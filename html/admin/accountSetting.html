@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Template</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+</head>
+<body class="">
+    <div id="wrapper">
+	<!-- left wrapper -->
+	<div w3-include-html="leftWrapper.html"></div>
+	<!-- /end left wrapper -->
+	<div id="page-wrapper" class="gray-bg">
+		<div class="row border-bottom">
+				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+				<!-- top wrapper -->
+				<div w3-include-html="topWrapper.html"></div>
+				<!-- / top wrapper -->
+				</nav>
+		</div>	
+<!-- content -->
+<div ng-controller="myCtrl">
+        <div class="row wrapper border-bottom white-bg page-heading" >
+            <div class="col-lg-10">
+                <h2>Account Settings</h2>
+                <ol class="breadcrumb">
+                    <li><a href="welcome.html">Home</a></li>
+                    <li><strong><a>Settings</a></strong></li>                    
+                </ol>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Let's get to know each other. <small>A few simple questions from a complex man.</small></h5>
+                            <div class="ibox-tools">								
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <!-- <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul> -->
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="post" class="form-horizontal">
+                                <div><h2>Studio Credentials</h2></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Studio Username</label>
+                                    <div class="col-sm-10">									
+									
+									<input type="text" class="form-control" placeholder="you@something.com" name="studio_username" ng-model="userinfo.username">
+									<!-- <input type="text" ng-model="userinfo.username"> -->
+									<span class="help-block m-b-none">Your studio username.</span></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Studio Password</label>
+                                    <div class="col-sm-10">									
+									
+									<input type="password" class="form-control" placeholder="You want some cool stuff?" name="studio_password"  ng-model="userinfo.passsword">
+									<span class="help-block m-b-none">Shhh.  I won't tell anyone.</span>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+
+
+                                <div><h2>3rd Party Applications</h2></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Google Analytics Tracking Code</label>
+                                    <div class="col-sm-10">
+									
+									<input type="text" class="form-control" placeholder="UA-83447148-1" name="google_tracking_code" ng-model="userinfo.GoogleAccessToken">
+									<span class="help-block m-b-none">Find your tracking ID and tracking code snippet.</span></div>
+                                </div>
+
+                                
+								<div class="form-group"><label class="col-sm-2 control-label">Facebook Pixel ID</label>
+                                    <div class="col-sm-10">
+									
+									<input type="text" class="form-control" placeholder="120261521652622" name="facebook_pixel_id" ng-model="userinfo.FaceBookAccessToken">
+									<span class="help-block m-b-none">Shhh.  I won't tell anyone.</span>
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>                                
+                                <div><h2>Marketing Settings</h2></div>
+                                
+								
+								<div class="form-group"><label class="col-sm-2 control-label">From Email</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="you@something.com" name="defFromAdd" ng-model="userinfo.defFromAdd">
+									<span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span></div>
+                                </div>
+                               
+								
+								<div class="form-group"><label class="col-sm-2 control-label">From Email Name</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="Bill Gates" name="defFromName" ng-model="userinfo.defFromName">
+									<span class="help-block m-b-none">What do they call you?</span>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>            
+                                
+								<div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <input type="hidden" name="action" value="saveProfileSettings">
+                                        <button class="btn btn-primary" ng-click="Save()" >Save</button>
+                                        <button class="btn btn-white" ng-click="Load()">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>        
+</div><!-- myCtrl -->
+<!--/ content -->           
+			<div class="footer">
+			<!-- footer -->
+			<div w3-include-html="footer.html"></div>
+			<!-- / footer -->			
+			</div>
+		</div><!--  end page-wrapper -->
+</div>
+<!--  -->
+<script>
+
+	
+var myApp = angular.module('myApp', ["xeditable"]);
+myApp.controller('myCtrl',function($scope,$http) {
+		$scope.Reset = function() {				 
+                  $scope.userinfo  = angular.copy($scope.master);
+				  //$scope.fuser = $scope.userinfo.username;
+				  //$scope.fadd = $scope.userinfo.defFromAdd;			
+		};
+		$scope.Load = function() {
+				//alert("load");				
+				$http.get("/couchdb/ftest/UserInfo").then(function(response) {
+					 $scope.master  = response.data; 
+					 if (typeof $scope.master.items == 'undefined') {
+					   $scope.master.items = [];
+					 } 
+					 $scope.Reset();
+				});
+		};		
+
+		$scope.Save = function() {
+			//$http.put('/couchdb/' + data.username +'/userinfo', $scope.userinfo).then(function(response){
+				$http.put('/couchdb/ftest/UserInfo', $scope.userinfo).then(function(response){
+					  $scope.data = response.data;          
+					  $scope.Load();
+				 },function(response){
+                      alert("ERROR: can not save!!!");	  
+				});         
+
+		};		
+		
+		$scope.Load();
+
+});// end myApp.controller(myCtrl)
+
+
+</script>
+
+<!--  -->
+    <!-- Mainly scripts -->
+	<script src="js/w3data.js"></script>	
+	<script>w3IncludeHTML();</script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+	
+	
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js" class="pre"></script> 
+<script src="https://secure.aadcdn.microsoftonline-p.com/lib/0.1.1/js/msal.min.js"></script>
+</head>
+<body>
+Test MSAL
+<script class="pre">
+        var userAgentApplication = new Msal.UserAgentApplication("1dd57f07-aac6-47f7-b3af-04d8fc3a6455", null, function (errorDes, token, error, tokenType) {
+              // this callback is called after loginRedirect OR acquireTokenRedirect (not used for loginPopup/aquireTokenPopup)
+        })
+        userAgentApplication.loginPopup(["user.read"]).then( function(token) {
+            var user = userAgentApplication.getUser();
+		alert('Success');
+            // signin successful
+        }, function (error) {
+            // handle error
+        });
+</script>
+</body>
+</html>

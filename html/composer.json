@@ -1,0 +1,8 @@
+{
+    "require": {
+	 "aws/aws-sdk-php": "2.*",
+        "rapidwebltd/php-google-contacts-v3-api": "^1.4",
+        "guzzlehttp/guzzle": "^6.3",
+        "microsoft/microsoft-graph": "^1.0"
+    }
+}

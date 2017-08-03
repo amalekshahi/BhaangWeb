@@ -1,0 +1,8 @@
+{
+    "require": {
+        "microsoft/microsoft-graph": "^1.0",
+        "lukaszkujawa/couch-php": "dev-master",
+	"mustache/mustache": "~2.5"
+    }
+}
+

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+	<meta name="description" content="User login page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" /> -->
+    <!-- <title>Marketing Studio</title> -->
+	<title>1752</title> 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	<script type="text/JavaScript" src="global.js?n=1"></script> 
+<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+
+
+</head>
+<body class="gray-bg">
+    <div class="passwordBox animated fadeInDown" ng-controller="myCtrl">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox-content">
+                    <!-- <h1 class="font-bold">Marketing Studio</h1><br> -->
+					<img src="img/mindfire_logo.png">    
+                    <p><h2>Login</h2></p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form class="m-t" role="form" >
+                                <div class="form-group">
+									<input type="text" class="form-control" id="email" placeholder="Username" required="" ng-model="login.userName">
+                                </div>
+				                <div class="form-group">
+								    <input type="password" class="form-control" id="pwd" placeholder="Password"  required="" ng-model="login.passWord">
+                                </div>
+					          <div class="form-group">
+									<!-- <select name="repeatSelect" id="repeatSelect" ng-model="mpsSelect" ng-style="selStyle" > -->
+									<!-- ng-style=="{ 'width' : width, 'background' : bgColor }" -->
+									<select name="repeatSelect" id="repeatSelect" ng-model="mpsSelect" ng-style=="{ 'width' : selWidth, 'background-color' : selBgColor}" >
+											<option ng-repeat="option in login.mps" value="{{option.id}}">{{option.name}}</option>
+									  </select>
+								</div>
+                                <button class="btn btn-primary block full-width m-b"  ng-click="Login()">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                Copyright Company
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2014-2015</small>
+            </div>
+        </div>
+    </div>
+<script>	
+function clearCallBack(data){
+	var len = data.length;
+	if(data.charAt(0) == '('){
+		return data.substring(1, len-1); 
+	 }else{
+		 return data;
+	 }
+};
+var myApp = angular.module('myApp', ["xeditable"]);
+myApp.controller('myCtrl',function($scope,$http) {
+		
+		//$scope.myStyle = { "width" : "100%" }; 
+		$scope.selWidth="100%"; 
+		$scope.selBgColor="white"; 
+		$scope.Load = function() {
+/*
+                $scope.login = {
+					  userName : "tt994613@gmail.com",
+					  passWord : "Atm12345#",
+				}
+				*/ 
+        };
+		
+		$scope.Login = function(){
+                  $http.get("/admin/loginOriginal.php",
+                    {
+                      method: "GET",
+                      params: {
+                        email: $scope.login.userName,
+                        pwd: $scope.login.passWord,
+                        account: 228,
+                      }  
+                    }
+					
+                  ).then(function(response) {
+                      $scope.login.response = JSON.parse(clearCallBack(response.data));
+                      alert("response: " + response.statusText);
+                      $scope.login.mps = [];
+                      var mps = $scope.login.response.mps;
+                      for(var i=0;i < mps.length; i++){
+                          $scope.login.mps.push({"id":mps[i][1],"name":mps[i][1]}); 
+                      } 
+					  $scope.selWidth="100%"; 
+					  $$scope.selBgColor="gray"; 
+
+					  $scope.myStyle = {
+							"width" : "100%","border" : "1px solid gray"
+					  };
+					  
+                  },function(response){
+                      alert("ERROR: " + response.statusText);
+                  });
+
+		};	//end scope.Login
+
+		$scope.Load();		
+
+});		//END myApp
+</script>
+
+</body>
+
+</html>

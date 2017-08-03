@@ -1,0 +1,9 @@
+
+Single value [{{value}}]
+URL Single value [{{URL-value}}]
+Single dot value [{{main.value}}]
+URL Single dot value [{{URL-main.value}}]
+[{{#items}}
+Item name {{name}}
+Item value {{value}}
+{{/items}}]
