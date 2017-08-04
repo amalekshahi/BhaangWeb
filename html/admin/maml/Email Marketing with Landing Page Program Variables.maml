@@ -1,0 +1,2238 @@
+<Program Name="DaVinci Master Template" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+  <Campaign Name="Beneficiary Business" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
+    <CampaignElements>
+      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Busines MicroSite" Position="300,260" SharedCheckout="False">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
+            <Subject>Business MicroSite (Right Now)</Subject>
+            <Body />
+            <Start DateTime="02/14/2013 12:00:00 AM" />
+            <End DateTime="02/28/2020 11:59:00 PM" />
+          </Schedule>
+        </Schedules>
+        <Events />
+        <CallbackTouchPoints />
+        <ChildElements>
+          <ChildElement Id="5" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="Thanks.html" Position="250,250">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;##CampaignName##: Thank you&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+       &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+          ##ThankYouContent##
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="6" DbId="0" Type="Page" IsVersion="False" Name="Home.html" Position="250,0">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="True" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="7" Name="WelcomeGurl.html">
+                <Filter CriteriaJoinOperator="&amp;">
+                  <Criteria Row="1" Field="purl" Operator="Equal" Value="" />
+                </Filter>
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="7" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="WelcomeGurl.html" Position="250,130">
+            <Properties PageType="AddContact" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;##CampaignName##: Purchase Plan&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+&lt;link rel="stylesheet" href="https://s3.amazonaws.com/autoassets/auto-css-js/css/pikaday.css"&gt;
+&lt;script stype="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" /&gt;
+&lt;script src="http://code.jquery.com/jquery-2.0.0.min.js"&gt;&lt;/script&gt;
+&lt;script &gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"&gt;&lt;/script&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+        &lt;script src="https://s3.amazonaws.com/autoassets/auto-css-js/js/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+   
+&lt;/head&gt;
+
+&lt;body&gt;
+         ##pagecontent##
+        &lt;div class="footer-container"&gt;
+            &lt;footer class="wrapper"&gt;
+                ##pagefooter##  
+            &lt;/footer&gt;
+        &lt;/div&gt;
+
+    &lt;script src="https://s3.amazonaws.com/autoassets/auto-css-js/js/pikaday.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    var picker = new Pikaday(
+    {
+        field: document.getElementById('q2_birthdate'),
+        firstDay: 1,
+        minDate: new Date('1920-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [1920,2020]
+
+    });
+    var picker = new Pikaday(
+    {
+        field: document.getElementById('q2_anniversary'),
+        firstDay: 1,
+        minDate: new Date('1940-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [1940,2020]
+
+    });
+	&lt;/script&gt;
+	
+	    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="5" Name="Thanks.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="8" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="Privacy.html" Position="500,20">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;##CampaignName##: Privacy, Disclosure and Consent&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+       &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+&lt;!--
+     &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" /&gt;  
+           &lt;script src="http://code.jquery.com/jquery-2.0.0.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+		&lt;script src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"&gt;&lt;/script&gt;
+--&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##picCampaignLogo##" /&gt;&lt;/h1&gt;
+   &lt;!--             &lt;h1 class="title right"&gt;&lt;img src="##picbusinessLogo##" /&gt;&lt;/h1&gt;  --&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        &lt;div class="main-container"&gt; &lt;!-- style="background-image: url('##picBackground##')"&gt; --&gt;
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                &lt;label style="font-size: 14px"&gt;&lt;b&gt;Privacy Policy, State Law Disclosures &amp; Consent for Electronic Documents&lt;/b&gt;&lt;/label&gt;
+                &lt;label style="font-size: 10px"&gt;&lt;br /&gt;
+                 Effective 5/7/2012&lt;br /&gt;&lt;br /&gt;
+                 Please refer to the end of the document for the State Law Disclosures, Consent for Electronic Documents and contact information.&lt;br/&gt;&lt;br/&gt;
+                 &lt;b&gt;PRIVACY POLICY&lt;/b&gt;&lt;br /&gt;
+						This privacy statement describes how ##CampaignName##.com collects and uses the personal information you provide on our Web site: www.##CampaignName##.com. It also describes the choices available to you regarding our use of your personal information and how you can access and update this information.&lt;br/&gt;&lt;br/&gt;
+
+We are committed to protecting your privacy online. We employ business practices to protect your privacy. This Privacy Policy applies to your information that we collect and receive via our vehicle finance application; it does not apply to practices of businesses that we do not own or control or to people we do not employ.  By clicking the submit button, we will share your information with finance partners and authorized intermediaries (including, but not limited to banks, finance companies, credit unions and car dealers) (“Finance Partners”) and in an attempt to process your vehicle finance application.  If you selected to receive other special offers, we may share your personal information excluding your financial information and social security number with parties interested in making you other offers.  If you wish to opt out of the vehicle finance application process, simply do not click the submit button. 
+In order to provide you with additional product and service offerings, we may disclose all Private Information about you with trustworthy and reputable third parties such as:&lt;br/&gt;&lt;br /&gt;
+l    Financial service providers&lt;br/&gt;
+l    Non-financial companies&lt;br/&gt;
+l    Others&lt;br/&gt;&lt;br/&gt;
+IF YOU PREFER THAT WE NOT DISCLOSE YOUR PRIVATE INFORMATION WITH NON-AFFILIATED MARKETING COMPANIES, YOU MAY "OPT-OUT" OF THOSE DISCLOSURES, THAT IS, YOU MAY DIRECT US NOT TO MAKE THOSE DISCLOSURES (OTHER THAN DISCLOSURES OTHERWISE PERMITTED BY LAW).  IF YOU WISH TO OPT OUT OF OFFERS OTHER THAN SUBMITTING A VEHICLE FINANCE APPLICATION, SIMPLY DO NOT CHECK THE BOX NEXT TO “I WOULD LIKE TO RECEIVE OTHER SPECIAL OFFERS” ON THE VEHICLE FINANCE APPLICATION FORM.&lt;br/&gt;&lt;br/&gt;
+
+We will not release your personally-identifiable data without your permission. 
+You can access www.##CampaignName##.com without revealing any personal information.  By using this Site, you agree to the terms of this Privacy Policy.&lt;br/&gt;&lt;br/&gt;
+ 
+&lt;b&gt;Browsing the Site&lt;/b&gt;&lt;br /&gt;
+If you access www.##CampaignName##.com without entering any personal information, we will gather and store information about your visit. This information does not identify you and cannot link back to you unless you choose to identify yourself.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Cookies&lt;/b&gt;&lt;br /&gt;
+We may also place "cookies" on your personal computer when you are browsing the Site, or otherwise. "Cookies" are small identifiers sent from a web server and stored on your computer's hard drive, similar to a license plate, that help us to recognize you if you visit the Site again. Also, the Site uses cookies to track how you found the Site. Cookies are not designed to get data from your hard drive, your e-mail or any other personal data about you. To protect your privacy we do not use cookies to store or transmit any personal information about you on the Internet. To find out more about Cookies, please visit www.cookiecentral.com. You can reject cookies by changing your browser settings. Please note, however, that if you reject our cookies it is possible that some Site pages may not properly load, your access to certain information might be denied or you might have to enter your information more than once.
+&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Third Party Cookies&lt;/b&gt;&lt;br /&gt;
+The use of cookies by our [partners, affiliates, tracking utility company, service providers] is not covered by our privacy statement.  We do not have access or control over these cookies.  Our [partners, affiliates, tracking utility company, service providers] use session ID cookies [to make it easier for you to navigate our site, in order for you to use the shopping cart, etc.]  &lt;br /&gt;&lt;br /&gt;
+
+&lt;b&gt;Web beacons&lt;/b&gt;&lt;br /&gt;
+
+Our Web pages contain electronic images known as Web beacons (sometimes called single-pixel gifs) and are used along with cookies to compile aggregated statistics to analyze how our site is used and may be used in some of our emails to let us know which emails and links have been opened by recipients. This allows us to gauge the effectiveness of our customer communications and marketing campaigns.&lt;br /&gt;&lt;br /&gt;
+ 
+&lt;b&gt;Widgets&lt;/b&gt;&lt;br /&gt;
+
+Our Web site includes Social Media Features, such as the Facebook Like button [and Widgets, such as the Share this button or interactive mini-programs that run on our site]. These Features may collect your IP address, which page you are visiting on our site, and may set a cookie to enable the Feature to function properly. Social Media Features and Widgets are either hosted by a third party or hosted directly on our Site. Your interactions with these Features are governed by the privacy policy of the company providing it.
+&lt;br /&gt;&lt;br /&gt; 
+&lt;b&gt;Information Collected&lt;/b&gt;&lt;br /&gt;
+When you submit a vehicle financing application,  we will need to obtain personally identifiable information from you or about you. Such personally identifiable information may include your name, home address, residence information, employment information, e-mail address, telephone number, social security number, financial information, bankruptcy history, credit references, etc. Consumers who submit an application expressly authorize us and third party partners to contact them in connection with each application and/or request regardless of whether or not such consumer is listed on a "Do Not Call" list.&lt;br /&gt;
+The information we receive about you or from you may be used by us or shared (including evaluating and obtaining financial products or services) by us with our corporate affiliates, agents, vendors and other third parties to help process your request or complete a transaction; to comply with any law, regulation, audit or court order; to help improve our website or the products or services we offer; for research; to better understand our customers' needs; to develop new offerings; and to alert you to new products and services (of us or our business associates) in which you may be interested. We may also combine information you provide us with information about you that is available to us internally or from other sources. The more we know about you, the better we are able to serve you.
+We may also aggregate your personal information with others' information and prepare reports on site usage. Those reports are aggregated and include no personally identifying information. Finally, we may use your personal information to send you email or postal communications regarding products or services offered by us or by third parties with whom we have relationships in which we think you may be interested.  You may at any time choose not to receive promotional emails from us by contacting us at info@##CampaignName##.com. Notwithstanding the foregoing, we may continue to contact you for the purpose of communicating information relating to www.##CampaignName##.com, as well as to facilitate, complete, or confirm any transaction that you may enter into or responding to your inquiry or request.&lt;br /&gt;
+If you prefer for us not to provide your name and email or postal address to third parties for direct marketing purposes, please contact us at info@##CampaignName##.com.&lt;br /&gt;
+We collect nonpublic personal information about you from the following sources:&lt;br /&gt;
+Information we receive from you on applications on our website or other forms;&lt;br /&gt;
+Information about your transactions with us, our affiliates, or others; and&lt;br /&gt;&lt;br /&gt;
+We may disclose all of the information we collect, as described above, to financial institutions, dealership lender partners, local dealers and other third parties that provide financing referral services to explore financing options to process your credit request.
+We also may disclose non-public personal information about you to non-affiliated third parties as permitted by law.
+All information provided by consumers in any of the above-listed ways or otherwise may be used and disclosed as permitted in this Privacy Policy.&lt;br/&gt;&lt;br/&gt;
+
+Information submitted to us in connection with a financing request is used to transmit the request to third parties who may be in a position to respond to your request. We do not provide financing, but instead transmit those requests to third-party vendors for consideration.&lt;br/&gt;&lt;br/&gt;
+
+Federal law requires all financial institutions to obtain, verify and record information that identifies each person who opens an account. When you submit a financing application, your name, residential address, date of birth and social security number will be used to verify your identity. In addition, as part of the request process, we may verify the information you provide, or obtain omitted address or other contact information from third parties. &lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Credit Reports&lt;/b&gt;&lt;br /&gt;
+By checking the box next to “I authorize your Finance Partners to check my credit report.” and by submitting an Application you are affirming on behalf of the stated Applicant(s):  I  authorize any and all Finance Partners and its employees, agents and potential assignees to obtain and verify information about me (including one or more credit reports, information about my employment and banking and credit relationships) that any of them may deem necessary or appropriate in evaluating my Application. If my Application is approved and credit is granted, I also authorize such parties to obtain additional credit reports and other information about me in connection with reviewing the account, taking collection on the account, or for any other legitimate purpose. I further understand that multiple credit reports may be obtained by multiple Finance Partners in an attempt to process my Application.”  I understand that by checking the box “A cosigner is available if necessary” that I may be asked to provide additional information about the cosigner and the cosigner will be asked to provide authorization to pull the cosigner’s credit report as well.  &lt;br /&gt;&lt;br /&gt;
+&lt;b&gt;Updating or Deleting Your information&lt;/b&gt;&lt;br /&gt;
+You may update or delete your information at any time prior to submitting any request to us at info@##CampaignName##.com. 
+Please note that users can not update or delete previously submitted information. If your information (such as your email address) should change, we ask that you re-submit a registration form or request.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Security&lt;/b&gt;&lt;br /&gt;
+We safeguard your personal identifying data (e.g., name and social security number) during electronic transmission from you to us using known encryption, security standards and procedures.  With respect to our employees, we restrict access to non-public personal information about you only to those employees who need to know that information in order to provide products or services to you. We maintain physical, electronic and other procedural safeguards to comply with applicable privacy laws to guard your nonpublic personal information. We also assess new technology for protecting sensitive customer information on an ongoing basis. However, if your information is forwarded to a third party provider, your information will be transmitted according to the security and privacy policies of that third party provider whose privacy practices may differ from ours. Your information, as shared with outside providers will become subject to those different privacy policies.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Links to Other Web Sites&lt;/b&gt;&lt;br /&gt;
+Our Site includes links to other Web sites whose privacy practices may differ from ours. If you submit personal information to any of those sites, your information is governed by their privacy statements. We encourage you to carefully read the privacy statement of any Web site you visit.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Minors&lt;/b&gt;
+We do not knowingly collect information from individuals under the age of eighteen (18). No information should be submitted to, or posted at, the Site by individuals under eighteen (18) years of age. We encourage parents and guardians to spend time online with their children and to participate and monitor the interactive activities of their children.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Do Not Call Registry Compliance&lt;/b&gt;&lt;br /&gt;
+By submitting personal contact and/or financial information through (##CampaignName##.com domain), the user hereby grants written permission to ##CampaignName##.com, its affiliated sites, and its business partners for contact via telephone, mail, and/or e-mail. Further, by registering at ##CampaignName##.com you are consenting to receive phone calls from ##CampaignName##.com, its affiliated sites, and its business partners for contact via telephone and thereby registrants waive their right to file a claim with the FTC or any other agency in reference to these calls or contacts.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Opting-Out of Further Communications&lt;/b&gt;&lt;br /&gt;
+##CampaignName##.com registrants may opt-out of receiving further communications from ##CampaignName##.com by:
+ (1) following "unsubscribe" instructions in any ##CampaignName##.com e-mail received by registrant, or
+ (2) writing to info@##CampaignName##.com.
+Unsubscribing from the ##CampaignName##.com email list does not automatically unsubscribe you from other email lists. Please read your email carefully to understand which email list you are unsubscribing from.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Data Retention&lt;/b&gt;&lt;br /&gt;
+We will retain your information for as long as your account is active or as needed to provide you services. If you wish to cancel your account or request that we no longer use your information to provide you services contact us at info@##CampaignName##.com. We will retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Changes to this Privacy Policy&lt;/b&gt;&lt;br /&gt;
+We reserve the right, in our sole discretion, to change, modify, add and/or remove portions of this Privacy Policy at any time. If we make any change in how we use your personal information we will notify you by email (sent to the e-mail address specified in your account) or by means of a notice on this Site prior to the change becoming effective. All Privacy Policy changes will take effect immediately upon their posting on the Site. Please check the Site periodically for any changes. Where you do not agree to any such changes, you must opt-out by contacting us at info@##CampaignName##.com.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Contacting Us&lt;/b&gt;&lt;br /&gt;
+ You can contact us by writing or email us at the address below: &lt;br /&gt;
+info@##CampaignName##.com or call us at ##businessPhone##. &lt;br /&gt;
+##businessName## - ##businessAddress1##, ##businessAddress2##
+
+&lt;b&gt;Trademark and Copyright Information&lt;/b&gt;&lt;br /&gt;
+Everything on our website is copyrighted (unless otherwise noted) and may not be used except with our express written consent. Use of text or images by you or other third parties is prohibited and may violate the copyright laws, trademark laws, privacy laws and other laws and regulations. Nothing contained on this site may be construed as granting any license or right to use any of our text, images, trademarks or service marks, or any content on our website, without our prior written consent.
+&lt;br/&gt;
+                 &lt;br /&gt;&lt;b&gt;STATE LAW DISCLOSURE&lt;/b&gt;&lt;br /&gt;
+						&lt;b&gt;Legal Notice&lt;/b&gt;&lt;br /&gt;
+
+California Applicants: 
+For purposes of compliance with the California Financial Privacy Act, if you are a resident of the State of California and would like to opt-out from the disclosure of your personal information to any third-party for marketing purposes, please contact us at info@##CampaignName##.com. Married applicants may apply for separate credit. A married applicant may include a spouse's income even when applying for a separate account.&lt;br /&gt;
+Maryland Applicants: 
+We do not accept or solicit any fees or payments from you.  When you submit an Application to us and your Application is forwarded to one of our Finance Partners, you may be issued a Financing Agreement by a Finance Partner in accordance with Maryland Commercial Law Code § 12-125, 1013. This Financing Agreement must include: (1) the term and principal amount of your loan; (2) an explanation of the type of loan being offered; (3) the interest rate and, if the rate is subject to final determination at a future date based on some objective standard, a specific statement of those facts; (4) the points, if any, to be paid by the borrower; and (5) the term during which the Financing Agreement remains in effect.&lt;br /&gt;
+Ohio Applicants: 
+The Ohio laws against discrimination require that all creditors make credit equally available to all credit worthy customers, and that credit reporting agencies maintain separate credit histories on each individual upon request. The Ohio civil rights commission administers compliance with this law.&lt;br /&gt;
+Vermont Applicants: 
+For purposes of compliance with the Vermont Consumer Protection Act, if you are a resident of the State of Vermont and would like to opt-out from the disclosure of your personal information to any third-party for marketing purposes, please contact us at info@##CampaignName##.com. &lt;br /&gt;
+Wisconsin Applicants: 
+No provision of a marital property agreement, a unilateral statement under Wis. Rev. Stat. § 766.59 or a court decree under Wis. Rev. Stat. § 766.70 adversely affects the interest of the creditor unless the creditor, prior to the time the credit is granted, is furnished a copy of the agreement, statement or decree or has actual knowledge of the adverse provision when the obligation to the creditor is incurred.
+&lt;br /&gt;
+                 &lt;br /&gt;&lt;b&gt;CONSENT FOR ELECTRONIC DOCUMENT&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+						You are submitting a Vehicle Finance application ("Application").  To continue this process, our Finance Partners must provide you certain notices, documents, information and disclosures related to your Application electronically ("Electronic Documents").  By reading this Consent for Electronic Documents, you agree that you have been informed of your rights when receiving these Electronic Documents.  By agreeing to receive Electronic Documents, you acknowledge receipt of this Consent for Electronic Documents, and agree to receive Electronic Documents via the internet to the e-mail address designated on your Application.  You need to contact the Finance Partner if you would like such records to be provided on paper or in non-electronic form.&lt;br /&gt;&lt;br /&gt;
+&lt;b&gt;Hardware and Software requirements&lt;/b&gt;&lt;br /&gt;
+Before choosing to receive Disclosures electronically, you must decide if you have the necessary hardware and software to access and store these Electronic Disclosures. To obtain electronic Disclosures, you will need a personal computer or other device that can access the Internet, Adobe Acrobat Reader software, and a working electronic mail address. To store electronic Disclosures, your computer or access device must allow you either to download and store electronic Disclosures to the computer, access device, or another media storage device or to print web pages and embedded HTML files that are provided electronically. To verify that you have the necessary hardware and software, try to save or print a copy of this screen. If what you save looks like what you see on the screen, you have the necessary hardware and software.&lt;br /&gt;&lt;br /&gt;
+You may withdraw your consent by contacting us at info@##CampaignName##.com or call us at ##business800##, however, if we have already forwarded your application to a Financial Partner you must also withdraw your consent from the Financial Partner when they contact you.  If you withdraw your consent, the legal validity and enforceability of previously transmitted Electronic Documents will not be affected, and you will not have the option to later receive your Electronic Documents via electronic means.&lt;br /&gt;&lt;br /&gt;
+&lt;b&gt;Consent and Acknowledgment&lt;/b&gt;&lt;br /&gt;
+BY CLICKING THE SUBMIT BUTTON TO SEND THE APPLICATION TO ##CampaignName##.COM, YOU HEREBY ACKNOWLEDGE YOU CAN ACCESS ELECTRONIC DOCUMENTS, AND YOU CONSENT TO HAVING ELECTRONIC DOCUMENTS PROVIDED TO YOU ELECTRONICALLY VIA E-MAIL.&lt;br /&gt;&lt;br /&gt;
+ 
+&lt;b&gt;Contacting Us&lt;/b&gt;&lt;br /&gt;
+Please be aware that we may change our State Law Disclosures and/or Consent for Electronic Documents from time to time.  If we do, we will update this State Law Disclosures and Consent for Electronic Documents at our website, so be sure to check back here frequently.
+If you have any questions about our State Law Disclosures or Consent for Electronic Documents, please feel free to e-mail your questions to info@##CampaignName##.com or call us at ##business800##.&lt;br /&gt;&lt;br /&gt;
+PLEASE PRINT AND RETAIN A COPY OF THIS AGREEMENT FOR YOUR RECORDS. &lt;br /&gt;
+LAST UPDATED May 7, 2012
+&lt;br /&gt;&lt;br /&gt;
+						&lt;/label&gt;
+                &lt;/article&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="9" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="OnLineInitialEmail.html" Position="500,150">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+
+        &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##picCampaignLogo##" /&gt;&lt;/h1&gt;
+ &lt;!--              &lt;h1 class="title right"&gt;&lt;img src="##picbusinessLogo##" /&gt;&lt;/h1&gt;  --&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        &lt;div class="main-container"&gt; &lt;!-- style="background-image: url('##picBackground##')"&gt; --&gt;
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                        &lt;label&gt;
+						##firstname## ##lastname##, &lt;br /&gt; &lt;br /&gt;
+						You have been selected for a VIP trade appraisal of your ##mfgyear## ##make## ##model##. To schedule an appointment, please call ##business800## or go now to your personal website &lt;b&gt;http://##purl##.##CampaignName##.com&lt;/b&gt; and verify your PIN# &lt;b&gt;##prizenumber##&lt;/b&gt;. &lt;br /&gt;
+						&lt;br /&gt;&lt;br /&gt;
+						PERSONAL WEBSITE: http://##purl##.##CampaignName##.com &lt;br /&gt;
+						PERSONAL PRIZE CODE: &lt;b&gt;##prizenumber##&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+                 &lt;a href="##Unsubscribe RedirectURL="" ##"&gt;Click here&lt;/a&gt; to Unsubscribe.
+						&lt;/label&gt;
+                &lt;/article&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;
+
+        &lt;div class="footer-container"&gt;
+            &lt;footer class="wrapper"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;SPECIAL EVENT LOCATION&lt;/h4&gt;
+                        &lt;span class="var"&gt;##businessName##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress1##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress2##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessPhone##&lt;/span&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;EVENT DATES AND TIMES&lt;/h4&gt;
+                        &lt;span class="var"&gt;##EventDateTimes##&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;
+ 
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="10" DbId="0" Type="Page" IsVersion="False" Name="remove.html" Position="500,280">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+        </ChildElements>
+        <ChildConnections>
+          <ChildConnection StartElementId="6" EndElementId="7" />
+          <ChildConnection StartElementId="7" EndElementId="5" />
+        </ChildConnections>
+        <Properties>
+          <BaseUrlCollection />
+          <Settings SessionTimeout="20">
+            <InvalidPurl>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Did you type your PURL correctly?&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting an invalid PURL, you cannot use any variables (like ##firstname##) within your content.  --&gt;
+Are you sure you typed your Personalized URL correctly? Please try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</InvalidPurl>
+            <PageNotFound>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page not found!&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting a valid PURL but non-existent page, you can use any variable (like ##firstname##) within your content.  --&gt;
+Oops! ##firstname default="Sir/Madam"##,  we are really sorry but the page you requested could not be found. Please check the URL and try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</PageNotFound>
+            <Error>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Something happened.&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- In addition to supporting any contact variable, this page also supports a special variable: ##error##, which is a system-generated description of the error.--&gt;
+Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please contact the site administrator. The following error has occurred: ##error##
+&lt;/body&gt;
+&lt;/html&gt;
+</Error>
+          </Settings>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="2" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="AllContacts" Position="140,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="4" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ResponseTrigger" Position="300,380" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit">
+          <Event EventId="30502" ElementId="1" ChildElementId="1" />
+          <Event EventId="30502" ElementId="1" ChildElementId="7" />
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="5" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="ThankYouEmail" Position="200,510" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+        <Comment>To Respondent</Comment>
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##thankyou-name##</FromName>
+              <FromAddress>##thankyou-email##</FromAddress>
+              <ReplyTo>##thankyou-email##</ReplyTo>
+              <Subject>##thankyouSubject##</Subject>
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+
+        &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##ThankYouBanner##" /&gt;&lt;/h1&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        ##ThankYouContent##
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+              <TextContent>##firstname## ##lastname##, 
+
+Thank you for your participation in the ##CampaignName## program!
+Your PIN# has been verified. An event specialist will be contacting you with more details. 
+
+Please remember to bring your invitation or this email with your PIN# ##prizenumber## and present it to an authorized event coordinator or call ##business800## to set an appointment. 
+
+SPECIAL EVENT LOCATION
+##businessName##
+##businessAddress1##
+##businessAddress2##
+##businessPhone##
+http://##purl##.##CampaignName##.com
+
+EVENT DATES AND TIMES
+##EventDateTimes##
+</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="6" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="LeadEmail" Position="440,510" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="LandingPages">
+        <Comment>To business</Comment>
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##lead-email##</ToAddress>
+              <FromName>##thankyou-name##</FromName>
+              <FromAddress>##thankyou-email##</FromAddress>
+              <ReplyTo>##thankyou-email##</ReplyTo>
+              <Subject>##firstname## ##lastname## just visited ##CampaignName## microsite</Subject>
+              <HtmlContent>&lt;html&gt;
+&lt;table width="800px" border="1"&gt;&lt;tr&gt;&lt;td&gt;&lt;table width="800" style="font-family:Tahoma;font-size:12px;"&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				&lt;table style="font-family:Tahoma;font-size:12px;"&gt;
+		&lt;tr&gt;
+			&lt;td valign="top" width="170"&gt;
+				
+			&lt;/td&gt;
+			&lt;td valign="top" width="250"&gt;
+				&lt;b&gt;&lt;b&gt;&lt;/b&gt; ##firstname## ##lastname##
+	&lt;br /&gt;&lt;b&gt;Address: &lt;/b&gt; ##address1##
+	&lt;br /&gt;&lt;b&gt;City: &lt;/b&gt; ##city##
+	&lt;br /&gt;&lt;b&gt;State: &lt;/b&gt; ##state##
+	&lt;b&gt;Zip: &lt;/b&gt; ##zip##
+	&lt;br /&gt;&lt;b&gt;ZipPlus4: &lt;/b&gt; ##zipplus4##
+	&lt;br /&gt;&lt;b&gt;Email: &lt;/b&gt; ##email##
+	&lt;br /&gt;&lt;b&gt;Mobile: &lt;/b&gt; ##mobile##
+	&lt;br /&gt;&lt;b&gt;Phone: &lt;/b&gt; ##phone##	
+	&lt;br /&gt;
+			&lt;/td&gt;
+			&lt;td valign="top" width="250"&gt;
+	&lt;br /&gt;&lt;/b&gt;&lt;b&gt;Personalized URL: &lt;/b&gt; ##purl##
+    &lt;br /&gt;&lt;b&gt;Seed: &lt;/b&gt; ##isseed##
+	&lt;br /&gt;&lt;b&gt;MfgYear: &lt;/b&gt; ##mfgyear##
+	&lt;br /&gt;&lt;b&gt;Make: &lt;/b&gt; ##make##
+	&lt;br /&gt;&lt;b&gt;Model: &lt;/b&gt; ##model##
+&lt;!--	&lt;br /&gt;&lt;b&gt;Mileage: &lt;/b&gt; ##mileage##
+	              &lt;br /&gt;&lt;b&gt;VIN: &lt;/b&gt; ##vin##   --&gt;
+&lt;!--	&lt;br /&gt;&lt;b&gt;PrizeNumber: &lt;/b&gt; RR5008305 --&gt;
+	&lt;br /&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+				&lt;hr /&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/table&gt;
+	&lt;/html&gt;</HtmlContent>
+              <TextContent>##firstname## ##lastname## just visited ##CampaignName## microsite</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="InitialEmail" Position="300,140" SharedCheckout="False" RuleGroup="EmailContent">
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##from-name##</FromName>
+              <FromAddress>##from-email##</FromAddress>
+              <ReplyTo>##from-email##</ReplyTo>
+              <Subject>##emailSubject##</Subject>
+              <HtmlContent>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta content="width=device-width, initial-scale=1.0" name="viewport" /&gt;
+&lt;style&gt;
+.ReadMsgBody {
+    width: 100%;
+}
+
+.ExternalClass {
+    width: 100%;
+}
+
+.ExternalClass * {
+    line-height: 100%;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /*-webkit-font-smoothing: antialiased;*/
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+img {
+    border-width: 0px;
+    border-style: solid;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main_text {
+    font-size: 12px;
+    font-family: sans-serif, tahoma;
+}
+.h3_text {
+        font-size: 1.2em !important;
+		font-family: sans-serif, tahoma;
+    }
+	.h5_text {
+        font-size: .8em !important;
+		font-family: sans-serif, tahoma;
+    }
+
+@media only screen and (max-width: 590px) and (min-width: 441px) {
+    table[class=main] {
+        width: 100% !important;
+        height: auto;
+    }
+    .header_img, .footer_img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    .footer_img2 {
+        height: auto !important;
+        display: block;
+    }
+    .main_text {
+        font-size: 1.5em !important;
+    }
+	.h3_text {
+        font-size: 1.2em !important;
+    }
+	.h5_text {
+        font-size: .8em !important;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    table[class=main] {
+        width: 100% !important;
+        height: auto;
+    }
+    .header_img, .footer_img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    .footer_img2 {
+        height: auto !important;
+        display: block;
+    }
+    .main_text {
+        font-size: 1.2em !important;
+    }
+	.h3_text {
+        font-size: 1.2em !important;
+    }
+	.h5_text {
+        font-size: .8em !important;
+    }
+}
+
+   .preheader { display:none !important; visibility:hidden; opacity:0; color:transparent; height:0; width:0; }
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- PRE-HEADER TEXT BEGIN --&gt;
+	  &lt;span class="preheader" style="display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;"&gt;##preheader##&lt;/span&gt;
+&lt;!-- PRE-HEADER TEXT END --&gt;
+
+    &lt;table width="100%" cellspacing="0" cellpadding="0" border="0"
+        style="width: 100%; margin: 0px auto; padding: 0px; border-collapse: collapse;"&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td valign="top" align="center"
+                    style="padding: 0px; background-color: #ffffff;"&gt;
+
+                    &lt;table width="600" cellspacing="0" cellpadding="0" border="0"
+                        align="center" class="main"
+                        style="padding: 0px; width: 600px; margin: 0px auto; text-align: center; border-collapse: collapse; background-color: #ffffff;"&gt;
+                        &lt;tbody&gt;
+                            &lt;tr&gt;
+                                &lt;td style="width: 100%;"&gt;To view this email as web page, go
+                                    &lt;a href="http://##domainvar##/##purl##/onlineEmail.html"&gt;here&lt;/a&gt;&lt;br&gt;
+                                &lt;/td&gt;
+                            &lt;/tr&gt;
+                            &lt;tr&gt;
+                                &lt;td style="width: 100%;"&gt;
+								&lt;a href="http://##domainvar##/##purl##"&gt; 
+								&lt;img class="header_img"
+                                    src="##emailbannerimage##"
+                                    style="border-width: 0px; border-style: solid; display: block; width: 600px; height: 320px;"
+                                    border="0" alt=""&gt;&lt;/a&gt;&lt;/td&gt;
+                            &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+                    &lt;tr&gt;##emailbody##&lt;/tr&gt;
+							&lt;tr&gt;##calltoaction##&lt;/tr&gt;
+							&lt;tr&gt;##emailfooter##&lt;/tr&gt;
+							&lt;tr&gt;##unsubscribelink##&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</HtmlContent>
+              <TextContent>##firstname## ##lastname##, 
+
+You have been selected as a FINALIST in the Shift Nissan 2013 NISSAN ALTIMA GIVEAWAY.
+To see if you are the GRAND PRIZE WINNER of a 2013 NISSAN ALTIMA,
+go now to your personal website http://##purl##.shiftnissan.com and verify your prize code ##prizenumber##. 
+Or, call 816-459-4800 now to make an appointment.
+
+Someone in the ##city## area has the winning prize code. It could be you! 
+
+PERSONAL WEBSITE: http://##purl##.shiftnissan.com 
+PERSONAL PRIZE CODE: ##prizenumber##
+
+SPECIAL EVENT LOCATION
+Randy Reed Nissan
+9600 NW Prairie View Road
+Kansas City, MO 64153
+816-459-4800 
+
+EVENT DATES AND TIMES
+Wed December 26 9am-8pm 
+Thu December 27 9am-8pm 
+Fri December 28 9am-8pm 
+Sat December 29 9am-8pm 
+
+Go to ##Unsubscribe RedirectURL="" ## to unsubscribe.</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="9" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="SeedContacts" Position="490,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="320,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="email" Operator="NotEqual" Value="" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Wizard" Position="1060,140" SharedCheckout="False">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
+            <Subject>Wizard (Right Now)</Subject>
+            <Body />
+            <Start DateTime="02/18/2013 07:36:00 PM" />
+            <End DateTime="03/31/2020 11:00:00 PM" />
+          </Schedule>
+        </Schedules>
+        <Events />
+        <CallbackTouchPoints>
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://birthday.m.mdl.io/wiz" />
+        </CallbackTouchPoints>
+        <ChildElements>
+          <ChildElement Id="1" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="customer.html" Position="100,0">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="False" IsLoginRequired="True">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: Customer&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--	&lt;link href="https://dl.dropbox.com/u/73788087/onBoarding/style3.css" rel="stylesheet" type="text/css"&gt; --&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+   
+
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;&lt;h6&gt;		
+        &lt;nav&gt;
+    &lt;ul&gt;
+         &lt;li&gt;&lt;a href="customer.html" class="activeLink"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;		
+&lt;/div&gt;
+	&lt;!--/page-header--&gt;
+	&lt;!--	&lt;div class="row-fluid"&gt;
+				&lt;div class="span2" id="sidebar-left" &gt;
+					&lt;p&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:support@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;support@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Pro Services&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:services@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;services@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Carrie Driscoll&lt;/strong&gt;&lt;br /&gt;Client Advocate&lt;br /&gt;&lt;a href="mailto:cdriscoll@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;cdriscoll@mindfireinc.com&lt;/font&gt;&lt;/a&gt; &lt;/p&gt;
+                    &lt;br /&gt;&lt;br &gt;&lt;br /&gt;
+					
+			
+					
+				&lt;/div&gt; --&gt;&lt;!--/span9--&gt;
+				
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher&lt;br&gt;&lt;/h2&gt;
+					&lt;h4&gt;Customer Information&lt;/h4&gt;
+                    &lt;form method="post"&gt;
+					&lt;div&gt;
+						&lt;table cellspacing="40" cellpadding="10"&gt;
+						
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Customer Name: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="customername" name="customername" value="##businessName##" /&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Address: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="custaddress1" name="custaddress1" value="##businessAddress1##" /&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;City: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="custcity" name="custcity" value="##Cust-City##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;label class="span1"&gt;State: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="custstate" name="custstate" value="##Cust-State##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;label&gt;Zip: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="custzip" name="custzip" value="##Cust-Zip##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Phone: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="custphone" name="custphone" value="##businessPhone##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;label class="span1"&gt;800 No (if any): &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="no800" name="no800" value="##business800##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+                      &lt;tr&gt;
+                                 
+                                	&lt;td colspan="2"&gt;&lt;p align="center" style="width:100px;"&gt;&lt;button type="submit" class="btn btn-primary btn-large btn-block" tabindex="100"&gt;Submit&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+                                   &lt;/tr&gt;
+                              &lt;/table&gt;
+                            &lt;/form&gt;
+                            
+&lt;!--							
+                         &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;
+                         &lt;a href="nextsteps.html" class="nextStep"&gt;Next Steps...&lt;/a&gt;
+--&gt;                  
+					&lt;/div&gt;
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Form>
+              <Input Type="TextBox" Name="customername" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="custaddress1" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="custcity" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="custstate" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="custzip" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="custphone" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="no800" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+            </Form>
+            <Flow>
+              <FlowNextElement Id="2" Name="event.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="2" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="event.html" Position="100,120">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: Event&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--	&lt;link href="https://dl.dropbox.com/u/73788087/onBoarding/style3.css" rel="stylesheet" type="text/css"&gt; --&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--    &lt;link rel="stylesheet" type="text/css" href="style3.css"&gt;   --&gt;
+
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;
+&lt;h6&gt;			
+        &lt;nav&gt;
+    &lt;ul&gt;
+         &lt;li&gt;&lt;a href="customer.html"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html" class="activeLink"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;		
+&lt;/div&gt;
+	&lt;!--/page-header--&gt;
+	&lt;!--	&lt;div class="row-fluid"&gt;
+				&lt;div class="span2" id="sidebar-left" &gt;
+					&lt;p&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:support@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;support@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Pro Services&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:services@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;services@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Carrie Driscoll&lt;/strong&gt;&lt;br /&gt;Client Advocate&lt;br /&gt;&lt;a href="mailto:cdriscoll@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;cdriscoll@mindfireinc.com&lt;/font&gt;&lt;/a&gt; &lt;/p&gt;
+                    &lt;br /&gt;&lt;br &gt;&lt;br /&gt;
+					
+			
+					
+				&lt;/div&gt; --&gt;&lt;!--/span9--&gt;
+				
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher &lt;br&gt;&lt;/h2&gt;
+					&lt;h4&gt;Event Information&lt;/h4&gt;
+                    &lt;form method="post"&gt;
+					&lt;div&gt;
+						&lt;table cellspacing="40" cellpadding="10"&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Event Name: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventname" name="eventname" value="##CampaignName##" /&gt;&lt;/td&gt;
+                   &lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Offer: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="offertext" name="offertext" value="##Offertext##" /&gt;&lt;/td&gt;
+                   &lt;/tr&gt;
+						&lt;/table&gt;
+
+						&lt;table cellspacing="40" cellpadding="10"&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;Event Schedule: &lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 1: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline1" name="eventline1" value="##EventScheduleLine1##" /&gt;&lt;/td
+								&lt;/tr&gt;
+							      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 2: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline2" name="eventline2" value="##EventScheduleLine2##" /&gt;&lt;/td
+								&lt;/tr&gt;
+							      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 3: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline3" name="eventline3" value="##EventScheduleLine3##" /&gt;&lt;/td
+								&lt;/tr&gt;
+							      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 4: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline4" name="eventline4" value="##EventScheduleLine4##" /&gt;&lt;/td
+								&lt;/tr&gt;
+								      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 5: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline5" name="eventline5" value="##EventScheduleLine5##" /&gt;&lt;/td
+								&lt;/tr&gt;
+							      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 6: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline6" name="eventline6" value="##EventScheduleLine6##" /&gt;&lt;/td
+								&lt;/tr&gt;
+							      &lt;tr&gt;
+                           &lt;td&gt;&lt;label&gt;Line 7: &lt;/label&gt;&lt;/td&gt;
+                           &lt;td&gt;&lt;input type="text" id="eventline7" name="eventline7" value="##EventScheduleLine7##" /&gt;&lt;/td
+								&lt;/tr&gt;
+
+						&lt;/table&gt;
+
+&lt;!--					
+						&lt;table border="1" cellspacing="50" cellpadding="10"&gt;
+							&lt;tr&gt;
+								&lt;th&gt;&lt;b&gt;Day&lt;/b&gt;&lt;/th&gt;
+								&lt;th&gt;&lt;b&gt;Date&lt;/b&gt;&lt;/th&gt;
+								&lt;th&gt;&lt;b&gt;Time&lt;/b&gt;&lt;/th&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;input type="text" id="eventday1" name="eventday1" value="##event-day1##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventdate1" name="eventdate1" value="##event-date1##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventtime1" name="eventtime1" value="##event-time1##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;input type="text" id="eventday2" name="eventday2" value="##event-day2##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventdate2" name="eventdate2" value="##event-date2##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventtime2" name="eventtime2" value="##event-time2##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;input type="text" id="eventday3" name="eventday3" value="##event-day3##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventdate3" name="eventdate3" value="##event-date3##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventtime3" name="eventtime3" value="##event-time3##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;input type="text" id="eventday4" name="eventday4" value="##event-day4##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventdate4" name="eventdate4" value="##event-date4##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="eventtime4" name="eventtime4" value="##event-time4##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+						&lt;/table&gt;
+--&gt;	
+						
+						&lt;table cellspacing="50" cellpadding="10"&gt;
+                                &lt;tr&gt;
+                                	&lt;td colspan="2"&gt;&lt;p align="center" style="width:100px;"&gt;&lt;button type="submit" class="btn btn-primary btn-large btn-block" tabindex="100"&gt;Submit&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+                                 &lt;/tr&gt;
+                         &lt;/table&gt;
+                         &lt;/form&gt;
+                            
+&lt;!--							
+                         &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;
+                         &lt;a href="nextsteps.html" class="nextStep"&gt;Next Steps...&lt;/a&gt;
+--&gt;                  
+					&lt;/div&gt;
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Form>
+              <Input Type="TextBox" Name="eventname" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="offertext" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline1" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline2" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline3" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline4" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline5" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline6" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventline7" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventday1" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventdate1" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventtime1" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventday2" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventdate2" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventtime2" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventday3" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventdate3" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventtime3" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventday4" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventdate4" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="eventtime4" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+            </Form>
+            <Flow>
+              <FlowNextElement Id="4" Name="asset.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="3" DbId="0" Type="Page" IsVersion="False" Name="login.html" Position="580,30">
+            <Properties PageType="Login" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: Login&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--	&lt;link href="https://dl.dropbox.com/u/73788087/onBoarding/style3.css" rel="stylesheet" type="text/css"&gt; --&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+   
+
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;
+&lt;!--
+		&lt;h6&gt;		
+        &lt;nav&gt;
+    &lt;ul&gt;
+         &lt;li&gt;&lt;a href="customer.html" class="activeLink"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;  --&gt;
+		
+&lt;/div&gt;
+	&lt;!--/page-header--&gt;
+	&lt;!--	&lt;div class="row-fluid"&gt;
+				&lt;div class="span2" id="sidebar-left" &gt;
+					&lt;p&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:support@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;support@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Pro Services&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:services@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;services@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Carrie Driscoll&lt;/strong&gt;&lt;br /&gt;Client Advocate&lt;br /&gt;&lt;a href="mailto:cdriscoll@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;cdriscoll@mindfireinc.com&lt;/font&gt;&lt;/a&gt; &lt;/p&gt;
+                    &lt;br /&gt;&lt;br &gt;&lt;br /&gt;
+					
+			
+					
+				&lt;/div&gt; --&gt;&lt;!--/span9--&gt;
+				
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher&lt;br&gt;&lt;/h2&gt;
+					&lt;h4&gt;Please Sign In&lt;/h4&gt;
+                    &lt;form method="post"&gt;
+					&lt;div&gt;
+						&lt;table cellspacing="40" cellpadding="10"&gt;
+						
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Login ID: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="purl" name="purl" value="" /&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Password: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="password" id="password" name="password" value="" /&gt;&lt;/td&gt;&lt;/tr&gt;
+                             &lt;tr&gt;                             
+                                	&lt;td colspan="2"&gt;&lt;p align="center" style="width:100px;"&gt;&lt;button type="submit" class="btn btn-primary btn-large btn-block" tabindex="100"&gt;Submit&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+                               &lt;/tr&gt;
+                              &lt;/table&gt;
+                            &lt;/form&gt;
+                            
+&lt;!--							
+                         &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;
+                         &lt;a href="nextsteps.html" class="nextStep"&gt;Next Steps...&lt;/a&gt;
+--&gt;                  
+					&lt;/div&gt;
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Form>
+              <Input Type="TextBox" Name="purl" IsEncrypted="False">
+                <IsRequired>True</IsRequired>
+                <IsRequiredMessage>Please enter login id</IsRequiredMessage>
+                <ValidationRegex>admint123</ValidationRegex>
+                <ValidationRegexMessage>Invalid login ID</ValidationRegexMessage>
+              </Input>
+              <Input Type="TextBox" Name="password" IsEncrypted="False">
+                <IsRequired>True</IsRequired>
+                <IsRequiredMessage>Please enter password</IsRequiredMessage>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+            </Form>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="4" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="asset.html" Position="380,130">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: Assets&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+   
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+
+	function setFile(str1,str2) {
+		
+		var fileTarget = null;
+		if (str1 == 'bgimglink') {
+			fileTarget = $('#bgimglink');			
+		} else if (str1 == 'campaignlogolink') {
+			fileTarget = $('#campaignlogolink');		
+		} else if (str1 == 'customerlogolink') {
+			fileTarget = $('#customerlogolink');
+		} else if (str1 == 'offerimglink') {
+			fileTarget = $('#offerimglink');
+		}
+		if (fileTarget != null)	{
+			$(fileTarget).val(str2);
+		}
+		
+	}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;
+&lt;h6&gt;		
+        &lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="customer.html"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html" class="activeLink"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;		
+&lt;/div&gt;
+	
+				
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher &lt;br&gt;&lt;/h2&gt;
+				&lt;h4&gt;Asset Information&lt;/h4&gt;
+					&lt;form method='post' &gt;
+					&lt;div&gt;
+						&lt;table cellspacing="40" cellpadding="10"&gt;				
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Background Image: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="bgimglink" name="bgimglink" value="##picBackground##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;p align="center" style="width:50px;"&gt;&lt;button id="bgimgButton" class="browserFile btn btn-primary btn-small btn-block" tabindex="50"&gt;Browse&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Campaign Logo: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="campaignlogolink" name="campaignlogolink" value="##picCampaignLogo##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;p align="center" style="width:50px;"&gt;&lt;button id="campaignlogoButton" class="browserFile btn btn-primary btn-small btn-block" tabindex="50"&gt;Browse&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Customer Logo: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="customerlogolink" name="customerlogolink" value="##picbusinessLogo##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;p align="center" style="width:50px;"&gt;&lt;button id="customerlogoButton" class="browserFile btn btn-primary btn-small btn-block" tabindex="50"&gt;Browse&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Offer Image: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="offerimglink" name="offerimglink" value="##picPrize##" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;p align="center" style="width:50px;"&gt;&lt;button id="offerimgButton" class="browserFile btn btn-primary btn-small btn-block" tabindex="50"&gt;Browse&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+						
+                                &lt;tr&gt;
+                                	&lt;td colspan="2"&gt;&lt;p align="center" style="width:100px;"&gt;&lt;button type="submit" class="btn btn-primary btn-large btn-block" tabindex="100"&gt;Submit&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+                                   &lt;/tr&gt;
+                              &lt;/table&gt;
+                            &lt;/form&gt;
+                            
+                  
+					&lt;/div&gt;
+
+					
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+
+
+
+
+&lt;/body&gt;
+
+&lt;script type="text/javascript"&gt;
+	
+	var objName = '';
+	var objLabel = '';
+	//var campaignName = 'drive_ford';
+	
+	
+	$('body').delegate('.browserFile', 'click', function() {
+		if (this.id == 'bgimgButton') {
+			objName = 'bgimglink';
+			objLabel = 'Background Image';
+		} else if (this.id == 'campaignlogoButton') {			
+			objName = 'campaignlogolink';
+			objLabel = 'Campaign Logo';
+		} else if (this.id == 'customerlogoButton') {
+			objName = 'customerlogolink';
+			objLabel = 'Customer Logo';
+		} else if (this.id == 'offerimgButton') {
+			objName = 'offerimglink';
+			objLabel = 'Offer Image';
+		}
+		var p1 = '##BaseDAMFolder##';
+		var p2 = '##awsAccessKey##';
+		var p3 = '##awsSecretKey##';
+		var campaignName = '##CampaignName##';
+
+
+
+		campaignName = cleanName(campaignName);
+		var domainName = encodeURIComponent(document.domain);
+		p1 = encodeURIComponent(p1);
+		p2 = encodeURIComponent(p2);
+		p3 = encodeURIComponent(p3);
+
+		var url = "http://com-ext.com/Automotive/s3upload/index.php?campaignName="+campaignName+"&amp;objName="+objName+"&amp;domainName="+domainName+"&amp;objLabel="+objLabel+"&amp;p1="+p1+"&amp;p2="+p2+"&amp;p3="+p3;
+		var windowName = "Upload_to_S3";
+		var windowSize = "menubar=no,width=430,height=200,toolbar=no";
+		var win = window.open(url, windowName, windowSize);
+
+		return false;
+
+	});
+
+
+
+	function cleanName(campaignName) {
+		var name = campaignName;
+		name = name.replace(/\s+/gi, '_'); // Replace white space with dash
+		return name.replace(/[^a-zA-Z0-9\_\-]/gi, ''); // Strip any special charactere
+	}
+	
+
+&lt;/script&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Form>
+              <Input Type="TextBox" Name="bgimglink" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="campaignlogolink" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="customerlogolink" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="offerimglink" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+            </Form>
+            <Flow>
+              <FlowNextElement Id="5" Name="email.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="5" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="email.html" Position="380,250">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: Email&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--	&lt;link href="https://dl.dropbox.com/u/73788087/onBoarding/style3.css" rel="stylesheet" type="text/css"&gt; --&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+   
+
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;
+&lt;h6&gt;		
+        &lt;nav&gt;
+    &lt;ul&gt;
+         &lt;li&gt;&lt;a href="customer.html"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html" class="activeLink"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;		
+&lt;/div&gt;
+	&lt;!--/page-header--&gt;
+	&lt;!--	&lt;div class="row-fluid"&gt;
+				&lt;div class="span2" id="sidebar-left" &gt;
+					&lt;p&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:support@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;support@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Pro Services&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:services@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;services@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Carrie Driscoll&lt;/strong&gt;&lt;br /&gt;Client Advocate&lt;br /&gt;&lt;a href="mailto:cdriscoll@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;cdriscoll@mindfireinc.com&lt;/font&gt;&lt;/a&gt; &lt;/p&gt;
+                    &lt;br /&gt;&lt;br &gt;&lt;br /&gt;
+					
+			
+					
+				&lt;/div&gt; --&gt;&lt;!--/span9--&gt;
+				
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher &lt;br&gt;&lt;/h2&gt;
+					&lt;h4&gt;Email Information&lt;/h4&gt;
+                    &lt;form method="post"&gt;
+					&lt;div&gt;
+						&lt;table cellspacing="40" cellpadding="10"&gt;
+					
+&lt;!--					&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Email Schedule: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="datetime" id="emailschedule" name="emailschedule" value="" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;p align="center" style="width:50px;"&gt;&lt;button class="btn btn-primary btn-small btn-block" tabindex="50"&gt;Calendar&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+							&lt;/tr&gt;  --&gt;
+
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;From Name: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="fromname" name="fromname" value="##from-name##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;From Email: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="fromemail" name="fromemail" value="##from-email##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+						
+                                &lt;tr&gt;
+                                 
+                                	&lt;td colspan="2"&gt;&lt;p align="center" style="width:100px;"&gt;&lt;button type="submit" class="btn btn-primary btn-large btn-block" tabindex="100"&gt;Submit&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+                                   &lt;/tr&gt;
+                              &lt;/table&gt;
+                            &lt;/form&gt;
+                            
+&lt;!--							
+                         &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;
+                         &lt;a href="nextsteps.html" class="nextStep"&gt;Next Steps...&lt;/a&gt;
+--&gt;                  
+					&lt;/div&gt;
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Form>
+              <Input Type="TextBox" Name="fromname" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="fromemail" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+            </Form>
+            <Flow>
+              <FlowNextElement Id="6" Name="smslead.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="6" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="smslead.html" Position="380,360">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: SMS, Leads&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--	&lt;link href="https://dl.dropbox.com/u/73788087/onBoarding/style3.css" rel="stylesheet" type="text/css"&gt; --&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+   
+
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;
+&lt;h6&gt;		
+        &lt;nav&gt;
+    &lt;ul&gt;
+         &lt;li&gt;&lt;a href="customer.html"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"  class="activeLink"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;		
+&lt;/div&gt;
+	&lt;!--/page-header--&gt;
+	&lt;!--	&lt;div class="row-fluid"&gt;
+				&lt;div class="span2" id="sidebar-left" &gt;
+					&lt;p&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:support@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;support@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Pro Services&lt;/strong&gt;&lt;br /&gt;&lt;a href="mailto:services@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;services@mindfireinc.com&lt;/font&gt;&lt;/a&gt;&lt;/p&gt;
+					&lt;p&gt;&lt;strong&gt;Carrie Driscoll&lt;/strong&gt;&lt;br /&gt;Client Advocate&lt;br /&gt;&lt;a href="mailto:cdriscoll@mindfireinc.com"&gt;&lt;font size="-1"contact&gt;cdriscoll@mindfireinc.com&lt;/font&gt;&lt;/a&gt; &lt;/p&gt;
+                    &lt;br /&gt;&lt;br &gt;&lt;br /&gt;
+					
+			
+					
+				&lt;/div&gt; --&gt;&lt;!--/span9--&gt;
+				
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher&lt;br&gt;&lt;/h2&gt;
+					&lt;h4&gt;Lead Information&lt;/h4&gt;
+                    &lt;form method="post"&gt;
+					&lt;div&gt;
+						&lt;table cellspacing="40" cellpadding="10"&gt;
+						
+&lt;!--					&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;SMS Schedule: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="datetime" id="smsschedule" name="smsschedule" value="" /&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;p align="center" style="width:50px;"&gt;&lt;button class="btn btn-primary btn-small btn-block" tabindex="50"&gt;Calendar&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+							&lt;/tr&gt;  --&gt;
+
+							&lt;br&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Thank You Email&lt;/label&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;From Name: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="thankyouname" name="thankyouname" value="##thankyou-name##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;From Email: &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="thankyouemail" name="thankyouemail" value="##thankyou-email##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;br&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Emails to forward Leads to (comma separated): &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="leademail" name="leademail" value="##lead-email##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+							&lt;br&gt;
+							&lt;tr&gt;
+								&lt;td&gt;&lt;label&gt;Emails to forward Financial Applications to (comma separated): &lt;/label&gt;&lt;/td&gt;
+								&lt;td&gt;&lt;input type="text" id="loanemails" name="loanemails" value="##loan-emails##" /&gt;&lt;/td&gt;
+							&lt;/tr&gt;
+                            &lt;tr&gt;
+                                &lt;td colspan="2"&gt;&lt;p align="center" style="width:100px;"&gt;&lt;button type="submit" class="btn btn-primary btn-large btn-block" tabindex="100"&gt;Submit&lt;/button&gt;&lt;/p&gt;&lt;/td&gt;
+                            &lt;/tr&gt;
+                         &lt;/table&gt;
+                         &lt;/form&gt;
+                            
+&lt;!--							
+                         &lt;br /&gt; &lt;br /&gt; &lt;br /&gt;
+                         &lt;a href="nextsteps.html" class="nextStep"&gt;Next Steps...&lt;/a&gt;
+--&gt;                  
+					&lt;/div&gt;
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Form>
+              <Input Type="TextBox" Name="thankyouname" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="thankyouemail" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="leademail" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+              <Input Type="TextBox" Name="loanemails" IsEncrypted="False">
+                <IsRequired>False</IsRequired>
+                <ValidationRegex />
+                <ValidationRegexMessage />
+              </Input>
+            </Form>
+            <Flow>
+              <FlowNextElement Id="7" Name="nextsteps.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="7" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="nextsteps.html" Position="680,380">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Campaign Launcher: Customer&lt;/title&gt;
+	&lt;link href="http://dl.dropbox.com/u/2126295/boot/css/bootstrap.min.css" rel="stylesheet" type="text/css"&gt;
+&lt;!--	&lt;link href="https://dl.dropbox.com/u/73788087/onBoarding/style3.css" rel="stylesheet" type="text/css"&gt; --&gt;
+	&lt;link href="https://s3-us-west-1.amazonaws.com/proservices/Auto/Wizard/style3.css" rel="stylesheet" type="text/css"&gt;
+   
+
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class="container-fluid"&gt;
+	&lt;div class="page-header"&gt;
+  &lt;!--  &lt;h5 class="pull-right"&gt;Call us: 877-560-3473&lt;/h5&gt;  --&gt;
+				&lt;img src="https://s3-us-west-1.amazonaws.com/proservices/bond/assets/img/Wizard/bondautomedia_logo.jpg" style=	"width:300px;height:30px;padding:0; margin:0;"&gt;&lt;h6&gt;		
+        &lt;nav&gt;
+    &lt;ul&gt;
+         &lt;li&gt;&lt;a href="customer.html"&gt;Customer&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="event.html"&gt;Event&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="asset.html"&gt;Asset&lt;/a&gt;&lt;/li&gt;				
+        &lt;li&gt;&lt;a href="email.html"&gt;Email&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="smslead.html"&gt;SMS/Leads&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="nextsteps.html" class="activeLink"&gt;Next Steps&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/h6&gt;		
+&lt;/div&gt;
+		
+				&lt;div class="span6" id="main_content" style="padding-left:10px;"&gt;
+					&lt;h2&gt;Campaign Launcher&lt;br&gt;&lt;/h2&gt;
+					&lt;h4&gt;Next Steps&lt;/h4&gt;
+ 					&lt;div&gt;
+						&lt;table cellspacing="30" cellpadding="10"&gt;
+						
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;1. Log into Studio and open campaign.&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;2. Upload contacts if not already uploaded.&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;3. Export direct mail for sending to printer.&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;4. Add schedule for email and SMS, if applicable.&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;5. Set schedule for all triggers and microsites, if not set already.&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;6. Launch and enjoy the ride!&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;tr&gt;&lt;td&gt;&lt;label&gt;&lt;strong&gt;Call MindFire at 877-560-3473 if you need help.&lt;/strong&gt;&lt;/label&gt;&lt;/td&gt;&lt;/tr&gt;
+						&lt;/table&gt;
+					&lt;/div&gt;
+					
+					
+				&lt;/div&gt;&lt;!--/span9--&gt;
+				
+			
+		&lt;/div&gt;&lt;!--/row--&gt;
+	
+	&lt;footer class="clearfix"&gt;
+		&lt;hr&gt;
+		&lt;div class="row"&gt;
+			&lt;center&gt;&lt;small&gt;Powered by MindFire Studio &amp;copy; 2013 | www.mindfireinc.com&lt;/small&gt;&lt;/center&gt; 
+		&lt;/div&gt;&lt;!--/row--&gt;
+	&lt;/footer&gt;
+
+&lt;/div&gt;&lt;!--/container--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="8" DbId="0" Type="Page" IsVersion="False" Name="assetRedirect.html" Position="90,280">
+            <Comment>Get filename from S3</Comment>
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt; asset redirect &lt;/title&gt;
+  &lt;meta name="Generator" content="EditPlus"&gt;
+  &lt;meta name="Author" content=""&gt;
+  &lt;meta name="Keywords" content=""&gt;
+  &lt;meta name="Description" content=""&gt;
+  &lt;script type="text/javascript"&gt;
+
+	function sendToAsset() {
+
+			//alert('sendToAsset');  
+
+			var objName = gup("objName");
+			var objFile = decodeURIComponent(gup("imageName"));
+			//alert("aaa objName = "+objName+", objFile = "+objFile);
+			window.opener.setFile(objName,objFile);
+			window.close();
+
+	}
+	
+	function gup( name ){
+		name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
+		var regexS = "[\\?&amp;]"+name+"=([^&amp;#]*)";  
+		var regex = new RegExp( regexS );  
+		var results = regex.exec( window.location.href ); 
+		 if( results == null )    return "";  
+		else    return results[1];
+	}
+	
+
+ 
+
+	&lt;/script&gt; 
+ &lt;/head&gt;
+
+ &lt;body onload="sendToAsset();"&gt;
+  sendToAsset
+ &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+        </ChildElements>
+        <ChildConnections>
+          <ChildConnection StartElementId="1" EndElementId="2" />
+          <ChildConnection StartElementId="2" EndElementId="4" />
+          <ChildConnection StartElementId="4" EndElementId="5" />
+          <ChildConnection StartElementId="5" EndElementId="6" />
+          <ChildConnection StartElementId="6" EndElementId="7" />
+        </ChildConnections>
+        <Properties>
+          <BaseUrlCollection>
+            <BaseUrl Id="1" DbId="0" URL="birthday.m.mdl.io/wiz" Extension="wiz" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="birthday.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
+          </BaseUrlCollection>
+          <Settings SessionTimeout="20">
+            <InvalidPurl>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Did you type your PURL correctly?&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting an invalid PURL, you cannot use any variables (like ##firstname##) within your content.  --&gt;
+Are you sure you typed your Personalized URL correctly? Please try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</InvalidPurl>
+            <PageNotFound>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page not found!&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting a valid PURL but non-existent page, you can use any variable (like ##firstname##) within your content.  --&gt;
+Oops! ##firstname default="Sir/Madam"##,  we are really sorry but the page you requested could not be found. Please check the URL and try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</PageNotFound>
+            <Error>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Something happened.&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- In addition to supporting any contact variable, this page also supports a special variable: ##error##, which is a system-generated description of the error.--&gt;
+Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please contact the site administrator. The following error has occurred: ##error##
+&lt;/body&gt;
+&lt;/html&gt;
+</Error>
+          </Settings>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="18" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ContactList" Position="1060,290" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="purl" Operator="Equal" Value="admint123" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit">
+          <Event EventId="30502" ElementId="13" ChildElementId="6" />
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email" Position="1060,440" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="LandingPages">
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>MindFire, Inc</FromName>
+              <FromAddress>kdutta@mindfireinc.com</FromAddress>
+              <ReplyTo>kdutta@mindfireinc.com</ReplyTo>
+              <Subject>##CampaignName## Campaign Launch Confirmation</Subject>
+              <HtmlContent>##ContactHistory ProgramId="34"  InboundIds="16" EventIds="30505" Month="0" D="0" H="1" M="0" IncludeProfile="False" IncludeActivities="True" ShowCriteria="True"##</HtmlContent>
+              <TextContent>Hi ##firstname##, this is the text email.
+
+Company's physical email address and unsubscribe link must be included for CAN-SPAM compliance.
+
+COMPANY NAME | ADDRESS | CITY, STATE ZIP 
+
+To unsubscribe, visit http://##Unsubscribe RedirectURL="yourdomain.com"##</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+    </CampaignElements>
+    <CampaignConnections>
+      <CampaignConnection StartElementId="1" EndElementId="4" />
+      <CampaignConnection StartElementId="4" EndElementId="5" />
+      <CampaignConnection StartElementId="4" EndElementId="6" />
+      <CampaignConnection StartElementId="2" EndElementId="7" />
+      <CampaignConnection StartElementId="7" EndElementId="1" />
+      <CampaignConnection StartElementId="9" EndElementId="7" />
+      <CampaignConnection StartElementId="12" EndElementId="7" />
+      <CampaignConnection StartElementId="13" EndElementId="18" />
+      <CampaignConnection StartElementId="18" EndElementId="19" />
+    </CampaignConnections>
+  </Campaign>
+  <RuleGroupSet>
+    <RuleGroup Name="LandingPages" Description="">
+      <ContentVariables>
+        <ContentVariable Name="businessName">Nate's Salon</ContentVariable>
+        <ContentVariable Name="businessAddress1">123 Galaxy Avenue</ContentVariable>
+        <ContentVariable Name="businessAddress2">Los Angeles, CA 92612</ContentVariable>
+        <ContentVariable Name="businessPhone">213-212-3333</ContentVariable>
+        <ContentVariable Name="business800">866-233-5678</ContentVariable>
+        <ContentVariable Name="picBackground">https://i.ytimg.com/vi/Xv6LPr9MZg4/maxresdefault.jpg</ContentVariable>
+        <ContentVariable Name="picbusinessLogo">https://s3.amazonaws.com/autoassets/Drive-Cadillac/Dealer1.png</ContentVariable>
+        <ContentVariable Name="picCampaignLogo">https://s3.amazonaws.com/autoassets/Drive-Cadillac/Logo1.png</ContentVariable>
+        <ContentVariable Name="picPrize">https://s3.amazonaws.com/autoassets/Auto-Upgrade/JackLinks_Giveaway_banner.png</ContentVariable>
+        <ContentVariable Name="Giveaway">Test drive a Cadillac to participate in the GIVEAWAY of a lifttime</ContentVariable>
+        <ContentVariable Name="pagecontent">	&lt;form method="post"&gt;
+        &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;##businessName##&lt;/h1&gt;
+                &lt;h4 class="title right"&gt;##businessAddress1##, ##businessAddress2##&lt;/h4&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        &lt;div class="main-container" style="background-image: url('##picBackground##')"&gt;
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                    &lt;header&gt;
+                        &lt;h1 style="font-size: 36px; line-height: 1.5em"&gt;##businessName## invites you to sign up to receive free dinners on your birthday and anniversary!&lt;/h1&gt;
+                    &lt;/header&gt;
+                &lt;/article&gt;
+
+                &lt;aside&gt;
+                     &lt;fieldset&gt;
+                        &lt;div data-role="fieldcontain"&gt;&lt;label for="firstname"&gt;First Name:&lt;/label&gt;&lt;input type="text" id="firstname" name="firstname" data-mini="true" /&gt;&lt;/div&gt;
+                        &lt;div data-role="fieldcontain"&gt;&lt;label for="lastname"&gt;Last Name:&lt;/label&gt;&lt;input type="text" id="lastname" name="lastname" data-mini="true"  /&gt;&lt;/div&gt;
+                        &lt;div data-role="fieldcontain"&gt;&lt;label for="address1"&gt;Address:&lt;/label&gt;&lt;input type="text" id="address1" name="address1" data-mini="true" /&gt;&lt;/div&gt;
+                          &lt;div data-role="fieldcontain"&gt;&lt;label for="city"&gt;City:&lt;/label&gt;&lt;input type="text" id="city" name="city" data-mini="true" /&gt;&lt;/div&gt;
+                        &lt;div data-role="fieldcontain"&gt;&lt;label for="state"&gt;State:&lt;/label&gt;&lt;input type="text" id="state" name="state" data-mini="true"  /&gt;&lt;/div&gt;
+                        &lt;div data-role="fieldcontain"&gt;&lt;label for="zip"&gt;Zip:&lt;/label&gt;&lt;input type="text" id="zip" name="zip" data-mini="true"  /&gt;&lt;/div&gt;
+                        &lt;div data-role="fieldcontain"&gt;&lt;label for="mobile"&gt;Cell Phone:&lt;/label&gt;&lt;input type="text" id="mobile" name="mobile" data-mini="true"  /&gt;&lt;/div&gt;
+                         &lt;div data-role="fieldcontain"&gt;&lt;label for="email"&gt;Email:&lt;/label&gt;&lt;input type="text" id="email" name="email"  data-mini="true" /&gt;&lt;/div&gt;
+
+					 &lt;div class="questionBlock"&gt;
+						&lt;p class="answer"&gt;
+    							&lt;label style="line-height:1em;"&gt;Birthday: &lt;/label&gt;
+						&lt;input type="text" id="q2_birthdate" name="q2_birthdate" placeholder="mm/dd/yyyy"&gt;&lt;/div&gt;
+
+					 &lt;div class="questionBlock"&gt;
+						&lt;p class="answer"&gt;
+    							&lt;label style="line-height:1em;"&gt;Anniversary: &lt;/label&gt;
+						&lt;input type="text" id="q2_anniversary" name="q2_anniversary" placeholder="mm/dd/yyyy"&gt;&lt;/div&gt;
+						
+                        &lt;input type="hidden" id="birthdate" name="birthdate" value="##birthdate##"&gt;
+ 						&lt;input type="hidden" id="anniversary" name="anniversary" value="##anniversary##"&gt;
+                    &lt;/fieldset&gt;
+                    &lt;fieldset&gt;   
+						   &lt;div data-role="fieldcontain"&gt;
+						&lt;label&gt;I agree to receive promotional email and SMS messages from ##businessName##&lt;/label&gt;
+                            &lt;select name="optin" id="optin" data-role="slider" data-mini="true" style="width:100%;"&gt;
+                                &lt;option value="yes"&gt;Yes&lt;/option&gt;
+                                &lt;option value="no"&gt;No&lt;/option&gt;
+                            &lt;/select&gt;
+                        &lt;/div&gt;
+                    &lt;/fieldset&gt;
+                   &lt;fieldset&gt;
+                        &lt;input type="submit" onclick="customSubmit();" value="Submit" data-theme="a" /&gt;
+                    &lt;/fieldset&gt;
+                &lt;/aside&gt;
+                &lt;section class="callout-container"&gt;
+                    &lt;div class="callout"&gt;
+                        &lt;h2&gt;Questions?&lt;/h2&gt;
+                        &lt;h4&gt;Call us at &lt;/h4&gt;
+                        &lt;span&gt;##business800##&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;
+      &lt;/form&gt;
+</ContentVariable>
+        <ContentVariable Name="pagefooter">           &lt;footer class="wrapper"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;SPECIAL EVENT LOCATION&lt;/h4&gt;
+                        &lt;span class="var"&gt;##businessName##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress1##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress2##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessPhone##&lt;/span&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;EVENT DATES AND TIMES&lt;/h4&gt;
+                        &lt;span class="var"&gt;##EventDateTimes##&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;
+                    &lt;/li&gt;
+                   &lt;li&gt;
+					    &lt;span class="var" style="font-size: 16px; line-height: 1.4em"&gt;&lt;b&gt;##Giveaway##&lt;/b&gt;&lt;/span&gt;&lt;br /&gt;
+                        &lt;img src="##picPrize##" width="333" height="61"/&gt;
+                     &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/footer&gt;</ContentVariable>
+        <ContentVariable Name="ThankYouContent">      &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;##businessName##&lt;/h1&gt;
+                &lt;h4 class="title right"&gt;##businessAddress1##, ##businessAddress2##&lt;/h4&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+       &lt;div class="main-container" style="background-image: url('##picBackground##')"&gt;  
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article style="height:400px;"&gt;
+                    &lt;header&gt;
+                        &lt;h1 style="font-size: 36px; line-height: 1.5em"&gt;Thank you, ##FirstName##, we will soon be in touch!&lt;/h1&gt;
+                    &lt;/header&gt;
+                &lt;/article&gt;
+
+             &lt;article&gt;
+                    &lt;header&gt;
+                        &lt;h1 style="font-size: 36px; line-height: 1.5em;VISIBILITY: hidden;"&gt;Congratulations, dude! &lt;br /&gt;
+                                 Your prize code has been verified and you are a grand prize finalist! &lt;/h1&gt;
+                    &lt;/header&gt;
+                &lt;/article&gt;
+
+
+                &lt;section class="callout-container"&gt;
+                    &lt;div class="callout"&gt;
+                        &lt;h2&gt;Questions?&lt;/h2&gt;
+                        &lt;h4&gt;Call us at&lt;/h4&gt;
+                        &lt;span&gt;##business800##&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/section&gt;
+
+  
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;</ContentVariable>
+      </ContentVariables>
+    </RuleGroup>
+    <RuleGroup Name="EmailContent" Description="">
+      <ContentVariables>
+        <ContentVariable Name="preheader">This is my pre-header</ContentVariable>
+        <ContentVariable Name="domainvar">http://birthday.m.mdl.io</ContentVariable>
+        <ContentVariable Name="emailbannerimage">http://i.huffpost.com/gen/3273962/images/o-FANCY-DINNER-facebook.jpg</ContentVariable>
+        <ContentVariable Name="emailbody"> 
+                                &lt;td
+                                    style="width: 100%; text-align: left; padding-left: 10%; padding-right: 10%; padding-top: 17px;"&gt;
+                                    &lt;h3 class="h3_text"&gt;&lt;span style="color: #00aeef;"&gt;&lt;b&gt;Plug in and power up!&lt;/i&gt;&lt;/b&gt;&lt;/span&gt;&lt;/h3&gt;
+                                    &lt;p class="main_text" style="width: 100%; height: auto;"&gt;
+                                      
+  Lorem ipsum dolor sit amet, fastidii ullamcorper intellegebat cu mei, eos malorum euismod repudiare ad. Eruditi oportere eos ad. Sea at mucius adipiscing, sea bonorum legimus cu. Ut qui choro scaevola accommodare, ex velit voluptua ius. Duo eu ponderum invenire. &lt;/p&gt;
+
+                                &lt;/td&gt;</ContentVariable>
+        <ContentVariable Name="calltoaction">                             &lt;td
+                                    style="width: 100%; padding-left: 10%; padding-right: 10%; padding-top: 10px;"&gt;
+                                &lt;table width="480" cellspacing="0" cellpadding="0" border="0"
+                                        align="center" class="main"
+                                        style="padding: 0px; width: 480px; margin: 0px auto; text-align: center; border-collapse: collapse; background-color: #00adef;"&gt;
+                                        &lt;tbody&gt;
+                                            &lt;tr&gt;
+                                                &lt;td
+                                                    style="font-size: 24px; text-align: center; text-transform: uppercase; cursor: pointer; padding: 10px 20px;"&gt;
+                                                    &lt;a href="http:/##domainvar##/##purl##"
+                                                    style="text-decoration: none; font-family: arial-narrow; color: #fff;"&gt;
+                                                        ##firstname##, TAKE THE FIRST STEP
+                                                &lt;/a&gt;
+                                                &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</ContentVariable>
+        <ContentVariable Name="emailfooter">                              &lt;td style="width: 100%; padding-top: 10px;" align="center"&gt;
+                                    &lt;p style="font-size: 9px; line-height: 16px;"&gt;This email sent to you by: Nate's Salon&lt;br&gt;1200
+                                        Main Street | Bethlehem, PA 18018 | 1.800.441.3191&lt;br&gt; 
+                                     &lt;/p&gt;
+                                &lt;/td&gt;</ContentVariable>
+        <ContentVariable Name="unsubscribelink">&lt;td&gt;&lt;center&gt;
+&lt;a href="##Unsubscribe RedirectURL="http://##domainvar##/remove.html" ##"&gt; Unsubscribe&lt;/a&gt;
+&lt;/center&gt;&lt;/td&gt;</ContentVariable>
+        <ContentVariable Name="fromemail">aa@bb.com</ContentVariable>
+        <ContentVariable Name="fromname">Indiana Jones</ContentVariable>
+        <ContentVariable Name="emailSubject">Lorem Ipsum</ContentVariable>
+        <ContentVariable Name="thankyou-name">New Content</ContentVariable>
+        <ContentVariable Name="thankyou-email">New Content</ContentVariable>
+        <ContentVariable Name="lead-email">New Content</ContentVariable>
+        <ContentVariable Name="thankyouSubject">New Content</ContentVariable>
+        <ContentVariable Name="ThankYouContent"> 
+        &lt;div class="main-container"&gt; 
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                        &lt;label&gt;
+						##firstname## ##lastname##, &lt;br /&gt; &lt;br /&gt;
+						Thank you for your participation in the &lt;span class="var"&gt;##CampaignName##&lt;/span&gt; program!&lt;br /&gt;
+						Your PIN# has been verified and you are a grand prize finalist. An event specialist will be contacting you with more details.&lt;br /&gt;&lt;br /&gt;
+						Please remember to bring your invitation or this email with your PIN# ##prizenumber## and present it to an authorized event coordinator or call ##business800## to set an appointment.
+						&lt;br /&gt; 
+						&lt;/label&gt;
+                &lt;/article&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;
+
+        &lt;div class="footer-container"&gt;
+            &lt;footer class="wrapper"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;SPECIAL EVENT LOCATION&lt;/h4&gt;
+                        &lt;span class="var"&gt;##businessName##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress1##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress2##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessPhone##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;http://##purl##.##CampaignName##.com&lt;/span&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;EVENT DATES AND TIMES&lt;/h4&gt;
+                        &lt;span class="var"&gt;##EventDateTimes##&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;
+ 
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;</ContentVariable>
+        <ContentVariable Name="ThankYouBanner">https://s3.amazonaws.com/autoassets/Drive-Cadillac/Logo1.png</ContentVariable>
+      </ContentVariables>
+    </RuleGroup>
+  </RuleGroupSet>
+</Program>
+

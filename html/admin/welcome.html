@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
+
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Template</title>
+
+    <title>Bhaang</title>
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+	<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
 </head>
+
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
@@ -21,7 +31,8 @@
 				<div w3-include-html="topWrapper.html"></div>
 				<!-- / top wrapper -->
 				</nav>
-		</div>	
+		</div>
+		
 <!-- content -->
 		<div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -37,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-controller="myCtrl" id="myCtrl">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
                     <div class="ibox">
@@ -62,29 +73,29 @@
 
                                 <table class="table table-hover">
                                     <tbody>
-										<tr>
+										<tr ng-repeat="item in campaignlist.items">
 											<td class="project-actions">
-												<a href="dv.php?page=editCampaign&programNameHash=$programNameHash" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+												<a href="editCampaign.html?action=editCampaign&campaignID={{item.ID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
 											</td>
 											<td class="project-title">
-												<a href="dv.php?page=editCampaign&programNameHash=$programNameHash">$programName</a>
+												<a href="editCampaign_markdown.html?action=editCampaign&campaignID={{item.ID}}">{{item.Title}}</a>
 												<br/>
-												<small>Launched $created </small>
+												<small>Last Edited {{item.LastEditDate}} </small>
 											</td>
 											<td class="project-reach">
-													<medium>Reach: $reach people</medium>
+													<medium>Reach: 5000 people</medium>
 													<div class="progress progress-mini">
-														<div style="width: $reachPercentage%;" class="progress-bar"></div>
+														<div style="width: 95%;" class="progress-bar"></div>
 													</div>
 											</td>
 											<td class="project-completion">
-													<medium>Results: $clicks clicks to Blog Post ($clickRate% CTR)</medium>
+													<medium>Results: 2387 clicks to Blog Post (45% CTR)</medium>
 													<div class="progress progress-mini">
-														<div style="width: $clickRate%;" class="progress-bar"></div>
+														<div style="width: 45%;" class="progress-bar"></div>
 													</div>
 											</td>
 											 <td class="project-status">
-												<span class="label label-success">$status</span>
+												<span class="label label-success">{{item.Status}}</span>
 											</td>
 										</tr>
                                     </tbody>
@@ -96,16 +107,16 @@
             </div>
         </div>
 <!--/ content -->           
-			<div class="footer">
+		<div class="footer">
 			<!-- footer -->
 			<div w3-include-html="footer.html"></div>
 			<!-- / footer -->			
-			</div>
-		</div><!--  end page-wrapper -->
+		</div>
+	</div><!--  end page-wrapper -->
 </div>
 
     <!-- Mainly scripts -->
-	<script src="js/w3data.js"></script>	
+    <script src="js/w3data.js"></script>	
 	<script>w3IncludeHTML();</script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -115,8 +126,37 @@
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
-	
-	
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			//angular.element('#myCtrl').scope.Load();
+        });
+		var accountProfile = {
+			"firstname" : "John",
+			"lastname" : "Sample",
+			"username" : "johnsample",
+			"email" : "johnsample@example.com",
+			"pass" : "password",
+		};
+		var myApp = angular.module('myApp', ["xeditable"]);
+		myApp.controller('myCtrl',function($scope,$http) {
+			$scope.Reset = function() {
+                  $scope.campaignlist  = angular.copy($scope.master);
+            };
+			$scope.Load = function() {
+                $http.get("/couchdb/" + accountProfile.username +'/campaignlist').then(function(response) {
+                     $scope.master  = response.data; 
+                     if (typeof $scope.master.items == 'undefined') {
+                       $scope.master.items = [];
+                     } 
+                     $scope.Reset();
+                });
+            };
+
+			$scope.Load();
+		});
+    </script>
 
 </body>
 

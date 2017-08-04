@@ -91,18 +91,18 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>-->
                                 <div class="form-group"><label class="col-sm-2 control-label">From Email</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="you@something.com" ><span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span>
+                                    <div class="col-sm-10"><input type="text" class="form-control" id="FromEmail" ng-model="campaign.EML1.FromEmail" placeholder="you@something.com" ><span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span>
                                     </div>
                                 </div>
 								<div class="form-group"><label class="col-sm-2 control-label">From Email Name</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="Bill Gates" name="URL-PABP-EML1-SUBJECT" value="{{URL-PABP-EML1-SUBJECT}}"><span class="help-block m-b-none">What do they call you?</span>
+                                    <div class="col-sm-10"><input type="text" class="form-control" id="FromName" ng-model="campaign.EML1.FromName" placeholder="Bill Gates"><span class="help-block m-b-none">What do they call you?</span>
                                     </div>
                                 </div>
 								<div class="form-group"><label class="col-sm-2 control-label">Email Subject Line</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="You want some cool stuff?" name="URL-PABP-EML1-SUBJECT" value="{{URL-PABP-EML1-SUBJECT}}"><span class="help-block m-b-none">This is what appears in your recipient's inbox. Make it snappy.</span>
+                                    <div class="col-sm-10"><input type="text" class="form-control" id="Subject" ng-model="campaign.EML1.Subject" placeholder="You want some cool stuff?"><span class="help-block m-b-none">This is what appears in your recipient's inbox. Make it snappy.</span>
                                     </div>
                                 </div>
-                                
+                                <input type="hidden" ng-model="campaign.EML1.ReplyTo" value="{{campaign.EML1.FromEmail}}">
                                 
                                 <div class="tab-content">
                                 <div id="tab-1" class="tab-pane active">
@@ -114,9 +114,8 @@
                                 <div class="form-group"><label class="col-sm-2 control-label">Email Body</label>
                                     <div class="col-sm-10">
                                         <div>
-                                        <textarea class="summernote" name="URL-PABP-EML1-HTMLBODY" id="summernote">{{URL-PABP-EML1-HTMLBODY}}</textarea>
+                                        <textarea class="summernote" id="BodyHtml"></textarea>
                                         </div>
-                                    
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -271,7 +270,11 @@
 	<script src="js/plugins/summernote/summernote.min.js"></script>
 
     <!-- Page-Level Scripts -->
+	<script src="js/jquery.md5.js"></script>
     <script>
+		var action = getParameterByName("action");
+		var campaignName = getParameterByName("campaign_name");
+		var campaignID = getParameterByName("campaignID");
 		function getParameterByName(name){
 		  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
 		  var regexS = "[\\?&]" + name + "=([^&#]*)";
@@ -285,12 +288,11 @@
 
         $(document).ready(function() {
 			$('.summernote').summernote();
-
-           var campaignName = getParameterByName("campaign_name");
+           
 			$("#campaignname").text(campaignName);
         });
 
-		var userProfile = {
+		var accountProfile = {
 			"firstname" : "John",
 			"lastname" : "Sample",
 			"username" : "johnsample",
@@ -300,11 +302,43 @@
 		var myApp = angular.module('myApp', ["xeditable"]);
 		myApp.controller('myCtrl',function($scope,$http) {
 			$scope.Save = function() {
-				$scope.userinfo = userProfile;
-				$http.put('/couchdb/' + userProfile.username +'/userinfo', $scope.userinfo).then(function(response){
-					  $scope.data = response.data;                  
-				});         
+				//$scope.userinfo = userProfile;
+				/*var campaignID = $.md5(campaignName);
+				var today = new Date();
+				var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+				var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+				var createDate = date+' '+time;
+				var item = [];
+				item.push({"ID":campaignID,"AccountID":"","Title":campaignName,"CreateDate":createDate,"LastEditDate":createDate,"Status":"Edit"});
+				var campaignlist = {"items":item};
+				$http.put('/couchdb/' + accountProfile.username +'/campaignlist', campaignlist).then(function(response){
+					  //$scope.campaignlist = response.campaignlist;                  
+					  alert("Save Campaign List Successful.");
+				});*/
+				//var EML1 = {"Name":"EML1","Subject":$("#Subject").val(),"FromName":$("#FromName").val(),"FromEmail":$("#FromEmail").val(),"ReplyTo":$("#FromEmail").val(),"BodyHtml":$("#BodyHtml").val()};
+				//var campaign = {"GUID":campaignID,"accountID":"","publishProgramName":campaignName,"publishDate":"","EML1":EML1};
+				$scope.campaign.EML1.BodyHtml = $("#BodyHtml").val();
+				$http.put('/couchdb/' + accountProfile.username +'/'+campaignID, $scope.campaign).then(function(response){
+					  //$scope.campaignlist = response.campaignlist;                  
+					  alert("Save Campaign Successful.");
+				});
 			};
+			$scope.Reset = function() {
+                  $scope.campaign  = angular.copy($scope.master);
+				  $("#BodyHtml").summernote('pasteHTML', $scope.campaign.EML1.BodyHtml);
+            };
+			$scope.Load = function() {
+                $http.get("/couchdb/" + accountProfile.username +'/'+campaignID).then(function(response) {
+                     $scope.master  = response.data; 
+                     $scope.Reset();
+                });
+            };
+			
+			if (action=="editCampaign") {
+				$scope.Load();
+				//$("#campaignname").text($scope.campaign.campaignName);
+				//$("#BodyHtml").val($scope.campaign.EML1.BodyHtml);
+			}
 		});
     </script>
 

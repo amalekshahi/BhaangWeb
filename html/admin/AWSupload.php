@@ -13,6 +13,20 @@ $client = S3Client::factory(array(
     )
 ));
 
+$client->registerStreamWrapper();
+
+
+$data = date("YmdHis");
+$filename = "$data.txt";
+$SourceFile = AWSPATH.$filename;
+file_put_contents($SourceFile, $data);
+echo "$SourceFile<br>\n";
+
+
+$keyname = 's3://'.AWSBUCKET.'/tmp/'.$filename;
+$stream = fopen($keyname, 'x');
+fwrite($stream, $data);
+fclose($stream);
 
 /*
 $result = $client->listBuckets();
@@ -26,6 +40,8 @@ foreach ($result['Buckets'] as $bucket) {
 // Upload an object by streaming the contents of a file
 // $pathToFile should be absolute path to a file on disk
 
+
+/*
 $data = date("YmdHis");
 $EMAIL = $_SESSION['EMAIL'];
 
@@ -33,6 +49,10 @@ $filename = "$data.txt";
 
 $SourceFile = AWSPATH.$filename;
 file_put_contents($SourceFile, $data);
+echo "$SourceFile<br>\n";
+
+
+
 
 $result = $client->putObject(array(
     'Bucket'     => AWSBUCKET,
@@ -45,6 +65,7 @@ $result = $client->putObject(array(
 ));
 
 echo $result['ObjectURL'] . "<br>\n";
+*/
 
-echo "$SourceFile<br>\n";
+
 
