@@ -1,0 +1,269 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<!--
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+
+</head>
+  <body>
+    TestDB 1.03<br>
+    <div ng-controller="myCtrl">
+      <button ng-click="Load()">Load</button>
+      <button ng-click="Save()">Save</button>
+      <button ng-click="Reset()">Reset</button>
+      <p>The button has been clicked {{count}} times.</p>
+      <p>{{data}}</p>
+      
+      <form>
+        firstname: <input type="text" ng-model="userinfo.firstname"><br>
+        lastname: <input type="text" ng-model="userinfo.lastname"><br>
+        username: <input type="text" ng-model="userinfo.username"><br>
+        email: <input type="text" ng-model="userinfo.email"><br>
+        pass: <input type="text" ng-model="userinfo.pass"><br>
+        field1: <input type="text" ng-model="userinfo.field1"><br>
+        field2: <input type="text" ng-model="userinfo.field2"><br>
+        {{field2}}
+        <div class="button" ng-model="file" ngf-select="upload2($file,'image1',$event)">Image1</div> 
+        <!--<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+        <img ng-src="{{userinfo.image1}}" style="width: 64px;height: 64px" ><br>
+        <div class="button" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE</div> 
+        <!--<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+        <img ng-src="{{userinfo['IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE']}}" style="width: 64px;height: 64px" ><br>
+
+      </form>
+      
+      <button ng-click="AddNew()">Add</button>    
+      <table>
+        <tr><td>id</td><td>name</td><td>value</td><td>value2</td></tr>
+        <tr ng-repeat="item in userinfo.items">
+          <td ng-if="item.id!='empty'">{{item.id}}</td>
+          <td ng-if="item.id=='empty'"><a href="#" editable-text="item.id">{{ item.id || "empty" }}</a></td>
+          
+          <!--<td ng-if="item.name!='empty'">{{item.name}}</td>-->
+          <td><a href="#" editable-text="item.name">{{ item.name || "empty" }}</a></td>
+          
+          <td ng-if="item.value!='empty'">{{item.value}}</td>
+          <td ng-if="item.value=='empty'"><a href="#" editable-text="item.value">{{ item.value || "empty" }}</a></td>
+          <td ng-if="item.value2!='empty'">{{item.value2}}</td>
+          <td ng-if="item.value2=='empty'"><a href="#" editable-text="item.value2">{{ item.value2 || "empty" }}</a></td>
+          
+        </tr>
+      </table>
+      
+      <hr>
+      <label>Login:
+      <input type="text" name="input" ng-model="login.userName">
+      </label><br>
+      <label>Password:
+      <input type="text" name="input" ng-model="login.passWord">
+      </label><br>
+      <select name="repeatSelect" id="repeatSelect" ng-model="mpsSelect">
+        <option ng-repeat="option in login.mps" value="{{option.id}}">{{option.name}}</option>
+      </select>
+
+      <br>
+      <button ng-click="Login()">Login</button><button ng-click="Login2()">Login2</button>    
+      {{login.response.message}}
+      
+      <hr>
+      
+
+<!--    <div class="button" ngf-select="uploadFiles($files)" multiple="multiple">Upload on file select</div>
+      Drop File:
+    <div ngf-drop="uploadFiles($files)" class="drop-box"
+      ngf-drag-over-class="'dragover'" ngf-multiple="true"
+      ngf-pattern="'image/*,application/pdf'">Drop Images or PDFs files here</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>-->
+    
+
+
+
+<form enctype="multipart/form-data" action="upload.php" method="POST">
+    Send this file: <input name="file" type="file" />
+    <input name="s3" type="hidden" value="true"/>
+    <input type="submit" value="Send File" />
+</form>
+
+<form action="upload.php"
+      class="dropzone"
+      id="my-awesome-dropzone"></form>
+
+
+	<!-- Form End -->
+
+
+    </div>
+    
+    <div ng-controller="myCtrlTable">
+    </div>
+
+    <script>
+      var data = {
+        "firstname" : "Branko",
+        "lastname" : "Ajzele",
+        "username" : "ajzele",
+        "email" : "branko.ajzele@example.com",
+        "pass" : "password",
+      };
+      
+      /*var items = [
+        {"id":1,"name":"name1","value":"value1"},
+        {"id":2,"name":"name2","value":"value2"},
+        {"id":3,"name":"name3","value":"value3"},
+      ];*/
+      
+      function clearCallBack(data) 
+      {
+         var len = data.length;
+         if(data.charAt(0) == '('){
+           return data.substring(1, len-1); 
+         }else{
+           return data;
+         }
+      };
+       
+          
+      var myApp = angular.module('myApp', ["xeditable","ngFileUpload"]);
+      myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
+              $scope.count = 0; 
+              $scope.Reset = function() {
+                  $scope.userinfo  = angular.copy($scope.master);
+                  $scope.field2 = $scope.userinfo.field2;
+                  $scope.login = {
+                      userName : "tt994613@gmail.com",
+                      passWord : "Atm12345#",
+                  }
+              };
+              $scope.Load = function() {
+                $scope.count++;
+                $http.get("/couchdb/" + data.username +'/userinfo').then(function(response) {
+                     $scope.master  = response.data; 
+                     if (typeof $scope.master.items == 'undefined') {
+                       $scope.master.items = [];
+                     } 
+                     $scope.Reset();
+                });
+              };
+              $scope.Save = function() {
+
+                $http.put('/couchdb/' + data.username +'/userinfo', $scope.userinfo).then(function(response){
+                      $scope.data = response.data;                  
+                });         
+              };
+              $scope.AddNew = function(){
+                  $scope.userinfo.items.push({"id":"empty","name":"empty","value":"empty","value2":"empty"});
+              };
+              $scope.IsNew = function(item){
+                  return false;
+              };
+              
+              $scope.Login = function(){
+                  $http.get("/admin/loginOriginal.php",
+                    {
+                      method: "GET",
+                      params: {
+                        email: $scope.login.userName,
+                        pwd: $scope.login.passWord,
+                        account: 228,
+                      }  
+                    }
+                  ).then(function(response) {
+                      $scope.login.response = JSON.parse(clearCallBack(response.data));
+                      //alert("OK: " + response.statusText);
+                      $scope.login.mps = [];
+                      var mps = $scope.login.response.mps;
+                      for(var i=0;i < mps.length; i++){
+                          $scope.login.mps.push({"id":mps[i][1],"name":mps[i][1]}); 
+                      } 
+                  },function(response){
+                      alert("ERROR: " + response.statusText);
+                  });
+              };
+              
+              $scope.Login2 = function(){
+                  //alert($scope.login.mpsSelect);
+                  alert($scope.mpsSelect);
+                  $http.get("/admin/loginOriginal.php",
+                    {
+                      method: "GET",
+                      params: {
+                        mode: "login",
+                        email: $scope.login.userName,
+                        pwd: $scope.login.passWord,
+                        account: $scope.mpsSelect,
+                      }  
+                    }
+                  ).then(function(response) {
+                      $scope.login.response = JSON.parse(clearCallBack(response.data));
+                      alert("OK: " + $scope.login.response.success);
+                  });
+              };
+              
+              $scope.Submit = function(){
+                alert('submit');
+              };
+              
+                $scope.upload = function (file,propname) {
+                    console.log(propname);
+                    Upload.upload({
+                        url: 'upload.php',
+                        method: 'POST',
+                        file:file,
+                        data: {
+                            file:file, 
+                            's3':'true',
+                            'fileName':propname,
+                            'acctID':'accountID',
+                            'progID':'programID',
+                        }
+                    }).then(function (resp) {
+                        console.log('Success ' + resp.config.data.file.name + 'uploaded');
+                        console.log(resp.data);
+                        $scope.userinfo[propname] = resp.data.imgSrc;
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    }, function (evt) {
+                        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    });
+                };
+                
+                $scope.upload2 = function (file,propname,$event) {
+                    console.log(propname);
+                    Upload.upload({
+                        url: 'upload.php',
+                        method: 'POST',
+                        file:file,
+                        data: {
+                            file:file, 
+                            's3':'true',
+                            'fileName':propname,
+                            'acctID':'accountID',
+                            'progID':'programID',
+                        }
+                    }).then(function (resp) {
+                        console.log('Success ' + resp.config.data.file.name + 'uploaded');
+                        console.log(resp.data);
+                        $scope.userinfo[propname] = resp.data.imgSrc;
+                    }, function (resp) {
+                        console.log('Error status: ' + resp.status);
+                    }, function (evt) {
+                        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    });
+                };                
+              
+              $scope.Load();
+              
+      }]);
+      
+      myApp.controller('myCtrlTable',function($scope,$http) {
+      });
+    </script>
+  </body>
+</html>

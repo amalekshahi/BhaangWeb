@@ -139,7 +139,7 @@ if ($contact != '') {
 	
 	$FileName = $importTime.".csv";
 
-	$importName = "microsoft".$importTime;
+	$importName = "microsoft_".$importTime;
 
 	$file = IMPORTPATH."microsoft/".$FileName;
 	

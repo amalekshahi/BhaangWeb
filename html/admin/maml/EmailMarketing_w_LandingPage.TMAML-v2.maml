@@ -1,0 +1,842 @@
+<Program Name="{{campaignName}}" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+  <Campaign Name="Beneficiary Business" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
+    <CampaignElements>
+      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Busines MicroSite" Position="300,260" SharedCheckout="False">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
+            <Subject>Business MicroSite (Right Now)</Subject>
+            <Body />
+            <Start DateTime="02/14/2013 12:00:00 AM" />
+            <End DateTime="02/28/2020 11:59:00 PM" />
+          </Schedule>
+        </Schedules>
+        <Events />
+        <CallbackTouchPoints />
+        <ChildElements>
+          <ChildElement Id="5" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="Thanks.html" Position="250,250">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;##CampaignName##: Thank you&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+       &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+          ##ThankYouContent##
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="6" DbId="0" Type="Page" IsVersion="False" Name="Home.html" Position="250,0">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="True" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="7" Name="WelcomeGurl.html">
+                <Filter CriteriaJoinOperator="&amp;">
+                  <Criteria Row="1" Field="purl" Operator="Equal" Value="" />
+                </Filter>
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="7" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="WelcomeGurl.html" Position="250,130">
+            <Properties PageType="AddContact" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+       &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;##CampaignName##: Purchase Plan&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+&lt;link rel="stylesheet" href="https://s3.amazonaws.com/autoassets/auto-css-js/css/pikaday.css"&gt;
+&lt;script stype="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" /&gt;
+&lt;script src="http://code.jquery.com/jquery-2.0.0.min.js"&gt;&lt;/script&gt;
+&lt;script &gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+&lt;script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"&gt;&lt;/script&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+        &lt;script src="https://s3.amazonaws.com/autoassets/auto-css-js/js/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+   
+&lt;/head&gt;
+
+&lt;body&gt;
+         ##pagecontent##
+        &lt;div class="footer-container"&gt;
+            &lt;footer class="wrapper"&gt;
+                ##pagefooter##  
+            &lt;/footer&gt;
+        &lt;/div&gt;
+
+    &lt;script src="https://s3.amazonaws.com/autoassets/auto-css-js/js/pikaday.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    var picker = new Pikaday(
+    {
+        field: document.getElementById('q2_birthdate'),
+        firstDay: 1,
+        minDate: new Date('1920-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [1920,2020]
+
+    });
+    var picker = new Pikaday(
+    {
+        field: document.getElementById('q2_anniversary'),
+        firstDay: 1,
+        minDate: new Date('1940-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [1940,2020]
+
+    });
+	&lt;/script&gt;
+	
+	    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="5" Name="Thanks.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="8" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="Privacy.html" Position="500,20">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;##CampaignName##: Privacy, Disclosure and Consent&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+       &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+&lt;!--
+     &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" /&gt;  
+           &lt;script src="http://code.jquery.com/jquery-2.0.0.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+		&lt;script src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"&gt;&lt;/script&gt;
+--&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##picCampaignLogo##" /&gt;&lt;/h1&gt;
+   &lt;!--             &lt;h1 class="title right"&gt;&lt;img src="##picbusinessLogo##" /&gt;&lt;/h1&gt;  --&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        &lt;div class="main-container"&gt; &lt;!-- style="background-image: url('##picBackground##')"&gt; --&gt;
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                &lt;label style="font-size: 14px"&gt;&lt;b&gt;Privacy Policy, State Law Disclosures &amp; Consent for Electronic Documents&lt;/b&gt;&lt;/label&gt;
+                &lt;label style="font-size: 10px"&gt;&lt;br /&gt;
+                 Effective 5/7/2012&lt;br /&gt;&lt;br /&gt;
+                 Please refer to the end of the document for the State Law Disclosures, Consent for Electronic Documents and contact information.&lt;br/&gt;&lt;br/&gt;
+                 &lt;b&gt;PRIVACY POLICY&lt;/b&gt;&lt;br /&gt;
+						This privacy statement describes how ##CampaignName##.com collects and uses the personal information you provide on our Web site: www.##CampaignName##.com. It also describes the choices available to you regarding our use of your personal information and how you can access and update this information.&lt;br/&gt;&lt;br/&gt;
+
+We are committed to protecting your privacy online. We employ business practices to protect your privacy. This Privacy Policy applies to your information that we collect and receive via our vehicle finance application; it does not apply to practices of businesses that we do not own or control or to people we do not employ.  By clicking the submit button, we will share your information with finance partners and authorized intermediaries (including, but not limited to banks, finance companies, credit unions and car dealers) (“Finance Partners”) and in an attempt to process your vehicle finance application.  If you selected to receive other special offers, we may share your personal information excluding your financial information and social security number with parties interested in making you other offers.  If you wish to opt out of the vehicle finance application process, simply do not click the submit button. 
+In order to provide you with additional product and service offerings, we may disclose all Private Information about you with trustworthy and reputable third parties such as:&lt;br/&gt;&lt;br /&gt;
+l    Financial service providers&lt;br/&gt;
+l    Non-financial companies&lt;br/&gt;
+l    Others&lt;br/&gt;&lt;br/&gt;
+IF YOU PREFER THAT WE NOT DISCLOSE YOUR PRIVATE INFORMATION WITH NON-AFFILIATED MARKETING COMPANIES, YOU MAY "OPT-OUT" OF THOSE DISCLOSURES, THAT IS, YOU MAY DIRECT US NOT TO MAKE THOSE DISCLOSURES (OTHER THAN DISCLOSURES OTHERWISE PERMITTED BY LAW).  IF YOU WISH TO OPT OUT OF OFFERS OTHER THAN SUBMITTING A VEHICLE FINANCE APPLICATION, SIMPLY DO NOT CHECK THE BOX NEXT TO “I WOULD LIKE TO RECEIVE OTHER SPECIAL OFFERS” ON THE VEHICLE FINANCE APPLICATION FORM.&lt;br/&gt;&lt;br/&gt;
+
+We will not release your personally-identifiable data without your permission. 
+You can access www.##CampaignName##.com without revealing any personal information.  By using this Site, you agree to the terms of this Privacy Policy.&lt;br/&gt;&lt;br/&gt;
+ 
+&lt;b&gt;Browsing the Site&lt;/b&gt;&lt;br /&gt;
+If you access www.##CampaignName##.com without entering any personal information, we will gather and store information about your visit. This information does not identify you and cannot link back to you unless you choose to identify yourself.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Cookies&lt;/b&gt;&lt;br /&gt;
+We may also place "cookies" on your personal computer when you are browsing the Site, or otherwise. "Cookies" are small identifiers sent from a web server and stored on your computer's hard drive, similar to a license plate, that help us to recognize you if you visit the Site again. Also, the Site uses cookies to track how you found the Site. Cookies are not designed to get data from your hard drive, your e-mail or any other personal data about you. To protect your privacy we do not use cookies to store or transmit any personal information about you on the Internet. To find out more about Cookies, please visit www.cookiecentral.com. You can reject cookies by changing your browser settings. Please note, however, that if you reject our cookies it is possible that some Site pages may not properly load, your access to certain information might be denied or you might have to enter your information more than once.
+&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Third Party Cookies&lt;/b&gt;&lt;br /&gt;
+The use of cookies by our [partners, affiliates, tracking utility company, service providers] is not covered by our privacy statement.  We do not have access or control over these cookies.  Our [partners, affiliates, tracking utility company, service providers] use session ID cookies [to make it easier for you to navigate our site, in order for you to use the shopping cart, etc.]  &lt;br /&gt;&lt;br /&gt;
+
+&lt;b&gt;Web beacons&lt;/b&gt;&lt;br /&gt;
+
+Our Web pages contain electronic images known as Web beacons (sometimes called single-pixel gifs) and are used along with cookies to compile aggregated statistics to analyze how our site is used and may be used in some of our emails to let us know which emails and links have been opened by recipients. This allows us to gauge the effectiveness of our customer communications and marketing campaigns.&lt;br /&gt;&lt;br /&gt;
+ 
+&lt;b&gt;Widgets&lt;/b&gt;&lt;br /&gt;
+
+Our Web site includes Social Media Features, such as the Facebook Like button [and Widgets, such as the Share this button or interactive mini-programs that run on our site]. These Features may collect your IP address, which page you are visiting on our site, and may set a cookie to enable the Feature to function properly. Social Media Features and Widgets are either hosted by a third party or hosted directly on our Site. Your interactions with these Features are governed by the privacy policy of the company providing it.
+&lt;br /&gt;&lt;br /&gt; 
+&lt;b&gt;Information Collected&lt;/b&gt;&lt;br /&gt;
+When you submit a vehicle financing application,  we will need to obtain personally identifiable information from you or about you. Such personally identifiable information may include your name, home address, residence information, employment information, e-mail address, telephone number, social security number, financial information, bankruptcy history, credit references, etc. Consumers who submit an application expressly authorize us and third party partners to contact them in connection with each application and/or request regardless of whether or not such consumer is listed on a "Do Not Call" list.&lt;br /&gt;
+The information we receive about you or from you may be used by us or shared (including evaluating and obtaining financial products or services) by us with our corporate affiliates, agents, vendors and other third parties to help process your request or complete a transaction; to comply with any law, regulation, audit or court order; to help improve our website or the products or services we offer; for research; to better understand our customers' needs; to develop new offerings; and to alert you to new products and services (of us or our business associates) in which you may be interested. We may also combine information you provide us with information about you that is available to us internally or from other sources. The more we know about you, the better we are able to serve you.
+We may also aggregate your personal information with others' information and prepare reports on site usage. Those reports are aggregated and include no personally identifying information. Finally, we may use your personal information to send you email or postal communications regarding products or services offered by us or by third parties with whom we have relationships in which we think you may be interested.  You may at any time choose not to receive promotional emails from us by contacting us at info@##CampaignName##.com. Notwithstanding the foregoing, we may continue to contact you for the purpose of communicating information relating to www.##CampaignName##.com, as well as to facilitate, complete, or confirm any transaction that you may enter into or responding to your inquiry or request.&lt;br /&gt;
+If you prefer for us not to provide your name and email or postal address to third parties for direct marketing purposes, please contact us at info@##CampaignName##.com.&lt;br /&gt;
+We collect nonpublic personal information about you from the following sources:&lt;br /&gt;
+Information we receive from you on applications on our website or other forms;&lt;br /&gt;
+Information about your transactions with us, our affiliates, or others; and&lt;br /&gt;&lt;br /&gt;
+We may disclose all of the information we collect, as described above, to financial institutions, dealership lender partners, local dealers and other third parties that provide financing referral services to explore financing options to process your credit request.
+We also may disclose non-public personal information about you to non-affiliated third parties as permitted by law.
+All information provided by consumers in any of the above-listed ways or otherwise may be used and disclosed as permitted in this Privacy Policy.&lt;br/&gt;&lt;br/&gt;
+
+Information submitted to us in connection with a financing request is used to transmit the request to third parties who may be in a position to respond to your request. We do not provide financing, but instead transmit those requests to third-party vendors for consideration.&lt;br/&gt;&lt;br/&gt;
+
+Federal law requires all financial institutions to obtain, verify and record information that identifies each person who opens an account. When you submit a financing application, your name, residential address, date of birth and social security number will be used to verify your identity. In addition, as part of the request process, we may verify the information you provide, or obtain omitted address or other contact information from third parties. &lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Credit Reports&lt;/b&gt;&lt;br /&gt;
+By checking the box next to “I authorize your Finance Partners to check my credit report.” and by submitting an Application you are affirming on behalf of the stated Applicant(s):  I  authorize any and all Finance Partners and its employees, agents and potential assignees to obtain and verify information about me (including one or more credit reports, information about my employment and banking and credit relationships) that any of them may deem necessary or appropriate in evaluating my Application. If my Application is approved and credit is granted, I also authorize such parties to obtain additional credit reports and other information about me in connection with reviewing the account, taking collection on the account, or for any other legitimate purpose. I further understand that multiple credit reports may be obtained by multiple Finance Partners in an attempt to process my Application.”  I understand that by checking the box “A cosigner is available if necessary” that I may be asked to provide additional information about the cosigner and the cosigner will be asked to provide authorization to pull the cosigner’s credit report as well.  &lt;br /&gt;&lt;br /&gt;
+&lt;b&gt;Updating or Deleting Your information&lt;/b&gt;&lt;br /&gt;
+You may update or delete your information at any time prior to submitting any request to us at info@##CampaignName##.com. 
+Please note that users can not update or delete previously submitted information. If your information (such as your email address) should change, we ask that you re-submit a registration form or request.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Security&lt;/b&gt;&lt;br /&gt;
+We safeguard your personal identifying data (e.g., name and social security number) during electronic transmission from you to us using known encryption, security standards and procedures.  With respect to our employees, we restrict access to non-public personal information about you only to those employees who need to know that information in order to provide products or services to you. We maintain physical, electronic and other procedural safeguards to comply with applicable privacy laws to guard your nonpublic personal information. We also assess new technology for protecting sensitive customer information on an ongoing basis. However, if your information is forwarded to a third party provider, your information will be transmitted according to the security and privacy policies of that third party provider whose privacy practices may differ from ours. Your information, as shared with outside providers will become subject to those different privacy policies.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Links to Other Web Sites&lt;/b&gt;&lt;br /&gt;
+Our Site includes links to other Web sites whose privacy practices may differ from ours. If you submit personal information to any of those sites, your information is governed by their privacy statements. We encourage you to carefully read the privacy statement of any Web site you visit.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Minors&lt;/b&gt;
+We do not knowingly collect information from individuals under the age of eighteen (18). No information should be submitted to, or posted at, the Site by individuals under eighteen (18) years of age. We encourage parents and guardians to spend time online with their children and to participate and monitor the interactive activities of their children.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Do Not Call Registry Compliance&lt;/b&gt;&lt;br /&gt;
+By submitting personal contact and/or financial information through (##CampaignName##.com domain), the user hereby grants written permission to ##CampaignName##.com, its affiliated sites, and its business partners for contact via telephone, mail, and/or e-mail. Further, by registering at ##CampaignName##.com you are consenting to receive phone calls from ##CampaignName##.com, its affiliated sites, and its business partners for contact via telephone and thereby registrants waive their right to file a claim with the FTC or any other agency in reference to these calls or contacts.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Opting-Out of Further Communications&lt;/b&gt;&lt;br /&gt;
+##CampaignName##.com registrants may opt-out of receiving further communications from ##CampaignName##.com by:
+ (1) following "unsubscribe" instructions in any ##CampaignName##.com e-mail received by registrant, or
+ (2) writing to info@##CampaignName##.com.
+Unsubscribing from the ##CampaignName##.com email list does not automatically unsubscribe you from other email lists. Please read your email carefully to understand which email list you are unsubscribing from.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Data Retention&lt;/b&gt;&lt;br /&gt;
+We will retain your information for as long as your account is active or as needed to provide you services. If you wish to cancel your account or request that we no longer use your information to provide you services contact us at info@##CampaignName##.com. We will retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Changes to this Privacy Policy&lt;/b&gt;&lt;br /&gt;
+We reserve the right, in our sole discretion, to change, modify, add and/or remove portions of this Privacy Policy at any time. If we make any change in how we use your personal information we will notify you by email (sent to the e-mail address specified in your account) or by means of a notice on this Site prior to the change becoming effective. All Privacy Policy changes will take effect immediately upon their posting on the Site. Please check the Site periodically for any changes. Where you do not agree to any such changes, you must opt-out by contacting us at info@##CampaignName##.com.&lt;br/&gt;&lt;br/&gt;
+
+&lt;b&gt;Contacting Us&lt;/b&gt;&lt;br /&gt;
+ You can contact us by writing or email us at the address below: &lt;br /&gt;
+info@##CampaignName##.com or call us at ##businessPhone##. &lt;br /&gt;
+##businessName## - ##businessAddress1##, ##businessAddress2##
+
+&lt;b&gt;Trademark and Copyright Information&lt;/b&gt;&lt;br /&gt;
+Everything on our website is copyrighted (unless otherwise noted) and may not be used except with our express written consent. Use of text or images by you or other third parties is prohibited and may violate the copyright laws, trademark laws, privacy laws and other laws and regulations. Nothing contained on this site may be construed as granting any license or right to use any of our text, images, trademarks or service marks, or any content on our website, without our prior written consent.
+&lt;br/&gt;
+                 &lt;br /&gt;&lt;b&gt;STATE LAW DISCLOSURE&lt;/b&gt;&lt;br /&gt;
+						&lt;b&gt;Legal Notice&lt;/b&gt;&lt;br /&gt;
+
+California Applicants: 
+For purposes of compliance with the California Financial Privacy Act, if you are a resident of the State of California and would like to opt-out from the disclosure of your personal information to any third-party for marketing purposes, please contact us at info@##CampaignName##.com. Married applicants may apply for separate credit. A married applicant may include a spouse's income even when applying for a separate account.&lt;br /&gt;
+Maryland Applicants: 
+We do not accept or solicit any fees or payments from you.  When you submit an Application to us and your Application is forwarded to one of our Finance Partners, you may be issued a Financing Agreement by a Finance Partner in accordance with Maryland Commercial Law Code § 12-125, 1013. This Financing Agreement must include: (1) the term and principal amount of your loan; (2) an explanation of the type of loan being offered; (3) the interest rate and, if the rate is subject to final determination at a future date based on some objective standard, a specific statement of those facts; (4) the points, if any, to be paid by the borrower; and (5) the term during which the Financing Agreement remains in effect.&lt;br /&gt;
+Ohio Applicants: 
+The Ohio laws against discrimination require that all creditors make credit equally available to all credit worthy customers, and that credit reporting agencies maintain separate credit histories on each individual upon request. The Ohio civil rights commission administers compliance with this law.&lt;br /&gt;
+Vermont Applicants: 
+For purposes of compliance with the Vermont Consumer Protection Act, if you are a resident of the State of Vermont and would like to opt-out from the disclosure of your personal information to any third-party for marketing purposes, please contact us at info@##CampaignName##.com. &lt;br /&gt;
+Wisconsin Applicants: 
+No provision of a marital property agreement, a unilateral statement under Wis. Rev. Stat. § 766.59 or a court decree under Wis. Rev. Stat. § 766.70 adversely affects the interest of the creditor unless the creditor, prior to the time the credit is granted, is furnished a copy of the agreement, statement or decree or has actual knowledge of the adverse provision when the obligation to the creditor is incurred.
+&lt;br /&gt;
+                 &lt;br /&gt;&lt;b&gt;CONSENT FOR ELECTRONIC DOCUMENT&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+						You are submitting a Vehicle Finance application ("Application").  To continue this process, our Finance Partners must provide you certain notices, documents, information and disclosures related to your Application electronically ("Electronic Documents").  By reading this Consent for Electronic Documents, you agree that you have been informed of your rights when receiving these Electronic Documents.  By agreeing to receive Electronic Documents, you acknowledge receipt of this Consent for Electronic Documents, and agree to receive Electronic Documents via the internet to the e-mail address designated on your Application.  You need to contact the Finance Partner if you would like such records to be provided on paper or in non-electronic form.&lt;br /&gt;&lt;br /&gt;
+&lt;b&gt;Hardware and Software requirements&lt;/b&gt;&lt;br /&gt;
+Before choosing to receive Disclosures electronically, you must decide if you have the necessary hardware and software to access and store these Electronic Disclosures. To obtain electronic Disclosures, you will need a personal computer or other device that can access the Internet, Adobe Acrobat Reader software, and a working electronic mail address. To store electronic Disclosures, your computer or access device must allow you either to download and store electronic Disclosures to the computer, access device, or another media storage device or to print web pages and embedded HTML files that are provided electronically. To verify that you have the necessary hardware and software, try to save or print a copy of this screen. If what you save looks like what you see on the screen, you have the necessary hardware and software.&lt;br /&gt;&lt;br /&gt;
+You may withdraw your consent by contacting us at info@##CampaignName##.com or call us at ##business800##, however, if we have already forwarded your application to a Financial Partner you must also withdraw your consent from the Financial Partner when they contact you.  If you withdraw your consent, the legal validity and enforceability of previously transmitted Electronic Documents will not be affected, and you will not have the option to later receive your Electronic Documents via electronic means.&lt;br /&gt;&lt;br /&gt;
+&lt;b&gt;Consent and Acknowledgment&lt;/b&gt;&lt;br /&gt;
+BY CLICKING THE SUBMIT BUTTON TO SEND THE APPLICATION TO ##CampaignName##.COM, YOU HEREBY ACKNOWLEDGE YOU CAN ACCESS ELECTRONIC DOCUMENTS, AND YOU CONSENT TO HAVING ELECTRONIC DOCUMENTS PROVIDED TO YOU ELECTRONICALLY VIA E-MAIL.&lt;br /&gt;&lt;br /&gt;
+ 
+&lt;b&gt;Contacting Us&lt;/b&gt;&lt;br /&gt;
+Please be aware that we may change our State Law Disclosures and/or Consent for Electronic Documents from time to time.  If we do, we will update this State Law Disclosures and Consent for Electronic Documents at our website, so be sure to check back here frequently.
+If you have any questions about our State Law Disclosures or Consent for Electronic Documents, please feel free to e-mail your questions to info@##CampaignName##.com or call us at ##business800##.&lt;br /&gt;&lt;br /&gt;
+PLEASE PRINT AND RETAIN A COPY OF THIS AGREEMENT FOR YOUR RECORDS. &lt;br /&gt;
+LAST UPDATED May 7, 2012
+&lt;br /&gt;&lt;br /&gt;
+						&lt;/label&gt;
+                &lt;/article&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="9" RuleGroup="LandingPages" DbId="0" Type="Page" IsVersion="False" Name="OnLineInitialEmail.html" Position="500,150">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+
+        &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##picCampaignLogo##" /&gt;&lt;/h1&gt;
+ &lt;!--              &lt;h1 class="title right"&gt;&lt;img src="##picbusinessLogo##" /&gt;&lt;/h1&gt;  --&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        &lt;div class="main-container"&gt; &lt;!-- style="background-image: url('##picBackground##')"&gt; --&gt;
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                        &lt;label&gt;
+						##firstname## ##lastname##, &lt;br /&gt; &lt;br /&gt;
+						You have been selected for a VIP trade appraisal of your ##mfgyear## ##make## ##model##. To schedule an appointment, please call ##business800## or go now to your personal website &lt;b&gt;http://##purl##.##CampaignName##.com&lt;/b&gt; and verify your PIN# &lt;b&gt;##prizenumber##&lt;/b&gt;. &lt;br /&gt;
+						&lt;br /&gt;&lt;br /&gt;
+						PERSONAL WEBSITE: http://##purl##.##CampaignName##.com &lt;br /&gt;
+						PERSONAL PRIZE CODE: &lt;b&gt;##prizenumber##&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+                 &lt;a href="##Unsubscribe RedirectURL="" ##"&gt;Click here&lt;/a&gt; to Unsubscribe.
+						&lt;/label&gt;
+                &lt;/article&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;
+
+        &lt;div class="footer-container"&gt;
+            &lt;footer class="wrapper"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;SPECIAL EVENT LOCATION&lt;/h4&gt;
+                        &lt;span class="var"&gt;##businessName##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress1##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress2##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessPhone##&lt;/span&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;EVENT DATES AND TIMES&lt;/h4&gt;
+                        &lt;span class="var"&gt;##EventDateTimes##&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;
+ 
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="10" DbId="0" Type="Page" IsVersion="False" Name="remove.html" Position="500,280">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+        </ChildElements>
+        <ChildConnections>
+          <ChildConnection StartElementId="6" EndElementId="7" />
+          <ChildConnection StartElementId="7" EndElementId="5" />
+        </ChildConnections>
+        <Properties>
+          <BaseUrlCollection />
+          <Settings SessionTimeout="20">
+            <InvalidPurl>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Did you type your PURL correctly?&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting an invalid PURL, you cannot use any variables (like ##firstname##) within your content.  --&gt;
+Are you sure you typed your Personalized URL correctly? Please try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</InvalidPurl>
+            <PageNotFound>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page not found!&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting a valid PURL but non-existent page, you can use any variable (like ##firstname##) within your content.  --&gt;
+Oops! ##firstname default="Sir/Madam"##,  we are really sorry but the page you requested could not be found. Please check the URL and try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</PageNotFound>
+            <Error>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Something happened.&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- In addition to supporting any contact variable, this page also supports a special variable: ##error##, which is a system-generated description of the error.--&gt;
+Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please contact the site administrator. The following error has occurred: ##error##
+&lt;/body&gt;
+&lt;/html&gt;
+</Error>
+          </Settings>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="2" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="AllContacts" Position="140,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="4" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ResponseTrigger" Position="300,380" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit">
+          <Event EventId="30502" ElementId="1" ChildElementId="7" />
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="5" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="ThankYouEmail" Position="200,510" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+        <Comment>To Respondent</Comment>
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>ThankYouEmail (Right Now)</Subject>
+            <Body />
+            <Start Days="0" Hours="0" Mins="0" />
+          </Schedule>
+        </Schedules>
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##thankyou-name##</FromName>
+              <FromAddress>##thankyou-email##</FromAddress>
+              <ReplyTo>##thankyou-email##</ReplyTo>
+              <Subject>##thankyouSubject##</Subject>
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+
+        &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##ThankYouBanner##" /&gt;&lt;/h1&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        ##ThankYouContent##
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+              <TextContent>##firstname## ##lastname##, 
+
+Thank you for your participation in the ##CampaignName## program!
+Your PIN# has been verified. An event specialist will be contacting you with more details. 
+
+Please remember to bring your invitation or this email with your PIN# ##prizenumber## and present it to an authorized event coordinator or call ##business800## to set an appointment. 
+
+SPECIAL EVENT LOCATION
+##businessName##
+##businessAddress1##
+##businessAddress2##
+##businessPhone##
+http://##purl##.##CampaignName##.com
+
+EVENT DATES AND TIMES
+##EventDateTimes##
+</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="6" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="LeadEmail" Position="440,510" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="LandingPages">
+        <Comment>To business</Comment>
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>LeadEmail (Right Now)</Subject>
+            <Body />
+            <Start Days="0" Hours="0" Mins="0" />
+          </Schedule>
+        </Schedules>
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##lead-email##</ToAddress>
+              <FromName>##thankyou-name##</FromName>
+              <FromAddress>##thankyou-email##</FromAddress>
+              <ReplyTo>##thankyou-email##</ReplyTo>
+              <Subject>##firstname## ##lastname## just visited ##CampaignName## microsite</Subject>
+              <HtmlContent>&lt;html&gt;
+&lt;table width="800px" border="1"&gt;&lt;tr&gt;&lt;td&gt;&lt;table width="800" style="font-family:Tahoma;font-size:12px;"&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				&lt;table style="font-family:Tahoma;font-size:12px;"&gt;
+		&lt;tr&gt;
+			&lt;td valign="top" width="170"&gt;
+				
+			&lt;/td&gt;
+			&lt;td valign="top" width="250"&gt;
+				&lt;b&gt;&lt;b&gt;&lt;/b&gt; ##firstname## ##lastname##
+	&lt;br /&gt;&lt;b&gt;Address: &lt;/b&gt; ##address1##
+	&lt;br /&gt;&lt;b&gt;City: &lt;/b&gt; ##city##
+	&lt;br /&gt;&lt;b&gt;State: &lt;/b&gt; ##state##
+	&lt;b&gt;Zip: &lt;/b&gt; ##zip##
+	&lt;br /&gt;&lt;b&gt;ZipPlus4: &lt;/b&gt; ##zipplus4##
+	&lt;br /&gt;&lt;b&gt;Email: &lt;/b&gt; ##email##
+	&lt;br /&gt;&lt;b&gt;Mobile: &lt;/b&gt; ##mobile##
+	&lt;br /&gt;&lt;b&gt;Phone: &lt;/b&gt; ##phone##	
+	&lt;br /&gt;
+			&lt;/td&gt;
+			&lt;td valign="top" width="250"&gt;
+	&lt;br /&gt;&lt;/b&gt;&lt;b&gt;Personalized URL: &lt;/b&gt; ##purl##
+    &lt;br /&gt;&lt;b&gt;Seed: &lt;/b&gt; ##isseed##
+	&lt;br /&gt;&lt;b&gt;MfgYear: &lt;/b&gt; ##mfgyear##
+	&lt;br /&gt;&lt;b&gt;Make: &lt;/b&gt; ##make##
+	&lt;br /&gt;&lt;b&gt;Model: &lt;/b&gt; ##model##
+&lt;!--	&lt;br /&gt;&lt;b&gt;Mileage: &lt;/b&gt; ##mileage##
+	              &lt;br /&gt;&lt;b&gt;VIN: &lt;/b&gt; ##vin##   --&gt;
+&lt;!--	&lt;br /&gt;&lt;b&gt;PrizeNumber: &lt;/b&gt; RR5008305 --&gt;
+	&lt;br /&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+				&lt;hr /&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/table&gt;
+	&lt;/html&gt;</HtmlContent>
+              <TextContent>##firstname## ##lastname## just visited ##CampaignName## microsite</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="InitialEmail" Position="300,140" SharedCheckout="False" RuleGroup="EmailContent">
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##emailSubject##</Subject>
+              <HtmlContent>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta content="width=device-width, initial-scale=1.0" name="viewport" /&gt;
+&lt;style&gt;
+.ReadMsgBody {
+    width: 100%;
+}
+
+.ExternalClass {
+    width: 100%;
+}
+
+.ExternalClass * {
+    line-height: 100%;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /*-webkit-font-smoothing: antialiased;*/
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+img {
+    border-width: 0px;
+    border-style: solid;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main_text {
+    font-size: 12px;
+    font-family: sans-serif, tahoma;
+}
+.h3_text {
+        font-size: 1.2em !important;
+		font-family: sans-serif, tahoma;
+    }
+	.h5_text {
+        font-size: .8em !important;
+		font-family: sans-serif, tahoma;
+    }
+
+@media only screen and (max-width: 590px) and (min-width: 441px) {
+    table[class=main] {
+        width: 100% !important;
+        height: auto;
+    }
+    .header_img, .footer_img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    .footer_img2 {
+        height: auto !important;
+        display: block;
+    }
+    .main_text {
+        font-size: 1.5em !important;
+    }
+	.h3_text {
+        font-size: 1.2em !important;
+    }
+	.h5_text {
+        font-size: .8em !important;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    table[class=main] {
+        width: 100% !important;
+        height: auto;
+    }
+    .header_img, .footer_img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    .footer_img2 {
+        height: auto !important;
+        display: block;
+    }
+    .main_text {
+        font-size: 1.2em !important;
+    }
+	.h3_text {
+        font-size: 1.2em !important;
+    }
+	.h5_text {
+        font-size: .8em !important;
+    }
+}
+
+   .preheader { display:none !important; visibility:hidden; opacity:0; color:transparent; height:0; width:0; }
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- PRE-HEADER TEXT BEGIN --&gt;
+	  &lt;span class="preheader" style="display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;"&gt;##preheader##&lt;/span&gt;
+&lt;!-- PRE-HEADER TEXT END --&gt;
+
+    &lt;table width="100%" cellspacing="0" cellpadding="0" border="0"
+        style="width: 100%; margin: 0px auto; padding: 0px; border-collapse: collapse;"&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td valign="top" align="center"
+                    style="padding: 0px; background-color: #ffffff;"&gt;
+
+                    &lt;table width="600" cellspacing="0" cellpadding="0" border="0"
+                        align="center" class="main"
+                        style="padding: 0px; width: 600px; margin: 0px auto; text-align: center; border-collapse: collapse; background-color: #ffffff;"&gt;
+                        &lt;tbody&gt;
+                            &lt;tr&gt;
+                                &lt;td style="width: 100%;"&gt;To view this email as web page, go
+                                    &lt;a href="http://##domainvar##/##purl##/onlineEmail.html"&gt;here&lt;/a&gt;&lt;br&gt;
+                                &lt;/td&gt;
+                            &lt;/tr&gt;
+                            &lt;tr&gt;
+                                &lt;td style="width: 100%;"&gt;
+								&lt;a href="http://##domainvar##/##purl##"&gt; 
+								&lt;img class="header_img"
+                                    src="##emailbannerimage##"
+                                    style="border-width: 0px; border-style: solid; display: block; width: 600px; height: 320px;"
+                                    border="0" alt=""&gt;&lt;/a&gt;&lt;/td&gt;
+                            &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+                    &lt;tr&gt;##emailbody##&lt;/tr&gt;
+							&lt;tr&gt;##calltoaction##&lt;/tr&gt;
+							&lt;tr&gt;##emailfooter##&lt;/tr&gt;
+							&lt;tr&gt;##unsubscribelink##&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</HtmlContent>
+              <TextContent>##firstname## ##lastname##, 
+
+You have been selected as a FINALIST in the Shift Nissan 2013 NISSAN ALTIMA GIVEAWAY.
+To see if you are the GRAND PRIZE WINNER of a 2013 NISSAN ALTIMA,
+go now to your personal website http://##purl##.shiftnissan.com and verify your prize code ##prizenumber##. 
+Or, call 816-459-4800 now to make an appointment.
+
+Someone in the ##city## area has the winning prize code. It could be you! 
+
+PERSONAL WEBSITE: http://##purl##.shiftnissan.com 
+PERSONAL PRIZE CODE: ##prizenumber##
+
+SPECIAL EVENT LOCATION
+Randy Reed Nissan
+9600 NW Prairie View Road
+Kansas City, MO 64153
+816-459-4800 
+
+EVENT DATES AND TIMES
+Wed December 26 9am-8pm 
+Thu December 27 9am-8pm 
+Fri December 28 9am-8pm 
+Sat December 29 9am-8pm 
+
+Go to ##Unsubscribe RedirectURL="" ## to unsubscribe.</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="9" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="SeedContacts" Position="490,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="320,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="email" Operator="NotEqual" Value="" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+    </CampaignElements>
+    <CampaignConnections>
+      <CampaignConnection StartElementId="1" EndElementId="4" />
+      <CampaignConnection StartElementId="4" EndElementId="5" />
+      <CampaignConnection StartElementId="4" EndElementId="6" />
+      <CampaignConnection StartElementId="2" EndElementId="7" />
+      <CampaignConnection StartElementId="7" EndElementId="1" />
+      <CampaignConnection StartElementId="9" EndElementId="7" />
+      <CampaignConnection StartElementId="12" EndElementId="7" />
+    </CampaignConnections>
+  </Campaign>
+  <RuleGroupSet>
+    <RuleGroup Name="LandingPages" Description="">
+      <ContentVariables>
+        <ContentVariable Name="businessName">{{URL TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME}}</ContentVariable>
+        <ContentVariable Name="businessAddress1">{{URL TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS1}}</ContentVariable>
+        <ContentVariable Name="businessAddress2">{{URL TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS2}}</ContentVariable>
+        <ContentVariable Name="businessPhone">{{URL TEXT-LINE-ACCTID-PROGRAMID-BUSINESSPHONE}}</ContentVariable>
+        <ContentVariable Name="business800">{{URL TEXT-LINE-ACCTID-PROGRAMID-BUSINESS800}}</ContentVariable>
+        <ContentVariable Name="picBackground">{{IMAGE-ACCTID-PROGRAMID-PICBACKGROUND}}</ContentVariable>
+        <ContentVariable Name="picbusinessLogo">{{IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO}}</ContentVariable>
+        <ContentVariable Name="picCampaignLogo">{{IMAGE-ACCTID-PROGRAMID-PICCAMPAIGNLOGO}}</ContentVariable>
+        <ContentVariable Name="picPrize">{{IMAGE-ACCTID-PROGRAMID-PICPRIZE}}</ContentVariable>
+        <ContentVariable Name="Giveaway">{{URL TEXT-AREA-ACCTID-PROGRAMID-GIVEAWAY}}</ContentVariable>
+        <ContentVariable Name="pagecontent">{{URL TEXT-AREA-ACCTID-PROGRAMID-PAGECONTENT}}</ContentVariable>
+        <ContentVariable Name="pagefooter">{{URL TEXT-AREA-ACCTID-PROGRAMID-PAGEFOOTER}}</ContentVariable>
+        <ContentVariable Name="ThankYouContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-THANKYOUCONTENT}}</ContentVariable>
+      </ContentVariables>
+    </RuleGroup>
+    <RuleGroup Name="EmailContent" Description="">
+      <ContentVariables>
+        <ContentVariable Name="preheader">{{URL TEXT-LINE-ACCTID-PROGRAMID-PREHEADER}}</ContentVariable>
+        <ContentVariable Name="domainvar">{{URL TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR}}</ContentVariable>
+        <ContentVariable Name="emailbannerimage">{{IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE}}</ContentVariable>
+        <ContentVariable Name="emailbody">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAILBODY}}</ContentVariable>
+        <ContentVariable Name="calltoaction">{{URL TEXT-AREA-ACCTID-PROGRAMID-CALLTOACTION}}</ContentVariable>
+        <ContentVariable Name="emailfooter">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAILFOOTER}}</ContentVariable>
+        <ContentVariable Name="unsubscribelink">{{URL TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK}}</ContentVariable>
+        <ContentVariable Name="fromemail">{{URL TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL}}</ContentVariable>
+        <ContentVariable Name="fromname">{{URL TEXT-LINE-ACCTID-PROGRAMID-FROMNAME}}</ContentVariable>
+        <ContentVariable Name="emailSubject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAILSUBJECT}}</ContentVariable>
+        <ContentVariable Name="thankyou-name">{{URL TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-NAME}}</ContentVariable>
+        <ContentVariable Name="thankyou-email">{{URL TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-EMAIL}}</ContentVariable>
+        <ContentVariable Name="lead-email">{{URL TEXT-LINE-ACCTID-PROGRAMID-LEAD-EMAIL}}</ContentVariable>
+        <ContentVariable Name="thankyouSubject">{{URL TEXT-LINE-ACCTID-PROGRAMID-THANKYOUSUBJECT}}</ContentVariable>
+        <ContentVariable Name="ThankYouEmailContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-THANKYOUEMAILCONTENT}}</ContentVariable>
+        <ContentVariable Name="ThankYouBanner">{{IMAGE-ACCTID-PROGRAMID-THANKYOUBANNER}}</ContentVariable>
+      </ContentVariables>
+    </RuleGroup>
+  </RuleGroupSet>
+</Program>

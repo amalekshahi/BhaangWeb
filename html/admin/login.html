@@ -81,17 +81,22 @@ myApp.controller('myCtrl',function($scope,$http) {
                       }  
                     }					
                   ).then(function(response) {
-                      $scope.login.response = JSON.parse(clearCallBack(response.data));
-                      //alert("response: " + response.statusText);
-                      $scope.login.mps = [];
-                      var mps = $scope.login.response.mps;
-                      for(var i=0;i < mps.length; i++){
-                          $scope.login.mps.push({"id":mps[i][0],"name":mps[i][1]}); 						   
-                      } 
-					  $('#accountDiv').show();
-					  $('#continueDiv').show();
-					  $('#loginDiv').hide();		
-					  
+						  $scope.login.response = JSON.parse(clearCallBack(response.data));
+						  //alert("success: " +  $scope.login.response.success + "\n errMsg: " +  $scope.login.response.message);
+						  if($scope.login.response.success){	
+								  $scope.login.mps = [];
+								  var mps = $scope.login.response.mps;
+
+								  for(var i=0;i < mps.length; i++){
+									  $scope.login.mps.push({"id":mps[i][0],"name":mps[i][1]}); 						   
+								  } 
+								  $('#accountDiv').show();
+								  $('#continueDiv').show();
+								  $('#loginDiv').hide();		
+						  }else{
+								alert($scope.login.response.message); 
+						  }
+
                   },function(response){
 						alert("A connection error occured. Please try again.");			
 						//alert("ERROR: " + response.statusText);
@@ -107,39 +112,24 @@ myApp.controller('myCtrl',function($scope,$http) {
 							mode: "login",
 							email: $scope.login.userName,
 							pwd: $scope.login.passWord,
-							account: $scope.mpsSelect,
+							accountID: $scope.mpsSelect,
+							accountName: $('#mpsSelect option:selected').text() ,
 						  }  
 						}
 				).then(function(response) {
-						  $scope.login.response = JSON.parse(clearCallBack(response.data));						  
-						  alert("mpsSelect text =  " + $('#mpsSelect option:selected').text() );
-						  alert("mpsSelect val =  " + $('#mpsSelect option:selected').val() );
-/*
-						   for(var i=0;i < $scope.login.mps.length; i++){
-								  if($scope.login.mps(i).id==$scope.mpsSelect){
-											alert($scope.login.mps(i).name); 
-								  }
-						  } 
-*/ 
-
-/*
-						  $_SESSION['ACCOUNTID'] = '';
-						  $_SESSION['ACCOUNNAME'] = '';
-						  $_SESSION['EMAIL'] = $scope.login.userName;
-						  $_SESSION['PWD'] = $scope.login.passWord;
-						  $_SESSION['PARTNERGUID'] = $scope.login.response.PartnerGuid;
-						  $_SESSION['PARTNERPASSWORD'] = $scope.login.response.PartnerPassword;
-						  */ 
-						  $("#loginForm").attr("action", "welcome.html");
-						  $("#loginForm").submit();		
-/*
-						  if (loginMode == 'CTM') {
-								$("#loginForm").attr("action", "viewContacts.html");
-						
-						  } else {
-								$("#loginForm").attr("action", "dashboard.html");
-						  }
-*/ 
+						  $scope.login.response = JSON.parse(clearCallBack(response.data));		
+						  //alert("mpsSelect text =  " + $('#mpsSelect option:selected').text() );
+						  //alert("mpsSelect val =  " + $('#mpsSelect option:selected').val() );
+						    if($scope.login.response.success){	
+									createCookie("canLogin","Yes");
+									//alert('44')
+								    $("#loginForm").attr("action", "welcome.html");
+									$("#loginForm").submit();		
+						  }else{
+								alert($scope.login.response.message); 
+						  }						
+				},function(response){
+                      alert("Can not login!");
 				});
 		 };
 
@@ -153,6 +143,7 @@ myApp.controller('myCtrl',function($scope,$http) {
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script type="text/JavaScript" src="global.js?n=1"></script> 
 
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>

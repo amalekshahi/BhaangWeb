@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Template</title>
+    <title>Audience</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+
+
+	<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+
 </head>
 <body class="">
     <div id="wrapper">
@@ -22,214 +30,95 @@
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
-<!-- content -->
 
+<!-- content -->
+<div ng-controller="myCtrl">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Edit List: "{{LIST-NAME}}" [{{LIST-COUNT}} People]</h2>
-                <!--<ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a>Launch a Campaign</a>
-                    </li>
-                    <li>
-                        <strong><a>Promote a Blog Post</a></strong>
-                    </li>
-                    
-                </ol>-->
+                <h2>Edit List: "{{item['LIST-NAME']}}" [{{item['LIST-COUNT']}} People]</h2>
             </div>
-            <!--<div class="col-lg-2">
-
-            </div>-->
         </div>
         <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <!--<div class="ibox-title">
-                            <h5>All I Need Are A Few Details <small>... and we'll be ready to rock.</small></h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>-->
+                    <div class="ibox float-e-margins">                        
                         <div class="ibox-content">
-                            <form method="post" class="form-horizontal" action="dv.php?page=editList&action=saveList" onsubmit="return postForm()">
-                                <!--<div class="form-group"><label class="col-sm-2 control-label">Your Campaign's Name</label>
-                                    <div class="col-sm-10"><h2>{{campaign_name}}</h2>
-                                    <!--
-                                    <input type="text" class="form-control" placeholder="My awesome first campaign" name="campaign_name" value="{{campaign_name}}">
-                                    
-                                    <span class="help-block m-b-none"></span></div>
-                                    
-                                </div>
-                                <div class="hr-line-dashed"></div>-->
-                                <div class="form-group"><label class="col-sm-2 control-label">List Name</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="You want some cool stuff?" name="LIST-NAME" value="{{LIST-NAME}}"><span class="help-block m-b-none">This is what appears in your targeting options.  Make it memorable.</span>
+						      <form id="idForm">
+                        
+								<div class="form-group"><label class="col-sm-2 control-label">List Name</label>
+                                    <div class="col-sm-10">								
+									<input type="text" class="form-control" placeholder="You want some cool stuff?" name="LIST-NAME" ng-model="item['LIST-NAME']" >
+									<span class="help-block m-b-none">This is what appears in your targeting options.  Make it memorable.</span>
                                     </div>
                                 </div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+	
                                 <div class="form-group"><label class="col-sm-2 control-label">Description</label>
-                                    <div class="col-sm-10"><input type="text" class="form-control" placeholder="Describe your list for easy future reference" name="LIST-DESCRIPTION" value="{{LIST-DESCRIPTION}}"><span class="help-block m-b-none">Give yourself a little reminder.  You're sure not getting any younger.</span>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="Describe your list for easy future reference" name="LIST-DESCRIPTION" ng-model="item['LIST-DESCRIPTION']">
+									<span class="help-block m-b-none">Give yourself a little reminder.  You're sure not getting any younger.</span>
                                     </div>
                                 </div>
-                                
-                                
-                                <div class="tab-content">
-                                <div id="tab-1" class="tab-pane active">
-                                    <div class="panel-body">
-                                </div>
-                                </div>
-                                </div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">List Definition</label>
                                     <div class="col-sm-10">
                                         <div>
-                                        <textarea class="form-control" name="LIST-DEFINITION" rows="3">{{LIST-DEFINITION}}</textarea>
-                                        </div>
-                                    
+                                        <textarea class="form-control" id="LISTDEFINITION" name="LIST-DEFINITION" rows="3" ng-model="item['LIST-DEFINITION']"></textarea>
+                                        </div>                                    
                                     </div>
                                 </div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+
                                 <div class="form-group">
-                                    <div class="col-sm-4 col-sm-offset-2">
+                                    <div class="col-sm-2 col-sm-offset-2">
+                                        <button class="btn btn-danger" name="action" value="checkCount" onclick="CountClick()">Check Count</button>
+										<button class="btn btn-danger" name="setFilter" value="setFilter" onclick="FilterClick()">Create Filter</button>
+                                    </div>
+									<div class="row wrapper border-bottom white-bg page-heading" id="filterDiv" style="display:none;">
+										<button id='addRow' onclick="AddRow();">Add</button>
+										<input type="radio" name="joinrow" value="and" checked> AND
+										<input type="radio" name="joinrow" value="or" > OR
 
-                                        <button class="btn btn-danger" type="submit" name="action" value="checkCount">Check Count</button>
+										<div class="table-responsive">
+											<table id="filterTable" class="table table-striped table-bordered " >
+											<thead>
+											<tr>
+												<th>Row</th>
+												<th>Field</th>
+												<th>Operator</th>
+												<th>Value</th>
+												<th></th>
+											</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+										<button class="btn btn-danger" name="okFilter" value="okFilter" onclick="okFilterClick()">OK</button>
+										<input type="hidden" id="itemCount" name="itemCount" value="" >							
+									</div>
+
+								</div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+								
+								<div class="form-group">
+                                    <div class="col-sm-3 col-sm-offset-2">                                       
+                                        <input type="hidden" name="LISTID-HASH" value="{{item['LISTID-HASH']}}">
+										<input type="hidden" name="LIST-COUNT" ng-model="item['LIST-COUNT']">
+										<button class="btn btn-primary" ng-click="Save()">Save</button>
+                                        <button class="btn btn-white" ng-click="cancel()">Cancel</button>
                                     </div>
                                 </div>
-                                <div class="hr-line-dashed"></div>
-                                <!--
-                                <div class="hr-line-dashed"></div>
-                                <div class="form-group"><label class="col-sm-2 control-label">Send to Who?</label>
 
-                                    <div class="col-sm-10"><select class="form-control m-b" name="account">
-                                        <option>All Printers (Leads & Contacts) [16,374]</option>
-                                        <option>All Enterprise Accounts [4,123]</option>
-                                        <option>Mary and Joe's Opps [343]</option>
-                                        <option>MindFire Staff [38]</option>
-                                    </select>
-
-                                        
-                                    </div>
-                                </div>
-                                <div class="form-group"><label class="col-sm-2 control-label">Schedule</label>
-                                    <div class="col-sm-10">
-                                        <div class="table-responsive">
-                                            <table class="table table-stripped table-bordered">
-
-                                                <thead>
-                                                <tr>
-                                                    <th>
-                                                        Group
-                                                    </th>
-                                                    <th>
-                                                        Quantity
-                                                    </th>
-                                                    <th style="width: 20%">
-                                                        Send Date/Time
-                                                    </th>
-                                                    <th>
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-control" >
-                                                            <option selected>Everyone in my selected Lists(s)</option>
-                                                            <option>Non-Opens</option>
-                                                            <option>Non-Clickers</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" placeholder="16,374">
-                                                    </td>
-                                                    <td>
-                                                        <div class="input-group date">
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="07/01/2014">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                            <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-control" >
-                                                            <option>Everyone in my selected Lists(s)</option>
-                                                            <option selected>Non-Opens</option>
-                                                            <option>Non-Clickers</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" placeholder="TBD">
-                                                    </td>
-                                                    <td>
-                                                        <div class="input-group date">
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="07/03/2014">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                            <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-control" >
-                                                            <option></option>Everyone in my selected Lists(s)</option>
-                                                            <option>Non-Opens</option>
-                                                            <option selected>Non-Clickers</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" placeholder="TBD">
-                                                    </td>
-                                                    <td>
-                                                        <div class="input-group date">
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="07/10/2014">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                            <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
-                                                    </td>
-                                                </tr>
-                                                
-
-                                                </tbody>
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
-                                -->
-                                <div class="form-group">
-                                    <div class="col-sm-4 col-sm-offset-2">
-                                        <!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
-                                        <input type="hidden" name="listIDHash" value="{{LISTID-HASH}}">
-                                        <button class="btn btn-primary" type="submit" name="action" value="saveList">Save</button>
-                                        <button class="btn btn-white" type="submit">Cancel</button>
-
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>        
+</div><!-- myCtrl -->
 <!--/ content -->           
 			<div class="footer">
 			<!-- footer -->
@@ -250,7 +139,202 @@
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
-	
+	 
+	 <!-- Page-Level Scripts -->
+ 	<script src="js/jquery.md5.js"></script>
+    <script>
+        $(document).ready(function() {
+			//angular.element('#myCtrl').scope.Load();
+			$.ajax({
+				url: 'getFieldList.php', // point to server-side PHP script 
+				dataType: 'json',  // what to expect back from the PHP script, if anything
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: '',                         
+				type: 'get',
+				success: function(json){										
+					if (json.success) {
+						FieldOption = json.fieldOption;						
+					}
+					
+				}
+			 });
+
+        });
+		var accountProfile = {
+			"firstname" : "ff",
+			"lastname" : "test",
+			"accName" : "ftest",
+			"email" : "ftest@example.com",
+			"pass" : "password",
+		};
+		function getParameterByName(name){
+				name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+				var regexS = "[\\?&]" + name + "=([^&#]*)";
+				var regex = new RegExp(regexS);
+				var results = regex.exec(window.location.search);
+				if(results == null)	return "";
+				else		return decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+		Array.prototype.getIndexByValue = function (name, value) 
+		{
+				for (var i = 0, len=this.length; i <len; i++) {
+					if (this[i][name]) {
+						if (this[i][name] === value) {
+							return i
+						}
+					}
+				}
+				return -1;
+		};
+		
+		var OperatorOption = 
+		"<option value=\"\" ><\/option>"+
+		"<option value=\"After\" >After<\/option>"+
+		"<option value=\"AfterEqual\" >AfterEqual<\/option>"+
+		"<option value=\"Before\" >Before<\/option>"+
+		"<option value=\"BeforeEqual\" >BeforeEqual<\/option>"+
+		"<option value=\"Contains\" >Contains<\/option>"+
+		"<option value=\"EndsWith\" >EndsWith<\/option>"+
+		"<option value=\"Equal\" >Equal<\/option>"+
+		"<option value=\"NotContains\" >NotContains<\/option>"+
+		"<option value=\"NotEndsWith\" >NotEndsWith<\/option>"+
+		"<option value=\"NotEqual\" >NotEqual<\/option>"+
+		"<option value=\"NotStartsWith\" >NotStartsWith<\/option>"+
+		"<option value=\"StartsWith\" >StartsWith<\/option>";
+
+		var FieldOption = "";
+
+		var counter = 1;
+
+		var cid = getParameterByName("cid");
+		//alert("cid = "+cid);
+		var index = -1; 
+		var myApp = angular.module('myApp', ["xeditable"]);
+		myApp.controller('myCtrl',function($scope,$http) {
+
+			$scope.Reset = function() {
+                  $scope.audience  = angular.copy($scope.master);
+				  if(cid == 'new'){
+					  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":""});
+				  }else{
+					 var index = $scope.audience.items.getIndexByValue('contactID',cid);		
+					 //alert("idx = "+index);
+					 $scope.item = $scope.audience.items[index];
+				  }
+            };
+			$scope.Load = function() {
+                $http.get("/couchdb/" + accountProfile.accName +'/audienceLists').then(function(response) {
+                     $scope.master  = response.data; 
+                     if (typeof $scope.master.items == 'undefined') {
+                       $scope.master.items = [];
+                     } 
+                     $scope.Reset();
+                });
+            };
+			$scope.Save = function() {
+					$http.put('/couchdb/' + accountProfile.accName +'/audienceLists',  $scope.audience).then(function(response){
+	                     $scope.Load();
+						 alert("Save success");
+					});         
+			};
+			$scope.cancel = function() {
+					window.location.href="audiences.html"; 
+			};
+
+			$scope.Load();
+		});
+
+		function CountClick() {
+
+			var form_data = $("#idForm").serialize();
+			
+			
+			$.ajax({
+				url: 'countClick.php', // point to server-side PHP script 
+				dataType: 'json',  // what to expect back from the PHP script, if anything
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: form_data,                         
+				type: 'get',
+				success: function(json){					
+					var count = "0"; 
+					if (json.success) {
+						count = json.count;						
+						// set LIST-COUNT
+					}
+					alert (count+' Contact(s) found');
+				}
+			 });
+		}
+
+		function FilterClick() {
+			$('#filterDiv').show();
+		}
+
+		function AddRow() {
+			var tabData = "<tr>"+
+			"<td>"+counter+"<input type=\"hidden\" name=\"rownumber"+counter+"\" id=\"rownumber"+counter+" value='"+counter+"'\"></td>"+
+			"<td><select name=\"fieldoption"+counter+"\" id=\"fieldoption"+counter+"\">"+FieldOption+"</select></td>"+
+			"<td><select name=\"operatoroption"+counter+"\" id=\"operatoroption"+counter+"\">"+OperatorOption+"</select></td>"+
+			"<td><input type=\"text\" name=\"filtervalue"+counter+"\" id=\"filtervalue"+counter+"\"></td>"+
+			"<td><input type=\"button\" value=\"Del\" onclick=\"delRow(this,"+counter+")\"></td>"+
+			"</tr>";
+			$('#filterTable > tbody').append(tabData); 		
+			counter++;			
+		}
+
+		function delRow(row, index) {
+			
+
+			var rowCount = $('#filterTable tr').length;
+			
+			if (index == rowCount) {
+				counter--;
+			} else if (rowCount == 2) {
+				counter = 1;
+			}
+			$(row).closest('tr').remove();
+			
+		}
+
+		function okFilterClick() {
+			var table = document.getElementById('filterTable');
+
+			var rowLength = table.rows.length;
+			if (rowLength == 1) {
+				alert("Please set filter.");
+			} else {
+				$('#itemCount').val(counter);
+				var LISTDEFINITION = "";
+				var form_data = $("#idForm").serialize();			
+				
+				$.ajax({
+					url: 'createFilter.php', // point to server-side PHP script 
+					dataType: 'json',  // what to expect back from the PHP script, if anything
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form_data,                         
+					type: 'get',
+					success: function(json){					
+						if (json.success) {
+							$('#LISTDEFINITION').val(json.Filter);
+							$('#filterDiv').hide();
+						}
+					}
+				 });
+
+
+						
+				
+			}
+			
+		}
+		
+    </script>
 	
 
 </body>

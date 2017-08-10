@@ -1,0 +1,406 @@
+<Program Name="{{campaignName}}" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+  <Campaign Name="Beneficiary Business" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
+    <CampaignElements>
+      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Busines MicroSite" Position="50,150" SharedCheckout="False">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
+            <Subject>Business MicroSite (Right Now)</Subject>
+            <Body />
+            <Start DateTime="02/14/2013 12:00:00 AM" />
+            <End DateTime="02/28/2020 11:59:00 PM" />
+          </Schedule>
+        </Schedules>
+        <Events />
+        <CallbackTouchPoints />
+        <ChildElements>
+          <ChildElement Id="9" DbId="0" Type="Page" IsVersion="False" Name="OnLineInitialEmail.html" Position="300,30">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>&lt;!DOCTYPE html&gt;
+&lt;html class="no-js"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;meta name="description" content=""&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+
+
+        &lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
+        &lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+		&lt;script tyle="text/javascript"&gt;$(document).bind("mobileinit", function() { $.mobile.ajaxEnabled = false; });&lt;/script&gt;
+        &lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/normalize.min.css"&gt;
+        &lt;link rel="stylesheet" href="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/css/main.css"&gt;
+
+        &lt;script src="http://proservices.s3-website-us-west-1.amazonaws.com/bond/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="header-container"&gt;
+            &lt;header class="wrapper clearfix"&gt;
+                &lt;h1 class="title left"&gt;&lt;img src="##picCampaignLogo##" /&gt;&lt;/h1&gt;
+ &lt;!--              &lt;h1 class="title right"&gt;&lt;img src="##picbusinessLogo##" /&gt;&lt;/h1&gt;  --&gt;
+            &lt;/header&gt;
+        &lt;/div&gt;
+
+        &lt;div class="main-container"&gt; &lt;!-- style="background-image: url('##picBackground##')"&gt; --&gt;
+            &lt;div class="main wrapper clearfix"&gt;
+
+                &lt;article&gt;
+                        &lt;label&gt;
+						##firstname## ##lastname##, &lt;br /&gt; &lt;br /&gt;
+						You have been selected for a VIP trade appraisal of your ##mfgyear## ##make## ##model##. To schedule an appointment, please call ##business800## or go now to your personal website &lt;b&gt;http://##purl##.##CampaignName##.com&lt;/b&gt; and verify your PIN# &lt;b&gt;##prizenumber##&lt;/b&gt;. &lt;br /&gt;
+						&lt;br /&gt;&lt;br /&gt;
+						PERSONAL WEBSITE: http://##purl##.##CampaignName##.com &lt;br /&gt;
+						PERSONAL PRIZE CODE: &lt;b&gt;##prizenumber##&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;
+                 &lt;a href="##Unsubscribe RedirectURL="" ##"&gt;Click here&lt;/a&gt; to Unsubscribe.
+						&lt;/label&gt;
+                &lt;/article&gt;
+            &lt;/div&gt; &lt;!-- #main --&gt;
+        &lt;/div&gt; &lt;!-- #main-container --&gt;
+
+        &lt;div class="footer-container"&gt;
+            &lt;footer class="wrapper"&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;SPECIAL EVENT LOCATION&lt;/h4&gt;
+                        &lt;span class="var"&gt;##businessName##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress1##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessAddress2##&lt;/span&gt;&lt;br /&gt;
+                        &lt;span class="var"&gt;##businessPhone##&lt;/span&gt;
+                    &lt;/li&gt;
+                    &lt;li&gt;
+                        &lt;h4&gt;EVENT DATES AND TIMES&lt;/h4&gt;
+                        &lt;span class="var"&gt;##EventDateTimes##&lt;/span&gt;&lt;br /&gt;&lt;br /&gt;
+ 
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="10" DbId="0" Type="Page" IsVersion="False" Name="remove.html" Position="120,30">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+        </ChildElements>
+        <ChildConnections />
+        <Properties>
+          <BaseUrlCollection />
+          <Settings SessionTimeout="20">
+            <InvalidPurl>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Did you type your PURL correctly?&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting an invalid PURL, you cannot use any variables (like ##firstname##) within your content.  --&gt;
+Are you sure you typed your Personalized URL correctly? Please try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</InvalidPurl>
+            <PageNotFound>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page not found!&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting a valid PURL but non-existent page, you can use any variable (like ##firstname##) within your content.  --&gt;
+Oops! ##firstname default="Sir/Madam"##,  we are really sorry but the page you requested could not be found. Please check the URL and try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</PageNotFound>
+            <Error>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Something happened.&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- In addition to supporting any contact variable, this page also supports a special variable: ##error##, which is a system-generated description of the error.--&gt;
+Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please contact the site administrator. The following error has occurred: ##error##
+&lt;/body&gt;
+&lt;/html&gt;
+</Error>
+          </Settings>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="2" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="AllContacts" Position="140,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="InitialEmail" Position="300,140" SharedCheckout="False" RuleGroup="EmailContent">
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##emailSubject##</Subject>
+              <HtmlContent>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta content="width=device-width, initial-scale=1.0" name="viewport" /&gt;
+&lt;style&gt;
+.ReadMsgBody {
+    width: 100%;
+}
+
+.ExternalClass {
+    width: 100%;
+}
+
+.ExternalClass * {
+    line-height: 100%;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /*-webkit-font-smoothing: antialiased;*/
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+img {
+    border-width: 0px;
+    border-style: solid;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main_text {
+    font-size: 12px;
+    font-family: sans-serif, tahoma;
+}
+.h3_text {
+        font-size: 1.2em !important;
+		font-family: sans-serif, tahoma;
+    }
+	.h5_text {
+        font-size: .8em !important;
+		font-family: sans-serif, tahoma;
+    }
+
+@media only screen and (max-width: 590px) and (min-width: 441px) {
+    table[class=main] {
+        width: 100% !important;
+        height: auto;
+    }
+    .header_img, .footer_img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    .footer_img2 {
+        height: auto !important;
+        display: block;
+    }
+    .main_text {
+        font-size: 1.5em !important;
+    }
+	.h3_text {
+        font-size: 1.2em !important;
+    }
+	.h5_text {
+        font-size: .8em !important;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    table[class=main] {
+        width: 100% !important;
+        height: auto;
+    }
+    .header_img, .footer_img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+    }
+    .footer_img2 {
+        height: auto !important;
+        display: block;
+    }
+    .main_text {
+        font-size: 1.2em !important;
+    }
+	.h3_text {
+        font-size: 1.2em !important;
+    }
+	.h5_text {
+        font-size: .8em !important;
+    }
+}
+
+   .preheader { display:none !important; visibility:hidden; opacity:0; color:transparent; height:0; width:0; }
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- PRE-HEADER TEXT BEGIN --&gt;
+	  &lt;span class="preheader" style="display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;"&gt;##preheader##&lt;/span&gt;
+&lt;!-- PRE-HEADER TEXT END --&gt;
+
+    &lt;table width="100%" cellspacing="0" cellpadding="0" border="0"
+        style="width: 100%; margin: 0px auto; padding: 0px; border-collapse: collapse;"&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td valign="top" align="center"
+                    style="padding: 0px; background-color: #ffffff;"&gt;
+
+                    &lt;table width="600" cellspacing="0" cellpadding="0" border="0"
+                        align="center" class="main"
+                        style="padding: 0px; width: 600px; margin: 0px auto; text-align: center; border-collapse: collapse; background-color: #ffffff;"&gt;
+                        &lt;tbody&gt;
+                            &lt;tr&gt;
+                                &lt;td style="width: 100%;"&gt;To view this email as web page, go
+                                    &lt;a href="http://##domainvar##/##purl##/onlineEmail.html"&gt;here&lt;/a&gt;&lt;br&gt;
+                                &lt;/td&gt;
+                            &lt;/tr&gt;
+                            &lt;tr&gt;
+                                &lt;td style="width: 100%;"&gt;
+								&lt;a href="http://##domainvar##/##purl##"&gt; 
+								&lt;img class="header_img"
+                                    src="##emailbannerimage##"
+                                    style="border-width: 0px; border-style: solid; display: block; width: 600px; height: 320px;"
+                                    border="0" alt=""&gt;&lt;/a&gt;&lt;/td&gt;
+                            &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+                    &lt;tr&gt;##emailbody##&lt;/tr&gt;
+							&lt;tr&gt;##calltoaction##&lt;/tr&gt;
+							&lt;tr&gt;##emailfooter##&lt;/tr&gt;
+							&lt;tr&gt;##unsubscribelink##&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</HtmlContent>
+              <TextContent>##firstname## ##lastname##, 
+
+You have been selected as a FINALIST in the Shift Nissan 2013 NISSAN ALTIMA GIVEAWAY.
+To see if you are the GRAND PRIZE WINNER of a 2013 NISSAN ALTIMA,
+go now to your personal website http://##purl##.shiftnissan.com and verify your prize code ##prizenumber##. 
+Or, call 816-459-4800 now to make an appointment.
+
+Someone in the ##city## area has the winning prize code. It could be you! 
+
+PERSONAL WEBSITE: http://##purl##.shiftnissan.com 
+PERSONAL PRIZE CODE: ##prizenumber##
+
+SPECIAL EVENT LOCATION
+Randy Reed Nissan
+9600 NW Prairie View Road
+Kansas City, MO 64153
+816-459-4800 
+
+EVENT DATES AND TIMES
+Wed December 26 9am-8pm 
+Thu December 27 9am-8pm 
+Fri December 28 9am-8pm 
+Sat December 29 9am-8pm 
+
+Go to ##Unsubscribe RedirectURL="" ## to unsubscribe.</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="9" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="SeedContacts" Position="490,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+      <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="320,10" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="email" Operator="NotEqual" Value="" />
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+    </CampaignElements>
+    <CampaignConnections>
+      <CampaignConnection StartElementId="2" EndElementId="7" />
+      <CampaignConnection StartElementId="9" EndElementId="7" />
+      <CampaignConnection StartElementId="12" EndElementId="7" />
+    </CampaignConnections>
+  </Campaign>
+  <RuleGroupSet>
+    <RuleGroup Name="EmailContent" Description="">
+      <ContentVariables>
+        <ContentVariable Name="preheader">{{URL TEXT-LINE-ACCTID-PROGRAMID-PREHEADER}}</ContentVariable>
+        <ContentVariable Name="domainvar">{{URL TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR}}</ContentVariable>
+        <ContentVariable Name="emailbannerimage">{{IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE}}</ContentVariable>
+        <ContentVariable Name="emailbody">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAILBODY}}</ContentVariable>
+        <ContentVariable Name="calltoaction">{{URL TEXT-AREA-ACCTID-PROGRAMID-CALLTOACTION}}</ContentVariable>
+        <ContentVariable Name="emailfooter">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAILFOOTER}}</ContentVariable>
+        <ContentVariable Name="unsubscribelink">{{URL TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK}}</ContentVariable>
+        <ContentVariable Name="fromemail">{{URL TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL}}</ContentVariable>
+        <ContentVariable Name="fromname">{{URL TEXT-LINE-ACCTID-PROGRAMID-FROMNAME}}</ContentVariable>
+        <ContentVariable Name="emailSubject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAILSUBJECT}}</ContentVariable>
+      </ContentVariables>
+    </RuleGroup>
+  </RuleGroupSet>
+</Program>
+

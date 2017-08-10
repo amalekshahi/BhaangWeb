@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Audiences</title>
+      <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+	<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
 </head>
+
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
@@ -23,6 +28,7 @@
 				</nav>
 		</div>	
 <!-- content -->
+<div ng-controller="myCtrl">
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -36,16 +42,29 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInUp">
                     <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Your Lists</h5>
-                            <div class="ibox-tools">
-                                <a href="editContact.html" class="btn btn-primary btn">+ Create New List</a>
-                            </div>
-                        </div>
+                        <div class="ibox-title" style="float:left;padding:0;">
+								<div class="ibox-tools">
+									<a href="importContact.php" class="btn btn-primary btn">Import Contact</a>
+								</div>
+						</div>
+					</div>
+					<div class="ibox">
+                        <div class="ibox-title" style="min-height:0;padding:0">
+								<h5>Your Lists</h5>
+								<div class="ibox-tools">
+									<a href="editContact.html?cid=new" class="btn btn-primary btn">+ Create New List</a>
+								</div>
+                        </div>                        
+					</div><!-- ibox -->	
+					
+					
+
+<!-- 
                         <div class="ibox-content">
                             <div class="row m-b-sm m-t-sm">
                                 <div class="col-md-1">
@@ -56,93 +75,46 @@
                                         <button type="button" class="btn btn-sm btn-primary"> Go!</button> </span></div>
                                 </div>
                             </div>
+ -->
                             <div class="project-list">
                                 <table class="table table-hover">
                                     <tbody>
-									<tr>
-											<td class="project-status">
-												<span class="label label-primary">1 person</span>
-											</td>
-											<td class="project-title">
-												<a href="project_detail.html">Just Dave</a>
-												<br>
-												<small>Use this for testing to yourself, D. </small>
-											</td>
-											<td class="project-completion">
-													<small>Engagement Rate: TBD</small>
-													<div class="progress progress-mini">
-														<div style="width: 0%;" class="progress-bar"></div>
-													</div>
-											</td>
-											<td class="project-actions">
-												<a href="editContact.html?page=editList&amp;listIDHash=dbbb15c0dcb992001b54f8825faf43d0" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-											</td>
-									</tr>
-									<tr>
-											<td class="project-status">
-												<span class="label label-primary">1 person</span>
-											</td>
-											<td class="project-title">
-												<a href="project_detail.html">Just Mackenzi</a>
-												<br>
-												<small>What does it sound like.  You're smart enough to figure this one out. </small>
-											</td>
-											<td class="project-completion">
-													<small>Engagement Rate: TBD</small>
-													<div class="progress progress-mini">
-														<div style="width: 0%;" class="progress-bar"></div>
-													</div>
-											</td>
-											<td class="project-actions">
-												<a href="editContact.html?page=editList&amp;listIDHash=60e2c677eba39612d4f9cd427b779a32" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-											</td>
-									</tr>
-									<tr>
-											<td class="project-status">
+									<tr ng-repeat="item in audience.items">
+											
+											<td class="project-status" ng-if="item['LIST-COUNT']!=0">
+												<span class="label label-primary">{{item['LIST-COUNT']}} person</span>
+											</td>					
+											<td class="project-status" ng-if="item['LIST-COUNT']==0">
 												<span class="label label-primary">No one!</span>
 											</td>
-											<td class="project-title">
-												<a href="project_detail.html">No One</a>
-												<br>
-												<small>Exactly as it sounds.  Should not find anyone. </small>
+
+											<td class="project-title" ng-if="item['LIST-COUNT']!=0">
+												<a href="editContact.html?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small>
 											</td>
+											<td class="project-title" ng-if="item['LIST-COUNT']==0">
+												<a href="editContact.html?cid={{item.contactID}}">No One</a><br><small>{{item['LIST-DESCRIPTION']}}</small>
+											</td>
+
 											<td class="project-completion">
-													<small>Engagement Rate: TBD</small>
+													<small>{{item.contactDetail}}{{item.contactID}}</small>
 													<div class="progress progress-mini">
 														<div style="width: 0%;" class="progress-bar"></div>
 													</div>
 											</td>
 											<td class="project-actions">
-												<a href="editContact.html?page=editList&amp;listIDHash=7417d66a7c73d7a34294c1de87b0000e" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+												<a href="editContact.html?cid={{item.contactID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
 											</td>
-										</tr>
-									<tr>
-											<td class="project-status">
-												<span class="label label-primary">No one!</span>
-											</td>
-											<td class="project-title">
-												<a href="project_detail.html"></a>
-												<br>
-												<small> </small>
-											</td>
-											<td class="project-completion">
-													<small>Engagement Rate: TBD</small>
-													<div class="progress progress-mini">
-														<div style="width: 0%;" class="progress-bar"></div>
-													</div>
-											</td>
-											<td class="project-actions">
-												<a href="editContact.html?page=editList&amp;listIDHash={{LISTID-HASH}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-											</td>
-										</tr>
-										</tbody>
+									</tr>									
+									</tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            </div><!-- project-list -->
+
+                        </div><!-- wrapper wrapper-content animated fadeInUp -->
+					</div><!-- col-lg-12 -->
+				</div><!-- row -->
+
+  
+</div><!-- myCtrl -->
 <!--/ content -->           
 			<div class="footer">
 			<!-- footer -->
@@ -163,7 +135,40 @@
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
-	
+	 <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+			//angular.element('#myCtrl').scope.Load();
+        });
+		var accountProfile = {
+			"firstname" : "ff",
+			"lastname" : "test",
+			"accName" : "ftest",
+			"email" : "ftest@example.com",
+			"pass" : "password",
+		};
+		var myApp = angular.module('myApp', ["xeditable"]);
+		myApp.controller('myCtrl',function($scope,$http) {
+			$scope.Reset = function() {
+                  $scope.audience  = angular.copy($scope.master);
+            };
+			$scope.Load = function() {
+                $http.get("/couchdb/" + accountProfile.accName +'/audienceLists').then(function(response) {
+                     $scope.master  = response.data; 
+                     if (typeof $scope.master.items == 'undefined') {
+                       $scope.master.items = [];
+                     } 
+                     $scope.Reset();
+                });
+            };
+
+			$scope.Load();
+		});
+
+		function importContact() {
+			window.location.href = "importContact.php";
+		}
+    </script>
 	
 
 </body>

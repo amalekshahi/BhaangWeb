@@ -75,12 +75,12 @@
                                     <tbody>
 										<tr ng-repeat="item in campaignlist.items">
 											<td class="project-actions">
-												<a href="editCampaign.html?action=editCampaign&campaignID={{item.ID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+												<a href="edit{{item.campaignType}}.html?action=editCampaign&campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
 											</td>
 											<td class="project-title">
-												<a href="editCampaign_markdown.html?action=editCampaign&campaignID={{item.ID}}">{{item.Title}}</a>
+												<a href="edit{{item.campaignType}}.html?action=editCampaign&campaign_id={{item.campaignID}}">{{item.campaignName}}</a> <small>({{item.campaignType}})</small>
 												<br/>
-												<small>Last Edited {{item.LastEditDate}} </small>
+												<small>Last Edited {{item.lastEditDate}} </small>
 											</td>
 											<td class="project-reach">
 													<medium>Reach: 5000 people</medium>
@@ -95,7 +95,7 @@
 													</div>
 											</td>
 											 <td class="project-status">
-												<span class="label label-success">{{item.Status}}</span>
+												<span class="label label-success">{{item.status}}</span>
 											</td>
 										</tr>
                                     </tbody>

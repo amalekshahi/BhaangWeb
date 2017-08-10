@@ -4,13 +4,17 @@ require_once 'global.php';
 
 use Aws\S3\S3Client;
 
+$URLRenderFormat = "##URL SRC=\"{{url}}\"##";
+$MISSINGRenderFormat = "MISSING-{{value}}";
+$AWSFormatURL = "https://bkktest.s3.amazonaws.com/{{fileName}}";
+$AWSFormatFileName = "/tmp/{{fileName}}";
+$LocalFormatURL = "https://web2xmm.com/admin/images/{{fileName}}";
+$LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
 
-$AWSFormatURL = "##SRC URLhttps://bkktest.s3.amazonaws.com/{{fileName}} ##";
-$AWSFormatFileName = "tmp/{{fileName}}.html";
 function couchDB_Get($path)
 {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984/' . $path);
+    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984' . $path);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -18,7 +22,9 @@ function couchDB_Get($path)
             'Accept: */*'
     ));
     $response = curl_exec($ch);
+    //echo($response);
     $doc = json_decode($response);
+    //print_r($response);
     return $doc;
 }
 
@@ -84,37 +90,66 @@ function studio_render($template,$data,$handler)
 
 /*
     Support
-    - "TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME"
+    - direct as "TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME"
+    - url src as "URL TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME"
 */
 function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
 {
-    global $AWSFormatURL;
-    global $AWSFormatFileName;
+    global $URLRenderFormat;
+    global $MISSINGRenderFormat;
 
     if(is_null($urlFormat) == true){    
-        $urlFormat = $AWSFormatURL;
+        $urlFormat = $URLRenderFormat;
     }
     preg_match_all('/\{{(.*?)\}}/', $template, $matches, PREG_PATTERN_ORDER);
-    $aValue0 =  array_unique ($matches[0]);
-    $aValue1 =  array_unique ($matches[1]);
+    $aValue0 = $matches[0];
+    $aValue1 = $matches[1];
+    // somehow unique_array not work using hash instead.
+    $hash = array();
     for($i = 0;$i<count($aValue0);$i++){
         $value0 = $aValue0[$i];
         $value1 = $aValue1[$i];
-        
-        
-        $filename = str_replace("ACCTID",$acctID,$value1);
-        $filename = str_replace("PROGRAMID",$progID,$filename);
-        $awsFileName = str_replace("{{fileName}}", "$filename", $AWSFormatFileName);
-        $awsUrl = str_replace("{{fileName}}", "$awsFileName", $AWSFormatURL);
-        
-        $template = str_replace("$value0", "$awsUrl", $template);
-        
-        //send data to S3
-        $a = array("acctID" =>$acctID, "progID" => $progID );
-        $s3Url = s3_put_contents("/" . $awsFileName,$data->$value1,array("$acctID"=>$acctID,"$progID"=>$progID));
-        wPrint("$s3Url\n");
+        $renderDirect = true;
+        //wPrint("-- $value0 $value1\n");
+        if(startsWith($value1,"URL ")){
+            $renderDirect = false;
+            $value1 = substr($value1,4);
+            //wPrint("-- change to $value1\n");
+        }
+        if(array_key_exists($value0,$hash)){
+        }else{
+            $hash[$value0] = $value1;
+            //wPrint("$value0 $value1\n");
+            
+            $filename = str_replace("ACCTID",$acctID,$value1);
+            $filename = str_replace("PROGRAMID",$progID,$filename);
+            $renderValue = "";
+            if(property_exists($data,"$value1")){
+                if($renderDirect){
+                    $renderValue = $data->$value1;                
+                }else{
+                    $filename = $filename . ".html";
+                    $s3Url = s3_put_contents($filename,$data->$value1,array("$acctID"=>$acctID,"$progID"=>$progID));
+                    $renderValue = str_replace("{{url}}", "$s3Url", $URLRenderFormat);
+                }
+                
+                $xmlSave = htmlspecialchars($renderValue);
+                $template = str_replace("$value0", "$xmlSave", $template);
+            }else{
+                $missingValue = str_replace("{{value}}","$value1",$MISSINGRenderFormat);
+                $xmlSave = htmlspecialchars($missingValue);
+                $template = str_replace("$value0", "$xmlSave", $template);
+            }
+        }
     }
     return $template;
+}
+
+function RenderFileName($acctID,$progID,$filename)
+{
+    $filename = str_replace("ACCTID",$acctID,$filename);
+    $filename = str_replace("PROGRAMID",$progID,$filename);
+    return $filename;
 }
 
 function isAssoc(array $arr)
@@ -178,8 +213,21 @@ function IterateObject($obj,$parent,$func)
     }
 };
 
-function s3_put_contents($path,$data,$metaData=array())
+function local_put_contents($fileName,$data,$metaData=array())
 {
+    global $LocalFormatFileName;
+    global $LocalFormatURL;
+    
+    $localFileName = str_replace("{{fileName}}", "$fileName", $LocalFormatFileName);
+    file_put_contents($localFileName,$data);
+    $url = str_replace("{{fileName}}", "$fileName", $LocalFormatURL);
+    return $url;
+}
+
+function s3_put_contents($fileName,$data,$metaData=array())
+{
+    global $AWSFormatFileName;
+    $path = str_replace("{{fileName}}", "$fileName", $AWSFormatFileName);
     $client = S3Client::factory(array(
         'credentials' => array(
             'key'    => AWSKEY,
@@ -244,6 +292,48 @@ function create_tmaml($mamlFileName,$mapFileName,$outputFileName)
     wPrint("create_tmaml " . strlen($maml) . "\n");
 }
 
+function startsWith($haystack, $needle)
+{
+     $length = strlen($needle);
+     return (substr($haystack, 0, $length) === $needle);
+}
+
+function endsWith($haystack, $needle)
+{
+    $length = strlen($needle);
+    if ($length == 0) {
+        return true;
+    }
+
+    return (substr($haystack, -$length) === $needle);
+}
+
+function getStudioTicket() { 
+    return getTicket($_SESSION['ACCOUNTID'], $_SESSION['EMAIL'],$_SESSION['PWD']);
+}
+
+
+function publishMAML($MAML) {
+    
+	$byteArray = array();
+	for($i = 0; $i < strlen($MAML); $i++) {
+		$byteArray[$i] = ord($MAML[$i]); 
+	}
+    $userTicket = getStudioTicket();
+    $publish = array(
+    	"Maml"					=> $byteArray,
+    	"MamlFormat"			=> 0,
+    	"EnforcePublish"        => true,
+    	"Credentials"			=>  array
+            (
+                "Ticket" => $userTicket        
+            ),
+    );
+    		
+    $publishResponse = callService("programservice/PublishProgram", $publish);
+    return $publishResponse;
+}
+
 
 function wPrint($data)
 {
@@ -255,6 +345,10 @@ function wPrintLine($data)
     echo nl2br($data . "\n");
 }
 
+function dump_r($data)
+{
+    print_r($data);echo "<br>";
+}
 
 
 ?>

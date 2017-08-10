@@ -5,7 +5,8 @@ include 'global.php';
 $callback = $_GET['callback'];
 $email = $_GET["email"];
 $pwd = $_GET["pwd"];
-$account = $_GET["account"];
+$accountID = $_GET["accountID"];
+$accountName = $_GET["accountName"];
 $mode = $_GET["mode"];
 
 
@@ -26,18 +27,26 @@ function echoCallbackString($callback, $loadmore='', $authToken = '', $mpArray){
 }
 
 
-if ($account == "") {
+if ($accountID == "") {
 	$SelectedAccountID = null;
 } else {
-	$SelectedAccountID = $account;
+	$SelectedAccountID = $accountID;
 }
 
 if ($mode == 'login') {
-	$FieldNames = getxmediaAPI($account);
+	$FieldNames = getxmediaAPI($accountName);
 	$PartnerGuid = $FieldNames[0];
 	$PartnerPassword = $FieldNames[1]; 
 
 	if ($PartnerGuid != '') {
+		 session_start();
+		$_SESSION['ACCOUNTID'] = $accountID;
+		$_SESSION['ACCOUNNAME'] = $accountName;
+		$_SESSION['EMAIL'] = $email;
+		$_SESSION['PWD'] = $pwd;
+		$_SESSION['PARTNERGUID'] = $PartnerGuid;
+		$_SESSION['PARTNERPASSWORD'] = $PartnerPassword;
+		$_SESSION['login'] = true;
 		echo $callback, '(', json_encode( array('success'=>true, 'PartnerGuid'=>$PartnerGuid, 'PartnerPassword'=>$PartnerPassword)), ')';
 	} else {
 		echo $callback, '(', json_encode( array('success'=>false, 'message'=>'Cannot find PartnerGuid')), ')';

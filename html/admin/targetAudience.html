@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+require_once('loginCredentials.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -408,6 +417,8 @@
                     <button onclick="getGoogleContact();">Import Google Contact</button>
 					<br>
 					<button onclick="getMicrosoftContact();">Import Microsoft Contact</button>
+					<br>
+					<button onclick="importContact();">Import Contact</button>
                 </div>
                 <div class="col-lg-2">
 
@@ -968,6 +979,11 @@
 
 	function getMicrosoftContact() { 
 		window.location.href = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=1dd57f07-aac6-47f7-b3af-04d8fc3a6455&response_type=code&redirect_uri=https%3A%2F%2Fweb2xmm.com%2Fadmin%2FrecvMScontact.php&response_mode=query&scope=offline_access%20user.read%20mail.read%20contacts.read&state=12345';
+	}
+
+
+	function importContact() {
+		window.location.href = "importContact.php";
 	}
 	</script>
 

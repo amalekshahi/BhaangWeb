@@ -5,9 +5,8 @@ date_default_timezone_set('America/Los_Angeles');
 require('config.php');
 
 
+
 ini_set("memory_limit", "-1");
-
-
 
 
 
@@ -137,6 +136,69 @@ function ImportContacts($TEST, $FileName, $Mapping, $importName, $userTicket, $e
 }
 
 
+function GetContactFieldList($TEST, $userTicket){
+	$rows = array();
+	$GetContactFieldListRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		),
+		"Type" => 0
+	);
+	$GetContactFieldListResponse = callService("contactservice/GetContactFieldList", $GetContactFieldListRequest);
+	$ErrorCode = $GetContactFieldListResponse->{"Result"}->{"ErrorCode"};
+	if ($ErrorCode == "") {
+		$ImportList = $GetContactFieldListResponse->{"FieldList"};
+		foreach ($ImportList as $x){
+			//echo "Name = ".$ImportList->{'Name'}."<br>";
+			$importName = $x->{'Name'};
+			if ($importName != '') {
+				$group = array(					
+					'Name'=>$x->{'Name'}
+				);					
+				$rows[] = $group;
+			}			
+		}
+		array_sort($rows, 'Name', SORT_ASC);
+	} else {
+		$errorMessage = "GetContactFieldListResponse ERROR : <br> ErrorMessage -> ".$GetContactFieldListResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$GetContactFieldListResponse->{"Result"}->{"ExceptionMessage"};
+
+		echo $errorMessage;
+		
+	}
+
+	return $rows;
+}
+
+
+function GetContactCount($TEST, $userTicket, $filter, $ACCOUNTID){
+	$rows = array();
+	$Count = "0";
+	$ContactListCountRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		),
+		"Account_ID" => $ACCOUNTID,
+		"Filter" => $filter
+	);
+	$ContactListCountResponse = callService("contactservice/GetContactListCount", $ContactListCountRequest);
+	$ErrorCode = $ContactListCountResponse->{"Result"}->{"ErrorCode"};
+	if ($ErrorCode == "") {
+		$Count = $ContactListCountResponse->{"Count"};		
+	} else {
+		$errorMessage = "ContactListCountResponse ERROR : <br> ErrorMessage -> ".$ContactListCountResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$ContactListCountResponse->{"Result"}->{"ExceptionMessage"};		
+	}
+
+	return $Count;
+}
+
 function saveListInfo($TEST, $email, $accountName, $ListName, $ListDescription, $ListDefinition, $recordCount) {
 	
 
@@ -147,7 +209,132 @@ function saveListInfo($TEST, $email, $accountName, $ListName, $ListDescription, 
 		echo "$email, $accountName, $ListName, $ListDescription, $ListDefinition, $recordCount, $ListName, $ListDescription, $ListDefinition<br>\n";
 	}
 
-	DB::QueryExecute($sql, $importType, $FileName, $email, $errorMessage, $recordCount, $accountName);
+	//DB::QueryExecute($sql, $importType, $FileName, $email, $errorMessage, $recordCount, $accountName);
 
 	return $errorMessage;
+}
+
+function array_sort($array, $on, $order=SORT_ASC)
+{
+    $new_array = array();
+    $sortable_array = array();
+
+    if (count($array) > 0) {
+        foreach ($array as $k => $v) {
+            if (is_array($v)) {
+                foreach ($v as $k2 => $v2) {
+                    if ($k2 == $on) {
+                        $sortable_array[$k] = $v2;
+                    }
+                }
+            } else {
+                $sortable_array[$k] = $v;
+            }
+        }
+
+        switch ($order) {
+            case SORT_ASC:
+                asort($sortable_array);
+            break;
+            case SORT_DESC:
+                arsort($sortable_array);
+            break;
+        }
+
+        foreach ($sortable_array as $k => $v) {
+            $new_array[$k] = $array[$k];
+        }
+    }
+
+    return $new_array;
+}
+
+function mapOperator($op) {
+	$ret = 'Contains';
+	if ($op == 'eq') {
+		$ret = 'Equal';
+	} else if ($op == 'ne') {
+		$ret = 'NotEqual';
+	} else if ($op == 'bw') {
+		$ret = 'StartsWith';
+	} else if ($op == 'bn') {
+		$ret = 'NotStartsWith';
+	} else if ($op == 'ew') {
+		$ret = 'EndsWith';
+	} else if ($op == 'en') {
+		$ret = 'NotEndsWith';
+	} else if ($op == 'cn') {
+		$ret = 'Contains';
+	} else if ($op == 'nc') {
+		$ret = 'NotContains';
+	} else if ($op == 'lt') {
+		$ret = 'Before';
+	} else if ($op == 'le') {
+		$ret = 'BeforeEqual';
+	} else if ($op == 'gt') {
+		$ret = 'After';
+	} else if ($op == 'ge') {
+		$ret = 'AfterEqual';
+	} else if ($op == 'in') {
+		$ret = 'Contains';
+	} else if ($op == 'ni') {
+		$ret = 'NotContains';
+	}
+
+	return $ret;
+
+}
+
+
+function getJsonFilter($jsonFilters) {
+	$Filter = '';
+
+	if ($jsonFilters) {
+		$JoinOperator = "";
+		$CriteriaRow = "";
+
+		$row = 0;
+
+		
+		
+		$JoinOperator = $jsonFilters->{"groupOp"};
+		if ($JoinOperator == 'AND') {
+			$JoinOperator = "&amp;";
+		} else if ($JoinOperator == 'OR') {
+			$JoinOperator = "|";
+		}
+
+		$rules = $jsonFilters->{"rules"};
+		foreach ($rules as $rule) {
+			$field	= $rule->{"field"};
+			$op		= $rule->{"op"};
+			//$op		= mapOperator($op);
+			$data	= $rule->{"data"};
+			//echo "field = $field, op = $op, data = $data<br>";
+			$row++;
+			$CriteriaRow1 .= "Criteria Row=\"$row\" Field=\"$field\" Operator=\"$op\" Value=\"$data\" <br>";
+			$CriteriaRow .= "<Criteria Row=\"$row\" Field=\"$field\" Operator=\"$op\" Value=\"$data\" />";
+			
+		}
+		
+		
+			
+		
+
+		$Filter = "<Filter CriteriaJoinOperator=\"$JoinOperator\">$CriteriaRow</Filter>";
+		$CriteriaRow1 = "Filter CriteriaJoinOperator=\"$JoinOperator\" $CriteriaRow1 Filter<br>";
+		
+	} else {
+		$CriteriaRow1 = "Filter CriteriaJoinOperator=\"&amp;\" <br>";		
+		$Filter = "<Filter CriteriaJoinOperator=\"&amp;\" />";		
+
+		//echo "CriteriaRow1 = $CriteriaRow1<br>";
+	}
+	
+	//echo "JoinOperator = $JoinOperator<br>CriteriaRow1 = $CriteriaRow1<br>";
+	
+	
+	
+	return $Filter;
+
 }
