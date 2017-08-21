@@ -1,0 +1,223 @@
+<!doctype html>
+<html ng-app="myApp"">
+<head>
+<!--
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+
+</head>
+<body>
+<!--<a href="#/!">page1</a>
+<a href="#!page2">page2</a>
+<a href="#!page3">page3</a> -->
+<div class="w3-bar w3-teal">
+   <a href="#/!" class="w3-bar-item w3-button">Home</a>
+   <a href="#!page2" class="w3-bar-item w3-button">page 2</a>
+   <a href="#!page3" class="w3-bar-item w3-button">page 3</a>
+</div> 
+
+<div ng-view></div>
+<script>
+var data = {
+    "firstname" : "Branko",
+    "lastname" : "Ajzele",
+    "username" : "ajzele",
+    "email" : "branko.ajzele@example.com",
+    "pass" : "password",
+};
+
+function clearCallBack(data) 
+{
+    var len = data.length;
+    if(data.charAt(0) == '('){
+        return data.substring(1, len-1); 
+    }else{
+        return data;
+    }
+};
+       
+var myApp = angular.module("myApp", ["ngRoute","xeditable","ngFileUpload"]);
+myApp.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "page1.html"
+    })
+    .when("/page2", {
+        templateUrl : "page2.html"
+    })
+    .when("/page3", {
+        templateUrl : "page3.html",
+        controller : "page3Ctrl"
+     });
+ 
+});
+
+myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scope,$http,Upload,$rootScope) {
+
+    $scope.Reset = function() {
+      $scope.userinfo  = angular.copy($rootScope.master);
+      $scope.field2 = $scope.userinfo.field2;
+      $scope.login = {
+          userName : "tt994613@gmail.com",
+          passWord : "Atm12345#",
+      }
+      //$rootScope = $scope.userinfo;
+    };
+    $scope.Load = function() {
+        $scope.count++;
+        //if(typeof $rootScope.master == 'undefined'){
+            $http.get("/couchdb/" + data.username +'/userinfo').then(function(response) {
+                 $rootScope.master  = response.data; 
+                 if (typeof $rootScope.master.items == 'undefined') {
+                   $rootScope.master.items = [];
+                 } 
+                 $scope.Reset();
+            });
+        //}else{
+        //    $scope.userinfo = $rootScope.copy;
+        //}
+    };
+    $scope.Save = function() {
+        $http.put('/couchdb/' + data.username +'/userinfo', $scope.userinfo).then(function(response){
+              $scope.data = response.data;                  
+        });         
+    };
+    $scope.AddNew = function(){
+      $scope.userinfo.items.push({"id":"empty","name":"empty","value":"empty","value2":"empty"});
+    };
+    $scope.IsNew = function(item){
+      return false;
+    };
+
+    $scope.Login = function(){
+        $http.get("/admin/loginOriginal.php",
+        {
+          method: "GET",
+          params: {
+            email: $scope.login.userName,
+            pwd: $scope.login.passWord,
+            account: 228,
+          }  
+        }
+        ).then(function(response) {
+          $scope.login.response = JSON.parse(clearCallBack(response.data));
+          //alert("OK: " + response.statusText);
+          $scope.login.mps = [];
+          var mps = $scope.login.response.mps;
+          for(var i=0;i < mps.length; i++){
+              $scope.login.mps.push({"id":mps[i][1],"name":mps[i][1]}); 
+          } 
+        },function(response){
+          alert("ERROR: " + response.statusText);
+        });
+    };
+
+    $scope.Login2 = function(){
+      //alert($scope.login.mpsSelect);
+      alert($scope.mpsSelect);
+      $http.get("/admin/loginOriginal.php",
+        {
+          method: "GET",
+          params: {
+            mode: "login",
+            email: $scope.login.userName,
+            pwd: $scope.login.passWord,
+            account: $scope.mpsSelect,
+          }  
+        }
+      ).then(function(response) {
+          $scope.login.response = JSON.parse(clearCallBack(response.data));
+          alert("OK: " + $scope.login.response.success);
+      });
+    };
+
+    $scope.Submit = function(){
+        alert('submit');
+    };
+
+    $scope.upload = function (file,propname) {
+        console.log(propname);
+        Upload.upload({
+            url: 'upload.php',
+            method: 'POST',
+            file:file,
+            data: {
+                file:file, 
+                's3':'true',
+                'fileName':propname,
+                'acctID':'accountID',
+                'progID':'programID',
+            }
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded');
+            console.log(resp.data);
+            $scope.userinfo[propname] = resp.data.imgSrc;
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+    $scope.upload2 = function (file,propname,$event) {
+        console.log(propname);
+        Upload.upload({
+            url: 'upload.php',
+            method: 'POST',
+            file:file,
+            data: {
+                file:file, 
+                's3':'true',
+                'fileName':propname,
+                'acctID':'accountID',
+                'progID':'programID',
+            }
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded');
+            console.log(resp.data);
+            $scope.userinfo[propname] = resp.data.imgSrc;
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };         
+
+    $scope.Init = function(){
+        $scope.count = 0; 
+        $scope.Load();
+    }    
+    
+    $scope.$on('$locationChangeStart', function(event) {
+        //if ($scope.form.$invalid) {
+        //   event.preventDefault();
+        //}
+        //alert('change');
+        //$rootScope.copy = $scope.userinfo;
+        //$rootScope.userInfo = $scope.userinfo;
+    });
+
+    $scope.Init();            
+    //$scope.Load();
+      
+}]);
+
+myApp.controller('page2Ctrl',['$scope','$http','Upload',function($scope,$http,Upload) {
+    //alert('page2Ctrl');
+}]);
+
+myApp.controller('page3Ctrl',['$scope','$http','Upload',function($scope,$http,Upload) {
+    //alert('page3Ctrl');
+}]);
+
+</script>
+</body>
+</html>

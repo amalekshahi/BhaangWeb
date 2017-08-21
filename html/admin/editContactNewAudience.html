@@ -1,0 +1,127 @@
+<html>
+<body>
+<style type="text/css">
+	.close1 {
+	  float: right;
+	  font-size: (@font-size-base * 1.5);
+	  font-weight: @close-font-weight;
+	  line-height: 1;
+	  color: @close-color;
+	  text-shadow: @close-text-shadow;
+	  .opacity(.2);
+
+	  &:hover,
+	  &:focus {
+		color: @close-color;
+		text-decoration: none;
+		cursor: pointer;
+		.opacity(.5);
+	  }
+
+	  // Additional properties for button version
+	  // iOS requires the button element instead of an anchor tag.
+	  // If you want the anchor version, it requires `href="#"`.
+	  // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+	  button& {
+		padding: 0;
+		cursor: pointer;
+		background: transparent;
+		border: 0;
+		-webkit-appearance: button;
+	  }
+}
+
+</style>
+<div ng-controller="myNewCtrl" id="myNewCtrl">       
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">                        
+                        <div class="ibox-content">
+						
+						<form id="idForm" name="idForm" >                        
+								<input type="hidden" id="tmpFilter" name="tmpFilter" value="" >
+								<input type="hidden" id="tmpCount" name="tmpCount" value="" >
+								<div class="form-group"><label class="col-sm-2 control-label">List Name</label>
+                                    <div class="col-sm-10">								
+									<input type="text" class="form-control" placeholder="You want some cool stuff?" name="LISTNAME" id="LISTNAME" ng-model="item['LIST-NAME']"  required><!-- <span ng-show="idForm.LISTNAME.$touched && idForm.LISTNAME.$invalid" style="color:red;">List Name is required.</span> -->
+									<span class="help-block m-b-none">This is what appears in your targeting options.  Make it memorable.</span>
+                                    </div>
+                                </div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+	
+                                <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="Describe your list for easy future reference" name="LISTDESCRIPTION" id="LISTDESCRIPTION" ng-model="item['LIST-DESCRIPTION']">
+									<span class="help-block m-b-none">Give yourself a little reminder.  You're sure not getting any younger.</span>
+                                    </div>
+                                </div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+
+                                <div class="form-group" style="display:none;"><label class="col-sm-2 control-label">List Definition</label>
+                                    <div class="col-sm-10">
+                                        <div>
+                                        <textarea class="form-control" id="LISTDEFINITION" name="LISTDEFINITION" rows="3" ng-model="item['LIST-DEFINITION']"></textarea>
+                                        </div>                                    
+                                    </div>
+                                </div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-2 col-sm-offset-2">
+										<button class="btn btn-danger" name="setFilter" value="setFilter" onclick="FilterClick()">Show Filter</button>
+                                    </div>
+									<div class="row wrapper border-bottom white-bg page-heading" id="filterDiv" style="display:none;">
+										<button id='addRow' onclick="AddRow();">Add</button>
+										<input type="radio" name="joinrow" value="and" checked> AND
+										<input type="radio" name="joinrow" value="or" > OR
+
+										<div class="table-responsive">
+											<table id="filterTable" class="table table-striped table-bordered " >
+											<thead>
+											<tr>
+												<th>Row</th>
+												<th>Field</th>
+												<th>Operator</th>
+												<th>Value</th>
+												<th></th>
+											</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+
+										<div class="col-sm-2">														
+													<button class="btn btn-danger" name="okFilter" value="okFilter" onclick="okFilterClick('new');">OK</button>
+											</div>
+											<div class="col-sm-6 alert-info" style="padding-top:5px;display:none" id="altCnt">
+													<button aria-hidden="true" data-dismiss="alert1" class="close1" type="button" onclick="$('#altCnt').hide();" style="border:transparent;">x</button>
+													<h3><label id="cntLabel"></label> Contact(s) found</h3>
+											</div>										
+										<input type="hidden" id="itemCount" name="itemCount" value="" >							
+									</div>
+
+								</div>
+
+								 <div class="tab-content"><div id="tab-1" class="tab-pane active"><div class="panel-body"></div></div></div>
+								
+								<div class="form-group">
+                                    <div class="col-sm-3 col-sm-offset-2">                                       
+                                        <input type="hidden" name="contactDetail" id="contactDetail" value="Engagement Rate: TBD">
+                                        <input type="hidden" name="LISTIDHASH" id="LISTIDHASH" value="">
+										<input type="hidden" name="LISTCOUNT" id="LISTCOUNT" ng-model="item['LIST-COUNT']" value="0">
+										<button class="btn btn-primary" ng-click="Save()">Save</button>
+                                        <button class="btn btn-white" ng-click="cancel()">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+</div><!-- myNewCtrl -->
+</body>
+</html>

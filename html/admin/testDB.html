@@ -1,13 +1,26 @@
 <!doctype html>
 <html ng-app="myApp">
 <head>
-<!--
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> 
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
 
 </head>
   <body>
@@ -97,9 +110,18 @@
 	<!-- Form End -->
 
 
-    </div>
-    
-    <div ng-controller="myCtrlTable">
+    <!--</div>-->
+    <hr>
+    <!--<div ng-controller="myCtrl">-->
+        <div id="myDiv"></div>
+        Select Template
+        <select ng-model="selectedTemplate" ng-change="SelectChanged()">
+        <option ng-repeat="x in templates" value="{{x.content}}">{{x.title}}</option>
+        </select>
+        <!--<div ng-bind-html="selectedTemplateSafe"></div>-->
+        COMPANY-HERO-IMAGE={{userinfo['COMPANY-HERO-IMAGE']}}<br>
+        EMAIL-TOP-TEXT={{userinfo['EMAIL1-TOP-TEXT']}}<br>
+        EMAIL-BOTTOM-TEXT={{userinfo['EMAIL1-BOTTOM-TEXT']}}<br>
     </div>
 
     <script>
@@ -128,11 +150,14 @@
       };
        
           
-      var myApp = angular.module('myApp', ["xeditable","ngFileUpload"]);
+      var myApp = angular.module('myApp', ["xeditable","ngFileUpload","summernote"]);
       myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
               $scope.count = 0; 
               $scope.Reset = function() {
                   $scope.userinfo  = angular.copy($scope.master);
+                  // default value
+                  //jQuery.extend($scope.userinfo, $scope.config);
+                  $scope.userinfo = jQuery.extend(true, {},$scope.config,$scope.userinfo);
                   $scope.field2 = $scope.userinfo.field2;
                   $scope.login = {
                       userName : "tt994613@gmail.com",
@@ -141,12 +166,17 @@
               };
               $scope.Load = function() {
                 $scope.count++;
-                $http.get("/couchdb/" + data.username +'/userinfo').then(function(response) {
-                     $scope.master  = response.data; 
-                     if (typeof $scope.master.items == 'undefined') {
-                       $scope.master.items = [];
-                     } 
-                     $scope.Reset();
+                $http.get("/couchdb/" + data.username +'/userinfo' + "?"+new Date().toString()).then(function(response) {
+                    $scope.master  = response.data; 
+                    if (typeof $scope.master.items == 'undefined') {
+                        $scope.master.items = [];
+                    } 
+                    $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=userinfo").then(function(response) {
+                        $scope.templates  = response.data.templates; 
+                        $scope.config = response.data.config;
+                        $scope.Reset();
+                    });
+
                 });
               };
               $scope.Save = function() {
@@ -256,14 +286,22 @@
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                     });
+                };              
+                
+                $scope.SelectChanged = function(){
+                    $scope.content = angular.copy($scope.selectedTemplate);
+                    $("#myDiv").html($scope.content);
+                    angular.element(document).injector().invoke(function($compile) {
+                        var scope = angular.element($("#myDiv")).scope();
+                        $compile($("#myDiv"))(scope);
+                    });
                 };                
-              
-              $scope.Load();
+                $scope.Load();
               
       }]);
       
-      myApp.controller('myCtrlTable',function($scope,$http) {
-      });
+      myApp.controller('myCtrlTable',['$scope','$http',function($scope,$http) {
+      }]);
     </script>
   </body>
 </html>

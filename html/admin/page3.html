@@ -1,0 +1,22 @@
+<html>
+<body>
+<div ng-controller="myCtrl">
+page3<br>
+
+<label>Login:
+<input type="text" name="input" ng-model="login.userName">
+</label><br>
+<label>Password:
+<input type="text" name="input" ng-model="login.passWord">
+</label><br>
+<select name="repeatSelect" id="repeatSelect" ng-model="mpsSelect">
+<option ng-repeat="option in login.mps" value="{{option.id}}">{{option.name}}</option>
+</select>
+
+<br>
+<button ng-click="Login()">Login</button><button ng-click="Login2()">Login2</button>    
+{{login.response.message}}
+
+</div>
+</body>
+</html>

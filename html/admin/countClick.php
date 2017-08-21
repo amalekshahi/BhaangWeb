@@ -3,7 +3,7 @@ date_default_timezone_set('America/Los_Angeles');
 session_start();
 require_once 'commonUtil.php';
 
-$LISTDEFINITION = $_GET['LIST-DEFINITION'];
+$LISTDEFINITION = $_GET['LISTDEFINITION'];
 
 
 $ACCOUNTID = $_SESSION['ACCOUNTID'];

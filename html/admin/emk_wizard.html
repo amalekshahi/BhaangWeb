@@ -1,534 +1,260 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html ng-app="myApp">
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>INSPINIA | Wizards</title>
-
+    <title>Main Template</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
-    <link href="css/plugins/steps/jquery.steps.css" rel="stylesheet">
+	<link href="css/plugins/steps/jquery.steps.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-	<link href="css/plugins/bootstrap-markdown/bootstrap-markdown.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+	<!-- Summer Note -->
+	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+	<!-- Drop Zone -->
+	<link href="css/plugins/dropzone/basic.css" rel="stylesheet">
+    <link href="css/plugins/dropzone/dropzone.css" rel="stylesheet">
+
+	<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
 </head>
 <style type="text/css">
-	.wizard > .steps > ul > li {width: 16.66%;}
+	.wizard > .steps > ul > li {width: 33.33%;}
 </style>
 <body class="">
-
-    <div id="wrapper">
-
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav metismenu" id="side-menu">            
-			<!-- left wrapper -->
-                <li>
-                    <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Contact</span><span class="fa arrow"></span></a>
-					 <ul class="nav nav-second-level collapse">
-                        <li><a href="uploadContact.html">Upload Contact</a></li>						
-                        <li><a href="viewContact.html">View Contact</a></li>
-                    </ul>
-                </li>
-				 <li>
-                    <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">Goal</span><span class="fa arrow"></span></a>
-		            <ul class="nav nav-second-level collapse">
-						<li>							
-							<a href="leadAcquisition.html" >Lead Acquisition<span class="fa arrow"></span></a>
-<!-- 
-									<ul class="nav nav-third-level">
-										<li>
-											<a href="emk_program_list.html">Email Marketing</a>
-										</li>
-										<li>
-											<a href="#">Text to Join</a>
-										</li>
-										<li>
-											<a href="#">Join a Mailing List</a>
-										</li>
-										<li>
-											<a href="#">Setup FB</a>
-										</li>
-									</ul>
- -->
-                        </li>
-						<li>							
-							<a href="loyaltyProgram.html">Loyalty Program<span class="fa arrow"></span></a>
-								<!-- 
-								<ul class="nav nav-third-level">
-									<li>
-										<a href="#">Birthday Anniversary</a>
-									</li>
-									<li>
-										<a href="#">eNewsletter</a>
-									</li>
-								</ul>
- -->
-                        </li>
-                    </ul>                   
-                </li>
-				 <li>
-                    <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Setting</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="account.html">Account</a></li>
-                        <li><a href="users.html">Users</a></li>
-                    </ul>
-                </li>
-				<!-- <li>
-                    <a href="emk_program_list.html"><i class="fa fa-sitemap"></i> <span class="nav-label">Email Marketing</span></a>
-                </li> -->
-                <!-- <li>
-                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Email Marketing</span><span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="#">Third Level <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li>
-										<a href="#">Third Level Item</a>
-									</li>
-									<li>
-										<a href="#">Third Level Item</a>
-									</li>
-									<li>
-										<a href="#">Third Level Item</a>
-									</li>
-
-								</ul>
-                        </li>
-                        <li><a href="#">Second Level Item</a></li>
-                        <li>
-                            <a href="#">Second Level Item</a></li>
-                        <li>
-                            <a href="#">Second Level Item</a></li>
-                    </ul>
-                </li>  -->
-				
-				<!-- <li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Text to join</span></a>
-                </li>
-				<li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">eNewletters</span></a>
-                </li>
-				<li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Join a Mailing list</span></a>
-                </li>
-				<li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Set up a Facebook</span></a>
-                </li> -->
-				<li>
-                    <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Log out</span></a>
-                </li>
-
-
-			<!-- /end left wrapper -->
-            </ul>
-        </div>
-    </nav>
-
-        <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
+<div id="wrapper">
+	<!-- left wrapper -->
+	<div w3-include-html="leftWrapper.html"></div>
+	<!-- /end left wrapper -->
+	<div id="page-wrapper" class="gray-bg" ng-controller="myCtrl">
+		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-						<div class="navbar-header">
-							<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-						</div>
+				<!-- top wrapper -->
+				<div w3-include-html="topWrapper.html"></div>
+				<!-- / top wrapper -->
 				</nav>
-        </div>
+		</div>	
 		
 <!-- content -->
-			<div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
-                    <h2>Email Marketing</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            Goal
-                        </li>
-                        <li>
-                            <a href="leadAcquisition.html" >Lead Acquisition</a>
-                        </li>
-						<li>
-                            <a href="emk_program_list.html" >Program List</a>
-                        </li>
-                        <li class="active">
-                            <strong>Email Marketing</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-lg-2">
-
-                </div>
+		<div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Email Marketing: "{{campaign.campaignName}}"</h2>
             </div>
+            <!--<div class="col-lg-2">
+
+            </div>-->
+        </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        <p>
-                            This is Email Marketing Step
-                        </p>
                         <div id="wizard">
                             <h1>Initial Email</h1>
                             <div class="step-content">
-                                <div class="text-center m-t-md">
-                                <p>
-                                    <form method="get" class="form-horizontal">
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress"> Email From Address : </label>
+                                
+								<form class="form-horizontal">
+									<div class="form-group"><label class="col-sm-2 control-label">Pre-Header</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-PREHEADER']" placeholder="Pre-Header" ><span class="help-block m-b-none">Pre-Header.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Domain-Var</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR']" placeholder="Domain-Var" ><span class="help-block m-b-none">Domain-Var.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">From Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" placeholder="you@something.com" ><span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">From Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME']" placeholder="Bill Gates"><span class="help-block m-b-none">What do they call you?</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Email Subject Line</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAILSUBJECT']" placeholder="You want some cool stuff?"><span class="help-block m-b-none">This is what appears in your recipient's inbox. Make it snappy.</span>
+										</div>
+									</div>
 
-											<div class="col-sm-9">
-												<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
+									<div class="form-group"><label class="col-sm-2 control-label">Email Banner Image</label>
+										<div class="col-sm-10">
+											<!-- <div>
+											<form action="#" class="dropzone" id="dropzoneForm">
+												<div class="fallback">
+													<input name="file" id="file" type="file" />
+												</div>
+											</form>
+											</div> -->
+											<!-- Kwang -->
+											<!--<div class="button" ng-model="file" ngf-select="upload($file,'EMAILBANNERIMAGE')">Image1</div>
+											<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Email Body</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="BodyHtml">
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress">To Address : </label>
-
-											<div class="col-sm-9">
-												<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Call to Action</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="CallHtml">
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="EmailFromName"> Email From Name : </label>
-
-											<div class="col-sm-9">
-												<input type="text" id='EmailFromName' placeholder="Email From Name" class="col-xs-10 col-sm-5" />
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Email Footer</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="FooterHtml">
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="ReplyToEmailAddress"> Reply To Email Address : </label>
-
-											<div class="col-sm-9">
-												<input type="text" id='ReplyToEmailAddress' placeholder="Reply To Email Address" class="col-xs-10 col-sm-5" />
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Unsubscribe Link</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="UnsubLink">
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="EmailSubject"> Email Subject : </label>
-
-											<div class="col-sm-9">
-												<input type="text" id='EmailSubject' placeholder="Email Subject" class="col-xs-10 col-sm-5" />
-											</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="sendTest">Send a Test to Me Now</button></a>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="HTMLContent"> HTML Content : </label>
-
-											<div class="col-sm-9">
-												<textarea name="content" data-provide="markdown" rows="10">
-													h1 header
-													============
-
-													Paragraphs are separated by a blank line.
-
-													2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-													look like:
-
-													  * this one
-													  * that one
-													  * the other one
-												</textarea>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label no-padding-right" for="TextOnlyContent"> Text Only Content : </label>
-
-											<div class="col-sm-9">
-												<textarea class="autosize-transition form-control" id="TextOnlyContent" placeholder="Text Only Content" rows="7" style="border:1px solid black;"></textarea>
-											</div>
-										</div>
-									</form>
-                                </p>
-                                </div>
+									</div>
+								</form>
+                                
                             </div>
 
                             <h1>Landing Page</h1>
                             <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <p>
-                                        <form method="get" class="form-horizontal">
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress"> DEALERSHIP NAME : </label>
+                                <form class="form-horizontal">
+									<div class="form-group"><label class="col-sm-2 control-label">Business Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME']" placeholder="Business Name" ><span class="help-block m-b-none">Business Name.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Address1</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS1']" placeholder="Business Address1" ><span class="help-block m-b-none">Business Address1.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Address2</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS2']" placeholder="Business Address2" ><span class="help-block m-b-none">Business Address2.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Phone</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSPHONE']" placeholder="Business Phone"><span class="help-block m-b-none">Business Phone.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business800</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESS800']" placeholder="Business800"><span class="help-block m-b-none">Business800.</span>
+										</div>
+									</div>
 
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="DEALERSHIP NAME" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress">DEALERSHIP ADDR1 : </label>
+									<div class="form-group"><label class="col-sm-2 control-label">Background Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICBACKGROUND')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICBACKGROUND']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Logo Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Campaign Logo Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-CAMPAIGNLOGO')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-CAMPAIGNLOGO']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Prize Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICPRIZE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICPRIZE']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
 
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="DEALERSHIP ADDR1" class="col-xs-10 col-sm-5" />
-												</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Giveaway</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="Giveaway">
 											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromName"> DEALERSHIP CITY : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromName' placeholder="DEALERSHIP CITY" class="col-xs-10 col-sm-5" />
-												</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Page Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="pagecontent">
 											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="ReplyToEmailAddress"> DEALERSHIP STATE : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='ReplyToEmailAddress' placeholder="DEALERSHIP STATE" class="col-xs-10 col-sm-5" />
-												</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Page Footer</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="pagefooter">
 											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailSubject"> DEALERSHIP ZIP : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailSubject' placeholder="DEALERSHIP ZIP" class="col-xs-10 col-sm-5" />
-												</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">ThankYou Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="thankyoucontent">
 											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailSubject"> DEALERSHIP PHONE : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailSubject' placeholder="DEALERSHIP PHONE" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-										</form>
-                                    </p>
-                                </div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="Preview">Preview Landing Page</button></a>
+										</div>
+									</div>
+								</form>
                             </div>
 
 							<h1>Thank you Email</h1>
                             <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <p>
-                                        <form method="get" class="form-horizontal">
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress"> Email From Address : </label>
+                                <form class="form-horizontal">
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-NAME']" placeholder="Thank You Name" ><span class="help-block m-b-none">Thank You Name.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-EMAIL']" placeholder="Thank You Email" ><span class="help-block m-b-none">Thank You Email.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Lead Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" placeholder="you@something.com" ><span class="help-block m-b-none">Lead Email.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Subject</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOUSUBJECT']" placeholder="Thank You Subject"><span class="help-block m-b-none">Thank You Subject.</span>
+										</div>
+									</div>
 
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
-												</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Banner Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-THANKYOUBANNER']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">ThankYou Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="ThankYouEmailContent">
 											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress">To Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromName"> Email From Name : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromName' placeholder="Email From Name" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="ReplyToEmailAddress"> Reply To Email Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='ReplyToEmailAddress' placeholder="Reply To Email Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailSubject"> Email Subject : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailSubject' placeholder="Email Subject" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="HTMLContent"> HTML Content : </label>
-
-												<div class="col-sm-9">
-													<textarea name="content" data-provide="markdown" rows="10">
-														h1 header
-														============
-
-														Paragraphs are separated by a blank line.
-
-														2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-														look like:
-
-														  * this one
-														  * that one
-														  * the other one
-													</textarea>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="TextOnlyContent"> Text Only Content : </label>
-
-												<div class="col-sm-9">
-													<textarea class="autosize-transition form-control" id="TextOnlyContent" placeholder="Text Only Content" rows="7" style="border:1px solid black;"></textarea>
-												</div>
-											</div>
-										</form>
-                                    </p>
-                                </div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="sendTest">Send a Test to Me Now</button></a>
+										</div>
+									</div>
+								</form>
                             </div>
 
-							<h1>Lead Email</h1>
-                            <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <p>
-                                        <form method="get" class="form-horizontal">
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress"> Email From Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress">To Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromName"> Email From Name : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromName' placeholder="Email From Name" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="ReplyToEmailAddress"> Reply To Email Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='ReplyToEmailAddress' placeholder="Reply To Email Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailSubject"> Email Subject : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailSubject' placeholder="Email Subject" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="HTMLContent"> HTML Content : </label>
-
-												<div class="col-sm-9">
-													<textarea name="content" data-provide="markdown" rows="10">
-														h1 header
-														============
-
-														Paragraphs are separated by a blank line.
-
-														2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-														look like:
-
-														  * this one
-														  * that one
-														  * the other one
-													</textarea>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="TextOnlyContent"> Text Only Content : </label>
-
-												<div class="col-sm-9">
-													<textarea class="autosize-transition form-control" id="TextOnlyContent" placeholder="Text Only Content" rows="7" style="border:1px solid black;"></textarea>
-												</div>
-											</div>
-										</form>
-                                    </p>
-                                </div>
-                            </div>
-
-							<h1>BDayAnnivEmail</h1>
-                            <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <p>
-                                        <form method="get" class="form-horizontal">
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress"> Email From Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress">To Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Email From Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromName"> Email From Name : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromName' placeholder="Email From Name" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="ReplyToEmailAddress"> Reply To Email Address : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='ReplyToEmailAddress' placeholder="Reply To Email Address" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailSubject"> Email Subject : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailSubject' placeholder="Email Subject" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="HTMLContent"> HTML Content : </label>
-
-												<div class="col-sm-9">
-													<textarea name="content" data-provide="markdown" rows="10">
-														h1 header
-														============
-
-														Paragraphs are separated by a blank line.
-
-														2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-														look like:
-
-														  * this one
-														  * that one
-														  * the other one
-													</textarea>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="TextOnlyContent"> Text Only Content : </label>
-
-												<div class="col-sm-9">
-													<textarea class="autosize-transition form-control" id="TextOnlyContent" placeholder="Text Only Content" rows="7" style="border:1px solid black;"></textarea>
-												</div>
-											</div>
-										</form>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <h1>BDayAnnivSMS</h1>
-                            <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <p>
-                                        <form method="get" class="form-horizontal">
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="EmailFromAddress"> Mobile : </label>
-
-												<div class="col-sm-9">
-													<input type="text" id='EmailFromAddress' placeholder="Mobile" class="col-xs-10 col-sm-5" />
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-3 control-label no-padding-right" for="TextOnlyContent"> Message : </label>
-
-												<div class="col-sm-9">
-													<textarea class="autosize-transition form-control" id="TextOnlyContent" placeholder="Message" rows="7" style="border:1px solid black;"></textarea>
-												</div>
-											</div>
-										</form>
-                                    </p>
-                                </div>
-                            </div>
+							
                         </div>
 
                     </div>
@@ -538,22 +264,21 @@
 
 <!--/ content -->           
             <div class="footer">
-                <div class="pull-right">
-                    10GB of <strong>250GB</strong> Free.
-                </div>
-                <div>
-                    <strong>Copyright</strong> Example Company &copy; 2014-2017
-                </div>
-            </div>
-
-        </div>
-        </div>
+				<!-- footer -->
+				<div w3-include-html="footer.html"></div>
+				<!-- / footer -->			
+			</div>
+		</div><!--  end page-wrapper -->
+</div>
 
     <!-- Mainly scripts -->
+	<script src="js/w3data.js"></script>	
+	<script>w3IncludeHTML();</script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script type="text/JavaScript" src="global.js?n=1"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
@@ -562,91 +287,133 @@
     <!-- Steps -->
     <script src="js/plugins/steps/jquery.steps.min.js"></script>
 
-    <!-- Jquery Validate -->
-    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <!-- SUMMERNOTE -->
+	<script src="js/plugins/summernote/summernote.min.js"></script>
 
-	<!-- Bootstrap markdown -->
-    <script src="js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
-    <script src="js/plugins/bootstrap-markdown/markdown.js"></script>
+	<!-- DROPZONE -->
+    <script src="js/plugins/dropzone/dropzone.js"></script>
+
+    <!-- Page-Level Scripts -->
+	<script src="js/jquery.md5.js"></script>
 	<script>
-        $(document).ready(function(){
-            $("#wizard").steps();
-            $("#form").steps({
-                bodyTag: "fieldset",
-                onStepChanging: function (event, currentIndex, newIndex)
-                {
-                    // Always allow going backward even if the current step contains invalid fields!
-                    if (currentIndex > newIndex)
-                    {
-                        return true;
-                    }
+		var action = getParameterByName("action");
+		var campaignName = getParameterByName("campaign_name");
+		var campaignID = getParameterByName("campaign_id");
+		if (action=="newCampaign") {
+			var keyword = campaignName+getCurrentDateTime();
+			campaignID = $.md5(keyword);
+		}
 
-                    // Forbid suppressing "Warning" step if the user is to young
-                    if (newIndex === 3 && Number($("#age").val()) < 18)
-                    {
-                        return false;
-                    }
-
-                    var form = $(this);
-
-                    // Clean up if user went backward before
-                    if (currentIndex < newIndex)
-                    {
-                        // To remove error styles
-                        $(".body:eq(" + newIndex + ") label.error", form).remove();
-                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
-                    }
-
-                    // Disable validation on fields that are disabled or hidden.
-                    form.validate().settings.ignore = ":disabled,:hidden";
-
-                    // Start validation; Prevent going forward if false
-                    return form.valid();
-                },
-                onStepChanged: function (event, currentIndex, priorIndex)
-                {
-                    // Suppress (skip) "Warning" step if the user is old enough.
-                    if (currentIndex === 2 && Number($("#age").val()) >= 18)
-                    {
-                        $(this).steps("next");
-                    }
-
-                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
-                    if (currentIndex === 2 && priorIndex === 3)
-                    {
-                        $(this).steps("previous");
-                    }
-                },
-                onFinishing: function (event, currentIndex)
-                {
-                    var form = $(this);
-
-                    // Disable validation on fields that are disabled.
-                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
-                    form.validate().settings.ignore = ":disabled";
-
-                    // Start validation; Prevent form submission if false
-                    return form.valid();
-                },
+		/*$(document).ready(function(){
+            $("#wizard").steps({
                 onFinished: function (event, currentIndex)
                 {
-                    var form = $(this);
-
-                    // Submit form input
-                    form.submit();
+                    alert("finish");
+					$('#myCtrl').Save();
                 }
-            }).validate({
-                        errorPlacement: function (error, element)
-                        {
-                            element.before(error);
-                        },
-                        rules: {
-                            confirm: {
-                                equalTo: "#password"
-                            }
-                        }
-                    });
-       });
+            });
+			$('.summernote').summernote();
+		});*/
+
+		var accountProfile = {
+			"firstname" : "John",
+			"lastname" : "Sample",
+			"username" : "johnsample",
+			"email" : "johnsample@example.com",
+			"pass" : "password",
+		};
+		var myApp = angular.module('myApp', ["xeditable","ngFileUpload"]);
+		myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
+			$scope.Save = function() {
+				//$scope.upload($('#file').val(),'EMAILBANNERIMAGE');
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILBODY'] = $("#BodyHtml").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-CALLTOACTION'] = $("#CallHtml").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILFOOTER'] = $("#FooterHtml").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK'] = $("#UnsubLink").summernote("code");
+				
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-GIVEAWAY'] = $("#Giveaway").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGECONTENT'] = $("#pagecontent").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGEFOOTER'] = $("#pagefooter").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUCONTENT'] = $("#thankyoucontent").summernote("code");
+
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUEMAILCONTENT'] = $("#ThankYouEmailContent").summernote("code");
+				$http.put('/couchdb/' + accountProfile.username +'/'+campaignID, $scope.campaign).then(function(response){
+					var currentDate = getCurrentDateTime();
+
+					if (action=="newCampaign") {
+						$scope.campaignlist.items.push({"campaignID":$scope.campaign.campaignID,"accountID":"","campaignName":$scope.campaign.campaignName,"createDate":currentDate,"lastEditDate":currentDate,"status":"Edit","campaignType":$scope.campaign.campaignType});
+					} else{
+						$scope.campaignlist.items[$scope.listIndex()].LastEditDate = currentDate;
+						$scope.campaignlist.items[$scope.listIndex()].CampaignType = $scope.campaign.campaignType;
+					}
+					$http.put('/couchdb/' + accountProfile.username +'/campaignlist', $scope.campaignlist).then(function(response){
+						alert("Save Campaign Successful.");
+					});
+				});
+			};
+			$scope.Reset = function() {
+                  $scope.campaign  = angular.copy($scope.master);
+				  $("#BodyHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILBODY']);
+				  $("#CallHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-CALLTOACTION']);
+				  $("#FooterHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILFOOTER']);
+				  $("#UnsubLink").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK']);
+
+				  $("#BodyHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-GIVEAWAY']);
+				  $("#CallHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGECONTENT']);
+				  $("#FooterHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGEFOOTER']);
+				  $("#UnsubLink").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUCONTENT']);
+
+				  $("#BodyHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUEMAILCONTENT']);
+            };
+			$scope.Load = function() {
+				$http.get("/couchdb/" + accountProfile.username +'/campaignlist').then(function(response) {
+                     $scope.campaignlist  = response.data; 
+                });
+                $http.get("/couchdb/" + accountProfile.username +'/'+campaignID).then(function(response) {
+                     $scope.master  = response.data; 
+                     $scope.Reset();
+                },function(errResponse){
+					if (errResponse.status == 404) {
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"EmailMarketing","accountID":"","publishProgramName":"","publishDate":""};
+					} else {
+						alert(errResponse.statusText);
+					}
+					
+				});
+            };
+			$scope.listIndex = function() {
+				var cplist = 	$scope.campaignlist.items;
+				for(var i=0;i < cplist.length; i++){
+				  if (cplist[i]["campaignID"] == campaignID)
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.upload = function (file,propname) {
+				Upload.upload({
+					url: 'upload.php',
+					method: 'POST',
+					file:file,
+					data: {
+						file:file, 
+						's3':'true',
+						'fileName':propname,
+                        'acctID':accountProfile.username,
+                        'progID':campaignID
+					}
+				}).then(function (resp) {
+					console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.fileName);
+					$scope.campaign[propname] = resp.data.imgSrc;
+				}, function (resp) {
+					console.log('Error status: ' + resp.status);
+				}, function (evt) {
+					var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+				});
+			};
+			$scope.Load();
+		}]);
     </script>
 
 </body>

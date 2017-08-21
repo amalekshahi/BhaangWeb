@@ -199,6 +199,83 @@ function GetContactCount($TEST, $userTicket, $filter, $ACCOUNTID){
 	return $Count;
 }
 
+function GetContact($TEST, $userTicket, $filter, $ACCOUNTID){
+	$Contact = "";
+	$rows = array();
+	$Contactarray = array();
+	$columns = array();
+	$errorMessage = '';
+
+	$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
+	
+
+	$ContactListRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		),
+	
+		"FieldNames" => $FieldNames,
+		"Filter" => $filter,
+		"OutputType" => 1,
+	);
+	$ContactListResponse = callService("contactservice/GetContactList", $ContactListRequest);
+	$ErrorCode = $ContactListResponse->{"Result"}->{"ErrorCode"};
+	if ($ErrorCode == "") {
+		$Contacts = $ContactListResponse->{"Contacts"};
+
+
+		
+		foreach ($Contacts as $chr) {
+			$Contact .= chr($chr);
+		}
+
+		
+
+
+		$t = date("mdY-His",time());
+		$tmpName = $t.'.csv';
+		$filename = IMPORTPATH.'contactFile/'.$tmpName;
+		$Contact = trim($Contact);
+
+		file_put_contents( $filename, $Contact);			
+
+		$Contactarray = array_map("str_getcsv", explode("\n", $Contact));
+		array_splice($Contactarray, 0, 1);
+
+		$columns = rtrim(strtok($Contact, "\n"));
+		
+		$arr = explode(",", $columns);
+		$columns = array();
+		if ($arr) {
+			foreach( $arr as $row1 ) {	
+				$arr1 = array(					
+					'title'=>$row1
+				);	
+				$columns[] = $arr1;
+			}
+		}
+		$success = true;
+		
+		
+
+	} else {
+		$errorMessage = "ContactListResponse ERROR : <br> ErrorMessage -> ".$ContactListResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$ContactListResponse->{"Result"}->{"ExceptionMessage"};
+		//$errorMessage = "ImportResponse ERROR : <br> ErrorMessage -> ".$ImportResponse->{"Result"}->{"ErrorMessage"};
+		//echo $errorMessage."<BR>";
+
+		$success = false;
+	}
+
+	$result = json_encode( array('success'=>$success, 'ticket' => $userTicket, 'Contact' => $Contactarray, 'columns' => $columns, 'errorMessage' => $errorMessage, 'filename' => $filename, 'tmpName' => $tmpName));
+
+	return $result;
+
+}
+
 function saveListInfo($TEST, $email, $accountName, $ListName, $ListDescription, $ListDefinition, $recordCount) {
 	
 
@@ -337,4 +414,28 @@ function getJsonFilter($jsonFilters) {
 	
 	return $Filter;
 
+}
+
+
+function GetTimeZone($TEST, $userTicket){
+	$rows = array();
+	$Count = "0";
+	$TimeZoneRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		)
+	);
+	$TimeZoneResponse = callService("programservice/GetTimeZone", $TimeZoneRequest);
+	$ErrorCode = $TimeZoneResponse->{"Result"}->{"ErrorCode"};
+	if ($ErrorCode == "") {
+		$TimeZoneList = $TimeZoneResponse->{"TimeZoneList"};		
+	} else {
+		$errorMessage = "TimeZoneResponse ERROR : <br> ErrorMessage -> ".$TimeZoneResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$TimeZoneResponse->{"Result"}->{"ExceptionMessage"};		
+	}
+
+	return $TimeZoneList;
 }

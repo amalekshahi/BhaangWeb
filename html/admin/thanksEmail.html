@@ -1,0 +1,58 @@
+<!-- Summer Note -->
+	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+<div  ng-controller="myCtrl">
+	<form class="form-horizontal">
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-NAME']" placeholder="Thank You Name" ><span class="help-block m-b-none">Thank You Name.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-EMAIL']" placeholder="Thank You Email" ><span class="help-block m-b-none">Thank You Email.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Lead Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-LEAD-EMAIL']" placeholder="you@something.com" ><span class="help-block m-b-none">Lead Email.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Subject</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOUSUBJECT']" placeholder="Thank You Subject"><span class="help-block m-b-none">Thank You Subject.</span>
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Banner Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-THANKYOUBANNER']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">ThankYou Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="ThankYouEmailContent">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="sendTest">Send a Test to Me Now</button></a>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-primary" ng-click="Save()">Save</button>
+											<button class="btn btn-white" type="submit">Cancel</button>
+
+										</div>
+									</div>
+	</form>
+</div>
+<!-- SUMMERNOTE -->
+	<script src="js/plugins/summernote/summernote.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.summernote').summernote();
+        });
+	</script>

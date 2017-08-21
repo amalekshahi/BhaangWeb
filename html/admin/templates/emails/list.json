@@ -1,0 +1,12 @@
+[
+	{
+		"title":"Company Email",
+		"file":"COMPANY-EMAIL.html",
+		"default":""
+	},
+	{
+		"title":"Plain Email",
+		"file":"PLAIN-EMAIL.html",
+		"default":""
+	}
+]

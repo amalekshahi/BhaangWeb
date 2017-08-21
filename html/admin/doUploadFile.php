@@ -67,7 +67,7 @@ require_once 'commonUtil.php';
 			$line2 = "";
 			for ($j = 0; $j < $itemCount; $j++) {
 				$arrtmp = strtolower(trim($arr[$j]));
-				$line1 .= "<td>".trim($arr[$j])."</td>";
+				$line1 .= "<th>".trim($arr[$j])."</th>";
 				$line2 .= "<td><select name=\"fieldoption$j\" id=\"fieldoption$j\">";
 				$fieldOption = "<option value=\"\" >Skip</option>";
 				for ($i = 0; $i < sizeOf($FieldList); $i++) {
@@ -83,9 +83,10 @@ require_once 'commonUtil.php';
 				$line2 .= $fieldOption."</select></td>";	
 			}
 			$headerdiv = "
-			<table id=\"headertable\">
-				<tr>".$line1."</tr>
-				<tr>".$line2."</tr>
+			<table id=\"headertable\" class=\"table table-striped table-bordered \" >		
+
+				<thead><tr>".$line1."</tr></thead>
+				<tbody><tr>".$line2."</tr></tbody>
 			</table>";
             
         }

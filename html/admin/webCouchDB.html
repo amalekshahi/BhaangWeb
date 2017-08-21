@@ -1,0 +1,100 @@
+<html ng-app="myApp">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.9.4/jsoneditor.css" rel="stylesheet" >
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.9.4/jsoneditor.js"></script>
+<script src="https://cdn.rawgit.com/angular-tools/ng-jsoneditor/master/ng-jsoneditor.js"></script>
+</head>
+<body>
+<div class="bg-primary">
+  <h1>Web CoucbDB 1.0</h1>
+</div>
+
+<div ng-controller="myCtrl">
+<div class="input-group">
+    <span class="input-group-addon"><i class="fa fa-database" aria-hidden="true"></i></span>
+    <input type="text" class="form-control" placeholder="{{defaultPath}}" ng-model="path" style="width: 400px;">
+    <button type="button" ng-click="Load()" class="btn btn-info"><i class="fa fa-refresh" aria-hidden="true"></i> Load</button>
+    <button type="button" ng-click="Save()" class="btn btn-info"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+    <button type="button" class="btn btn-info" ng-click="changeOptions()"><i class="fa fa-bars"></i> Mode</button><br>
+</div>
+<!--Path: <input type="text" ><br> -->
+<!--{{obj.data._rev}}<br>-->
+{{saveResult}}
+<div ng-if="obj.data" ng-jsoneditor="onLoad" ng-model="obj.data" options="obj.options" style="width: 98%;"></div>
+</div>
+<script>
+var myApp = angular.module('myApp', ['ng.jsoneditor']);
+var json = {"Array": [1, 2, 3], "Boolean": true, "Null": null, "Number": 123, "Object": {"a": "b", "c": "d"}, "String": "Hello World"};
+myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
+    //$scope.path = "ajzele/userinfo"
+    $scope.defaultPath = "ajzele/userinfo";
+    $scope.Load = function(){
+        if ($scope.path == "") {
+            $scope.path = $scope.defaultPath;
+        }
+        $http.get("/couchdb/" + $scope.path + "?"+new Date().toString()).then(function(response) {
+            $scope.master  = response.data; 
+            $scope.obj.data = $scope.master;
+        },function(response){
+            $scope.obj.data = {};
+        });
+    };
+    $scope.Save = function(){
+        if (typeof $scope.obj.data != 'undefined') {
+            $http.put('/couchdb/' + $scope.path, $scope.obj.data).then(function(response){
+                $scope.saveResult = response.data;        
+                $scope.obj.data._rev = $scope.saveResult.rev;
+                $scope.instance.set($scope.obj.data);
+            });   
+        }
+    };
+
+    $scope.obj = {options: {mode: 'tree'}};
+    //$scope.options = {mode: 'tree'};
+    //$scope.data = json;
+    $scope.onLoad = function (instance) {
+        instance.expandAll();
+        $scope.instance = instance;
+    };
+    $scope.changeData = function () {
+        $scope.data = {foo: 'bar'};
+    };
+    $scope.changeOptions = function () {
+        $scope.obj.options.mode = $scope.obj.options.mode == 'tree' ? 'code' : 'tree';
+    };
+
+    //other
+    $scope.pretty = function (obj) {
+        return angular.toJson(obj, true);
+    }
+
+}]);
+/*
+myApp.controller('ngCtrl',['$scope','$http',function($scope,$http) {
+    $scope.obj = {data: json, options: {mode: 'tree'}};
+    //$scope.options = {mode: 'tree'};
+    //$scope.data = json;
+    $scope.onLoad = function (instance) {
+        instance.expandAll();
+    };
+    $scope.changeData = function () {
+        $scope.data = {foo: 'bar'};
+    };
+    $scope.changeOptions = function () {
+        $scope.obj.options.mode = $scope.obj.options.mode == 'tree' ? 'code' : 'tree';
+    };
+
+    //other
+    $scope.pretty = function (obj) {
+        return angular.toJson(obj, true);
+    }
+}]);*/
+</script>
+</body>
+</html>

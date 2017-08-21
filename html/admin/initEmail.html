@@ -1,0 +1,82 @@
+<!-- Summer Note -->
+	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+<div  ng-controller="myCtrl">
+	<form class="form-horizontal">
+									<div class="form-group"><label class="col-sm-2 control-label">Pre-Header</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-PREHEADER']" placeholder="Pre-Header" ><span class="help-block m-b-none">Pre-Header.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Domain-Var</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR']" placeholder="Domain-Var" ><span class="help-block m-b-none">Domain-Var.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">From Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" placeholder="you@something.com" ><span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">From Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME']" placeholder="Bill Gates"><span class="help-block m-b-none">What do they call you?</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Email Subject Line</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAILSUBJECT']" placeholder="You want some cool stuff?"><span class="help-block m-b-none">This is what appears in your recipient's inbox. Make it snappy.</span>
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Email Banner Image</label>
+										<div class="col-sm-10">
+											<!-- <div>
+											<form action="#" class="dropzone" id="dropzoneForm">
+												<div class="fallback">
+													<input name="file" id="file" type="file" />
+												</div>
+											</form>
+											</div> -->
+											<!-- Kwang -->
+											<!--<div class="button" ng-model="file" ngf-select="upload($file,'EMAILBANNERIMAGE')">Image1</div>
+											<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Email Body</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="BodyHtml">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Call to Action</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="CallHtml">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Email Footer</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="FooterHtml">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Unsubscribe Link</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="UnsubLink">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="sendTest">Send a Test to Me Now</button></a>
+										</div>
+									</div>
+	</form>
+</div>
+<!-- SUMMERNOTE -->
+	<script src="js/plugins/summernote/summernote.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.summernote').summernote();
+        });
+	</script>

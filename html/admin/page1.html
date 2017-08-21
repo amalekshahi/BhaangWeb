@@ -1,0 +1,33 @@
+<html>
+<body>
+<div ng-controller="myCtrl">
+<div class="w3-container w3-blue">
+  page1
+</div>
+<button ng-click="Load()">Load</button>
+<button ng-click="Save()">Save</button>
+<button ng-click="Reset()">Reset</button>
+<p>The button has been clicked {{count}} times.</p>
+Count=(ng-bind)<span ng-bind="count"></span><br>
+
+<form name="myForm" class="w3-container">
+    <p>firstname: <input type="text" ng-model="userinfo.firstname" ></p>
+    <p>lastname: <input type="text" ng-model="userinfo.lastname" class="w3-input w3-animate-input" style="width:30%"></p>
+    <p>username: <input type="text" ng-model="userinfo.username" class="w3-input"></p>
+    <p>email: <input type="email" ng-model="userinfo.email" name="email" class="w3-input"> {{myForm.email.$valid}}</p>
+    <p>pass: <input type="text" ng-model="userinfo.pass" class="w3-input"><br>
+    <p>field1: <input type="text" ng-model="userinfo.field1" name="field1" required class="w3-input"> {{myForm.field1.$valid}} </p>
+    <p>field2: <input type="text" ng-model="userinfo.field2" class="w3-input">{{field2}}</p>
+    
+    <div class="button" ng-model="file" ngf-select="upload2($file,'image1',$event)" >Image1</div> 
+    <!--<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+    <img ng-src="{{userinfo.image1}}" style="width: 64px;height: 64px" ><br>
+    <div class="button" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE</div> 
+    <!--<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+    <img ng-src="{{userinfo['IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE']}}" style="width: 64px;height: 64px" ><br>
+
+    Is this Form Valid {{myForm.$valid}}
+</form>
+</div>
+</body>
+</html>

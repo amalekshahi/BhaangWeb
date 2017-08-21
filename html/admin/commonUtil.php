@@ -11,7 +11,7 @@ $AWSFormatFileName = "/tmp/{{fileName}}";
 $LocalFormatURL = "https://web2xmm.com/admin/images/{{fileName}}";
 $LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
 
-function couchDB_Get($path)
+function couchDB_Get($path,$asArray = false)
 {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984' . $path);
@@ -23,7 +23,7 @@ function couchDB_Get($path)
     ));
     $response = curl_exec($ch);
     //echo($response);
-    $doc = json_decode($response);
+    $doc = json_decode($response,$asArray);
     //print_r($response);
     return $doc;
 }
@@ -101,44 +101,53 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
     if(is_null($urlFormat) == true){    
         $urlFormat = $URLRenderFormat;
     }
-    preg_match_all('/\{{(.*?)\}}/', $template, $matches, PREG_PATTERN_ORDER);
-    $aValue0 = $matches[0];
-    $aValue1 = $matches[1];
-    // somehow unique_array not work using hash instead.
-    $hash = array();
-    for($i = 0;$i<count($aValue0);$i++){
-        $value0 = $aValue0[$i];
-        $value1 = $aValue1[$i];
-        $renderDirect = true;
-        //wPrint("-- $value0 $value1\n");
-        if(startsWith($value1,"URL ")){
-            $renderDirect = false;
-            $value1 = substr($value1,4);
-            //wPrint("-- change to $value1\n");
+    for($loop = 0;$loop < 3; $loop++){
+    //while(true){
+        preg_match_all('/\{{(.*?)\}}/', $template, $matches, PREG_PATTERN_ORDER);
+        $aValue0 = $matches[0];
+        $aValue1 = $matches[1];
+        // somehow unique_array not work using hash instead.
+        $hash = array();
+        if(count($aValue0) == 0){
+            break;
         }
-        if(array_key_exists($value0,$hash)){
-        }else{
-            $hash[$value0] = $value1;
-            //wPrint("$value0 $value1\n");
-            
-            $filename = str_replace("ACCTID",$acctID,$value1);
-            $filename = str_replace("PROGRAMID",$progID,$filename);
-            $renderValue = "";
-            if(property_exists($data,"$value1")){
-                if($renderDirect){
-                    $renderValue = $data->$value1;                
-                }else{
-                    $filename = $filename . ".html";
-                    $s3Url = s3_put_contents($filename,$data->$value1,array("$acctID"=>$acctID,"$progID"=>$progID));
-                    $renderValue = str_replace("{{url}}", "$s3Url", $URLRenderFormat);
-                }
-                
-                $xmlSave = htmlspecialchars($renderValue);
-                $template = str_replace("$value0", "$xmlSave", $template);
+        for($i = 0;$i<count($aValue0);$i++){
+            $value0 = $aValue0[$i];
+            $value1 = $aValue1[$i];
+            $renderDirect = true;
+            //wPrint("-- $value0 $value1\n");
+            if(startsWith($value1,"URL ")){
+                $renderDirect = false;
+                $value1 = substr($value1,4);
+                //wPrint("-- change to $value1\n");
+            }
+            if(array_key_exists($value0,$hash)){
             }else{
-                $missingValue = str_replace("{{value}}","$value1",$MISSINGRenderFormat);
-                $xmlSave = htmlspecialchars($missingValue);
-                $template = str_replace("$value0", "$xmlSave", $template);
+                $hash[$value0] = $value1;
+                //wPrint("$value0 $value1\n");
+                
+                $filename = str_replace("ACCTID",$acctID,$value1);
+                $filename = str_replace("PROGRAMID",$progID,$filename);
+                $renderValue = "";
+                if(property_exists($data,"$value1")){
+                    if($renderDirect){
+                        $renderValue = $data->$value1;                
+                    }else{
+                        $filename = $filename . ".html";
+                        //Render content before publish to S3
+                        $renderedContent = studio_url_render($data->$value1,$acctID,$progID,$data);
+                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        //$s3Url = s3_put_contents($filename,$data->$value1,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $renderValue = str_replace("{{url}}", "$s3Url", $URLRenderFormat);
+                    }
+                    
+                    $xmlSave = htmlspecialchars($renderValue);
+                    $template = str_replace("$value0", "$xmlSave", $template);
+                }else{
+                    $missingValue = str_replace("{{value}}","$value1",$MISSINGRenderFormat);
+                    $xmlSave = htmlspecialchars($missingValue);
+                    $template = str_replace("$value0", "$xmlSave", $template);
+                }
             }
         }
     }
@@ -156,6 +165,16 @@ function isAssoc(array $arr)
 {
     if (array() === $arr) return false;
     return array_keys($arr) !== range(0, count($arr) - 1);
+}
+
+function MergeStdClassWithArray($data,$default)
+{
+    foreach($default as $key => $value){
+        if(property_exists ( $data , $key )){
+        }else{
+            $data ->{$key} = $value;
+        }
+    }
 }
 
 //$func = function($name,$value)

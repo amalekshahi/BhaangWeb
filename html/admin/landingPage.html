@@ -1,0 +1,92 @@
+<!-- Summer Note -->
+	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+<div  ng-controller="myCtrl">
+	<form class="form-horizontal">
+									<div class="form-group"><label class="col-sm-2 control-label">Business Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME']" placeholder="Business Name" ><span class="help-block m-b-none">Business Name.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Address1</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS1']" placeholder="Business Address1" ><span class="help-block m-b-none">Business Address1.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Address2</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS2']" placeholder="Business Address2" ><span class="help-block m-b-none">Business Address2.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Phone</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSPHONE']" placeholder="Business Phone"><span class="help-block m-b-none">Business Phone.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business800</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESS800']" placeholder="Business800"><span class="help-block m-b-none">Business800.</span>
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Background Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICBACKGROUND')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICBACKGROUND']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Logo Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Campaign Logo Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-CAMPAIGNLOGO')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-CAMPAIGNLOGO']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Prize Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICPRIZE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICPRIZE']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Giveaway</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="Giveaway">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Page Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="pagecontent">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Page Footer</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="pagefooter">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">ThankYou Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="thankyoucontent">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="Preview">Preview Landing Page</button></a>
+										</div>
+									</div>
+	</form>
+</div>
+<!-- SUMMERNOTE -->
+	<script src="js/plugins/summernote/summernote.min.js"></script>
+	<script>
+	alert('1');
+		$(document).ready(function() {
+		alert('2');
+			$('.summernote').summernote();
+        });
+	</script>

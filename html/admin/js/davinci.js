@@ -1,4 +1,4 @@
-function getParameterByName(name){
+function getParameterByName_old(name){
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
   var regexS = "[\\?&]" + name + "=([^&#]*)";
   var regex = new RegExp(regexS);

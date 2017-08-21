@@ -1,0 +1,34 @@
+<html>
+<body>
+<div ng-controller="myCtrl">
+page2<br>
+<button ng-click="Load()">Load</button>
+<button ng-click="Save()">Save</button>
+<button ng-click="Reset()">Reset</button>
+
+<form>
+    <button ng-click="AddNew()">Add</button>    
+    <table>
+        <tr><td>id</td><td>name</td><td>value</td><td>value2</td></tr>
+        <tr ng-repeat="item in userinfo.items">
+          <td ng-if="item.id!='empty'">{{item.id}}</td>
+          <td ng-if="item.id=='empty'"><a href="#" editable-text="item.id">{{ item.id || "empty" }}</a></td>
+          
+          <!--<td ng-if="item.name!='empty'">{{item.name}}</td>-->
+          <td><a href="#" editable-text="item.name">{{ item.name || "empty" }}</a></td>
+          
+          <td ng-if="item.value!='empty'">{{item.value}}</td>
+          <td ng-if="item.value=='empty'"><a href="#" editable-text="item.value">{{ item.value || "empty" }}</a></td>
+          <td ng-if="item.value2!='empty'">{{item.value2}}</td>
+          <td ng-if="item.value2=='empty'"><a href="#" editable-text="item.value2">{{ item.value2 || "empty" }}</a></td>
+        </tr>
+    </table>
+</form>
+</div>
+<div ng-controller="page2Ctrl">
+</div>
+<script>
+    alert('page2 from script');
+</script>
+</body>
+</html>

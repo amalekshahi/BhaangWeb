@@ -1,0 +1,423 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Template</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="css/plugins/steps/jquery.steps.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+	<!-- Summer Note -->
+	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+	<!-- Drop Zone -->
+	<link href="css/plugins/dropzone/basic.css" rel="stylesheet">
+    <link href="css/plugins/dropzone/dropzone.css" rel="stylesheet">
+
+	<!-- Angular -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
+</head>
+<style type="text/css">
+	.wizard > .steps > ul > li {width: 33.33%;}
+</style>
+<body class="">
+<div id="wrapper">
+	<!-- left wrapper -->
+	<div w3-include-html="leftWrapper.html"></div>
+	<!-- /end left wrapper -->
+	<div id="page-wrapper" class="gray-bg">
+		<div class="row border-bottom">
+				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+				<!-- top wrapper -->
+				<div w3-include-html="topWrapper.html"></div>
+				<!-- / top wrapper -->
+				</nav>
+		</div>	
+		
+<!-- content -->
+		<div id="myCtrl" ng-controller="myCtrl">
+		<div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Email Marketing2: "{{campaign.campaignName}}"</h2>
+            </div>
+            <!--<div class="col-lg-2">
+
+            </div>-->
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+						<form class="form-horizontal">
+                        <div id="wizard">
+                            <h1>Initial Email</h1>
+                            <div class="step-content">
+                                
+								
+									<div class="form-group"><label class="col-sm-2 control-label">Pre-Header</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-PREHEADER']" placeholder="Pre-Header" ><span class="help-block m-b-none">Pre-Header.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Domain-Var</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR']" placeholder="Domain-Var" ><span class="help-block m-b-none">Domain-Var.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">From Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" placeholder="you@something.com" ><span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">From Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME']" placeholder="Bill Gates"><span class="help-block m-b-none">What do they call you?</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Email Subject Line</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAILSUBJECT']" placeholder="You want some cool stuff?"><span class="help-block m-b-none">This is what appears in your recipient's inbox. Make it snappy.</span>
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Email Banner Image</label>
+										<div class="col-sm-10">
+											<!-- <div>
+											<form action="#" class="dropzone" id="dropzoneForm">
+												<div class="fallback">
+													<input name="file" id="file" type="file" />
+												</div>
+											</form>
+											</div> -->
+											<!-- Kwang -->
+											<!--<div class="button" ng-model="file" ngf-select="upload($file,'EMAILBANNERIMAGE')">Image1</div>
+											<img ngf-src="file" style="width: 64px;height: 64px" ><br> -->
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Email Body</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="BodyHtml">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Call to Action</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="CallHtml">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Email Footer</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="FooterHtml">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Unsubscribe Link</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="UnsubLink">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="sendTest">Send a Test to Me Now</button></a>
+										</div>
+									</div>
+								
+                                
+                            </div>
+
+                            <h1>Landing Page</h1>
+                            <div class="step-content">
+                                
+									<div class="form-group"><label class="col-sm-2 control-label">Business Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSNAME']" placeholder="Business Name" ><span class="help-block m-b-none">Business Name.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Address1</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS1']" placeholder="Business Address1" ><span class="help-block m-b-none">Business Address1.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Address2</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSADDRESS2']" placeholder="Business Address2" ><span class="help-block m-b-none">Business Address2.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Phone</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESSPHONE']" placeholder="Business Phone"><span class="help-block m-b-none">Business Phone.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business800</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-BUSINESS800']" placeholder="Business800"><span class="help-block m-b-none">Business800.</span>
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Background Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICBACKGROUND')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICBACKGROUND']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Business Logo Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICBUSINESSLOGO']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Campaign Logo Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-CAMPAIGNLOGO')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-CAMPAIGNLOGO']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Prize Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-PICPRIZE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-PICPRIZE']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Giveaway</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="Giveaway">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Page Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="pagecontent">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Page Footer</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="pagefooter">
+											</div>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">ThankYou Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="thankyoucontent">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="Preview">Preview Landing Page</button></a>
+										</div>
+									</div>
+								
+                            </div>
+
+							<h1>Thank you Email</h1>
+                            <div class="step-content">
+                                
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Name</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-NAME']" placeholder="Thank You Name" ><span class="help-block m-b-none">Thank You Name.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOU-EMAIL']" placeholder="Thank You Email" ><span class="help-block m-b-none">Thank You Email.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Lead Email</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" placeholder="you@something.com" ><span class="help-block m-b-none">Lead Email.</span>
+										</div>
+									</div>
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Subject</label>
+										<div class="col-sm-10"><input type="text" class="form-control" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-THANKYOUSUBJECT']" placeholder="Thank You Subject"><span class="help-block m-b-none">Thank You Subject.</span>
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">Thank You Banner Image</label>
+										<div class="col-sm-10">
+											<button class="btn btn-white" ng-model="file" ngf-select="upload($file,'IMAGE-ACCTID-PROGRAMID-EMAILBANNERIMAGE')">Select Image File</button><br>
+											<img ng-src="{{campaign['IMAGE-ACCTID-PROGRAMID-THANKYOUBANNER']}}" style="width: 64px;height: 64px" >
+										</div>
+									</div>
+
+									<div class="form-group"><label class="col-sm-2 control-label">ThankYou Content</label>
+										<div class="col-sm-10">
+											<div class="summernote" id="ThankYouEmailContent">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="col-sm-4 col-sm-offset-2">
+											<button class="btn btn-danger" type="submit" name="action" value="sendTest">Send a Test to Me Now</button></a>
+										</div>
+									</div>
+								
+                            </div>
+
+							
+                        </div><!-- id="wizard" -->
+						</form>
+                    </div>
+                </div>
+            </div>
+			</div>
+		</div> <!-- ng-controller="myCtrl" -->
+<!--/ content -->           
+            <div class="footer">
+				<!-- footer -->
+				<div w3-include-html="footer.html"></div>
+				<!-- / footer -->			
+			</div>
+		</div><!--  end page-wrapper -->
+</div>
+
+    <!-- Mainly scripts -->
+	<script src="js/w3data.js"></script>	
+	<script>w3IncludeHTML();</script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+	<script src="js/davinci.js"></script>
+
+    <!-- Steps -->
+    <script src="js/plugins/steps/jquery.steps.min.js"></script>
+
+    <!-- SUMMERNOTE -->
+	<script src="js/plugins/summernote/summernote.min.js"></script>
+
+	<!-- DROPZONE -->
+    <script src="js/plugins/dropzone/dropzone.js"></script>
+
+    <!-- Page-Level Scripts -->
+	<script src="js/jquery.md5.js"></script>
+	<script>
+		var action = getParameterByName("action");
+		var campaignName = getParameterByName("campaign_name");
+		var campaignID = getParameterByName("campaign_id");
+		if (action=="newCampaign") {
+			var keyword = campaignName+getCurrentDateTime();
+			campaignID = $.md5(keyword);
+		}
+
+		$(document).ready(function(){
+            /*$("#wizard").steps({
+                onFinished: function (event, currentIndex)
+                {
+                    alert("finish");
+					angular.element($('#myCtrl')).scope().Save();
+                }
+            });*/
+			$('.summernote').summernote();
+		});
+
+		var accountProfile = {
+			"firstname" : "John",
+			"lastname" : "Sample",
+			"username" : "johnsample",
+			"email" : "johnsample@example.com",
+			"pass" : "password",
+		};
+		var myApp = angular.module('myApp', ["xeditable","ngFileUpload"]);
+		myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
+			$scope.Save = function() {
+				//$scope.upload($('#file').val(),'EMAILBANNERIMAGE');
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILBODY'] = $("#BodyHtml").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-CALLTOACTION'] = $("#CallHtml").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILFOOTER'] = $("#FooterHtml").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK'] = $("#UnsubLink").summernote("code");
+				
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-GIVEAWAY'] = $("#Giveaway").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGECONTENT'] = $("#pagecontent").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGEFOOTER'] = $("#pagefooter").summernote("code");
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUCONTENT'] = $("#thankyoucontent").summernote("code");
+
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUEMAILCONTENT'] = $("#ThankYouEmailContent").summernote("code");
+				$http.put('/couchdb/' + accountProfile.username +'/'+campaignID, $scope.campaign).then(function(response){
+					var currentDate = getCurrentDateTime();
+
+					if (action=="newCampaign") {
+						$scope.campaignlist.items.push({"campaignID":$scope.campaign.campaignID,"accountID":"","campaignName":$scope.campaign.campaignName,"createDate":currentDate,"lastEditDate":currentDate,"status":"Edit","campaignType":$scope.campaign.campaignType});
+					} else{
+						$scope.campaignlist.items[$scope.listIndex()].LastEditDate = currentDate;
+						$scope.campaignlist.items[$scope.listIndex()].CampaignType = $scope.campaign.campaignType;
+					}
+					$http.put('/couchdb/' + accountProfile.username +'/campaignlist', $scope.campaignlist).then(function(response){
+						alert("Save Campaign Successful.");
+					});
+				});
+			};
+			$scope.Reset = function() {
+                  $scope.campaign  = angular.copy($scope.master);
+				  $("#BodyHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILBODY']);
+				  $("#CallHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-CALLTOACTION']);
+				  $("#FooterHtml").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAILFOOTER']);
+				  $("#UnsubLink").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK']);
+
+				  $("#Giveaway").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-GIVEAWAY']);
+				  $("#pagecontent").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGECONTENT']);
+				  $("#pagefooter").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-PAGEFOOTER']);
+				  $("#thankyoucontent").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUCONTENT']);
+
+				  $("#ThankYouEmailContent").summernote('pasteHTML', $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-THANKYOUEMAILCONTENT']);
+            };
+			$scope.Load = function() {
+				$http.get("/couchdb/" + accountProfile.username +'/campaignlist').then(function(response) {
+                     $scope.campaignlist  = response.data; 
+                });
+                $http.get("/couchdb/" + accountProfile.username +'/'+campaignID).then(function(response) {
+                     $scope.master  = response.data; 
+                     $scope.Reset();
+                },function(errResponse){
+					if (errResponse.status == 404) {
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"EmailMarketing","accountID":"","publishProgramName":"","publishDate":""};
+					} else {
+						alert(errResponse.statusText);
+					}
+					
+				});
+            };
+			$scope.listIndex = function() {
+				var cplist = 	$scope.campaignlist.items;
+				for(var i=0;i < cplist.length; i++){
+				  if (cplist[i]["campaignID"] == campaignID)
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.upload = function (file,propname) {
+				Upload.upload({
+					url: 'upload.php',
+					method: 'POST',
+					file:file,
+					data: {
+						file:file, 
+						's3':'true',
+						'fileName':propname,
+                        'acctID':accountProfile.username,
+                        'progID':campaignID
+					}
+				}).then(function (resp) {
+					console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.fileName);
+					$scope.campaign[propname] = resp.data.imgSrc;
+				}, function (resp) {
+					console.log('Error status: ' + resp.status);
+				}, function (evt) {
+					var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+				});
+			};
+			$scope.Load();
+		}]);
+    </script>
+
+</body>
+
+</html>

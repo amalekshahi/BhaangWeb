@@ -45,37 +45,30 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInUp">
-                    <div class="ibox">
-                        <div class="ibox-title" style="float:left;padding:0;">
+                <div class="wrapper" style="padding:0;">
+                    <div class="ibox" style="float: left;margin-bottom:0;">
+                        <div class="ibox-title">
 								<div class="ibox-tools">
-									<a href="importContact.php" class="btn btn-primary btn">Import Contact</a>
-								</div>
+									<a href="importContact.php" class="btn btn-outline btn-success" style="margin-left:0;">Import Contact</a><a href="showContact.php?cid=-1" class="btn btn-outline btn-success" target="_blank"><i class="fa fa-external-link"></i> All</a>
+								</div>							
 						</div>
 					</div>
-					<div class="ibox">
-                        <div class="ibox-title" style="min-height:0;padding:0">
+					<div class="ibox" style="margin-bottom:0;">
+                        <div class="ibox-title">
 								<h5>Your Lists</h5>
 								<div class="ibox-tools">
-									<a href="editContact.html?cid=new" class="btn btn-primary btn">+ Create New List</a>
+									<a href="editContact.html?cid=new#!new" class="btn btn-primary btn">+ Create New List</a>
 								</div>
                         </div>                        
-					</div><!-- ibox -->	
-					
-					
+					</div><!-- ibox -->			
+				</div><!-- wrapper wrapper-content animated fadeInUp -->
+			</div><!-- col-lg-12 -->
+		</div><!-- row -->	
 
-<!-- 
-                        <div class="ibox-content">
-                            <div class="row m-b-sm m-t-sm">
-                                <div class="col-md-1">
-                                    <button type="button" id="loading-example-btn" class="btn btn-white btn-sm" ><i class="fa fa-refresh"></i> Refresh</button>
-                                </div>
-                                <div class="col-md-11">
-                                    <div class="input-group"><input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> Go!</button> </span></div>
-                                </div>
-                            </div>
- -->
+
+   <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
                             <div class="project-list">
                                 <table class="table table-hover">
                                     <tbody>
@@ -96,10 +89,13 @@
 											</td>
 
 											<td class="project-completion">
-													<small>{{item.contactDetail}}{{item.contactID}}</small>
+													<small>{{item.contactDetail}}</small>
 													<div class="progress progress-mini">
 														<div style="width: 0%;" class="progress-bar"></div>
 													</div>
+											</td>
+											<td class="project-actions">
+												<a href="showContact.php?cid={{item.contactID}}" class="btn btn-white btn-sm" target="_blank"><i class="fa fa-external-link"></i> View </a>
 											</td>
 											<td class="project-actions">
 												<a href="editContact.html?cid={{item.contactID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
