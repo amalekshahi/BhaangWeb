@@ -1,4 +1,4 @@
-<Program Name="{{campaignName}}" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+<Program Name="coatest082510" Version="1.0" DbId="0" CheckOutId="0" State="Start">
   <Comment>This is program comment</Comment>
   <Campaign Name="Beneficiary Business" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
@@ -148,20 +148,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="330,180" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="9" Type="Fixed" TimeZone="{{EMAIL1-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="9" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule1</Subject>
             <Body />
-            <Start DateTime="{{EMAIL1-SCHEDULE1-DATETIME}}" />
+            <Start DateTime="08/25/2017 01:35:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="9" Type="Fixed" TimeZone="{{EMAIL1-SCHEDULE2-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="9" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule2</Subject>
             <Body />
-            <Start DateTime="{{EMAIL1-SCHEDULE2-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="9" Type="Fixed" TimeZone="{{EMAIL1-SCHEDULE3-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="9" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule3</Subject>
             <Body />
-            <Start DateTime="{{EMAIL1-SCHEDULE3-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -180,31 +180,31 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="9" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="SeedContacts" Position="390,10" SharedCheckout="False">
-        {{RAW EMAIL1-FILTER}}	
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True" />
+        </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="210,10" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="email" Operator="NotEqual" Value="" />
-        </Filter>
+        <Filter CriteriaJoinOperator="&amp;"><Criteria Row="1" Field="email" Operator="NotEqual" Value="" /></Filter>	
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="500,180" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="{{EMAIL2-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule1</Subject>
             <Body />
-            <Start DateTime="{{EMAIL2-SCHEDULE1-DATETIME}}" />
+            <Start DateTime="08/26/2017 01:40:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="{{EMAIL2-SCHEDULE2-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule2</Subject>
             <Body />
-            <Start DateTime="{{EMAIL2-SCHEDULE2-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="{{EMAIL2-SCHEDULE3-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule3</Subject>
             <Body />
-            <Start DateTime="{{EMAIL2-SCHEDULE3-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -224,20 +224,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email3" Position="860,180" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL3-SCHEDULE3-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule3</Subject>
             <Body />
-            <Start DateTime="{{EMAIL3-SCHEDULE3-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL3-SCHEDULE2-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule2</Subject>
             <Body />
-            <Start DateTime="{{EMAIL3-SCHEDULE2-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL3-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule1</Subject>
             <Body />
-            <Start DateTime="{{EMAIL3-SCHEDULE1-DATETIME}}" />
+            <Start DateTime="08/27/2017 01:45:00 PM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -295,7 +295,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20105" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="{{OPEN-MY-EMAIL}}" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,450" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,450" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>OpenEmailAlert (Right Now)</Subject>
@@ -414,20 +414,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="600,320" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL4-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email4Schedule1</Subject>
             <Body />
-            <Start DateTime="{{EMAIL4-SCHEDULE1-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL4-SCHEDULE2-TIMEZONE}}" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email4Schedule2</Subject>
             <Body />
-            <Start DateTime="{{EMAIL4-SCHEDULE2-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL4-SCHEDULE3-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email4Schedule3</Subject>
             <Body />
-            <Start DateTime="{{EMAIL4-SCHEDULE3-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -447,20 +447,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="770,320" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL5-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email5Schedule1</Subject>
             <Body />
-            <Start DateTime="{{EMAIL5-SCHEDULE1-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL5-SCHEDULE2-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email5Schedule2</Subject>
             <Body />
-            <Start DateTime="{{EMAIL5-SCHEDULE2-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL5-SCHEDULE3-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email5Schedule3</Subject>
             <Body />
-            <Start DateTime="{{EMAIL5-SCHEDULE3-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -480,20 +480,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="960,320" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL6-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email6Schedule1</Subject>
             <Body />
-            <Start DateTime="{{EMAIL6-SCHEDULE1-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL6-SCHEDULE2-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="2" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email6Schedule2</Subject>
             <Body />
-            <Start DateTime="{{EMAIL6-SCHEDULE2-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL6-SCHEDULE3-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email6Schedule3</Subject>
             <Body />
-            <Start DateTime="{{EMAIL6-SCHEDULE3-DATETIME}}" />
+            <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -511,7 +511,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="{{VISIT-MY-BLOCK}}" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,450" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,450" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>ClickAlertLeadTrigger (Right Now)</Subject>
@@ -592,22 +592,22 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
   <RuleGroupSet>
     <RuleGroup Name="EmailContent" Description="">
       <ContentVariables>
-        <ContentVariable Name="domainvar">{{URL TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR}}</ContentVariable>
-        <ContentVariable Name="unsubscribelink">{{URL TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK}}</ContentVariable>
-        <ContentVariable Name="fromemail">{{URL TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL}}</ContentVariable>
-        <ContentVariable Name="fromname">{{URL TEXT-LINE-ACCTID-PROGRAMID-FROMNAME}}</ContentVariable>
-        <ContentVariable Name="email1content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
-        <ContentVariable Name="email2content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT}}</ContentVariable>
-        <ContentVariable Name="email3content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT}}</ContentVariable>
-        <ContentVariable Name="email4content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
-        <ContentVariable Name="email5content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
-        <ContentVariable Name="email6content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
-        <ContentVariable Name="email1subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT}}</ContentVariable>
-        <ContentVariable Name="email2subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT}}</ContentVariable>
-        <ContentVariable Name="email3subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT}}</ContentVariable>
-        <ContentVariable Name="email4subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT}}</ContentVariable>
-        <ContentVariable Name="email5subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT}}</ContentVariable>
-        <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
+        <ContentVariable Name="domainvar">MISSING-TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR</ContentVariable>
+        <ContentVariable Name="unsubscribelink">MISSING-TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK</ContentVariable>
+        <ContentVariable Name="fromemail">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-f9a57b7ce5685d94d34e30bf1c74ad2c-FROMEMAIL.html&quot;##</ContentVariable>
+        <ContentVariable Name="fromname">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-f9a57b7ce5685d94d34e30bf1c74ad2c-FROMNAME.html&quot;##</ContentVariable>
+        <ContentVariable Name="email1content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-228-f9a57b7ce5685d94d34e30bf1c74ad2c-EMAIL1CONTENT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email2content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT</ContentVariable>
+        <ContentVariable Name="email3content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT</ContentVariable>
+        <ContentVariable Name="email4content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT</ContentVariable>
+        <ContentVariable Name="email5content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT</ContentVariable>
+        <ContentVariable Name="email6content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT</ContentVariable>
+        <ContentVariable Name="email1subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-f9a57b7ce5685d94d34e30bf1c74ad2c-EMAIL1SUBJECT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email2subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT</ContentVariable>
+        <ContentVariable Name="email3subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT</ContentVariable>
+        <ContentVariable Name="email4subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT</ContentVariable>
+        <ContentVariable Name="email5subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT</ContentVariable>
+        <ContentVariable Name="email6subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>

@@ -465,9 +465,8 @@
 			});
         });
 
-		function startPlugIn(){
-			$('#subjectEmail1').editable();
-			$('#subjectEmail2').editable();
+		function startEditable(objID){
+			$('#subjectEmail'+objID).editable();
 			//$('#template').trigger('change');
 			
 		}
@@ -485,6 +484,11 @@
 					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tp2Index()].contentRaw;
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
 					$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
+				}
+				if (mode == 'Email3') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
+					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
+					$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
 				}
 				$http.put('/couchdb/' + dbName +'/'+campaignID, $scope.campaign).then(function(response){
 					$scope.campaign._rev = response.data.rev;
@@ -591,9 +595,10 @@
 					$("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
 					$scope.SelectChanged('viewEmail1','templateEmail1');
 					$scope.sendersChanged('textSender1');
-					startPlugIn();
+					startEditable('1');
 				});
 			};
+			/*
 			$scope.initTemplateEmail2 = function(){
 				if ($scope.openEmail2) {
 					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=2").then(function(response) {
@@ -601,7 +606,19 @@
 						$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
 						$scope.SelectChanged('viewEmail2','templateEmail2');
 						$scope.sendersChanged('textSender2');
-						startPlugIn();
+						startEditable('2');
+					});
+				}
+			};
+			*/
+			$scope.initTemplateEmail = function(emlID){
+				if ($scope['openEmail'+emlID]) {
+					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+emlID).then(function(response) {
+						$scope['templatesAs'+emlID]  = response.data.templates; 
+						$("#subjectEmail"+emlID).text($scope.campaign['EMAIL'+emlID+'-SUBJECT']);
+						$scope.SelectChanged('viewEmail'+emlID,'templateEmail'+emlID);
+						$scope.sendersChanged('textSender'+emlID);
+						startEditable(emlID);
 					});
 				}
 			};
@@ -625,7 +642,7 @@
 				}*/
                 $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
                 $scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
+                $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM");
                 $scope.step4Done = $scope.step3Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -639,6 +656,7 @@
 						}
 						if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])) {
 							emailDone = '3';
+							$scope.openEmail3 = true;
 						}
 					}
 					$scope.emailProgress = emailDone+' of 3 emails ready';
@@ -665,12 +683,26 @@
 			};
 			$scope.startEmail = function(cmd){
 				var currentEmail = '1';
+				var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "templateEmail1"];
 				if (cmd.endsWith("2")) {
 					currentEmail = '2';
 					$scope.openEmail2 = true;
+					if (cmd=='COPY2') {
+						$scope.copyEmail(email1Fields,'1','2');
+					} else {
+						$scope.copyEmail(email1Fields,'2','2');
+					}
+				} else if (cmd.endsWith("3")) {
+					currentEmail = '3';
+					$scope.openEmail3 = true;
+					if (cmd=='COPY3') {
+						$scope.copyEmail(email1Fields,'2','3');
+					} else {
+						$scope.copyEmail(email1Fields,'3','3');
+					}
 				}
-				var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "templateEmail1"];
-				if (cmd=='2COPY') {
+				/*
+				if (cmd=='COPY2') {
 					var email2Fields = email1Fields.map(function(x){ return x.replace(/1/g,"2") });
 					for (var i=0; i<email1Fields.length; i++) {
 						$scope.campaign[email2Fields[i]] = $scope.campaign[email1Fields[i]];
@@ -678,39 +710,35 @@
 					$scope.campaign.templateEmail2 = $scope.campaign.templateEmail2.replace(/campaign\[\'EMAIL1/g, "campaign['EMAIL2");
 
 					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+currentEmail).then(function(response) {
-						$scope.templates  = response.data.templates; 
+						$scope.templatesAs2  = response.data.templates; 
 						$scope.config = response.data.config;
 						$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
 						$scope.SelectChanged('viewEmail2','templateEmail2');
 						$scope.sendersChanged('textSender2');
-						startPlugIn();
+						startEditable('2');
 					});
 				}
-				if (cmd=='3COPY') {
-					$scope.copyEmail(email1Fields,'2','3');
-				}
-				
+				*/
 			};
 			$scope.copyEmail = function(fields,src,tar){
-				var emailSRCFields = fields.map(function(x){ return x.replace(/1/g,src) });
-				var emailTARFields = fields.map(function(x){ return x.replace(/1/g,tar) });
-				for (var i=0; i<fields.length; i++) {
-					if (emailTARFields[i]=="templateEmail"+tar) 	{
-						$scope.campaign[emailTARFields[i]] = $scope.campaign[emailSRCFields[i]].replace(new RegExp("campaign['EMAIL"+src, "gi"), "campaign['EMAIL"+tar);
-					} else {
-						$scope.campaign[emailTARFields[i]] = $scope.campaign[emailSRCFields[i]];
+				if (src!=tar) {
+					var emailSRCFields = fields.map(function(x){ return x.replace(/1/g,src) });
+					var emailTARFields = fields.map(function(x){ return x.replace(/1/g,tar) });
+					for (var i=0; i<fields.length; i++) {
+						if (emailTARFields[i]=="templateEmail"+tar) 	{
+							$scope.campaign[emailTARFields[i]] = $scope.campaign[emailSRCFields[i]].replace(new RegExp("campaign\\[\\'EMAIL"+src, "gi"), "campaign['EMAIL"+tar);
+						} else {
+							$scope.campaign[emailTARFields[i]] = $scope.campaign[emailSRCFields[i]];
+						}
 					}
 				}
-				var tempField = "templateEmail"+tar;
-				//$scope.campaign[tempField] = $scope.campaign.[tempField].replace(new RegExp("campaignEMAIL"+src, "gi"), "campaignEMAIL"+tar);
-
 				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+tar).then(function(response) {
-					$scope.templates  = response.data.templates; 
+					$scope['templatesAs'+tar]  = response.data.templates; 
 					$scope.config = response.data.config;
 					$("#subjectEmail"+tar).text($scope.campaign['EMAIL'+tar+'-SUBJECT']);
 					$scope.SelectChanged('viewEmail'+tar,'templateEmail'+tar);
 					$scope.sendersChanged('textSender'+tar);
-					startPlugIn();
+					startEditable(tar);
 				});
 			}
 			$scope.clIndex = function() {
@@ -726,6 +754,15 @@
 				var tplist = 	$scope.templates;
 				for(var i=0;i < tplist.length; i++){
 				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.tpsIndex = function(emlID) {
+				var tplist = 	$scope['templatesAs'+emlID];
+				for(var i=0;i < tplist.length; i++){
+				  if (tplist[i]["content"] == $scope.campaign['templateEmail'+emlID])
 				  {
 					return i;
 				  } 
@@ -784,7 +821,7 @@
             };
             // Kwang clear form state
             $scope.clearFormState = function(){
-                $scope.frmStep3.$setPristine();
+                //$scope.frmStep3.$setPristine();
             };
             //Kwang uiSwitch change
             $scope.SwitchChange = function(){
@@ -839,10 +876,17 @@
 			return timeString; 
 		}
         
-        function hasValue(obj){
+        function hasValue(obj,defaultValue){
             if (obj===undefined || obj=='') {
                 return false;
             } else {
+                //make sure that it is not default if provided
+                if(defaultValue ===undefined){
+                }else{
+                    if(obj == defaultValue){
+                        return false;
+                    }
+                }
 				return true;
 			}
         }
@@ -862,6 +906,23 @@
                 return falseValue;
             }
         }
+        
+        function formatDate(date) {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth();
+          var year = date.getFullYear();
+
+          return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
+
+
         
     </script>
 

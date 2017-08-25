@@ -164,11 +164,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
-        <Events>
-          <Event EventId="20102" GoalId="14" IsDistinct="False" />
-          <Event EventId="20103" GoalId="9" IsDistinct="False" />
-          <Event EventId="20105" GoalId="13" IsDistinct="False" />
-        </Events>
+        <Events />
         <Properties>
           <Messages>
             <Message Id="1">
@@ -184,13 +180,13 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="9" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="SeedContacts" Position="390,10" SharedCheckout="False">
-        &lt;Filter CriteriaJoinOperator=&quot;&amp;amp;&quot; /&gt;
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True" />
+        </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="210,10" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="email" Operator="NotEqual" Value="" />
-        </Filter>
+        <Filter CriteriaJoinOperator="&amp;" />	
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="500,180" SharedCheckout="False" RuleGroup="EmailContent">
@@ -211,11 +207,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
-        <Events>
-          <Event EventId="20102" GoalId="14" IsDistinct="False" />
-          <Event EventId="20103" GoalId="9" IsDistinct="False" />
-          <Event EventId="20105" GoalId="13" IsDistinct="False" />
-        </Events>
+        <Events />
         <Properties>
           <Messages>
             <Message Id="1">
@@ -248,11 +240,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="" />
           </Schedule>
         </Schedules>
-        <Events>
-          <Event EventId="20102" GoalId="14" IsDistinct="False" />
-          <Event EventId="20103" GoalId="9" IsDistinct="False" />
-          <Event EventId="20105" GoalId="13" IsDistinct="False" />
-        </Events>
+        <Events />
         <Properties>
           <Messages>
             <Message Id="1">
@@ -442,11 +430,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
-        <Events>
-          <Event EventId="20102" GoalId="14" IsDistinct="False" />
-          <Event EventId="20103" GoalId="9" IsDistinct="False" />
-          <Event EventId="20105" GoalId="13" IsDistinct="False" />
-        </Events>
+        <Events />
         <Properties>
           <Messages>
             <Message Id="1">
@@ -479,11 +463,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
-        <Events>
-          <Event EventId="20102" GoalId="14" IsDistinct="False" />
-          <Event EventId="20103" GoalId="9" IsDistinct="False" />
-          <Event EventId="20105" GoalId="13" IsDistinct="False" />
-        </Events>
+        <Events />
         <Properties>
           <Messages>
             <Message Id="1">
@@ -516,11 +496,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="01/01/2050 08:00:00 AM" />
           </Schedule>
         </Schedules>
-        <Events>
-          <Event EventId="20102" GoalId="14" IsDistinct="False" />
-          <Event EventId="20103" GoalId="9" IsDistinct="False" />
-          <Event EventId="20105" GoalId="13" IsDistinct="False" />
-        </Events>
+        <Events />
         <Properties>
           <Messages>
             <Message Id="1">
@@ -622,13 +598,13 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="fromname">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1084f95471883ce4b2f15c6832fa20a7-FROMNAME.html&quot;##</ContentVariable>
         <ContentVariable Name="email1content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-1084f95471883ce4b2f15c6832fa20a7-EMAIL1CONTENT.html&quot;##</ContentVariable>
         <ContentVariable Name="email2content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT</ContentVariable>
-        <ContentVariable Name="email3content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT</ContentVariable>
+        <ContentVariable Name="email3content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-1084f95471883ce4b2f15c6832fa20a7-EMAIL3CONTENT.html&quot;##</ContentVariable>
         <ContentVariable Name="email4content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT</ContentVariable>
         <ContentVariable Name="email5content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT</ContentVariable>
         <ContentVariable Name="email6content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT</ContentVariable>
         <ContentVariable Name="email1subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1084f95471883ce4b2f15c6832fa20a7-EMAIL1SUBJECT.html&quot;##</ContentVariable>
         <ContentVariable Name="email2subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT</ContentVariable>
-        <ContentVariable Name="email3subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT</ContentVariable>
+        <ContentVariable Name="email3subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1084f95471883ce4b2f15c6832fa20a7-EMAIL3SUBJECT.html&quot;##</ContentVariable>
         <ContentVariable Name="email4subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT</ContentVariable>
         <ContentVariable Name="email5subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT</ContentVariable>
         <ContentVariable Name="email6subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT</ContentVariable>

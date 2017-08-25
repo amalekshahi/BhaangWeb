@@ -206,7 +206,7 @@
 						}else{
 								swal({
 									  title: "Error Import",
-									  text: json.message,									  
+									  text: "Studio return error",									  
 									  showConfirmButton: true
 								});
 						}

@@ -183,3 +183,13 @@ function serealizeSelects (select)
     select.each(function(){ array.push($(this).val()) });
     return array;
 }
+Array.prototype.getIndexByValue = function (name, value) {
+		for (var i = 0, len=this.length; i <len; i++) {
+			if (this[i][name]) {
+				if (this[i][name] === value) {
+					return i
+				}
+			}
+		}
+		return -1;
+};

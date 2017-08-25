@@ -598,7 +598,6 @@
 					startEditable('1');
 				});
 			};
-			/*
 			$scope.initTemplateEmail2 = function(){
 				if ($scope.openEmail2) {
 					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=2").then(function(response) {
@@ -610,7 +609,6 @@
 					});
 				}
 			};
-			*/
 			$scope.initTemplateEmail = function(emlID){
 				if ($scope['openEmail'+emlID]) {
 					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+emlID).then(function(response) {
@@ -642,7 +640,7 @@
 				}*/
                 $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
                 $scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM");
+                $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
                 $scope.step4Done = $scope.step3Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -687,21 +685,16 @@
 				if (cmd.endsWith("2")) {
 					currentEmail = '2';
 					$scope.openEmail2 = true;
-					if (cmd=='COPY2') {
-						$scope.copyEmail(email1Fields,'1','2');
-					} else {
-						$scope.copyEmail(email1Fields,'2','2');
-					}
 				} else if (cmd.endsWith("3")) {
 					currentEmail = '3';
 					$scope.openEmail3 = true;
+
 					if (cmd=='COPY3') {
 						$scope.copyEmail(email1Fields,'2','3');
 					} else {
 						$scope.copyEmail(email1Fields,'3','3');
 					}
 				}
-				/*
 				if (cmd=='COPY2') {
 					var email2Fields = email1Fields.map(function(x){ return x.replace(/1/g,"2") });
 					for (var i=0; i<email1Fields.length; i++) {
@@ -718,7 +711,6 @@
 						startEditable('2');
 					});
 				}
-				*/
 			};
 			$scope.copyEmail = function(fields,src,tar){
 				if (src!=tar) {
@@ -867,17 +859,10 @@
 			return timeString; 
 		}
         
-        function hasValue(obj,defaultValue){
+        function hasValue(obj){
             if (obj===undefined || obj=='') {
                 return false;
             } else {
-                //make sure that it is not default if provided
-                if(defaultValue ===undefined){
-                }else{
-                    if(obj == defaultValue){
-                        return false;
-                    }
-                }
 				return true;
 			}
         }

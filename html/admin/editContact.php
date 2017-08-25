@@ -141,6 +141,7 @@ editContactAudience.html
 		var dbName = "<?php echo $dbName; ?>";
 		var FArr = [] ; // filter Array
 		var FOperator = ""; 
+		var JOperator = "and"; 
 
 		var myApp = angular.module("myApp", ["ngRoute","xeditable","ngFileUpload"]);
 		myApp.config(function($routeProvider) {
@@ -159,7 +160,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 							  $scope.audience  = angular.copy($rootScope.master);
 							  indx = $scope.audience.items.getIndexByValue('contactID',cid);						  
 							  if(cid == 'new' || indx == -1){
-								  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":"","LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator});
+								  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":"","LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
 							  }else{					 
 								 $scope.item = $scope.audience.items[indx];
 							  }
@@ -229,12 +230,12 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 								$rootScope.master.items = [];
 						 } 
 						 $scope.audience  = angular.copy($rootScope.master);						 
-						 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator});
+						 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
  						$scope.SaveDB(contactID); 
 				},function(errResponse){
 						if (errResponse.status == 404) {
 							$scope.audience = {items:[]};
-							$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator});
+							$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
 	 						$scope.SaveDB(contactID); 
 						}
                 });
@@ -255,7 +256,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 			
 		function okFilterClick(page) { //edit for ng-view get parameter to seperate page  [ page = new/saveCount/ ]
 			    $('#altCnt').hide();	
-				var table = document.getElementById('filterTable');
+				var table = document.getElementById('filterTable');				
 				var rowLength = table.rows.length;
 				if (rowLength == 1) {
 					//alert("Please set filter.");
@@ -276,13 +277,15 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 								if (json.success) {
 									$('#tmpFilter').val(json.Filter);									
 									$('#LISTDEFINITION').val(json.Filter);
-									if(page!='new'){	
-											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-DEFINITION',json.Filter);
-									}
 									FArr = json.filterArray; 
 									FOperator = json.CriteriaJoinOperator; 
-									angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-ARRAY',json.filterArray);
-									angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-OPERATOR',json.CriteriaJoinOperator);
+									JOperator = json.JoinOperator;			
+									if(page!='new'){	
+											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-DEFINITION',json.Filter);
+											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-ARRAY',json.filterArray);
+											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-OPERATOR',json.CriteriaJoinOperator);
+											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('JOINOPERATOR',JOperator);
+									}
 									//$('#filterDiv').hide();
 									CountClick(page); 
 									
@@ -352,6 +355,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 //						alert(json.filterArray); 
 						FArr = json.filterArray; 
 						FOperator = json.CriteriaJoinOperator; 
+						JOperator = JoinOperator; 
 					}
 				}
 			 });				

@@ -6,9 +6,9 @@
                             &nbsp;Choose Your Audience & Schedule 
                             <small class="m-l-sm"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Scheduled for Wednesday August 22, 2017 at 3:00 PM</small>
                             </a></h4>
-
     </div>
-    <div class="panel-collapse collapse" id="collapseThree">
+    <div class="panel-collapse collapse" id="collapseThree" ng-controller="step3">
+        <!--<button ng-click="ParseDate()"></button>-->
         <div class="panel-body">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
@@ -17,23 +17,13 @@
 							<label class="col-sm-2 control-label">Choose Your Audience</label>
 							<div class="col-sm-10">
 								<div>
-									<select class="chosen-select" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4">
-										<option value="">
-											Select
-										</option>
-										<option value="All Printers from SalesForce (3,512)">
-											All Printers from SalesForce (3,512)
-										</option>
-										<option value="All Leads imported from scanned (713)">
-											All Leads imported from scanned (713)
-										</option>
-										<option value="Existing Clients (3,412)">
-											Existing Clients (3,412)
-										</option>
-										<option value="Mary and Joe Opps from this month (442)">
-											Mary and Joe Opps from this month (442)
-										</option>
-									</select> <span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>
+									<select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
+										<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
+										<!-- <option ng-repeat="option in audience.items" ng-value="option">{{option['LIST-NAME']}}</option>  -->
+										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
+									</select>
+									 <input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">
+									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>									
 								</div>
 								<div>
 									<p></p>
@@ -41,7 +31,7 @@
 									
 							</div>
                             
-							<div class="row" ng-controller="step3">
+							<div class="row">
                                 <!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL3-SCHEDULE1-DATETIME={{campaign['EMAIL3-SCHEDULE1-DATETIME']}}<br>-->
@@ -224,6 +214,63 @@ myApp.controller('step3',function($scope,$http) {
         $scope.$parent.Cancel();
         //$scope.Reset(); // parent scope's Reset()
     };
+
+	$scope.LoadAudience = function() {
+			$http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+					 $scope.masterAu  = response.data; 
+					 if (typeof $scope.masterAu.items == 'undefined') {
+					   $scope.masterAu.items = [];
+					 } 
+					  $scope.audience  = angular.copy($scope.masterAu);
+			});
+	};				
+	$scope.ArrangeFilter = function() {	
+				$scope.AuFilter  = angular.copy($scope.masterAu);
+				var auCnt = 0; 
+				var auOpr = ""; 
+				var allRule=""; 
+				for (var i = 0; i < $scope.filterList.length; i++) {
+					var indx = $scope.AuFilter.items.getIndexByValue('contactID',$scope.filterList[i]);
+					$scope.auItem = $scope.AuFilter.items[indx];
+					var auItemOpr = $scope.auItem['LIST-OPERATOR']; 
+					auOpr += "("; 
+					var arrItem = $scope.auItem['LIST-ARRAY']; 	
+					if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
+										var itemRule = ""; 
+										for (var k = 0; k < arrItem.length; k++) {		
+												auCnt++; 
+												//alert(arrItem[k]); 
+												if(arrItem[k] !=null ){
+													itemRule = itemRule+'<Criteria Row=\"' +auCnt+ '\" Field=\"'+arrItem[k].Field+'\" Operator=\"'+arrItem[k].Operator+'\" Value=\"'+arrItem[k].Value+'\" />' ; 
+												}				
+												auOpr += auCnt ; 
+												var opr = "&amp;"
+												if(arrItem[k].JoinOperator == "or")	opr ="|"; 												
+												if(k < arrItem.length-1)		auOpr += opr;  	
+
+										} // end for k
+										//alert(itemRule ); 
+										allRule += itemRule; 																				
+					}		
+					auOpr += ")";
+					if(i < $scope.filterList.length-1)		auOpr += "|";  
+				}//end for i
+				var auRule = "<Filter CriteriaJoinOperator=\""+auOpr+"\">"+allRule+"</Filter>" ; 
+				
+				$("#EMAIL1-FILTER").val(auRule);
+				$scope.campaign['EMAIL1-FILTER']  = auRule; 
+				//alert( "val = " + $("#EMAIL1-FILTER").val() ); 
+	};	
+    $scope.ParseDate = function(){
+        
+        if(hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM")){
+            var d = new Date(Date.parse($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'])); 
+            alert(formatDate(d));    
+        }
+    };
+	$scope.LoadAudience	(); 
+
+
 });
 </script>
 <!-- step3 End-->

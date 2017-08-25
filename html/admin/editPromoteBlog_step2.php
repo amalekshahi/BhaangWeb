@@ -21,10 +21,10 @@
 									<a data-toggle="tab" href="#tab-1" ng-click="initEmailTemplate();">Email #1: Sent to Everyone You're Targeting</a>
 								</li>
 								<li class="">
-									<a data-toggle="tab" href="#tab-2" ng-click="initTemplateEmail2();">Email #2: Sent to Non-Openers</a>
+									<a data-toggle="tab" href="#tab-2" ng-click="initTemplateEmail('2');">Email #2: Sent to Non-Openers</a>
 								</li>
 								<li class="">
-									<a data-toggle="tab" href="#tab-3">Email #3: Sent to Non-Clickers</a>
+									<a data-toggle="tab" href="#tab-3" ng-click="initTemplateEmail('3');">Email #3: Sent to Non-Clickers</a>
 								</li>
 							</ul>
 							<div class="tab-content">

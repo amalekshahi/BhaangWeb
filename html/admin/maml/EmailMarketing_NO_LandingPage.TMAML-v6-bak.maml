@@ -164,7 +164,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="{{EMAIL1-SCHEDULE3-DATETIME}}" />
           </Schedule>
         </Schedules>
-        <Events />
+        <Events>
+          <Event EventId="20102" GoalId="14" IsDistinct="False" />
+          <Event EventId="20103" GoalId="9" IsDistinct="False" />
+          <Event EventId="20105" GoalId="13" IsDistinct="False" />
+        </Events>
         <Properties>
           <Messages>
             <Message Id="1">
@@ -180,13 +184,13 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="9" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="SeedContacts" Position="390,10" SharedCheckout="False">
-        {{RAW EMAIL1-FILTER}}	
+        <Filter CriteriaJoinOperator="&amp;">
+          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True" />
+        </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="210,10" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="email" Operator="NotEqual" Value="" />
-        </Filter>
+      <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="EmailContactList" Position="210,10" SharedCheckout="False">
+        {{RAW EMAIL1-FILTER}}	
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="500,180" SharedCheckout="False" RuleGroup="EmailContent">
@@ -207,7 +211,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="{{EMAIL2-SCHEDULE3-DATETIME}}" />
           </Schedule>
         </Schedules>
-        <Events />
+        <Events>
+          <Event EventId="20102" GoalId="14" IsDistinct="False" />
+          <Event EventId="20103" GoalId="9" IsDistinct="False" />
+          <Event EventId="20105" GoalId="13" IsDistinct="False" />
+        </Events>
         <Properties>
           <Messages>
             <Message Id="1">
@@ -240,7 +248,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="{{EMAIL3-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
-        <Events />
+        <Events>
+          <Event EventId="20102" GoalId="14" IsDistinct="False" />
+          <Event EventId="20103" GoalId="9" IsDistinct="False" />
+          <Event EventId="20105" GoalId="13" IsDistinct="False" />
+        </Events>
         <Properties>
           <Messages>
             <Message Id="1">
@@ -430,7 +442,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="{{EMAIL4-SCHEDULE3-DATETIME}}" />
           </Schedule>
         </Schedules>
-        <Events />
+        <Events>
+          <Event EventId="20102" GoalId="14" IsDistinct="False" />
+          <Event EventId="20103" GoalId="9" IsDistinct="False" />
+          <Event EventId="20105" GoalId="13" IsDistinct="False" />
+        </Events>
         <Properties>
           <Messages>
             <Message Id="1">
@@ -463,7 +479,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="{{EMAIL5-SCHEDULE3-DATETIME}}" />
           </Schedule>
         </Schedules>
-        <Events />
+        <Events>
+          <Event EventId="20102" GoalId="14" IsDistinct="False" />
+          <Event EventId="20103" GoalId="9" IsDistinct="False" />
+          <Event EventId="20105" GoalId="13" IsDistinct="False" />
+        </Events>
         <Properties>
           <Messages>
             <Message Id="1">
@@ -496,7 +516,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start DateTime="{{EMAIL6-SCHEDULE3-DATETIME}}" />
           </Schedule>
         </Schedules>
-        <Events />
+        <Events>
+          <Event EventId="20102" GoalId="14" IsDistinct="False" />
+          <Event EventId="20103" GoalId="9" IsDistinct="False" />
+          <Event EventId="20105" GoalId="13" IsDistinct="False" />
+        </Events>
         <Properties>
           <Messages>
             <Message Id="1">
