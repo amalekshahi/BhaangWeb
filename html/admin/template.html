@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,8 @@
 	<!-- Sweet alert -->
 	 <script src="css/sweet/sweetalert-dev.js"></script>
 	 <link rel="stylesheet" href="css/sweet/sweetalert.css">
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 	
 </head>
@@ -57,7 +59,6 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/JavaScript" src="global.js?n=1"></script> 
-	<script type="text/JavaScript" src="checkLogin.js"></script> 
 
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
@@ -66,6 +67,29 @@
 	 <!-- Page-Level Scripts -->
 	
 	
+
+
+
+<script type="text/javascript">
+		var myApp = angular.module('myApp', []);
+		myApp.controller('myCtrl',function($scope,$http) {
+			
+			$scope.Reset = function() {
+                  $scope.audience  = angular.copy($scope.master);
+            };
+			$scope.Load = function() {
+                $http.get("/couchdb/" + accountProfile.accName +'/audienceLists').then(function(response) {
+                     $scope.master  = response.data; 
+                     if (typeof $scope.master.items == 'undefined') {
+                       $scope.master.items = [];
+                     } 
+                     $scope.Reset();
+                });
+            };
+			$scope.Load();
+		});
+
+</script>
 
 </body>
 

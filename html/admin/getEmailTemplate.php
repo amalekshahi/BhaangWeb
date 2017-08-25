@@ -24,9 +24,11 @@ if(empty($scopeName)){
 }
 
 $asEmail = $_REQUEST['as'];
-
 $requestBlueprint = $_REQUEST['blueprint'];
-$blueprints = json_decode(file_get_contents("conf/template.conf"));
+
+$masterTemplate = couchDB_Get("/master/templates");
+//$blueprints = json_decode(file_get_contents("conf/template.conf"));
+$blueprints = $masterTemplate->blueprints;
 // check if we have this blueprint
 $flgFound = false;
 foreach($blueprints as $blueprint)
@@ -53,7 +55,9 @@ $default = couchDB_Get("/master/Default_".$requestBlueprint,true);
 
 //print_r($default);
 //Read config file
-$configs = json_decode(file_get_contents("templates/emails/list.json"));
+
+$configs = $masterTemplate->emails;
+//$configs = json_decode(file_get_contents("templates/emails/list.json"));
 //print_r($configs);
 
 $ret = array();

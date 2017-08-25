@@ -1,8 +1,11 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
-session_start();
-include 'global.php';
-require_once('loginCredentials.php');
+    date_default_timezone_set('America/Los_Angeles');
+    session_start();
+    include 'global.php';
+    require_once('loginCredentials.php');
+    $dbName = $_SESSION['DBNAME'];
+    $accountID = $_SESSION['ACCOUNTID'];
+    $accountName = $_SESSION['ACCOUNNAME'];
 ?>
 
 <!DOCTYPE html>
@@ -76,11 +79,7 @@ require_once('loginCredentials.php');
 </div><!-- end id=wrapper -->
 
 <!--  footer -->
-<div class="footer"><div w3-include-html="footer.html"></div></div>
-
-
-
-
+<div class="footer"><div w3-include-html="footer.php"></div></div>
 
     <!-- Mainly scripts -->
 	<script src="js/w3data.js"></script>	
@@ -90,7 +89,6 @@ require_once('loginCredentials.php');
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/JavaScript" src="global.js?n=1"></script> 
-	<script type="text/JavaScript" src="checkLogin.js"></script> 
 
 
     <!-- Custom and plugin javascript -->
@@ -100,15 +98,7 @@ require_once('loginCredentials.php');
 	 <!-- Page-Level Scripts -->
  	<script src="js/jquery.md5.js"></script>
 	<script src="js/davinci.js"></script>
-    <script>
-		var accountProfile = {
-			"firstname" : "ff",
-			"lastname" : "test",
-			"accName" : "ftest",
-			"email" : "ftest@example.com",
-			"pass" : "password",
-		};
-
+    <script>	
 		Array.prototype.getIndexByValue = function (name, value) {
 				for (var i = 0, len=this.length; i <len; i++) {
 					if (this[i][name]) {
@@ -121,13 +111,15 @@ require_once('loginCredentials.php');
 		};
 		var cid = getParameterByName("cid");
 		var indx = -1; 
+
+		var dbName = "<?php echo $dbName; ?>";
 		var myApp = angular.module('myApp', ["xeditable"]);
 		myApp.controller('myCtrl',function($scope,$http) {			
 			$scope.sendtocontact = function() {                 				
 				  getContactClick(); 
             };			
 			$scope.Load = function() {
-                $http.get("/couchdb/" + accountProfile.accName +'/audienceLists').then(function(response) {
+                $http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
                      $scope.master  = response.data; 
                      if (typeof $scope.master.items == 'undefined') {
                        $scope.master.items = [];

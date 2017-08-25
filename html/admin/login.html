@@ -9,11 +9,7 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 	<!-- Angular -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
-
-
 </head>
 <body class="gray-bg">
     <div class="passwordBox animated fadeInDown" ng-controller="myCtrl">
@@ -21,7 +17,7 @@
             <div class="col-md-12">
                 <div class="ibox-content">
                     <!-- <h1 class="font-bold">Marketing Studio</h1><br> -->
-					<img src="img/mindfire_logo.png">    
+					<img src="img/mindfire_logo.png"/>
                     <p><h2>Login</h2></p>
                     <div class="row">
                         <div class="col-lg-12">
@@ -32,16 +28,19 @@
 				                <div class="form-group">
 								    <input type="password" class="form-control" id="pwd" placeholder="Password"  required="" ng-model="login.passWord">
                                 </div>
-					          <div id="accountDiv" class="form-group" style="DISPLAY: none;">
-									<select name="mpsSelect" id="mpsSelect" style="width:100%;" ng-model="mpsSelect">
-											<option ng-repeat="option in login.mps" value="{{option.id}}">{{option.name}}</option>
-									  </select>
+                                <div ng-show="state" id="accountDiv" class="form-group"  ng-cloak>
+									<select style="width:100%;" ng-model="mpsSelect">
+											<option ng-repeat="option in login.mps" value="{{option.id}}|{{option.name}}">{{option.name}}</option>
+									</select>
 								</div>
-                                <div id="loginDiv">
-									<button class="btn btn-primary block full-width m-b"  ng-click="CheckLogin()">Login</button>
-                                </div>
-                                <div id="continueDiv" style="DISPLAY: none;">
+                                <div id="continueDiv">
 									<button class="btn btn-primary block full-width m-b"  ng-click="Login()">Login</button>
+                                </div>
+                                <div ng-show="alert"  ng-cloak>
+                                    <div class="alert alert-danger">
+                                    <!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+                                    <strong> Error! </strong> {{alert.normal}}
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -59,97 +58,120 @@
             </div>
         </div>
     </div>
-<script>	
-function clearCallBack(data){
-	var len = data.length;
-	if(data.charAt(0) == '('){
-		return data.substring(1, len-1); 
-	 }else{
-		 return data;
-	 }
-};
-var myApp = angular.module('myApp', ["xeditable"]);
-myApp.controller('myCtrl',function($scope,$http) {		
-		$scope.selectAccount = ""; 
-		$scope.CheckLogin = function(){
-                  $http.get("/admin/login.php",
-                    {
-                      method: "GET",
-                      params: {
-                        email: $scope.login.userName,
-                        pwd: $scope.login.passWord,
-                      }  
-                    }					
-                  ).then(function(response) {
-						  $scope.login.response = JSON.parse(clearCallBack(response.data));
-						  //alert("success: " +  $scope.login.response.success + "\n errMsg: " +  $scope.login.response.message);
-						  if($scope.login.response.success){	
-								  $scope.login.mps = [];
-								  var mps = $scope.login.response.mps;
-
-								  for(var i=0;i < mps.length; i++){
-									  $scope.login.mps.push({"id":mps[i][0],"name":mps[i][1]}); 						   
-								  } 
-								  $('#accountDiv').show();
-								  $('#continueDiv').show();
-								  $('#loginDiv').hide();		
-						  }else{
-								alert($scope.login.response.message); 
-						  }
-
-                  },function(response){
-						alert("A connection error occured. Please try again.");			
-						//alert("ERROR: " + response.statusText);
-                  });
-
-		};	//end scope.Login
-
-		 $scope.Login = function(){
-				$http.get("/admin/login.php",
-						{
-						  method: "GET",
-						  params: {
-							mode: "login",
-							email: $scope.login.userName,
-							pwd: $scope.login.passWord,
-							accountID: $scope.mpsSelect,
-							accountName: $('#mpsSelect option:selected').text() ,
-						  }  
-						}
-				).then(function(response) {
-						  $scope.login.response = JSON.parse(clearCallBack(response.data));		
-						  //alert("mpsSelect text =  " + $('#mpsSelect option:selected').text() );
-						  //alert("mpsSelect val =  " + $('#mpsSelect option:selected').val() );
-						    if($scope.login.response.success){	
-									createCookie("canLogin","Yes");
-									//alert('44')
-								    $("#loginForm").attr("action", "welcome.html");
-									$("#loginForm").submit();		
-						  }else{
-								alert($scope.login.response.message); 
-						  }						
-				},function(response){
-                      alert("Can not login!");
-				});
-		 };
-
-});		//END myApp
-</script>
-
  <!-- Mainly scripts -->
+
 	<script src="js/w3data.js"></script>	
 	<script>w3IncludeHTML();</script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!--<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>-->
 	<script type="text/JavaScript" src="global.js?n=1"></script> 
-
     <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
+    <!--<script src="js/inspinia.js"></script>-->
     <script src="js/plugins/pace/pace.min.js"></script>
-	
+    <script src="js/davinci.js"></script>
+<script>	
+    var myApp = angular.module('myApp', []);
+    myApp.controller('myCtrl',function($scope,$http) {		
+        $scope.selectAccount = ""; 
+        $scope.login = {
+            userName : "tt994613@gmail.com",
+            passWord : "Atm12345#",
+        }
+        $scope.myAlert = function(mesg){
+            $scope.alert = {
+                normal:mesg,
+            };
+        };        
+        
+        $scope.Login = function(){
+            $scope.alert = false;
+            if (typeof $scope.state == 'undefined'){
+                $scope.CheckLogin();
+            }else{
+                //if($scope.state == "checked"){
+                //}
+                $scope.RealLogin();
+            }
+        };
+        
+        $scope.CheckLogin = function(){
+            $http.get("/admin/login.php",
+            {
+              method: "GET",
+              params: {
+                email: $scope.login.userName,
+                pwd: $scope.login.passWord,
+              }  
+            }					
+            ).then(function(response) {
+                  $scope.login.response = JSON.parse(clearCallBack(response.data));
+                  //alert("success: " +  $scope.login.response.success + "\n errMsg: " +  $scope.login.response.message);
+                  if($scope.login.response.success){	
+                          $scope.login.mps = [];
+                          var mps = $scope.login.response.mps;
+                          for(var i=0;i < mps.length; i++){
+                              $scope.login.mps.push({"id":mps[i][0],"name":mps[i][1]}); 						   
+                          } 
+                          $scope.state = "checked";
+                          //$('#accountDiv').show();
+                          //$('#continueDiv').show();
+                          //$('#loginDiv').hide();		
+                  }else{
+                        //alert($scope.login.response.message); 
+                        $scope.myAlert($scope.login.response.message); 
+                  }
 
+            },function(response){
+               $scope.myAlert("A connection error occured. Please try again.");			
+                //alert("ERROR: " + response.statusText);
+            });
+
+        };	//end scope.Login
+
+        $scope.RealLogin = function(){
+            if (typeof $scope.mpsSelect == 'undefined'){
+                $scope.myAlert("Please select an account"); 
+                return;
+            }
+            var acct = $scope.mpsSelect.split("|"); 
+            //alert(acct[0]);
+            //alert(acct[1]);
+            //return;
+            $http.get("/admin/login.php",
+                {
+                  method: "GET",
+                  params: {
+                    mode: "login",
+                    email: $scope.login.userName,
+                    pwd: $scope.login.passWord,
+                    //accountID: $scope.mpsSelect,
+                    //accountName: $('#mpsSelect option:selected').text() ,
+                    accountID: acct[0],
+                    accountName: acct[1],
+                  }  
+                }
+            ).then(function(response) {
+                $scope.login.response = JSON.parse(clearCallBack(response.data));		
+                //alert("mpsSelect text =  " + $('#mpsSelect option:selected').text() );
+                //alert("mpsSelect val =  " + $('#mpsSelect option:selected').val() );
+                if($scope.login.response.success){	
+                    //createCookie("canLogin","Yes");
+                    //alert('44')
+                    window.location="welcome.php";
+                    //$("#loginForm").attr("action", "welcome.html");
+                    //$("#loginForm").submit();		
+                }else{
+                    $scope.myAlert($scope.login.response.message); 
+                }						
+            },function(response){
+                  $scope.myAlert("Can not login!");
+            });
+        };
+});		//END myApp
+</script>
+    
 </body>
 
 </html>

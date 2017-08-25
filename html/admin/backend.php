@@ -37,10 +37,11 @@ if (empty($_REQUEST['cmd']) or  empty($_REQUEST['acctID']) or empty($_REQUEST['p
     exit;
 }
 
+
 $acctID = $_REQUEST['acctID'];
 $progID = $_REQUEST['progID'];
 $cmd = $_REQUEST['cmd'];
-
+$dbName = getDatabaseName($acctID,"");
 if($cmd!="publish" and $cmd!="update"){
     echo json_encode( 
         array(
@@ -50,14 +51,17 @@ if($cmd!="publish" and $cmd!="update"){
     exit;
 }
 //Read config file
-$configs = json_decode(file_get_contents("conf/template.conf"));
+//$configs = json_decode(file_get_contents("conf/template.conf"));
+$masterTemplate = couchDB_Get("/master/templates");
+$blueprints = $masterTemplate->blueprints;
+
 //Read Document
-$doc = couchDB_Get("/$acctID/$progID");
+$doc = couchDB_Get("/$dbName/$progID");
 if(empty($doc->_id)){
     echo json_encode( 
         array(
             'success'=>false,
-            'message'=>"Document not found /$acctID/$progID",
+            'message'=>"Document not found /$dbName/$progID",
         ));
     exit;
 }
@@ -69,7 +73,7 @@ $campaignType = $doc->campaignType;
 // find maml 
 //echo($campaignType);
 $templateName = "";
-foreach ($configs as $item){
+foreach ($blueprints as $item){
     if($item->campaignType == $campaignType){
         //echo "Found $item->campaignType $item->template";
         $templateName = $item->template;
@@ -89,6 +93,8 @@ $tmaml = file_get_contents($templateFileName);
 
 //Render and upload to S3 if necessary
 $finishMAML = studio_url_render($tmaml,$acctID,$progID,$doc);
+$publishFileName = "publish/".$acctID."_".$progID.".maml";
+file_put_contents($publishFileName,$finishMAML);
 //dump_r($finishMAML);
 if($cmd == "publish"){
     $resp = publishMAML($finishMAML);
@@ -98,6 +104,8 @@ if($cmd == "publish"){
                 'success'=>false,
                 'message'=>"Studio return error",
                 'detail'=>$resp,
+                'templateFileName'=>$templateFileName,
+                'maml'=>$publishFileName,
             ));
     }else{
         echo json_encode( 

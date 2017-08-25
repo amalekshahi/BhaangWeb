@@ -1,20 +1,26 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
-session_start();
-include 'global.php';
-require_once('loginCredentials.php');
+    date_default_timezone_set('America/Los_Angeles');
+    session_start();
+    include 'global.php';
+    require_once('loginCredentials.php');
+    $dbName = $_SESSION['DBNAME'];
+    $accountID = $_SESSION['ACCOUNTID'];
+    $accountName = $_SESSION['ACCOUNNAME'];
 ?>
-
 <!doctype html>
 <html ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
     <title>Main Template</title>
-	<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
 	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
@@ -25,14 +31,32 @@ require_once('loginCredentials.php');
 
 	<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/chosen/chosen.css">
     <link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
-
+	<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    
 	<!-- x-editable (bootstrap version) -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+
+	<!-- Sweet alert -->
+	<link rel="stylesheet" href="css/sweet/sweetalert.css">
+
+	<!-- TouchSpin -->
+	<link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> 
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
 
 	<!-- Angular -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
 
 	<style class="cp-pen-styles">
 	   /*@charset "UTF-8";*/
@@ -188,15 +212,21 @@ require_once('loginCredentials.php');
 	</style>
 </head>
 <body class="">
+    <script>
+        //Kwang create myAPP here so all step can access it.
+        var dbName = "<?php echo $dbName; ?>";
+		var accountID = "<?php echo $accountID; ?>";
+		var myApp = angular.module('myApp', ["xeditable","summernote"]);
+    </script>
     <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.html"></div>
+	<div w3-include-html="leftWrapper.php"></div>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg" ng-controller="myCtrl">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.html"></div>
+				<div w3-include-html="topWrapper.php"></div>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -237,8 +267,8 @@ require_once('loginCredentials.php');
 											<div class="panel-heading">
 												<!-- <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green"></i> &nbsp;Identify the Targeted Blog Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-BLOG-POST-URL']}}</small></a></h4> -->
 												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
-													<span class="badge" ng-if="campaign['URL-BLOG-POST-URL']===undefined || campaign['URL-BLOG-POST-URL']==''">1</span>
-													<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-if="campaign['URL-BLOG-POST-URL']!==undefined && campaign['URL-BLOG-POST-URL']!=''"></i>
+													<span class="badge" ng-show="!step1Done">1</span>
+													<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done""></i>
 													&nbsp;Identify the Targeted Blog Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-BLOG-POST-URL']}}</small>
 												</a></h4>
@@ -287,7 +317,7 @@ require_once('loginCredentials.php');
 															<div class="form-group">
 																<div class="col-sm-4 col-sm-offset-2">
 																	<!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
-																	<input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save()">Save</button> <button class="btn btn-white" type="submit">Cancel</button>
+																	<input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save()">Save</button> <button class="btn btn-white" ng-click="Cancel()">Cancel</button>
 																</div>
 															</div>
 														</form>
@@ -297,7 +327,11 @@ require_once('loginCredentials.php');
 										</div>
 										<div class="panel panel-default">
 											<div class="panel-heading">
-												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"><span class="badge">2</span> &nbsp;Write Your Email Sequence &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"> <i class="fa fa-envelope-o" aria-hidden="true"></i> 2 of 3 emails ready</small></a></h4>
+												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+													<span class="badge" ng-show="!step2Done">2</span>
+													<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done""></i>
+													&nbsp;Write Your Email Sequence &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"> <i class="fa fa-envelope-o" aria-hidden="true"></i> {{emailProgress}}</small></a>
+												</h4>
 											</div>
 											<div class="panel-collapse collapse" id="collapseTwo">
 												<div class="panel-body">
@@ -308,10 +342,10 @@ require_once('loginCredentials.php');
 																	<div class="tabs-container">
 																		<ul class="nav nav-tabs">
 																			<li class="active">
-																				<a data-toggle="tab" href="#tab-1">Email #1: Sent to Everyone You're Targeting</a>
+																				<a data-toggle="tab" href="#tab-1" ng-click="initEmailTemplate();">Email #1: Sent to Everyone You're Targeting</a>
 																			</li>
 																			<li class="">
-																				<a data-toggle="tab" href="#tab-2">Email #2: Sent to Non-Openers</a>
+																				<a data-toggle="tab" href="#tab-2" ng-click="initTemplateEmail2();">Email #2: Sent to Non-Openers</a>
 																			</li>
 																			<li class="">
 																				<a data-toggle="tab" href="#tab-3">Email #3: Sent to Non-Clickers</a>
@@ -321,21 +355,24 @@ require_once('loginCredentials.php');
 																			<div class="tab-pane active" id="tab-1">
 																				<div class="mail-box-header">
 																					<div class="pull-right tooltip-demo">
-																						<a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" ng-click="Save()"><i class="fa fa-floppy-o"></i> Save Email</button>
+																						<a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" ng-click="Save('Email')"><i class="fa fa-floppy-o"></i> Save Email</button>
 																					</div>
-																					<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="email_subject"><span ng-bind="campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']">[NEW POST] How To XYZ Without ABC</span></a></h3>
+																					<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail1"></a></h3>
 																				</div>	
 																				
 																				<div class="row">
 																					<div class="col-lg-4">
 																						<div class="ibox-content">
 																							<div class="ibox-content">
-																								<form action="" class="form-horizontal" method="post" onsubmit="return postForm()">
+																								<form class="form-horizontal">
 																									<div class="form-group">
 																										<div class="col-sm-12">
 																													<div>Select who you want this email to come from.  Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
 																													<label class="control-label">From</label> 
-																													<select name="EMAIL-{{email_number}}-from_address" class="chosen-select" data-placeholder="Choose a sender (replies go here too)" tabindex="1">
+																													<select ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" style="width: 100%;height: 30px;">
+																													<option ng-repeat="x in senders" value="{{x.email}}">{{x.name}}&nbsp;({{x.email}})</option>
+																													</select>
+																													<!-- <select name="EMAIL-{{email_number}}-from_address" class="chosen-select" data-placeholder="Choose a sender (replies go here too)" tabindex="1">
 																														<option value="">
 																															Choose a sender (replies go here too)
 																														</option>
@@ -345,13 +382,16 @@ require_once('loginCredentials.php');
 																														<option value="mackenzi_farsheed">
 																															Mackenzi Farsheed (mcfarsheed@mindfireinc.com)
 																														</option> 
-																													</select>
+																													</select> -->
 																												</div>
 																											</div>
 																											<div class="form-group">
 																												<div class="col-sm-12">
 																													<label class="control-label">Template</label> 
-																													<select class="chosen-select" data-target=".template_preview" id="template" tabindex="2" name="EMAIL-{{email_number}}-template">
+																													<select ng-model="campaign.templateEmail1" ng-change="SelectChanged('viewEmail1','templateEmail1')" style="width: 100%;height: 30px;">
+																													<option ng-repeat="x in templates" value="{{x.content}}">{{x.title}}</option>
+																													</select>
+																													<!-- <select class="chosen-select" data-target=".template_preview" id="template" tabindex="2" name="EMAIL-{{email_number}}-template">
 																													<option data-show=".Pick" value="Pick">
 																															Pick a template...
 																														</option>
@@ -361,6 +401,76 @@ require_once('loginCredentials.php');
 																														<option data-show=".Company_Email" value="Company_Email">
 																															Company Email: Your company logo, call to action button, and address in footer
 																														</option>
+																													</select> -->
+																												</div>
+																												<div class="col-sm-12">
+																													<div><p></p></div>
+																													<div class="tooltip-demo">
+																													<label class="control-label"></label> 
+																													<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Send me a test email</a>
+																												  </div>
+																												</div>
+																												
+																											</div>
+																									<div class="hr-line-dashed"></div><input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> <input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}"> <input name="programNameHash" type="hidden" value="{{programNameHash}}">
+																								</form>
+																							</div>
+																						</div>
+																					</div>
+																					<div class="col-lg-8">
+																						<div class="ibox-content">
+																							<div class="window">
+																								<div class="titlebar">
+																									<div class="buttons">
+																										<div class="close"></div>
+																										<div class="minimize"></div>
+																										<div class="zoom"></div>
+																									</div><small><span id="textSender1">New Email from:</span></small> <!-- window title -->
+																								</div>
+																								<div class="content">
+																									<div class="template_preview">
+																										<div id="viewEmail1"></div>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+<!-- Email #2 -->																			
+																			<div class="tab-pane" id="tab-2">
+																				<div class="panel-body" ng-show="!openEmail2">
+																					<h2>By adding a second email to non-openers, you'll increase engagement rates by an average of 24%.</h2>
+																					<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY2')">Create Email Using #1's Content</button>
+                            														<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW2')">Start With a Blank Email</button></p>
+																				</div>
+
+																				<div class="mail-box-header" ng-show="openEmail2">
+																					<div class="pull-right tooltip-demo">
+																						<a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" ng-click="Save('Email2')"><i class="fa fa-floppy-o"></i> Save Email</button>
+																					</div>
+																					<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail2"></a></h3>
+																				</div>	
+																				
+																				<div class="row" ng-show="openEmail2">
+																					<div class="col-lg-4">
+																						<div class="ibox-content">
+																							<div class="ibox-content">
+																								<form action="" class="form-horizontal" method="post" onsubmit="return postForm()">
+																									<div class="form-group">
+																										<div class="col-sm-12">
+																													<div>Select who you want this email to come from.  Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
+																													<label class="control-label">From</label> 
+																													<select ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender2')" style="width: 100%;height: 30px;">
+																													<option ng-repeat="x in senders" value="{{x.email}}">{{x.name}}&nbsp;({{x.email}})</option>
+																													</select>
+																												</div>
+																											</div>
+																											<div class="form-group">
+																												<div class="col-sm-12">
+																													<label class="control-label">Template</label> 
+																													<select ng-model="campaign.templateEmail2" ng-change="SelectChanged('viewEmail2','templateEmail2')" style="width: 100%;height: 30px;">
+																													<option ng-repeat="x in templatesAs2" value="{{x.content}}">{{x.title}}</option>
 																													</select>
 																												</div>
 																												<div class="col-sm-12">
@@ -385,33 +495,16 @@ require_once('loginCredentials.php');
 																										<div class="close"></div>
 																										<div class="minimize"></div>
 																										<div class="zoom"></div>
-																									</div><small>New Email from: "Mackenzi Farsheed @ MindFire" &lt;mcfarsheed@mindfireinc.com&gt;</small> <!-- window title -->
+																									</div><small><span id="textSender2">New Email from:</span></small> <!-- window title -->
 																								</div>
 																								<div class="content">
 																									<div class="template_preview">
-																										<div class="Pick">
-																											<p></p>
-																											<p>Your email preview will display here after you select a template.</p>
-																											<p></p>
-																										</div>
-																										<div class="Plain">
-																											{{PLAIN-EMAIL}}
-																										</div>
-																										<div class="Company_Email" id="Company_Email">
-																											
-																										</div>
+																										<div id="viewEmail2"></div>
 																									</div>
 																								</div>
 																							</div>
 																						</div>
 																					</div>
-																				</div>
-																			</div>
-																			<div class="tab-pane" id="tab-2">
-																				<div class="panel-body">
-																					<h2>By adding a second email to non-openers, you'll increase engagement rates by an average of 24%.</h2>
-																					<p><button type="button" class="btn btn-primary btn-lg">Create Email Using #1's Content</button>
-                            														<button type="button" class="btn btn-default btn-lg">Start With a Blank Email</button></p>
 																				</div>
 																			</div>
 																			<div class="tab-pane" id="tab-3">
@@ -431,227 +524,10 @@ require_once('loginCredentials.php');
 											</div>
 										</div>
 										<div class="panel panel-default">
-											<div class="panel-heading">
-												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge">3</span> &nbsp;Choose Your Audience & Schedule <small class="m-l-sm"> <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Scheduled for Wednesday August 22, 2017 at 3:00 PM</small></a></h4>
-											</div>
-											<div class="panel-collapse collapse" id="collapseThree">
-												<div class="panel-body">
-													<div class="ibox float-e-margins">
-														<div class="ibox-content">
-														<form action="" class="form-horizontal" method="post">
-														<div class="form-group">
-							<label class="col-sm-2 control-label">Choose Your Audience</label>
-							<div class="col-sm-10">
-								<div>
-									<select class="chosen-select" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4">
-										<option value="">
-											Select
-										</option>
-										<option value="All Printers from SalesForce (3,512)">
-											All Printers from SalesForce (3,512)
-										</option>
-										<option value="All Leads imported from scanned (713)">
-											All Leads imported from scanned (713)
-										</option>
-										<option value="Existing Clients (3,412)">
-											Existing Clients (3,412)
-										</option>
-										<option value="Mary and Joe Opps from this month (442)">
-											Mary and Joe Opps from this month (442)
-										</option>
-									</select> <span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>
-								</div>
-								<div>
-									<p></p>
-								</div>
-									
-							</div>
-							</form>
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="wrapper wrapper-content animated fadeInUp">
-										<div class="ibox">
-											<div class="ibox-title">
-												<h5><i aria-hidden="true" class="fa fa-calendar"></i> Schedule</h5>
-											</div>
-											<div class="project-list">
-												<table class="table table-hover">
-
-												<input type="hidden" class="form-control" id="EMAIL1-SCHEDULE1-DATETIME" name="EMAIL1-SCHEDULE1-DATETIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE1-DATETIME']">
-
-												<input type="hidden" class="form-control" id="EMAIL2-SCHEDULE1-DATETIME" name="EMAIL2-SCHEDULE1-DATETIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-DATETIME']">
-
-												<input type="hidden" class="form-control" id="EMAIL3-SCHEDULE1-DATETIME" name="EMAIL3-SCHEDULE1-DATETIME" placeholder="" type="text" ng-model="campaign['EMAIL3-SCHEDULE1-DATETIME']">
-
-													<tbody>
-														<tr>
-															
-															<td class="project-title">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #1</button>
-															</td>
-															<td class="project-title">
-																<strong>Targeting: All Your Primary Targets</strong><br>
-																<small>This email is sent to everyone you specify in the above Targeting section.</small>
-															</td>
-															<td class="project-title">
-																<form class="form-inline" role="form">
-																	<div class="form-group">
-																		<!-- <label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for Wednesday August 22, 2017</label>
-																		<small>@ 3:30 PM PST</small><br> 													 -->
-
-																		<label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for</label><br> 
-																		
-
-																		<div class="input-group date">
-															                <input type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE1-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE1-DATE" name="EMAIL1-SCHEDULE1-DATE">
-															                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-															            </div>
-
-																		<div class="input-group clockpicker" clock-picker data-autoclose="true">
-																			<input type="text" class="form-control" id="EMAIL1-SCHEDULE1-TIME" name="EMAIL1-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE1-TIME']">
-																			<span class="input-group-addon">
-																				<span class="fa fa-clock-o"></span>
-																			</span>
-																		</div>
-
-																		<select class="form-control m-b" id="EMAIL1-SCHEDULE1-TIMEZONE" name="EMAIL1-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL1-SCHEDULE1-TIMEZONE']">
-																			<option value="Pacific Standard Time" >PST</option> 
-																			<option value="Mountain Standard Time">MST</option> 
-																			<option value="Central America Standard Time">CST</option> 
-																			<option value="Eastern Standard Time">EST</option>
-																		</select>
-																	</div>
-																	</form>
-															</td>
-															
-														</tr>
-														<tr>
-															
-															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> </i>Email #2</button>
-															</td>
-															<td class="project-title">
-																<strong>Targeting: Non-Opens</strong><br>
-																<small>This email is sent to everyone who did not open.</small>
-															</td>
-															<td class="project-title">
-																<form class="form-inline" role="form">
-																	<div class="form-group">
-																		<label for="wait"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
-																		<input class="touchspin2 form-control input-sm" id="EMAIL2-WAIT" name="EMAIL2-WAIT" type="text" value="4" ng-model="campaign['EMAIL2-WAIT']" style="width:50px; text-align: center""> <strong>days</strong> <small>and send @ </small> 
-																		
-
-																		<div class="input-group clockpicker" clock-picker data-autoclose="true">
-																			<input type="text" class="form-control" id="EMAIL2-SCHEDULE1-TIME" name="EMAIL2-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-TIME']">
-																			<span class="input-group-addon">
-																				<span class="fa fa-clock-o"></span>
-																			</span>
-																		</div>
-																		<select class="form-control m-b" id="EMAIL2-SCHEDULE1-TIMEZONE" name="EMAIL2-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL2-SCHEDULE1-TIMEZONE']">
-																			<option value="Pacific Standard Time" >PST</option> 
-																			<option value="Mountain Standard Time">MST</option> 
-																			<option value="Central America Standard Time">CST</option> 
-																			<option value="Eastern Standard Time">EST</option>
-																		</select>
-																	</div>
-																	</form>
-															</td>
-															
-														</tr>
-														<tr>
-															
-															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #3</button>
-															</td>
-															<td class="project-title">
-																<strong>Targeting: Non-Clickers</strong><br>
-																<small>This email is sent to everyone you who opened but did not click.</small>
-															</td>
-															<td class="project-title">
-																<form class="form-inline" role="form">
-																	<div class="form-group">
-																		<label for="wait3"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
-																		<input class="touchspin2 form-control input-sm" id="EMAIL3-WAIT" name="EMAIL3-WAIT" type="text" value="4" ng-model="campaign['EMAIL3-WAIT']" style="width:50px; text-align: center"> <strong>days</strong> <small>and send @ </small> 
-
-
-																		<div class="input-group clockpicker" clock-picker data-autoclose="true">
-																			<input type="text" class="form-control" id="EMAIL3-SCHEDULE1-TIME" name="EMAIL3-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL3-SCHEDULE1-TIME']">
-																			<span class="input-group-addon">
-																				<span class="fa fa-clock-o"></span>
-																			</span>
-																		</div>
-																		<select class="form-control m-b" id="EMAIL3-SCHEDULE1-TIMEZONE" name="EMAIL3-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL3-SCHEDULE1-TIMEZONE']">
-																			<option value="Pacific Standard Time" >PST</option> 
-																			<option value="Mountain Standard Time">MST</option> 
-																			<option value="Central America Standard Time">CST</option> 
-																			<option value="Eastern Standard Time">EST</option>
-																		</select>
-																	</div>
-																	</form>
-															</td>
-															
-														</tr>
-														
-													</tbody>
-												</table>
-												
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							</div>
-							<label class="col-sm-2 control-label"></label>
-							<div class="col-sm-10"><input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save('Schedule')">Save</button> <button class="btn btn-white" type="submit">Cancel</button></div>
-						</div>
-															
-															
-															
-														</div>
-													</div>
-												</div>
-											</div>
+											<?php include "editPromoteBlog_step3.php"; ?>
 										</div>
 										<div class="panel panel-default">
-											<div class="panel-heading">
-												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour"><span class="badge">4</span> &nbsp;Configure Notifications & Alerts &nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"> <i class="fa fa-bell-o" aria-hidden="true"></i> Alerted on Clicks, Opens, and Conversions</small></a></h4>
-											</div>
-											<div class="panel-collapse collapse" id="collapseFour">
-												<div class="panel-body">
-													<div class="ibox float-e-margins">
-														<div class="ibox-content">
-															<form action="" class="form-horizontal" method="post">
-															<div class="form-group">
-																<label class="col-sm-2 control-label">Notify me when people:</label>
-																<div class="col-sm-10">
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="col-sm-2 control-label">Open my Emails</label>
-																<div class="col-sm-10">
-																	<input checked class="js-switch" type="checkbox">
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="col-sm-2 control-label">Visit my Blog Post</label>
-																<div class="col-sm-10">
-																	<input checked class="js-switch_2" type="checkbox">
-																</div>
-															</div>
-
-															<div class="form-group">
-																<label class="col-sm-2 control-label">Complete my Call-to-Action</label>
-																<div class="col-sm-10">
-																	<input checked class="js-switch_3" type="checkbox">
-																</div>
-															</div>
-
-																<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->
-															</form>
-														</div>
-													</div>
-												</div>
-											</div>
+											<?php include "editPromoteBlog_step4Coa.php"; ?>
 										</div>
 										
 									</div>
@@ -691,29 +567,24 @@ require_once('loginCredentials.php');
 <!--/ content -->           
 			<div class="footer">
 				<!-- footer -->
-				<div w3-include-html="footer.html"></div>
+				<div w3-include-html="footer.php"></div>
 				<!-- / footer -->			
 			</div>
 		</div><!--  end page-wrapper -->
 </div>
-
-    <!-- Mainly scripts -->
+	
 	<script src="js/w3data.js"></script>	
 	<script>w3IncludeHTML();</script>
-    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- <script src="js/jquery-3.1.1.min.js"></script> -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
 	<script type="text/JavaScript" src="global.js?n=1"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 	<script src="js/davinci.js"></script>
-
-	<!-- SUMMERNOTE -->
-	<script src="js/plugins/summernote/summernote.min.js"></script>
 
 	<!-- Chosen -->
 	<script src="js/plugins/chosen/chosen.jquery.js"></script>
@@ -723,20 +594,26 @@ require_once('loginCredentials.php');
 
 	<!-- Clipboard -->
 	<script src="js/plugins/clipboard/clipboard.min.js"></script>
-	
+
 	<!-- clockpicker -->
 	<script src="js/plugins/clockpicker/clockpicker.js"></script>
 
 	<!-- datepicker -->
 	<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
+	<!-- Sweet alert -->
+	<script src="css/sweet/sweetalert-dev.js"></script>
+
+	<!-- TouchSpin -->
+	<script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
     <!-- Page-Level Scripts -->
 	<script src="js/jquery.md5.js"></script>
     <script>
-		var action = getParameterByName("action");
+		var action = '';
 		var campaignName = getParameterByName("campaign_name");
 		var campaignID = getParameterByName("campaign_id");
-		if (action=="newCampaign") {
+		if (campaignID === undefined || campaignID=='') {
 			var keyword = campaignName+getCurrentDateTime();
 			campaignID = $.md5(keyword);
 		}
@@ -747,65 +624,44 @@ require_once('loginCredentials.php');
         '<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>'+
         '<button type="button" class="btn btn-default btn-sm editable-off"><i class="glyphicon glyphicon-trash"></i></button>';
 		
-		$(document).on('change', '#template', function() {
-			var target = $(this).data('target');
-			var show = $("option:selected", this).data('show');
-			$(target).children().addClass('hide');
-			$(show).removeClass('hide');
-		});
-
-        $(document).ready(function() {
+		$(document).ready(function() {
 			$('#email_name').editable();
-			$('#email_subject').editable();
-			
-			$('#template').trigger('change');
-		
-			$('.summernote').summernote({
-			  airMode: true,
-			  popover: {
-				  image: [
-					['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-					['float', ['floatLeft', 'floatRight', 'floatNone']],
-					['remove', ['removeMedia']]
-				  ],
-				  link: [
-					['link', ['linkDialogShow', 'unlink']]
-				  ],
-				  air: [
-					['color', ['color']],
-					['font', ['bold', 'underline', 'clear']],
-					['para', ['ul', 'paragraph']],
-					['table', ['table']],
-					['insert', ['link', 'picture']]
-				  ]
-				}
-			});
 
 			$('.clockpicker').clockpicker( {
-				twelvehour: false
+				twelvehour: true
 			} );
 
 			$( "#EMAIL1-SCHEDULE1-DATE" ).datepicker();
 
+			$('.chosen-select').chosen({width: "100%"});
 
+			$(".touchspin2").TouchSpin({
+				initval: 1,
+				min: 1,
+				max: 100,
+				step: 1,
+				decimals: 0,
+				boostat: 5,
+				maxboostedstep: 10,
+				postfix: '',
+				postfix_extraclass: "btn btn-xs",
+				buttondown_class: 'btn btn-white',
+				buttonup_class: 'btn btn-white'
+			});
         });
 
-		var accountProfile = {
-			"firstname" : "John",
-			"lastname" : "Sample",
-			"username" : "johnsample",
-			"email" : "johnsample@example.com",
-			"pass" : "password",
-		};
-		var myApp = angular.module('myApp', ["xeditable"]);
+		function startPlugIn(){
+			$('#subjectEmail1').editable();
+			$('#subjectEmail2').editable();
+			//$('#template').trigger('change');
+			
+		}
+
 		myApp.controller('myCtrl',function($scope,$http) {
 			$scope.Save = function(mode) {
-
-				
-				$scope.campaign['PABP-EML1-HTMLBODY'] = $("#BodyHtml").summernote("code");
-				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $("#Company_Email").html();
-
-				
+				//alert(mode);
+				$("body").css("cursor", "progress");
+				/*
 				var EMAIL2SCHEDULE1TIME = $("#EMAIL2-SCHEDULE1-TIME").val();
 				var EMAIL3SCHEDULE1TIME = $("#EMAIL3-SCHEDULE1-TIME").val();
 
@@ -837,7 +693,7 @@ require_once('loginCredentials.php');
 				$scope.campaign['EMAIL1-SCHEDULE1-DATE'] = EMAIL1SCHEDULE1DATE;
 				$scope.campaign['EMAIL1-SCHEDULE1-TIME'] = EMAIL1SCHEDULE1TIME;
 
-				EMAIL1SCHEDULE1 = EMAIL1SCHEDULE1DATE+' '+convertTime(EMAIL1SCHEDULE1TIME);
+				EMAIL1SCHEDULE1 = EMAIL1SCHEDULE1DATE+' '+convertTimeFormat(EMAIL1SCHEDULE1TIME);
 
 				if (mode == 'Schedule') {
 					EMAIL1SCHEDULE1DATETIME = EMAIL1SCHEDULE1;
@@ -846,14 +702,12 @@ require_once('loginCredentials.php');
 					date1 = toDate(EMAIL1SCHEDULE1);
 					numberOfDaysToAdd = parseInt(EMAIL2WAIT);
 					date2 = addDays(date1, numberOfDaysToAdd);
-					EMAIL2SCHEDULE1DATETIME = formatDate(date2)+' '+convertTime(EMAIL2SCHEDULE1TIME);
-
+					EMAIL2SCHEDULE1DATETIME = formatDate(date2)+' '+convertTimeFormat(EMAIL2SCHEDULE1TIME);
 					//alert('EMAIL2-SCHEDULE1-DATETIME = '+EMAIL2SCHEDULE1DATETIME);
 
 					numberOfDaysToAdd = parseInt(EMAIL3WAIT);
 					date3 = addDays(date2, numberOfDaysToAdd);
-					EMAIL3SCHEDULE1DATETIME = formatDate(date3)+' '+convertTime(EMAIL3SCHEDULE1TIME);				
-
+					EMAIL3SCHEDULE1DATETIME = formatDate(date3)+' '+convertTimeFormat(EMAIL3SCHEDULE1TIME);
 					//alert('EMAIL3-SCHEDULE1-DATETIME = '+EMAIL3SCHEDULE1DATETIME);
 
 				}
@@ -861,83 +715,235 @@ require_once('loginCredentials.php');
 				$scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = EMAIL1SCHEDULE1DATETIME;
 				$scope.campaign['EMAIL2-SCHEDULE1-DATETIME'] = EMAIL2SCHEDULE1DATETIME;
 				$scope.campaign['EMAIL3-SCHEDULE1-DATETIME'] = EMAIL3SCHEDULE1DATETIME;
-			
+				*/
+				if (mode == 'Email') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templates[$scope.tpIndex()].contentRaw;
+					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
+					$scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
+				}
+				if (mode == 'Email2') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tp2Index()].contentRaw;
+					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
+					$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
+				}
+				$http.put('/couchdb/' + dbName +'/'+campaignID, $scope.campaign).then(function(response){
+					$scope.campaign._rev = response.data.rev;
 
-				$http.put('/couchdb/' + accountProfile.username +'/'+campaignID, $scope.campaign).then(function(response){
 					var currentDate = getCurrentDateTime();
-
-					if (action=="newCampaign") {
-						$scope.campaignlist.items.push({"campaignID":$scope.campaign.campaignID,"accountID":"","campaignName":$scope.campaign.campaignName,"createDate":currentDate,"lastEditDate":currentDate,"status":"Edit","campaignType":$scope.campaign.campaignType,"EMAIL1-SCHEDULE1-DATE":$scope.campaign.EMAIL1-SCHEDULE1-DATE,"EMAIL1-SCHEDULE1-TIME":$scope.campaign.EMAIL1-SCHEDULE1-TIME,"EMAIL2-SCHEDULE1-TIME":$scope.campaign.EMAIL2-SCHEDULE1-TIME,"EMAIL3-SCHEDULE1-TIME":$scope.campaign.EMAIL3-SCHEDULE1-TIME,"EMAIL2-WAIT":$scope.campaign.EMAIL2-WAIT,"EMAIL3-WAIT":$scope.campaign.EMAIL3-WAIT,"EMAIL1-SCHEDULE1-DATETIME":$scope.campaign.EMAIL1-SCHEDULE1-DATETIME,"EMAIL2-SCHEDULE1-DATETIME":$scope.campaign.EMAIL2-SCHEDULE1-DATETIME,"EMAIL3-SCHEDULE1-DATETIME":$scope.campaign.EMAIL3-SCHEDULE1-DATETIME,"EMAIL1-SCHEDULE1-TIMEZONE":$scope.campaign.EMAIL1-SCHEDULE1-TIMEZONE,"EMAIL2-SCHEDULE1-TIMEZONE":$scope.campaign.EMAIL2-SCHEDULE1-TIMEZONE,"EMAIL3-SCHEDULE1-TIMEZONE":$scope.campaign.EMAIL3-SCHEDULE1-TIMEZONE});
-					} else{
-						$scope.campaignlist.items[$scope.listIndex()].LastEditDate = currentDate;
-						$scope.campaignlist.items[$scope.listIndex()].CampaignType = $scope.campaign.campaignType;
-					}
-					$http.put('/couchdb/' + accountProfile.username +'/campaignlist', $scope.campaignlist).then(function(response){
-						alert("Save Campaign Successful.");
-					});
-				});
-			};
-			$scope.Reset = function() {
-                  $scope.campaign  = angular.copy($scope.master);
-				  $("#BodyHtml").summernote('pasteHTML', $scope.campaign['PABP-EML1-HTMLBODY']);
-				  $("#Company_Email").html($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-					
-					$("#EMAIL1-SCHEDULE1-DATE").val($scope.campaign['EMAIL1-SCHEDULE1-DATE']);
-					$("#EMAIL1-SCHEDULE1-TIME").val($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
-
-					$("#EMAIL2-SCHEDULE1-TIME").val($scope.campaign['EMAIL2-SCHEDULE1-TIME']);
-					$("#EMAIL3-SCHEDULE1-TIME").val($scope.campaign['EMAIL3-SCHEDULE1-TIME']);
-
-					$("#EMAIL1-SCHEDULE1-DATETIME").val($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
-					$("#EMAIL2-SCHEDULE1-DATETIME").val($scope.campaign['EMAIL2-SCHEDULE1-DATETIME']);
-					$("#EMAIL3-SCHEDULE1-DATETIME").val($scope.campaign['EMAIL3-SCHEDULE1-DATETIME']);
-
-					$("#EMAIL2-WAIT").val($scope.campaign['EMAIL2-WAIT']);
-					$("#EMAIL3-WAIT").val($scope.campaign['EMAIL3-WAIT']);
-
-					$("#EMAIL1-SCHEDULE1-TIMEZONE").val($scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE']);
-					$("#EMAIL2-SCHEDULE1-TIMEZONE").val($scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE']);
-					$("#EMAIL3-SCHEDULE1-TIMEZONE").val($scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE']);
-
-				  $('.summernote').summernote({
-					  airMode: true,
-					  popover: {
-						  image: [
-							['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-							['float', ['floatLeft', 'floatRight', 'floatNone']],
-							['remove', ['removeMedia']]
-						  ],
-						  link: [
-							['link', ['linkDialogShow', 'unlink']]
-						  ],
-						  air: [
-							['color', ['color']],
-							['font', ['bold', 'underline', 'clear']],
-							['para', ['ul', 'paragraph']],
-							['table', ['table']],
-							['insert', ['link', 'picture']]
-						  ]
+					$http.get("/couchdb/" + dbName +'/campaignlist'+"?"+new Date().toString()).then(function(response) {
+						$scope.campaignlist  = response.data; 
+						if (action=="newCampaign") {
+							$scope.campaignlist.campaigns.push({"campaignID":$scope.campaign.campaignID,"accountID":accountID,"campaignName":$scope.campaign.campaignName,"createDate":currentDate,"lastEditDate":currentDate,"status":"Edit","campaignType":$scope.campaign.campaignType});
+							action = 'editCampaign';
+						} else{
+							$scope.campaignlist.campaigns[$scope.clIndex()].LastEditDate = currentDate;
+						}
+						$http.put('/couchdb/' + dbName +'/campaignlist', $scope.campaignlist).then(function(response){
+							$("body").css("cursor", "default");
+							$scope.setDisplay();
+							swal("Save Campaign Successful.", "", "success");
+							// Kwang backup current to master and clear formState
+                            $scope.master  = angular.copy($scope.campaign);
+                            $scope.clearFormState();   
+						});
+					},function(errResponse){
+						// case new account
+						if (errResponse.status == 404) {
+							$scope.campaignlist = {campaigns:[]};
+							
+							$scope.campaignlist.campaigns.push({"campaignID":$scope.campaign.campaignID,"accountID":accountID,"campaignName":$scope.campaign.campaignName,"createDate":currentDate,"lastEditDate":currentDate,"status":"Edit","campaignType":$scope.campaign.campaignType});
+							$http.put('/couchdb/' + dbName +'/campaignlist', $scope.campaignlist).then(function(response){
+								$("body").css("cursor", "default");
+								$scope.setDisplay();
+								swal("Save Campaign Successful.", "", "success");
+								//alert("Save Campaign Successful.");
+							});
+						} else {
+							//alert(errResponse.statusText);
+							swal(errResponse.statusText);
 						}
 					});
+					
+				});
+			};
+			$scope.Cancel = function() {
+				swal({
+					title: "Are you sure?",
+					text: "You will not be able to recover your last changed!",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "OK!",
+					closeOnConfirm: false
+				}, function () {
+					$scope.Reset(true);
+					
+				});
+            };
+			$scope.Reset = function(alert) {
+				$scope.campaign  = angular.copy($scope.master);
+				$("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
+				$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
+				/*
+				$("#EMAIL1-SCHEDULE1-DATE").val($scope.campaign['EMAIL1-SCHEDULE1-DATE']);
+				$("#EMAIL1-SCHEDULE1-TIME").val($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
+
+				$("#EMAIL2-SCHEDULE1-TIME").val($scope.campaign['EMAIL2-SCHEDULE1-TIME']);
+				$("#EMAIL3-SCHEDULE1-TIME").val($scope.campaign['EMAIL3-SCHEDULE1-TIME']);
+
+				$("#EMAIL1-SCHEDULE1-DATETIME").val($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
+				$("#EMAIL2-SCHEDULE1-DATETIME").val($scope.campaign['EMAIL2-SCHEDULE1-DATETIME']);
+				$("#EMAIL3-SCHEDULE1-DATETIME").val($scope.campaign['EMAIL3-SCHEDULE1-DATETIME']);
+
+				$("#EMAIL2-WAIT").val($scope.campaign['EMAIL2-WAIT']);
+				$("#EMAIL3-WAIT").val($scope.campaign['EMAIL3-WAIT']);
+
+				$("#EMAIL1-SCHEDULE1-TIMEZONE").val($scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE']);
+				$("#EMAIL2-SCHEDULE1-TIMEZONE").val($scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE']);
+				$("#EMAIL3-SCHEDULE1-TIMEZONE").val($scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE']);
+				*/
+				
+				if (alert) {
+					$scope.$apply();
+					$scope.SelectChanged('viewEmail1','templateEmail1');
+					$scope.sendersChanged('textSender1');
+                    // Kwang clear form state
+                    $scope.clearFormState();
+					swal("Cancel!", "You are back to previous version.", "success");
+				}
             };
 			$scope.Load = function() {
-				$http.get("/couchdb/" + accountProfile.username +'/campaignlist').then(function(response) {
-                     $scope.campaignlist  = response.data; 
-                });
-                $http.get("/couchdb/" + accountProfile.username +'/'+campaignID).then(function(response) {
-					$scope.master  = response.data; 
+				$http.get("/couchdb/" + dbName +'/'+campaignID+"?"+new Date().toString()).then(function(response) {
+					action = 'editCampaign';
+					$scope.master  = response.data;
+					$scope.campaign  = angular.copy($scope.master);
+					$scope.setInitValue();
+					$scope.setDisplay();
 					$scope.Reset();
                 },function(errResponse){
 					if (errResponse.status == 404) {
-						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":"","publishProgramName":"","publishDate":"","EMAIL1-SCHEDULE1-DATE":"","EMAIL1-SCHEDULE1-TIME":"","EMAIL2-SCHEDULE1-TIME":"","EMAIL3-SCHEDULE1-TIME":"","EMAIL2-WAIT":"","EMAIL3-WAIT":"","EMAIL1-SCHEDULE1-DATETIME":"","EMAIL2-SCHEDULE1-DATETIME":"","EMAIL3-SCHEDULE1-DATETIME":"","EMAIL1-SCHEDULE1-TIMEZONE":"","EMAIL2-SCHEDULE1-TIMEZONE":"","EMAIL3-SCHEDULE1-TIMEZONE":""};
+						action = 'newCampaign';
+						//$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","EMAIL1-SCHEDULE1-DATE":"","EMAIL1-SCHEDULE1-TIME":"","EMAIL2-SCHEDULE1-TIME":"","EMAIL3-SCHEDULE1-TIME":"","EMAIL2-WAIT":"","EMAIL3-WAIT":"","EMAIL1-SCHEDULE1-DATETIME":"","EMAIL2-SCHEDULE1-DATETIME":"","EMAIL3-SCHEDULE1-DATETIME":"","EMAIL1-SCHEDULE1-TIMEZONE":"","EMAIL2-SCHEDULE1-TIMEZONE":"","EMAIL3-SCHEDULE1-TIMEZONE":""};
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":""};
+						$scope.setInitValue();
+						$scope.setDisplay();
 					} else {
-						alert(errResponse.statusText);
+						//alert(errResponse.statusText);
+						swal(errResponse.statusText);
 					}
-					
 				});
+				
             };
-			$scope.listIndex = function() {
-				var cplist = 	$scope.campaignlist.items;
+			$scope.setInitValue = function(){
+				$scope.initEmailTemplate();
+				$scope.initSender();
+			};
+			$scope.initEmailTemplate = function(){
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign").then(function(response) {
+					$scope.templates  = response.data.templates; 
+					$scope.config = response.data.config; 
+					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+					$("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
+					$scope.SelectChanged('viewEmail1','templateEmail1');
+					$scope.sendersChanged('textSender1');
+					startPlugIn();
+				});
+			};
+			$scope.initTemplateEmail2 = function(){
+				if ($scope.openEmail2) {
+					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=2").then(function(response) {
+						$scope.templatesAs2  = response.data.templates; 
+						$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
+						$scope.SelectChanged('viewEmail2','templateEmail2');
+						$scope.sendersChanged('textSender2');
+						startPlugIn();
+					});
+				}
+			};
+			$scope.initSender = function(){
+				$scope.senders = [];
+				$scope.senders.push({"email" : "daver@mindfireinc.com","name" : "David Rosendahl"});
+				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});
+			};
+			$scope.setDisplay = function(){
+				$scope.openEmail2 = false;
+				$scope.openEmail3 = false;
+				if ($scope.campaign['URL-BLOG-POST-URL']===undefined || $scope.campaign['URL-BLOG-POST-URL']=='') {
+					$scope.step1Done = false;
+				} else {
+					$scope.step1Done = true;
+				}
+				if ($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']===undefined || $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']=='') {
+					$scope.step2Done = false;
+				} else {
+					$scope.step2Done = true;
+				}
+                if ($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']===undefined || $scope.campaign['EMAIL1-SCHEDULE1-DATETIME']=='') {
+                    $scope.step3Done = false;
+                }else{
+                    $scope.step3Done = true;
+                }
+				if ($scope.campaign.totalEmail > '3')	{
+					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
+				} else {
+					var emailDone = '0';
+					if ($scope.step2Done) {
+						emailDone = '1';
+						if ($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT']!==undefined & $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT']!='') {
+							emailDone = '2';
+							$scope.openEmail2 = true;
+						}
+						if ($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT']!==undefined & $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT']!='') {
+							emailDone = '3';
+						}
+					}
+					$scope.emailProgress = emailDone+' of 3 emails ready';
+				}
+
+				
+			};
+			$scope.SelectChanged = function(emailViewID,templateField){
+				//$scope.content = angular.copy($scope.templateEmail1);
+				$("#"+emailViewID).html($scope.campaign[templateField]);
+				angular.element(document).injector().invoke(function($compile) {
+					var scope = angular.element($("#"+emailViewID)).scope();
+					$compile($("#"+emailViewID))(scope);
+				});
+			};
+			$scope.sendersChanged = function(senderTextID){
+				if ($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']===undefined || $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']=='') {
+					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME'] = '';
+					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'] = '';
+				} else {
+					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME'] = $scope.senders[$scope.sdIndex()].name
+					$("#"+senderTextID).text('New Email from: "'+$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME']+'" <'+$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']+'>');
+				}
+			};
+			$scope.startEmail = function(cmd){
+				var currentEmail = '1';
+				if (cmd.endsWith("2")) {
+					currentEmail = '2';
+					$scope.openEmail2 = true;
+				}
+				if (cmd=='2COPY') {
+					var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "templateEmail1"];
+					var email2Fields = email1Fields.map(function(x){ return x.replace(/1/g,"2") });
+					for (var i=0; i<email1Fields.length; i++) {
+						$scope.campaign[email2Fields[i]] = $scope.campaign[email1Fields[i]];
+					}
+					$scope.campaign.templateEmail2 = $scope.campaign.templateEmail2.replace(/campaign\[\'EMAIL1/g, "campaign['EMAIL2");
+				}
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+currentEmail).then(function(response) {
+					$scope.templates  = response.data.templates; 
+					$scope.config = response.data.config;
+					$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
+					$scope.SelectChanged('viewEmail2','templateEmail2');
+					$scope.sendersChanged('textSender2');
+					startPlugIn();
+				});
+			};
+			$scope.clIndex = function() {
+				var cplist = 	$scope.campaignlist.campaigns;
 				for(var i=0;i < cplist.length; i++){
 				  if (cplist[i]["campaignID"] == campaignID)
 				  {
@@ -945,9 +951,39 @@ require_once('loginCredentials.php');
 				  } 
 				}
             };
+			$scope.tpIndex = function() {
+				var tplist = 	$scope.templates;
+				for(var i=0;i < tplist.length; i++){
+				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.tp2Index = function() {
+				var tplist = 	$scope.templatesAs2;
+				for(var i=0;i < tplist.length; i++){
+				  if (tplist[i]["content"] == $scope.campaign.templateEmail2)
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.sdIndex = function() {
+				var sdlist = 	$scope.senders;
+				for(var i=0;i < sdlist.length; i++){
+				  if (sdlist[i]["email"] == $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])
+				  {
+					return i;
+				  } 
+				}
+            };
+            // Kwang clear form state
+            $scope.clearFormState = function(){
+                $scope.frmStep3.$setPristine();
+            };
 			$scope.Load();
 		});
-
 		function toDate(dateStr) {			
 			var parts1 = dateStr.split(" ");
 
@@ -984,9 +1020,21 @@ require_once('loginCredentials.php');
 		function str_pad(n) {
 		    return String("0" + n).slice(-2);
 		}
+
+		function convertTimeFormat (timeString) {
+			timeString = timeString.replace("PM", ":00 PM");
+			timeString = timeString.replace("AM", ":00 AM");
+			return timeString; 
+		}
+        
+        function hasValue(obj){
+            if (obj===undefined || obj=='') {
+                return false;
+            } else {
+				return true;
+			}
+        }
     </script>
-
-
 
 </body>
 

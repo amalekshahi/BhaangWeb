@@ -439,3 +439,7 @@ function GetTimeZone($TEST, $userTicket){
 
 	return $TimeZoneList;
 }
+
+function object2array($object) { 
+	return @json_decode(@json_encode($object),1); 
+} 

@@ -78,19 +78,18 @@
                                     <div class="col-sm-2 col-sm-offset-2">                                        
 										<button class="btn btn-danger" name="setFilter" value="setFilter" onclick="FilterClick()">Show Filter</button>
                                     </div>
-									<div class="row wrapper border-bottom white-bg page-heading" id="filterDiv" style="display:none;">
-										<button id='addRow' onclick="AddRow();">Add</button>
-										<input type="radio" id="joinrowand" name="joinrow" value="and" checked> AND
-										<input type="radio" id="joinrowor" name="joinrow" value="or" > OR
-
+									<div class="col-sm-8 wrapper border-bottom white-bg page-heading" id="filterDiv" style="display:none;">
+										<button id='addRow' onclick="AddRow();" class="btn btn-outline btn-danger">New Search Criteria</button><br><br>
+										<input type="radio" id="joinrowand" name="joinrow" id="joinrowand" value="and" >Match all of the Search criterial below<br>
+										<input type="radio" id="joinrowor" name="joinrow" id="joinrowor" value="or" >Match any one of the search criteria below
 										<div class="table-responsive">
 												<table id="filterTable" class="table table-striped table-bordered " >
 												<thead>
 												<tr>
-													<th>Row</th>
-													<th>Field</th>
-													<th>Operator</th>
-													<th>Value</th>
+													<th></th>
+													<th>Search by</th>
+													<th></th>
+													<th></th>
 													<th></th>
 												</tr>
 												</thead>
@@ -99,8 +98,8 @@
 											</table>
 										
 										
-											<div class="col-sm-2">														
-													<button class="btn btn-danger" name="okFilter" value="okFilter" onclick="okFilterClick();">OK</button>
+											<div class="col-sm-3">														
+													<button class="btn btn-danger" name="okFilter" value="okFilter" onclick="okFilterClick();">Check Count</button>
 											</div>
 											<div class="col-sm-6 alert-info" style="padding-top:5px;display:none" id="altCnt">
 													<button aria-hidden="true" data-dismiss="alert1" class="close1" type="button" onclick="$('#altCnt').hide();" style="border:transparent;">x</button>

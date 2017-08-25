@@ -28,6 +28,30 @@ function couchDB_Get($path,$asArray = false)
     return $doc;
 }
 
+
+function couchDB_CreateDatabase($dbName)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984/' . $dbName);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-type: application/json',
+            'Accept: */*'
+    ));
+    $response = curl_exec($ch);
+    //echo($response);
+    $doc = json_decode($response,$asArray);
+    //print_r($response);
+    return $doc;
+}
+
+function getDatabaseName($acctID,$acctName)
+{
+    return  "db" . $acctID;
+}
+
+
 /*
     Simple json to template render using Mustache syntax
     - json dot notation
@@ -115,11 +139,16 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
             $value0 = $aValue0[$i];
             $value1 = $aValue1[$i];
             $renderDirect = true;
+            $renderRaw = false;
             //wPrint("-- $value0 $value1\n");
             if(startsWith($value1,"URL ")){
                 $renderDirect = false;
                 $value1 = substr($value1,4);
                 //wPrint("-- change to $value1\n");
+            }
+            if(startsWith($value1,"RAW ")){
+                $renderRaw = true;
+                $value1 = substr($value1,4);
             }
             if(array_key_exists($value0,$hash)){
             }else{
@@ -140,12 +169,18 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
                         //$s3Url = s3_put_contents($filename,$data->$value1,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $renderValue = str_replace("{{url}}", "$s3Url", $URLRenderFormat);
                     }
-                    
-                    $xmlSave = htmlspecialchars($renderValue);
+                    $xmlSave = $renderValue;
+                    if($renderRaw==false){
+                        $xmlSave = htmlspecialchars($renderValue);
+                    }
                     $template = str_replace("$value0", "$xmlSave", $template);
                 }else{
                     $missingValue = str_replace("{{value}}","$value1",$MISSINGRenderFormat);
-                    $xmlSave = htmlspecialchars($missingValue);
+                    $xmlSave = $missingValue;
+                    if($renderRaw==false){
+                        $xmlSave = htmlspecialchars($missingValue);
+                    }
+                    //$xmlSave = htmlspecialchars($missingValue);
                     $template = str_replace("$value0", "$xmlSave", $template);
                 }
             }
@@ -352,6 +387,18 @@ function publishMAML($MAML) {
     $publishResponse = callService("programservice/PublishProgram", $publish);
     return $publishResponse;
 }
+
+function echoCallbackString($callback, $loadmore='', $authToken = '', $mpArray){
+    echo $callback, '(',
+    json_encode( array(
+        'success'   => true,
+        'loadmore'  => $loadmore,
+        'authToken' => $authToken,
+        'mps'=>$mpArray
+    )), ')';
+}
+
+
 
 
 function wPrint($data)

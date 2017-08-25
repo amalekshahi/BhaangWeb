@@ -23,16 +23,12 @@
     <button type="button" ng-click="Save()" class="btn btn-info"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
     <button type="button" class="btn btn-info" ng-click="changeOptions()"><i class="fa fa-bars"></i> Mode</button><br>
 </div>
-<!--Path: <input type="text" ><br> -->
-<!--{{obj.data._rev}}<br>-->
 {{saveResult}}
 <div ng-if="obj.data" ng-jsoneditor="onLoad" ng-model="obj.data" options="obj.options" style="width: 98%;"></div>
 </div>
 <script>
 var myApp = angular.module('myApp', ['ng.jsoneditor']);
-var json = {"Array": [1, 2, 3], "Boolean": true, "Null": null, "Number": 123, "Object": {"a": "b", "c": "d"}, "String": "Hello World"};
 myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
-    //$scope.path = "ajzele/userinfo"
     $scope.defaultPath = "ajzele/userinfo";
     $scope.Load = function(){
         if ($scope.path == "") {
@@ -56,8 +52,6 @@ myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
     };
 
     $scope.obj = {options: {mode: 'tree'}};
-    //$scope.options = {mode: 'tree'};
-    //$scope.data = json;
     $scope.onLoad = function (instance) {
         instance.expandAll();
         $scope.instance = instance;
@@ -75,26 +69,6 @@ myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
     }
 
 }]);
-/*
-myApp.controller('ngCtrl',['$scope','$http',function($scope,$http) {
-    $scope.obj = {data: json, options: {mode: 'tree'}};
-    //$scope.options = {mode: 'tree'};
-    //$scope.data = json;
-    $scope.onLoad = function (instance) {
-        instance.expandAll();
-    };
-    $scope.changeData = function () {
-        $scope.data = {foo: 'bar'};
-    };
-    $scope.changeOptions = function () {
-        $scope.obj.options.mode = $scope.obj.options.mode == 'tree' ? 'code' : 'tree';
-    };
-
-    //other
-    $scope.pretty = function (obj) {
-        return angular.toJson(obj, true);
-    }
-}]);*/
 </script>
 </body>
 </html>

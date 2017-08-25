@@ -1,4 +1,13 @@
-<!-- <?php session_start(); require_once('loginCredentials.php'); ?> -->
+<?php
+    date_default_timezone_set('America/Los_Angeles');
+    session_start();
+    include 'global.php';
+    require_once('loginCredentials.php');
+    $dbName = $_SESSION['DBNAME'];
+    $accountID = $_SESSION['ACCOUNTID'];
+    $accountName = $_SESSION['ACCOUNNAME'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +23,13 @@
 <!-- hhhh -->
     <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.html"></div>
+	<div w3-include-html="leftWrapper.php"></div>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.html"></div>
+				<div w3-include-html="topWrapper.php"></div>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -97,7 +106,7 @@
 <!--/ content -->           
 			<div class="footer">
 			<!-- footer -->
-			<div w3-include-html="footer.html"></div>
+			<div w3-include-html="footer.php"></div>
 			<!-- / footer -->			
 			</div>
 		</div><!--  end page-wrapper -->

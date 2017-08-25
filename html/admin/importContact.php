@@ -1,3 +1,13 @@
+<?php
+    date_default_timezone_set('America/Los_Angeles');
+    session_start();
+    include 'global.php';
+    require_once('loginCredentials.php');
+    $dbName = $_SESSION['DBNAME'];
+    $accountID = $_SESSION['ACCOUNTID'];
+    $accountName = $_SESSION['ACCOUNNAME'];
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -23,13 +33,13 @@
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.html"></div>
+	<div w3-include-html="leftWrapper.php"></div>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.html"></div>
+				<div w3-include-html="topWrapper.php"></div>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -93,7 +103,7 @@
 <!--/ content -->           
 			<div class="footer">
 				<!-- footer -->
-				<div w3-include-html="footer.html"></div>
+				<div w3-include-html="footer.php"></div>
 				<!-- / footer -->			
 			</div>
 		</div><!--  end page-wrapper -->
@@ -179,12 +189,27 @@
 				data: form_data,                         
 				type: 'get',
 				success: function(json){
-					swal(json.message);
-					if (json.success) {
-						location.href = 'audiences.html';
-					} else {
-						
-					}
+						//swal(json.message);
+						if (json.success) {
+									swal({
+											  title: "Import Result", 
+											  text: json.message,
+											  type: "success",
+											  showCancelButton:false,
+											  confirmButtonColor: "#DD6B55",
+											  confirmButtonText: "OK",
+											  closeOnConfirm: true
+									},
+									function(){
+												location.href = 'audiences.php';						  
+									});
+						}else{
+								swal({
+									  title: "Error Import",
+									  text: json.message,									  
+									  showConfirmButton: true
+								});
+						}
 				}
 			 });
 		}		

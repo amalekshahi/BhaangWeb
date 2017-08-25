@@ -40,6 +40,9 @@ $FieldList = GetContactFieldList($TEST, $ticket);
 
 
 $counter = 1;
+$CriteriaJoinOperator = "";
+
+
 
 function xml_attribute($object, $attribute)
 {
@@ -67,62 +70,175 @@ if ($LISTDEFINITION == '') {
 		echo "<br>";			
 	}
 
-	foreach ($xml as $elements) {
-		$Row = $elements['Row'];
-		$Field = $elements['Field'];
-		$Operator = $elements['Operator'];
-		$Value = $elements['Value'];
-		$counter++;
-
-		$OperatorOption = "<option value=\"\" ></option>";
-		foreach ($OperatorArray as $strTemp){
-			$strTempLower = strtolower($strTemp);
-            $arrtmp = strtolower($Operator);					
-			if ($arrtmp == $strTempLower) {
-				$selected = 'selected';
-			} else {
-				$selected = '';
-			}
-			$OperatorOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
-        } 
-		
-		$fieldOption = "<option value=\"\" ></option>";
-		for ($i = 0; $i < sizeOf($FieldList); $i++) {
-			$strTemp = trim($FieldList[$i]["Name"]);
-			$strTempLower = strtolower($strTemp);					
-			$arrtmp = strtolower($Field);					
-			if ($arrtmp == $strTempLower) {
-				$selected = 'selected';
-			} else {
-				$selected = '';
-			}
-			$fieldOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
-		}
-
-		$tabData .= "<tr>".
-			"<td>".$Row."<input type=\"hidden\" name=\"rownumber".$Row."\" id=\"rownumber".$Row." value='".$Row."'\"></td>".
-			"<td><select name=\"fieldoption".$Row."\" id=\"fieldoption".$Row."\">".$fieldOption."</select></td>".
-			"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\">".$OperatorOption."</select></td>".
-			"<td><input type=\"text\" name=\"filtervalue".$Row."\" id=\"filtervalue".$Row."\" value='$Value'></td>".
-			"<td><input type=\"button\" value=\"Del\" onclick=\"delRow(this,".$Row.")\"></td>".
-			"</tr>";
-	}
-
 	$joinrow = xml_attribute($xml, 'CriteriaJoinOperator');
 	if ($TEST == 't') {
 		echo "joinrow : $joinrow<br>";
 	}
+	$JoinOperator = "and";
+	$JoinOp = "&amp;";
+	if ($joinrow == '|') {
+		$JoinOperator = "or";
+		$JoinOp = "|";
+	}
 
+	$array0=object2array($xml); 
+	if ($TEST == 't') {
+		echo "filterArray<br>";
+		var_dump($array0);
+		echo "<br>";		
+		echo "<br>";		
+		echo "<br>";		
+		echo "<br>";		
+		echo "<br>";
+	}
 
+	foreach ($array0 as $array1) {
+		if ($TEST == 't') {
+			echo "array1<br>";
+			var_dump($array1);
+			echo "<br>=============<br>";	
+		}
+
+		foreach ($array1 as $array2) {
+			if ($TEST == 't') {
+				echo "array2<br>";
+				var_dump($array2);
+				echo "<br>=============<br>";	
+			}
+
+			if (array_key_exists('Row', $array2)) {
+				if ($TEST == 't') {
+					echo "Row is in array2....<br><br><br>";  
+				}
+				$array3 = $array2;
+				$Row = $array3{'Row'};
+				$Field = $array3['Field'];
+				$Operator = $array3['Operator'];
+				$Value = $array3['Value'];
+				$array3['JoinOperator'] = $JoinOperator;
+				$CriteriaJoinOperator .= $counter.$JoinOp;
+				$counter++;
+				if ($TEST == 't') {
+					echo "Row: $Row <br>";
+					echo "Field: $Field <br>";
+					echo "Operator: $Operator <br>";
+					echo "Value: $Value <br>";
+					
+				}
+				$OperatorOption = "<option value=\"\" ></option>";
+				foreach ($OperatorArray as $strTemp){
+					$strTempLower = strtolower($strTemp);
+					$arrtmp = strtolower($Operator);					
+					if ($arrtmp == $strTempLower) {
+						$selected = 'selected';
+					} else {
+						$selected = '';
+					}
+					$OperatorOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
+				} 
+				
+				$fieldOption = "<option value=\"\" ></option>";
+				for ($i = 0; $i < sizeOf($FieldList); $i++) {
+					$strTemp = trim($FieldList[$i]["Name"]);
+					$strTempLower = strtolower($strTemp);					
+					$arrtmp = strtolower($Field);					
+					if ($arrtmp == $strTempLower) {
+						$selected = 'selected';
+					} else {
+						$selected = '';
+					}
+					$fieldOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
+				}
+
+				$tabData .= "<tr>".
+					"<td>".$Row."<input type=\"hidden\" name=\"rownumber".$Row."\" id=\"rownumber".$Row." value='".$Row."'\"></td>".
+					"<td><select name=\"fieldoption".$Row."\" id=\"fieldoption".$Row."\">".$fieldOption."</select></td>".
+					"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\">".$OperatorOption."</select></td>".
+					"<td><input type=\"text\" name=\"filtervalue".$Row."\" id=\"filtervalue".$Row."\" value='$Value'></td>".
+					"<td><input type=\"button\" value=\"Del\" onclick=\"delRow(this,".$Row.")\"></td>".
+					"</tr>";
+
+				$filterArray[] = $array3;
+			} else {
+				if ($TEST == 't') {
+					echo "Row is not in array2....<br><br><br>";  
+				}
+				foreach ($array2 as $array3) {
+					if ($TEST == 't') {
+						echo "array3<br>";
+						var_dump($array3);
+						echo "<br>=============<br>";	
+					}
+					$Row = $array3{'Row'};
+					$Field = $array3['Field'];
+					$Operator = $array3['Operator'];
+					$Value = $array3['Value'];
+					$array3['JoinOperator'] = $JoinOperator;
+					$CriteriaJoinOperator .= $counter.$JoinOp;
+					$counter++;
+					if ($TEST == 't') {
+						echo "Row: $Row <br>";
+						echo "Field: $Field <br>";
+						echo "Operator: $Operator <br>";
+						echo "Value: $Value <br>";
+						
+					}
+					$OperatorOption = "<option value=\"\" ></option>";
+					foreach ($OperatorArray as $strTemp){
+						$strTempLower = strtolower($strTemp);
+						$arrtmp = strtolower($Operator);					
+						if ($arrtmp == $strTempLower) {
+							$selected = 'selected';
+						} else {
+							$selected = '';
+						}
+						$OperatorOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
+					} 
+					
+					$fieldOption = "<option value=\"\" ></option>";
+					for ($i = 0; $i < sizeOf($FieldList); $i++) {
+						$strTemp = trim($FieldList[$i]["Name"]);
+						$strTempLower = strtolower($strTemp);					
+						$arrtmp = strtolower($Field);					
+						if ($arrtmp == $strTempLower) {
+							$selected = 'selected';
+						} else {
+							$selected = '';
+						}
+						$fieldOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
+					}
+
+					$tabData .= "<tr>".
+						"<td>".$Row."<input type=\"hidden\" name=\"rownumber".$Row."\" id=\"rownumber".$Row." value='".$Row."'\"></td>".
+						"<td><select name=\"fieldoption".$Row."\" id=\"fieldoption".$Row."\">".$fieldOption."</select></td>".
+						"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\">".$OperatorOption."</select></td>".
+						"<td><input type=\"text\" name=\"filtervalue".$Row."\" id=\"filtervalue".$Row."\" value='$Value'></td>".
+						"<td><input type=\"button\" value=\"Del\" onclick=\"delRow(this,".$Row.")\"></td>".
+						"</tr>";
+
+					$filterArray[] = $array3;
+				}
+			}		
+			
+		}
+	}	
 }
 
 
 
-$JoinOperator = "and";
-if ($joinrow == '|') {
-	$JoinOperator = "or";
+$l1 = strlen($CriteriaJoinOperator);
+$l2 = strlen($JoinOp);
+
+//$Filter = "<Filter CriteriaJoinOperator=\"$JoinOperator\">$CriteriaRow</Filter>";
+if ($TEST == 't') {
+	echo "1 CriteriaJoinOperator : $CriteriaJoinOperator<br>";
+	echo "1 strlen : $l1, $l2<br>";
 }
 
-$Filter = "<Filter CriteriaJoinOperator=\"$JoinOperator\">$CriteriaRow</Filter>";
+$CriteriaJoinOperator = substr($CriteriaJoinOperator, 0, 0-$l2);
 
-echo json_encode( array('success'=>true, 'tabData' => $tabData, 'JoinOperator' => $JoinOperator, 'counter' => $counter));
+if ($TEST == 't') {
+	echo "2 CriteriaJoinOperator : $CriteriaJoinOperator<br>";
+}
+
+echo json_encode( array('success'=>true, 'tabData' => $tabData, 'JoinOperator' => $JoinOperator, 'counter' => $counter, 'filterArray' => $filterArray, 'CriteriaJoinOperator' => $CriteriaJoinOperator));

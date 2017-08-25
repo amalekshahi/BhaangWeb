@@ -1,3 +1,4 @@
+
 function getParameterByName_old(name){
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
   var regexS = "[\\?&]" + name + "=([^&#]*)";
@@ -19,3 +20,21 @@ function getCurrentDateTime() {
 	var time = (h<=9 ? '0' + h : h) + ":" + (mm<=9 ? '0' + mm : mm) + ":" + (s<=9 ? '0' + s : s);
 	return date+' '+time;
 }
+
+/*
+    Remove JSONP Style Call back data
+    (xxxxxxxx) -> xxxxxxx
+*/
+function clearCallBack(data){
+    var len = data.length;
+    if(data.charAt(0) == '('){
+        return data.substring(1, len-1); 
+    }else{
+        return data;
+    }
+};
+
+String.prototype.startsWith = function(needle)
+{
+    return(this.indexOf(needle) == 0);
+};
