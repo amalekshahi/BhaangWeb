@@ -2,6 +2,7 @@
     $emailHTMLTemplate = file_get_contents('eachEmailCode.html');
 	$email3 = str_replace('##emailid##','3',$emailHTMLTemplate);
 ?>
+<div class="panel panel-default" ng-controller="step2">
 <div class="panel-heading">
 	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
 		<span class="badge" ng-show="!step2Done">2</span>
@@ -26,6 +27,14 @@
 								<li class="">
 									<a data-toggle="tab" href="#tab-3" ng-click="initTemplateEmail('3');">Email #3: Sent to Non-Clickers</a>
 								</li>
+								<!-- Jiew -->
+								<li class="" ng-repeat="item in emailList" ng-cloak>
+									<a data-toggle="tab" href="#tab-{{item.emlID}}" ng-click="initTemplateEmail('{{item.emlID}}');">{{item.tabLabel}}&nbsp;&nbsp;<i class="fa fa-close" ng-click="removeTab(item)"></i></a>
+								</li>
+								<li class="" ng-if="emlIndex<maxEmail">
+									<a data-toggle="tab"><i class="fa fa-plus" ng-click="newTab();"></i></a>
+								</li>
+								<!-- Jiew -->
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab-1">
@@ -191,6 +200,17 @@
 									</div>
 									<?php echo $email3; ?>
 								</div>
+
+								<!-- Jiew -->
+								<div ng-repeat="item in emailList" class="tab-pane" id="tab-{{item.emlID}}">
+									<div class="panel-body" ng-show="!openEmail{{item.emlID}}">
+										{{item.emlHead}}
+										<!-- <h2>By adding a third email to non-clickers, you'll increase engagement rates by an average of 14%.</h2>
+										<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY3')">Create Email Using #2's Content</button>
+										<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW3')">Start With a Blank Email</button></p> -->
+									</div>
+								</div>
+								<!-- Jiew -->
 							</div>
 						</div>
 					</div>
@@ -199,3 +219,40 @@
 		</div>
 	</div>
 </div>
+</div>
+<script>
+	myApp.controller('step2',function($scope,$http) {
+		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
+		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
+		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
+		var emails = [{emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'},
+								{emlID : '5',tabLabel : 'Email #5: Sent to Non-Order',emlHead : 'Thsi is Email #5 Content.'},
+								{emlID : '6',tabLabel : 'Email #6: Sent to Non-Order',emlHead : 'Thsi is Email #6 Content.'}];
+		//emails.push(email4);
+		$scope.emlIndex = 0;
+		$scope.maxEmail = 0;
+		$scope.emailList = [];
+		$scope.newTab = function(tab){
+			//emlIndex = parseInt($scope.campaign.totalEmail)+1;
+			$scope.emailList.push(emails[$scope.emlIndex]);
+			$scope.emlIndex++;
+			$('.nav-tabs a[href="#tab-4"]').tab('show');
+		}
+		$scope.removeTab = function(tab){
+			swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this Email!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				closeOnConfirm: false
+			}, function () {
+				$scope.emailList.splice($scope.emailList.indexOf(tab), 1);
+				$scope.emlIndex--;
+				$scope.$apply();
+				swal("Deleted!", "Your imaginary file has been deleted.", "success");
+			});
+		}
+	});
+</script>

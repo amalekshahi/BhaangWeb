@@ -7,21 +7,9 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Expires" content="-1">
-    <title>Main Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-	<!-- Angular -->
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">-->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>-->
+    <?php include "header.php"; ?>
 </head>
+
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->

@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
  </head>
 
- <body>
+ <body ng-app="myApp" ng-cloak>
 <div ng-controller="AppCtrl" class="sample" layout="column" ng-cloak>
   <md-content class="md-padding">
     <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
@@ -49,11 +49,8 @@
   <!-- Angular Material Library -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 <script type="text/javascript">
-(function () {
-  'use strict';
-  angular
-      .module('tabsDemoDynamicTabs', ['ngMaterial'])
-      .controller('AppCtrl', AppCtrl);
+var myApp = angular.module('myApp', ['ngMaterial'])
+      myApp.controller('AppCtrl', AppCtrl);
 
   function AppCtrl ($scope, $log) {
     var tabs = [
@@ -87,7 +84,7 @@
       tabs.splice(index, 1);
     };
   }
-})();
+
 </script>
  </body>
 </html>

@@ -7,16 +7,9 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <?php include "header.php"; ?>
 </head>
+
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
@@ -80,7 +73,7 @@
                                                         <tbody>
                                                             <tr ng-repeat="item in campaignlist.campaigns | filter: myFilter | orderBy:'-lastEditDate'" ng-cloak>
 																<td class="project-status">
-																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}"><span class="label label-info">Prototype</span></a>
+																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}"><span class="label label-info">{{item.status}}</span></a>
 																</td>
 																<td class="project-title">
 																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}">{{item.campaignName}}</a> <small>({{item.campaignType}})</small>

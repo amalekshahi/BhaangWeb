@@ -108,11 +108,25 @@ if($cmd == "publish"){
                 'maml'=>$publishFileName,
             ));
     }else{
+        $dateTimeNow = date('Y/m/d H:i:s');
+
+        $param = array(
+            "status"=>"publish",
+            "publishDate"=>$dateTimeNow,
+        );
+        // Save to document status in campaign 
+        //$docCampaignList = couchDB_Update("$dbName/campaignlist","status","publish","campaigns.campaignID=$progID");
+        $docCampaignList = couchDB_Update("$dbName/campaignlist",$param,"campaigns.campaignID=$progID");
+        // Update document status
+        
+        //$docUpdate = couchDB_Update("$dbName/$progID","status","publish");
+        $docUpdate = couchDB_UpdateEx("$dbName/$progID",$param);
         echo json_encode( 
             array(
                 'success'=>true,
                 'message'=>"Publish Done",
-                //'detail'=>$resp,
+                'detail'=>$docCampaignList,
+                'detail2'=>$docUpdate,
             ));
     }
     

@@ -10,211 +10,7 @@
 <!doctype html>
 <html ng-app="myApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="cache-control" content="max-age=0" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-	<meta http-equiv="pragma" content="no-cache" />
-    <title>Main Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-
-	<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
-	<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/chosen/chosen.css">
-    <link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
-	<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-    
-	<!-- x-editable (bootstrap version) -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-
-	<!-- Sweet alert -->
-	<link rel="stylesheet" href="css/sweet/sweetalert.css">
-
-	<!-- TouchSpin -->
-	<link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> 
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>    
-
-	<!-- Angular -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
-    
-    <!-- ui-switch -->
-    <link rel="stylesheet" href="js/angular-ui-switch.min.css"/>
-    <script src="js/angular-ui-switch.js"></script>
-
-	<style class="cp-pen-styles">
-	   /*@charset "UTF-8";*/
-	   /* 2015 Johannes Jakob
-	     Made with <3 in Germany */
-
-	   .window {
-	    background: #fff;
-	    width: 700px;
-	    margin: auto;
-	    margin-top: .5vh;
-	    border: 1px solid #acacac;
-	    border-radius: 6px;
-	    box-shadow: 0px 0px 20px #acacac;
-	   }
-
-	   .titlebar {
-	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ebebeb, color-stop(1, #d5d5d5)));
-	    background: -webkit-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: -moz-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: -ms-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: -o-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: linear-gradient(top, #ebebeb, #d5d5d5);
-	    color: #4d494d;
-	    font-size: 11pt;
-	    line-height: 20px;
-	    text-align: center;
-	    width: 100%;
-	    height: 20px;
-	    border-top: 1px solid #f3f1f3;
-	    border-bottom: 1px solid #b1aeb1;
-	    border-top-left-radius: 6px;
-	    border-top-right-radius: 6px;
-	    user-select: none;
-	    -webkit-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
-	    -o-user-select: none;
-	    cursor: default;
-	   }
-
-	   .buttons {
-	    padding-left: 8px;
-	    padding-top: 3px;
-	    float: left;
-	    line-height: 0px;
-	   }
-
-	   .buttons:hover a {
-	    visibility: visible;
-	   }
-
-	   .close {
-	    background: #ff5c5c;
-	    font-size: 9pt;
-	    width: 11px;
-	    height: 11px;
-	    border: 1px solid #e33e41;
-	    border-radius: 50%;
-	    display: inline-block;
-	   }
-
-	   .close:active {
-	    background: #c14645;
-	    border: 1px solid #b03537;
-	   }
-
-	   .close:active .closebutton {
-	    color: #4e0002;
-	   }
-
-	   .closebutton {
-	    color: #820005;
-	    visibility: hidden;
-	    cursor: default;
-	   }
-
-	   .minimize {
-	    background: #ffbd4c;
-	    font-size: 9pt;
-	    line-height: 11px;
-	    margin-left: 4px;
-	    width: 11px;
-	    height: 11px;
-	    border: 1px solid #e09e3e;
-	    border-radius: 50%;
-	    display: inline-block;
-	   }
-
-	   .minimize:active {
-	    background: #c08e38;
-	    border: 1px solid #af7c33;
-	   }
-
-	   .minimize:active .minimizebutton {
-	    color: #5a2607;
-	   }
-
-	   .minimizebutton {
-	    color: #9a5518;
-	    visibility: hidden;
-	    cursor: default;
-	   }
-
-	   .zoom {
-	    background: #00ca56;
-	    font-size: 9pt;
-	    line-height: 11px;
-	    margin-right: 4px;
-	    width: 11px;
-	    height: 11px;
-	    border: 1px solid #14ae46;
-	    border-radius: 50%;
-	    display: inline-block;
-	   }
-
-	   .zoom:active {
-	    background: #029740;
-	    border: 1px solid #128435;
-	   }
-
-	   .zoom:active .zoombutton {
-	    color: #003107;
-	   }
-
-	   .zoombutton {
-	    color: #006519;
-	    visibility: hidden;
-	    cursor: default;
-	   }
-
-	   .content {
-	    padding: 10px;
-	   }
-
-	   /* window END */
-	   /* content BEGIN */
-	   h3 {
-	    margin-top: 0px;
-	   }
-
-	   /* content END */
-
-	   .hover {
-	      border: 2px solid transparent;
-	   }
-
-	   .hover:hover {
-	        text-shadow: 2px 2px 20px red;
-	        border: 2px dashed red;
-	   }
-
-	</style>
+    <?php include "header.php"; ?>
 </head>
 <body class="">
     <script>
@@ -223,6 +19,7 @@
 		var accountID = "<?php echo $accountID; ?>";
 		var myApp = angular.module('myApp', ["xeditable","summernote","uiSwitch"]);
     </script>
+
     <div id="wrapper">
 	<!-- left wrapper -->
 	<div w3-include-html="leftWrapper.php"></div>
@@ -322,7 +119,7 @@
 															<div class="form-group">
 																<div class="col-sm-4 col-sm-offset-2">
 																	<!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
-																	<input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save()">Save</button> <button class="btn btn-white" ng-click="Cancel()">Cancel</button>
+																	<input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save()"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button> <button class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
 																</div>
 															</div>
 														</form>
@@ -334,7 +131,7 @@
 											<?php include "editPromoteBlog_step2.php"; ?>
 										</div>
 										<div class="panel">
-											<?php include "editPromoteBlog_step3_KKK.php"; ?>
+											<?php include "editPromoteBlog_step3.php"; ?>
 										</div>
 										<div class="panel panel-default">
 											<?php include "editPromoteBlog_step4.php"; ?>
@@ -353,6 +150,12 @@
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
 					<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5>
+					<div class="ibox-tools">
+						<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-external-link" style="color:blue"></i> VIEW MORE PERFORMANCE REPORTS</button>
+                    	<a class="collapse-link">
+                        	<i class="fa fa-chevron-up"></i>
+                        </a>
+      				</div>
 				</div>
 				<div class="ibox-content">
 					<div class="row">
@@ -423,8 +226,6 @@
     <!-- Page-Level Scripts -->
 	<script src="js/jquery.md5.js"></script>
     <script>
-
-        
 		var action = '';
 		var campaignName = getParameterByName("campaign_name");
 		var campaignID = getParameterByName("campaign_id");
@@ -473,7 +274,9 @@
 		}
 
 		myApp.controller('myCtrl',function($scope,$http) {
+            $scope.campaignID = campaignID;
 			$scope.Save = function(mode,silence) {
+                $scope.state['Save'] = "Saving";
 				//alert(mode);
 				$("body").css("cursor", "progress");
 				if (mode == 'Email') {
@@ -508,7 +311,8 @@
 							$scope.setDisplay();
                             if(silence == true){
                             }else{
-                                swal("Save Campaign Successful.", "", "success");
+                                //swal("Save Campaign Successful.", "", "success");
+                                $scope.state['Save'] = 'Save';
                             }
 							// Kwang backup current to master and clear formState
                             $scope.master  = angular.copy($scope.campaign);
@@ -523,13 +327,14 @@
 							$http.put('/couchdb/' + dbName +'/campaignlist', $scope.campaignlist).then(function(response){
 								$("body").css("cursor", "default");
 								$scope.setDisplay();
-								swal("Save Campaign Successful.", "", "success");
+								//swal("Save Campaign Successful.", "", "success");
 								//alert("Save Campaign Successful.");
 							});
 						} else {
 							//alert(errResponse.statusText);
 							swal(errResponse.statusText);
 						}
+                        $scope.state['Save'] = 'Save';
 					});
 					
 				});
@@ -567,6 +372,9 @@
 					action = 'editCampaign';
 					$scope.master  = response.data;
 					$scope.campaign  = angular.copy($scope.master);
+                    $scope.state = {    
+                        Save:"Save",
+                    };
 					$scope.setInitValue();
 					$scope.setDisplay();
 					$scope.Reset();
@@ -831,6 +639,10 @@
                 $scope.campaign['CALL-TO-ACTION'] = MapTrueFalse($scope.campaign['CALL-TO-ACTION-'],"Start","Stop");
                 $scope.Save("",true);   //silence save
                 //alert('SwitchChange');
+            };
+            
+            $scope.ViewReport = function(){
+                window.location.href = "reporting.php?campaignID=" + campaignID;
             };
 			$scope.Load();
 		});

@@ -41,10 +41,165 @@ function couchDB_CreateDatabase($dbName)
     ));
     $response = curl_exec($ch);
     //echo($response);
-    $doc = json_decode($response,$asArray);
+    $doc = json_decode($response);
     //print_r($response);
     return $doc;
 }
+
+function couchDB_Save($dbName,$doc)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984/' . $dbName);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-type: application/json',
+            'Accept: */*'
+    ));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($doc));
+    $response = curl_exec($ch);
+    //echo($response);
+    $doc = json_decode($response);
+    //print_r($response);
+    return $doc;
+}
+
+function couchDB_Update($path,$field,$value,$where){
+    $doc = couchDB_Get("/$path",true);
+    if(empty($doc["_id"])){
+        return json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"Document not found $path",
+            )
+        );
+    }
+    
+    // check if we have where
+    if(!empty($where)){ 
+        //print_r($where);
+        preg_match_all('/(.*)\.(.*)=(.*)/', $where, $matches, PREG_PATTERN_ORDER);
+        //echo "<hr>";
+        //print_r($matches);
+        $whereArray = $matches[1][0];
+        $whereField = $matches[2][0];
+        $whereValue = $matches[3][0];
+        //print_r($whereArray);
+        
+        //print_r($doc);
+        if (!is_array($doc[$whereArray])){
+            return json_encode( 
+                array(
+                    'success'=>false,
+                    'message'=>"$whereArray is not array",
+                ));
+        }
+        for($i = 0;$i<count($doc[$whereArray]);$i++){
+            if($doc[$whereArray][$i][$whereField] == $whereValue){
+                //print_r($doc[$whereArray][$i]);
+                $doc[$whereArray][$i][$field] = $value;
+                $ret = couchDB_Save("/$path",$doc);
+                //print_r($ret);
+                return json_encode( 
+                    array(
+                        'success'=>true,
+                        'message'=>"Done",
+                        'detail'=>$ret,
+                    ));
+            }
+        }
+        // Not found 
+        return json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"record not found where $whereField = $whereValue",
+            ));
+    }else{
+        $doc[$field] = $value;
+        //print_r($doc);
+        $ret = couchDB_Save("/$path",$doc);
+        //print_r($ret);
+        return json_encode( 
+            array(
+                'success'=>true,
+                'message'=>"Done",
+                'detail'=>$ret,
+            ));
+    }
+}
+
+function couchDB_UpdateEx($path,$param,$where){
+    $doc = couchDB_Get("/$path",true);
+    if(empty($doc["_id"])){
+        return json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"Document not found $path",
+            )
+        );
+    }
+    
+    // check if we have where
+    if(!empty($where)){ 
+        //print_r($where);
+        preg_match_all('/(.*)\.(.*)=(.*)/', $where, $matches, PREG_PATTERN_ORDER);
+        //echo "<hr>";
+        //print_r($matches);
+        $whereArray = $matches[1][0];
+        $whereField = $matches[2][0];
+        $whereValue = $matches[3][0];
+        //print_r($whereArray);
+        
+        //print_r($doc);
+        if (!is_array($doc[$whereArray])){
+            return json_encode( 
+                array(
+                    'success'=>false,
+                    'message'=>"$whereArray is not array",
+                ));
+        }
+        for($i = 0;$i<count($doc[$whereArray]);$i++){
+            if($doc[$whereArray][$i][$whereField] == $whereValue){
+                //print_r($doc[$whereArray][$i]);
+                //$doc[$whereArray][$i][$field] = $value;
+                $doc[$whereArray][$i] = array_merge($doc[$whereArray][$i],$param);
+                $ret = couchDB_Save("/$path",$doc);
+                //print_r($ret);
+                return json_encode( 
+                    array(
+                        'success'=>true,
+                        'message'=>"Done",
+                        'detail'=>$ret,
+                    ));
+            }
+        }
+        // Not found 
+        return json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"record not found where $whereField = $whereValue",
+            ));
+    }else{
+        //$doc[$field] = $value;
+        $doc = array_merge($doc,$param);
+        //print_r($doc);
+        $ret = couchDB_Save("/$path",$doc);
+        //print_r($ret);
+        return json_encode( 
+            array(
+                'success'=>true,
+                'message'=>"Done",
+                'detail'=>$ret,
+            ));
+    }
+}
+
+
+
+
+
+
+
 
 function getDatabaseName($acctID,$acctName)
 {
