@@ -31,7 +31,7 @@
 								<div class="tab-pane active" id="tab-1">
 									<div class="mail-box-header">
 										<div class="pull-right tooltip-demo">
-											<a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" ng-click="Save('Email')"><i class="fa fa-floppy-o"></i> Save Email</button>
+											<button class="btn btn-primary" ng-click="Save('Email')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Email</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
 										</div>
 										<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail1"></a></h3>
 									</div>	

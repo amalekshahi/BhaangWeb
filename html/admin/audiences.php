@@ -153,8 +153,8 @@
 			$scope.Reset = function() {
                   $scope.audience  = angular.copy($scope.master);
             };
-			$scope.Load = function() {
-                $http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+			$scope.Load = function() {                
+				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
                      $scope.master  = response.data; 
                      if (typeof $scope.master.items == 'undefined') {
                        $scope.master.items = [];

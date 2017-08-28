@@ -46,6 +46,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> 
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>    
 
 	<!-- Angular -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
@@ -212,6 +213,27 @@
 	        text-shadow: 2px 2px 20px red;
 	        border: 2px dashed red;
 	   }
+       
+       .glyphicon.spinning {
+            animation: spin 1s infinite linear;
+            -webkit-animation: spin2 1s infinite linear;
+        }
+        @keyframes spin {
+            from {
+                transform: scale(1) rotate(0deg);
+            }
+            to {
+                transform: scale(1) rotate(360deg);
+            }
+        }
+        @-webkit-keyframes spin2 {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
 
 	</style>
 </head>
@@ -321,7 +343,7 @@
 															<div class="form-group">
 																<div class="col-sm-4 col-sm-offset-2">
 																	<!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
-																	<input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save()">Save</button> <button class="btn btn-white" ng-click="Cancel()">Cancel</button>
+																	<input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save()"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button> <button class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
 																</div>
 															</div>
 														</form>
@@ -332,7 +354,7 @@
 										<div class="panel panel-default">
 											<?php include "editPromoteBlog_step2.php"; ?>
 										</div>
-										<div class="panel panel-default">
+										<div class="panel">
 											<?php include "editPromoteBlog_step3.php"; ?>
 										</div>
 										<div class="panel panel-default">
@@ -473,6 +495,7 @@
 
 		myApp.controller('myCtrl',function($scope,$http) {
 			$scope.Save = function(mode,silence) {
+                $scope.state['Save'] = "Saving";
 				//alert(mode);
 				$("body").css("cursor", "progress");
 				if (mode == 'Email') {
@@ -507,7 +530,8 @@
 							$scope.setDisplay();
                             if(silence == true){
                             }else{
-                                swal("Save Campaign Successful.", "", "success");
+                                //swal("Save Campaign Successful.", "", "success");
+                                $scope.state['Save'] = 'Save';
                             }
 							// Kwang backup current to master and clear formState
                             $scope.master  = angular.copy($scope.campaign);
@@ -522,13 +546,14 @@
 							$http.put('/couchdb/' + dbName +'/campaignlist', $scope.campaignlist).then(function(response){
 								$("body").css("cursor", "default");
 								$scope.setDisplay();
-								swal("Save Campaign Successful.", "", "success");
+								//swal("Save Campaign Successful.", "", "success");
 								//alert("Save Campaign Successful.");
 							});
 						} else {
 							//alert(errResponse.statusText);
 							swal(errResponse.statusText);
 						}
+                        $scope.state['Save'] = 'Save';
 					});
 					
 				});
@@ -566,6 +591,9 @@
 					action = 'editCampaign';
 					$scope.master  = response.data;
 					$scope.campaign  = angular.copy($scope.master);
+                    $scope.state = {    
+                        Save:"Save",
+                    };
 					$scope.setInitValue();
 					$scope.setDisplay();
 					$scope.Reset();

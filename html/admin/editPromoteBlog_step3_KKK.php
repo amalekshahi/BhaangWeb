@@ -1,9 +1,15 @@
 <!-- step3 Start -->
+<div class="panel panel-default" ng-controller="step3">
     <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge">3</span> &nbsp;Choose Your Audience & Schedule <small class="m-l-sm"> <i class="fa fa-dot-circle-o" aria-hidden="true"></i> Scheduled for Wednesday August 22, 2017 at 3:00 PM</small></a></h4>
-
+                            <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
+                            <span class="badge" ng-show="!step3Done">3</span>
+                            <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done""></i>
+                            &nbsp;Choose Your Audience & Schedule 
+                            <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>Scheduled for {{ScheduleDateTime}} ({{campaign['EMAIL1-SCHEDULE1-TIMEZONE']}})</small>
+                            </a></h4>
     </div>
     <div class="panel-collapse collapse" id="collapseThree">
+        <!--<button ng-click="ParseDate()"></button>-->
         <div class="panel-body">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
@@ -12,23 +18,13 @@
 							<label class="col-sm-2 control-label">Choose Your Audience</label>
 							<div class="col-sm-10">
 								<div>
-									<select class="chosen-select" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4">
-										<option value="">
-											Select
-										</option>
-										<option value="All Printers from SalesForce (3,512)">
-											All Printers from SalesForce (3,512)
-										</option>
-										<option value="All Leads imported from scanned (713)">
-											All Leads imported from scanned (713)
-										</option>
-										<option value="Existing Clients (3,412)">
-											Existing Clients (3,412)
-										</option>
-										<option value="Mary and Joe Opps from this month (442)">
-											Mary and Joe Opps from this month (442)
-										</option>
-									</select> <span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>
+									<select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
+										<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
+										<!-- <option ng-repeat="option in audience.items" ng-value="option">{{option['LIST-NAME']}}</option>  -->
+										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
+									</select>
+									 <input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">
+									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>									
 								</div>
 								<div>
 									<p></p>
@@ -36,7 +32,7 @@
 									
 							</div>
                             
-							<div class="row" ng-controller="step3">
+							<div class="row">
                                 <!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL3-SCHEDULE1-DATETIME={{campaign['EMAIL3-SCHEDULE1-DATETIME']}}<br>-->
@@ -48,7 +44,7 @@
                                                     <h5><i aria-hidden="true" class="fa fa-calendar"></i> Schedule</h5>
                                                 </div>
                                                 <div style="float:right;"><h5><input name="programNameHash" type="hidden" value="{{programNameHash}}">
-                                                    <button class="btn btn-primary" ng-disabled="frmStep3.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o"></i> Save </button>
+                                                    <button class="btn btn-primary" ng-disabled="frmStep3.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o"></i><span ng-show="saveButtonText == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> Save </button>
                                                     <button class="btn btn-white" ng-disabled="frmStep3.$pristine" ng-click="Cancel()"><i class="fa fa-refresh"></i> Cancel </button></h5>
                                                 </div>
 											</div>
@@ -193,80 +189,8 @@
             </div>
         </div>
     </div>
+</div>
 <script>
-
-function dateChange_COA() {
-	
-
-	var EMAIL2SCHEDULE1TIME = $("#EMAIL2-SCHEDULE1-TIME").val();
-	var EMAIL3SCHEDULE1TIME = $("#EMAIL3-SCHEDULE1-TIME").val();
-
-	var EMAIL1SCHEDULE1TIME = $("#EMAIL1-SCHEDULE1-TIME").val();
-	var EMAIL1SCHEDULE1DATE = $("#EMAIL1-SCHEDULE1-DATE").val();
-				
-				
-	var EMAIL1SCHEDULE1DATETIME = "";
-	var EMAIL2SCHEDULE1DATETIME = "";
-	var EMAIL3SCHEDULE1DATETIME = "";
-
-	var EMAIL2WAIT = $("#EMAIL2-WAIT").val();
-	var EMAIL3WAIT = $("#EMAIL3-WAIT").val();
-
-	var EMAIL1SCHEDULE1TIMEZONE = $("#EMAIL1-SCHEDULE1-TIMEZONE").val();
-	var EMAIL2SCHEDULE1TIMEZONE = $("#EMAIL2-SCHEDULE1-TIMEZONE").val();	
-	var EMAIL3SCHEDULE1TIMEZONE = $("#EMAIL3-SCHEDULE1-TIMEZONE").val();
-
-	//alert('EMAIL1SCHEDULE1DATE = '+EMAIL1SCHEDULE1DATE);
-	//alert('EMAIL1SCHEDULE1TIME = '+EMAIL1SCHEDULE1TIME);
-
-	if(EMAIL1SCHEDULE1DATE!="" && EMAIL1SCHEDULE1TIME!=""){
-		var d1 = EMAIL1SCHEDULE1DATE+' '+convertTimeFormat(EMAIL1SCHEDULE1TIME);
-		$('#EMAIL1-SCHEDULE1-DATETIME').val(d1);
-		var date1 = toDate(d1);
-		//alert('d1 = '+d1);
-		//alert('date1 = '+EMAIL1SCHEDULE1DATE);
-		var date2 = date1;
-		for(var i=2;i<=3;i++){
-			var emailName = "EMAIL" + i;
-			$('#'+emailName+'-SCHEDULE1-DATETIME').val()
-			if($('#'+emailName+'-WAIT').val()!="" && $('#'+emailName+'-SCHEDULE1-TIME').val()!=""){
-				var numberOfDaysToAdd = parseInt($('#'+emailName+'-WAIT').val());
-				date2 = addDays(date2, numberOfDaysToAdd);
-				var d2 = formatDate(date2)+' '+convertTimeFormat($('#'+emailName+'-SCHEDULE1-TIME').val());
-				//alert(emailName+' : d2 = '+d2);
-				$('#'+emailName+'-SCHEDULE1-DATETIME').val(d2);   
-			}else{
-				$('#'+emailName+'-SCHEDULE1-DATETIME').val("");
-			}
-		}
-	}
-
-	/* for test
-	if($scope.campaign['EMAIL1-SCHEDULE1-DATE']!="" && $scope.campaign['EMAIL1-SCHEDULE1-TIME']!=""){
-		$scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE']+' '+convertTime($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
-		var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
-		
-		for(var i=2;i<=3;i++){
-			var emailName = "EMAIL" + i;
-			if($scope.campaign[emailName + '-WAIT']!="" && $scope.campaign[emailName + '-SCHEDULE1-TIME']!=""){
-				var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
-				var date2 = addDays(date1, numberOfDaysToAdd);
-				$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDate(date2)+' '+convertTime($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
-			}else{
-				$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
-			}
-		}
-	}
-	*/
-	
-	/*
-	function convertTimeFormat (timeString) {
-		timeString = timeString.replace("PM", ":00 PM");
-		timeString = timeString.replace("AM", ":00 AM");
-		return timeString; 
-	}
-	*/
-}
 
 myApp.controller('step3',function($scope,$http) {
     //alert('step3');
@@ -274,17 +198,18 @@ myApp.controller('step3',function($scope,$http) {
         if($scope.campaign['EMAIL1-SCHEDULE1-DATE']!="" && $scope.campaign['EMAIL1-SCHEDULE1-TIME']!=""){
             $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE']+' '+convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
             var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
-            
+            var date2 = date1;
             for(var i=2;i<=3;i++){
                 var emailName = "EMAIL" + i;
                 if($scope.campaign[emailName + '-WAIT']!="" && $scope.campaign[emailName + '-SCHEDULE1-TIME']!=""){
                     var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
-                    var date2 = addDays(date1, numberOfDaysToAdd);
+                    date2 = addDays(date2, numberOfDaysToAdd);
                     $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDate(date2)+' '+convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
                 }else{
                     $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
                 }
             }
+            ShowScheduleDateTime();
         }
     };
     $scope.Cancel = function(){
@@ -292,6 +217,76 @@ myApp.controller('step3',function($scope,$http) {
         $scope.$parent.Cancel();
         //$scope.Reset(); // parent scope's Reset()
     };
+
+	$scope.LoadAudience = function() {
+//			$http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+			$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
+					 $scope.masterAu  = response.data; 
+					 if (typeof $scope.masterAu.items == 'undefined') {
+					   $scope.masterAu.items = [];
+					 } 
+					  $scope.audience  = angular.copy($scope.masterAu);
+
+			},function(errResponse){
+						// case new account
+						if (errResponse.status == 404) {
+							alert("ERROR 404 [audienceLists]"); 
+						}
+			});
+	};				
+	$scope.ArrangeFilter = function() {	
+				$scope.AuFilter  = angular.copy($scope.masterAu);
+				var auCnt = 0; 
+				var auOpr = ""; 
+				var allRule=""; 
+				for (var i = 0; i < $scope.filterList.length; i++) {
+					var indx = $scope.AuFilter.items.getIndexByValue('contactID',$scope.filterList[i]);
+					$scope.auItem = $scope.AuFilter.items[indx];
+					var auItemOpr = $scope.auItem['LIST-OPERATOR']; 
+					auOpr += "("; 
+					var arrItem = $scope.auItem['LIST-ARRAY']; 	
+					if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
+										var itemRule = ""; 
+										for (var k = 0; k < arrItem.length; k++) {		
+												auCnt++; 
+												//alert(arrItem[k]); 
+												if(arrItem[k] !=null ){
+													itemRule = itemRule+'<Criteria Row=\"' +auCnt+ '\" Field=\"'+arrItem[k].Field+'\" Operator=\"'+arrItem[k].Operator+'\" Value=\"'+arrItem[k].Value+'\" />' ; 
+												}				
+												auOpr += auCnt ; 
+												var opr = "&amp;"
+												if(arrItem[k].JoinOperator == "or")	opr ="|"; 												
+												if(k < arrItem.length-1)		auOpr += opr;  	
+
+										} // end for k
+										//alert(itemRule ); 
+										allRule += itemRule; 																				
+					}		
+					auOpr += ")";
+					if(i < $scope.filterList.length-1)		auOpr += "|";  
+				}//end for i
+				var auRule = "<Filter CriteriaJoinOperator=\""+auOpr+"\">"+allRule+"</Filter>" ; 
+				
+				$("#EMAIL1-FILTER").val(auRule);
+				$scope.campaign['EMAIL1-FILTER']  = auRule; 
+				//alert( "val = " + $("#EMAIL1-FILTER").val() ); 
+	};	
+    $scope.ShowScheduleDateTime = function(){
+        if(hasValue($scope.campaign)){
+            if(hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM")){
+                var a = moment($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']); 
+                $scope.ScheduleDateTime = a.format('dddd MMMM DD, YYYY [at] h:mm:ss a');
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    };
+	$scope.LoadAudience	(); 
+
+
 });
 </script>
 <!-- step3 End-->

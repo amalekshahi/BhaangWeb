@@ -1,13 +1,14 @@
 <!-- step3 Start -->
+<div class="panel panel-default" ng-controller="step3">
     <div class="panel-heading">
                             <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
                             <span class="badge" ng-show="!step3Done">3</span>
                             <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done""></i>
                             &nbsp;Choose Your Audience & Schedule 
-                            <small class="m-l-sm"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Scheduled for Wednesday August 22, 2017 at 3:00 PM</small>
+                            <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>Scheduled for {{ScheduleDateTime}} ({{campaign['EMAIL1-SCHEDULE1-TIMEZONE']}})</small>
                             </a></h4>
     </div>
-    <div class="panel-collapse collapse" id="collapseThree" ng-controller="step3">
+    <div class="panel-collapse collapse" id="collapseThree">
         <!--<button ng-click="ParseDate()"></button>-->
         <div class="panel-body">
             <div class="ibox float-e-margins">
@@ -43,8 +44,8 @@
                                                     <h5><i aria-hidden="true" class="fa fa-calendar"></i> Schedule</h5>
                                                 </div>
                                                 <div style="float:right;"><h5><input name="programNameHash" type="hidden" value="{{programNameHash}}">
-                                                    <button class="btn btn-primary" ng-disabled="frmStep3.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o"></i> Save </button>
-                                                    <button class="btn btn-white" ng-disabled="frmStep3.$pristine" ng-click="Cancel()"><i class="fa fa-refresh"></i> Cancel </button></h5>
+                                                    <button class="btn btn-primary" ng-disabled="frmStep3.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button>
+                                                    <button class="btn btn-white" ng-disabled="frmStep3.$pristine" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel </button></h5>
                                                 </div>
 											</div>
 											<div class="project-list">												
@@ -188,6 +189,7 @@
             </div>
         </div>
     </div>
+</div>
 <script>
 
 myApp.controller('step3',function($scope,$http) {
@@ -207,6 +209,7 @@ myApp.controller('step3',function($scope,$http) {
                     $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
                 }
             }
+            ShowScheduleDateTime();
         }
     };
     $scope.Cancel = function(){
@@ -216,12 +219,19 @@ myApp.controller('step3',function($scope,$http) {
     };
 
 	$scope.LoadAudience = function() {
-			$http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+//			$http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+			$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 					 $scope.masterAu  = response.data; 
 					 if (typeof $scope.masterAu.items == 'undefined') {
 					   $scope.masterAu.items = [];
 					 } 
 					  $scope.audience  = angular.copy($scope.masterAu);
+
+			},function(errResponse){
+						// case new account
+						if (errResponse.status == 404) {
+							alert("ERROR 404 [audienceLists]"); 
+						}
 			});
 	};				
 	$scope.ArrangeFilter = function() {	
@@ -261,11 +271,17 @@ myApp.controller('step3',function($scope,$http) {
 				$scope.campaign['EMAIL1-FILTER']  = auRule; 
 				//alert( "val = " + $("#EMAIL1-FILTER").val() ); 
 	};	
-    $scope.ParseDate = function(){
-        
-        if(hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM")){
-            var d = new Date(Date.parse($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'])); 
-            alert(formatDate(d));    
+    $scope.ShowScheduleDateTime = function(){
+        if(hasValue($scope.campaign)){
+            if(hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM")){
+                var a = moment($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']); 
+                $scope.ScheduleDateTime = a.format('dddd MMMM DD, YYYY [at] h:mm:ss a');
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     };
 	$scope.LoadAudience	(); 

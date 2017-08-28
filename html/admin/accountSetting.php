@@ -137,8 +137,8 @@
 								<div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <input type="hidden" name="action" value="saveProfileSettings">
-                                        <button ng-disabled="myForm.$pristine" class="btn btn-primary" ng-click="Save()" >Save</button>
-                                        <button ng-disabled="myForm.$pristine" class="btn btn-white" ng-click="Cancel()">Cancel</button>
+                                        <button ng-disabled="myForm.$pristine" class="btn btn-primary" ng-click="Save()" ><i class="fa fa-floppy-o" ng-show="state['SaveAccountSetting'] == 'Save'"></i><span ng-show="state['SaveAccountSetting'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['SaveAccountSetting']}}</button>
+                                        <button ng-disabled="myForm.$pristine" class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
                                     </div>
                                 </div>
                                 <div ng-show="saveSuccess && myForm.$pristine"  ng-cloak>
@@ -189,6 +189,9 @@
 		$scope.Load = function() {
                 $scope.studioEmail = studioEmail;
                 $scope.studioPassword = studioPassword;
+                $scope.state = {
+                    "SaveAccountSetting":"Save",
+                };
 				//alert("load");				
 				$http.get("/couchdb/" + dbname + "/UserInfo").then(function(response) {
 					 $scope.master  = response.data; 
@@ -202,12 +205,15 @@
 
 		$scope.Save = function() {
 			//$http.put('/couchdb/' + data.username +'/userinfo', $scope.userinfo).then(function(response){
+                $scope.state['SaveAccountSetting'] = "Saving";
 				$http.put("/couchdb/" + dbname + "/UserInfo", $scope.userinfo).then(function(response){
 					  $scope.data = response.data;          
 					  $scope.Load();
                       $scope.saveSuccess = true;
+                      $scope.state['SaveAccountSetting'] = "Save";
 				 },function(response){
-                      alert("ERROR: can not save!!!");	  
+                      alert("ERROR: can not save!!!");	
+                      $scope.state['SaveAccountSetting'] = "Save";                      
 				});         
 
 		};		

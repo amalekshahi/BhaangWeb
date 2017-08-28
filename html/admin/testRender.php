@@ -26,10 +26,10 @@ $default = couchDB_Get("/master/Default_".$requestBlueprint,true);
 
 
 //$data = couchDB_Get("/johnsample/88c3e7bba77a0ac58645d9635244b561");
-$data = couchDB_Get("/johnsample/b134806d66b1bbf47e2b863815ff0324");
+$data = couchDB_Get("/228/255338cb6a802e73113dc481da4c47ed");
 
-$data ->{'TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'} = file_get_contents("templates/emails/PLAIN-EMAIL.html");
-$data ->{'EMAIL1-TOP-TEXT'} = "This is Email TOP Text";
+$data ->{'TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'} = file_get_contents("templates/emails/COMPANY-EMAIL.html");
+$data ->{'EMAIL1-TOP-TEXT'} = "This is Email TOP TextXXX";
 // check default value
 
 MergeStdClassWithArray($data,$default);

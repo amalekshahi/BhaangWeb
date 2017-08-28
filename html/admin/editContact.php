@@ -104,18 +104,8 @@ editContactAudience.html
 				}
 			 });
 
-        });
+        });	
 		
-		Array.prototype.getIndexByValue = function (name, value) {
-				for (var i = 0, len=this.length; i <len; i++) {
-					if (this[i][name]) {
-						if (this[i][name] === value) {
-							return i
-						}
-					}
-				}
-				return -1;
-		};
 		
 		var OperatorOption = 
 		"<option value=\"\" ></option>"+
@@ -166,13 +156,17 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 							  }
 						};
 						$scope.Load = function() {
-							$http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+						$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 								 $rootScope.master  = response.data; 
 								 if (typeof $rootScope.master.items == 'undefined') {
 								   $rootScope.master.items = [];
 								 } 
 								 $scope.Reset();
 							});
+						},function(errResponse){
+										if (errResponse.status == 404) {
+
+										}
 						};
 						$scope.Save = function() {							    
 								okFilterClick("saveCount"); 
@@ -224,7 +218,8 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 				 var LDef = $('#LISTDEFINITION').val();
 				 var LHash= $('#LISTIDHASH').val();
 				 var LDetail = $('#contactDetail').val();				 
-                $http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+
+				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 						 $rootScope.master  = response.data; 
 						 if (typeof $rootScope.master.items == 'undefined') {
 								$rootScope.master.items = [];

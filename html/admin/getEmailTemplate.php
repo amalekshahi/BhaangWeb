@@ -64,7 +64,9 @@ $ret = array();
 foreach($configs as $config)
 {
     $fileName = "templates/emails/".$config->file;
-    $fileContent = file_get_contents($fileName);
+    $fileContentRaw = file_get_contents($fileName);
+    //Replace {{RAW 
+    $fileContent = str_replace("{{RAW ","{{",$fileContentRaw);
     if(!empty($asEmail)){
         // change EMAIL1 to $asEmail
         $fileContent = str_replace('{{EMAIL1-',"{{EMAIL".$asEmail."-",$fileContent);
@@ -75,7 +77,7 @@ foreach($configs as $config)
     $content = preg_replace('/\{{([^\}]*)}\}/',$editTag ,$fileContent);
     $ret[] = array(
         "title"=> $config->title,
-        "contentRaw"=> $fileContent,
+        "contentRaw"=> $fileContentRaw,
         "content"=> $content,
     );
 }

@@ -46,6 +46,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> 
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>    
 
 	<!-- Angular -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
@@ -332,8 +333,8 @@
 										<div class="panel panel-default">
 											<?php include "editPromoteBlog_step2.php"; ?>
 										</div>
-										<div class="panel panel-default">
-											<?php include "editPromoteBlog_step3.php"; ?>
+										<div class="panel">
+											<?php include "editPromoteBlog_step3_KKK.php"; ?>
 										</div>
 										<div class="panel panel-default">
 											<?php include "editPromoteBlog_step4.php"; ?>
@@ -486,7 +487,7 @@
 					$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
 				}
 				if (mode == 'Email3') {
-					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs2[$scope.tp2Index()].contentRaw;
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
 					$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
 				}
@@ -759,6 +760,15 @@
 				  } 
 				}
             };
+			$scope.tpsIndex = function(emlID) {
+				var tplist = 	$scope['templatesAs'+emlID];
+				for(var i=0;i < tplist.length; i++){
+				  if (tplist[i]["content"] == $scope.campaign['templateEmail'+emlID])
+				  {
+					return i;
+				  } 
+				}
+            };
 			$scope.tp2Index = function() {
 				var tplist = 	$scope.templatesAs2;
 				for(var i=0;i < tplist.length; i++){
@@ -812,7 +822,7 @@
             };
             // Kwang clear form state
             $scope.clearFormState = function(){
-                $scope.frmStep3.$setPristine();
+                //$scope.frmStep3.$setPristine();
             };
             //Kwang uiSwitch change
             $scope.SwitchChange = function(){
@@ -897,6 +907,23 @@
                 return falseValue;
             }
         }
+        
+        function formatDate(date) {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate();
+          var monthIndex = date.getMonth();
+          var year = date.getFullYear();
+
+          return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
+
+
         
     </script>
 
