@@ -99,7 +99,7 @@
             </div>        
 
 <!--/ content -->           
-			<div class="footer">
+			<div class="footer fixed">
 			<!-- footer -->
 			<div w3-include-html="footer.php"></div>
 			<!-- / footer -->			
@@ -120,15 +120,7 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-	 <!-- Page-Level Scripts -->
-	  <script>
-			$(document).ready(function(e) {  					
-					var canLogin = readCookie("canLogin");
-					if (canLogin != "Yes") {
-							 location.href = 'login.html';
-					}
-		   });
-	</script>	
+	 <!-- Page-Level Scripts -->	  
 	
 
 </body>

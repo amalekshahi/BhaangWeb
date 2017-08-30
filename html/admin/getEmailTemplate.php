@@ -61,8 +61,10 @@ $configs = $masterTemplate->emails;
 //print_r($configs);
 
 $ret = array();
+$number = 0;
 foreach($configs as $config)
 {
+    $number = $number + 1;
     $fileName = "templates/emails/".$config->file;
     $fileContentRaw = file_get_contents($fileName);
     //Replace {{RAW 
@@ -72,9 +74,13 @@ foreach($configs as $config)
         $fileContent = str_replace('{{EMAIL1-',"{{EMAIL".$asEmail."-",$fileContent);
     }
     
-    $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']"></summernote>';
-    // Replace {{XXXX}} with proper summernote tag
-    $content = preg_replace('/\{{([^\}]*)}\}/',$editTag ,$fileContent);
+    $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
+    // Replace {{EMAIL}} with proper summernote tag
+    $content = preg_replace('/\{{(EMAIL[^\}]*)}\}/',$editTag ,$fileContent);
+    
+    $noneEditTag = '{{'.$scopeName.'[\'$1\']}}';
+    // Replace other tag with normal tag
+    $content = preg_replace('/\{{([^\}]*)}\}/',$noneEditTag ,$content);
     $ret[] = array(
         "title"=> $config->title,
         "contentRaw"=> $fileContentRaw,

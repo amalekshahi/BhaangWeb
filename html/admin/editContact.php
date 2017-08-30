@@ -17,29 +17,9 @@ editContactAudience.html
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audience</title>
-    <!-- Bootstrap -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<!-- Font awesome -->
-	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <!-- Main Inspinia CSS files -->
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-	<!-- Sweet alert -->
-	 <script src="css/sweet/sweetalert-dev.js"></script>
-	 <link rel="stylesheet" href="css/sweet/sweetalert.css">
-
-	<!-- Angular -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
-	<!-- Route -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> 
-
+    <?php include "header.php"; ?>
+    <script src="css/sweet/sweetalert-dev.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>     
 </head>
 <body class="">
     <div id="wrapper">
@@ -72,7 +52,7 @@ editContactAudience.html
     <!-- Mainly scripts -->
 	<script src="js/w3data.js"></script>	
 	<script>w3IncludeHTML();</script>
-    <script src="js/jquery-3.1.1.min.js"></script>
+    <!--<script src="js/jquery-3.1.1.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -145,7 +125,9 @@ editContactAudience.html
 		});
 
 myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scope,$http,Upload,$rootScope) {
-
+                        $scope.state = {
+                            "Save":"Save",
+                        };
 						$scope.Reset = function() {
 							  $scope.audience  = angular.copy($rootScope.master);
 							  indx = $scope.audience.items.getIndexByValue('contactID',cid);						  
@@ -168,12 +150,14 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 
 										}
 						};
-						$scope.Save = function() {							    
+						$scope.Save = function() {				
+                                $scope.state['Save'] = "Saving";
 								okFilterClick("saveCount"); 
 								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
 									 $scope.Load();
 									 //alert("Save success");
-									 swal("Save Success", "", "success");
+									 //swal("Save Success", "", "success");
+                                     $scope.state['Save'] = "Save";
 								});         
 								$('#filterDiv').hide();
 						};
@@ -201,7 +185,9 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 
 
 myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($scope,$http,Upload,$rootScope) {
-
+            $scope.state = {
+                "Save":"Save",
+            };
 			$scope.Save = function() {						
 						var LName = $('#LISTNAME').val();			//alert("LName = "+LName); 
 						if(LName != ''){
@@ -236,11 +222,13 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
                 });
             };
 			$scope.SaveDB = function(cID) {					
-						$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
-							 //alert("Save success");
-							 swal("Save Success", "", "success");
-							 window.location.href="editContact.php?cid="+cID; 
-						});   
+                $scope.state['Save'] = "Saving";
+                $http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
+                     //alert("Save success");
+                     //swal("Save Success", "", "success");
+                     window.location.href="editContact.php?cid="+cID; 
+                     $scope.state['Save'] = "Save";
+                });   
 			};
 			$scope.cancel = function() {
 					window.location.href="audiences.php"; 

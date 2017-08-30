@@ -76,7 +76,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-2 col-sm-offset-2">                                        
-										<button class="btn btn-danger" name="setFilter" value="setFilter" onclick="FilterClick()">Show Filter</button>
+										<button class="btn btn-danger" name="setFilter" value="setFilter" onclick="FilterClick()"><i class="fa fa-filter"></i> Show Filter</button>
                                     </div>
 									<div class="col-sm-8 wrapper border-bottom white-bg page-heading" id="filterDiv" style="display:none;">
 										<button id='addRow' onclick="AddRow();" class="btn btn-outline btn-danger">New Search Criteria</button><br><br>
@@ -116,8 +116,8 @@
                                     <div class="col-sm-3 col-sm-offset-2">                                       
                                         <input type="hidden" name="LISTID-HASH" value="{{item['LISTID-HASH']}}">
 										<input type="hidden" name="LIST-COUNT" ng-model="item['LIST-COUNT']">
-										<button class="btn btn-primary" ng-click="Save()">Save</button>
-                                        <button class="btn btn-white" ng-click="cancel()">Cancel</button>
+										<button class="btn btn-primary" ng-click="Save()"><i class="fa fa-floppy-o" ng-show="state['Save'] != 'Saving'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> Save</button>
+                                        <button class="btn btn-white" ng-click="cancel()"><i class="fa fa-ban"></i> Cancel</button>
                                     </div>
                                 </div>
 

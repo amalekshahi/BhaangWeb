@@ -27,14 +27,50 @@
 <body>
 <div ng-controller="myCtrl">
     Test SummerNote
-    <summernote ng-model="summerText"></summernote><br>
+    <summernote ng-model="summerText" editor="editor" on-image-upload="imageUpload(files,'editor')"></summernote><br>
+    
+    <summernote ng-model="summerText2" editor="editor1" on-image-upload="imageUpload(files,'editor1')"></summernote><br>
     {{summerText}}
 </div>
 <script>
-    var myApp = angular.module('myApp',  ['summernote']);
-    myApp.controller('myCtrl',['$scope',function($scope) {
+    var myApp = angular.module('myApp',  ['summernote',"ngFileUpload"]);
+    myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
         $scope.summerText = "Summer Text 2"; 
+        $scope.imageUpload = function(files,editor){
+            var uploadFileName = "IMG-" + uuidv4();
+            //$scope.editor.summernote('insertNode', imgNode);
+            Upload.upload({
+                url: 'upload.php',
+                method: 'POST',
+                file:files[0],
+                data: {
+                    file:files[0], 
+                    's3':'true',
+                    'fileName':uploadFileName,
+                    'acctID':'accountID',
+                    'progID':'programID',
+                }
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + 'uploaded');
+                console.log(resp.data);
+                var imgNode = $('<img>').attr('src', resp.data.imgSrc)[0];
+                $scope[editor].summernote('insertNode',imgNode );
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
+        };
     }]);
+    
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
 </script>
 </body>
 </html>

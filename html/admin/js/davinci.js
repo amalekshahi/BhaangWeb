@@ -38,3 +38,22 @@ String.prototype.startsWith = function(needle)
 {
     return(this.indexOf(needle) == 0);
 };
+
+function Render(template,data){
+    var reg = /\{{(.*?)\}}/g;
+    var html = template;
+    while (match = reg.exec(html)) {
+        // first shows the match: <h1>,h1
+        // then shows the match: </h1>,/h1
+        var slugPattern = match[0];
+        var slug = match[1];
+        var renderRaw = false;
+        if(slug.startsWith("RAW ")){
+            renderRaw = true;
+            slug = slug.substring(4);
+        }
+        html = html.replace(slugPattern,data[slug]);
+        console.log(slug);
+    }
+    return html;
+} 

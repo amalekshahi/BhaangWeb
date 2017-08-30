@@ -553,9 +553,6 @@ function echoCallbackString($callback, $loadmore='', $authToken = '', $mpArray){
     )), ')';
 }
 
-
-
-
 function wPrint($data)
 {
     echo nl2br($data);

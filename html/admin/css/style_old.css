@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700");
 /*
- *  *
- *   *   INSPINIA - Responsive Admin Theme
- *    *   version 2.7.1
- *     *
- *     */
-
+ *
+ *   INSPINIA - Responsive Admin Theme
+ *   version 2.7.1
+ *
+*/
 h1,
 h2,
 h3,
@@ -40,7 +39,7 @@ h5 {
   font-weight: 600;
 }
 .nav > li > a {
-  color: #FFFFFF;
+  color: #a7b1c2;
   font-weight: 600;
   padding: 14px 20px 14px 25px;
 }
@@ -72,7 +71,7 @@ h5 {
 }
 .navbar-default {
   background-color: transparent;
-  border-color: #ff6633;
+  border-color: #333;
 }
 .navbar-top-links li {
   display: inline-block;
@@ -170,18 +169,18 @@ h5 {
 }
 .nav-header {
   padding: 33px 25px;
-  background-color: #000000;
-  background-image: url("https://da-vinci-rules-daver78.c9users.io/httpdoc/daver/DV-CMS-UI/DV-logo.png");
+  background-color: #333;
+  background-image: url("patterns/header-profile.png");
 }
 .pace-done .nav-header {
   transition: all 0.4s;
 }
 ul.nav-second-level {
-  background: #FF6633;
+  background: #293846;
 }
 .nav > li.active {
   border-left: 4px solid #19aa8d;
-  background: #FF6633;
+  background: #293846;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -273,12 +272,12 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   position: absolute;
   left: 70px;
   top: 0;
-  background-color: #ff6633;
+  background-color: #333;
   padding: 10px 10px 10px 10px;
   font-size: 12px;
 }
 .canvas-menu.mini-navbar .nav-second-level {
-  background: #FF6633;
+  background: #293846;
 }
 .mini-navbar li.active .nav-second-level {
   left: 65px;
@@ -414,7 +413,7 @@ body.canvas-menu .logo-element {
 }
 body.mini-navbar .nav-header {
   padding: 0;
-  background-color: #ff6633;
+  background-color: #FF6632;
 }
 body.canvas-menu .nav-header {
   padding: 33px 25px;
@@ -499,7 +498,7 @@ body.canvas-menu.mini-navbar .navbar-default .nav li .profile-element a span {
 }
 body.canvas-menu nav.navbar-static-side {
   z-index: 2001;
-  background: #333333;
+  background: #333;
   height: 100%;
   position: fixed;
   display: none;
@@ -583,7 +582,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   padding: 40px 0 40px 0;
 }
 .navbar-toggle {
-  background-color: #ff6633;
+  background-color: #FF6632;
   color: #fff;
   padding: 6px 12px;
   font-size: 14px;
@@ -665,8 +664,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-primary:active:hover,
 .btn-primary.active:hover,
 .btn-primary.active:focus {
-  background-color: #18a689;
-  border-color: #18a689;
+  background-color: #F5653B;
+  border-color: #F5653B;
   color: #FFFFFF;
 }
 .btn-primary:active,
@@ -1276,19 +1275,19 @@ button.dim:active:before {
 }
 /* TOOLTIPS */
 .tooltip-inner {
-  background-color: #333333;
+  background-color: #333;
 }
 .tooltip.top .tooltip-arrow {
-  border-top-color: #333333;
+  border-top-color: #333;
 }
 .tooltip.right .tooltip-arrow {
-  border-right-color: #333333;
+  border-right-color: #333;
 }
 .tooltip.bottom .tooltip-arrow {
-  border-bottom-color: #333333;
+  border-bottom-color: #333;
 }
 .tooltip.left .tooltip-arrow {
-  border-left-color: #333333;
+  border-left-color: #333;
 }
 /* EASY PIE CHART*/
 .easypiechart {
@@ -1888,7 +1887,7 @@ div.dt-button-info {
 .single-line {
   background-color: #FFFFFF;
   background-image: none;
-  border: 1px solid #e5e6e7;
+  border: 1px solid #ccc;
   border-radius: 1px;
   color: inherit;
   display: block;
@@ -2354,8 +2353,8 @@ div.dt-button-info {
   box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
 }
 /**
- * * Nestable Extras
- * */
+* Nestable Extras
+*/
 .nestable-lists {
   display: block;
   clear: both;
@@ -3406,7 +3405,7 @@ body.tour-open .animated {
   padding: 12px 10px;
   margin: 0;
   border-radius: 0;
-  background: #333333;
+  background: #333;
   color: #fff;
   text-align: center;
   border-right: 1px solid #334556;
@@ -3479,7 +3478,7 @@ body.tour-open .animated {
 }
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #333333;
+  background-color: #333;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;
@@ -3499,7 +3498,7 @@ body.boxed-layout {
   background: url('patterns/shattered.png');
 }
 body.boxed-layout #wrapper {
-  background-color: #333333;
+  background-color: #333;
   max-width: 1200px;
   margin: 0 auto;
   -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.75);
@@ -3771,7 +3770,7 @@ body.body-small .footer.fixed {
   padding-bottom: 0;
 }
 .nav-tabs > li > a {
-  color: #aaaaaa;
+  color: #A7B1C2;
   font-weight: 600;
   padding: 10px 20px 10px 25px;
 }
@@ -4212,7 +4211,7 @@ a.close-canvas-menu {
   top: 10px;
   right: 15px;
   z-index: 1011;
-  color: #FFFFFF;
+  color: #a7b1c2;
 }
 a.close-canvas-menu:hover {
   color: #fff;
@@ -5400,7 +5399,7 @@ dd.project-people {
 .article h1 {
   font-size: 48px;
   font-weight: 700;
-  color: #333333;
+  color: #333;
 }
 .article p {
   font-size: 15px;
@@ -5771,7 +5770,7 @@ body.body-small .vote-icon {
   display: block;
 }
 .small-chat-box .heading {
-  background: #333333;
+  background: #333;
   padding: 8px 15px;
   font-weight: bold;
   color: #fff;
@@ -5823,13 +5822,13 @@ body.body-small .vote-icon {
   padding: 10px 10px;
 }
 /*
- *  * metismenu - v2.0.2
- *   * A jQuery menu plugin
- *    * https://github.com/onokumus/metisMenu
- *     *
- *      * Made by Osman Nuri Okumus
- *       * Under MIT License
- *        */
+ * metismenu - v2.0.2
+ * A jQuery menu plugin
+ * https://github.com/onokumus/metisMenu
+ *
+ * Made by Osman Nuri Okumus
+ * Under MIT License
+ */
 .metismenu .plus-minus,
 .metismenu .plus-times {
   float: right;
@@ -5898,11 +5897,11 @@ body.body-small .vote-icon {
   display: block;
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-rotating-plane"></div>
- *     *
- *      */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-rotating-plane"></div>
+ *
+ */
 .sk-spinner-rotating-plane.sk-spinner {
   width: 30px;
   height: 30px;
@@ -5940,14 +5939,14 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-double-bounce">
- *     *      <div class="sk-double-bounce1"></div>
- *      *      <div class="sk-double-bounce2"></div>
- *       *    </div>
- *        *
- *         */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-double-bounce">
+ *      <div class="sk-double-bounce1"></div>
+ *      <div class="sk-double-bounce2"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-double-bounce.sk-spinner {
   width: 40px;
   height: 40px;
@@ -5994,17 +5993,17 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-wave">
- *     *      <div class="sk-rect1"></div>
- *      *      <div class="sk-rect2"></div>
- *       *      <div class="sk-rect3"></div>
- *        *      <div class="sk-rect4"></div>
- *         *      <div class="sk-rect5"></div>
- *          *    </div>
- *           *
- *            */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-wave">
+ *      <div class="sk-rect1"></div>
+ *      <div class="sk-rect2"></div>
+ *      <div class="sk-rect3"></div>
+ *      <div class="sk-rect4"></div>
+ *      <div class="sk-rect5"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-wave.sk-spinner {
   margin: 0 auto;
   width: 50px;
@@ -6061,14 +6060,14 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-wandering-cubes">
- *     *      <div class="sk-cube1"></div>
- *      *      <div class="sk-cube2"></div>
- *       *    </div>
- *        *
- *         */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-wandering-cubes">
+ *      <div class="sk-cube1"></div>
+ *      <div class="sk-cube2"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-wandering-cubes.sk-spinner {
   margin: 0 auto;
   width: 32px;
@@ -6137,11 +6136,11 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-pulse"></div>
- *     *
- *      */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-pulse"></div>
+ *
+ */
 .sk-spinner-pulse.sk-spinner {
   width: 40px;
   height: 40px;
@@ -6174,14 +6173,14 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-chasing-dots">
- *     *      <div class="sk-dot1"></div>
- *      *      <div class="sk-dot2"></div>
- *       *    </div>
- *        *
- *         */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-chasing-dots">
+ *      <div class="sk-dot1"></div>
+ *      <div class="sk-dot2"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-chasing-dots.sk-spinner {
   margin: 0 auto;
   width: 40px;
@@ -6244,15 +6243,15 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-three-bounce">
- *     *      <div class="sk-bounce1"></div>
- *      *      <div class="sk-bounce2"></div>
- *       *      <div class="sk-bounce3"></div>
- *        *    </div>
- *         *
- *          */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-three-bounce">
+ *      <div class="sk-bounce1"></div>
+ *      <div class="sk-bounce2"></div>
+ *      <div class="sk-bounce3"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-three-bounce.sk-spinner {
   margin: 0 auto;
   width: 70px;
@@ -6303,24 +6302,24 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-circle">
- *     *      <div class="sk-circle1 sk-circle"></div>
- *      *      <div class="sk-circle2 sk-circle"></div>
- *       *      <div class="sk-circle3 sk-circle"></div>
- *        *      <div class="sk-circle4 sk-circle"></div>
- *         *      <div class="sk-circle5 sk-circle"></div>
- *          *      <div class="sk-circle6 sk-circle"></div>
- *           *      <div class="sk-circle7 sk-circle"></div>
- *            *      <div class="sk-circle8 sk-circle"></div>
- *             *      <div class="sk-circle9 sk-circle"></div>
- *              *      <div class="sk-circle10 sk-circle"></div>
- *               *      <div class="sk-circle11 sk-circle"></div>
- *                *      <div class="sk-circle12 sk-circle"></div>
- *                 *    </div>
- *                  *
- *                   */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-circle">
+ *      <div class="sk-circle1 sk-circle"></div>
+ *      <div class="sk-circle2 sk-circle"></div>
+ *      <div class="sk-circle3 sk-circle"></div>
+ *      <div class="sk-circle4 sk-circle"></div>
+ *      <div class="sk-circle5 sk-circle"></div>
+ *      <div class="sk-circle6 sk-circle"></div>
+ *      <div class="sk-circle7 sk-circle"></div>
+ *      <div class="sk-circle8 sk-circle"></div>
+ *      <div class="sk-circle9 sk-circle"></div>
+ *      <div class="sk-circle10 sk-circle"></div>
+ *      <div class="sk-circle11 sk-circle"></div>
+ *      <div class="sk-circle12 sk-circle"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-circle.sk-spinner {
   margin: 0 auto;
   width: 22px;
@@ -6472,28 +6471,28 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-cube-grid">
- *     *      <div class="sk-cube"></div>
- *      *      <div class="sk-cube"></div>
- *       *      <div class="sk-cube"></div>
- *        *      <div class="sk-cube"></div>
- *         *      <div class="sk-cube"></div>
- *          *      <div class="sk-cube"></div>
- *           *      <div class="sk-cube"></div>
- *            *      <div class="sk-cube"></div>
- *             *      <div class="sk-cube"></div>
- *              *    </div>
- *               *
- *                */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-cube-grid">
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *      <div class="sk-cube"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-cube-grid {
   /*
- *    * Spinner positions
- *       * 1 2 3
- *          * 4 5 6
- *             * 7 8 9
- *                */
+   * Spinner positions
+   * 1 2 3
+   * 4 5 6
+   * 7 8 9
+   */
 }
 .sk-spinner-cube-grid.sk-spinner {
   width: 30px;
@@ -6569,13 +6568,13 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-wordpress">
- *     *      <span class="sk-inner-circle"></span>
- *      *    </div>
- *       *
- *        */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-wordpress">
+ *      <span class="sk-inner-circle"></span>
+ *    </div>
+ *
+ */
 .sk-spinner-wordpress.sk-spinner {
   background-color: #FF6632;
   width: 30px;
@@ -6617,24 +6616,24 @@ body.body-small .vote-icon {
   }
 }
 /*
- *  *  Usage:
- *   *
- *    *    <div class="sk-spinner sk-spinner-fading-circle">
- *     *      <div class="sk-circle1 sk-circle"></div>
- *      *      <div class="sk-circle2 sk-circle"></div>
- *       *      <div class="sk-circle3 sk-circle"></div>
- *        *      <div class="sk-circle4 sk-circle"></div>
- *         *      <div class="sk-circle5 sk-circle"></div>
- *          *      <div class="sk-circle6 sk-circle"></div>
- *           *      <div class="sk-circle7 sk-circle"></div>
- *            *      <div class="sk-circle8 sk-circle"></div>
- *             *      <div class="sk-circle9 sk-circle"></div>
- *              *      <div class="sk-circle10 sk-circle"></div>
- *               *      <div class="sk-circle11 sk-circle"></div>
- *                *      <div class="sk-circle12 sk-circle"></div>
- *                 *    </div>
- *                  *
- *                   */
+ *  Usage:
+ *
+ *    <div class="sk-spinner sk-spinner-fading-circle">
+ *      <div class="sk-circle1 sk-circle"></div>
+ *      <div class="sk-circle2 sk-circle"></div>
+ *      <div class="sk-circle3 sk-circle"></div>
+ *      <div class="sk-circle4 sk-circle"></div>
+ *      <div class="sk-circle5 sk-circle"></div>
+ *      <div class="sk-circle6 sk-circle"></div>
+ *      <div class="sk-circle7 sk-circle"></div>
+ *      <div class="sk-circle8 sk-circle"></div>
+ *      <div class="sk-circle9 sk-circle"></div>
+ *      <div class="sk-circle10 sk-circle"></div>
+ *      <div class="sk-circle11 sk-circle"></div>
+ *      <div class="sk-circle12 sk-circle"></div>
+ *    </div>
+ *
+ */
 .sk-spinner-fading-circle.sk-spinner {
   margin: 0 auto;
   width: 22px;
@@ -6805,15 +6804,15 @@ body.body-small .vote-icon {
   z-index: 2000;
 }
 /*
- *  *
- *   *   INSPINIA Landing Page - Responsive Admin Theme
- *    *   Copyright 2014 Webapplayers.com
- *     *
- *     */
+ *
+ *   INSPINIA Landing Page - Responsive Admin Theme
+ *   Copyright 2014 Webapplayers.com
+ *
+*/
 /* GLOBAL STYLES
- * -------------------------------------------------- */
+-------------------------------------------------- */
 /* PACE PLUGIN
- * -------------------------------------------------- */
+-------------------------------------------------- */
 .landing-page.pace .pace-progress {
   background: #fff;
   position: fixed;
@@ -6836,21 +6835,21 @@ body.landing-page {
 }
 .landing-page {
   /* CUSTOMIZE THE NAVBAR
- *   -------------------------------------------------- */
+  -------------------------------------------------- */
   /* Flip around the padding for proper display in narrow viewports */
   /* BACKGROUNDS SLIDER
- *   -------------------------------------------------- */
+  -------------------------------------------------- */
   /* CUSTOMIZE THE CAROUSEL
- *   -------------------------------------------------- */
+  -------------------------------------------------- */
   /* Carousel base class */
   /* Since positioning the image, we need to help out the caption */
   /* Declare heights because of positioning of img element */
   /* Sections
- *   ------------------------- */
+  ------------------------- */
   /* Buttons - only primary custom button
- *   ------------------------- */
+  ------------------------- */
   /* RESPONSIVE CSS
- *   -------------------------------------------------- */
+  -------------------------------------------------- */
 }
 .landing-page .container {
   overflow: hidden;
@@ -7647,11 +7646,11 @@ body.rtls.top-navigation .footer.fixed {
   left: 0;
 }
 /*
- *  *
- *   *   This is style for skin config
- *    *   Use only in demo theme
- *     *
- *     */
+ *
+ *   This is style for skin config
+ *   Use only in demo theme
+ *
+*/
 .theme-config {
   position: absolute;
   top: 90px;
@@ -7744,11 +7743,11 @@ body.rtls.top-navigation .footer.fixed {
   background: url("patterns/4.png") repeat scroll 0 0;
 }
 /*
- *  *
- *   *   SKIN 1 - INSPINIA - Responsive Admin Theme
- *    *   NAME - Blue light
- *     *
- *     */
+ *
+ *   SKIN 1 - INSPINIA - Responsive Admin Theme
+ *   NAME - Blue light
+ *
+*/
 .skin-1 .minimalize-styl-2 {
   margin: 14px 5px 5px 30px;
 }
@@ -7850,11 +7849,11 @@ body.skin-1 {
   background: transparent;
 }
 /*
- *  *
- *   *   SKIN 2 - INSPINIA - Responsive Admin Theme
- *    *   NAME - Inspinia Ultra
- *     *
- *     */
+ *
+ *   SKIN 2 - INSPINIA - Responsive Admin Theme
+ *   NAME - Inspinia Ultra
+ *
+*/
 body.skin-2 {
   color: #565758 !important;
 }
@@ -7903,7 +7902,7 @@ body.skin-2 {
 }
 .skin-2 #side-menu > li > a,
 .skin-2 .nav.nav-second-level > li > a {
-  color: #FF6633;
+  color: #586b7d;
 }
 .skin-2 .nav > li.active > a {
   color: #213a53;
@@ -8000,11 +7999,11 @@ body.skin-2 #wrapper {
   background: transparent;
 }
 /*
- *  *
- *   *   SKIN 3 - INSPINIA - Responsive Admin Theme
- *    *   NAME - Yellow/purple
- *     *
- *     */
+ *
+ *   SKIN 3 - INSPINIA - Responsive Admin Theme
+ *   NAME - Yellow/purple
+ *
+*/
 .skin-3 .minimalize-styl-2 {
   margin: 14px 5px 5px 30px;
 }
@@ -8561,118 +8560,3 @@ body.md-skin {
     margin: 0;
   }
 }
-
-#lawsContent
-{
-    width: 100%;
-    height: 10em;
-}
-
-.hide {
-  display: none;
-}
-
-.fake-browser {
-    color: black;
-}
-
-.fake-browser-bar {
-    padding: 10px 8px 6px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom: 2px solid #ccc;
-    background: #ddd;
-    overflow:hidden;
-}
-
-.fake-browser-bar div {
-    height: 22px;
-}
-
-    .fake-browser-bar .buttons {
-        float: left;
-        padding-top: 6px;
-        margin-right: 15px;
-    }
-
-        .fake-browser-bar .buttons span {
-            height: 10px;
-            width: 10px;
-            background-color: #ccc;
-            border-radius: 10px;
-            border: 1px solid #dadada;
-            float: left;
-            margin: 0 0 0 4px;
-        }
-
-        .fake-browser-bar .buttons .bt-1 {
-            background-color: #FF7F71;
-        }
-
-        .fake-browser-bar .buttons .bt-2 {
-            background-color: #FFE238;
-        }
-
-        .fake-browser-bar .buttons .bt-3 {
-            background-color: #5AC05A;
-        }
-
-    .fake-browser-bar .address-bar {
-        background-color: white;
-        color: #bbb;
-        border-radius: 3px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: #d7d3d3;
-        padding: 3px 7px 4px;
-        font-size: 10px;
-        overflow: hidden;
-    }
-        .fake-browser-bar .address-bar:hover {
-            cursor: default;
-        }
-
-        .fake-browser-bar .address-bar .repeat {
-            display: inline-block;
-            margin-right: 5px;
-            font-size: 9px;
-        }
-
-        .fake-browser-bar .address-bar .address-bar-text {
-            display: inline-block;
-        }
-
-    .fake-browser-bar .hamburger-menu {
-        float: right;
-        width: 38px;
-        padding: 3px 5px 0px 14px;
-    }
-
-        .fake-browser-bar .hamburger-menu span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: #b6b5b5;
-            border-radius: 3px;
-            opacity: 1;
-            left: 0;
-            margin-bottom: 3px;
-        }
-
-
-.fake-browser-container {
-    background-color: #fff;
-    width: 100%;
-    height: 100%;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-
-.badge-published{background-color:#32CD32}
-.badge-published[href]:focus,.badge-published[href]:hover{background-color:#72a53b}
-.badge{text-transform:uppercase}
-.badge{display:inline-block;padding:.25em .4em;font-size:75%;font-weight:600;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:3px}
-

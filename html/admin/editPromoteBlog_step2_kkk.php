@@ -77,7 +77,7 @@
                                                             <div class="col-sm-12">
                                                                 <label class="control-label">Send Test To</label> 
                                                                 <select ng-model="sendTestContactSelected" style="width: 100%;height: 30px;">
-                                                                <option ng-repeat="x in sendTestContacts" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
+                                                                <option ng-repeat="x in sendTestContacts" value="{{x[0]}}">{{x[3]}}</option>
                                                                 </select>
                                                             </div>
                                                             
@@ -206,7 +206,7 @@
 </div>
 </div>
 <script>
-	myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload) {
+	myApp.controller('step2',function($scope,$http) {
 		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
 		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
 		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
@@ -305,41 +305,6 @@
                 swal("Server Error");
             });
         }
-        
-        $scope.imageUpload = function(files,editor){
-            var uploadFileName = "IMG-" + uuidv4();
-            //$scope.editor.summernote('insertNode', imgNode);
-            Upload.upload({
-                url: 'upload.php',
-                method: 'POST',
-                file:files[0],
-                data: {
-                    file:files[0], 
-                    's3':'true',
-                    'fileName':uploadFileName,
-                    'acctID':'accountID',
-                    'progID':'programID',
-                }
-            }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + 'uploaded');
-                console.log(resp.data);
-                var imgNode = $('<img>').attr('src', resp.data.imgSrc)[0];
-                $scope[editor].summernote('insertNode',imgNode );
-            }, function (resp) {
-                console.log('Error status: ' + resp.status);
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-            });
-        };        
         $scope.LoadSendTestContact();
-	}]);
-    
-     function uuidv4() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
-
+	});
 </script>

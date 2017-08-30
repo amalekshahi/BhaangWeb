@@ -68,10 +68,10 @@
                                     <tbody>
 										<tr ng-repeat="item in campaignlist.campaigns | orderBy:'-lastEditDate'" ng-cloak>
 											<td class="project-status">
-												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" target="_blank"><span class="label label-info">{{item.status}}</span></a>
+												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" ><span class="label label-info">{{item.status}}</span></a>
 											</td>
 											<td class="project-title">
-												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" target="_blank">{{item.campaignName}}</a> <small>({{item.campaignType}})</small>
+												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" >{{item.campaignName}}</a> <small>({{item.campaignType}})</small>
 												<br/>
 												<small>Last Edited {{item.lastEditDate}} </small>
 											</td>
@@ -86,8 +86,8 @@
 													<medium>{{Random(10)}}%</medium><br><small class="text-muted">Click-thru Rate</small>
 											</td>
 											<td class="project-actions">
-												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" target="_blank"><i class="fa fa-clone" style="color:green"></i> Copy </a>
-												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" target="_blank"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
+												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" ><i class="fa fa-clone" style="color:green"></i> Copy </a>
+												<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" ><i class="fa fa-pencil" style="color:green"></i> Edit </a>
 											</td>
 										</tr>
                                     </tbody>

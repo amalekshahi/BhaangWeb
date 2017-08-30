@@ -1,4 +1,9 @@
 <!-- step3 Start -->
+<link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
+<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
+<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js"></script>
+<script src="https://rawgit.com/leocaseiro/angular-chosen/master/dist/angular-chosen.min.js"></script>
+
 <div class="panel panel-default" ng-controller="step3">
     <div class="panel-heading">
                             <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
@@ -8,7 +13,14 @@
                             <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>Scheduled for {{ScheduleDateTime}} ({{campaign['EMAIL1-SCHEDULE1-TIMEZONE']}})</small>
                             </a></h4>
     </div>
-<style>.chosen-container{width: 400px !important;}</style>
+<style>
+    .chosen-container{
+        width: 400px !important;
+    }
+    .chosen-container-multi .chosen-choices li.search-field input[type=text] {
+        padding-top: 0px;
+    }
+</style>
     <div class="panel-collapse collapse" id="collapseThree">
         <!--<button ng-click="ParseDate()"></button>-->
         <div class="panel-body">
@@ -19,7 +31,8 @@
 							<label class="col-sm-2 control-label">Choose Your Audience</label>
 							<div class="col-sm-10">
 								<div>
-									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">
+									<!--<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">-->
+                                    <select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.contactID as s['LIST-NAME'] for s in audience.items"  style="width:400px;" ng-change="ArrangeFilter()">
 										 <option value=""></option>
 									</select>
 										<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
@@ -27,13 +40,12 @@
 									<!-- <select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
 										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
 									</select> -->
-									 <input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">
+									<!--<input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">-->
 									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>									
 								</div>
-								<div>
-									<p></p>
-								</div>
-									
+								<!--<div>
+									<p>{{campaign['EMAIL1-FILTER']}}</p>
+								</div>-->
 							</div>
                             
 							<div class="row">
@@ -195,11 +207,6 @@
     </div>
 </div>
 
-<!-- <script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
-<link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
-<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
-<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js"></script>
-<script src="https://rawgit.com/leocaseiro/angular-chosen/master/dist/angular-chosen.min.js"></script>
 <script>
 myApp.controller('step3',function($scope,$http) {
     //alert('step3');
@@ -228,35 +235,7 @@ myApp.controller('step3',function($scope,$http) {
     };
 
 
-	$scope.LoadAudience = function() {     
-				/*
-				if (typeof $scope.campaign['filterSelected']  == 'undefined') {
-		   				$scope.filterList = [];
-				}else{
-						$scope.filterList = $scope.campaign['filterSelected'] ;	
-				}*/ 
-				$scope.filterList = ["f31711a4f8a49122046ed172246d83e2"]; 
-				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
-								$scope.masterAu  = response.data; 								
-								 if (typeof $scope.masterAu.items == 'undefined') {
-								   $scope.masterAu.items = [];
-								 } 
-								 $scope.audience  = angular.copy($scope.masterAu);	
-								 $scope.states = []; 								 
-								 for (var i = 0; i < $scope.audience.items.length; i++) {
-										$scope.fItems = { 
-											id : $scope.audience.items[i].contactID, 
-											listname : $scope.audience.items[i]['LIST-NAME'] 
-										}; 										
-										$scope.states.push($scope.fItems);
-								 }
-								 //alert("states = "+$scope.states); 
-				},function(errResponse){				
-						if (errResponse.status == 404) {
-							alert("ERROR 404 [audienceLists]"); 
-						}
-				});
-	};			
+	
 
 	$scope.ArrangeFilter = function() {						
 			$scope.AuFilter  = angular.copy($scope.masterAu);
@@ -295,7 +274,7 @@ myApp.controller('step3',function($scope,$http) {
 			$scope.campaign['filterSelected']  = selList; 
 //			$scope.campaign['filterSelected'].push(selList);
 			var auRule = "<Filter CriteriaJoinOperator=\""+auOpr+"\">"+allRule+"</Filter>" ; 
-			$("#EMAIL1-FILTER").val(auRule);
+			//$("#EMAIL1-FILTER").val(auRule);
 			$scope.campaign['EMAIL1-FILTER']  = auRule; 
 			//alert( "val = " + $("#EMAIL1-FILTER").val() ); 					
 	};	
@@ -314,7 +293,7 @@ myApp.controller('step3',function($scope,$http) {
             return false;
         }
     };
-	$scope.LoadAudience(); 
+
 
 
 });

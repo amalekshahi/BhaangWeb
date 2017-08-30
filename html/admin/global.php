@@ -199,14 +199,23 @@ function GetContactCount($TEST, $userTicket, $filter, $ACCOUNTID){
 	return $Count;
 }
 
-function GetContact($TEST, $userTicket, $filter, $ACCOUNTID){
+function GetContact($TEST, $userTicket, $filter, $ACCOUNTID){	
+	
+	$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
+	$result = GetContactWithFields($TEST, $userTicket, $filter, $ACCOUNTID, $FieldNames, "Y");
+
+	return $result;
+
+}
+
+function GetContactWithFields($TEST, $userTicket, $filter, $ACCOUNTID, $FieldNames, $saveFile){
 	$Contact = "";
 	$rows = array();
 	$Contactarray = array();
 	$columns = array();
 	$errorMessage = '';
 
-	$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
+	//$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
 	
 
 	$ContactListRequest   = array
@@ -234,19 +243,16 @@ function GetContact($TEST, $userTicket, $filter, $ACCOUNTID){
 
 		
 
-
 		$t = date("mdY-His",time());
 		$tmpName = $t.'.csv';
 		$filename = IMPORTPATH.'contactFile/'.$tmpName;
 		$Contact = trim($Contact);
-
 		file_put_contents( $filename, $Contact);			
-
 		$Contactarray = array_map("str_getcsv", explode("\n", $Contact));
 		array_splice($Contactarray, 0, 1);
 
 		$columns = rtrim(strtok($Contact, "\n"));
-		
+			
 		$arr = explode(",", $columns);
 		$columns = array();
 		if ($arr) {
@@ -257,6 +263,10 @@ function GetContact($TEST, $userTicket, $filter, $ACCOUNTID){
 				$columns[] = $arr1;
 			}
 		}
+		if ($saveFile != "Y") {
+			unlink($filename);
+		}
+
 		$success = true;
 		
 		

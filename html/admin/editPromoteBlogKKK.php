@@ -7,7 +7,8 @@
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html ng-app="myApp">
 <head>
     <?php include "header.php"; ?>
@@ -17,7 +18,7 @@
         //Kwang create myAPP here so all step can access it.
         var dbName = "<?php echo $dbName; ?>";
 		var accountID = "<?php echo $accountID; ?>";
-		var myApp = angular.module('myApp', ["xeditable","summernote","uiSwitch"]);
+		var myApp = angular.module('myApp', ["localytics.directives","xeditable","summernote","uiSwitch"]);
     </script>
 
     <div id="wrapper">
@@ -34,6 +35,7 @@
 		</div>	
 		
 <!-- content -->
+
 	<div class="row" ng-cloak>
 		<div class="col-lg-12">
 			<div class="widget style1 blue-bg">
@@ -127,8 +129,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="panel panel-default">
-											<?php include "editPromoteBlog_step2.php"; ?>
+										<div class="panel">
+											<?php include "editPromoteBlog_step2_kkk.php"; ?>
 										</div>
 										<div class="panel">
 											<?php include "editPromoteBlog_step3.php"; ?>
@@ -138,7 +140,7 @@
 										</div>
 									</div>
                                     <div style="float:right;">
-                                        <button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane"></i> Publish</button>
+                                        <button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
                                     </div>
 								</div>
 
@@ -203,8 +205,8 @@
 	<script src="js/davinci.js"></script>
 
 	<!-- Chosen -->
-	<script src="js/plugins/chosen/chosen.jquery.js"></script>
-
+	<!-- <script src="js/plugins/chosen/chosen.jquery.js"></script> -->
+    
 	<!-- X-editable -->
 	<script src="js/plugins/bootstrap-editable/boostrap-editable.js"></script>
 
@@ -250,8 +252,6 @@
 
 			$( "#EMAIL1-SCHEDULE1-DATE" ).datepicker();
 
-			$('.chosen-select').chosen({width: "100%"});
-
 			$(".touchspin2").TouchSpin({
 				initval: 1,
 				min: 1,
@@ -275,6 +275,10 @@
 
 		myApp.controller('myCtrl',function($scope,$http) {
             $scope.campaignID = campaignID;
+            $scope.state = {    
+                Save:"Save",
+                Publish:"Launch Program",
+            };
 			$scope.Save = function(mode,silence) {
                 $scope.state['Save'] = "Saving";
 				//alert(mode);
@@ -372,19 +376,18 @@
 					action = 'editCampaign';
 					$scope.master  = response.data;
 					$scope.campaign  = angular.copy($scope.master);
-                    $scope.state = {    
-                        Save:"Save",
-                    };
 					$scope.setInitValue();
 					$scope.setDisplay();
+					$scope.LoadAudience(); 
 					$scope.Reset();
                 },function(errResponse){
 					if (errResponse.status == 404) {
 						action = 'newCampaign';
 						//$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","EMAIL1-SCHEDULE1-DATE":"","EMAIL1-SCHEDULE1-TIME":"","EMAIL2-SCHEDULE1-TIME":"","EMAIL3-SCHEDULE1-TIME":"","EMAIL2-WAIT":"","EMAIL3-WAIT":"","EMAIL1-SCHEDULE1-DATETIME":"","EMAIL2-SCHEDULE1-DATETIME":"","EMAIL3-SCHEDULE1-DATETIME":"","EMAIL1-SCHEDULE1-TIMEZONE":"","EMAIL2-SCHEDULE1-TIMEZONE":"","EMAIL3-SCHEDULE1-TIMEZONE":""};
-						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":""};
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","filterSelected":[]};
 						$scope.setInitValue();
 						$scope.setDisplay();
+                        $scope.LoadAudience(); 
 					} else {
 						//alert(errResponse.statusText);
 						swal(errResponse.statusText);
@@ -600,6 +603,7 @@
             };
             $scope.Publish = function() {
                 //alert("Do publish here");
+                $scope.state['Publish'] = "Launching";
                 $http(
                     {
                         method: 'POST',
@@ -622,8 +626,10 @@
                     }else{
                         swal(response.data.message);
                     }
+                    $scope.state['Publish'] = "Launch Program";
                     //alert(response);
                 },function(errResponse){
+                    $scope.state['Publish'] = "Launch Program";
                     swal("Server Error");
                     //alert(errResponse);
                 });
@@ -644,6 +650,38 @@
             $scope.ViewReport = function(){
                 window.location.href = "reporting.php?campaignID=" + campaignID;
             };
+
+			$scope.LoadAudience = function() {     
+				
+				if (typeof $scope.campaign['filterSelected']  == 'undefined') {
+		   				$scope.filterList = [];
+				}else{
+						$scope.filterList = $scope.campaign['filterSelected'] ;	
+				} 
+				//$scope.filterList = ["f31711a4f8a49122046ed172246d83e2"]; 
+				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
+								$scope.masterAu  = response.data; 								
+								 if (typeof $scope.masterAu.items == 'undefined') {
+								   $scope.masterAu.items = [];
+								 } 
+								 $scope.audience  = angular.copy($scope.masterAu);	
+                                 /*
+								 $scope.states = []; 								 
+								 for (var i = 0; i < $scope.audience.items.length; i++) {
+										$scope.fItems = { 
+											id : $scope.audience.items[i].contactID, 
+											listname : $scope.audience.items[i]['LIST-NAME'] 
+										}; 										
+										$scope.states.push($scope.fItems);
+								 }*/
+								 //alert("states = "+$scope.states); 
+				},function(errResponse){				
+						if (errResponse.status == 404) {
+							alert("ERROR 404 [audienceLists]"); 
+						}
+				});
+            };			
+
 			$scope.Load();
 		});
 		function toDate(dateStr) {			
@@ -734,7 +772,12 @@
 
           return day + ' ' + monthNames[monthIndex] + ' ' + year;
         }
-
+        
+        function dbgClick(from){
+            if(from == 'Utils'){
+                window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
+            }
+        }
 
         
     </script>
