@@ -2,7 +2,7 @@
 /*
     backend.php
     param
-    cmd = publish/update
+    cmd = publish/update/getID
     acctID = accountID
     progID = programID
     mode = test
@@ -41,8 +41,10 @@ if (empty($_REQUEST['cmd']) or  empty($_REQUEST['acctID']) or empty($_REQUEST['p
 $acctID = $_REQUEST['acctID'];
 $progID = $_REQUEST['progID'];
 $cmd = $_REQUEST['cmd'];
+$mode = $_REQUEST['mode'];
 $dbName = getDatabaseName($acctID,"");
-if($cmd!="publish" and $cmd!="update"){
+$dateTimeNow = date('Y/m/d H:i:s');
+if($cmd!="publish" and $cmd!="update" and $cmd!="getID"){
     echo json_encode( 
         array(
             'success'=>false,
@@ -50,6 +52,29 @@ if($cmd!="publish" and $cmd!="update"){
         ));
     exit;
 }
+
+if($cmd=="getID"){
+    $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+    $publishMamlContent = file_get_contents($publishReturnFileName);
+    $xml = new DOMDocument();
+    $xml->loadXML($publishMamlContent);
+    $xpath = new DOMXpath($xml);
+    $node = $xpath->query("/Program")->item(0);
+    //$programNode = $xml->getElementsByTagName('Program')->item(0);
+    echo json_encode( 
+        array(
+            'success'=>true,
+            'cmd'=>$cmd,
+            'publishProgramID'=>$node->getAttribute('DbId'),       
+            //'tbody'=>print_r($programNode,true),                 
+            'date'=>$dateTimeNow,           
+            'publishMamlContent'=>$publishMamlContent,
+            //'publishProgramID'=>$programNode->getAttribute('DbId'),
+        ));
+    exit;
+}
+
+
 //Read config file
 //$configs = json_decode(file_get_contents("conf/template.conf"));
 $masterTemplate = couchDB_Get("/master/templates");
@@ -91,7 +116,12 @@ if($templateName == ""){
 $templateFileName = "maml/$templateName";
 $tmaml = file_get_contents($templateFileName);
 
+if($mode == "junk"){
+    $doc->campaignName = $doc->campaignName."_".$dateTimeNow;
+}
+
 //Render and upload to S3 if necessary
+
 $finishMAML = studio_url_render($tmaml,$acctID,$progID,$doc);
 $publishFileName = "publish/".$acctID."_".$progID.".maml";
 file_put_contents($publishFileName,$finishMAML);
@@ -106,10 +136,9 @@ if($cmd == "publish"){
                 'detail'=>$resp,
                 'templateFileName'=>$templateFileName,
                 'maml'=>$publishFileName,
+                'mode'=>$mode,
             ));
     }else{
-        $dateTimeNow = date('Y/m/d H:i:s');
-
         $param = array(
             "status"=>"publish",
             "publishDate"=>$dateTimeNow,
@@ -121,12 +150,20 @@ if($cmd == "publish"){
         
         //$docUpdate = couchDB_Update("$dbName/$progID","status","publish");
         $docUpdate = couchDB_UpdateEx("$dbName/$progID",$param);
+        
+        //convert byte array maml 
+        $returnMaml = implode(array_map("chr", $resp->Maml));
+        $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+        file_put_contents($publishReturnFileName,$returnMaml);
+        $resp->Maml = $returnMaml;
         echo json_encode( 
             array(
                 'success'=>true,
                 'message'=>"Publish Done",
-                'detail'=>$docCampaignList,
-                'detail2'=>$docUpdate,
+                'detail'=>$resp,
+                'detailCampaignList'=>$docCampaignList,
+                'detailDoc'=>$docUpdate,
+                //'returnMaml'=>$returnMaml,
             ));
     }
     

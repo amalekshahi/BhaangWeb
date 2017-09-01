@@ -1,4 +1,4 @@
-<Program Name="coatest082810" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+<Program Name="coatest090101" Version="1.0" DbId="0" CheckOutId="0" State="Start">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
@@ -151,7 +151,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="12" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule1</Subject>
             <Body />
-            <Start DateTime="08/28/2017 02:35:00 AM" />
+            <Start DateTime="08/31/2017 09:34:00 PM" />
           </Schedule>
         </Schedules>
         <Events>
@@ -173,7 +173,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="LastName" Operator="Equal" Value="atm2" /></Filter>	
+        <Filter CriteriaJoinOperator="(1|2)"><Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa" /><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com" /></Filter>	
         
 	
 	<HookedEvents TriggerFireContext="Current Visit" />
@@ -183,7 +183,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule1</Subject>
             <Body />
-            <Start DateTime="31 August 2017 02:35:00 AM" />
+            <Start DateTime="31 August 2017 09:35:00 PM" />
           </Schedule>
         </Schedules>
         <Events>
@@ -209,7 +209,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule1</Subject>
             <Body />
-            <Start DateTime="4 September 2017 02:35:00 AM" />
+            <Start DateTime="31 August 2017 09:36:00 PM" />
           </Schedule>
         </Schedules>
         <Events>
@@ -231,8 +231,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="15" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="390,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="MISSING-EMAIL-FILTER-JOINOPERATOR">
-          MISSING-EMAIL-FILTER-CRITERIAROW
+        <Filter CriteriaJoinOperator="(1|2)">
+          <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa" /><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com" />
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -240,8 +240,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="16" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="540,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="MISSING-EMAIL-FILTER-JOINOPERATOR">
-          MISSING-EMAIL-FILTER-CRITERIAROW
+        <Filter CriteriaJoinOperator="(1|2)">
+          <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa" /><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com" />
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -270,7 +270,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20105" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>OpenEmailAlert (Right Now)</Subject>
@@ -287,7 +287,116 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##firstname## ##lastname## just opened your email</Subject>
-              <HtmlContent>##OpenAlertContent##</HtmlContent>
+              <HtmlContent>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+&lt;head&gt;
+&lt;meta name="viewport" content="width=device-width" /&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+&lt;title&gt;Alerts e.g. approaching your limit&lt;/title&gt;
+
+
+&lt;style type="text/css"&gt;
+img {
+max-width: 100%;
+}
+body {
+-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;
+}
+body {
+background-color: #f6f6f6;
+}
+@media only screen and (max-width: 640px) {
+  body {
+    padding: 0 !important;
+  }
+  h1 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h2 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h3 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h4 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h1 {
+    font-size: 22px !important;
+  }
+  h2 {
+    font-size: 18px !important;
+  }
+  h3 {
+    font-size: 16px !important;
+  }
+  .container {
+    padding: 0 !important; width: 100% !important;
+  }
+  .content {
+    padding: 0 !important;
+  }
+  .content-wrap {
+    padding: 10px !important;
+  }
+  .invoice {
+    width: 100% !important;
+  }
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"&gt;
+
+&lt;table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"&gt;
+  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+    &lt;td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"&gt;&lt;/td&gt;
+		&lt;td class="container" width="600" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top"&gt;
+			&lt;div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;"&gt;
+				&lt;table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"&gt;
+				  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+				    &lt;td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #FF9F00; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top"&gt;
+								##firstname## ##lastname## just opened your email.&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+					  &lt;td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top"&gt;
+							&lt;table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+							  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;&lt;td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"&gt;
+										This person &lt;strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;opened your email &lt;/strong&gt; in the coatest090101 campaign.
+									&lt;/td&gt;
+								&lt;/tr&gt;
+								&lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;&lt;td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"&gt;
+										&lt;hr&gt;
+										&lt;p&gt;&lt;strong&gt;Who&lt;/strong&gt;: ##firstname## ##lastname##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Company&lt;/strong&gt;: ##company##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Title&lt;/strong&gt;: ##title##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;: ##email##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Phone&lt;/strong&gt;: ##phone## [cell: ##mobile##]&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Address&lt;/strong&gt;: ##address1##, ##city##, ##state##, ##zip##&lt;/p&gt;
+										&lt;hr&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+								&lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; margin: 0;"&gt;
+								  &lt;td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; vertical-align: top; margin: 0; padding: 0 0 0px; text-align:center" valign="top"&gt;
+										&lt;img src="https://s3-us-west-1.amazonaws.com/marketingmfi/Da+Vinci.png"&gt;&lt;p&gt;Don't want this alert anymore? Da Vinci understands. &lt;a href="http://www-link-to-notifications-settings-if-possible" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; color: #999; text-decoration: underline; margin: 0;"&gt;Change your notification settings&lt;/a&gt;.&lt;/p&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+						&lt;/td&gt;
+					&lt;/tr&gt;
+				&lt;/table&gt;
+			&lt;div class="footer" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"&gt;
+					&lt;table width="100%" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+					  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+					    &lt;td class="aligncenter content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 0px;" align="center" valign="top"&gt;MindFire @ 2601 Main Street, Suite 830, Irvine, CA 92614.  Call us anytime at: 1 877-560-3473&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;/td&gt;
+		&lt;td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"&gt;&lt;/td&gt;
+	&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;
+&lt;/html&gt;</HtmlContent>
               <TextContent />
             </Message>
           </Messages>
@@ -435,7 +544,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>ClickAlertLeadTrigger (Right Now)</Subject>
@@ -452,15 +561,124 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##firstname## ##lastname## just clicked a link in your email</Subject>
-              <HtmlContent>##ClickAlertContent##</HtmlContent>
+              <HtmlContent>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+&lt;head&gt;
+&lt;meta name="viewport" content="width=device-width" /&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+&lt;title&gt;Alerts e.g. approaching your limit&lt;/title&gt;
+
+
+&lt;style type="text/css"&gt;
+img {
+max-width: 100%;
+}
+body {
+-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;
+}
+body {
+background-color: #f6f6f6;
+}
+@media only screen and (max-width: 640px) {
+  body {
+    padding: 0 !important;
+  }
+  h1 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h2 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h3 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h4 {
+    font-weight: 800 !important; margin: 20px 0 5px !important;
+  }
+  h1 {
+    font-size: 22px !important;
+  }
+  h2 {
+    font-size: 18px !important;
+  }
+  h3 {
+    font-size: 16px !important;
+  }
+  .container {
+    padding: 0 !important; width: 100% !important;
+  }
+  .content {
+    padding: 0 !important;
+  }
+  .content-wrap {
+    padding: 10px !important;
+  }
+  .invoice {
+    width: 100% !important;
+  }
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"&gt;
+
+&lt;table class="body-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"&gt;
+  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+    &lt;td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"&gt;&lt;/td&gt;
+		&lt;td class="container" width="600" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top"&gt;
+			&lt;div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;"&gt;
+				&lt;table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"&gt;
+				  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+				    &lt;td class="alert alert-warning" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #FF9F00; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top"&gt;
+								##firstname## ##lastname## just clicked your email.&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+					  &lt;td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top"&gt;
+							&lt;table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+							  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;&lt;td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"&gt;
+										This person &lt;strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;clicked your email &lt;/strong&gt; in the coatest090101 campaign.
+									&lt;/td&gt;
+								&lt;/tr&gt;
+								&lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;&lt;td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top"&gt;
+										&lt;hr&gt;
+										&lt;p&gt;&lt;strong&gt;Who&lt;/strong&gt;: ##firstname## ##lastname##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Company&lt;/strong&gt;: ##company##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Title&lt;/strong&gt;: ##title##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;: ##email##&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Phone&lt;/strong&gt;: ##phone## [cell: ##mobile##]&lt;/p&gt;
+										&lt;p&gt;&lt;strong&gt;Address&lt;/strong&gt;: ##address1##, ##city##, ##state##, ##zip##&lt;/p&gt;
+										&lt;hr&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+								&lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; margin: 0;"&gt;
+								  &lt;td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; vertical-align: top; margin: 0; padding: 0 0 0px; text-align:center" valign="top"&gt;
+										&lt;img src="https://s3-us-west-1.amazonaws.com/marketingmfi/Da+Vinci.png"&gt;&lt;p&gt;Don't want this alert anymore? Da Vinci understands. &lt;a href="http://www-link-to-notifications-settings-if-possible" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; color: #999; text-decoration: underline; margin: 0;"&gt;Change your notification settings&lt;/a&gt;.&lt;/p&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+						&lt;/td&gt;
+					&lt;/tr&gt;
+				&lt;/table&gt;
+			&lt;div class="footer" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"&gt;
+					&lt;table width="100%" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+					  &lt;tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"&gt;
+					    &lt;td class="aligncenter content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 10px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 0px;" align="center" valign="top"&gt;MindFire @ 2601 Main Street, Suite 830, Irvine, CA 92614.  Call us anytime at: 1 877-560-3473&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;/td&gt;
+		&lt;td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"&gt;&lt;/td&gt;
+	&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;
+&lt;/html&gt;</HtmlContent>
               <TextContent />
             </Message>
           </Messages>
         </Properties>
       </CampaignElement>
       <CampaignElement Id="26" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="690,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="MISSING-EMAIL-FILTER-JOINOPERATOR">
-          MISSING-EMAIL-FILTER-CRITERIAROW
+        <Filter CriteriaJoinOperator="(1|2)">
+          <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa" /><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com" />
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -468,8 +686,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="27" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="840,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="MISSING-EMAIL-FILTER-JOINOPERATOR">
-          MISSING-EMAIL-FILTER-CRITERIAROW
+        <Filter CriteriaJoinOperator="(1|2)">
+          <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa" /><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com" />
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -477,8 +695,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="28" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="990,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="MISSING-EMAIL-FILTER-JOINOPERATOR">
-          MISSING-EMAIL-FILTER-CRITERIAROW
+        <Filter CriteriaJoinOperator="(1|2)">
+          <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa" /><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com" />
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -514,22 +732,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <ContentVariables>
         <ContentVariable Name="domainvar">MISSING-TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR</ContentVariable>
         <ContentVariable Name="unsubscribelink">MISSING-TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK</ContentVariable>
-        <ContentVariable Name="fromemail">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-24d4ea35fd91047acdc18b2746372cee-FROMEMAIL.html&quot;##</ContentVariable>
-        <ContentVariable Name="fromname">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-24d4ea35fd91047acdc18b2746372cee-FROMNAME.html&quot;##</ContentVariable>
-        <ContentVariable Name="email1content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-228-24d4ea35fd91047acdc18b2746372cee-EMAIL1CONTENT.html&quot;##</ContentVariable>
+        <ContentVariable Name="fromemail">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-cf53a689121856b5b0cba36e109bfb3c-FROMEMAIL.html&quot;##</ContentVariable>
+        <ContentVariable Name="fromname">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-cf53a689121856b5b0cba36e109bfb3c-FROMNAME.html&quot;##</ContentVariable>
+        <ContentVariable Name="email1content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-cf53a689121856b5b0cba36e109bfb3c-EMAIL1CONTENT.html&quot;##</ContentVariable>
         <ContentVariable Name="email2content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT</ContentVariable>
         <ContentVariable Name="email3content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT</ContentVariable>
         <ContentVariable Name="email4content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT</ContentVariable>
         <ContentVariable Name="email5content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT</ContentVariable>
         <ContentVariable Name="email6content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT</ContentVariable>
-        <ContentVariable Name="email1subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-24d4ea35fd91047acdc18b2746372cee-EMAIL1SUBJECT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email1subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-cf53a689121856b5b0cba36e109bfb3c-EMAIL1SUBJECT.html&quot;##</ContentVariable>
         <ContentVariable Name="email2subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT</ContentVariable>
         <ContentVariable Name="email3subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT</ContentVariable>
         <ContentVariable Name="email4subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT</ContentVariable>
         <ContentVariable Name="email5subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT</ContentVariable>
         <ContentVariable Name="email6subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT</ContentVariable>
-	<ContentVariable Name="ClickAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_clickalert.html"##</ContentVariable>
-	<ContentVariable Name="OpenAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_openalert.html"##</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>

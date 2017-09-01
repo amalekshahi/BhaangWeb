@@ -90,7 +90,7 @@
 																	<div class="fileinput fileinput-new input-group col-sm-6" data-provides="fileinput">
 																		<div class="form-control" data-trigger="fileinput">
 																			<i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span>
-																		</div><span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Upload your eBook</span> <span class="fileinput-exists">Change</span> <input name="..." type="file"></span> <a class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
+																		</div><span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Upload your eBook</span> <span class="fileinput-exists">Change</span> <input name="eBookFile" id="eBookFile" type="file"></span> <a class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
 																	</div>
 																	<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="campaign['URL-eBOOK-LOCATION']"><span class="help-block m-b-none">Something like http://www.yahoo.com/myeBook.pdf</span>
 																</div>
@@ -104,7 +104,7 @@
 													<div class="form-group">
 														<div class="col-sm-4 col-sm-offset-2">
 															<!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
-															<input name="programNameHash" type="hidden" value="{{programNameHash}}"><button class="btn btn-primary" ng-click="Save()"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button> <button class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
+															<input name="programNameHash" type="hidden" value="{{programNameHash}}"><button class="btn btn-primary" ng-click="uploadBeforeSave()"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button> <button class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -214,7 +214,7 @@
 
     <!-- Page-Level Scripts -->
 	<script src="js/jquery.md5.js"></script>
-    <script>
+	<script>
 		var action = '';
 		var campaignName = getParameterByName("campaign_name");
 		var campaignID = getParameterByName("campaign_id");
@@ -266,17 +266,43 @@
                 Save:"Save",
                 Publish:"Launch Program",
             };
+			$scope.uploadBeforeSave = function () {
+				var file = $('#eBookFile').prop('files')[0];
+				$scope.state['Save'] = "Saving";
+				Upload.upload({
+					url: 'upload.php',
+					method: 'POST',
+					file:file,
+					data: {
+						file:file, 
+						's3':'true',
+						'fileName':'URL-eBOOK-FILE',
+						'acctID':accountID,
+						'progID':'programID',
+					}
+				}).then(function (resp) {
+					console.log('Success ' + resp.config.data.file.name + 'uploaded');
+					console.log(resp.data);
+					$scope.campaign['URL-eBOOK-LOCATION'] = resp.data.imgSrc;
+					$scope.Save();
+				}, function (resp) {
+					console.log('Error status: ' + resp.status);
+				}, function (evt) {
+					var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+				});
+			};
 			$scope.Save = function(mode,silence) {
                 $scope.state['Save'] = "Saving";
 				//alert(mode);
 				$("body").css("cursor", "progress");
 				if (mode == 'Email') {
-					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templates[$scope.tpIndex()].contentRaw;
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
 					$scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
 				}
 				if (mode == 'Email2') {
-					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tp2Index()].contentRaw;
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tpsIndex('2')].contentRaw;
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
 					$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
 				}
@@ -363,6 +389,7 @@
 					action = 'editCampaign';
 					$scope.master  = response.data;
 					$scope.campaign  = angular.copy($scope.master);
+					$scope.openEmail1 = true;
 					$scope.setInitValue();
 					$scope.setDisplay();
 					$scope.LoadAudience(); 
@@ -370,8 +397,8 @@
                 },function(errResponse){
 					if (errResponse.status == 404) {
 						action = 'newCampaign';
-						//$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteEbook","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","EMAIL1-SCHEDULE1-DATE":"","EMAIL1-SCHEDULE1-TIME":"","EMAIL2-SCHEDULE1-TIME":"","EMAIL3-SCHEDULE1-TIME":"","EMAIL2-WAIT":"","EMAIL3-WAIT":"","EMAIL1-SCHEDULE1-DATETIME":"","EMAIL2-SCHEDULE1-DATETIME":"","EMAIL3-SCHEDULE1-DATETIME":"","EMAIL1-SCHEDULE1-TIMEZONE":"","EMAIL2-SCHEDULE1-TIMEZONE":"","EMAIL3-SCHEDULE1-TIMEZONE":""};
-						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteEbook","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","filterSelected":[]};
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"2","publishProgramName":"","publishDate":"","filterSelected":[]};
+						$scope.openEmail1 = true;
 						$scope.setInitValue();
 						$scope.setDisplay();
                         $scope.LoadAudience(); 
@@ -383,11 +410,11 @@
 				
             };
 			$scope.setInitValue = function(){
-				$scope.initEmailTemplate();
+				$scope.initTemplateEmail('1');
 				$scope.initSender();
 			};
-			$scope.initEmailTemplate = function(){
-				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign").then(function(response) {
+			/*$scope.initEmailTemplate = function(){
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign").then(function(response) {
 					$scope.templates  = response.data.templates; 
 					$scope.config = response.data.config; 
 					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
@@ -396,24 +423,16 @@
 					$scope.sendersChanged('textSender1');
 					startEditable('1');
 				});
-			};
-			/*
-			$scope.initTemplateEmail2 = function(){
-				if ($scope.openEmail2) {
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=2").then(function(response) {
-						$scope.templatesAs2  = response.data.templates; 
-						$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
-						$scope.SelectChanged('viewEmail2','templateEmail2');
-						$scope.sendersChanged('textSender2');
-						startEditable('2');
-					});
-				}
-			};
-			*/
+			};*/
 			$scope.initTemplateEmail = function(emlID){
-				if ($scope['openEmail'+emlID]) {
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as="+emlID).then(function(response) {
+				if ($scope['openEmail'+emlID] || emlID=='1') { //Email #1 always open.
+					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+emlID).then(function(response) {
 						$scope['templatesAs'+emlID]  = response.data.templates; 
+						if (emlID == '1')
+						{
+							$scope.config = response.data.config; 
+							$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+						}
 						$("#subjectEmail"+emlID).text($scope.campaign['EMAIL'+emlID+'-SUBJECT']);
 						$scope.SelectChanged('viewEmail'+emlID,'templateEmail'+emlID);
 						$scope.sendersChanged('textSender'+emlID);
@@ -423,31 +442,23 @@
 			};
 			$scope.initSender = function(){
 				$scope.senders = [];
+				$scope.senders.push({"email" : "boonsom@mindfireinc.com","name" : "Boonsom Coa" });
+                $scope.senders.push({"email" : "kdutta@mindfireinc.com","name" : "Kushal Dutta" });
 				$scope.senders.push({"email" : "daver@mindfireinc.com","name" : "David Rosendahl"});
-				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});
+				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});                
 			};
 			$scope.setDisplay = function(){
 				$scope.openEmail2 = false;
 				$scope.openEmail3 = false;
-				/*if ($scope.campaign['URL-BLOG-POST-URL']===undefined || $scope.campaign['URL-BLOG-POST-URL']=='') {
-					$scope.step1Done = false;
-				} else {
-					$scope.step1Done = true;
-				}
-				if ($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']===undefined || $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']=='') {
-					$scope.step2Done = false;
-				} else {
-					$scope.step2Done = true;
-				}*/
-                $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
-                $scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM");
-                $scope.step4Done = $scope.step3Done;
+                $scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
+                $scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
+                $scope.step4Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM");
+                $scope.step5Done = $scope.step4Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
 				} else {
 					var emailDone = '0';
-					if ($scope.step2Done) {
+					if ($scope.step3Done) {
 						emailDone = '1';
 						if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])) {
 							emailDone = '2';
@@ -458,7 +469,7 @@
 							$scope.openEmail3 = true;
 						}
 					}
-					$scope.emailProgress = emailDone+' of 3 emails ready';
+					$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' emails ready';
 				}
 
 				
@@ -513,7 +524,7 @@
 						}
 					}
 				}
-				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as="+tar).then(function(response) {
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+tar).then(function(response) {
 					$scope['templatesAs'+tar]  = response.data.templates; 
 					$scope.config = response.data.config;
 					$("#subjectEmail"+tar).text($scope.campaign['EMAIL'+tar+'-SUBJECT']);
@@ -531,7 +542,7 @@
 				  } 
 				}
             };
-			$scope.tpIndex = function() {
+			/*$scope.tpIndex = function() {
 				var tplist = 	$scope.templates;
 				for(var i=0;i < tplist.length; i++){
 				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
@@ -539,7 +550,7 @@
 					return i;
 				  } 
 				}
-            };
+            };*/
 			$scope.tpsIndex = function(emlID) {
 				var tplist = 	$scope['templatesAs'+emlID];
 				for(var i=0;i < tplist.length; i++){
@@ -549,7 +560,7 @@
 				  } 
 				}
             };
-			$scope.tp2Index = function() {
+			/*$scope.tp2Index = function() {
 				var tplist = 	$scope.templatesAs2;
 				for(var i=0;i < tplist.length; i++){
 				  if (tplist[i]["content"] == $scope.campaign.templateEmail2)
@@ -557,7 +568,7 @@
 					return i;
 				  } 
 				}
-            };
+            };*/
 			$scope.sdIndex = function() {
 				var sdlist = 	$scope.senders;
 				for(var i=0;i < sdlist.length; i++){
@@ -568,7 +579,7 @@
 				}
             };
             $scope.CanPublish = function() {
-                return $scope.step1Done==true && $scope.step2Done==true && $scope.step3Done==true && $scope.step4Done==true ;
+                return $scope.step1Done==true && $scope.step2Done==true && $scope.step3Done==true && $scope.step4Done==true && $scope.step5Done==true ;
             };
             $scope.Publish = function() {
                 //alert("Do publish here");
@@ -609,15 +620,17 @@
             };
             //Kwang uiSwitch change
             $scope.SwitchChange = function(){
-                $scope.campaign['OPEN-MY-EMAIL'] = MapTrueFalse($scope.campaign['OPEN-MY-EMAIL-'],"Start","Stop");
-                $scope.campaign['VISIT-MY-EMAIL'] = MapTrueFalse($scope.campaign['VISIT-MY-EMAIL-'],"Start","Stop");
+                $scope.campaign['OPEN-MY-EMAIL'] = MapTrueFalse($scope.campaign['OPEN-MY-EMAIL-'],"Start","Stop");                
                 $scope.campaign['CALL-TO-ACTION'] = MapTrueFalse($scope.campaign['CALL-TO-ACTION-'],"Start","Stop");
+				$scope.campaign['VISIT-MY-BLOCK'] = MapTrueFalse($scope.campaign['VISIT-MY-BLOCK-'],"Start","Stop");
                 $scope.Save("",true);   //silence save
                 //alert('SwitchChange');
             };
             
             $scope.ViewReport = function(){
-                window.location.href = "reporting.php?campaignID=" + campaignID;
+                //window.location.href = "reporting.php?campaignID=" + campaignID;
+                window.open("reporting.php?campaignID=" + campaignID);
+
             };
 
 			$scope.LoadAudience = function() {     
@@ -627,23 +640,12 @@
 				}else{
 						$scope.filterList = $scope.campaign['filterSelected'] ;	
 				} 
-				//$scope.filterList = ["f31711a4f8a49122046ed172246d83e2"]; 
 				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 								$scope.masterAu  = response.data; 								
 								 if (typeof $scope.masterAu.items == 'undefined') {
 								   $scope.masterAu.items = [];
 								 } 
 								 $scope.audience  = angular.copy($scope.masterAu);	
-                                 /*
-								 $scope.states = []; 								 
-								 for (var i = 0; i < $scope.audience.items.length; i++) {
-										$scope.fItems = { 
-											id : $scope.audience.items[i].contactID, 
-											listname : $scope.audience.items[i]['LIST-NAME'] 
-										}; 										
-										$scope.states.push($scope.fItems);
-								 }*/
-								 //alert("states = "+$scope.states); 
 				},function(errResponse){				
 						if (errResponse.status == 404) {
 							alert("ERROR 404 [audienceLists]"); 
@@ -741,14 +743,7 @@
 
           return day + ' ' + monthNames[monthIndex] + ' ' + year;
         }
-        
-        function dbgClick(from){
-            if(from == 'Utils'){
-                window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
-            }
-        }
-
-        
+                
     </script>
 
 </body>

@@ -28,15 +28,23 @@
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="backend">
-        <md-content md-theme="docs-dark" layout="column" class1="md-padding">          
-            <md-content md-theme="docs-dark" layout="row" layout-padding>            
+        <md-content md-theme="docs-dark" layout="column" class="md-padding">          
+            <md-content md-theme="docs-dark" layout="row" layout-padding>    
                 <md-input-container>
                     <label>cmd</label>
-                    <input ng-model="backend.cmd" placeholder="publish/update">
-                </md-input-container>
+                    <md-select ng-model="backend.cmd">
+                        <md-option value="publish">publish</md-option>
+                        <md-option value="update">update</md-option>
+                        <md-option value="getID">getID</md-option>
+                    </md-select>
+                </md-input-container>  
                 <md-input-container>
                     <label>mode</label>
-                    <input ng-model="backend.mode" placeholder="[test]">
+                    <!--<input ng-model="backend.mode" placeholder="[test]">-->
+                    <md-select ng-model="backend.mode">
+                        <md-option value="">--not set--</md-option>
+                        <md-option value="junk">junk</md-option>
+                    </md-select>
                 </md-input-container>  
                 <md-input-container>
                     <label>acctID</label>
@@ -44,21 +52,23 @@
                 </md-input-container>  
                 <md-input-container>
                     <label>progID</label>
-                    <input ng-model="backend.progID" placeholder="4e98af380d523688c0504e98af3">
+                    <input ng-model="backend.progID" placeholder="b81fc4f3c0f9a7cd2856dc97c3b42373">
+                </md-input-container>  
+                <md-input-container>
+                    <button ng-click="backendClick()">submit</button>
                 </md-input-container>  
             </md-content>                  
-            <md-input-container>
-                <button ng-click="backendClick()">submit</button>
-            </md-input-container>  
+            
         </md-content>  
+        <div ng-if="backend.data" ng-jsoneditor="onLoad" ng-model="backend.data" options="backend.options" style="width: 98%;"></div>
       </md-tab label>        
-      <!--
-      <md-tab label="two">
+      <md-tab label="CheckOut">
         <md-content class="md-padding">
           <h1 class="md-display-1">Tab tow</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
         </md-content>  
       </md-tab label>        
+      <!--
       <md-tab label="three">
         <md-content class="md-padding">
           <h1 class="md-display-1">Tab three</h1>
@@ -69,148 +79,43 @@
   <md-content>
 </div>  
 {{result}}
-<div ng-if="obj.data" ng-jsoneditor="onLoad" ng-model="obj.data" options="obj.options" style="width: 98%;"></div>
+
 </div>
 <script>
   var myApp = angular.module('myApp', ['ngMaterial','ng.jsoneditor']);
   myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
-        $scope.obj = {options: {mode: 'tree'}};
-        $scope.backendClick = function(){
-            console.log('backendClick');
+        $scope.backend = {
+            cmd:"publish",
+            acctID:"228",
+            progID:"24d4ea35fd91047acdc18b2746372cee",
+            options: {mode: 'tree'},
         };
-            
-          $scope.Load = function() {
-            $scope.count++;
-            $http.get("/couchdb/" + data.username +'/userinfo' + "?"+new Date().toString()).then(function(response) {
-                $scope.master  = response.data; 
-                if (typeof $scope.master.items == 'undefined') {
-                    $scope.master.items = [];
-                } 
-                $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=userinfo").then(function(response) {
-                    $scope.templates  = response.data.templates; 
-                    $scope.config = response.data.config;
-                    $scope.Reset();
-                });
-
+        $scope.backendClick = function(){
+            $scope.backend.data = {};
+            $http.get("backend.php",
+                {
+                  method: "POST",
+                  params: {
+                    cmd: $scope.backend.cmd,
+                    acctID: $scope.backend.acctID,
+                    progID: $scope.backend.progID,
+                    mode: $scope.backend.mode,
+                  }  
+                }
+            ).then(function(response) {
+                  $scope.backend.data = response.data;
+                  console.log($scope.backend.response);
             });
-          };
-          $scope.Save = function() {
-
-            $http.put('/couchdb/' + data.username +'/userinfo', $scope.userinfo).then(function(response){
-                  $scope.data = response.data;                  
-            });         
-          };
-          $scope.AddNew = function(){
-              $scope.userinfo.items.push({"id":"empty","name":"empty","value":"empty","value2":"empty"});
-          };
-          $scope.IsNew = function(item){
-              return false;
-          };
-          
-          $scope.Login = function(){
-              $http.get("/admin/loginOriginal.php",
-                {
-                  method: "GET",
-                  params: {
-                    email: $scope.login.userName,
-                    pwd: $scope.login.passWord,
-                    account: 228,
-                  }  
-                }
-              ).then(function(response) {
-                  $scope.login.response = JSON.parse(clearCallBack(response.data));
-                  //alert("OK: " + response.statusText);
-                  $scope.login.mps = [];
-                  var mps = $scope.login.response.mps;
-                  for(var i=0;i < mps.length; i++){
-                      $scope.login.mps.push({"id":mps[i][1],"name":mps[i][1]}); 
-                  } 
-              },function(response){
-                  alert("ERROR: " + response.statusText);
-              });
-          };
-          
-          $scope.Login2 = function(){
-              //alert($scope.login.mpsSelect);
-              alert($scope.mpsSelect);
-              $http.get("/admin/loginOriginal.php",
-                {
-                  method: "GET",
-                  params: {
-                    mode: "login",
-                    email: $scope.login.userName,
-                    pwd: $scope.login.passWord,
-                    account: $scope.mpsSelect,
-                  }  
-                }
-              ).then(function(response) {
-                  $scope.login.response = JSON.parse(clearCallBack(response.data));
-                  alert("OK: " + $scope.login.response.success);
-              });
-          };
-          
-          $scope.Submit = function(){
-            alert('submit');
-          };
-          
-            $scope.upload = function (file,propname) {
-                console.log(propname);
-                Upload.upload({
-                    url: 'upload.php',
-                    method: 'POST',
-                    file:file,
-                    data: {
-                        file:file, 
-                        's3':'true',
-                        'fileName':propname,
-                        'acctID':'accountID',
-                        'progID':'programID',
-                    }
-                }).then(function (resp) {
-                    console.log('Success ' + resp.config.data.file.name + 'uploaded');
-                    console.log(resp.data);
-                    $scope.userinfo[propname] = resp.data.imgSrc;
-                }, function (resp) {
-                    console.log('Error status: ' + resp.status);
-                }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                });
-            };
-            
-            $scope.upload2 = function (file,propname,$event) {
-                console.log(propname);
-                Upload.upload({
-                    url: 'upload.php',
-                    method: 'POST',
-                    file:file,
-                    data: {
-                        file:file, 
-                        's3':'true',
-                        'fileName':propname,
-                        'acctID':'accountID',
-                        'progID':'programID',
-                    }
-                }).then(function (resp) {
-                    console.log('Success ' + resp.config.data.file.name + 'uploaded');
-                    console.log(resp.data);
-                    $scope.userinfo[propname] = resp.data.imgSrc;
-                }, function (resp) {
-                    console.log('Error status: ' + resp.status);
-                }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                });
-            };              
-            
-            $scope.SelectChanged = function(){
-                $scope.content = angular.copy($scope.selectedTemplate);
-                $("#myDiv").html($scope.content);
-                angular.element(document).injector().invoke(function($compile) {
-                    var scope = angular.element($("#myDiv")).scope();
-                    $compile($("#myDiv"))(scope);
-                });
-            };                
+        };
+        
+        $scope.SelectChanged = function(){
+            $scope.content = angular.copy($scope.selectedTemplate);
+            $("#myDiv").html($scope.content);
+            angular.element(document).injector().invoke(function($compile) {
+                var scope = angular.element($("#myDiv")).scope();
+                $compile($("#myDiv"))(scope);
+            });
+        };                
   }]);
 </script>
 </body>
