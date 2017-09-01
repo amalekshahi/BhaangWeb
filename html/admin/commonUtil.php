@@ -518,7 +518,8 @@ function endsWith($haystack, $needle)
 }
 
 function getStudioTicket() { 
-    return getTicket($_SESSION['ACCOUNTID'], $_SESSION['EMAIL'],$_SESSION['PWD']);
+    //return getTicket($_SESSION['ACCOUNTID'], $_SESSION['EMAIL'],$_SESSION['PWD']);
+	return getTicket($_SESSION['ACCOUNTID'], $_SESSION['EMAIL'],$_SESSION['PWD'], $_SESSION['PARTNERGUID'], $_SESSION['PARTNERPASSWORD']);
 }
 
 

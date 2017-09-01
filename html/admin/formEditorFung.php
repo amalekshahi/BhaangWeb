@@ -18,7 +18,7 @@
 
 
 <body>
-<div ng-controller="myCtrl">
+<div ng-controller="myCtrl" id="myCtrl">
 	<div id="wrapper">
 	  <nav class="navbar-default navbar-static-side" role="navigation">
 			<div class="sidebar-collapse">
@@ -74,7 +74,7 @@
 			</div>
 			<div class="mail-box-header">
     			<div class="pull-right tooltip-demo">
-    			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail"><i class="fa fa-floppy-o"></i> Save Form</button>
+    			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
     			</div>
 				<!-- <select ng-model="selectedForm" ng-change="SelectChanged({{x.formName}})" ng-options = "x['formName'] for x in deflist.items">
 				<option value=""></option>
@@ -83,7 +83,7 @@
 					<option ng-repeat="x in deflist.items" value="{{x.formName}}" selected={{x.formSelected}}>{{x.formName}}</option>					
 				</select>
 				</h3>
-				<div class="alerttest" style="color:red;"></div>
+				<!-- <div class="alerttest" style="color:red;"></div> -->
 			</div>	
 
 			<div class="wrapper wrapper-content animated fadeInRight">
@@ -193,31 +193,27 @@
 						<div class="ibox">
 							<div class="ibox-content">
 								<h3>Preview & Edit Labels & Text</h3>
-								<div class="well">
+								
+								<div class="well" id="selectedFromHTML">
+												<style type="text/css">.input-sm{ border: 1px solid #ccc;}</style>
 												<form action="/send?a=download" id="rzForm" method="post" name="rzForm" novalidate="">
-													<fieldset>
-													<style type="text/css">
-														.input-sm{ border: 1px solid #ccc;
-														}
-													</style>
-														<div><p class="lead">Download your eBook:</p></div>
-														<div id="summer">															
-															<div class="form-group">
-																<label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">Email <span style="color:red;">&#42;</span></label></textarea></div> <input class="form-control input-sm" name="email" required="" type="text" value="">
+													<fieldset>													
+															<div><p class="lead">Download your eBook:</p></div>
+															<div id="summer">
+																<div class="form-group">
+																	<label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">Email <span style="color:red;">&#42;</span></label></textarea></div> <input class="form-control input-sm" name="email" required="" type="text" value="">
+																</div>
+																<div class="form-group">
+																	<label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">First Name <span style="color:red;">&#42;</span></label></textarea></div> <input class="form-control input-sm" name="firstname" required="" type="text" value="">
+																</div>
+															</div><!-- end summer bind -->
+															<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button>
+															<div>
+																<p class="rz-required-note" style="text-align: right;"><i><div>* Indicates a required field.<br>
+																Answer all required fields to activate the button.</div></i></p>
 															</div>
-															<div class="form-group">
-																<label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">First Name <span style="color:red;">&#42;</span></label></textarea></div> <input class="form-control input-sm" name="firstname" required="" type="text" value="">
-															</div>
-														
-														</div>
-														<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button>
-														<!-- <div>
-															<p class="rz-required-note" style="text-align: right;"><i><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">* Indicates a required field.<br>
-															Answer all required fields to activate the button.</textarea></div></i></p>
-														</div> -->
 													</fieldset>
-												</form>										
-
+												</form>	
 								</div>
 							</div>
 						</div>
@@ -231,8 +227,8 @@
 						<h4>Serialized Output</h4>
 						<p>Here are the sortable fields in a string array:</p>
 						<div class="output p-m m white-bg"></div>
-						<div class="outputhtml p-m m white-bg"></div>
-						<div class="outputhtml2 p-m m white-bg"></div>
+						<!-- <div class="outputhtml p-m m white-bg"></div>
+						<div class="outputhtml2 p-m m white-bg"></div> -->
 					</div>
 				</div>
 			</div>
@@ -296,20 +292,18 @@
 						  airMode: true,
 						  popover: {}
 						});				
-
+						var tempArr = []; 
 						for(i=0;i<form_fields.length;i++){
 							var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
+							var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
+							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
+							//add array
+							tempArr.push({"fileID":form_fields[i], "label": flabel,"required": frequire,"prepropulated": fprefill,"fieldType": "textbox" }); 
+
 							$('.summernote').eq(i).summernote('code',flabel+' <span style="color:red;">&#42;</span>'); 
-						}
-	                   //$('.outputhtml').html(" 1 =  "+$('#form_fields li').eq(0).html() );
-					   /*
-  					   var theHtml = eval( $('#'+form_fields[0]+' li').text() ) ; 
- 					   var theHtml2 = $('#lastname li').html() ; 
-					   */ 
-	                   $('.output').html(" form_fields = "+form_fields);
-
-					   
-
+						}//end for i
+						angular.element(document.getElementById('myCtrl')).scope().myCopyItem('fieldLists',tempArr);
+	                    $('.output').html(" form_fields = "+form_fields);
 	               }
 	           }).disableSelection();			 
 //			  alert( $('.summernote').eq(1).summernote('code') ); 
@@ -322,14 +316,25 @@ var defIndx = -1;
 var dbName = "<?php echo $dbName; ?>";
 var myApp = angular.module('myApp',  ['summernote',"ngFileUpload"]);
 myApp.controller('myCtrl',function($scope,$http) {
-			$scope.Reset = function() {
-                  
-            };
 			
-			$scope.LoadStart = function() {
-				$scope.LoadSelect(); 
-				$scope.LoadDefault(); 				
+			$scope.SaveForm = function() {
+                  //alert($('#selectedFromHTML').html()); 
+				  var txt = $('#selectedFromHTML').html(); 
+//				  txt = "html xxxx"; 
+				  $scope.myCopyItem('formHTML',txt);
+				  $http.put('/couchdb/' + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
+						 $scope.LoadSelect(); 
+						 alert("Save success");
+//						 $scope.state['Save'] = "Save";
+					});         
             };
+
+			$scope.myCopyItem = function (ItemName,data) {
+				if(indx != -1)
+					$scope.frmlist.items[indx][ItemName] = data; 
+				else
+					$scope.selectItem[ItemName] = data; 
+			};
 			
 			$scope.LoadSelect = function() {                
 				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
@@ -376,6 +381,15 @@ myApp.controller('myCtrl',function($scope,$http) {
 				$('.alerttest').html(" formtype = "+ftype);
             };
 
+			$scope.LoadStart = function() {
+				$scope.LoadSelect(); 
+				$scope.LoadDefault(); 				
+            };
+			
+			$scope.Reset = function() {
+                  
+            };
+			
 			$scope.LoadStart();
 });
 

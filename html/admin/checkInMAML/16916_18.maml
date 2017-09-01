@@ -1,0 +1,46 @@
+<Program Name="testCheckin" Version="1.0" DbId="18" CheckOutId="29" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+  <Campaign Name="New Campaign" Version="1.0" Id="1" DbId="18" CheckOutId="0" State="Start" Permissions="">
+    <CampaignElements>
+      <CampaignElement Id="1" DbId="138" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email" Position="190,210" SharedCheckout="False" Permissions="">
+        <Events />
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>Your name here</FromName>
+              <FromAddress>tt994613@gmail.com</FromAddress>
+              <ReplyTo>tt994613@gmail.com</ReplyTo>
+              <Subject>Subject line here</Subject>
+              <HtmlContent>&lt;b&gt;Hi ##firstname##, this is your HTML email.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;
+
+Company's physical email address and unsubscribe link must be included for CAN-SPAM compliance.&lt;br/&gt;&lt;br/&gt;
+
+COMPANY NAME | ADDRESS | CITY, STATE ZIP &lt;br/&gt;&lt;br/&gt;
+
+Click here to &lt;a href="##Unsubscribe RedirectURL="http://studio.m.mdl.io/unsubscribe" ##"&gt;unsubscribe&lt;/a&gt;.
+
+</HtmlContent>
+              <TextContent>Hi ##firstname##, this is the text email.
+
+Company's physical email address and unsubscribe link must be included for CAN-SPAM compliance.
+
+COMPANY NAME | ADDRESS | CITY, STATE ZIP
+
+To unsubscribe, visit ##Unsubscribe RedirectURL="http://www.yourdomain.com"##
+
+1504167079&lt;br/&gt;aaaaaaaaaa&lt;br/&gt;</TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="2" DbId="93" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ContactList" Position="189,47" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
+    </CampaignElements>
+    <CampaignConnections>
+      <CampaignConnection StartElementId="2" EndElementId="1" />
+    </CampaignConnections>
+  </Campaign>
+  <RuleGroupSet />
+</Program>

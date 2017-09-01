@@ -11,11 +11,10 @@
 </head>
 <body class="">
     <style>
-        .hideBlueprint {
-            opacity: 0.25;
-        };
+        .blueprintHide {
+            opacity:0.25;
+        }
     </style>
-    
     <div id="wrapper">
 	<!-- left wrapper -->
 	<div w3-include-html="leftWrapper.php"></div>
@@ -76,7 +75,7 @@
                                 								</div>
                                 								<div>
 
-                                									<button class="btn btn-lg btn-primary" type="submit" name="action" value="newCampaign"><strong>Got it.  Let's Go!</strong></button>
+                                									<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
                                 								</div>
                                 							</form>
                                 						</div>
@@ -96,7 +95,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+
+				<div class="col-md-3">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
@@ -107,8 +107,6 @@
                                 </span>
                                 <small class="text-muted">Average # of Downloads: 323</small>
                                 <a href="#" class="product-name"> Promote an eBook</a>
-
-
 
                                 <div class="small m-t-xs">
                                     The Great Gatsby doesn't stand a chance against your latest eBook.  Drive downloads and leads now!.
@@ -126,14 +124,14 @@
                                 						<div class="col-sm-6 b-r">
                                 							<h3 class="m-t-none m-b">Let's Get Started!</h3>
                                 							<p>Start by naming your campaign.</p>
-                                							<form role="form" method="post" action="dv.php?page=PAEB_homepage&action=startCampaign&blueprint=PAEB">
+                                							<form role="form" method="get" action="editPromoteEbook.php">
                                 								<div class="form-group">
                                 									<!--<label>Name</label>--> <input class="form-control" placeholder="My fancy first campaign" type="input" name="campaign_name">
                                 									<span class="help-block m-b-none">A good campaign name helps you easily identify the campaigns you've created in your Dashboard.</span>
                                 								</div>
                                 								<div>
 
-                                									<button class="btn btn-lg btn-primary" type="submit" name="action" value="startCampaign"><strong>Got it.  Let's Go!</strong></button>
+                                									<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
                                 								</div>
                                 							</form>
                                 						</div>
@@ -152,8 +150,8 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-3 hideBlueprint">
+
+                <div class="col-md-3 blueprintHide">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
@@ -178,7 +176,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 hideBlueprint">
+                <div class="col-md-3 blueprintHide">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
@@ -205,7 +203,7 @@
                 </div>
             </div>
             <div class="row">
-                 <div class="col-md-3 hideBlueprint">
+                <div class="col-md-3 blueprintHide">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
@@ -230,8 +228,7 @@
                         </div>
                     </div>
                 </div>
-            
-                 <div class="col-md-3 hideBlueprint">
+                <div class="col-md-3 blueprintHide">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
@@ -256,7 +253,7 @@
                         </div>
                     </div>
                 </div>
-                 <div class="col-md-3 hideBlueprint">
+                <div class="col-md-3 blueprintHide">
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
@@ -282,7 +279,7 @@
                     </div>
                 </div>
 
-				 <div class="col-md-3 hideBlueprint">
+				<!-- <div class="col-md-3">
                     <div class="ibox">
                         <div class="ibox-content product-box">
                             <img src="http://www.solostream.com/wp-content/uploads/2016/08/wordpress-custom-post-types.jpg" class="img-responsive"/>
@@ -300,7 +297,6 @@
                                 </div>
                                 <div class="m-t text-righ">
 
-                                    <!--<a href="dv.php?page=createCampaign" class="btn btn-xs btn-outline btn-primary">Launch <i class="fa fa-long-arrow-right"></i> </a>-->
                                     <a data-toggle="modal" class="btn btn-xs btn-outline btn-primary" href="#modal-emkform">Launch <i class="fa fa-long-arrow-right"> </i></a> 
                                 </div>
                                 
@@ -314,12 +310,12 @@
                                 							<p>Starting by naming your campaign.</p>
                                 							<form role="form" method="get" action="editEmailMarketing.html">
                                 								<div class="form-group">
-                                									<!--<label>Name</label>--> <input class="form-control" placeholder="My fancy first campaign" type="input" name="campaign_name">
+                                									<input class="form-control" placeholder="My fancy first campaign" type="input" name="campaign_name">
 																	<span class="help-block m-b-none">A good campaign name helps you easily identify the campaigns you've created in your Dashboard.</span>
                                 								</div>
                                 								<div>
 
-                                									<button class="btn btn-lg btn-primary" type="submit" name="action" value="newCampaign"><strong>Got it.  Let's Go!</strong></button>
+                                									<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
                                 								</div>
                                 							</form>
                                 						</div>
@@ -339,7 +335,7 @@
                         </div>
                     </div>
                 </div>
-                <!--
+
 				<div class="col-md-3">
                     <div class="ibox">
                         <div class="ibox-content product-box">
@@ -357,6 +353,7 @@
                                     New piece of great content?  Don't let it gather dust.  Promote the b*tch and drive some leads in the process.
                                 </div>
                                 <div class="m-t text-righ">
+
                                     <a data-toggle="modal" class="btn btn-xs btn-outline btn-primary" href="#modal-enewsform">Launch <i class="fa fa-long-arrow-right"> </i></a> 
                                 </div>
                                 
@@ -375,7 +372,7 @@
                                 								</div>
                                 								<div>
 
-                                									<button class="btn btn-lg btn-primary" type="submit" name="action" value="newCampaign"><strong>Got it.  Let's Go!</strong></button>
+                                									<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
                                 								</div>
                                 							</form>
                                 						</div>
@@ -394,8 +391,7 @@
                             </div>
                         </div>
                     </div>
-                </div>-->
-                
+                </div> -->
 
             </div>
         </div>

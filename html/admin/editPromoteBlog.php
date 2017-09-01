@@ -74,7 +74,7 @@
 													<span class="badge" ng-show="!step1Done">1</span>
 													<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done""></i>
 													&nbsp;Identify the Targeted Blog Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-BLOG-POST-URL']}}</small>
+													<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-BLOG-POST-URL']}}?{{campaign['URL-BLOG-POST-UTM']}}</small>
 												</a></h4>
 											</div>
 											<div class="panel-collapse collapse" id="collapseOne">
@@ -85,6 +85,12 @@
 																<label class="col-sm-2 control-label">Blog Post URL</label>
 																<div class="col-sm-10">
 																	<input class="form-control" name="URL-BLOG-POST-URL" placeholder="http://www.you-blog-post.com/page.html" type="text" ng-model="campaign['URL-BLOG-POST-URL']"><span class="help-block m-b-none">Enter the URL to the post you wish to promote. We'll use this link in your emails.</span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-2 control-label">UTM String</label>
+																<div class="col-sm-10">
+																	<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">Enter the UTM to the post you wish to promote. We'll use it in your emails.</span>
 																</div>
 															</div>
 															<div class="hr-line-dashed"></div>
@@ -284,12 +290,12 @@
 				//alert(mode);
 				$("body").css("cursor", "progress");
 				if (mode == 'Email') {
-					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templates[$scope.tpIndex()].contentRaw;
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
 					$scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
 				}
 				if (mode == 'Email2') {
-					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tp2Index()].contentRaw;
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tpsIndex('2')].contentRaw;
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
 					$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
 				}
@@ -376,6 +382,7 @@
 					action = 'editCampaign';
 					$scope.master  = response.data;
 					$scope.campaign  = angular.copy($scope.master);
+					$scope.openEmail1 = true; //Email #1 always open.
 					$scope.setInitValue();
 					$scope.setDisplay();
 					$scope.LoadAudience(); 
@@ -383,8 +390,8 @@
                 },function(errResponse){
 					if (errResponse.status == 404) {
 						action = 'newCampaign';
-						//$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","EMAIL1-SCHEDULE1-DATE":"","EMAIL1-SCHEDULE1-TIME":"","EMAIL2-SCHEDULE1-TIME":"","EMAIL3-SCHEDULE1-TIME":"","EMAIL2-WAIT":"","EMAIL3-WAIT":"","EMAIL1-SCHEDULE1-DATETIME":"","EMAIL2-SCHEDULE1-DATETIME":"","EMAIL3-SCHEDULE1-DATETIME":"","EMAIL1-SCHEDULE1-TIMEZONE":"","EMAIL2-SCHEDULE1-TIMEZONE":"","EMAIL3-SCHEDULE1-TIMEZONE":""};
 						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","filterSelected":[]};
+						$scope.openEmail1 = true; //Email #1 always open.
 						$scope.setInitValue();
 						$scope.setDisplay();
                         $scope.LoadAudience(); 
@@ -396,10 +403,10 @@
 				
             };
 			$scope.setInitValue = function(){
-				$scope.initEmailTemplate();
+				$scope.initTemplateEmail('1');
 				$scope.initSender();
 			};
-			$scope.initEmailTemplate = function(){
+			/*$scope.initEmailTemplate = function(){
 				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign").then(function(response) {
 					$scope.templates  = response.data.templates; 
 					$scope.config = response.data.config; 
@@ -409,24 +416,16 @@
 					$scope.sendersChanged('textSender1');
 					startEditable('1');
 				});
-			};
-			/*
-			$scope.initTemplateEmail2 = function(){
-				if ($scope.openEmail2) {
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=2").then(function(response) {
-						$scope.templatesAs2  = response.data.templates; 
-						$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
-						$scope.SelectChanged('viewEmail2','templateEmail2');
-						$scope.sendersChanged('textSender2');
-						startEditable('2');
-					});
-				}
-			};
-			*/
+			};*/
 			$scope.initTemplateEmail = function(emlID){
 				if ($scope['openEmail'+emlID]) {
 					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+emlID).then(function(response) {
 						$scope['templatesAs'+emlID]  = response.data.templates; 
+						if (emlID == '1')
+						{
+							$scope.config = response.data.config; 
+							$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+						}
 						$("#subjectEmail"+emlID).text($scope.campaign['EMAIL'+emlID+'-SUBJECT']);
 						$scope.SelectChanged('viewEmail'+emlID,'templateEmail'+emlID);
 						$scope.sendersChanged('textSender'+emlID);
@@ -436,22 +435,14 @@
 			};
 			$scope.initSender = function(){
 				$scope.senders = [];
+				$scope.senders.push({"email" : "boonsom@mindfireinc.com","name" : "Boonsom Coa" });
+                $scope.senders.push({"email" : "kdutta@mindfireinc.com","name" : "Kushal Dutta" });
 				$scope.senders.push({"email" : "daver@mindfireinc.com","name" : "David Rosendahl"});
-				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});
+				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});                
 			};
 			$scope.setDisplay = function(){
 				$scope.openEmail2 = false;
 				$scope.openEmail3 = false;
-				/*if ($scope.campaign['URL-BLOG-POST-URL']===undefined || $scope.campaign['URL-BLOG-POST-URL']=='') {
-					$scope.step1Done = false;
-				} else {
-					$scope.step1Done = true;
-				}
-				if ($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']===undefined || $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']=='') {
-					$scope.step2Done = false;
-				} else {
-					$scope.step2Done = true;
-				}*/
                 $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
                 $scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
                 $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM");
@@ -513,24 +504,6 @@
 						$scope.copyEmail(email1Fields,'3','3');
 					}
 				}
-				/*
-				if (cmd=='COPY2') {
-					var email2Fields = email1Fields.map(function(x){ return x.replace(/1/g,"2") });
-					for (var i=0; i<email1Fields.length; i++) {
-						$scope.campaign[email2Fields[i]] = $scope.campaign[email1Fields[i]];
-					}
-					$scope.campaign.templateEmail2 = $scope.campaign.templateEmail2.replace(/campaign\[\'EMAIL1/g, "campaign['EMAIL2");
-
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as="+currentEmail).then(function(response) {
-						$scope.templatesAs2  = response.data.templates; 
-						$scope.config = response.data.config;
-						$("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
-						$scope.SelectChanged('viewEmail2','templateEmail2');
-						$scope.sendersChanged('textSender2');
-						startEditable('2');
-					});
-				}
-				*/
 			};
 			$scope.copyEmail = function(fields,src,tar){
 				if (src!=tar) {
@@ -562,7 +535,7 @@
 				  } 
 				}
             };
-			$scope.tpIndex = function() {
+			/*$scope.tpIndex = function() {
 				var tplist = 	$scope.templates;
 				for(var i=0;i < tplist.length; i++){
 				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
@@ -570,7 +543,7 @@
 					return i;
 				  } 
 				}
-            };
+            };*/
 			$scope.tpsIndex = function(emlID) {
 				var tplist = 	$scope['templatesAs'+emlID];
 				for(var i=0;i < tplist.length; i++){
@@ -580,7 +553,7 @@
 				  } 
 				}
             };
-			$scope.tp2Index = function() {
+			/*$scope.tp2Index = function() {
 				var tplist = 	$scope.templatesAs2;
 				for(var i=0;i < tplist.length; i++){
 				  if (tplist[i]["content"] == $scope.campaign.templateEmail2)
@@ -588,7 +561,7 @@
 					return i;
 				  } 
 				}
-            };
+            };*/
 			$scope.sdIndex = function() {
 				var sdlist = 	$scope.senders;
 				for(var i=0;i < sdlist.length; i++){
@@ -640,15 +613,17 @@
             };
             //Kwang uiSwitch change
             $scope.SwitchChange = function(){
-                $scope.campaign['OPEN-MY-EMAIL'] = MapTrueFalse($scope.campaign['OPEN-MY-EMAIL-'],"Start","Stop");
-                $scope.campaign['VISIT-MY-EMAIL'] = MapTrueFalse($scope.campaign['VISIT-MY-EMAIL-'],"Start","Stop");
+                $scope.campaign['OPEN-MY-EMAIL'] = MapTrueFalse($scope.campaign['OPEN-MY-EMAIL-'],"Start","Stop");                
                 $scope.campaign['CALL-TO-ACTION'] = MapTrueFalse($scope.campaign['CALL-TO-ACTION-'],"Start","Stop");
+				$scope.campaign['VISIT-MY-BLOCK'] = MapTrueFalse($scope.campaign['VISIT-MY-BLOCK-'],"Start","Stop");
                 $scope.Save("",true);   //silence save
                 //alert('SwitchChange');
             };
             
             $scope.ViewReport = function(){
-                window.location.href = "reporting.php?campaignID=" + campaignID;
+                //window.location.href = "reporting.php?campaignID=" + campaignID;
+                window.open("reporting.php?campaignID=" + campaignID);
+
             };
 
 			$scope.LoadAudience = function() {     
@@ -658,23 +633,12 @@
 				}else{
 						$scope.filterList = $scope.campaign['filterSelected'] ;	
 				} 
-				//$scope.filterList = ["f31711a4f8a49122046ed172246d83e2"]; 
 				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 								$scope.masterAu  = response.data; 								
 								 if (typeof $scope.masterAu.items == 'undefined') {
 								   $scope.masterAu.items = [];
 								 } 
 								 $scope.audience  = angular.copy($scope.masterAu);	
-                                 /*
-								 $scope.states = []; 								 
-								 for (var i = 0; i < $scope.audience.items.length; i++) {
-										$scope.fItems = { 
-											id : $scope.audience.items[i].contactID, 
-											listname : $scope.audience.items[i]['LIST-NAME'] 
-										}; 										
-										$scope.states.push($scope.fItems);
-								 }*/
-								 //alert("states = "+$scope.states); 
 				},function(errResponse){				
 						if (errResponse.status == 404) {
 							alert("ERROR 404 [audienceLists]"); 
@@ -772,14 +736,7 @@
 
           return day + ' ' + monthNames[monthIndex] + ' ' + year;
         }
-        
-        function dbgClick(from){
-            if(from == 'Utils'){
-                window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
-            }
-        }
-
-        
+                
     </script>
 
 </body>

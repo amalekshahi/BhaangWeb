@@ -120,6 +120,34 @@
                                     </div>
                                 </div>
 
+								<div class="form-group"><label class="col-sm-2 control-label">View Online Message</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="View online message" name="defViewOnline" ng-model="userinfo.defViewOnline">
+									<span class="help-block m-b-none">View online message to show in the emails.</span>
+                                    </div>
+                                </div>
+
+								<div class="form-group"><label class="col-sm-2 control-label">Company Name</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="Company Name" name="defCompanyName" ng-model="userinfo.defCompanyName">
+									<span class="help-block m-b-none">Company Name</span>
+                                    </div>
+                                </div>
+
+								<div class="form-group"><label class="col-sm-2 control-label">Company Address</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="Company Address" name="defCompanyAddress" ng-model="userinfo.defCompanyAddress">
+									<span class="help-block m-b-none">Company Address</span>
+                                    </div>
+                                </div>
+
+								<div class="form-group"><label class="col-sm-2 control-label">Company Phone</label>
+                                    <div class="col-sm-10">
+									<input type="text" class="form-control" placeholder="Company Phone" name="defCompanyPhone" ng-model="userinfo.defCompanyPhone">
+									<span class="help-block m-b-none">Company Phone</span>
+                                    </div>
+                                </div>
+
                                 <div class="hr-line-dashed"></div>            
                                 
 								<div class="form-group">

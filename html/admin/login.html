@@ -30,7 +30,7 @@
                                 </div>
                                 <div ng-show="state" id="accountDiv" class="form-group"  ng-cloak>
 									<select style="width:100%;" ng-model="mpsSelect">
-											<option ng-repeat="option in login.mps" value="{{option.id}}|{{option.name}}">{{option.name}}</option>
+											<option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
 									</select>
 								</div>
                                 <div id="continueDiv">

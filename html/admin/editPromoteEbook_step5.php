@@ -1,4 +1,4 @@
-<!-- step4 Start -->
+<!-- step5 Start -->
 <style>
 .switch {
     width:42px;
@@ -23,11 +23,11 @@
 
 											
 											<div class="panel-heading">
-												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour"><span class="badge" ng-show="!step3Done">4</span> 
-                                                <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step4Done""></i>
-                                                &nbsp;Configure Notifications & Alerts &nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"> <i class="fa fa-bell-o" aria-hidden="true"></i> Alerted on Clicks, Opens, and Conversions</small></a></h4>
+												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFive"><span class="badge" ng-show="!step4Done">5</span> 
+                                                <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step5Done""></i>
+                                                &nbsp;Configure Notifications & Alerts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"> <i class="fa fa-bell-o" aria-hidden="true"></i> Alerted on Visits and Downloads</small></a></h4>
 											</div>
-											<div class="panel-collapse collapse" id="collapseFour">
+											<div class="panel-collapse collapse" id="collapseFive">
 												<div class="panel-body">
 													<div class="ibox float-e-margins">
 														<div class="ibox-content">
@@ -38,22 +38,15 @@
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-sm-3 control-label">Open my Emails</label>
+																<label class="col-sm-3 control-label">Visit the Landing Page</label>
 																<div class="col-sm-2">
                                                                     <switch ng-model="campaign['OPEN-MY-EMAIL-']" class="green"  ng-change="SwitchChange()"></switch>
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-sm-3 control-label">Visit my Blog Post</label>
+																<label class="col-sm-3 control-label">Download the eBook</label>
 																<div class="col-sm-2">
-                                                                    <switch ng-model="campaign['VISIT-MY-BLOCK-']" class="green" ng-change="SwitchChange()"></switch>
-																</div>
-															</div>
-
-															<div class="form-group">
-																<label class="col-sm-3 control-label">Complete my Call-to-Action</label>
-																<div class="col-sm-2">
-                                                                    <switch ng-model="campaign['CALL-TO-ACTION-']" class="green" ng-change="SwitchChange()"></switch>
+                                                                    <switch ng-model="campaign['VISIT-MY-EMAIL-']" class="green" ng-change="SwitchChange()"></switch>
 																</div>
 															</div>
 																<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->

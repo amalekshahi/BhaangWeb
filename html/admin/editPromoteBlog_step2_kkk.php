@@ -2,7 +2,9 @@
     $emailHTMLTemplate = file_get_contents('eachEmailCode.html');
 	$email3 = str_replace('##emailid##','3',$emailHTMLTemplate);
 ?>
-<div class="panel panel-default" ng-controller="step2">
+<script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous"></script> 
+
+<div class="panel panel-default" ng-controller="step2" id="step2ID">
 <div class="panel-heading">
 	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
 		<span class="badge" ng-show="!step2Done">2</span>
@@ -70,17 +72,21 @@
                                                                 <div><p></p></div>
                                                                 <div class="tooltip-demo">
                                                                 <label class="control-label"></label> 
-                                                                <a ng-click="SendTest()" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><span ng-show="state['SendTest'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest'] != 'Sending'"></i> Send me a test email</a>
+                                                                <a ng-click="SendTest(1)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email "><span ng-show="state['SendTest1'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest1'] != 'Sending'"></i> Send me a test email</a>
                                                               </div>
                                                             </div>
                                                             
                                                             <div class="col-sm-12">
                                                                 <label class="control-label">Send Test To</label> 
-                                                                <select ng-model="sendTestContactSelected" style="width: 100%;height: 30px;">
-                                                                <option ng-repeat="x in sendTestContacts" value="{{x[0]}}">{{x[3]}}</option>
+                                                            </div>    
+                                                            <div class="col-sm-12">
+                                                                <a class="btn btn-primary" ng-click="OpenRegister()" style="padding: 5px; vertical-align: middle; float: right;height:30px"><i class="fa fa-plus-square-o fa-lg"></i></a> 
+                                                                <div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;">
+                                                                <select ng-model="sendTestContactSelected" style="height: 30px;">
+                                                                <option ng-repeat="x in sendTestContacts| orderBy:'1'" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
                                                                 </select>
+                                                                </div>
                                                             </div>
-                                                            
                                                         </div>
 														<div class="hr-line-dashed"></div><input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> <input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}"> <input name="programNameHash" type="hidden" value="{{programNameHash}}">
 													</form>
@@ -143,13 +149,32 @@
 																		<option ng-repeat="x in templatesAs2" value="{{x.content}}">{{x.title}}</option>
 																		</select>
 																	</div>
-																	<div class="col-sm-12">
+																	<!--<div class="col-sm-12">
 																		<div><p></p></div>
 																		<div class="tooltip-demo">
 																		<label class="control-label"></label> 
-																		<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Send me a test email</a>
+																		<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><i class="fa fa-share-square-o"></i> Send me a test email</a>
 																	  </div>
-																	</div>
+																	</div>-->
+                                                                    <div class="col-sm-12">
+                                                                        <div><p></p></div>
+                                                                        <div class="tooltip-demo">
+                                                                        <label class="control-label"></label> 
+                                                                        <a ng-click="SendTest(2)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><span ng-show="state['SendTest2'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest2'] != 'Sending'"></i> Send me a test email</a>
+                                                                      </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-sm-12">
+                                                                        <label class="control-label">Send Test To</label> 
+                                                                    </div>    
+                                                                    <div class="col-sm-12">
+                                                                        <a class="btn btn-primary" ng-click="OpenRegister()" style="padding: 5px; vertical-align: middle; float: right;height:30px"><i class="fa fa-plus-square-o fa-lg"></i></a> 
+                                                                        <div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;">
+                                                                        <select ng-model="sendTestContactSelected" style="height: 30px;">
+                                                                        <option ng-repeat="x in sendTestContacts| orderBy:'1'" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
+                                                                        </select>
+                                                                        </div>
+                                                                    </div>
 																	
 																</div>
 														<div class="hr-line-dashed"></div><input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> <input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}"> <input name="programNameHash" type="hidden" value="{{programNameHash}}">
@@ -206,7 +231,7 @@
 </div>
 </div>
 <script>
-	myApp.controller('step2',function($scope,$http) {
+	myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload) {
 		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
 		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
 		//var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
@@ -241,18 +266,22 @@
 				swal("Deleted!", "Your imaginary file has been deleted.", "success");
 			});
 		}
-        $scope.SendTest = function(){
+        $scope.SendTest = function(index){
             var id = $scope.sendTestContactSelected;
             if(id == ""){
                 swal("Please select address to send to");
                 return;
             }
-            $scope.state['SendTest'] = "Sending";
-            var html = $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'];
+            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL' + index + 'CONTENT'] = $scope.templates[$scope.tpIndex()].contentRaw;
+            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL' + index + 'SUBJECT'] = $("#subjectEmail" + index).text();
+            $scope.campaign['EMAIL' + index + '-SUBJECT'] = $("#subjectEmail" + index).text();
+            
+            $scope.state['SendTest' + index] = "Sending";
+            var html = $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL' + index + 'CONTENT'];
             var fromAddress = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
             var fromName = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME'];
             var renderedHtml = Render(html,$scope.campaign);            
-            var subject = $("#subjectEmail1").text();
+            var subject = $("#subjectEmail" + index).text();
             //alert($scope.campaign['EMAIL1-HERO-IMAGE']);
             $http(
                     {
@@ -278,8 +307,8 @@
                     }else{
                         swal("Success");
                     }
-                    $scope.state['Publish'] = "Launch Program";
-                    $scope.state['SendTest'] = "Send Test";
+                    //$scope.state['Publish'] = "Launch Program";
+                    $scope.state['SendTest'  + index] = "Send Test";
                     //alert(response);
                 },function(errResponse){
                     var str = JSON.stringify(errResponse.data, null, 4); // (Optional) beautiful indented output.
@@ -287,7 +316,7 @@
                     /*
                     $scope.state['Publish'] = "Launch Program";*/
                     swal("Server Error");
-                    $scope.state['SendTest'] = "Send Test";
+                    $scope.state['SendTest'  + index] = "Send Test";
                     //alert(errResponse);
                 }
             );
@@ -305,6 +334,57 @@
                 swal("Server Error");
             });
         }
+        
+        $scope.imageUpload = function(files,editor){
+            var uploadFileName = "IMG-" + uuidv4();
+            //$scope.editor.summernote('insertNode', imgNode);
+            Upload.upload({
+                url: 'upload.php',
+                method: 'POST',
+                file:files[0],
+                data: {
+                    file:files[0], 
+                    's3':'true',
+                    'fileName':uploadFileName,
+                    'acctID':'accountID',
+                    'progID':'programID',
+                }
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + 'uploaded');
+                console.log(resp.data);
+                var imgNode = $('<img>').attr('src', resp.data.imgSrc)[0];
+                $scope[editor].summernote('insertNode',imgNode );
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
+        };        
+        
+        $scope.OpenRegister = function()
+        {
+            var w = 500;
+            var h = 500;
+            var x = screen.width/2 - w/2;
+            var y = screen.height/2 - h/2;
+
+            $scope.popup = window.open("register.php", '_blank','scrollbars=1,resizable=1,width='+w+',height=' + h +',left='+x+',top='+y); 
+        };
         $scope.LoadSendTestContact();
-	});
+	}]);
+    
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    
+    function CloseRegister()
+    {
+        var scope = angular.element(document.getElementById('step2ID')).scope();
+        scope.LoadSendTestContact();
+        alert('LoadSendTestContact done');        
+    }
 </script>

@@ -14,6 +14,8 @@
 	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
+	<link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+
 	<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 	<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 

@@ -135,6 +135,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 								  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":"","LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
 							  }else{					 
 								 $scope.item = $scope.audience.items[indx];
+								 FArr = $scope.audience.items[indx]['LIST-ARRAY']; 
 							  }
 						};
 						$scope.Load = function() {
@@ -203,23 +204,29 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 				 var LDesc = $('#LISTDESCRIPTION').val();
 				 var LDef = $('#LISTDEFINITION').val();
 				 var LHash= $('#LISTIDHASH').val();
-				 var LDetail = $('#contactDetail').val();				 
-
-				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
-						 $rootScope.master  = response.data; 
-						 if (typeof $rootScope.master.items == 'undefined') {
-								$rootScope.master.items = [];
-						 } 
-						 $scope.audience  = angular.copy($rootScope.master);						 
-						 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
- 						$scope.SaveDB(contactID); 
-				},function(errResponse){
-						if (errResponse.status == 404) {
-							$scope.audience = {items:[]};
-							$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
-	 						$scope.SaveDB(contactID); 
-						}
-                });
+				 var LDetail = $('#contactDetail').val();	 
+				 
+				 var table = document.getElementById('filterTable');				
+				 var rowLength = table.rows.length;
+				 if (rowLength == 1) {						
+						swal("Please set filter."); 
+				 } else{
+					$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
+							 $rootScope.master  = response.data; 
+							 if (typeof $rootScope.master.items == 'undefined') {
+									$rootScope.master.items = [];
+							 } 
+							 $scope.audience  = angular.copy($rootScope.master);						 
+							 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
+							$scope.SaveDB(contactID); 
+					},function(errResponse){
+							if (errResponse.status == 404) {
+								$scope.audience = {items:[]};
+								$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
+								$scope.SaveDB(contactID); 
+							}
+					});
+				 }
             };
 			$scope.SaveDB = function(cID) {					
                 $scope.state['Save'] = "Saving";
@@ -241,12 +248,12 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 			    $('#altCnt').hide();	
 				var table = document.getElementById('filterTable');				
 				var rowLength = table.rows.length;
+				//alert("FARR = "+FArr);
 				if (rowLength == 1) {
-					//alert("Please set filter.");
-					swal("Please set filter."); 
+					if(FArr == "")		swal("Please set filter."); 
 				} else {
 					$('#itemCount').val(counter);
-					var LISTDEFINITION = "";
+					//var LISTDEFINITION = "";
 					var form_data = $("#idForm").serialize();			
 					$.ajax({
 							url: 'createFilter.php', // point to server-side PHP script 
@@ -313,7 +320,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 		function FilterClick() {
 			$('#altCnt').hide();
 			var table = document.getElementById('filterTable');
-			var LISTDEFINITION = "";
+			//var LISTDEFINITION = "";
 			var form_data = $("#idForm").serialize();		
 			//alert(form_data);
 			$.ajax({

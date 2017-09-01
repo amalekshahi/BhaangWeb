@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="css/sweet/sweetalert.css">
 </head>
 <body class="gray-bg">
-    <div class="passwordBox animated fadeInDown" ng-controller="myCtrl">
+    <div class="passwordBox animated fadeInDown" ng-controller="myCtrl" style="padding-top:50px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="ibox-content">
@@ -124,6 +124,11 @@
 
         
 });		//END myApp
+
+window.onunload = function (e) {
+    opener.CloseRegister();
+    //opener.document.getElementById('someid').innerHTML = 'update content of parent window';
+};
 </script>
     
 </body>

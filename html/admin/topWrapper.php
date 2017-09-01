@@ -19,7 +19,8 @@
         <!--<li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog" ></i> Utils <span class="caret"></span></a>
              <ul class="dropdown-menu">-->
-               <li><a onClick="dbgClick('Utils')"><i class="fa fa-cog" ></i> DBView</a></li>
+               <li><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i> DBView</a></li>
+               <li><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i> Issue</a></li>
         <!--     </ul>
         </li>                -->
         <li>

@@ -1,4 +1,9 @@
 <!-- step3 Start -->
+<link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
+<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
+<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js"></script>
+<script src="https://rawgit.com/leocaseiro/angular-chosen/master/dist/angular-chosen.min.js"></script>
+
 <div class="panel panel-default" ng-controller="step3">
     <div class="panel-heading">
                             <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
@@ -8,6 +13,14 @@
                             <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>Scheduled for {{ScheduleDateTime}} ({{campaign['EMAIL1-SCHEDULE1-TIMEZONE']}})</small>
                             </a></h4>
     </div>
+<style>
+    .chosen-container{
+        width: 400px !important;
+    }
+    .chosen-container-multi .chosen-choices li.search-field input[type=text] {
+        padding-top: 0px;
+    }
+</style>
     <div class="panel-collapse collapse" id="collapseThree">
         <!--<button ng-click="ParseDate()"></button>-->
         <div class="panel-body">
@@ -18,24 +31,29 @@
 							<label class="col-sm-2 control-label">Choose Your Audience</label>
 							<div class="col-sm-10">
 								<div>
-									<select class="chosen-select" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
+									<!--<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">-->
+                                    <select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.contactID as s['LIST-NAME'] for s in audience.items"  style="width:400px;" ng-change="ArrangeFilter()">
+										 <option value=""></option>
+									</select>
 										<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
 										<!-- <option ng-repeat="option in audience.items" ng-value="option">{{option['LIST-NAME']}}</option>  -->
+									<!-- <select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
 										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
-									</select>
-									 <input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">
+									</select> -->
+									<!--<input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">-->
 									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>									
 								</div>
-								<div>
-									<p></p>
-								</div>
-									
+								<!--<div>
+									<p>{{campaign['EMAIL1-FILTER']}}</p>
+								</div>-->
 							</div>
                             
 							<div class="row">
                                 <!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>
-                                EMAIL3-SCHEDULE1-DATETIME={{campaign['EMAIL3-SCHEDULE1-DATETIME']}}<br>-->
+                                EMAIL3-SCHEDULE1-DATETIME={{campaign['EMAIL3-SCHEDULE1-DATETIME']}}<br>
+								EMAIL-FILTER-JOINOPERATOR={{campaign['EMAIL-FILTER-JOINOPERATOR']}}<br>
+								EMAIL-FILTER-CRITERIAROW={{campaign['EMAIL-FILTER-CRITERIAROW']}}<br>-->
 								<div class="col-lg-12">
 									<div class="wrapper wrapper-content animated fadeInUp">
 										<div class="ibox">
@@ -184,14 +202,17 @@
 							<div class="col-sm-10"><input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save('')">Save</button> <button class="btn btn-white" ng-click="Reset()">Cancel</button></div>
                             -->
 						</div>
+						<input class="form-control" name="EMAIL-FILTER-JOINOPERATOR" placeholder="" type="hidden" ng-model="campaign['EMAIL-FILTER-JOINOPERATOR']">
+						<input class="form-control" name="EMAIL-FILTER-CRITERIAROW" placeholder="" type="hidden" ng-model="campaign['EMAIL-FILTER-CRITERIAROW']">
+						
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
 
+<script>
 myApp.controller('step3',function($scope,$http) {
     //alert('step3');
     $scope.dateChange = function(){
@@ -218,59 +239,54 @@ myApp.controller('step3',function($scope,$http) {
         //$scope.Reset(); // parent scope's Reset()
     };
 
-	$scope.LoadAudience = function() {
-//			$http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
-			$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
-					 $scope.masterAu  = response.data; 
-					 if (typeof $scope.masterAu.items == 'undefined') {
-					   $scope.masterAu.items = [];
-					 } 
-					  $scope.audience  = angular.copy($scope.masterAu);
 
-			},function(errResponse){
-						// case new account
-						if (errResponse.status == 404) {
-							alert("ERROR 404 [audienceLists]"); 
-						}
-			});
-	};				
-	$scope.ArrangeFilter = function() {	
-				$scope.AuFilter  = angular.copy($scope.masterAu);
-				var auCnt = 0; 
-				var auOpr = ""; 
-				var allRule=""; 
-				for (var i = 0; i < $scope.filterList.length; i++) {
-					var indx = $scope.AuFilter.items.getIndexByValue('contactID',$scope.filterList[i]);
-					$scope.auItem = $scope.AuFilter.items[indx];
-					var auItemOpr = $scope.auItem['LIST-OPERATOR']; 
-					auOpr += "("; 
-					var arrItem = $scope.auItem['LIST-ARRAY']; 	
-					if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
-										var itemRule = ""; 
-										for (var k = 0; k < arrItem.length; k++) {		
-												auCnt++; 
-												//alert(arrItem[k]); 
-												if(arrItem[k] !=null ){
-													itemRule = itemRule+'<Criteria Row=\"' +auCnt+ '\" Field=\"'+arrItem[k].Field+'\" Operator=\"'+arrItem[k].Operator+'\" Value=\"'+arrItem[k].Value+'\" />' ; 
-												}				
-												auOpr += auCnt ; 
-												var opr = "&amp;"
-												if(arrItem[k].JoinOperator == "or")	opr ="|"; 												
-												if(k < arrItem.length-1)		auOpr += opr;  	
+	
 
-										} // end for k
-										//alert(itemRule ); 
-										allRule += itemRule; 																				
-					}		
-					auOpr += ")";
-					if(i < $scope.filterList.length-1)		auOpr += "|";  
-				}//end for i
-				var auRule = "<Filter CriteriaJoinOperator=\""+auOpr+"\">"+allRule+"</Filter>" ; 
-				
-				$("#EMAIL1-FILTER").val(auRule);
-				$scope.campaign['EMAIL1-FILTER']  = auRule; 
-				//alert( "val = " + $("#EMAIL1-FILTER").val() ); 
+	$scope.ArrangeFilter = function() {						
+			$scope.AuFilter  = angular.copy($scope.masterAu);
+			var auCnt = 0; 
+			var auOpr = ""; 
+			var allRule=""; 
+			var selList=[]; 
+			for (var i = 0; i < $scope.filterList.length; i++) {
+				var indx = $scope.AuFilter.items.getIndexByValue('contactID',$scope.filterList[i]);
+				selList.push($scope.filterList[i]); 
+				$scope.auItem = $scope.AuFilter.items[indx];
+				var auItemOpr = $scope.auItem['LIST-OPERATOR']; 
+				auOpr += "("; 
+				var arrItem = $scope.auItem['LIST-ARRAY']; 	
+				if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
+									var itemRule = ""; 
+									for (var k = 0; k < arrItem.length; k++) {		
+											auCnt++; 
+											//alert(arrItem[k]); 
+											if(arrItem[k] !=null ){
+												itemRule = itemRule+'<Criteria Row=\"' +auCnt+ '\" Field=\"'+arrItem[k].Field+'\" Operator=\"'+arrItem[k].Operator+'\" Value=\"'+arrItem[k].Value+'\" />' ; 
+											}				
+											auOpr += auCnt ; 
+											var opr = "&amp;"
+											if(arrItem[k].JoinOperator == "or")	opr ="|"; 												
+											if(k < arrItem.length-1)		auOpr += opr;  	
+
+									} // end for k
+									//alert(itemRule ); 
+									allRule += itemRule; 																				
+				}		
+				auOpr += ")";
+				if(i < $scope.filterList.length-1)		auOpr += "|";  
+			}//end for i		
+			//alert("selected = "+selList); 
+			$scope.campaign['filterSelected']  = selList; 
+//			$scope.campaign['filterSelected'].push(selList);
+			var auRule = "<Filter CriteriaJoinOperator=\""+auOpr+"\">"+allRule+"</Filter>" ; 
+			//$("#EMAIL1-FILTER").val(auRule);
+			$scope.campaign['EMAIL1-FILTER']  = auRule; 
+			$scope.campaign['EMAIL-FILTER-JOINOPERATOR']  = auOpr; 
+			$scope.campaign['EMAIL-FILTER-CRITERIAROW']  = allRule; 
+			//alert( "val = " + $("#EMAIL1-FILTER").val() ); 					
 	};	
+
+
     $scope.ShowScheduleDateTime = function(){
         if(hasValue($scope.campaign)){
             if(hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM")){
@@ -284,7 +300,7 @@ myApp.controller('step3',function($scope,$http) {
             return false;
         }
     };
-	$scope.LoadAudience	(); 
+
 
 
 });

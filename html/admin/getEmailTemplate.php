@@ -10,6 +10,19 @@
 #require_once 'global.php';
 require_once 'commonUtil.php';
 
+function MergeArrayWithArray(& $data,$default)
+{
+    foreach($default as $key => $value){
+        if (!array_key_exists($key,$data)) {
+            //echo "Merge $key<br>\n";
+            $data[$key] = $value;
+        }
+    }
+    //print_r($data);
+}
+
+session_start();
+
 if(empty($_REQUEST['blueprint'])){
     echo json_encode( 
         array(
@@ -53,6 +66,13 @@ if(!$flgFound){
 //$default = json_decode(file_get_contents("conf/".$requestBlueprint.".conf"),true);
 $default = couchDB_Get("/master/Default_".$requestBlueprint,true);
 
+$accountID = $_SESSION['ACCOUNTID'];
+$accountInfo = couchDB_Get("/db$accountID/UserInfo",true);
+//if(!empty($_REQUEST['dbg'])){
+MergeArrayWithArray($accountInfo,$default);
+//    print_r($default);
+//    exit;
+//};
 //print_r($default);
 //Read config file
 
@@ -67,12 +87,13 @@ foreach($configs as $config)
     $number = $number + 1;
     $fileName = "templates/emails/".$config->file;
     $fileContentRaw = file_get_contents($fileName);
-    //Replace {{RAW 
-    $fileContent = str_replace("{{RAW ","{{",$fileContentRaw);
     if(!empty($asEmail)){
         // change EMAIL1 to $asEmail
-        $fileContent = str_replace('{{EMAIL1-',"{{EMAIL".$asEmail."-",$fileContent);
+        $fileContentRaw = str_replace('EMAIL1-',"EMAIL".$asEmail."-",$fileContentRaw);
     }
+    
+    //Remove {{RAW 
+    $fileContent = str_replace("{{RAW ","{{",$fileContentRaw);
     
     $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
     // Replace {{EMAIL}} with proper summernote tag
@@ -85,12 +106,15 @@ foreach($configs as $config)
         "title"=> $config->title,
         "contentRaw"=> $fileContentRaw,
         "content"=> $content,
+        "accountInfo"=>$accountInfo,
+        "accountID"=>$accountID,
+        "newDefault"=>$newDefault,
     );
 }
 
 echo json_encode(
         array(
-            'config'=>$default,
+            'config'=>$accountInfo,
             'templates'=>$ret,
         )
     );

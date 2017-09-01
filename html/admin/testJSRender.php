@@ -30,6 +30,25 @@
       {{data.out}}
     </div>
     <script>
+        /*function Render(template,data){
+            var reg = /\{{(.*?)\}}/;
+            var html = template;
+            while (match = reg.exec(html)) {
+                console.log(match);
+                // first shows the match: <h1>,h1
+                // then shows the match: </h1>,/h1
+                var slugPattern = match[0];
+                var slug = match[1];
+                var renderRaw = false;
+                if(slug.startsWith("RAW ")){
+                    renderRaw = true;
+                    slug = slug.substring(4);
+                }
+                html = html.replace(slugPattern,data[slug]);
+                //console.log(slug);
+            }
+            return html;
+        }*/
         myApp = angular.module('myApp', ["xeditable","ngFileUpload","summernote"]);
             myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
                 $scope.data = {
@@ -37,7 +56,7 @@
                 };
                 $scope.Load = function() {
                     $scope.count++;
-                    $http.get("/couchdb/db228/b81fc4f3c0f9a7cd2856dc97c3b42373" + "?"+new Date().toString()).then(function(response) {
+                    $http.get("/couchdb/db16916/10abbb541aff9d3b002d94568541c8ac" + "?"+new Date().toString()).then(function(response) {
                         $scope.campaign  = response.data; 
                     });
                 };

@@ -1,16 +1,17 @@
-<!-- step3 Start -->
+<!-- step4 Start -->
 <link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
 <script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
 <script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js"></script>
 <script src="https://rawgit.com/leocaseiro/angular-chosen/master/dist/angular-chosen.min.js"></script>
 
-<div class="panel panel-default" ng-controller="step3">
+<div class="panel panel-default" ng-controller="step4">
     <div class="panel-heading">
-                            <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
-                            <span class="badge" ng-show="!step3Done">3</span>
-                            <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done""></i>
-                            &nbsp;Choose Your Audience & Schedule 
-                            <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>Scheduled for {{ScheduleDateTime}} ({{campaign['EMAIL1-SCHEDULE1-TIMEZONE']}})</small>
+                            <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour">
+                            <span class="badge" ng-show="!step4Done">4</span>
+                            <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step4Done""></i>
+                            &nbsp;Write Your Auto-Responder Drip Sequence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <!-- <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>2 Drip Emails Configured</small> -->
+							<small class="m-l-sm"><i aria-hidden="true" class="fa fa-envelope-o"></i> 2 Drip Emails Configured</small>
                             </a></h4>
     </div>
 <style>
@@ -21,39 +22,28 @@
         padding-top: 0px;
     }
 </style>
-    <div class="panel-collapse collapse" id="collapseThree">
+    <div class="panel-collapse collapse" id="collapseFour">
         <!--<button ng-click="ParseDate()"></button>-->
         <div class="panel-body">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <form class="form-horizontal" name="frmStep3">
+                    <form class="form-horizontal" name="frmStep4">
                         <div class="form-group">
-							<label class="col-sm-2 control-label">Choose Your Audience</label>
+							<!-- Jiew -->
+							<!-- <label class="col-sm-2 control-label">Choose Your Audience</label>
 							<div class="col-sm-10">
 								<div>
-									<!--<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">-->
-                                    <select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.contactID as s['LIST-NAME'] for s in audience.items"  style="width:400px;" ng-change="ArrangeFilter()">
+									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.contactID as s['LIST-NAME'] for s in audience.items"  style="width:400px;" ng-change="ArrangeFilter()">
 										 <option value=""></option>
 									</select>
-										<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
-										<!-- <option ng-repeat="option in audience.items" ng-value="option">{{option['LIST-NAME']}}</option>  -->
-									<!-- <select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
-										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
-									</select> -->
-									<!--<input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">-->
 									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>									
 								</div>
-								<!--<div>
-									<p>{{campaign['EMAIL1-FILTER']}}</p>
-								</div>-->
-							</div>
-                            
+							</div> -->
+                            <!-- Jiew -->
 							<div class="row">
                                 <!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>
-                                EMAIL3-SCHEDULE1-DATETIME={{campaign['EMAIL3-SCHEDULE1-DATETIME']}}<br>
-								EMAIL-FILTER-JOINOPERATOR={{campaign['EMAIL-FILTER-JOINOPERATOR']}}<br>
-								EMAIL-FILTER-CRITERIAROW={{campaign['EMAIL-FILTER-CRITERIAROW']}}<br>-->
+                                EMAIL3-SCHEDULE1-DATETIME={{campaign['EMAIL3-SCHEDULE1-DATETIME']}}<br>-->
 								<div class="col-lg-12">
 									<div class="wrapper wrapper-content animated fadeInUp">
 										<div class="ibox">
@@ -61,10 +51,12 @@
                                                 <div style="float:left;">
                                                     <h5><i aria-hidden="true" class="fa fa-calendar"></i> Schedule</h5>
                                                 </div>
-                                                <div style="float:right;"><h5><input name="programNameHash" type="hidden" value="{{programNameHash}}">
-                                                    <button class="btn btn-primary" ng-disabled="frmStep3.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button>
-                                                    <button class="btn btn-white" ng-disabled="frmStep3.$pristine" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel </button></h5>
-                                                </div>
+												<!-- Jiew -->
+                                                <!-- <div style="float:right;"><h5><input name="programNameHash" type="hidden" value="{{programNameHash}}">
+                                                    <button class="btn btn-primary" ng-disabled="frmStep4.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button>
+                                                    <button class="btn btn-white" ng-disabled="frmStep4.$pristine" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel </button></h5>
+                                                </div> -->
+												<!-- Jiew -->
 											</div>
 											<div class="project-list">												
 												<table class="table table-hover">
@@ -81,7 +73,8 @@
                                                                 </form>
 															</td>
                                                         </tr>
-														<tr>
+														<!-- Jiew -->
+														<!-- <tr>
 															<td class="project-status">
 																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #1</button>
 															</td>
@@ -92,11 +85,7 @@
 															<td class="project-title">
 																<form class="form-inline" role="form">
 																	<div class="form-group">
-																		<!-- <label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for Wednesday August 22, 2017</label>
-																		<small>@ 3:30 PM PST</small><br> 													 -->
-
 																		<label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for</label><br> 
-																		
 
 																		<div class="input-group date">
 															                <input type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE1-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE1-DATE" name="EMAIL1-SCHEDULE1-DATE" ng-change="dateChange('')">
@@ -119,16 +108,15 @@
 																	</div>
 																</form>
 															</td>
-															
-														</tr>
+														</tr> -->
+														<!-- Jiew -->
 														<tr>
-															
 															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> </i>Email #2</button>
+																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> </i>Email #1</button>
 															</td>
 															<td class="project-title">
-																<strong>Targeting: Non-Opens</strong><br>
-																<small>This email is sent to everyone who did not open.</small>
+																<strong>Targeting: Everyone Who Downloads</strong><br>
+																<small>This email is sent to everyone who downloads your eBook, and is typically used to thank them for downloading.  Tip: Provide the ebook as a link in the email for easy future reference.</small>
 															</td>
 															<td class="project-title">
 																<form class="form-inline" role="form">
@@ -142,13 +130,13 @@
 																			<span class="input-group-addon">
 																				<span class="fa fa-clock-o"></span>
 																			</span>
+																			<select class="form-control" id="EMAIL2-SCHEDULE1-TIMEZONE" name="EMAIL2-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL2-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')">
+																				<option value="Pacific Standard Time" >PST</option> 
+																				<option value="Mountain Standard Time">MST</option> 
+																				<option value="Central America Standard Time">CST</option> 
+																				<option value="Eastern Standard Time">EST</option>
+																			</select>
 																		</div>
-																		<select class="form-control" id="EMAIL2-SCHEDULE1-TIMEZONE" name="EMAIL2-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL2-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')">
-																			<option value="Pacific Standard Time" >PST</option> 
-																			<option value="Mountain Standard Time">MST</option> 
-																			<option value="Central America Standard Time">CST</option> 
-																			<option value="Eastern Standard Time">EST</option>
-																		</select>
 																	</div>
 																</form>
 															</td>
@@ -157,11 +145,11 @@
 														<tr>
 															
 															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #3</button>
+																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #2</button>
 															</td>
 															<td class="project-title">
-																<strong>Targeting: Non-Clickers</strong><br>
-																<small>This email is sent to everyone you who opened but did not click.</small>
+																<strong>Targeting: Everyone Who Downloads</strong><br>
+																<small>Use this email to continue building a relationship.  Offer insights and other useful content.</small>
 															</td>
 															<td class="project-title">
 																<form class="form-inline" role="form">
@@ -169,25 +157,34 @@
 																		<label for="wait3"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
 																		<input class="touchspin2 form-control input-sm" id="EMAIL3-WAIT" name="EMAIL3-WAIT" type="text" value="4" ng-model="campaign['EMAIL3-WAIT']" style="width:50px; text-align: center" ng-change="dateChange('')"> <strong>days</strong> <small>and send @ </small> 
 
-
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input type="text" class="form-control" id="EMAIL3-SCHEDULE1-TIME" name="EMAIL3-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL3-SCHEDULE1-TIME']" ng-change="dateChange('')">
 																			<span class="input-group-addon">
 																				<span class="fa fa-clock-o"></span>
 																			</span>
+																				<select class="form-control" id="EMAIL3-SCHEDULE1-TIMEZONE" name="EMAIL3-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL3-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')">
+																				<option value="Pacific Standard Time" >PST</option> 
+																				<option value="Mountain Standard Time">MST</option> 
+																				<option value="Central America Standard Time">CST</option> 
+																				<option value="Eastern Standard Time">EST</option>
+																			</select>
 																		</div>
-																		<select class="form-control" id="EMAIL3-SCHEDULE1-TIMEZONE" name="EMAIL3-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL3-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')">
-																			<option value="Pacific Standard Time" >PST</option> 
-																			<option value="Mountain Standard Time">MST</option> 
-																			<option value="Central America Standard Time">CST</option> 
-																			<option value="Eastern Standard Time">EST</option>
-																		</select>
 																	</div>
-																	</form>
+																</form>
 															</td>
-															
 														</tr>
-														
+														<tr>
+															<td class="project-status"><button class="btn btn-success btn-lg" type="button"><span aria-hidden="true" class="fa fa-plus-square-o"></span> ADD ANOTHER EMAIL</button></td>
+															<td class="project-title"><strong>You can up to 6 emails in this sequence</strong><br>
+															<small>Drive engagement by up to 57% by adding 1 more email.</small></td>
+															<td class="project-title">
+																<form class="form-inline" role="form">
+																	<div class="form-group">
+																		
+																	</div>
+																</form>
+															</td>
+														</tr>
 													</tbody>
 												</table>
 												
@@ -197,14 +194,10 @@
 									</div>
 								</div>
 							</div>
-                            <!--
-							<label class="col-sm-2 control-label"></label>
-							<div class="col-sm-10"><input name="programNameHash" type="hidden" value="{{programNameHash}}"> <button class="btn btn-primary" ng-click="Save('')">Save</button> <button class="btn btn-white" ng-click="Reset()">Cancel</button></div>
-                            -->
+                            <label class="col-sm-2 control-label"></label>
+							<div class="col-sm-10"><button class="btn btn-primary" ng-disabled="frmStep4.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button>
+                                                    <button class="btn btn-white" ng-disabled="frmStep4.$pristine" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel </button></div>
 						</div>
-						<input class="form-control" name="EMAIL-FILTER-JOINOPERATOR" placeholder="" type="hidden" ng-model="campaign['EMAIL-FILTER-JOINOPERATOR']">
-						<input class="form-control" name="EMAIL-FILTER-CRITERIAROW" placeholder="" type="hidden" ng-model="campaign['EMAIL-FILTER-CRITERIAROW']">
-						
                     </form>
                 </div>
             </div>
@@ -213,8 +206,8 @@
 </div>
 
 <script>
-myApp.controller('step3',function($scope,$http) {
-    //alert('step3');
+myApp.controller('step4',function($scope,$http) {
+    //alert('step4');
     $scope.dateChange = function(){
         if($scope.campaign['EMAIL1-SCHEDULE1-DATE']!="" && $scope.campaign['EMAIL1-SCHEDULE1-TIME']!=""){
             $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE']+' '+convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
@@ -234,7 +227,7 @@ myApp.controller('step3',function($scope,$http) {
         }
     };
     $scope.Cancel = function(){
-        //$scope.frmStep3.$setPristine();
+        //$scope.frmStep4.$setPristine();
         $scope.$parent.Cancel();
         //$scope.Reset(); // parent scope's Reset()
     };
@@ -281,8 +274,6 @@ myApp.controller('step3',function($scope,$http) {
 			var auRule = "<Filter CriteriaJoinOperator=\""+auOpr+"\">"+allRule+"</Filter>" ; 
 			//$("#EMAIL1-FILTER").val(auRule);
 			$scope.campaign['EMAIL1-FILTER']  = auRule; 
-			$scope.campaign['EMAIL-FILTER-JOINOPERATOR']  = auOpr; 
-			$scope.campaign['EMAIL-FILTER-CRITERIAROW']  = allRule; 
 			//alert( "val = " + $("#EMAIL1-FILTER").val() ); 					
 	};	
 
@@ -305,4 +296,4 @@ myApp.controller('step3',function($scope,$http) {
 
 });
 </script>
-<!-- step3 End-->
+<!-- step4 End-->

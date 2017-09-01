@@ -7,243 +7,20 @@
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
 ?>
-<!doctype html>
+
+<!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="cache-control" content="max-age=0" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-	<meta http-equiv="pragma" content="no-cache" />
-    <title>Main Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-
-	<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
-	<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/chosen/chosen.css">
-    <link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
-	<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-    
-	<!-- x-editable (bootstrap version) -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-
-	<!-- Sweet alert -->
-	<link rel="stylesheet" href="css/sweet/sweetalert.css">
-
-	<!-- TouchSpin -->
-	<link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script> 
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>    
-
-	<!-- Angular -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
-    
-    <!-- ui-switch -->
-    <link rel="stylesheet" href="js/angular-ui-switch.min.css"/>
-    <script src="js/angular-ui-switch.js"></script>
-
-	<style class="cp-pen-styles">
-	   /*@charset "UTF-8";*/
-	   /* 2015 Johannes Jakob
-	     Made with <3 in Germany */
-
-	   .window {
-	    background: #fff;
-	    width: 700px;
-	    margin: auto;
-	    margin-top: .5vh;
-	    border: 1px solid #acacac;
-	    border-radius: 6px;
-	    box-shadow: 0px 0px 20px #acacac;
-	   }
-
-	   .titlebar {
-	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ebebeb, color-stop(1, #d5d5d5)));
-	    background: -webkit-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: -moz-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: -ms-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: -o-linear-gradient(top, #ebebeb, #d5d5d5);
-	    background: linear-gradient(top, #ebebeb, #d5d5d5);
-	    color: #4d494d;
-	    font-size: 11pt;
-	    line-height: 20px;
-	    text-align: center;
-	    width: 100%;
-	    height: 20px;
-	    border-top: 1px solid #f3f1f3;
-	    border-bottom: 1px solid #b1aeb1;
-	    border-top-left-radius: 6px;
-	    border-top-right-radius: 6px;
-	    user-select: none;
-	    -webkit-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
-	    -o-user-select: none;
-	    cursor: default;
-	   }
-
-	   .buttons {
-	    padding-left: 8px;
-	    padding-top: 3px;
-	    float: left;
-	    line-height: 0px;
-	   }
-
-	   .buttons:hover a {
-	    visibility: visible;
-	   }
-
-	   .close {
-	    background: #ff5c5c;
-	    font-size: 9pt;
-	    width: 11px;
-	    height: 11px;
-	    border: 1px solid #e33e41;
-	    border-radius: 50%;
-	    display: inline-block;
-	   }
-
-	   .close:active {
-	    background: #c14645;
-	    border: 1px solid #b03537;
-	   }
-
-	   .close:active .closebutton {
-	    color: #4e0002;
-	   }
-
-	   .closebutton {
-	    color: #820005;
-	    visibility: hidden;
-	    cursor: default;
-	   }
-
-	   .minimize {
-	    background: #ffbd4c;
-	    font-size: 9pt;
-	    line-height: 11px;
-	    margin-left: 4px;
-	    width: 11px;
-	    height: 11px;
-	    border: 1px solid #e09e3e;
-	    border-radius: 50%;
-	    display: inline-block;
-	   }
-
-	   .minimize:active {
-	    background: #c08e38;
-	    border: 1px solid #af7c33;
-	   }
-
-	   .minimize:active .minimizebutton {
-	    color: #5a2607;
-	   }
-
-	   .minimizebutton {
-	    color: #9a5518;
-	    visibility: hidden;
-	    cursor: default;
-	   }
-
-	   .zoom {
-	    background: #00ca56;
-	    font-size: 9pt;
-	    line-height: 11px;
-	    margin-right: 4px;
-	    width: 11px;
-	    height: 11px;
-	    border: 1px solid #14ae46;
-	    border-radius: 50%;
-	    display: inline-block;
-	   }
-
-	   .zoom:active {
-	    background: #029740;
-	    border: 1px solid #128435;
-	   }
-
-	   .zoom:active .zoombutton {
-	    color: #003107;
-	   }
-
-	   .zoombutton {
-	    color: #006519;
-	    visibility: hidden;
-	    cursor: default;
-	   }
-
-	   .content {
-	    padding: 10px;
-	   }
-
-	   /* window END */
-	   /* content BEGIN */
-	   h3 {
-	    margin-top: 0px;
-	   }
-
-	   /* content END */
-
-	   .hover {
-	      border: 2px solid transparent;
-	   }
-
-	   .hover:hover {
-	        text-shadow: 2px 2px 20px red;
-	        border: 2px dashed red;
-	   }
-       
-       .glyphicon.spinning {
-            animation: spin 1s infinite linear;
-            -webkit-animation: spin2 1s infinite linear;
-        }
-        @keyframes spin {
-            from {
-                transform: scale(1) rotate(0deg);
-            }
-            to {
-                transform: scale(1) rotate(360deg);
-            }
-        }
-        @-webkit-keyframes spin2 {
-            from {
-                -webkit-transform: rotate(0deg);
-            }
-            to {
-                -webkit-transform: rotate(360deg);
-            }
-        }
-
-	</style>
+    <?php include "header.php"; ?>
 </head>
 <body class="">
     <script>
         //Kwang create myAPP here so all step can access it.
         var dbName = "<?php echo $dbName; ?>";
 		var accountID = "<?php echo $accountID; ?>";
-		var myApp = angular.module('myApp', ["xeditable","summernote","uiSwitch"]);
+		var myApp = angular.module('myApp', ["localytics.directives","xeditable","summernote","uiSwitch","ngFileUpload"]);
     </script>
+
     <div id="wrapper">
 	<!-- left wrapper -->
 	<div w3-include-html="leftWrapper.php"></div>
@@ -258,6 +35,7 @@
 		</div>	
 		
 <!-- content -->
+
 	<div class="row" ng-cloak>
 		<div class="col-lg-12">
 			<div class="widget style1 blue-bg">
@@ -351,18 +129,18 @@
 												</div>
 											</div>
 										</div>
-										<div class="panel panel-default">
+										<div class="panel">
 											<?php include "editPromoteBlog_step2.php"; ?>
 										</div>
 										<div class="panel">
-											<?php include "editPromoteBlog_step3_Coa.php"; ?>
+											<?php include "editPromoteBlog_step3Coa.php"; ?>
 										</div>
 										<div class="panel panel-default">
 											<?php include "editPromoteBlog_step4.php"; ?>
 										</div>
 									</div>
                                     <div style="float:right;">
-                                        <button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane"></i> Publish</button>
+                                        <button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
                                     </div>
 								</div>
 
@@ -374,6 +152,12 @@
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
 					<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5>
+					<div class="ibox-tools">
+						<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-external-link" style="color:blue"></i> VIEW MORE PERFORMANCE REPORTS</button>
+                    	<a class="collapse-link">
+                        	<i class="fa fa-chevron-up"></i>
+                        </a>
+      				</div>
 				</div>
 				<div class="ibox-content">
 					<div class="row">
@@ -421,8 +205,8 @@
 	<script src="js/davinci.js"></script>
 
 	<!-- Chosen -->
-	<script src="js/plugins/chosen/chosen.jquery.js"></script>
-
+	<!-- <script src="js/plugins/chosen/chosen.jquery.js"></script> -->
+    
 	<!-- X-editable -->
 	<script src="js/plugins/bootstrap-editable/boostrap-editable.js"></script>
 
@@ -444,8 +228,6 @@
     <!-- Page-Level Scripts -->
 	<script src="js/jquery.md5.js"></script>
     <script>
-
-        
 		var action = '';
 		var campaignName = getParameterByName("campaign_name");
 		var campaignID = getParameterByName("campaign_id");
@@ -470,11 +252,9 @@
 
 			$( "#EMAIL1-SCHEDULE1-DATE" ).datepicker();
 
-			$('.chosen-select').chosen({width: "100%"});
-
 			$(".touchspin2").TouchSpin({
 				initval: 1,
-				min: 1,
+				min: 0,
 				max: 100,
 				step: 1,
 				decimals: 0,
@@ -494,6 +274,11 @@
 		}
 
 		myApp.controller('myCtrl',function($scope,$http) {
+            $scope.campaignID = campaignID;
+            $scope.state = {    
+                Save:"Save",
+                Publish:"Launch Program",
+            };
 			$scope.Save = function(mode,silence) {
                 $scope.state['Save'] = "Saving";
 				//alert(mode);
@@ -591,19 +376,18 @@
 					action = 'editCampaign';
 					$scope.master  = response.data;
 					$scope.campaign  = angular.copy($scope.master);
-                    $scope.state = {    
-                        Save:"Save",
-                    };
 					$scope.setInitValue();
 					$scope.setDisplay();
+					$scope.LoadAudience(); 
 					$scope.Reset();
                 },function(errResponse){
 					if (errResponse.status == 404) {
 						action = 'newCampaign';
 						//$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","EMAIL1-SCHEDULE1-DATE":"","EMAIL1-SCHEDULE1-TIME":"","EMAIL2-SCHEDULE1-TIME":"","EMAIL3-SCHEDULE1-TIME":"","EMAIL2-WAIT":"","EMAIL3-WAIT":"","EMAIL1-SCHEDULE1-DATETIME":"","EMAIL2-SCHEDULE1-DATETIME":"","EMAIL3-SCHEDULE1-DATETIME":"","EMAIL1-SCHEDULE1-TIMEZONE":"","EMAIL2-SCHEDULE1-TIMEZONE":"","EMAIL3-SCHEDULE1-TIMEZONE":""};
-						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":""};
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"3","publishProgramName":"","publishDate":"","filterSelected":[]};
 						$scope.setInitValue();
 						$scope.setDisplay();
+                        $scope.LoadAudience(); 
 					} else {
 						//alert(errResponse.statusText);
 						swal(errResponse.statusText);
@@ -819,6 +603,7 @@
             };
             $scope.Publish = function() {
                 //alert("Do publish here");
+                $scope.state['Publish'] = "Launching";
                 $http(
                     {
                         method: 'POST',
@@ -841,8 +626,10 @@
                     }else{
                         swal(response.data.message);
                     }
+                    $scope.state['Publish'] = "Launch Program";
                     //alert(response);
                 },function(errResponse){
+                    $scope.state['Publish'] = "Launch Program";
                     swal("Server Error");
                     //alert(errResponse);
                 });
@@ -859,6 +646,42 @@
                 $scope.Save("",true);   //silence save
                 //alert('SwitchChange');
             };
+            
+            $scope.ViewReport = function(){
+                window.location.href = "reporting.php?campaignID=" + campaignID;
+            };
+
+			$scope.LoadAudience = function() {     
+				
+				if (typeof $scope.campaign['filterSelected']  == 'undefined') {
+		   				$scope.filterList = [];
+				}else{
+						$scope.filterList = $scope.campaign['filterSelected'] ;	
+				} 
+				//$scope.filterList = ["f31711a4f8a49122046ed172246d83e2"]; 
+				$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
+								$scope.masterAu  = response.data; 								
+								 if (typeof $scope.masterAu.items == 'undefined') {
+								   $scope.masterAu.items = [];
+								 } 
+								 $scope.audience  = angular.copy($scope.masterAu);	
+                                 /*
+								 $scope.states = []; 								 
+								 for (var i = 0; i < $scope.audience.items.length; i++) {
+										$scope.fItems = { 
+											id : $scope.audience.items[i].contactID, 
+											listname : $scope.audience.items[i]['LIST-NAME'] 
+										}; 										
+										$scope.states.push($scope.fItems);
+								 }*/
+								 //alert("states = "+$scope.states); 
+				},function(errResponse){				
+						if (errResponse.status == 404) {
+							alert("ERROR 404 [audienceLists]"); 
+						}
+				});
+            };			
+
 			$scope.Load();
 		});
 		function toDate(dateStr) {			
@@ -949,7 +772,12 @@
 
           return day + ' ' + monthNames[monthIndex] + ' ' + year;
         }
-
+        
+        function dbgClick(from){
+            if(from == 'Utils'){
+                window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
+            }
+        }
 
         
     </script>

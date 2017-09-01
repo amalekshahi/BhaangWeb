@@ -39,8 +39,12 @@ String.prototype.startsWith = function(needle)
     return(this.indexOf(needle) == 0);
 };
 
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 function Render(template,data){
-    var reg = /\{{(.*?)\}}/g;
+    var reg = /\{{(.*?)\}}/;
     var html = template;
     while (match = reg.exec(html)) {
         // first shows the match: <h1>,h1
@@ -57,3 +61,14 @@ function Render(template,data){
     }
     return html;
 } 
+
+function dbgClick(from){
+    if(from == 'DBView'){
+        window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
+    }
+    if(from == 'Issue'){
+        window.open("https://github.com/coa0329/Bhaang/issues", '_blank');
+    }
+}
+
+
