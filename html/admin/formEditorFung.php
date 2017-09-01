@@ -318,7 +318,7 @@ var defIndx = -1;
 var dbName = "<?php echo $dbName; ?>";
 var myApp = angular.module('myApp',  ['summernote',"ngFileUpload"]);
 myApp.controller('myCtrl',function($scope,$http) {
-			
+			$scope.tempArr = []; 
 			$scope.SaveForm = function() {
                   //alert($('#selectedFromHTML').html()); 
 				  var txt = $('#selectedFromHTML').html(); 
@@ -332,7 +332,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 					});         
             };
 			$scope.copyScope = function (ItemName,data) {
-				$scope[itemName] = data; 
+				$scope[ItemName] = data; 
 			};
 			$scope.myCopyItem = function (ItemName,data) {
 				if(indx != -1)
@@ -425,7 +425,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 
 						}else if($scope.tempArr[i].fieldType == "datetime"){
 							var datename = "$scope.tempArr[i].fieldID"+"_DATE"; 							
-							temphtml += ' <script>$(document).ready(function(){$("#'+datename ; //+' .input-group.date").datepicker({todayBtn: "linked"});}); </script>  ' ;
+							temphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); < /script>  ' ;
 
 							temphtml += '<div class="form-group" id="'+datename+'"><label>'+tmpLab+'</label><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value=""></div></div>' ; 
 								
