@@ -90,10 +90,21 @@ foreach($configs as $config)
     if(!empty($asEmail)){
         // change EMAIL1 to $asEmail
         $fileContentRaw = str_replace('EMAIL1-',"EMAIL".$asEmail."-",$fileContentRaw);
+        
     }
     
+    //change <viewStyle> to <style>
+    $fileContent = $fileContentRaw;
+    // Handle [[REMOVE 
+    $fileContent = preg_replace('/\[\[REMOVE ([^\]]*)\]\]/',"",$fileContent);
+    $fileContentRaw = preg_replace('/\[\[REMOVE ([^\]]*)\]\]/',"$1",$fileContentRaw);
+    
+    $fileContentRaw = str_replace("<aview","<a",$fileContentRaw);
+    $fileContentRaw = str_replace("aview>","a>",$fileContentRaw);
+
+    
     //Remove {{RAW 
-    $fileContent = str_replace("{{RAW ","{{",$fileContentRaw);
+    $fileContent = str_replace("{{RAW ","{{",$fileContent);
     
     $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
     // Replace {{EMAIL}} with proper summernote tag
@@ -102,6 +113,8 @@ foreach($configs as $config)
     $noneEditTag = '{{'.$scopeName.'[\'$1\']}}';
     // Replace other tag with normal tag
     $content = preg_replace('/\{{([^\}]*)}\}/',$noneEditTag ,$content);
+    
+
     $ret[] = array(
         "title"=> $config->title,
         "contentRaw"=> $fileContentRaw,
@@ -112,8 +125,10 @@ foreach($configs as $config)
     );
 }
 
+$testResult = preg_replace('/\[\[REMOVE ([^\]]*)\]\]/',"$1","aa [[REMOVE xxx\n]] bb");
 echo json_encode(
         array(
+            'testResult'=>$testResult,
             'config'=>$accountInfo,
             'templates'=>$ret,
         )

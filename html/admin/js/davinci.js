@@ -21,6 +21,11 @@ function getCurrentDateTime() {
 	return date+' '+time;
 }
 
+function UTCDateTime(){
+    var d = new Date();
+    return d.toUTCString();
+}
+
 /*
     Remove JSONP Style Call back data
     (xxxxxxxx) -> xxxxxxx

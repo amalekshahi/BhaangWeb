@@ -122,10 +122,15 @@
 																<form class="form-inline" role="form">
 																	<div class="form-group">
 																		<label for="wait"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
-																		<input class="touchspin2 form-control input-sm" id="EMAIL2-WAIT" name="EMAIL2-WAIT" type="text" value="4" ng-model="campaign['EMAIL2-WAIT']" style="width:50px; text-align: center" ng-change="dateChange('')"> <strong>days</strong> <small>and send @ </small> 
-																		
+																		<input class="touchspin2 form-control input-sm" id="EMAIL1-WAIT" name="EMAIL1-WAIT" type="text" value="4" ng-model="campaign['EMAIL1-WAIT']" style="width:50px; text-align: center"> 
+																		<select class="form-control" id="EMAIL1-WAIT-UNIT" name="EMAIL1-WAIT-UNIT" ng-model="campaign['EMAIL1-WAIT-UNIT']" ng-change="chkValidSchedule()">
+																			<option value="" disabled>Select...</option>
+																			<option value="Days" >days</option> 
+																			<option value="Hours">hours</option> 
+																			<option value="Mins">minutes</option> 
+																		</select>
 
-																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
+																		<!-- <div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input type="text" class="form-control" id="EMAIL2-SCHEDULE1-TIME" name="EMAIL2-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-TIME']" ng-change="dateChange('')">
 																			<span class="input-group-addon">
 																				<span class="fa fa-clock-o"></span>
@@ -136,7 +141,7 @@
 																				<option value="Central America Standard Time">CST</option> 
 																				<option value="Eastern Standard Time">EST</option>
 																			</select>
-																		</div>
+																		</div> -->
 																	</div>
 																</form>
 															</td>
@@ -155,14 +160,14 @@
 																<form class="form-inline" role="form">
 																	<div class="form-group">
 																		<label for="wait3"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
-																		<input class="touchspin2 form-control input-sm" id="EMAIL3-WAIT" name="EMAIL3-WAIT" type="text" value="4" ng-model="campaign['EMAIL3-WAIT']" style="width:50px; text-align: center" ng-change="dateChange('')"> <strong>days</strong> <small>and send @ </small> 
+																		<input class="touchspin2 form-control input-sm" id="EMAIL2-WAIT" name="EMAIL2-WAIT" type="text" value="4" ng-model="campaign['EMAIL2-WAIT']" style="width:50px; text-align: center"> <strong>days</strong> <small>and send @ </small> 
 
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
-																			<input type="text" class="form-control" id="EMAIL3-SCHEDULE1-TIME" name="EMAIL3-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL3-SCHEDULE1-TIME']" ng-change="dateChange('')">
+																			<input type="text" class="form-control" id="EMAIL2-SCHEDULE1-TIME" name="EMAIL2-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-TIME']">
 																			<span class="input-group-addon">
 																				<span class="fa fa-clock-o"></span>
 																			</span>
-																				<select class="form-control" id="EMAIL3-SCHEDULE1-TIMEZONE" name="EMAIL3-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL3-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')">
+																				<select class="form-control" id="EMAIL2-SCHEDULE1-TIMEZONE" name="EMAIL2-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL2-SCHEDULE1-TIMEZONE']">
 																				<option value="Pacific Standard Time" >PST</option> 
 																				<option value="Mountain Standard Time">MST</option> 
 																				<option value="Central America Standard Time">CST</option> 
@@ -173,7 +178,8 @@
 																</form>
 															</td>
 														</tr>
-														<tr>
+														<!-- Jiew : Current version cannot add email -->
+														<!-- <tr>
 															<td class="project-status"><button class="btn btn-success btn-lg" type="button"><span aria-hidden="true" class="fa fa-plus-square-o"></span> ADD ANOTHER EMAIL</button></td>
 															<td class="project-title"><strong>You can up to 6 emails in this sequence</strong><br>
 															<small>Drive engagement by up to 57% by adding 1 more email.</small></td>
@@ -184,7 +190,8 @@
 																	</div>
 																</form>
 															</td>
-														</tr>
+														</tr> -->
+														<!-- Jiew -->
 													</tbody>
 												</table>
 												
@@ -292,7 +299,21 @@ myApp.controller('step4',function($scope,$http) {
         }
     };
 
-
+	$scope.chkValidSchedule = function(){
+		var maxValue = 100;
+		if (hasValue($scope.campaign['EMAIL1-WAIT-UNIT'])) {
+			if ($scope.campaign['EMAIL1-WAIT-UNIT'] == 'Hours')	{
+				maxValue = 24;
+			} else if ($scope.campaign['EMAIL1-WAIT-UNIT'] == 'Mins')	{
+				maxValue = 60;
+			}
+		
+			if ($scope.campaign['EMAIL1-WAIT'] >maxValue) {
+				$( "#EMAIL1-WAIT" ).val(maxValue);
+			}
+		}
+		$( "#EMAIL1-WAIT" ).trigger("touchspin.updatesettings", {max: maxValue});
+	}
 
 });
 </script>

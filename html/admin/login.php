@@ -21,7 +21,8 @@ if ($accountID == "") {
 }
 
 if ($mode == 'login') {
-	$FieldNames = getxmediaAPI($accountName);
+	$FieldNames = getxmediaAPICouchDB($accountName);
+    //$FieldNames = getxmediaAPI($accountName);
 	$PartnerGuid = $FieldNames[0];
 	$PartnerPassword = $FieldNames[1]; 
 
@@ -41,7 +42,7 @@ if ($mode == 'login') {
             $_SESSION['DBNAME'] = $dbName;
             echo $callback, '(', json_encode( array('success'=>true, 'PartnerGuid'=>$PartnerGuid, 'PartnerPassword'=>$PartnerPassword, 'Doc'=>$doc)), ')';
         }else{
-            echo $callback, '(', json_encode( array('success'=>false, 'message'=>'Cannot create database '.$dbName)), ')';
+            echo $callback, '(', json_encode( array('success'=>false, 'message'=>'Cannot create database '.$dbName, 'Doc'=>$doc)), ')';
         }
 	} else {
 		echo $callback, '(', json_encode( array('success'=>false, 'message'=>'Cannot find PartnerGuid')), ')';
@@ -53,13 +54,16 @@ if ($mode == 'login') {
 		"SelectedAccountID" => $SelectedAccountID,
 		"Email" => $email, 
 		"Password" => $pwd, 
-		"PartnerGuid" => "CampaignLauncherAPIUser", 
-		"PartnerPassword" => "4e98af380d523688c0504e98af3="
+		//"PartnerGuid" => "CampaignLauncherAPIUser", 
+		//"PartnerPassword" => "4e98af380d523688c0504e98af3="
+		"PartnerGuid" => "", 
+		"PartnerPassword" => ""
+        
 	);
 
 	$authResponse = callService("userservice/Authenticate", $authRequest);
 
-	$userTicket = $authResponse->{"Credentials"}->{"Ticket"};
+	//$userTicket = $authResponse->{"Credentials"}->{"Ticket"};
 	//echo "userTicket=$userTicket<br>";
 	$ErrorCode = $authResponse->{"Result"}->{"ErrorCode"};
 	if ($ErrorCode == "") {
@@ -68,7 +72,9 @@ if ($mode == 'login') {
 		$AccountNumber = Sizeof($AvailableAccountList);
 		$isFound = true;
 
-		$AccountNames = getxmediaAPIaccount();
+		//$AccountNames = getxmediaAPIaccount();
+        
+        $AccountNames = getxmediaAPIaccountCouchDB();
 		
 		$loadmore = "Yes";
 			
@@ -93,7 +99,21 @@ if ($mode == 'login') {
 		echo $callback, '(', json_encode( array('success'=>false, 'message'=>$errorMessage)), ')';
 		exit;
 	} 
-	echoCallbackString( $callback, $loadmore, $authToken, $mpArray);
+    
+    echo $callback, '(',
+    json_encode( array(
+        'success'   => true,
+        'loadmore'  => $loadmore,
+        'authToken' => $authToken,
+        'mps'=>$mpArray,
+        'authRequest'=>$authRequest,
+        'authResponse'=>$authResponse,
+        'AccountNames'=>$AccountNames,
+        'doc'=>$doc,
+        'databaseEndpoint'=>$databaseEndpoint,
+    )), ')';
+
+	//echoCallbackString( $callback, $loadmore, $authToken, $mpArray);
 
 }
 

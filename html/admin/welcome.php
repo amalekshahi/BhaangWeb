@@ -154,6 +154,7 @@
             };
 			$scope.Load = function() {
                 $http.get("/couchdb/" + dbName +'/campaignlist?'+new Date().toString()).then(function(response) {
+                //$http.get("/couchdb/" + dbName +'/campaignlist?'+new Date().toString()).then(function(response) {
                      $scope.master  = response.data; 
                      if (typeof $scope.master.campaigns == 'undefined') {
                        $scope.master.campaigns = [];

@@ -62,19 +62,42 @@
         </md-content>  
         <div ng-if="backend.data" ng-jsoneditor="onLoad" ng-model="backend.data" options="backend.options" style="width: 98%;"></div>
       </md-tab label>        
-      <md-tab label="CheckOut">
-        <md-content class="md-padding">
-          <h1 class="md-display-1">Tab tow</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+      <md-tab label="getEmailTemplate">
+        <md-content md-theme="docs-dark" layout="column" class="md-padding">          
+            <md-content md-theme="docs-dark" layout="row" layout-padding>    
+                <md-input-container>
+                    <label>blueprint</label>
+                    <md-select ng-model="getEmailTemplate.blueprint">
+                        <md-option value="PromoteBlog">PromoteBlog</md-option>
+                    </md-select>
+                </md-input-container>  
+                <md-input-container>
+                    <button ng-click="getEmailTemplateClick()">submit</button>
+                </md-input-container>  
+            </md-content>                  
         </md-content>  
+        <div ng-if="getEmailTemplate.data" ng-jsoneditor="onLoad" ng-model="getEmailTemplate.data" options="getEmailTemplate.options" style="width: 98%;"></div>
       </md-tab label>        
-      <!--
-      <md-tab label="three">
-        <md-content class="md-padding">
-          <h1 class="md-display-1">Tab three</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+      
+      <md-tab label="login">
+        <md-content md-theme="docs-dark" layout="column" class="md-padding">          
+            <md-content md-theme="docs-dark" layout="row" layout-padding>    
+                 <md-input-container>
+                    <label>email</label>
+                    <input ng-model="login.email" >
+                </md-input-container>  
+                <md-input-container>
+                    <label>password</label>
+                    <input ng-model="login.pwd" >
+                </md-input-container>  
+                <md-input-container>
+                    <button ng-click="loginClick()">submit</button>
+                </md-input-container>  
+            </md-content>                  
         </md-content>  
-      </md-tab label>        -->
+        <div ng-if="login.data" ng-jsoneditor="onLoad" ng-model="login.data" options="login.options" style="width: 98%;"></div>
+      </md-tab label>        
+      
     </md-tabs>
   <md-content>
 </div>  
@@ -114,6 +137,46 @@
             angular.element(document).injector().invoke(function($compile) {
                 var scope = angular.element($("#myDiv")).scope();
                 $compile($("#myDiv"))(scope);
+            });
+        };    
+
+        $scope.getEmailTemplate = {
+            blueprint: "PromoteBlog",
+            options: {mode: 'tree'},
+        };
+        $scope.getEmailTemplateClick = function(){
+            $scope.getEmailTemplate.data = {};
+            $http.get("getEmailTemplate.php",
+                {
+                  method: "POST",
+                  params: {
+                    blueprint: $scope.getEmailTemplate.blueprint,
+                  }  
+                }
+            ).then(function(response) {
+                  $scope.getEmailTemplate.data = response.data;
+                  console.log($scope.getEmailTemplate.response);
+            });
+        };        
+        
+        $scope.login = {
+            email: "tt994613@gmail.com",
+            pwd: "Atm12345#",
+            options: {mode: 'tree'},
+        };
+        $scope.loginClick = function(){
+            $scope.login.data = {};
+            $http.get("login.php",
+                {
+                  method: "GET",
+                  params: {
+                    email: $scope.login.email,
+                    pwd: $scope.login.pwd,
+                  }  
+                }
+            ).then(function(response) {
+                  $scope.login.data = JSON.parse(clearCallBack(response.data)); // response.data;
+                  console.log($scope.login.response);
             });
         };                
   }]);

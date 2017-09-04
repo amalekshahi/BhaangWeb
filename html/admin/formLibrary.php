@@ -9,10 +9,10 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <?php include "header.php"; ?>
-</head>	
+</head>
 
 <body class="">
     <div id="wrapper">
@@ -28,7 +28,7 @@
 				</nav>
 		</div>	
 <!-- content -->
-<div>
+<div ng-controller="myCtrl">
 	
 
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -68,60 +68,33 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr ng-repeat="item in formLib.items" ng-cloak>
                                         <td class="project-reach">
                                                 <medium>Active</medium><br><small class="text-muted">&nbsp;</small> 
                                         </td>
                                         <td class="project-title">
-                                            <a href="formEditor.php">eBook Form </a>
+                                            <a href="formEditor.php?fID={{item.formID}}">{{item['formName']}}</a>
                                             <br/>
-                                            <a href="formEditor.php"><small class="text-muted">Last Modified Thurs Aug </small></a>
+                                            <a href="formEditor.php?fID={{item.formID}}"><small class="text-muted">Last Modified {{item.modifiedDate}} </small></a>
                                         </td>
                                         <td class="project-reach">
-                                                <medium>5</medium><br><small class="text-muted">&nbsp;</small> 
+                                                <medium>{{item.fieldLists.length}}</medium><br><small class="text-muted">&nbsp;</small> 
                                         </td>
                                         <td class="project-completion">
-                                                <medium>First Name, Last Name, Title, Company, Email</medium><br><small class="text-muted">&nbsp;</small> 
+                                                <medium>{{item.allFieldName}}</medium><br><small class="text-muted">&nbsp;</small> 
                                                 
                                             
                                         </td>
                                         <td class="project-completion">
-                                                <medium>17</medium><br><small class="text-muted">people submitted this form</small>
+                                                <medium>{{item.submission}}</medium><br><small class="text-muted">people submitted this form</small>
                                         </td>
 
                                         <td class="project-actions">
                                             <a href="formEditor.php" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
-                                            <a href="formEditor.php" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
+                                            <a href="formEditor.php?fID={{item.formID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
                                         </td>
                                         
-                                    </tr>
-                                    <tr>
-                                        <td class="project-reach">
-                                                <medium>Active</medium><br><small class="text-muted">&nbsp;</small> 
-                                        </td>
-                                        <td class="project-title">
-                                            <a href="formEditor.php">Evergreen Webinar Sign Up Form </a>
-                                            <br/>
-                                            <a href="formEditor.php"><small class="text-muted">Last Modified Thurs Aug </small></a>
-                                        </td>
-                                        <td class="project-reach">
-                                                <medium>3</medium><br><small class="text-muted">&nbsp;</small> 
-                                        </td>
-                                        <td class="project-completion">
-                                                <medium>First Name, Last Name, Email</medium><br><small class="text-muted">&nbsp;</small> 
-                                                
-                                            
-                                        </td>
-                                        <td class="project-completion">
-                                                <medium>57</medium><br><small class="text-muted">people submitted this form</small>
-                                        </td>
-
-                                        <td class="project-actions">
-                                            <a href="formEditor.php" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
-                                            <a href="formEditor.php" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
-                                        </td>
-                                        
-                                    </tr>
+                                    </tr>                                   
                                     </tbody>
                                 </table>
                             </div>
@@ -156,12 +129,32 @@
 
 	 <!-- Page-Level Scripts -->
 
-    <script>
-        $(document).ready(function() {
-			//angular.element('#myCtrl').scope.Load();
-        });
+<script>
+var dbName = "<?php echo $dbName; ?>";
+var myApp = angular.module('myApp', ["xeditable"]);
+myApp.controller('myCtrl',function($scope,$http) {
+			$scope.Reset = function() {
+				 
+			};
+			$scope.Load = function() {                
+				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
+					 $scope.master  = response.data; 
+					 if (typeof $scope.master.items == 'undefined') {
+					   $scope.master.items = [];
+					 } 
+					  $scope.formLib  = angular.copy($scope.master);
 
-	</script>
+				},function(errResponse){
+						if (errResponse.status == 404) {
+							$scope.formLib = {items:[]};
+						}
+				});
+			};
+
+			$scope.Load();
+});  
+
+</script>
 
 
 

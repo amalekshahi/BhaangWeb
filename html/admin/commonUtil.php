@@ -14,6 +14,7 @@ $databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
 
 function couchDB_Get($path,$asArray = false)
 {
+    global $databaseEndpoint;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $databaseEndpoint . $path);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -32,8 +33,9 @@ function couchDB_Get($path,$asArray = false)
 
 function couchDB_CreateDatabase($dbName)
 {
+    global $databaseEndpoint;
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $databaseEndpoint . $dbName);
+    curl_setopt($ch, CURLOPT_URL, $databaseEndpoint."/".$dbName);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -49,6 +51,7 @@ function couchDB_CreateDatabase($dbName)
 
 function couchDB_Save($dbName,$doc)
 {
+    global $databaseEndpoint;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $databaseEndpoint . $dbName);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');

@@ -452,7 +452,7 @@
 				$scope.openEmail3 = false;
                 $scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
                 $scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step4Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],"01/01/2050 08:00:00 AM");
+                $scope.step4Done = hasValue($scope.campaign['EMAIL1-WAIT'],"0");
                 $scope.step5Done = $scope.step4Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -620,9 +620,8 @@
             };
             //Kwang uiSwitch change
             $scope.SwitchChange = function(){
-                $scope.campaign['OPEN-MY-EMAIL'] = MapTrueFalse($scope.campaign['OPEN-MY-EMAIL-'],"Start","Stop");                
-                $scope.campaign['CALL-TO-ACTION'] = MapTrueFalse($scope.campaign['CALL-TO-ACTION-'],"Start","Stop");
-				$scope.campaign['VISIT-MY-BLOCK'] = MapTrueFalse($scope.campaign['VISIT-MY-BLOCK-'],"Start","Stop");
+                $scope.campaign['VISIT-LANDING-PAGE'] = MapTrueFalse($scope.campaign['VISIT-LANDING-PAGE-'],"Start","Stop");                
+                $scope.campaign['DOWNLOAD-eBOOK'] = MapTrueFalse($scope.campaign['DOWNLOAD-eBOOK-'],"Start","Stop");
                 $scope.Save("",true);   //silence save
                 //alert('SwitchChange');
             };

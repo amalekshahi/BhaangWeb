@@ -79,7 +79,7 @@
     			<div class="pull-right tooltip-demo">
     			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
     			</div>			
-    		    <h3>Form Name: <select id="selectForm" ng-model="selectedForm" ng-change="SelectChanged(this.selectedForm)">
+    		    <h3>Form Name: <select id="selectForm" ng-model="selectedForm" ng-change="SelectChanged(this.selectedForm)" ng-cloak>
 					<option ng-repeat="x in deflist.items" value="{{x.formName}}" selected={{x.formSelected}}>{{x.formName}}</option>					
 				</select>
 				</h3>
@@ -93,7 +93,7 @@
 								<h3>Available Contact Fields</h3>
 								<p class="small"><i class="fa fa-hand-o-up"></i> Drag from here to your form, or back again.</p>
 								<ul class="sortable-list connectList agile-list" id="available_fields" >
-									<li class="info-element" id="{{d.fieldID}}" ng-repeat="d in defItem">{{d.label}}
+									<li class="info-element" id="{{d.fieldID}}" ng-repeat="d in defItem" ng-cloak>{{d.label}}
 										<div class="agile-detail">
 											<a class="pull-right btn btn-xs btn-white" href="#" data-toggle="modal" data-target="#{{d.fieldID}}Modal"><i class="fa fa-cog"></i> Settings</a>
 											<small ng-if="d.fieldType=='textbox'"><i class="fa fa-pencil-square-o"></i> Text line</small>
@@ -156,7 +156,7 @@
 							<div class="ibox-content">
 								<p class="small"><i class="fa fa-hand-o-up"></i> Re-order your fields, or pull them to the left to remove them.</p>
 								<ul class="sortable-list connectList agile-list" id="form_fields">									
-									<li class="success-element"  id="{{s.fieldID}}" ng-repeat="s in selectItem">{{s.label}}<small ng-if="s.required=='Yes'"> <i aria-hidden="true" class="fa fa-star-o" style="color:red"></i></small>
+									<li class="success-element"  id="{{s.fieldID}}" ng-repeat="s in selectItem" ng-cloak>{{s.label}}<small ng-if="s.required=='Yes'"> <i aria-hidden="true" class="fa fa-star-o" style="color:red"></i></small>
 										<div class="agile-detail">
 											<a class="pull-right btn btn-xs btn-white" href="#" data-toggle="modal" data-target="#{{s.fieldID}}Modal"><i class="fa fa-cog"></i> Settings</a>
 											<small ng-if="s.fieldType=='textbox'"><i class="fa fa-pencil-square-o"></i> Text line</small>
@@ -203,13 +203,7 @@
 												<form action="/send?a=download" id="rzForm" method="post" name="rzForm" novalidate="">
 													<fieldset>													
 															<div><p class="lead">Download your eBook:</p></div>
-															<div id="summer">
-																<div class="form-group">
-																	<label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">Email <span style="color:red;">&#42;</span></label></textarea></div> <input class="form-control input-sm" name="email" required="" type="text" value="">
-																</div>
-																<div class="form-group">
-																	<label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">First Name <span style="color:red;">&#42;</span></label></textarea></div> <input class="form-control input-sm" name="firstname" required="" type="text" value="">
-																</div>
+															<div id="summerblock">													
 															</div><!-- end summer bind -->
 															<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button>
 															<div>
@@ -246,59 +240,56 @@
 	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script> 
 	<!-- jquery UI -->	 
 	<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script> 	
-	<!-- Touch Punch - Touch Event Support for jQuery UI -->	 
-	<!-- <script src="js/plugins/touchpunch/jquery.ui.touch-punch.min.js"></script>  -->
-	
-    <!-- SUMMERNOTE -->
-    <script src="js/plugins/summernote/summernote.min.js"></script>
-    <!-- X-editable -->
+	<!-- X-editable -->
     <script src="js/plugins/bootstrap-editable/boostrap-editable.js"></script>	 	
 	<script src="js/inspinia.js"></script> 
 	<script src="js/plugins/pace/pace.min.js"></script> 
-	<script type="text/JavaScript" src="global.js?n=1"></script> 
-	
-	
+	<script type="text/JavaScript" src="global.js?n=1"></script> 	
 	<!-- Custom and plugin javascript -->	 
 
 <script>
-/*
-    $.fn.editable.defaults.mode = 'inline';
-    $.fn.editableform.buttons  = 
-        '<button type="button" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i></button>'+
-        '<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>'+
-        '<button type="button" class="btn btn-default btn-sm editable-off"><i class="glyphicon glyphicon-trash"></i></button>';
-	   //postform
-*/ 
-
 	
 var fID = getParameterByName("fID");
 fID = "a1"; 
 var indx = -1; 
 var defIndx = -1; 
 var dbName = "<?php echo $dbName; ?>";
-var myApp = angular.module('myApp',  ['summernote',"ngFileUpload"]);
+var myApp = angular.module('myApp',  []);
 myApp.controller('myCtrl',function($scope,$http) {
 			$scope.tempArr = []; 
 
 			$scope.SaveForm = function() {
-				 $scope.genSelectedFromHTML(); 
+				 $scope.GenSelectedFromHTML(); 
 				  var txt = $scope.selectedFromHTML; 
-				  $scope.myCopyItem('formHTML',txt);
+				  $scope.MyCopyItem('formHTML',txt);
 				  $http.put('/couchdb/' + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
 						 $scope.LoadSelect(); 
+						 $scope.LoadDefault(); 
 						 alert("Save success");
 //						 $scope.state['Save'] = "Save";
+
 					});         
             };
-			$scope.copyScope = function (ItemName,data) {
+			$scope.CopyScope = function (ItemName,data) {
 				$scope[ItemName] = data; 
 			};
-			$scope.myCopyItem = function (ItemName,data) {
+			$scope.MyCopyItem = function (ItemName,data) {
 				if(indx != -1)
 					$scope.frmlist.items[indx][ItemName] = data; 
 				else
 					$scope.selectItem[ItemName] = data; 
 			};
+
+			$scope.LoadRightBlock = function() {
+					var summerdivtxt = ''; 
+					if(typeof $scope.selectItem != 'undefined') {
+							for(i=0;i<$scope.selectItem.length;i++){
+								var tmpLab = $scope.selectItem[i].label; 
+								summerdivtxt += '<div class="form-group"><label>'+tmpLab+'</label><input class="form-control input-sm" name="'+tmpLab+'" required="" type="text" value=""></div>' ; 
+							}
+					}
+					$('#summerblock').html(summerdivtxt); 		
+            };
 			
 			$scope.LoadSelect = function() {                
 				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
@@ -309,12 +300,14 @@ myApp.controller('myCtrl',function($scope,$http) {
 							$scope.frmlist  = angular.copy($scope.master);
 							indx = $scope.frmlist.items.getIndexByValue('formID',fID);		
 							$scope.selectItem = $scope.frmlist.items[indx]['fieldLists']; 
+							$scope.LoadRightBlock(); 
 
 				},function(errResponse){
 							if (errResponse.status == 404) {
 								$scope.frmlist = {items:[]};
 							}
                 });
+
             };
 
 			$scope.LoadDefault = function(defID) {                
@@ -332,13 +325,37 @@ myApp.controller('myCtrl',function($scope,$http) {
 								$scope.deflist.items[defIndx]['fieldLists'].formSelected = "selected";
 
 							}
-							$scope.defItem = $scope.deflist.items[defIndx]['fieldLists']; 
+							//$scope.defItem = $scope.deflist.items[defIndx]['fieldLists']; 						
+							$scope.CheckDupOnLoad(); 
 
 				},function(errResponse){
 							if (errResponse.status == 404) {
 								$scope.deflist = {items:[]};
 							}
                 });
+            };
+
+			$scope.CheckDupOnLoad = function(ftype) {
+					if(typeof $scope.selectItem != 'undefined') {
+							var defArr = []; 							
+							for(i=0;i<$scope.deflist.items[defIndx]['fieldLists'].length;i++){
+									var isDup = false; 
+									for(k=0;k<$scope.selectItem.length;k++){
+											if($scope.deflist.items[defIndx]['fieldLists'][i].fieldID == $scope.selectItem[k].fieldID){
+												isDup = true; 
+												break; 
+											}else{
+												isDup = false; 
+											}
+									}//for k
+									if(!isDup){
+											defArr.push($scope.deflist.items[defIndx]['fieldLists'][i]); 
+									}
+							}//for i
+							$scope.defItem = defArr; 
+					}else{
+							$scope.defItem = $scope.deflist.items[defIndx]['fieldLists']; 	
+					}
             };
 
 			$scope.SelectChanged = function(ftype) {
@@ -354,7 +371,7 @@ myApp.controller('myCtrl',function($scope,$http) {
                   
             };
 				
-			$scope.genSelectedFromHTML = function() {
+			$scope.GenSelectedFromHTML = function() {
 				var temphtml = ""; 
 				for(i=0;i<$scope.tempArr.length;i++){
 						temphtml +=' <div class="form-group"> '; 
@@ -397,16 +414,12 @@ myApp.controller('myCtrl',function($scope,$http) {
 				
 				$scope.selectedFromHTML = '<div class="col-lg-4 ibox ibox-content well"><form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form><div>' ; 		
                   
-            };// end genSelectedFromHTML()
+            };// end GenSelectedFromHTML()
 			
 			$scope.LoadStart();
 });
 
 $(document).ready(function(){
-				$('.summernote').summernote({
-				  airMode: true,
-				  popover: {}
-				});		
 
 	           $("#available_fields, #form_fields, #completed").sortable({
 	               connectWith: ".connectList",
@@ -414,18 +427,10 @@ $(document).ready(function(){
 
 	                   var available_fields = $( "#available_fields" ).sortable( "toArray" );
 	                   var form_fields = $( "#form_fields" ).sortable( "toArray" );
-	                   var completed = $( "#completed" ).sortable( "toArray" );
-						
-						var summerdivtxt = ''; 						
-						for(i=0;i<form_fields.length;i++){
-							summerdivtxt += '<div class="form-group"><label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">FieldName</label></textarea></div><input class="form-control input-sm" name="FieldName" required="" type="text" value=""></div>'
-						}
-						$('#summer').html(summerdivtxt); 		
-						$('.summernote').summernote({
-						  airMode: true,
-						  popover: {}
-						});				
-						//$scope.tempArr = []; 
+	                   var completed = $( "#completed" ).sortable( "toArray" );			
+					   						
+						var summerdivtxt = ''; 				//display right block 
+
 						var tempArr=[]; 
 						for(i=0;i<form_fields.length;i++){							
 							var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
@@ -433,15 +438,20 @@ $(document).ready(function(){
 							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
 							//add array
 							tempArr.push({"fieldID":form_fields[i], "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": "textbox" }); 
+														
+							summerdivtxt += '<div class="form-group"><label>'+flabel+'</label><input class="form-control input-sm" name="'+flabel+'" required="" type="text" value=""></div>' ; 
 
-							$('.summernote').eq(i).summernote('code',flabel+' <span style="color:red;">&#42;</span>'); 
+
 						}//end for i
-						angular.element(document.getElementById('myCtrl')).scope().myCopyItem('fieldLists',tempArr);
-						angular.element(document.getElementById('myCtrl')).scope().copyScope('tempArr',tempArr);
-	                    $('.output').html(" form_fields = "+form_fields);
+						angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
+						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
+	                    $('.output').html(" form_fields = "+form_fields);					
+						
+						$('#summerblock').html(summerdivtxt); 		
+
 	               }
 	           }).disableSelection();			 
-//			  alert( $('.summernote').eq(1).summernote('code') ); 
+
 }); // end document.ready(); 
 
 </script>

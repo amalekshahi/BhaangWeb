@@ -18,6 +18,14 @@ $ACCOUNNAME = $_SESSION['ACCOUNNAME'];
 if ($TEST == 't') {
 	echo "$LISTDEFINITION<br>";
 }
+/*print_r($ACCOUNTID);
+print_r($EMAIL);
+print_r($PWD);
+print_r($PARTNERGUID);
+print_r($PARTNERPASSWORD);
+print_r($ACCOUNNAME);
+print_r($_SESSION);
+*/
 
 $ticket = getTicket($ACCOUNTID, $EMAIL, $PWD, $PARTNERGUID, $PARTNERPASSWORD);
 

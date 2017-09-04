@@ -89,6 +89,48 @@ function getxmediaAPIaccount() {
 }
 
 
+function getxmediaAPICouchDB($account) {
+	//$sqltxt = "select * from xmediaAPI where accountname = ? limit 1";
+	//$row2 = DB::QueryExecuteMulti($sqltxt, $account);
+
+    $doc = couchDB_Get("/master/studioAPI",true);
+    $row2 = $doc['apiCredential'];
+	$FieldNames = array();
+	
+	if ($row2) {
+		foreach( $row2 as $row1 ) {		
+            if(strtolower($account) == strtolower($row1['accountname'])){
+                $FieldNames[] = $row1['PartnerGuid'];
+                $FieldNames[] = $row1['PartnerPwd'];
+                return $FieldNames;
+            }
+		}
+	} else {
+		$FieldNames[] = '';
+		$FieldNames[] = '';
+	}
+	return $FieldNames;
+}
+
+
+function getxmediaAPIaccountCouchDB() {
+    $doc = couchDB_Get("/master/studioAPI",true);
+	//$sqltxt = "select * from xmediaAPI";
+	//$row2 = DB::QueryExecuteMulti($sqltxt);
+	$AccountNames = array();
+    $row2 = $doc['apiCredential'];
+	
+	if ($row2) {
+		foreach( $row2 as $row1 ) {			
+			$r1 = $row1['accountname'];
+			$AccountNames[] = $r1;
+		}
+	}
+	return $AccountNames;
+}
+
+
+
 function ImportContacts($TEST, $FileName, $Mapping, $importName, $userTicket, $email, $file, $recordCount, $importType, $accountName) {
 	$output = file_get_contents($file);
 	$byteArr = str_split($output);

@@ -307,7 +307,8 @@
 				$http.put('/couchdb/' + dbName +'/'+campaignID, $scope.campaign).then(function(response){
 					$scope.campaign._rev = response.data.rev;
 
-					var currentDate = getCurrentDateTime();
+					//var currentDate = getCurrentDateTime();
+                    var currentDate = UTCDateTime();  //use GMT time zone to make angular sort() collrectly
 					$http.get("/couchdb/" + dbName +'/campaignlist'+"?"+new Date().toString()).then(function(response) {
 						$scope.campaignlist  = response.data; 
 						if (action=="newCampaign") {

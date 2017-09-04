@@ -40,13 +40,13 @@
 															<div class="form-group">
 																<label class="col-sm-3 control-label">Visit the Landing Page</label>
 																<div class="col-sm-2">
-                                                                    <switch ng-model="campaign['OPEN-MY-EMAIL-']" class="green"  ng-change="SwitchChange()"></switch>
+                                                                    <switch ng-model="campaign['VISIT-LANDING-PAGE-']" class="green"  ng-change="SwitchChange()"></switch>
 																</div>
 															</div>
 															<div class="form-group">
 																<label class="col-sm-3 control-label">Download the eBook</label>
 																<div class="col-sm-2">
-                                                                    <switch ng-model="campaign['VISIT-MY-EMAIL-']" class="green" ng-change="SwitchChange()"></switch>
+                                                                    <switch ng-model="campaign['DOWNLOAD-eBOOK-']" class="green" ng-change="SwitchChange()"></switch>
 																</div>
 															</div>
 																<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->
