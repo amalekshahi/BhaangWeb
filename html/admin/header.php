@@ -1,30 +1,27 @@
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
-    <title>Main Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+  <title>Da Vinci by MindFire</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
+  <link href="css/style.css" rel="stylesheet">
+	<link rel="icon" href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" type="image/x-icon" />
 	<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-
+  <link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 	<link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-
 	<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 	<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
 	<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/chosen/chosen.css">
-    <link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
+	<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
 	<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
     
 	<!-- x-editable (bootstrap version) -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 
 	<!-- Sweet alert -->
 	<link rel="stylesheet" href="css/sweet/sweetalert.css">

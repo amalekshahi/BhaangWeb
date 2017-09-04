@@ -5,16 +5,18 @@
     require_once('loginCredentials.php');
 ?>
 <div class="navbar-header">
-    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-    <form role="search" class="navbar-form-custom" action="#">
+  <!-- Commented out for now, until we have Da Vinci wide search
+  <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+  <form role="search" class="navbar-form-custom" action="#">
         <div class="form-group">
             <input type="text" placeholder="Search...." class="form-control" name="top-search" id="top-search">
         </div>
     </form>
+  -->
 </div>
 <ul class="nav navbar-top-links navbar-right">
         <li>
-            <?php echo $accountName;?> 
+          <span class="m-r-sm text-muted welcome-message">Hi userName, you're logged in to <?php echo $accountName;?>.</span>
         </li>    
         <!--<li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog" ></i> Utils <span class="caret"></span></a>

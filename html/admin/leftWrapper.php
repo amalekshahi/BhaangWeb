@@ -31,10 +31,14 @@
 				<li>
                     <a href="pickBlueprint.php"><i class="fa fa-plus"></i> <span class="nav-label">Create a Campaign</span></a>
                 </li>
-				<li>
+				
+	 			<!--
+	 			<li>
                     <a href="myCampaigns.php"><i class="fa fa-paper-plane-o"></i> <span class="nav-label">My Campaigns</span></a>
                 </li>
-				 <li>
+				-->					
+				<li>
+				
                     <a href="assetLibrary.php"><i class="fa fa-files-o"></i> <span class="nav-label">Asset Library<span class="label label-warning pull-right">NEW</span></a>
                 </li>    
 				<li>

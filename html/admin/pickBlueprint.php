@@ -30,7 +30,7 @@
 <!-- content -->
 <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h1><strong>What sort of campaign would you like to make?</strong></h1>
+                <h1><strong>What's Your Marketing Objective?</strong></h1>
             </div>
             <div class="col-lg-2">
 
@@ -64,33 +64,23 @@
                                 		<div class="modal-dialog">
                                 			<div class="modal-content">
                                 				<div class="modal-body">
-                                					<div class="row">
-                                						<div class="col-sm-6 b-r">
-                                							<h3 class="m-t-none m-b">Let's Get Started!</h3>
-                                							<p>Starting by naming your campaign.</p>
+                                						<div class="modal-header">
+                                							<h2>Promote a Blog Post</h2>
+                                							<p>Da Vinci will help you drive traffic to a piece of content, and generate leads (optional).  Start by naming your campaign.</p>
                                 							<form role="form" method="get" action="editPromoteBlog.php">
                                 								<div class="form-group">
-                                									<!--<label>Name</label>--> <input class="form-control" placeholder="My fancy first campaign" type="input" name="campaign_name">
-                                									<span class="help-block m-b-none">A good campaign name helps you easily identify the campaigns you've created in your Dashboard.</span>
+                                									<!--<label>Name</label>--> <input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name">
+                                									<span class="help-block m-b-none"><small>A good campaign name helps you easily identify the campaigns you've created in your Dashboard.</small></span>
                                 								</div>
                                 								<div>
-
                                 									<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
                                 								</div>
                                 							</form>
                                 						</div>
-                                						<div class="col-sm-6">
-                                							<h4>Not feeling creative yet?</h4>
-                                							<p>Don't worry.  You can always change this later.</p>
-                                							<p class="text-center"><a href=""><i class="fa fa-plus big-icon"></i></a></p>
-                                						</div>
-                                					</div>
                                 				</div>
                                 			</div>
                                 		</div>
                                 	</div>                                
-                                
-                                
                             </div>
                         </div>
                     </div>
@@ -100,7 +90,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <img src="https://cdn.elegantthemes.com/blog/wp-content/uploads/2016/01/WordPress-eBooks-FT-shutterstock_298676606-adichrisworo.png" class="img-responsive"/>
+                            <img src="https://s3.amazonaws.com/mindfiredavinci/img/ebook_blueprint.jpg" class="img-responsive"/>
                             <div class="product-desc">
                                 <span class="product-price">
                                     Lead Gen
@@ -155,7 +145,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <img src="https://cdn.elegantthemes.com/blog/wp-content/uploads/2017/01/wordpress-webinar.jpg" class="img-responsive"/>
+                            <img src="https://s3.amazonaws.com/mindfiredavinci/img/webinar_blueprint.png" class="img-responsive"/>
                             <div class="product-desc">
                                 <span class="product-price">
                                     Lead Gen
@@ -180,7 +170,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <img src="https://cdn.shopify.com/s/files/1/0191/2296/files/nanotech2017_1_grande.JPG?v=1495623768" class="img-responsive"/>
+                            <img src="https://s3.amazonaws.com/mindfiredavinci/img/tradeshow_blueprint.jpeg" class="img-responsive"/>
                             <div class="product-desc">
                                 <span class="product-price">
                                     Lead Gen
@@ -207,7 +197,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <img src="http://spdc.wpengine.com/wp-content/uploads/2013/04/postcard-example-thank-you.jpg" class="img-responsive"/>
+                            <img src="https://s3.amazonaws.com/mindfiredavinci/img/directmail_blueprint.jpg" class="img-responsive"/>
                             <div class="product-desc">
                                 <span class="product-price">
                                     Lead Gen
@@ -232,7 +222,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <img src="https://cdn.elegantthemes.com/blog/wp-content/uploads/2014/08/wordpress-chat-plugins.jpg" class="img-responsive"/>
+                            <img src="https://s3.amazonaws.com/mindfiredavinci/img/nps_blueprint.jpg" class="img-responsive"/>
                             <div class="product-desc">
                                 <span class="product-price">
                                     Nuture
@@ -257,7 +247,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
 
-                            <img src="https://cdn.elegantthemes.com/blog/wp-content/uploads/2015/01/creative-ways-to-drive-traffic-awesomeness-package.png" class="img-responsive"/>
+                            <img src="https://s3.amazonaws.com/mindfiredavinci/img/aircover_blueprint.png" class="img-responsive"/>
                             <div class="product-desc">
                                 <span class="product-price">
                                     Awareness

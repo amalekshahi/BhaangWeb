@@ -259,7 +259,8 @@
 	
 	
 	<!-- Custom and plugin javascript -->	 
-	<script>
+
+<script>
 /*
     $.fn.editable.defaults.mode = 'inline';
     $.fn.editableform.buttons  = 
@@ -269,48 +270,7 @@
 	   //postform
 */ 
 
-	$(document).ready(function(){
-				$('.summernote').summernote({
-				  airMode: true,
-				  popover: {}
-				});		
-
-	           $("#available_fields, #form_fields, #completed").sortable({
-	               connectWith: ".connectList",
-	               update: function( event, ui ) {
-
-	                   var available_fields = $( "#available_fields" ).sortable( "toArray" );
-	                   var form_fields = $( "#form_fields" ).sortable( "toArray" );
-	                   var completed = $( "#completed" ).sortable( "toArray" );
-						
-						var summerdivtxt = ''; 						
-						for(i=0;i<form_fields.length;i++){
-							summerdivtxt += '<div class="form-group"><label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">FieldName</label></textarea></div><input class="form-control input-sm" name="FieldName" required="" type="text" value=""></div>'
-						}
-						$('#summer').html(summerdivtxt); 		
-						$('.summernote').summernote({
-						  airMode: true,
-						  popover: {}
-						});				
-						//$scope.tempArr = []; 
-						var tempArr=[]; 
-						for(i=0;i<form_fields.length;i++){
-							var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
-							var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
-							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
-							//add array
-							tempArr.push({"fileID":form_fields[i], "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": "textbox" }); 
-
-							$('.summernote').eq(i).summernote('code',flabel+' <span style="color:red;">&#42;</span>'); 
-						}//end for i
-						angular.element(document.getElementById('myCtrl')).scope().myCopyItem('fieldLists',tempArr);
-						angular.element(document.getElementById('myCtrl')).scope().copyScope('tempArr',tempArr);
-	                    $('.output').html(" form_fields = "+form_fields);
-	               }
-	           }).disableSelection();			 
-//			  alert( $('.summernote').eq(1).summernote('code') ); 
-	}); // end document.ready(); 
-
+	
 var fID = getParameterByName("fID");
 fID = "a1"; 
 var indx = -1; 
@@ -319,11 +279,10 @@ var dbName = "<?php echo $dbName; ?>";
 var myApp = angular.module('myApp',  ['summernote',"ngFileUpload"]);
 myApp.controller('myCtrl',function($scope,$http) {
 			$scope.tempArr = []; 
+
 			$scope.SaveForm = function() {
-                  //alert($('#selectedFromHTML').html()); 
-				  var txt = $('#selectedFromHTML').html(); 
-				 $socpe.genSelectedFromHTML(); 
-				  txt = $scope.selectedFromHTML; 
+				 $scope.genSelectedFromHTML(); 
+				  var txt = $scope.selectedFromHTML; 
 				  $scope.myCopyItem('formHTML',txt);
 				  $http.put('/couchdb/' + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
 						 $scope.LoadSelect(); 
@@ -443,8 +402,49 @@ myApp.controller('myCtrl',function($scope,$http) {
 			$scope.LoadStart();
 });
 
+$(document).ready(function(){
+				$('.summernote').summernote({
+				  airMode: true,
+				  popover: {}
+				});		
 
-	</script>
+	           $("#available_fields, #form_fields, #completed").sortable({
+	               connectWith: ".connectList",
+	               update: function( event, ui ) {
+
+	                   var available_fields = $( "#available_fields" ).sortable( "toArray" );
+	                   var form_fields = $( "#form_fields" ).sortable( "toArray" );
+	                   var completed = $( "#completed" ).sortable( "toArray" );
+						
+						var summerdivtxt = ''; 						
+						for(i=0;i<form_fields.length;i++){
+							summerdivtxt += '<div class="form-group"><label><div><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">FieldName</label></textarea></div><input class="form-control input-sm" name="FieldName" required="" type="text" value=""></div>'
+						}
+						$('#summer').html(summerdivtxt); 		
+						$('.summernote').summernote({
+						  airMode: true,
+						  popover: {}
+						});				
+						//$scope.tempArr = []; 
+						var tempArr=[]; 
+						for(i=0;i<form_fields.length;i++){							
+							var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
+							var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
+							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
+							//add array
+							tempArr.push({"fieldID":form_fields[i], "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": "textbox" }); 
+
+							$('.summernote').eq(i).summernote('code',flabel+' <span style="color:red;">&#42;</span>'); 
+						}//end for i
+						angular.element(document.getElementById('myCtrl')).scope().myCopyItem('fieldLists',tempArr);
+						angular.element(document.getElementById('myCtrl')).scope().copyScope('tempArr',tempArr);
+	                    $('.output').html(" form_fields = "+form_fields);
+	               }
+	           }).disableSelection();			 
+//			  alert( $('.summernote').eq(1).summernote('code') ); 
+}); // end document.ready(); 
+
+</script>
 
 </body>
 </html>
