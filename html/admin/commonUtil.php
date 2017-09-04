@@ -1,5 +1,5 @@
 <?php
-require_once '/var/www/html/vendor/autoload.php';
+require_once '../vendor/autoload.php';
 require_once 'global.php';
 
 use Aws\S3\S3Client;
@@ -10,11 +10,12 @@ $AWSFormatURL = "https://bkktest.s3.amazonaws.com/{{fileName}}";
 $AWSFormatFileName = "/tmp/{{fileName}}";
 $LocalFormatURL = "https://web2xmm.com/admin/images/{{fileName}}";
 $LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
+$databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
 
 function couchDB_Get($path,$asArray = false)
 {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984' . $path);
+    curl_setopt($ch, CURLOPT_URL, $databaseEndpoint . $path);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -32,7 +33,7 @@ function couchDB_Get($path,$asArray = false)
 function couchDB_CreateDatabase($dbName)
 {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984/' . $dbName);
+    curl_setopt($ch, CURLOPT_URL, $databaseEndpoint . $dbName);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -49,7 +50,7 @@ function couchDB_CreateDatabase($dbName)
 function couchDB_Save($dbName,$doc)
 {
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'http://localhost:5984/' . $dbName);
+    curl_setopt($ch, CURLOPT_URL, $databaseEndpoint . $dbName);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(

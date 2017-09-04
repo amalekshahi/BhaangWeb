@@ -97,7 +97,7 @@
         };
         
         $scope.CheckLogin = function(){
-            $http.get("/admin/login.php",
+            $http.get("login.php",
             {
               method: "GET",
               params: {
@@ -139,7 +139,7 @@
             //alert(acct[0]);
             //alert(acct[1]);
             //return;
-            $http.get("/admin/login.php",
+            $http.get("login.php",
                 {
                   method: "GET",
                   params: {
