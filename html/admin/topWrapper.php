@@ -16,7 +16,7 @@
 </div>
 <ul class="nav navbar-top-links navbar-right">
         <li>
-          <span class="m-r-sm text-muted welcome-message">Hi <?php echo $email;?>, you're logged in to <?php echo $accountName;?>.</span>
+          <span class="m-r-sm text-muted welcome-message">Hi <?php echo $USERNAME;?>, you're logged in to <?php echo $accountName;?>.</span>
         </li>    
         <!--<li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog" ></i> Utils <span class="caret"></span></a>

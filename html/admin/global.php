@@ -164,7 +164,7 @@ function ImportContacts($TEST, $FileName, $Mapping, $importName, $userTicket, $e
 		"ExceptionMessage : ".$ImportResponse->{"Result"}->{"ExceptionMessage"};
 		//$errorMessage = "ImportResponse ERROR : <br> ErrorMessage -> ".$ImportResponse->{"Result"}->{"ErrorMessage"};
 	}
-
+	/*
 	$sql = 'INSERT INTO MF_importContact (id, importTime, importType, filename, email, errorMessage, recordCount, accountName) VALUES (NULL, NOW(), ?, ?, ?, ?, ?, ?)';
 	if ($TEST == 't') {
 		echo "sql : $sql<br>\n";
@@ -173,7 +173,7 @@ function ImportContacts($TEST, $FileName, $Mapping, $importName, $userTicket, $e
 	}
 
 	DB::QueryExecute($sql, $importType, $FileName, $email, $errorMessage, $recordCount, $accountName);
-
+	*/
 	return $errorMessage;
 }
 
@@ -495,3 +495,50 @@ function GetTimeZone($TEST, $userTicket){
 function object2array($object) { 
 	return @json_decode(@json_encode($object),1); 
 } 
+
+function GetUserinfo($TEST, $userTicket){
+	$rows = array();
+	$username = "";
+	$GetUserRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		)		
+	);
+	$GetUserResponse = callService("userservice/GetUser", $GetUserRequest);
+	$ErrorCode = $GetUserResponse->{"Result"}->{"ErrorCode"};
+	if ($ErrorCode == "") {
+		$FirstName = $GetUserResponse->{"FirstName"};		
+		$LastName = $GetUserResponse->{"LastName"};	
+		$username = "$FirstName $LastName";
+	} else {
+		$errorMessage = "GetUserResponse ERROR : <br> ErrorMessage -> ".$GetUserResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$GetUserResponse->{"Result"}->{"ExceptionMessage"};		
+	}
+
+	return $username;
+}
+
+function ForgotPassword($TEST, $Email){
+	$rows = array();
+	$username = "";
+	$ForgotPasswordRequest   = array
+	(
+
+		"Email" => $Email
+	);
+	$ForgotPasswordResponse = callService("userservice/RequestForgotPassword", $ForgotPasswordRequest);
+	$ErrorCode = $ForgotPasswordResponse->{"Result"}->{"ErrorCode"};
+	if ($ErrorCode == "") {
+		$message = "";
+		$success = true;
+	} else {
+		$message = "ForgotPasswordResponse ERROR : <br> ErrorMessage -> ".$ForgotPasswordResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$ForgotPasswordResponse->{"Result"}->{"ExceptionMessage"};		
+		$success = false;
+	}
+
+	return json_encode( array('success'=>$success, 'message' => $message, 'ErrorCode' => $ErrorCode ));
+}

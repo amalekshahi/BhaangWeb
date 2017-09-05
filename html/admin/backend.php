@@ -2,7 +2,7 @@
 /*
     backend.php
     param
-    cmd = publish/update/getID
+    cmd = publish/update/test/
     acctID = accountID
     progID = programID
     mode = test
@@ -10,14 +10,37 @@
 require_once 'commonUtil.php';
 
 session_start();
-if($_REQUEST['mode']=="test"){
-    $_SESSION['ACCOUNTID'] = '228';
-    $_SESSION['ACCOUNNAME'] = 'CampaignLauncher';
-    $_SESSION['EMAIL'] = 'boonsom@mindfireinc.com';
-    $_SESSION['PWD'] = 'Atm12345#';
-    $_SESSION['PARTNERGUID'] = 'CampaignLauncherAPIUser';
-    $_SESSION['PARTNERPASSWORD'] = '4e98af380d523688c0504e98af3=';
-};
+
+function UpdateMAMLSchedule($xml,$doc)
+{
+    $xpath = new DOMXpath($xml);
+    // scan for at most 10 email
+    $ret = array();
+    for($i=1;$i<10;$i++){
+        // check if $doc is define 
+        $scheduleDateTimeName = 'EMAIL'.$i.'-SCHEDULE1-DATETIME';
+        $timeZoneName = 'EMAIL'.$i.'-SCHEDULE1-TIMEZONE';
+        if(property_exists($doc,$scheduleDateTimeName)){
+            // check if not default value
+            $DateTimeValue = $doc->{$scheduleDateTimeName};
+            $TimeZoneValue = $doc->{$timeZoneName};
+            if($DateTimeValue!="" && $DateTimeValue!="01/01/2050 08:00:00 AM"){
+                $subjectText = "Email".$i."Schedule";
+                //$ret[] = $i;
+                $node = $xpath->query("//Schedule/Subject[starts-with(text(),'".$subjectText."')]")->item(0);
+                $scheduleNode  = $node->parentNode;
+                $startNode = $scheduleNode->getElementsByTagName("Start")->item(0);
+                $startNode->setAttribute("DateTime",$DateTimeValue);
+                $scheduleNode->setAttribute("TimeZone",$TimeZoneValue);
+                $ret[] = $xml->saveHTML($scheduleNode);
+            }
+        }
+    }
+    return array(
+        "Maml"=> $xml->saveHTML(),
+        "UpdateDetail" => $ret,
+    );
+}
 
 if(empty($_SESSION['EMAIL'])){
     echo json_encode( 
@@ -43,8 +66,9 @@ $progID = $_REQUEST['progID'];
 $cmd = $_REQUEST['cmd'];
 $mode = $_REQUEST['mode'];
 $dbName = getDatabaseName($acctID,"");
-$dateTimeNow = date('Y/m/d H:i:s');
-if($cmd!="publish" and $cmd!="update" and $cmd!="getID"){
+//$dateTimeNow = date('Y/m/d H:i:s');
+$dateTimeNow = gmdate('Y/m/d H:i:s T', time()); 
+if($cmd!="publish" and $cmd!="update" and $cmd!="test"){
     echo json_encode( 
         array(
             'success'=>false,
@@ -53,24 +77,36 @@ if($cmd!="publish" and $cmd!="update" and $cmd!="getID"){
     exit;
 }
 
-if($cmd=="getID"){
-    $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
-    $publishMamlContent = file_get_contents($publishReturnFileName);
+if($cmd=="test"){
+    $doc = couchDB_Get("/$dbName/$progID");
+    
+    $publishProgramID = GetMamlProgramID($acctID,$progID);
+    $mamlName = "checkInMAML/".$acctID."_".$publishProgramID.".maml";
+    $publishMamlContent = file_get_contents($mamlName);
     $xml = new DOMDocument();
     $xml->loadXML($publishMamlContent);
-    $xpath = new DOMXpath($xml);
-    $node = $xpath->query("/Program")->item(0);
+/*    $xpath = new DOMXpath($xml);
+    $node = $xpath->query("//Schedule/Subject[starts-with(text(),'Email')]")->item(0);
+    $scheduleNode  = $node->parentNode;
+    $startNode = $scheduleNode->getElementsByTagName("Start")->item(0);
+    $subject = $node->nodeValue;
+    $setDateTime = date('Y/m/d H:i:s');
+    $startNode->setAttribute("DateTime",$setDateTime);
+    $scheduleNode->setAttribute("TimeZone","Pacific Standard Time");*/
     //$programNode = $xml->getElementsByTagName('Program')->item(0);
+    $emailList = UpdateMAMLSchedule($xml,$doc);
     echo json_encode( 
         array(
             'success'=>true,
             'cmd'=>$cmd,
-            'publishProgramID'=>$node->getAttribute('DbId'),       
-            //'tbody'=>print_r($programNode,true),                 
-            'date'=>$dateTimeNow,           
-            'publishMamlContent'=>$publishMamlContent,
-            //'publishProgramID'=>$programNode->getAttribute('DbId'),
-        ));
+            'publishProgramID'=>$publishProgramID,  
+            //'scheduleNode'=>$xml->saveHTML($scheduleNode),
+            //'startNode'=>$xml->saveHTML($startNode),
+            'emailList'=>$emailList,
+            //'publishMamlContent'=>$publishMamlContent,
+            
+            //'node'=>print_r($node,true),
+     ));
     exit;
 }
 
@@ -117,12 +153,15 @@ $templateFileName = "maml/$templateName";
 $tmaml = file_get_contents($templateFileName);
 
 if($mode == "junk"){
+    $t = time();
     $doc->campaignName = $doc->campaignName."_".$dateTimeNow;
+    $doc->campaignID = $doc->campaignID."_".$t;
+    
 }
-
+$finishMAML = studio_url_render($tmaml,$acctID,$progID,$doc);
 //Render and upload to S3 if necessary
 
-$finishMAML = studio_url_render($tmaml,$acctID,$progID,$doc);
+
 $publishFileName = "publish/".$acctID."_".$progID.".maml";
 file_put_contents($publishFileName,$finishMAML);
 //dump_r($finishMAML);
@@ -137,11 +176,21 @@ if($cmd == "publish"){
                 'templateFileName'=>$templateFileName,
                 'maml'=>$publishFileName,
                 'mode'=>$mode,
+                "publishDate"=>$dateTimeNow,
             ));
     }else{
+        //convert byte array maml  and save to file
+        $returnMaml = implode(array_map("chr", $resp->Maml));
+        $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+        file_put_contents($publishReturnFileName,$returnMaml);
+        
+        //Get publish programID from that file 
+        $publishProgramID = GetMamlProgramID($acctID,$progID);
+    
         $param = array(
             "status"=>"publish",
             "publishDate"=>$dateTimeNow,
+            "publishProgramID"=>$publishProgramID,
         );
         // Save to document status in campaign 
         //$docCampaignList = couchDB_Update("$dbName/campaignlist","status","publish","campaigns.campaignID=$progID");
@@ -151,10 +200,6 @@ if($cmd == "publish"){
         //$docUpdate = couchDB_Update("$dbName/$progID","status","publish");
         $docUpdate = couchDB_UpdateEx("$dbName/$progID",$param);
         
-        //convert byte array maml 
-        $returnMaml = implode(array_map("chr", $resp->Maml));
-        $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
-        file_put_contents($publishReturnFileName,$returnMaml);
         $resp->Maml = $returnMaml;
         echo json_encode( 
             array(
@@ -164,15 +209,56 @@ if($cmd == "publish"){
                 'detailCampaignList'=>$docCampaignList,
                 'detailDoc'=>$docUpdate,
                 //'returnMaml'=>$returnMaml,
+                "publishProgramID"=>$publishProgramID,
             ));
     }
     
 }else{
-    echo json_encode( 
-        array(
-            'success'=>true,
-            'message'=>"Update Done",
-        ));
+    $ticket = GetTicketBySession();
+    // Update Republish mode
+    $publishProgramID = GetMamlProgramID($acctID,$progID);
+    $publishMAML = GetPublishedMAML($acctID,$progID);
+    $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
+    // Make sure check out success
+    if(!$checkOutRet['success']){
+        $undoRet = UndoProgramChanges($ticket, $publishProgramID);	
+        $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
+    }
+    $checkOutMAML = $checkOutRet['Maml'];
+    // Do some work here
+    $xml = new DOMDocument();
+    $xml->loadXML($checkOutMAML);
+    $updateResult = UpdateMAMLSchedule($xml,$doc);
+    $updateMAML = $updateResult["Maml"];
+    //CheckIn
+    $checkInRet = checkinProgram($ticket,$updateMAML);
+    if($checkInRet['success']){
+        echo json_encode( 
+            array(
+                'success'=>true,
+                'message'=>"Update Done",
+                'publishProgramID'=>$publishProgramID,
+                'ticket'=>$ticket,            
+                //'checkOutMAML'=>$checkOutMAML,
+                //'checkOutRet'=>$checkOutRet,
+                'checkInRet'=>$checkInRet,
+                //'undoRet'=>$undoRet,
+                'updateResult'=>$updateResult,
+            ));
+    }else{
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"Update fail",
+                'publishProgramID'=>$publishProgramID,
+                'ticket'=>$ticket,            
+                'checkOutMAML'=>$checkOutMAML,
+                'checkOutRet'=>$checkOutRet,
+                'checkInRet'=>$checkInRet,
+                'undoRet'=>$undoRet,
+                'updateResult'=>$updateResult,
+            ));
+    }
 }
 exit;
 ?>

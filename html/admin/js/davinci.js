@@ -1,4 +1,12 @@
 
+/* remove [] */
+function prettyStudioErrorMessage(str)
+{
+    str = str.replace("[i]", ""); 
+    return str;
+}
+
+
 function getParameterByName_old(name){
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
   var regexS = "[\\?&]" + name + "=([^&#]*)";

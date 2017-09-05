@@ -548,6 +548,154 @@ function publishMAML($MAML) {
     return $publishResponse;
 }
 
+function GetMamlProgramID($acctID,$progID)
+{
+    //$publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+    //$publishMamlContent = file_get_contents($publishReturnFileName);
+    $publishMamlContent = GetPublishedMAML($acctID,$progID);
+    $xml = new DOMDocument();
+    $xml->loadXML($publishMamlContent);
+    $xpath = new DOMXpath($xml);
+    $node = $xpath->query("/Program")->item(0);
+    //$programNode = $xml->getElementsByTagName('Program')->item(0);
+    return $node->getAttribute('DbId');
+}
+
+function GetPublishedMAML($acctID,$progID)
+{
+     $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+     $publishMamlContent = file_get_contents($publishReturnFileName);
+     return($publishMamlContent);
+}
+
+function checkoutProgram($userTicket, $ACCOUNTID, $PublishProgramID){	
+	$checkoutRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		),
+		"ProgramID" => $PublishProgramID,
+		"MamlFormat" => 0
+	);
+	$checkoutResponse = callService("programservice/CheckoutProgram", $checkoutRequest);
+	$ErrorCode = $checkoutResponse->{"Result"}->{"ErrorCode"};
+	$Maml = "";
+	$errorMessage = "";
+	if ($ErrorCode == "") {
+		$MamlArray = $checkoutResponse->{"Maml"};
+		
+		foreach ($MamlArray as $MamlChr) {
+			$Maml .= chr($MamlChr);
+		}
+		$file = "checkInMAML/".$ACCOUNTID."_".$PublishProgramID.".maml";
+		file_put_contents( $file, $Maml );			
+		$success = true;
+	} else {
+		$errorMessage = "checkoutResponse ERROR : <br> ErrorMessage -> ".$checkoutResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$checkoutResponse->{"Result"}->{"ExceptionMessage"};
+		$success = false;	
+	}
+
+	$result = array('success'=>$success, 'ticket' => $userTicket, 'Maml' => $Maml, 'errorMessage' => $errorMessage);
+	return $result;
+}
+
+function checkinProgram($userTicket,$data){
+
+	//$file = ROOT_DIR."checkInMAML/".$ACCOUNTID."_".$PublishProgramID.".maml";
+	//$data = file_get_contents($file, true);
+
+
+	// test change content
+	//echo "data 1 : $data <br><br><br>";
+	//$data = str_replace('aaaaaaaaaa', time()."&lt;br/&gt;".'aaaaaaaaaa'."&lt;br/&gt;", $data);
+	//echo "data 2 : $data <br><br><br>";
+	
+	$byteArr = array();
+	for($i = 0; $i < strlen($data); $i++) {
+		$byteArr[$i] = ord($data[$i]); 
+	}
+
+	$checkinRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		),
+		"MamlFormat" => 0,
+		"CheckoutAfterCheckin" => "false",
+		"Comments" => "",
+		"Maml" => $byteArr
+	);
+	$checkinResponse = callService("programservice/CheckinProgram", $checkinRequest);
+	$ErrorCode = $checkinResponse->{"Result"}->{"ErrorCode"};
+	$Maml = "";
+	$errorMessage = "";
+	if ($ErrorCode == "") {
+		$MamlArray = $checkinResponse->{"Maml"};
+		
+		foreach ($MamlArray as $MamlChr) {
+			$Maml .= chr($MamlChr);
+		}
+		$success = true;
+	} else {
+		$errorMessage = "checkinResponse ERROR : <br> ErrorMessage -> ".$checkinResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$checkinResponse->{"Result"}->{"ExceptionMessage"};
+		$success = false;	
+	}
+
+	$result = array('success'=>$success, 'ticket' => $userTicket, 'Maml' => $Maml, 'errorMessage' => $errorMessage);
+	return $result;
+}
+
+
+function UndoProgramChanges($userTicket, $PublishProgramID){	
+	$undoRequest   = array
+	(
+		
+		"Credentials" => array
+		(
+			"Ticket" => $userTicket        
+		),
+		"ProgramID" => $PublishProgramID,
+		"MamlFormat" => 0
+	);
+	$undoResponse = callService("programservice/UndoProgramChanges", $undoRequest);
+	$ErrorCode = $undoResponse->{"Result"}->{"ErrorCode"};
+	$Maml = "";
+	$errorMessage = "";
+	if ($ErrorCode == "") {
+		$MamlArray = $undoResponse->{"Maml"};
+		
+		foreach ($MamlArray as $MamlChr) {
+			$Maml .= chr($MamlChr);
+		}
+		$success = true;
+	} else {
+		$errorMessage = "undoResponse ERROR : <br> ErrorMessage -> ".$undoResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		"ExceptionMessage : ".$undoResponse->{"Result"}->{"ExceptionMessage"};
+		$success = false;	
+	}
+
+	$result = array('success'=>$success, 'ticket' => $userTicket, 'Maml' => $Maml, 'errorMessage' => $errorMessage);
+	return $result;
+}
+
+function GetTicketBySession()
+{
+    $ACCOUNTID = $_SESSION['ACCOUNTID'];
+    $EMAIL = $_SESSION['EMAIL'];
+    $PWD = $_SESSION['PWD'];
+    $PARTNERGUID = $_SESSION['PARTNERGUID'];
+    $PARTNERPASSWORD = $_SESSION['PARTNERPASSWORD'];
+    return getTicket($ACCOUNTID, $EMAIL, $PWD, $PARTNERGUID, $PARTNERPASSWORD);
+}
+
+
+
 function echoCallbackString($callback, $loadmore='', $authToken = '', $mpArray){
     echo $callback, '(',
     json_encode( array(

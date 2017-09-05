@@ -50,7 +50,7 @@
                         <div class="ibox-title">
                             <h5>Your Forms</h5>
                             <div class="ibox-tools">
-                                <a href="formEditor.php" class="btn btn-primary btn">+ Create New Form</a>
+                                <a href="formEditorNew.php" class="btn btn-primary btn">+ Create New Form</a>
                             </div>
                         </div>
                         <div class="ibox-content">
@@ -90,7 +90,7 @@
                                         </td>
 
                                         <td class="project-actions">
-                                            <a href="formEditor.php" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
+                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
                                             <a href="formEditor.php?fID={{item.formID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
                                         </td>
                                         

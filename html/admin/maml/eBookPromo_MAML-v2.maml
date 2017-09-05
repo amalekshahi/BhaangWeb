@@ -8,7 +8,7 @@
             <Subject>Business MicroSite (Right Now)</Subject>
             <Body />
             <Start DateTime="02/14/2013 12:00:00 AM" />
-            <End DateTime="02/28/2020 11:59:00 PM" />
+            <End DateTime="02/28/2050 11:59:00 PM" />
           </Schedule>
         </Schedules>
         <Events />
@@ -253,7 +253,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <CampaignElement Id="15" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="260,130" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
-            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
           </AdvancedFilter>
         </Filter>
         <HookedEvents TriggerFireContext="Current Child Visit">
@@ -263,7 +263,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <CampaignElement Id="16" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="450,130" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
-            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
         </Filter>
         <HookedEvents TriggerFireContext="Current Child Visit">
@@ -306,7 +306,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Schedules>
         <Events />
         <Properties ServiceTypeID="3000" ApplicationVersion="1.0">
-          <Settings Emails="" DataRange="Fixed" FromDate="01/01/17 12:00 AM" ToDate="01/01/30 12:00 AM" />
+          <Settings Emails="" DataRange="Fixed" FromDate="01/01/2017 00:00" ToDate="01/01/1930 00:00" />
           <Configs>
             <Config Key="Email">kdutta@mindfireinc.com</Config>
             <Config Key="FtpUrl"></Config>
@@ -461,7 +461,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <CampaignElement Id="26" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="620,130" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
-            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
         </Filter>
         <HookedEvents TriggerFireContext="Current Child Visit">
@@ -471,7 +471,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <CampaignElement Id="27" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="790,130" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
-            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
         </Filter>
         <HookedEvents TriggerFireContext="Current Child Visit">
@@ -481,7 +481,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <CampaignElement Id="28" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="960,130" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
-            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
         </Filter>
         <HookedEvents TriggerFireContext="Current Child Visit">

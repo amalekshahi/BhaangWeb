@@ -31,6 +31,8 @@ if ($mode == 'login') {
         $dbName = getDatabaseName($accountID,$accountName);
         $doc = couchDB_CreateDatabase($dbName);   
         if(empty($doc->error)||($doc->error == "file_exists")){
+
+
             session_start();
             $_SESSION['ACCOUNTID'] = $accountID;
             $_SESSION['ACCOUNNAME'] = $accountName;
@@ -40,7 +42,14 @@ if ($mode == 'login') {
             $_SESSION['PARTNERPASSWORD'] = $PartnerPassword;
             $_SESSION['login'] = true;
             $_SESSION['DBNAME'] = $dbName;
-            echo $callback, '(', json_encode( array('success'=>true, 'PartnerGuid'=>$PartnerGuid, 'PartnerPassword'=>$PartnerPassword, 'Doc'=>$doc)), ')';
+
+			$ticket = getTicket($accountID, $email, $pwd, $PartnerGuid, $PartnerPassword);
+			$username = GetUserinfo("", $ticket);
+
+
+			$_SESSION['USERNAME'] = $username;
+
+            echo $callback, '(', json_encode( array('success'=>true, 'PartnerGuid'=>$PartnerGuid, 'PartnerPassword'=>$PartnerPassword, 'Doc'=>$doc, 'username'=>$username)), ')';
         }else{
             echo $callback, '(', json_encode( array('success'=>false, 'message'=>'Cannot create database '.$dbName, 'Doc'=>$doc)), ')';
         }

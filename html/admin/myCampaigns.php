@@ -4,38 +4,39 @@
     include 'global.php';
     require_once('loginCredentials.php');
 ?>
-<!DOCTYPE html>
-<html ng-app="myApp">
-<head>
-    <?php include "header.php"; ?>
-</head>
+	<!DOCTYPE html>
+	<html ng-app="myApp">
 
-<body class="">
-    <div id="wrapper">
-	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.php"></div>
-	<!-- /end left wrapper -->
-	<div id="page-wrapper" class="gray-bg">
-		<div class="row border-bottom">
-				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.php"></div>
-				<!-- / top wrapper -->
-				</nav>
-		</div>	
-<!-- content -->       
-        <div class="row" ng-controller="myCtrl">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInUp">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>My Campaigns</h5>
-                            <div class="ibox-tools">
-                                <!--<a href="" class="btn btn-primary btn-xs">Create Folder</a>-->
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div class="row m-b-sm m-t-sm">
+	<head>
+		<?php include "header.php"; ?>
+	</head>
+
+	<body class="">
+		<div id="wrapper">
+			<!-- left wrapper -->
+			<div w3-include-html="leftWrapper.php"></div>
+			<!-- /end left wrapper -->
+			<div id="page-wrapper" class="gray-bg">
+				<div class="row border-bottom">
+					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+						<!-- top wrapper -->
+						<div w3-include-html="topWrapper.php"></div>
+						<!-- / top wrapper -->
+					</nav>
+				</div>
+				<!-- content -->
+				<div class="row" ng-controller="myCtrl">
+					<div class="col-lg-12">
+						<div class="wrapper wrapper-content animated fadeInUp">
+							<div class="ibox">
+								<div class="ibox-title">
+									<h5>My Campaigns</h5>
+									<div class="ibox-tools">
+										<!--<a href="" class="btn btn-primary btn-xs">Create Folder</a>-->
+									</div>
+								</div>
+								<div class="ibox-content">
+									<!--<div class="row m-b-sm m-t-sm">
                                 <div class="col-md-1">
                                     <button type="button" id="loading-example-btn" class="btn btn-white btn-sm" ng-click="Load()"><i class="fa fa-refresh"></i> Refresh</button>
                                 </div>
@@ -45,19 +46,23 @@
                                         <button type="button" class="btn btn-sm btn-primary" ng-click="Search()"> Go!</button></span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" >
-                                <div class="col-lg-12">
-                                    <div class="wrapper wrapper-content animated fadeInUp">
-                                        <div class="ibox">
-                                            <div class="ibox-title">
-                                                <h5>Recent Campaigns</h5>
-                                                <div class="ibox-tools">
-                                                    <!--<a href="" class="btn btn-primary btn-xs">Create Folder</a>-->
-                                                </div>
-                                            </div>
-                                            <div class="ibox-content">
-                                                <!--<div class="row m-b-sm m-t-sm">
+                            </div>-->
+									<div class="row m-b-sm m-t-sm">
+										<div class="col-md-12">
+											<div class="input-group"><input type="text" placeholder="Start typing what you're looking for ..." class="input-sm form-control" autofocus="autofocus" ng-model="searchText">
+												<span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary" ng-click="Search()"> Search</button></span>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="wrapper wrapper-content animated fadeInUp">
+													<div class="ibox">
+														<div class="ibox-tools">
+															<!--<a href="" class="btn btn-primary btn-xs">Create Folder</a>-->
+														</div>
+														<div class="ibox-content">
+															<!--<div class="row m-b-sm m-t-sm">
                                                     <div class="col-md-1">
                                                         <button type="button" id="loading-example-btn" class="btn btn-white btn-sm" ><i class="fa fa-refresh"></i> Refresh</button>
                                                     </div>
@@ -67,69 +72,54 @@
                                                     </div>
                                                 </div>-->
 
-                                                <div class="project-list">
+															<div class="project-list">
 
-                                                    <table class="table table-hover">
-                                                        <tbody>
-                                                            <tr ng-repeat="item in campaignlist.campaigns | filter: myFilter | orderBy:'-lastEditDate'" ng-cloak>
-																<td class="project-status">
-																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}"><span class="label label-info">{{item.status}}</span></a>
-																</td>
-																<td class="project-title">
-																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}">{{item.campaignName}}</a> <small>({{item.campaignType}})</small>
-																	<br/>
-																	<small>Last Edited {{item.lastEditDate}} </small>
-																</td>
+																<table class="table table-hover">
+																	<tbody>
+																		<thead>
+																			<tr>
+																				<th>Status</th>
+																				<th>Campaign Name</th>
+																				<th>Reach (People)</th>
+																				<th>Results</th>
+																				<th>&nbsp;</th>
+																				<th>&nbsp;</th>
+																			</tr>
+																		</thead>
+																		<tr ng-repeat="item in campaignlist.campaigns | orderBy:'-lastEditDate' | filter:searchText" ng-cloak>
+																			<td class="project-status">
+																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}"><span class="badge badge-published"><span class="badge badge-published"><i class="fa fa-rss"></i> {{item.status=='Edit' ? 'LIVE' : 'DRAFT'}}</span></a>
+																			</td>
+																			<td class="project-title">
+																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}">{{item.campaignName}}</a> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
+																				<br/>
+																				<small>Modified <time am-time-ago="item.lastEditDate"></time></small>
+																			</td>
 
-																<td class="project-reach">
-																	<medium>{{Random(10000)}}</medium><br><small class="text-muted">&nbsp;</small> 
-																</td>
-																<td class="project-completion">
-																		<medium>{{Random(1000)}}</medium><br><small class="text-muted"><i class="fa fa-bullhorn"></i> Clicks to Blog Post</small>
-																</td>
-																<td class="project-completion">
-																		<medium>{{Random(10)}}%</medium><br><small class="text-muted">Click-thru Rate</small>
-																</td>
-																<td class="project-actions">
-																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
-																	<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
-																</td>
+																			<td class="project-reach">
+																				<medium>{{Random(10000)|number}}</medium><br><small class="text-muted">&nbsp;</small>
+																			</td>
+																			<td class="project-completion">
+																				<medium>{{Random(1000)}}</medium><br><small class="text-muted"><i class="fa fa-bullhorn"></i> Clicks to Blog Post</small>
+																			</td>
+																			<td class="project-completion">
+																				<medium>{{Random(10)}}%</medium><br><small class="text-muted">Click-thru Rate</small>
+																			</td>
+																			<td class="project-actions">
+																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
+																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 
-
-																<!-- <td class="project-actions">
-                                                                    <a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                                                </td>
-                                                                <td class="project-title">
-                                                                    <a href="edit{{item.campaignType}}.php?action=editCampaign&campaign_id={{item.campaignID}}">{{item.campaignName}}</a> <small>({{item.campaignType}})</small>
-                                                                    <br/>
-                                                                    <small>Last Edited {{item.lastEditDate}} </small>
-                                                                </td>
-                                                                <td class="project-reach">
-                                                                        <medium>Reach: {{Random(10000)}} people</medium>
-                                                                        <div class="progress progress-mini">
-                                                                            <div class="progress-bar" ng-style="{width : ( Random(100) + '%' ) }"></div>
-                                                                        </div>
-                                                                </td>
-                                                                <td class="project-completion">
-                                                                        <medium>Results:{{Random(500)}}  clicks to Blog Post ({{Random(100)}} % CTR)</medium>
-                                                                        <div class="progress progress-mini">
-                                                                            <div class="progress-bar" ng-style="{width : ( Random(100) + '%' ) }"></div>
-                                                                        </div>
-                                                                </td>
-                                                                 <td class="project-status">
-                                                                    <span class="label label-success">{{item.status}}</span>
-                                                                </td> -->
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-<!--
+										<!--
                             <div class="project-list">
                                 <table class="table table-hover">
                                     <tbody>
@@ -453,73 +443,80 @@
                                     </tbody>
                                 </table>
                             </div>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-<!--/ content -->           
-			<div class="footer">
-			<!-- footer -->
-			<div w3-include-html="footer.php"></div>
-			<!-- / footer -->			
+					<!--/ content -->
+					<div class="footer">
+						<!-- footer -->
+						<div w3-include-html="footer.php"></div>
+						<!-- / footer -->
+					</div>
+				</div>
+				<!--  end page-wrapper -->
 			</div>
-		</div><!--  end page-wrapper -->
-</div>
 
-    <!-- Mainly scripts -->
-	<script src="js/w3data.js"></script>	
-	<script>w3IncludeHTML();</script>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
-    <script src="js/davinci.js"></script>
-    <!-- Page-Level Scripts -->
-    <script>
-		var dbName = "<?php echo $dbName; ?>";
-		var myApp = angular.module('myApp', []);
-		myApp.controller('myCtrl',function($scope,$http) {
-			$scope.Reset = function() {
-                  $scope.campaignlist  = angular.copy($scope.master);
-            };
-			$scope.Load = function() {
-                $http.get("/couchdb/" + dbName +'/campaignlist').then(function(response) {
-                     $scope.master  = response.data; 
-                     if (typeof $scope.master.campaigns == 'undefined') {
-                        $scope.master.campaigns = [];
-                     }
-                     $scope.Reset();
-                });
-            };
-            $scope.Random = function(range){
-                return Math.floor((Math.random() * range) + 1); 
-            };
-            $scope.Search = function(){
-                //alert($scope.searchText);
-                $scope.Load();
-            };
-            $scope.myFilter = function(item){
-                if (typeof $scope.searchText == 'undefined') {
-                    return true;
-                }
-                if ($scope.searchText == '') {
-                    return true;
-                }
-                if (item.campaignName.startsWith($scope.searchText)){
-                    return true;
-                }
-                return false;
-            };
-			$scope.Load();
-		});
-    </script>	
+			<!-- Mainly scripts -->
+			<script src="js/w3data.js"></script>
+			<script>
+				w3IncludeHTML();
+			</script>
+			<script src="js/jquery-3.1.1.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+			<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-</body>
+			<!-- Custom and plugin javascript -->
+			<script src="js/inspinia.js"></script>
+			<script src="js/plugins/pace/pace.min.js"></script>
+			<script src="js/davinci.js"></script>
 
-</html>
+			<!-- Page-Level Scripts -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
+
+			<script>
+				var dbName = "<?php echo $dbName; ?>";
+				var myApp = angular.module('myApp', ['angularMoment']);
+				myApp.controller('myCtrl', function($scope, $http) {
+					$scope.Reset = function() {
+						$scope.campaignlist = angular.copy($scope.master);
+					};
+					$scope.Load = function() {
+						$http.get("/couchdb/" + dbName + '/campaignlist').then(function(response) {
+							$scope.master = response.data;
+							if (typeof $scope.master.campaigns == 'undefined') {
+								$scope.master.campaigns = [];
+							}
+							$scope.Reset();
+						});
+					};
+					$scope.Random = function(range) {
+						return Math.floor((Math.random() * range) + 1);
+					};
+					$scope.Search = function() {
+						//alert($scope.searchText);
+						$scope.Load();
+					};
+					$scope.myFilter = function(item) {
+						if (typeof $scope.searchText == 'undefined') {
+							return true;
+						}
+						if ($scope.searchText == '') {
+							return true;
+						}
+						if (item.campaignName.startsWith($scope.searchText)) {
+							return true;
+						}
+						return false;
+					};
+					$scope.Load();
+				});
+			</script>
+
+	</body>
+
+	</html>

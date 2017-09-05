@@ -8,4 +8,5 @@ $accountID = $_SESSION['ACCOUNTID'];
 $accountName = $_SESSION['ACCOUNNAME'];
 $email = $_SESSION['EMAIL'];
 $pwd = $_SESSION['PWD'];
+$USERNAME = $_SESSION['USERNAME'];
 ?>

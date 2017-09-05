@@ -1,4 +1,4 @@
-<Program Name="coatest082810" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+<Program Name="coatest082810_2017/09/05 06:46:20 GMT" Version="1.0" DbId="0" CheckOutId="0" State="Start">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
@@ -8,15 +8,17 @@
             <Subject>Business MicroSite (Right Now)</Subject>
             <Body />
             <Start DateTime="02/14/2013 12:00:00 AM" />
-            <End DateTime="02/28/2020 11:59:00 PM" />
+            <End DateTime="02/28/2050 11:59:00 PM" />
           </Schedule>
         </Schedules>
         <Events />
-        <CallbackTouchPoints />
-        <ChildElements>
-          <ChildElement Id="9" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="300,30">
+        <CallbackTouchPoints>
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci.m.mdl.io/24d4ea35fd91047acdc18b2746372cee_1504593980" />
+        </CallbackTouchPoints>
+        <ChildElements>          
+          <ChildElement Id="9" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="200,530">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email1content##</HtmlContent>
+              <HtmlContent>##email1contentonline##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
@@ -28,45 +30,80 @@
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="11" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email2.html" Position="470,30">
+          <ChildElement Id="11" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email2.html" Position="320,530">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email2content##</HtmlContent>
+              <HtmlContent>##email2contentonline##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="12" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email3.html" Position="640,30">
+          <ChildElement Id="12" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email3.html" Position="450,530">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email3content##</HtmlContent>
+              <HtmlContent>##email3contentonline##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="13" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email4.html" Position="140,193">
+          <ChildElement Id="13" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email4.html" Position="590,530">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email4content##</HtmlContent>
+              <HtmlContent>##email4contentonline##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="14" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email5.html" Position="310,190">
+          <ChildElement Id="14" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email5.html" Position="740,530">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email5content##</HtmlContent>
+              <HtmlContent>##email5contentonline##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="15" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email6.html" Position="480,190">
+          <ChildElement Id="15" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email6.html" Position="880,530">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email6content##</HtmlContent>
+              <HtmlContent>##email6contentonline##</HtmlContent>
             </Properties>
             <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="16" DbId="0" Type="Page" IsVersion="False" Name="home.html" Position="480,320">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="True" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="9" Name="Email1.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="11" Name="Email2.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="12" Name="Email3.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="13" Name="Email4.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="14" Name="Email5.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="15" Name="Email6.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
             <Events />
           </ChildElement>
         </ChildElements>
-        <ChildConnections />
+        <ChildConnections>
+          <ChildConnection StartElementId="16" EndElementId="9" />
+          <ChildConnection StartElementId="16" EndElementId="11" />
+          <ChildConnection StartElementId="16" EndElementId="12" />
+          <ChildConnection StartElementId="16" EndElementId="13" />
+          <ChildConnection StartElementId="16" EndElementId="14" />
+          <ChildConnection StartElementId="16" EndElementId="15" />
+        </ChildConnections>
         <Properties>
-          <BaseUrlCollection />
+          <BaseUrlCollection>
+            <BaseUrl Id="1" DbId="0" URL="davinci.m.mdl.io/24d4ea35fd91047acdc18b2746372cee_1504593980" Extension="24d4ea35fd91047acdc18b2746372cee_1504593980" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="davinci.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
+          </BaseUrlCollection>
           <Settings SessionTimeout="20">
             <InvalidPurl>&lt;html&gt;
 &lt;head&gt;
@@ -528,6 +565,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email4subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT</ContentVariable>
         <ContentVariable Name="email5subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT</ContentVariable>
         <ContentVariable Name="email6subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT</ContentVariable>
+	<ContentVariable Name="email1contentonline">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL1CONTENT-ONLINE</ContentVariable>
+        <ContentVariable Name="email2contentonline">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL2CONTENT-ONLINE</ContentVariable>
+        <ContentVariable Name="email3contentonline">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL3CONTENT-ONLINE</ContentVariable>
+        <ContentVariable Name="email4contentonline">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4CONTENT-ONLINE</ContentVariable>
+        <ContentVariable Name="email5contentonline">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL5CONTENT-ONLINE</ContentVariable>
+        <ContentVariable Name="email6contentonline">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL6CONTENT-ONLINE</ContentVariable>
 	<ContentVariable Name="ClickAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_clickalert.html"##</ContentVariable>
 	<ContentVariable Name="OpenAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_openalert.html"##</ContentVariable>
       </ContentVariables>

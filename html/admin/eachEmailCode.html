@@ -33,23 +33,23 @@
 									<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><i class="fa fa-share-square-o"></i> Send me a test email</a>
 								  </div>
 								</div>-->
-								<div class="col-sm-12">
-                                    <div><p></p></div>
-                                    <div class="tooltip-demo">
-                                    <label class="control-label"></label> 
-                                    <a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><span ng-show="state['SendTest##emailid##'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send me a test email</a>
-                                  </div>
-                                </div>
                                 <div class="col-sm-12">
+                                    <div><p></p></div>
                                     <label class="control-label">Send Test To</label> 
                                 </div>    
                                 <div class="col-sm-12">
                                     <a class="btn btn-primary" ng-click="OpenRegister()" style="padding: 5px; vertical-align: middle; float: right;height:30px"><i class="fa fa-plus-square-o fa-lg"></i></a> 
                                     <div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;">
-                                    <select ng-model="sendTestContactSelected" style="height: 30px;">
-                                    <option ng-repeat="x in sendTestContacts| orderBy:'1'" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
-                                    </select>
+										<select ng-model="sendTestContactSelected" style="height: 30px;">
+										<option ng-repeat="x in sendTestContacts| orderBy:'1'" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
+										</select>
                                     </div>
+                                </div>
+								<div class="col-sm-12">
+                                    <div class="tooltip-demo">
+                                    <label class="control-label"></label> 
+                                    <a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><span ng-show="state['SendTest##emailid##'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send me a test email</a>
+                                  </div>
                                 </div>
 							</div>
 					<div class="hr-line-dashed"></div><input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> <input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}"> <input name="programNameHash" type="hidden" value="{{programNameHash}}">

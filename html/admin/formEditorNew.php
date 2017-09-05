@@ -18,7 +18,7 @@
 
 
 <body>
-<div ng-controller="myCtrl" id="myCtrl">
+<div ng-controller="myNewCtrl" id="myNewCtrl">
 	<div id="wrapper">
 <!-- left wrapper -->
 	  <nav class="navbar-default navbar-static-side" role="navigation">
@@ -69,7 +69,7 @@
 						<li>
 							<a href="dv.php?page=formLibrary">Create a Form</a>
 						</li>
-						<li class="active"><strong>eBook D/L Form</strong></li>
+						<li class="active"><strong></strong></li>
 					</ol>
 				</div>
 				<div class="col-lg-2"></div>
@@ -77,10 +77,10 @@
 			</div>
 			<div class="mail-box-header">
     			<div class="pull-right tooltip-demo">
-    			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
+    			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveNewForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
     			</div>			
-    		    <h3>Form Name: <select id="selectForm" ng-model="selectedForm" ng-change="SelectChanged(this.selectedForm)" ng-cloak>
-					<option ng-repeat="x in deflist.items" value="{{x.formName}}" selected={{x.formSelected}}>{{x.formName}}</option>					
+    		    <h3>Form Template: <select id="selectForm" ng-model="selectedForm" ng-change="SelectChanged(this.selectedForm)" ng-cloak>
+					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
 				</select>
 				</h3>
 			</div>	
@@ -118,7 +118,7 @@
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-														<button type="button" class="btn btn-primary" ng-click="">Save changes</button>
+														<!-- <button type="button" class="btn btn-primary" ng-click="">Save changes</button> -->
 													</div>
 												</div>
 											</div>
@@ -139,8 +139,10 @@
 						<div class="ibox">
 						    <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                 <h5>Form: eBook D/L Form</h5><div class="alerttest2" style="color:red;"></div>
-                                    <div class="ibox-tools">
+                                 <h5>Form Name: <input type="text" name="frmName" id="frmName" ng-model="listName" required><br>
+								 <span class="listNameAlt" style="color:red;"></span>
+								 </h5>
+                                    <!-- <div class="ibox-tools">
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             <i class="fa fa-wrench"></i> Form Options
                                         </a>
@@ -150,7 +152,7 @@
                                             <li><a href="#">Modify Form's Button</a>
                                             </li>
                                         </ul>
-                                    </div>   
+                                    </div>   --> 
                                 </div>
                             
 							<div class="ibox-content">
@@ -176,12 +178,12 @@
 													</div>
 													<div class="modal-body">
 														<p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}"></p>
-														<p>Required?: <select id="{{s.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
-														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill" ><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p>Required?: <select id="{{s.fieldID}}Require" ng-model="s.required" ng-change=SetRequire();><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No" selected>No</select></p>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-														<button type="button" class="btn btn-primary">Save changes</button>
+														<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+														<!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
 													</div>
 												</div>
 											</div>
@@ -217,10 +219,9 @@
 						</div>
 					</div>
 				</div>
-				</div>
-                            
+				</div>                 
 
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-lg-12">
 						<h4>Serialized Output</h4>
 						<p>Here are the sortable fields in a string array:</p>
@@ -228,11 +229,11 @@
 						<!-- <div class="outputhtml p-m m white-bg"></div>
 						<div class="outputhtml2 p-m m white-bg"></div> -->
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
-</div>	<!-- myCtrl -->
+</div>	<!-- myNewCtrl -->
 	<!-- Mainly scripts -->
 	<script src="js/jquery-3.1.1.min.js"></script> 	
 	<script src="js/bootstrap.min.js"></script> 
@@ -246,30 +247,89 @@
 	<script src="js/plugins/pace/pace.min.js"></script> 
 	<script type="text/JavaScript" src="global.js?n=1"></script> 	
 	<!-- Custom and plugin javascript -->	 
+	<script src="js/moment.js"></script>
+ 	<script src="js/jquery.md5.js"></script>
+	<script type="text/JavaScript" src="global.js?n=1"></script> 
+	<script src="js/davinci.js"></script>
 
 <script>
-	
-var fID = getParameterByName("fID");
-fID = "a1"; 
+
 var indx = -1; 
 var defIndx = -1; 
 var dbName = "<?php echo $dbName; ?>";
 var myApp = angular.module('myApp',  []);
-myApp.controller('myCtrl',function($scope,$http) {
+
+myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
+			$scope.state = {	"Save":"Save",	};
+			$scope.defID = ""; 	
 			$scope.tempArr = []; 
-
-			$scope.SaveForm = function() {
-				 $scope.GenSelectedFromHTML(); 
-				  var txt = $scope.selectedFromHTML; 
-				  $scope.MyCopyItem('formHTML',txt);
-				  $http.put('/couchdb/' + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
-						 $scope.LoadSelect(); 
-						 $scope.LoadDefault(); 
-						 alert("Save success");
-//						 $scope.state['Save'] = "Save";
-
-					});         
+			$scope.SaveNewForm = function() {							
+					var LName = $('#frmName').val();			
+					if(LName != ''){
+						var keyword = LName+getCurrentDateTime();
+						var conID = $.md5(keyword);      
+						$scope.LoadData(conID); 
+					}else{
+						$('.listNameAlt').html("Please fill Form Name");
+					}
             };
+
+			$scope.SaveDB = function(cID) {					
+                $scope.state['Save'] = "Saving";
+				$http.put('/couchdb/' + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
+						 //alert("Save success");
+						 window.location.href="formEditor.php?fID="+cID; 
+						 //$scope.state['Save'] = "Save";
+
+				});                    
+			};
+
+			$scope.LoadData = function (formID) {
+				$scope.GenSelectedFromHTML();  // create $scope.selectedFromHTML / $scope.allFieldName
+				var frmName = $('#frmName').val(); 
+				var frmtype_defID = $scope.defID; //formType_DefID 
+				var submission = "";
+				var modDate = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js  //modifiedDate
+				var allfield = $scope.allFieldName; //allFieldName
+				var formhtml = $scope.selectedFromHTML;  //formHTML
+
+				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
+							$rootScope.master  = response.data; 
+							if (typeof $rootScope.master.items == 'undefined') {
+									$rootScope.master.items = [];
+							} 
+							$scope.frmlist  = angular.copy($scope.master);
+							$scope.frmlist  = angular.copy($rootScope.master);						 
+							$scope.frmlist.items.push({
+									"formID":formID,
+									"formName":frmName,
+									"formType_DefID":frmtype_defID,
+									"submission":submission,
+									"modifiedDate":modDate,
+									"allFieldName":allfield,
+									"formHTML":formhtml,
+									"fieldLists":$scope.selectItem
+							});
+							$scope.SaveDB(formID); 
+					},function(errResponse){
+							if (errResponse.status == 404) {
+									$scope.frmlist = {items:[]};
+									$scope.frmlist.items.push({
+										"formID":formID,
+										"formName":frmName,
+										"formType_DefID":frmtype_defID,
+										"submission":submission,
+										"modifiedDate":modDate,
+										"allFieldName":allfield,
+										"formHTML":formhtml,
+										"fieldLists":$scope.selectItem
+									});
+									$scope.SaveDB(formID); 
+							}
+					});
+			
+            };
+
 			$scope.CopyScope = function (ItemName,data) {
 				$scope[ItemName] = data; 
 			};
@@ -283,14 +343,21 @@ myApp.controller('myCtrl',function($scope,$http) {
 			$scope.LoadRightBlock = function() {
 					var summerdivtxt = ''; 
 					if(typeof $scope.selectItem != 'undefined') {
-							for(i=0;i<$scope.selectItem.length;i++){
-								var tmpLab = $scope.selectItem[i].label; 
-								summerdivtxt += '<div class="form-group"><label>'+tmpLab+'</label><input class="form-control input-sm" name="'+tmpLab+'" required="" type="text" value=""></div>' ; 
+							for(i=0;i<$scope.selectItem.length;i++){								
+									summerdivtxt += getFormCode($scope.selectItem[i].fieldType,$scope.selectItem[i].fieldID,$scope.selectItem[i].label,$scope.selectItem[i].required,$scope.selectItem[i].prepopulated,$scope.selectItem[i].option); 								
 							}
 					}
-					$('#summerblock').html(summerdivtxt); 		
+					$('#summerblock').html(summerdivtxt); 
             };
-			
+
+			$scope.LoadNewSelect = function() {                
+				$scope.selectItem = [];	// default New
+				$scope.selectItem.push({"fieldID":"femail", "label": "Email","required": "Yes","prepopulated": "No","fieldType": "email" }); 
+				$scope.selectItem.push({"fieldID":"fname", "label": "First Name","required": "Yes","prepopulated": "No","fieldType": "textbox" }); 
+				$scope.LoadRightBlock(); 
+				$scope.tempArr = $scope.selectItem;  		
+            };
+			/*
 			$scope.LoadSelect = function() {                
 				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
 							$scope.master  = response.data; 
@@ -299,34 +366,40 @@ myApp.controller('myCtrl',function($scope,$http) {
 							} 
 							$scope.frmlist  = angular.copy($scope.master);
 							indx = $scope.frmlist.items.getIndexByValue('formID',fID);		
+							$scope.selectFrm = $scope.frmlist.items[indx];
 							$scope.selectItem = $scope.frmlist.items[indx]['fieldLists']; 
 							$scope.LoadRightBlock(); 
-
+							$scope.tempArr = $scope.selectItem;  							
+							$scope.defID = $scope.frmlist.items[indx]['formType_DefID']; 
+							
 				},function(errResponse){
 							if (errResponse.status == 404) {
 								$scope.frmlist = {items:[]};
-							}
-                });
-
+							}							
+                });				
             };
-
-			$scope.LoadDefault = function(defID) {                
+			*/ 
+			$scope.LoadDefault = function(load) { 			
+				if(load=="new"){
+					$scope.LoadNewSelect(); 
+				}
 				$http.get("/couchdb/" + dbName +'/formDefaultList'+"?"+new Date().toString()).then(function(response) {
 							$scope.masterDef  = response.data; 
 							if (typeof $scope.masterDef.items == 'undefined') {
 							   $scope.masterDef.items = [];
 							} 
 							$scope.deflist  = angular.copy($scope.masterDef);
-							if(typeof defID == 'undefined' || defID=="" ){
-								defIndx = 0; 
-							}else{
-								defIndx = $scope.deflist.items.getIndexByValue('defaultID',defID);		
-								$scope.deflist.items[0]['fieldLists'].formSelected = ""; 
-								$scope.deflist.items[defIndx]['fieldLists'].formSelected = "selected";
 
+							if(typeof $scope.defID == 'undefined' || $scope.defID=="" ){								
+								defIndx = $scope.deflist.items.getIndexByValue('defaultID',load);								
+							}else{
+								defIndx = $scope.deflist.items.getIndexByValue('defaultID',$scope.defID);		
+								//$scope.deflist.items[0]['fieldLists'].formSelected = ""; 
+								$scope.deflist.items[defIndx]['fieldLists'].formSelected = "selected";
 							}
 							//$scope.defItem = $scope.deflist.items[defIndx]['fieldLists']; 						
-							$scope.CheckDupOnLoad(); 
+							//alert(defIndx); 
+							$scope.CheckDupOnLoad(defIndx); 
 
 				},function(errResponse){
 							if (errResponse.status == 404) {
@@ -335,13 +408,14 @@ myApp.controller('myCtrl',function($scope,$http) {
                 });
             };
 
-			$scope.CheckDupOnLoad = function(ftype) {
+			$scope.CheckDupOnLoad = function(index) {
+					if(index=="-1" ){		index= "0";	}
 					if(typeof $scope.selectItem != 'undefined') {
 							var defArr = []; 							
-							for(i=0;i<$scope.deflist.items[defIndx]['fieldLists'].length;i++){
+							for(i=0;i<$scope.deflist.items[index]['fieldLists'].length;i++){
 									var isDup = false; 
 									for(k=0;k<$scope.selectItem.length;k++){
-											if($scope.deflist.items[defIndx]['fieldLists'][i].fieldID == $scope.selectItem[k].fieldID){
+											if($scope.deflist.items[index]['fieldLists'][i].fieldID == $scope.selectItem[k].fieldID){
 												isDup = true; 
 												break; 
 											}else{
@@ -349,74 +423,46 @@ myApp.controller('myCtrl',function($scope,$http) {
 											}
 									}//for k
 									if(!isDup){
-											defArr.push($scope.deflist.items[defIndx]['fieldLists'][i]); 
+											defArr.push($scope.deflist.items[index]['fieldLists'][i]); 
 									}
 							}//for i
 							$scope.defItem = defArr; 
+							$scope.defID = $scope.deflist.items[index]['defaultID'];
 					}else{
-							$scope.defItem = $scope.deflist.items[defIndx]['fieldLists']; 	
-					}
+							$scope.defItem = $scope.deflist.items[index]['fieldLists']; 	
+							$scope.defID = $scope.deflist.items[index]['defaultID'];
+					}					
             };
 
-			$scope.SelectChanged = function(ftype) {
-				$('.alerttest').html(" formtype = "+ftype);
-            };
+			$scope.SelectChanged = function(defFrmID) { //
+				$scope.defID = defFrmID; 
+				$scope.LoadDefault(defFrmID);	//send DefID to reload Available field
+				//$('.alerttest').html(" formtype = "+ftype);
+            };			
+			$scope.Reset = function() {                  
 
-			$scope.LoadStart = function() {
-				$scope.LoadSelect(); 
-				$scope.LoadDefault(); 				
-            };
-			
-			$scope.Reset = function() {
-                  
-            };
+            };			
+
+			$scope.SetRequire = function() {
+                  var txt=$scope.selectItem;
+            };	
 				
 			$scope.GenSelectedFromHTML = function() {
 				var temphtml = ""; 
+				var allFieldName =""; 
 				for(i=0;i<$scope.tempArr.length;i++){
-						temphtml +=' <div class="form-group"> '; 
-						var tmpLab = $scope.tempArr[i].label; 
-						var tmpReq = ""; 
-						var tmpPrepop = ""; 
 						
-						temphtml +=  ' <label>'+tmpLab+'</label> '; 
+						allFieldName += $scope.tempArr[i].label;
+						if(i<$scope.tempArr.length-1){		allFieldName +=",";		}				
 
-						if($scope.tempArr[i].required == "Yes"){
-							tmpReq = ' required="" '; 
-							temphtml += '<span style="color:red;">&#42;</span>'	; 
-						}
-
-						if($scope.tempArr[i].prepopulated == "Yes"){
-							tmpPrepop = '##'+tmpLab+'##'; 						
-						}
-
-						if($scope.tempArr[i].fieldType == "textbox" || $scope.tempArr[i].fieldType == "email" || $scope.tempArr[i].fieldType == "mobile" || $scope.tempArr[i].fieldType == "phone"){
-							temphtml += ' <input class="form-control input-sm" name="'+tmpLab+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
-
-						}else if($scope.tempArr[i].fieldType == "hidden"){						
-							temphtml += ' <input type="hidden" name="'+tmpLab+' value="'+tmpPrepop+'"> '; 
-
-						}else if($scope.tempArr[i].fieldType == "dropdown"){
-							temphtml += ' <select name="'+tmpLab+'> '+$scope.tempArr[i].option+'</select> '; 
-
-						}else if($scope.tempArr[i].fieldType == "datetime"){
-							var datename = "$scope.tempArr[i].fieldID"+"_DATE"; 							
-							temphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); < /script>  ' ;
-
-							temphtml += '<div class="form-group" id="'+datename+'"><label>'+tmpLab+'</label><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value=""></div></div>' ; 
-								
-						}else if($scope.tempArr[i].fieldType == "radio"){
-							temphtml += ' <input type="hidden" name="'+tmpLab+' value="'+tmpPrepop+'"> '; 
-						}
-
-						temphtml +=' </div> '; 
+						temphtml += getFormCode($scope.tempArr[i].fieldType,$scope.tempArr[i].fieldID,$scope.tempArr[i].label,$scope.tempArr[i].required,$scope.tempArr[i].prepopulated,$scope.tempArr[i].option); 					
 				}//end for i
-				
+				$scope.allFieldName = allFieldName; 
 				$scope.selectedFromHTML = '<div class="col-lg-4 ibox ibox-content well"><form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form><div>' ; 		
                   
-            };// end GenSelectedFromHTML()
+            };// end GenSelectedFromHTML()		
 			
-			$scope.LoadStart();
+			$scope.LoadDefault('new');				
 });
 
 $(document).ready(function(){
@@ -438,14 +484,16 @@ $(document).ready(function(){
 							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
 							//add array
 							tempArr.push({"fieldID":form_fields[i], "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": "textbox" }); 
-														
-							summerdivtxt += '<div class="form-group"><label>'+flabel+'</label><input class="form-control input-sm" name="'+flabel+'" required="" type="text" value=""></div>' ; 
+							
+							summerdivtxt += getFormCode("textbox",form_fields[i],flabel,frequire,fprefill,""); 
+							//summerdivtxt += '<div class="form-group"><label>'+flabel+'</label><input class="form-control input-sm" name="'+flabel+'" required="" type="text" value=""></div>' ; 
 
 
 						}//end for i
-						angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
-						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
-	                    $('.output').html(" form_fields = "+form_fields);					
+						angular.element(document.getElementById('myNewCtrl')).scope().MyCopyItem('fieldLists',tempArr);
+						angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('tempArr',tempArr);
+	                    $('.output').html(" form_fields = "+form_fields);	
+						//$('.output').html("Available Fields: " + window.JSON.stringify(available_fields) + "<br/>" + "Form Fields: " + window.JSON.stringify(form_fields) + "<br/>");
 						
 						$('#summerblock').html(summerdivtxt); 		
 
@@ -453,6 +501,44 @@ $(document).ready(function(){
 	           }).disableSelection();			 
 
 }); // end document.ready(); 
+
+function getFormCode(fieldType,fieldID,label,required,prepopulated,option){	
+		var tmpReq = ""; 
+		var tmpPrepop=""; 
+		var redstar = ""; 		
+		if(required == "Yes"){
+				tmpReq = ' required="" '; 
+				redstar += '<span style="color:red;">&#42;</span>'	; 
+		}
+		if(prepopulated == "Yes"){
+				tmpPrepop = '##'+label+'##'; 						
+		}
+
+	    var temphtml ='<div class="form-group"><label>'+label+'</label>'+redstar ;
+		if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
+				temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
+
+		}else if(fieldType == "hidden"){						
+				temphtml += ' <input type="hidden" name="'+label+' value="'+tmpPrepop+'"> '; 
+
+		}else if(fieldType == "dropdown"){
+				temphtml += ' <select name="'+label+'> '+option+'</select> '; 
+
+		}else if(fieldType == "datetime"){
+				var datename = fieldID+"_DATE"; 							
+				temphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); < /script>  ' ;
+
+				temphtml += '<div class="form-group" id="'+datename+'"><label>'+label+'</label><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value=""></div></div>' ; 
+					
+		}else if(fieldType == "radio"){
+				temphtml += ' <input type="hidden" name="'+label+' value="'+tmpPrepop+'"> '; 
+		}
+		temphtml +="</div>"; 
+
+		//var summerdivtxt += '<label>'+label+'</label>'+redstar+'<input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"></div>' ; 
+		return  temphtml;         
+};
+
 
 </script>
 

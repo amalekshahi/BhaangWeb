@@ -35,7 +35,7 @@
                     <md-select ng-model="backend.cmd">
                         <md-option value="publish">publish</md-option>
                         <md-option value="update">update</md-option>
-                        <md-option value="getID">getID</md-option>
+                        <md-option value="test">test</md-option>
                     </md-select>
                 </md-input-container>  
                 <md-input-container>
@@ -110,12 +110,12 @@
         $scope.backend = {
             cmd:"publish",
             acctID:"228",
-            progID:"24d4ea35fd91047acdc18b2746372cee",
+            progID:"923450c735088df2feaea4f0f81f3b55",
             options: {mode: 'tree'},
         };
         $scope.backendClick = function(){
             $scope.backend.data = {};
-            $http.get("backend.php",
+            $http.get("backend.php"+"?" + new Date().toString(),
                 {
                   method: "POST",
                   params: {
