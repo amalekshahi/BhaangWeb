@@ -23,6 +23,11 @@
 <div class="bg-primary">
   <h1>TestBed 1.0</h1>
 </div>  
+<style>
+.md-tab {
+    text-transform: none;
+}
+</style>
 <div ng-controller="myCtrl">
 <div ng-cloak>
   <md-content>
@@ -69,8 +74,18 @@
                     <label>blueprint</label>
                     <md-select ng-model="getEmailTemplate.blueprint">
                         <md-option value="PromoteBlog">PromoteBlog</md-option>
+                        <md-option value="PromoteEbook">PromoteEbook</md-option>
+                        
                     </md-select>
                 </md-input-container>  
+                <md-input-container>
+                    <label>resource</label>
+                    <md-select ng-model="getEmailTemplate.resource">
+                        <md-option value="emails">emails</md-option>
+                        <md-option value="pages">pages</md-option>
+                    </md-select>
+                </md-input-container>  
+                
                 <md-input-container>
                     <button ng-click="getEmailTemplateClick()">submit</button>
                 </md-input-container>  
@@ -115,7 +130,7 @@
         };
         $scope.backendClick = function(){
             $scope.backend.data = {};
-            $http.get("backend.php"+"?" + new Date().toString(),
+            $http.get("backend_kkk.php"+"?" + new Date().toString(),
                 {
                   method: "POST",
                   params: {
@@ -142,15 +157,20 @@
 
         $scope.getEmailTemplate = {
             blueprint: "PromoteBlog",
-            options: {mode: 'tree'},
+            resource: 'emails',
+            options: {  
+                mode: 'tree',
+                
+            },
         };
         $scope.getEmailTemplateClick = function(){
             $scope.getEmailTemplate.data = {};
-            $http.get("getEmailTemplate.php",
+            $http.get("getEmailTemplate_kkk.php"+"?" + new Date().toString(),
                 {
                   method: "POST",
                   params: {
                     blueprint: $scope.getEmailTemplate.blueprint,
+                    resource: $scope.getEmailTemplate.resource,
                   }  
                 }
             ).then(function(response) {
@@ -166,7 +186,7 @@
         };
         $scope.loginClick = function(){
             $scope.login.data = {};
-            $http.get("login.php",
+            $http.get("login.php"+"?" + new Date().toString(),
                 {
                   method: "GET",
                   params: {

@@ -28,16 +28,8 @@
 												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a> <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail"><i class="fa fa-floppy-o"></i> Save Page</button>
 											</div>
 											<div class="col-xs-4">
-												<select class="chosen-select col-xs-4" data-target=".template_preview" id="template" name="EMAIL-{{email_number}}-template" tabindex="2">
-													<option data-show=".Pick" value="Pick">
-														Pick a template...
-													</option>
-													<option data-show=".Plain" value="Plain">
-														Plain: Simple Page
-													</option>
-													<option data-show=".Company_eBook" value="Company_eBook">
-														Company Page: Your company logo, call to action button, and address in footer
-													</option>
+												<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
+												<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
 												</select>
 											</div><br>
 											<br>
@@ -53,18 +45,7 @@
 												</div>
 												<div class="content">
 													<div class="template_preview">
-														<div class="Pick">
-															<p></p>
-															<p>Your landing page preview will display here after you select a template.</p>
-															<p></p>
-														</div>
-														<div class="Plain">
-															{{PLAIN-EBOOK}}
-														</div>
-														<div class="Company_eBook">
-															{{COMPANY-EBOOK}}
-															<p>&nbsp;</p>
-														</div>
+														<div id="viewWelcome"></div>
 													</div>
 												</div>
 											</div>

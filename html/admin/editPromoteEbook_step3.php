@@ -67,14 +67,13 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-sm-12">
-                                                                <div><p></p></div>
-                                                                <div class="tooltip-demo">
-                                                                <label class="control-label"></label> 
-                                                                <a ng-click="SendTest(1)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email "><span ng-show="state['SendTest1'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest1'] != 'Sending'"></i> Send me a test email</a>
-                                                              </div>
+																<div class="tooltip-demo">
+																	<label class="control-label"></label>
+																	<a ng-model="file" ngf-select="upload($file,'1')" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload1'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload1'] != 'Uploading'"></i> Upload image to email</a>
+																</div>
                                                             </div>
-                                                            
                                                             <div class="col-sm-12">
+                                                                <div><p></p></div>
                                                                 <label class="control-label">Send Test To</label> 
                                                             </div>    
                                                             <div class="col-sm-12">
@@ -85,6 +84,12 @@
                                                                 </select>
                                                                 </div>
                                                             </div>
+															<div class="col-sm-12">
+																<div class="tooltip-demo">
+																	<label class="control-label"></label> 
+																	<a ng-click="SendTest(1)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email "><span ng-show="state['SendTest1'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest1'] != 'Sending'"></i> Send me a test email</a>
+																</div>
+															</div>
                                                         </div>
 														<div class="hr-line-dashed"></div><input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> <input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}"> <input name="programNameHash" type="hidden" value="{{programNameHash}}">
 													</form>
@@ -270,7 +275,37 @@
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
             });
-        };        
+        };
+		
+		$scope.upload = function (file,emlID) {
+			$scope.state['Upload'+emlID] = 'Uploading';
+			var uploadFileName = "IMG-" + uuidv4();
+			//$scope.editor.summernote('insertNode', imgNode);
+			Upload.upload({
+				url: 'upload.php',
+				method: 'POST',
+				file: file,
+				data: {
+					file: file,
+					's3': 'true',
+					'fileName': uploadFileName,
+					'acctID': 'accountID',
+					'progID': 'programID',
+				}
+			}).then(function(resp) {
+				console.log('Success ' + resp.config.data.file.name + 'uploaded');
+				console.log(resp.data);
+				var imgHTML = '<img src="'+resp.data.imgSrc+'">';
+				$scope['editor1'].summernote('code',imgHTML);
+				$scope.state['Upload'+emlID] = 'Finish';
+			}, function(resp) {
+				console.log('Error status: ' + resp.status);
+				$scope.state['Upload'+emlID] = 'Error';
+			}, function(evt) {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+			});
+		};
         
         $scope.OpenRegister = function()
         {

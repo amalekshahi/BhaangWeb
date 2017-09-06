@@ -61,8 +61,9 @@
 		</nav>
 <!-- left wrapper -->
 		<div class="gray-bg" id="page-wrapper">
-			<div class="row wrapper border-bottom white-bg page-heading">
 <!-- top wrapper -->
+			<div class="row wrapper border-bottom white-bg page-heading">
+
 				<div class="col-lg-10">
 					<h2>Form Builder</h2>
 					<ol class="breadcrumb">
@@ -73,8 +74,8 @@
 					</ol>
 				</div>
 				<div class="col-lg-2"></div>
-<!-- top wrapper -->
 			</div>
+<!-- top wrapper -->
 			<div class="mail-box-header">
     			<div class="pull-right tooltip-demo">
     			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveForm();"><i class="fa fa-floppy-o" ng-show="state['Save'] != 'Saving'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> Save Form</button>
@@ -83,7 +84,7 @@
 					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
 				</select>
 				</h3>
-			</div>	
+			</div>	<!-- mail-box-header -->
 
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
@@ -191,8 +192,7 @@
 							</div>
 							</div>
 						</div>
-					</div>
-					
+					</div><!-- col-lg-4 -->					
 					<div class="col-lg-4">
 						<div class="ibox">
 							<div class="ibox-content">
@@ -215,22 +215,15 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				</div>                 
+					</div><!-- col-lg-4 -->
 
-				<!-- <div class="row">
-					<div class="col-lg-12">
-						<h4>Serialized Output</h4>
-						<p>Here are the sortable fields in a string array:</p>
-						<div class="output p-m m white-bg"></div>
-						<!-- <div class="outputhtml p-m m white-bg"></div>
-						<div class="outputhtml2 p-m m white-bg"></div> -->
-					</div>
-				</div> -->
-			</div>
-		</div>
-	</div>
+
+				</div><!-- row -->
+			</div><!-- fadeInRight -->                 
+
+		</div><!-- page-wrapper -->
+	</div><!-- wrapper -->
+
 </div>	<!-- myCtrl -->
 	<!-- Mainly scripts -->
 	<script src="js/jquery-3.1.1.min.js"></script> 	
@@ -322,7 +315,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 				if(load=="new"){
 					$scope.LoadSelect(); 
 				}
-				$http.get("/couchdb/" + dbName +'/formDefaultList'+"?"+new Date().toString()).then(function(response) {
+				$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
 							$scope.masterDef  = response.data; 
 							if (typeof $scope.masterDef.items == 'undefined') {
 							   $scope.masterDef.items = [];

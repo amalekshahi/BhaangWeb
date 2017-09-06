@@ -1,4 +1,4 @@
-<Program Name="Kwang 5" Version="1.0" DbId="0" CheckOutId="0" State="Start">
+<Program Name="Jimmy's Blog" Version="1.0" DbId="0" CheckOutId="0" State="Start">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
@@ -13,7 +13,7 @@
         </Schedules>
         <Events />
         <CallbackTouchPoints>
-          <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci228.m.mdl.io/923450c735088df2feaea4f0f81f3b55" />
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci16916.m.mdl.io/1127c16fc2682c85c246cc8b7f1e218d" />
         </CallbackTouchPoints>
         <ChildElements>          
           <ChildElement Id="9" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="200,530">
@@ -102,7 +102,7 @@
         </ChildConnections>
         <Properties>
           <BaseUrlCollection>
-            <BaseUrl Id="1" DbId="0" URL="davinci228.m.mdl.io/923450c735088df2feaea4f0f81f3b55" Extension="923450c735088df2feaea4f0f81f3b55" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="davinci228.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
+            <BaseUrl Id="1" DbId="0" URL="davinci16916.m.mdl.io/1127c16fc2682c85c246cc8b7f1e218d" Extension="1127c16fc2682c85c246cc8b7f1e218d" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="davinci16916.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
           </BaseUrlCollection>
           <Settings SessionTimeout="20">
             <InvalidPurl>&lt;html&gt;
@@ -188,7 +188,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="12" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule1</Subject>
             <Body />
-            <Start DateTime="09/01/2017 01:05:01 PM" />
+            <Start DateTime="09/05/2017 04:42:00 PM" />
           </Schedule>
         </Schedules>
         <Events>
@@ -210,7 +210,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="12" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1|2|3)|(4)|(5|6)"><Criteria Row="1" Field="City" Operator="Equal" Value="Irvine" /><Criteria Row="2" Field="City" Operator="Equal" Value="Texas" /><Criteria Row="3" Field="City" Operator="Equal" Value="Boston" /><Criteria Row="4" Field="State" Operator="Equal" Value="TX" /><Criteria Row="5" Field="State" Operator="Equal" Value="CA" /><Criteria Row="6" Field="State" Operator="Equal" Value="TX" /></Filter>	
+        <Filter CriteriaJoinOperator=""></Filter>	
         
 	
 	<HookedEvents TriggerFireContext="Current Visit" />
@@ -220,7 +220,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule1</Subject>
             <Body />
-            <Start DateTime="01/01/2050 08:00:00 AM" />
+            <Start DateTime="5 September 2017 04:53:00 PM" />
           </Schedule>
         </Schedules>
         <Events>
@@ -246,7 +246,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule1</Subject>
             <Body />
-            <Start DateTime="01/01/2050 08:00:00 AM" />
+            <Start DateTime="5 September 2017 04:53:00 PM" />
           </Schedule>
         </Schedules>
         <Events>
@@ -268,8 +268,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="15" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="390,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1|2|3)|(4)|(5|6)">
-          <Criteria Row="1" Field="City" Operator="Equal" Value="Irvine" /><Criteria Row="2" Field="City" Operator="Equal" Value="Texas" /><Criteria Row="3" Field="City" Operator="Equal" Value="Boston" /><Criteria Row="4" Field="State" Operator="Equal" Value="TX" /><Criteria Row="5" Field="State" Operator="Equal" Value="CA" /><Criteria Row="6" Field="State" Operator="Equal" Value="TX" />
+        <Filter CriteriaJoinOperator="">
+          
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -277,8 +277,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="16" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="540,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1|2|3)|(4)|(5|6)">
-          <Criteria Row="1" Field="City" Operator="Equal" Value="Irvine" /><Criteria Row="2" Field="City" Operator="Equal" Value="Texas" /><Criteria Row="3" Field="City" Operator="Equal" Value="Boston" /><Criteria Row="4" Field="State" Operator="Equal" Value="TX" /><Criteria Row="5" Field="State" Operator="Equal" Value="CA" /><Criteria Row="6" Field="State" Operator="Equal" Value="TX" />
+        <Filter CriteriaJoinOperator="">
+          
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -496,8 +496,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="26" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="690,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1|2|3)|(4)|(5|6)">
-          <Criteria Row="1" Field="City" Operator="Equal" Value="Irvine" /><Criteria Row="2" Field="City" Operator="Equal" Value="Texas" /><Criteria Row="3" Field="City" Operator="Equal" Value="Boston" /><Criteria Row="4" Field="State" Operator="Equal" Value="TX" /><Criteria Row="5" Field="State" Operator="Equal" Value="CA" /><Criteria Row="6" Field="State" Operator="Equal" Value="TX" />
+        <Filter CriteriaJoinOperator="">
+          
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -505,8 +505,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="27" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="840,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1|2|3)|(4)|(5|6)">
-          <Criteria Row="1" Field="City" Operator="Equal" Value="Irvine" /><Criteria Row="2" Field="City" Operator="Equal" Value="Texas" /><Criteria Row="3" Field="City" Operator="Equal" Value="Boston" /><Criteria Row="4" Field="State" Operator="Equal" Value="TX" /><Criteria Row="5" Field="State" Operator="Equal" Value="CA" /><Criteria Row="6" Field="State" Operator="Equal" Value="TX" />
+        <Filter CriteriaJoinOperator="">
+          
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -514,8 +514,8 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
       <CampaignElement Id="28" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="990,20" SharedCheckout="False">
-        <Filter CriteriaJoinOperator="(1|2|3)|(4)|(5|6)">
-          <Criteria Row="1" Field="City" Operator="Equal" Value="Irvine" /><Criteria Row="2" Field="City" Operator="Equal" Value="Texas" /><Criteria Row="3" Field="City" Operator="Equal" Value="Boston" /><Criteria Row="4" Field="State" Operator="Equal" Value="TX" /><Criteria Row="5" Field="State" Operator="Equal" Value="CA" /><Criteria Row="6" Field="State" Operator="Equal" Value="TX" />
+        <Filter CriteriaJoinOperator="">
+          
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
           </AdvancedFilter>
@@ -551,17 +551,17 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <ContentVariables>
         <ContentVariable Name="domainvar">MISSING-TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR</ContentVariable>
         <ContentVariable Name="unsubscribelink">MISSING-TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK</ContentVariable>
-        <ContentVariable Name="fromemail">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-923450c735088df2feaea4f0f81f3b55-FROMEMAIL.html&quot;##</ContentVariable>
-        <ContentVariable Name="fromname">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-923450c735088df2feaea4f0f81f3b55-FROMNAME.html&quot;##</ContentVariable>
-        <ContentVariable Name="email1content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-228-923450c735088df2feaea4f0f81f3b55-EMAIL1CONTENT.html&quot;##</ContentVariable>
-        <ContentVariable Name="email2content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-228-923450c735088df2feaea4f0f81f3b55-EMAIL2CONTENT.html&quot;##</ContentVariable>
-        <ContentVariable Name="email3content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-228-923450c735088df2feaea4f0f81f3b55-EMAIL3CONTENT.html&quot;##</ContentVariable>
+        <ContentVariable Name="fromemail">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1127c16fc2682c85c246cc8b7f1e218d-FROMEMAIL.html&quot;##</ContentVariable>
+        <ContentVariable Name="fromname">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1127c16fc2682c85c246cc8b7f1e218d-FROMNAME.html&quot;##</ContentVariable>
+        <ContentVariable Name="email1content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-1127c16fc2682c85c246cc8b7f1e218d-EMAIL1CONTENT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email2content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-1127c16fc2682c85c246cc8b7f1e218d-EMAIL2CONTENT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email3content">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-1127c16fc2682c85c246cc8b7f1e218d-EMAIL3CONTENT.html&quot;##</ContentVariable>
         <ContentVariable Name="email4content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT</ContentVariable>
         <ContentVariable Name="email5content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT</ContentVariable>
         <ContentVariable Name="email6content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT</ContentVariable>
-        <ContentVariable Name="email1subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-923450c735088df2feaea4f0f81f3b55-EMAIL1SUBJECT.html&quot;##</ContentVariable>
-        <ContentVariable Name="email2subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-923450c735088df2feaea4f0f81f3b55-EMAIL2SUBJECT.html&quot;##</ContentVariable>
-        <ContentVariable Name="email3subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-228-923450c735088df2feaea4f0f81f3b55-EMAIL3SUBJECT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email1subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1127c16fc2682c85c246cc8b7f1e218d-EMAIL1SUBJECT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email2subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1127c16fc2682c85c246cc8b7f1e218d-EMAIL2SUBJECT.html&quot;##</ContentVariable>
+        <ContentVariable Name="email3subject">##URL SRC=&quot;https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-1127c16fc2682c85c246cc8b7f1e218d-EMAIL3SUBJECT.html&quot;##</ContentVariable>
         <ContentVariable Name="email4subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT</ContentVariable>
         <ContentVariable Name="email5subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT</ContentVariable>
         <ContentVariable Name="email6subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT</ContentVariable>

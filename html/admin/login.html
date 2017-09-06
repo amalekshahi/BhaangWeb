@@ -9,6 +9,8 @@
 	<link href="css/plugins/bootstrapSocial/bootstrap-social.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link rel="icon" href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" type="image/x-icon" />
+	
 	<!-- Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<!-- Sweet alert -->
@@ -17,7 +19,7 @@
 </head>
 <body class="gray-bg">
     <!-- The background image will rotate.  We may change them a few times p/week or month -->
-	<div class="container" style="width: 100%; height: auto; min-height: 100%; background-image: url('http://www.pacificworld.com/webwp/wp-content/uploads/2016/03/italy.jpg');">
+	<div class="container" style="width: 100%; height: auto; min-height: 100%; background-image: url('https://s3.amazonaws.com/mindfiredavinci/img/DV_italy-min.jpg');">
 		<div class="loginColumns animated fadeInDown" ng-controller="myCtrl">
 			<div class="row">
 				<div class="col-md-6">
@@ -32,7 +34,7 @@
 							</div>
 							<div ng-show="state" id="accountDiv" class="form-group"  ng-cloak>
 								<select style="width:100%;" ng-model="mpsSelect">
-										<option ng-repeat="option in login.mps" value="{{option.id}}|{{option.name}}">{{option.name}}</option>
+										<option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
 								</select>
 							</div>
 							<!-- <a href="dv.php?page=homePage" class="btn btn-primary block full-width m-b" role="button">Login</a> -->
@@ -70,7 +72,7 @@
 						<div class="ibox-content">
 							<h3>"A Look at How Millennials Respond to Direct Mail"</h3><img alt="Cinque Terre" class="img-thumbnail center-block" src="https://s3-us-west-1.amazonaws.com/marketingmfi/Still_Relevant-A_Look_At_How_Millennials_Respond_To_Direct_Mail_pdf.jpg" width="300">
 							<p></p>
-							<p>Did you know that 64% of Millennials would rather look at Direct Mail than Email?</p><button class="btn btn-danger btn-xs center-block" type="button"><i aria-hidden="true" class="fa fa-download"></i> Download the eBook</button>
+							<p>Did you know that 64% of Millennials would rather look at Direct Mail than Email?</p><a href="http://mindfireinc.com/resources/ebooks/ahBzfm1pbmRmaXJlc3R1ZGlvchILEgVFYm9vaxiAgICgoLSHCgw" target="_new" class="btn btn-primary btn center-block" role="button"><i aria-hidden="true" class="fa fa-download"></i> Download Now</a>
 						</div>
 					</div>
 				</div>

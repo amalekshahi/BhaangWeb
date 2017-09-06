@@ -11,11 +11,12 @@ require_once 'commonUtil.php';
 
 session_start();
 
-function UpdateMAMLSchedule($xml,$doc)
+function UpdateMAML($xml,$doc)
 {
     $xpath = new DOMXpath($xml);
     // scan for at most 10 email
     $ret = array();
+    $contactRet = array();
     for($i=1;$i<10;$i++){
         // check if $doc is define 
         $scheduleDateTimeName = 'EMAIL'.$i.'-SCHEDULE1-DATETIME';
@@ -35,11 +36,61 @@ function UpdateMAMLSchedule($xml,$doc)
                 $ret[] = $xml->saveHTML($scheduleNode);
             }
         }
+        
+        //Find Contact nodes
+        $contactText = "Email".$i."Contacts";
+        $nodeList = $xpath->query("//CampaignElement[@Name='".$contactText."']");
+        $CriteriaJoinOperatorValue = $doc->{'EMAIL-FILTER-JOINOPERATOR'};
+        $CriteriaXML = $doc->{'EMAIL-FILTER-CRITERIAROW'};
+        if ($nodeList->length > 0) {
+            $node = $nodeList->item(0);
+            $filterNode = $node->getElementsByTagName("Filter")->item(0);
+            
+            /* delete criteria node */
+            $deleteList = array();
+            $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+            foreach ($criteriaNodes as $n) {
+                $deleteList[] = $n;
+            }
+            foreach ($deleteList as $n) {
+                $filterNode->removeChild($n);
+            }
+            
+            //Set attribute
+            $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+            
+            //add criteria
+            $f = $xml->createDocumentFragment();
+            $f->appendXML($CriteriaXML);
+            $filterNode->appendChild($f);
+            
+            $contactRet[] = $xml->saveHTML($filterNode);
+        }
+        
+        //OPEN-MY-EMAIL "OpenAlertLeadTrigger
+        //$OpenAlertLeadTrigger = $xpath->query("//CampaignElement[@Name='OpenAlertLeadTrigger']")->item(0);
     }
+    $OpenAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='OpenAlertLeadTrigger']","State",$doc->{'OPEN-MY-EMAIL'});
+    $ClickAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='ClickAlertLeadTrigger']","State",$doc->{'VISIT-MY-BLOCK'});
+    
     return array(
+        "ContactUpdate" => $contactRet,
         "Maml"=> $xml->saveHTML(),
-        "UpdateDetail" => $ret,
+        "EmailUpdate" => $ret,
+        "OpenAlertLeadTrigger" => $xml->saveHTML($OpenAlertLeadTrigger),
+        "ClickAlertLeadTrigger" => $xml->saveHTML($ClickAlertLeadTrigger),
     );
+}
+
+function DomSetAttribute($xpath,$path,$attr,$value)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $node->setAttribute($attr,$value);
+        return $node;
+    }
+    return null;
 }
 
 if(empty($_SESSION['EMAIL'])){
@@ -85,16 +136,7 @@ if($cmd=="test"){
     $publishMamlContent = file_get_contents($mamlName);
     $xml = new DOMDocument();
     $xml->loadXML($publishMamlContent);
-/*    $xpath = new DOMXpath($xml);
-    $node = $xpath->query("//Schedule/Subject[starts-with(text(),'Email')]")->item(0);
-    $scheduleNode  = $node->parentNode;
-    $startNode = $scheduleNode->getElementsByTagName("Start")->item(0);
-    $subject = $node->nodeValue;
-    $setDateTime = date('Y/m/d H:i:s');
-    $startNode->setAttribute("DateTime",$setDateTime);
-    $scheduleNode->setAttribute("TimeZone","Pacific Standard Time");*/
-    //$programNode = $xml->getElementsByTagName('Program')->item(0);
-    $emailList = UpdateMAMLSchedule($xml,$doc);
+    $emailList = UpdateMAML($xml,$doc);
     echo json_encode( 
         array(
             'success'=>true,
@@ -228,9 +270,13 @@ if($cmd == "publish"){
     // Do some work here
     $xml = new DOMDocument();
     $xml->loadXML($checkOutMAML);
-    $updateResult = UpdateMAMLSchedule($xml,$doc);
+    $updateResult = UpdateMAML($xml,$doc);
     $updateMAML = $updateResult["Maml"];
-    //CheckIn
+
+    // save file for debug
+    $republishReturnFileName = "publish/".$acctID."_".$progID."_republish.maml";
+    file_put_contents($republishReturnFileName,$updateMAML);
+    //CheckIn    
     $checkInRet = checkinProgram($ticket,$updateMAML);
     if($checkInRet['success']){
         echo json_encode( 

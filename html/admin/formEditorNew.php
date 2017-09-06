@@ -61,8 +61,9 @@
 		</nav>
 <!-- left wrapper -->
 		<div class="gray-bg" id="page-wrapper">
-			<div class="row wrapper border-bottom white-bg page-heading">
 <!-- top wrapper -->
+			<div class="row wrapper border-bottom white-bg page-heading">
+
 				<div class="col-lg-10">
 					<h2>Form Builder</h2>
 					<ol class="breadcrumb">
@@ -73,8 +74,10 @@
 					</ol>
 				</div>
 				<div class="col-lg-2"></div>
-<!-- top wrapper -->
+
 			</div>
+<!-- top wrapper -->
+
 			<div class="mail-box-header">
     			<div class="pull-right tooltip-demo">
     			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveNewForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
@@ -83,7 +86,7 @@
 					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
 				</select>
 				</h3>
-			</div>	
+			</div>	<!-- mail-box-header -->
 
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
@@ -134,7 +137,7 @@
                                 </div>								
 							</div>
 						</div>
-					</div>
+					</div><!-- col-lg-4 -->
 					<div class="col-lg-4">
 						<div class="ibox">
 						    <div class="ibox float-e-margins">
@@ -193,7 +196,7 @@
 							</div>
 							</div>
 						</div>
-					</div>
+					</div><!-- col-lg-4 -->
 					
 					<div class="col-lg-4">
 						<div class="ibox">
@@ -217,23 +220,14 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				</div>                 
+					</div><!-- col-lg-4 -->				
+				</div><!-- row -->
+			</div><!-- fadeInRight -->                 
 
-				<!-- <div class="row">
-					<div class="col-lg-12">
-						<h4>Serialized Output</h4>
-						<p>Here are the sortable fields in a string array:</p>
-						<div class="output p-m m white-bg"></div>
-						<!-- <div class="outputhtml p-m m white-bg"></div>
-						<div class="outputhtml2 p-m m white-bg"></div> -->
-					</div>
-				</div> -->
-			</div>
-		</div>
-	</div>
-</div>	<!-- myNewCtrl -->
+		</div><!-- page-wrapper -->
+	</div><!-- wrapper -->
+
+</div><!-- myNewCtrl -->
 	<!-- Mainly scripts -->
 	<script src="js/jquery-3.1.1.min.js"></script> 	
 	<script src="js/bootstrap.min.js"></script> 
@@ -383,7 +377,7 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 				if(load=="new"){
 					$scope.LoadNewSelect(); 
 				}
-				$http.get("/couchdb/" + dbName +'/formDefaultList'+"?"+new Date().toString()).then(function(response) {
+				$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
 							$scope.masterDef  = response.data; 
 							if (typeof $scope.masterDef.items == 'undefined') {
 							   $scope.masterDef.items = [];
@@ -448,6 +442,7 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
             };	
 				
 			$scope.GenSelectedFromHTML = function() {
+				reloadformfield('new'); 
 				var temphtml = ""; 
 				var allFieldName =""; 
 				for(i=0;i<$scope.tempArr.length;i++){
@@ -501,6 +496,26 @@ $(document).ready(function(){
 	           }).disableSelection();			 
 
 }); // end document.ready(); 
+
+function reloadformfield(page){
+ 			   var form_fields = $( "#form_fields" ).sortable( "toArray" );									
+				var summerdivtxt = ''; 				//display right block 
+				var tempArr=[]; 
+				for(i=0;i<form_fields.length;i++){							
+					var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
+					var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
+					var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
+					//add array
+					tempArr.push({"fieldID":form_fields[i], "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": "textbox" }); 
+					summerdivtxt += getFormCode("textbox",form_fields[i],flabel,frequire,fprefill,""); 	
+				}//end for i
+				if(page=='new'){
+					angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('selectItem',tempArr);
+					angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('tempArr',tempArr);		
+				}
+				$('#summerblock').html(summerdivtxt); 		
+}
+
 
 function getFormCode(fieldType,fieldID,label,required,prepopulated,option){	
 		var tmpReq = ""; 

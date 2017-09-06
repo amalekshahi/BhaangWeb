@@ -166,13 +166,12 @@
 																		<option ng-repeat="x in templatesAs2" value="{{x.content}}">{{x.title}}</option>
 																		</select>
 																	</div>
-																	<!--<div class="col-sm-12">
-																		<div><p></p></div>
+																	<div class="col-sm-12">
 																		<div class="tooltip-demo">
-																		<label class="control-label"></label> 
-																		<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><i class="fa fa-share-square-o"></i> Send me a test email</a>
-																	  </div>
-																	</div>-->
+																			<label class="control-label"></label>
+																			<a ng-model="file" ngf-select="upload($file,'2')" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload2'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload2'] != 'Uploading'"></i> Upload image to email</a>
+																		</div>
+																	</div>
 																	<div class="col-sm-12">
 																		<div>
 																			<p></p>
@@ -409,7 +408,7 @@
 					console.log('Success ' + resp.config.data.file.name + 'uploaded');
 					console.log(resp.data);
 					var imgHTML = '<img src="'+resp.data.imgSrc+'">';
-					$scope['editor'+emlID].summernote('code',imgHTML);
+					$scope['editor1'].summernote('code',imgHTML);
 					$scope.state['Upload'+emlID] = 'Finish';
 				}, function(resp) {
 					console.log('Error status: ' + resp.status);

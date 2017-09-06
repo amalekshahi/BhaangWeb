@@ -68,14 +68,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="item in formLib.items" ng-cloak>
+                                    <tr ng-repeat="item in formLib.items | orderBy:'-modifiedDate'" ng-cloak>
                                         <td class="project-reach">
                                                 <medium>Active</medium><br><small class="text-muted">&nbsp;</small> 
                                         </td>
                                         <td class="project-title">
                                             <a href="formEditor.php?fID={{item.formID}}">{{item['formName']}}</a>
                                             <br/>
-                                            <a href="formEditor.php?fID={{item.formID}}"><small class="text-muted">Last Modified {{item.modifiedDate}} </small></a>
+                                            <a href="formEditor.php?fID={{item.formID}}"><small class="text-muted">Last Modified <time am-time-ago="item.modifiedDate"></time></small></a>
                                         </td>
                                         <td class="project-reach">
                                                 <medium>{{item.fieldLists.length}}</medium><br><small class="text-muted">&nbsp;</small> 
@@ -127,11 +127,14 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
+
 	 <!-- Page-Level Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
 
 <script>
 var dbName = "<?php echo $dbName; ?>";
-var myApp = angular.module('myApp', ["xeditable"]);
+var myApp = angular.module('myApp', ["angularMoment"]);
 myApp.controller('myCtrl',function($scope,$http) {
 			$scope.Reset = function() {
 				 

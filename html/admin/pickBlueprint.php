@@ -92,7 +92,7 @@
 							<div class="ibox">
 								<div class="ibox-content product-box">
 
-									<img src="https://s3-us-west-1.amazonaws.com/bkktest/image/ebook.png" class="img-responsive" />
+									<img src="https://s3.amazonaws.com/mindfiredavinci/img/ebook_blueprint.png" class="img-responsive" />
 									<div class="product-desc">
 										<span class="product-price">
                                     Lead Gen

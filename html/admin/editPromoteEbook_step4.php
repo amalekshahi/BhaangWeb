@@ -21,6 +21,7 @@
     .chosen-container-multi .chosen-choices li.search-field input[type=text] {
         padding-top: 0px;
     }
+	table.schedule td{padding: 0px !important;}
 </style>
     <div class="panel-collapse collapse" id="collapseFour">
         <!--<button ng-click="ParseDate()"></button>-->
@@ -121,14 +122,33 @@
 															<td class="project-title">
 																<form class="form-inline" role="form">
 																	<div class="form-group">
-																		<label for="wait"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
-																		<input class="touchspin2 form-control input-sm" id="EMAIL1-WAIT" name="EMAIL1-WAIT" type="text" value="4" ng-model="campaign['EMAIL1-WAIT']" style="width:50px; text-align: center"> 
-																		<select class="form-control" id="EMAIL1-WAIT-UNIT" name="EMAIL1-WAIT-UNIT" ng-model="campaign['EMAIL1-WAIT-UNIT']" ng-change="chkValidSchedule()">
+																		<table class="schedule">
+																		<tr>
+																			<td style="vertical-align: top;line-height: 32px;width: 170px;"><label for="wait3"><i aria-hidden="true" class="fa fa-pause"></i>&nbsp;Wait</label></td>
+																			<td>
+																				<table class="schedule">
+																					<tr>
+																						<td><input class="touchspin2 form-control input-sm" type="text" value="4" ng-model="campaign['EMAIL1-SCHEDULE1-DAYS']" style="width:50px; text-align: center"></td>
+																						<td>days</td>
+																					</tr>
+																					<tr>
+																						<td><input class="touchspin2 form-control input-sm" type="text" value="4" ng-model="campaign['EMAIL1-SCHEDULE1-HOURS']" style="width:50px; text-align: center"></td>
+																						<td>hours</td>
+																					</tr>
+																					<tr>
+																						<td><input class="touchspin2 form-control input-sm" type="text" value="4" ng-model="campaign['EMAIL1-SCHEDULE1-MINS']" style="width:50px; text-align: center"></td>
+																						<td>minutes</td>
+																					</tr>
+																				</table>
+																			</td>
+																		</tr>
+																		</table>
+																		<!-- <select class="form-control" id="EMAIL1-WAIT-UNIT" name="EMAIL1-WAIT-UNIT" ng-model="campaign['EMAIL1-WAIT-UNIT']" ng-change="chkValidSchedule()">
 																			<option value="" disabled>Select...</option>
 																			<option value="Days" >days</option> 
 																			<option value="Hours">hours</option> 
 																			<option value="Mins">minutes</option> 
-																		</select>
+																		</select> -->
 
 																		<!-- <div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input type="text" class="form-control" id="EMAIL2-SCHEDULE1-TIME" name="EMAIL2-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-TIME']" ng-change="dateChange('')">
@@ -159,8 +179,28 @@
 															<td class="project-title">
 																<form class="form-inline" role="form">
 																	<div class="form-group">
-																		<label for="wait3"><i aria-hidden="true" class="fa fa-pause"></i> Wait</label>
-																		<input class="touchspin2 form-control input-sm" id="EMAIL2-WAIT" name="EMAIL2-WAIT" type="text" value="4" ng-model="campaign['EMAIL2-WAIT']" style="width:50px; text-align: center"> <strong>days</strong> <small>and send @ </small> 
+																		<table class="schedule">
+																		<tr>
+																			<td style="vertical-align: top;line-height: 32px;width: 170px;"><label for="wait3"><i aria-hidden="true" class="fa fa-pause"></i>&nbsp;Wait</label></td>
+																			<td>
+																				<table class="schedule">
+																					<tr>
+																						<td><input class="touchspin2 form-control input-sm" type="text" value="4" ng-model="campaign['EMAIL2-SCHEDULE1-DAYS']" style="width:50px; text-align: center"></td>
+																						<td>days</td>
+																					</tr>
+																					<tr>
+																						<td><input class="touchspin2 form-control input-sm" type="text" value="4" ng-model="campaign['EMAIL2-SCHEDULE1-HOURS']" style="width:50px; text-align: center"></td>
+																						<td>hours</td>
+																					</tr>
+																					<tr>
+																						<td><input class="touchspin2 form-control input-sm" type="text" value="4" ng-model="campaign['EMAIL2-SCHEDULE1-MINS']" style="width:50px; text-align: center"></td>
+																						<td>minutes</td>
+																					</tr>
+																				</table>
+																			</td>
+																		</tr>
+																		</table>
+																		<!-- <input class="touchspin2 form-control input-sm" id="EMAIL2-WAIT" name="EMAIL2-WAIT" type="text" value="4" ng-model="campaign['EMAIL2-WAIT']" style="width:50px; text-align: center"> <strong>days</strong> <small>and send @ </small> 
 
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input type="text" class="form-control" id="EMAIL2-SCHEDULE1-TIME" name="EMAIL2-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-TIME']">
@@ -173,7 +213,7 @@
 																				<option value="Central America Standard Time">CST</option> 
 																				<option value="Eastern Standard Time">EST</option>
 																			</select>
-																		</div>
+																		</div> -->
 																	</div>
 																</form>
 															</td>

@@ -1,11 +1,19 @@
-  <meta charset="utf-8">
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-KWJ66T');</script>
+	<!-- End Google Tag Manager -->
+
+	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="cache-control" content="max-age=0" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
-  <title>Da Vinci by MindFire</title>
+  <title>Da Vinci: <?php echo $USERNAME;?> in <?php echo $accountName;?> on page <?php echo basename($_SERVER[REQUEST_URI]);?></title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 	<link href="css/animate.css" rel="stylesheet">

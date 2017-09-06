@@ -166,12 +166,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Settings>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL1-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email1 (Right Now)</Subject>
             <Body />
-            <Start Days="0" Hours="0" Mins="0" />
+            <Start Days="{{EMAIL1-SCHEDULE1-DAYS}}" Hours="{{EMAIL1-SCHEDULE1-HOURS}}" Mins="{{EMAIL1-SCHEDULE1-MINS}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -198,12 +198,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL2-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email2 (Right Now)</Subject>
             <Body />
-            <Start Days="0" Hours="1" Mins="0" />
+	    <Start Days="{{EMAIL2-SCHEDULE1-DAYS}}" Hours="{{EMAIL2-SCHEDULE1-HOURS}}" Mins="{{EMAIL2-SCHEDULE1-MINS}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -224,12 +224,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL3-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email3 (Right Now)</Subject>
             <Body />
-            <Start Days="0" Hours="3" Mins="0" />
+            <Start Days="{{EMAIL3-SCHEDULE1-DAYS}}" Hours="{{EMAIL3-SCHEDULE1-HOURS}}" Mins="{{EMAIL3-SCHEDULE1-MINS}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -270,7 +270,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="{{VISIT-MY-EBOOK}}" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>VisitAlertLeadTrigger (Right Now)</Subject>
@@ -287,7 +287,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##firstname## ##lastname## just visited your website</Subject>
-              <HtmlContent>##VistLeadAlertContent##</HtmlContent>
+              <HtmlContent>##VisitLeadAlertContent##</HtmlContent>
               <TextContent />
             </Message>
           </Messages>
@@ -357,12 +357,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Criteria>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="620,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL4-STATE}}" Type="Email" Category="Outbound" Name="Email4" Position="620,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email4 (Right Now)</Subject>
             <Body />
-            <Start Days="0" Hours="3" Mins="0" />
+	    <Start Days="{{EMAIL4-SCHEDULE1-DAYS}}" Hours="{{EMAIL4-SCHEDULE1-HOURS}}" Mins="{{EMAIL4-SCHEDULE1-MINS}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -383,12 +383,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="790,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL5-STATE}}" Type="Email" Category="Outbound" Name="Email5" Position="790,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email5 (Right Now)</Subject>
             <Body />
-            <Start Days="0" Hours="4" Mins="0" />
+	    <Start Days="{{EMAIL5-SCHEDULE1-DAYS}}" Hours="{{EMAIL5-SCHEDULE1-HOURS}}" Mins="{{EMAIL5-SCHEDULE1-MINS}}" />            
           </Schedule>
         </Schedules>
         <Events>
@@ -409,11 +409,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="960,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL6-STATE}}" Type="Email" Category="Outbound" Name="Email6" Position="960,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email6 (Right Now)</Subject>
             <Body />
+	    <Start Days="{{EMAIL6-SCHEDULE1-DAYS}}" Hours="{{EMAIL6-SCHEDULE1-HOURS}}" Mins="{{EMAIL6-SCHEDULE1-MINS}}" />  
             <Start Days="0" Hours="6" Mins="0" />
           </Schedule>
         </Schedules>
@@ -435,7 +436,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="DownloadAlertLeadTrigger" Position="160,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="{{DOWNLOAD-MY-EBOOK}}" Type="Email" Category="Outbound" Name="DownloadAlertLeadTrigger" Position="160,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>DownloadAlertLeadTrigger (Right Now)</Subject>
@@ -535,7 +536,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="WecomePageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT}}</ContentVariable>
         <ContentVariable Name="DownloadPageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT}}</ContentVariable>
         <ContentVariable Name="DownloadLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html"##</ContentVariable>
-        <ContentVariable Name="VistLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
+        <ContentVariable Name="VisitLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>

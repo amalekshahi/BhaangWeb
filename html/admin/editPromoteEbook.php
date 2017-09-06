@@ -260,7 +260,7 @@
 			
 		}
 
-		myApp.controller('myCtrl',function($scope,$http) {
+		myApp.controller('myCtrl',function($scope,$http,Upload) {
             $scope.campaignID = campaignID;
             $scope.state = {    
                 Save:"Save",
@@ -268,6 +268,7 @@
             };
 			$scope.uploadBeforeSave = function () {
 				var file = $('#eBookFile').prop('files')[0];
+				var uploadFileName = "eBOOK-" + uuidv4();
 				$scope.state['Save'] = "Saving";
 				Upload.upload({
 					url: 'upload.php',
@@ -276,8 +277,8 @@
 					data: {
 						file:file, 
 						's3':'true',
-						'fileName':'URL-eBOOK-FILE',
-						'acctID':accountID,
+						'fileName':uploadFileName,
+						'acctID':'accountID',
 						'progID':'programID',
 					}
 				}).then(function (resp) {
@@ -397,7 +398,7 @@
                 },function(errResponse){
 					if (errResponse.status == 404) {
 						action = 'newCampaign';
-						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteBlog","accountID":accountID,"totalEmail":"2","publishProgramName":"","publishDate":"","filterSelected":[]};
+						$scope.campaign = {"campaignID":campaignID,"campaignName":campaignName,"campaignType":"PromoteEbook","accountID":accountID,"totalEmail":"2","publishProgramName":"","publishDate":"","filterSelected":[]};
 						$scope.openEmail1 = true;
 						$scope.setInitValue();
 						$scope.setDisplay();
@@ -410,6 +411,7 @@
 				
             };
 			$scope.setInitValue = function(){
+				$scope.initTemplateWelcome();
 				$scope.initTemplateEmail('1');
 				$scope.initSender();
 			};
@@ -440,6 +442,32 @@
 					});
 				}
 			};
+			$scope.initTemplateWelcome = function(){
+				
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&resource=pages").then(function(response) {
+					$scope['templatesWelcome']  = response.data.templates; 
+					$scope.config = response.data.config; 
+					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+					$scope.SelectChanged('viewWelcome','templateWelcome');
+				});
+				
+			};
+			$scope.initTemplateThankyou = function(){
+				if ($scope['openEmail'+emlID] || emlID=='1') { //Email #1 always open.
+					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&resource=pages").then(function(response) {
+						$scope['templatesAs'+emlID]  = response.data.templates; 
+						if (emlID == '1')
+						{
+							$scope.config = response.data.config; 
+							$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+						}
+						$("#subjectEmail"+emlID).text($scope.campaign['EMAIL'+emlID+'-SUBJECT']);
+						$scope.SelectChanged('viewEmail'+emlID,'templateEmail'+emlID);
+						$scope.sendersChanged('textSender'+emlID);
+						startEditable(emlID);
+					});
+				}
+			};
 			$scope.initSender = function(){
 				$scope.senders = [];
 				$scope.senders.push({"email" : "boonsom@mindfireinc.com","name" : "Boonsom Coa" });
@@ -452,7 +480,7 @@
 				$scope.openEmail3 = false;
                 $scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
                 $scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step4Done = hasValue($scope.campaign['EMAIL1-WAIT'],"0");
+                $scope.step4Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DAYS']);
                 $scope.step5Done = $scope.step4Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -620,12 +648,12 @@
             };
             //Kwang uiSwitch change
             $scope.SwitchChange = function(){
-                $scope.campaign['VISIT-LANDING-PAGE'] = MapTrueFalse($scope.campaign['VISIT-LANDING-PAGE-'],"Start","Stop");                
-                $scope.campaign['DOWNLOAD-eBOOK'] = MapTrueFalse($scope.campaign['DOWNLOAD-eBOOK-'],"Start","Stop");
+                $scope.campaign['VISIT-MY-EBOOK'] = MapTrueFalse($scope.campaign['VISIT-MY-EBOOK-'],"Start","Stop");                
+                $scope.campaign['DOWNLOAD-MY-EBOOK'] = MapTrueFalse($scope.campaign['DOWNLOAD-MY-EBOOK-'],"Start","Stop");
                 $scope.Save("",true);   //silence save
                 //alert('SwitchChange');
             };
-            
+
             $scope.ViewReport = function(){
                 //window.location.href = "reporting.php?campaignID=" + campaignID;
                 window.open("reporting.php?campaignID=" + campaignID);

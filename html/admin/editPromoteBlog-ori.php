@@ -11,7 +11,6 @@
 
 	<head>
 		<?php include "header.php"; ?>
-		<script src="js/date.format.js"></script>
 	</head>
 
 	<body class="">
@@ -320,41 +319,6 @@
 						$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
 						$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
 						$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
-					}
-					if (mode == 'Step3') {
-						var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
-						var time1 = $scope.campaign['EMAIL1-SCHEDULE1-TIME'];
-						var timezone = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];
-
-						if ((typeof date1 == 'undefined') || (typeof time1 == 'undefined') || (timezone == "")){
-							swal('Please set schedule for Email1');
-							$scope.state['Save'] = "Save";
-							return;
-						} else {
-							if (checkdate(date1, time1, timezone)) {
-							} else {
-								swal('Please do not set "PAST" times');
-								$scope.state['Save'] = "Save";
-								return;
-							}
-						}
-
-						if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
-							if (($scope.campaign['EMAIL2-WAIT'] == "") || (typeof $scope.campaign['EMAIL2-SCHEDULE1-TIME'] == 'undefined') || ($scope.campaign['EMAIL2-SCHEDULE1-TIME'] == '') || ($scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'] == "")){
-								swal('Please set schedule for Email2');
-								$scope.state['Save'] = "Save";
-								return;
-							}
-						}
-						if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){
-							if (($scope.campaign['EMAIL3-WAIT'] == "") || (typeof $scope.campaign['EMAIL3-SCHEDULE1-TIME'] == 'undefined') || ($scope.campaign['EMAIL3-SCHEDULE1-TIME'] == '') || ($scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'] == "")){
-								swal('Please set schedule for Email3');
-								$scope.state['Save'] = "Save";
-								return;
-							}
-						}
-
-						
 					}
 					$http.put('/couchdb/' + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
 						$scope.campaign._rev = response.data.rev;
@@ -877,61 +841,6 @@
 
 				return day + ' ' + monthNames[monthIndex] + ' ' + year;
 			}
-			
-			function checkdate(date1, time1, timezone){
-				
-				if (timezone == 'Pacific Standard Time') {
-					timezone = 'PST';
-				} else if (timezone == 'Mountain  Standard Time') {
-					timezone = 'MST';
-				} else if (timezone == 'Central Standard Time') {
-					timezone = 'CST';
-				} else if (timezone == 'Eastern Standard Time') {
-					timezone = 'EST';
-				} else {
-					timezone = 'PST';
-				}
-
-				time1 = convert_to_24h(convertTimeFormat(time1));
-				
-				// Create date from input value
-				var d1 = new Date(date1+' '+time1+' '+timezone);
-				var inputDate= dateFormat(d1, "yyyy-mm-dd HH:MM:ss",true);
-				//alert(inputDate);
-
-				// Get today's date
-				var d2 = new Date();
-				var todaysDate= dateFormat(d2, "yyyy-mm-dd HH:MM:ss",true);
-				//alert(todaysDate);
-
-				if (inputDate < todaysDate) {
-					//alert('past date');
-					return false;
-				} else {
-					//alert('ok');
-					return true;
-				}
-			}
-
-
-			function convert_to_24h(time_str) {
-				// Convert a string like 10:05:23 PM to 24h format, returns like [22,5,23]
-				var time = time_str.match(/(\d+):(\d+):(\d+) (\w)/);
-				var hours = Number(time[1]);
-				var minutes = Number(time[2]);
-				var seconds = Number(time[3]);
-				var meridian = time[4].toLowerCase();
-
-				if (meridian == 'p' && hours < 12) {
-				  hours += 12;
-				}
-				else if (meridian == 'a' && hours == 12) {
-				  hours -= 12;
-				}
-				return str_pad(hours)+':'+str_pad(minutes)+':'+str_pad(seconds);
-		  };
-
-
 		</script>
 
 	</body>
