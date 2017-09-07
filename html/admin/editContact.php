@@ -89,18 +89,18 @@ editContactAudience.html
 		
 		var OperatorOption = 
 		"<option value=\"\" ></option>"+
-		"<option value=\"After\" >After</option>"+
-		"<option value=\"AfterEqual\" >AfterEqual</option>"+
-		"<option value=\"Before\" >Before</option>"+
-		"<option value=\"BeforeEqual\" >BeforeEqual</option>"+
+		"<option value=\"Equal\" >Is</option>"+
+		"<option value=\"NotEqual\" >Is not</option>"+
+		"<option value=\"After\" >Greater than</option>"+
+		"<option value=\"AfterEqual\" >Greater than or equal to</option>"+
+		"<option value=\"Before\" >Less than</option>"+
+		"<option value=\"BeforeEqual\" >Less than or equal to</option>"+
 		"<option value=\"Contains\" >Contains</option>"+
-		"<option value=\"EndsWith\" >EndsWith</option>"+
-		"<option value=\"Equal\" >Equal</option>"+
-		"<option value=\"NotContains\" >NotContains</option>"+
-		"<option value=\"NotEndsWith\" >NotEndsWith</option>"+
-		"<option value=\"NotEqual\" >NotEqual</option>"+
-		"<option value=\"NotStartsWith\" >NotStartsWith</option>"+
-		"<option value=\"StartsWith\" >StartsWith</option>";
+		"<option value=\"NotContains\" >Does not contain</option>"+
+		"<option value=\"StartsWith\" >Starts with</option>"+
+		"<option value=\"NotStartsWith\" >Does not start with</option>"+
+		"<option value=\"EndsWith\" >Ends with</option>"+
+		"<option value=\"NotEndsWith\" >Does not end with</option>";
 
 		var FieldOption = "";
 
@@ -356,8 +356,8 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 			"<td>"+counter+"<input type=\"hidden\" name=\"rownumber"+counter+"\" id=\"rownumber"+counter+" value='"+counter+"'\"></td>"+
 			"<td><select name=\"fieldoption"+counter+"\" id=\"fieldoption"+counter+"\">"+FieldOption+"</select></td>"+
 			"<td><select name=\"operatoroption"+counter+"\" id=\"operatoroption"+counter+"\">"+OperatorOption+"</select></td>"+
-			"<td><input type=\"text\" name=\"filtervalue"+counter+"\" id=\"filtervalue"+counter+"\"></td>"+
-			"<td><input type=\"button\" value=\"Del\" onclick=\"delRow(this,"+counter+")\"></td>"+
+			"<td><input type=\"text\" name=\"filtervalue"+counter+"\" id=\"filtervalue"+counter+"\" ng-blur=\"okFilterClick('new');()\"></td>"+
+			"<td><input type=\"button\" value=\"Delete\" onclick=\"delRow(this,"+counter+")\"></td>"+
 			"</tr>";
 			$('#filterTable > tbody').append(tabData); 		
 			counter++;			
