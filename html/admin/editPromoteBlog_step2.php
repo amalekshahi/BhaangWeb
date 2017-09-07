@@ -109,7 +109,7 @@
 																			<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
 																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
 																			</select>
-																			<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add a new person to this list"><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
+																			<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
 																		</div>
 																
 																			<label class="control-label"></label>
