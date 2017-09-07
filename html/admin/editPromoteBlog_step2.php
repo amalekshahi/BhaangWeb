@@ -445,11 +445,11 @@
 
 			$scope.OpenRegister = function() {
 				var w = 500;
-				var h = 500;
+				var h = 325;
 				var x = screen.width / 2 - w / 2;
 				var y = screen.height / 2 - h / 2;
 
-				$scope.popup = window.open("register.php", '_blank', 'scrollbars=1,resizable=1,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
+				$scope.popup = window.open("register.php", '_blank', 'toolbar=no, menubar=no, location=no, scrollbars=no,resizable=no,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
 			};
 			$scope.LoadSendTestContact();
 		}]);

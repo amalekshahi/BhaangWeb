@@ -43,7 +43,7 @@ $purl = "";
 
 if ($ErrorCode == "") {
 	$purl=$newContact->{'Purl'}; // The Contact's newly issued PURL	
-	$errorMessage = "Register successfully.";
+	$errorMessage = "$firstname $lastname was added.  Let's do another!";
 	$success = true;
 	
 } else {
