@@ -118,7 +118,7 @@ $cmd = $_REQUEST['cmd'];
 $mode = $_REQUEST['mode'];
 $dbName = getDatabaseName($acctID,"");
 //$dateTimeNow = date('Y/m/d H:i:s');
-$dateTimeNow = gmdate('Y/m/d H:i:s T', time()); 
+$dateTimeNow = gmdate('Y-m-d\TH:i:s\Z', time()); 
 if($cmd!="publish" and $cmd!="update" and $cmd!="test"){
     echo json_encode( 
         array(
@@ -129,14 +129,15 @@ if($cmd!="publish" and $cmd!="update" and $cmd!="test"){
 }
 
 if($cmd=="test"){
-    $doc = couchDB_Get("/$dbName/$progID");
-    
-    $publishProgramID = GetMamlProgramID($acctID,$progID);
-    $mamlName = "checkInMAML/".$acctID."_".$publishProgramID.".maml";
-    $publishMamlContent = file_get_contents($mamlName);
-    $xml = new DOMDocument();
-    $xml->loadXML($publishMamlContent);
-    $emailList = UpdateMAML($xml,$doc);
+    $doc = couchDB_Get("/$dbName/campaignlist",true);
+    $ret = array();
+    for($i=0;$i<count($doc['campaigns']);$i++){
+        $lastEditDate =  $doc['campaigns'][$i]['lastEditDate'];
+        $t = strtotime($lastEditDate);
+        $doc['campaigns'][$i]['lastEditDate'] = gmdate('Y-m-d\TH:i:s\Z', $t); 
+        $ret[] = $lastEditDate . "->" . $doc['campaigns'][$i]['lastEditDate'];       
+    }
+    $saveRet = couchDB_Save("/$dbName/campaignlist",$doc);
     echo json_encode( 
         array(
             'success'=>true,
@@ -145,6 +146,9 @@ if($cmd=="test"){
             //'scheduleNode'=>$xml->saveHTML($scheduleNode),
             //'startNode'=>$xml->saveHTML($startNode),
             'emailList'=>$emailList,
+            'doc'=>$doc,
+            'ret'=>$ret,
+            'saveRet'=>$saveRet,
             //'publishMamlContent'=>$publishMamlContent,
             
             //'node'=>print_r($node,true),

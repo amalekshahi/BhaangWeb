@@ -86,7 +86,12 @@ $ret = array();
 $number = 0;
 foreach($configs as $config)
 {
-    $number = $number + 1;
+    // check disabled field
+    if(array_key_exists("disabled",$config)){
+        if($config->disabled){
+            continue;
+        }
+    }
     // check subdir
     if(array_key_exists("subdir",$config)){
         $fileName = "templates/".$resourceName."/".$config->subdir."/".$config->file;
@@ -113,6 +118,8 @@ foreach($configs as $config)
     //Remove {{RAW 
     $fileContent = str_replace("{{RAW ","{{",$fileContent);
     
+    
+    $number = $number + 1;    
     $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
     // Replace {{EMAIL}} with proper summernote tag
     $content = preg_replace('/\{{(EMAIL[^\}]*)}\}/',$editTag ,$fileContent);

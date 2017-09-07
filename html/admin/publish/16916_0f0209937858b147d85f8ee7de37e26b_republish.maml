@@ -1,4 +1,4 @@
-<Program Name="coatest090601" Version="1.0" DbId="48" CheckOutId="62" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+<Program Name="coatest090601" Version="1.0" DbId="48" CheckOutId="67" State="Start" Permissions="DefineProgramPermission,Edit,CalendarView,ReportView,">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="48" CheckOutId="0" State="Start" Permissions="">
     <CampaignElements>
@@ -214,6 +214,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           
           
           
+          
+          
+          
+          
         <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa"></Criteria><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria><Criteria Row="3" Field="Phone" Operator="NotEqual" Value=""></Criteria><Criteria Row="4" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="5" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="6" Field="City" Operator="Equal" Value="Irvine"></Criteria><Criteria Row="7" Field="City" Operator="Equal" Value="New York"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
@@ -277,6 +281,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           
           
           
+          
+          
+          
+          
         <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa"></Criteria><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria><Criteria Row="3" Field="Phone" Operator="NotEqual" Value=""></Criteria><Criteria Row="4" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="5" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="6" Field="City" Operator="Equal" Value="Irvine"></Criteria><Criteria Row="7" Field="City" Operator="Equal" Value="New York"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
@@ -285,6 +293,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="48" InboundContext="" CampaignId="48" CriteriaOption="2" Operator="Equal" Value="0"></AdvancedCriteria>
           </AdvancedFilter>
+          
+          
+          
+          
           
           
           
@@ -509,6 +521,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           
           
           
+          
+          
+          
+          
         <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa"></Criteria><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria><Criteria Row="3" Field="Phone" Operator="NotEqual" Value=""></Criteria><Criteria Row="4" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="5" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="6" Field="City" Operator="Equal" Value="Irvine"></Criteria><Criteria Row="7" Field="City" Operator="Equal" Value="New York"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
@@ -520,6 +536,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           
           
           
+          
+          
+          
+          
         <Criteria Row="1" Field="FirstName" Operator="Equal" Value="coa"></Criteria><Criteria Row="2" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria><Criteria Row="3" Field="Phone" Operator="NotEqual" Value=""></Criteria><Criteria Row="4" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="5" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="6" Field="City" Operator="Equal" Value="Irvine"></Criteria><Criteria Row="7" Field="City" Operator="Equal" Value="New York"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
@@ -528,6 +548,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/17" To="01/01/50" ProgramId="48" InboundContext="" CampaignId="48" CriteriaOption="2" Operator="Equal" Value="0"></AdvancedCriteria>
           </AdvancedFilter>
+          
+          
+          
+          
           
           
           

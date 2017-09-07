@@ -116,10 +116,10 @@ var myApp = angular.module("myApp", ["ngRoute"]);
 myApp.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl : "formEditorEdit.html"
+		templateUrl : "formEditorEditFung.html"
 	})
 	.when("/new", {
-		templateUrl : "formEditorNew.html"
+		templateUrl : "formEditorNewFung.html"
 	});		 
 });
 
@@ -157,7 +157,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 					var summerdivtxt = ''; 
 					if(typeof $scope.selectItem != 'undefined') {
 							for(i=0;i<$scope.selectItem.length;i++){								
-									summerdivtxt += getFormCode($scope.selectItem[i].fieldType,$scope.selectItem[i].fieldID,$scope.selectItem[i].label,$scope.selectItem[i].required,$scope.selectItem[i].prepopulated,$scope.selectItem[i].option); 								
+									summerdivtxt += getFormCode($scope.selectItem[i].fieldType,$scope.selectItem[i].fieldID,$scope.selectItem[i].fieldName,$scope.selectItem[i].label,$scope.selectItem[i].required,$scope.selectItem[i].prepopulated,$scope.selectItem[i].option); 								
 							}
 					}
 					$('#summerblock').html(summerdivtxt); 
@@ -253,14 +253,15 @@ myApp.controller('myCtrl',function($scope,$http) {
             };	
 				
 			$scope.GenSelectedFromHTML = function() {
+				reloadformfield('edit'); 
 				var temphtml = ""; 
 				var allFieldName =""; 
 				for(i=0;i<$scope.tempArr.length;i++){
 						
-						allFieldName += $scope.tempArr[i].label;
-						if(i<$scope.tempArr.length-1){		allFieldName +=",";		}				
+						allFieldName += $scope.tempArr[i].fieldName;
+						if(i<$scope.tempArr.length-1){		allFieldName +=", ";		}				
 
-						temphtml += getFormCode($scope.tempArr[i].fieldType,$scope.tempArr[i].fieldID,$scope.tempArr[i].label,$scope.tempArr[i].required,$scope.tempArr[i].prepopulated,$scope.tempArr[i].option); 					
+						temphtml += getFormCode($scope.tempArr[i].fieldType,$scope.tempArr[i].fieldID,$scope.tempArr[i].fieldName,$scope.tempArr[i].label,$scope.tempArr[i].required,$scope.tempArr[i].prepopulated,$scope.tempArr[i].option); 					
 				}//end for i
 				$scope.allFieldName = allFieldName; 
 				$scope.selectedFromHTML = '<div class="col-lg-4 ibox ibox-content well"><form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form><div>' ; 		
@@ -281,13 +282,13 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 					if(LName != ''){
 						var keyword = LName+getCurrentDateTime();
 						var conID = $.md5(keyword);      
-						$scope.LoadData(conID); 
+						$scope.LoadSaveData(conID); 
 					}else{
 						$('.listNameAlt').html("Please fill Form Name");
 					}
             };		
 
-			$scope.LoadData = function (formID) {
+			$scope.LoadSaveData = function (formID) {
 				$scope.GenSelectedFromHTML();  // create $scope.selectedFromHTML / $scope.allFieldName
 				var frmName = $('#frmName').val(); 
 				var frmtype_defID = $scope.defID; //formType_DefID 
@@ -357,23 +358,25 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 					var summerdivtxt = ''; 
 					if(typeof $scope.selectItem != 'undefined') {
 							for(i=0;i<$scope.selectItem.length;i++){								
-									summerdivtxt += getFormCode($scope.selectItem[i].fieldType,$scope.selectItem[i].fieldID,$scope.selectItem[i].label,$scope.selectItem[i].required,$scope.selectItem[i].prepopulated,$scope.selectItem[i].option); 								
+									summerdivtxt += getFormCode($scope.selectItem[i].fieldType,$scope.selectItem[i].fieldID,$scope.selectItem[i].fieldName,$scope.selectItem[i].label,$scope.selectItem[i].required,$scope.selectItem[i].prepopulated,$scope.selectItem[i].option); 								
 							}
 					}
 					$('#summerblock').html(summerdivtxt); 
             };
 
-			$scope.LoadNewSelect = function() {                
-				$scope.selectItem = [];	// default New
+			//Default Set Middle block From Start 
+			$scope.LoadNewPageSelect = function() {                
+				$scope.selectItem = [];	
 				$scope.selectItem.push({"fieldID":"femail", "fieldName":"Email", "label": "Email","required": "Yes","prepopulated": "No","fieldType": "email" }); 
 				$scope.selectItem.push({"fieldID":"fname", "fieldName":"First Name", "label": "First Name","required": "Yes","prepopulated": "No","fieldType": "textbox" }); 
 				$scope.LoadRightBlock(); 
 				$scope.tempArr = $scope.selectItem;  		
+				
             };
 			
-			$scope.LoadDefault = function(load) { 			
+			$scope.LoadNewPageDefault = function(load) { 			
 				if(load=="new"){
-					$scope.LoadNewSelect(); 
+					$scope.LoadNewPageSelect(); 
 				}
 				$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
 							$scope.masterDef  = response.data; 
@@ -392,6 +395,16 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 							//$scope.defItem = $scope.deflist.items[defIndx]['fieldLists']; 						
 							//alert(defIndx); 
 							$scope.CheckDupOnLoad(defIndx); 
+							
+							if(load=='new'){
+								/* //fung
+									//set option on start
+									var defaultVal = document.getElementById('femailPrepop').value;
+									setOptionSelected("femailPrefill",defaultVal);
+									defaultVal = document.getElementById('fnamePrepop').value;
+									setOptionSelected("fnamePrefill",defaultVal);									
+									*/ 
+							}
 
 				},function(errResponse){
 							if (errResponse.status == 404) {
@@ -428,16 +441,16 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 
 			$scope.SelectChanged = function(defFrmID) { //
 				$scope.defID = defFrmID; 
-				$scope.LoadDefault(defFrmID);	//send DefID to reload Available field
+				$scope.LoadNewPageDefault(defFrmID);	//send DefID to reload Available field
 				//$('.alerttest').html(" formtype = "+ftype);
             };			
 			$scope.Reset = function() {                  
 
             };			
 
-			$scope.SetRequire = function() {
-				alert(1); 
-                  var txt=$scope.selectItem;
+			$scope.SetRequire = function(selid,hidid) {
+                  alert( document.getElementById(selid).val() );
+                  alert( document.getElementById(hidid).val() );
             };	
 				
 			$scope.GenSelectedFromHTML = function() {
@@ -446,21 +459,35 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 				var allFieldName =""; 
 				for(i=0;i<$scope.tempArr.length;i++){
 						
-						allFieldName += $scope.tempArr[i].label;
-						if(i<$scope.tempArr.length-1){		allFieldName +=",";		}				
+						allFieldName += $scope.tempArr[i].fieldName;
+						if(i<$scope.tempArr.length-1){		allFieldName +=", ";		}				
 
-						temphtml += getFormCode($scope.tempArr[i].fieldType,$scope.tempArr[i].fieldID,$scope.tempArr[i].label,$scope.tempArr[i].required,$scope.tempArr[i].prepopulated,$scope.tempArr[i].option); 					
+						temphtml += getFormCode($scope.tempArr[i].fieldType,$scope.tempArr[i].fieldID,$scope.tempArr[i].fieldName,$scope.tempArr[i].label,$scope.tempArr[i].required,$scope.tempArr[i].prepopulated,$scope.tempArr[i].option); 					
 				}//end for i
 				$scope.allFieldName = allFieldName; 
 				$scope.selectedFromHTML = '<div class="col-lg-4 ibox ibox-content well"><form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form><div>' ; 		
                   
             };// end GenSelectedFromHTML()		
+
+			$scope.LoadNewPageDefault('new');	
 			
-			$scope.LoadDefault('new');				
 });
 
+function setOptionSelected(ename,defaultVal){		
+			var eid = document.getElementById(ename);
+			if(eid != "undefined"){
+				$("#"+ename).find("option").each(function () {
+					if ($(this).val() == defaultVal) {
+						$(this).prop("selected", "selected");
+					}
+				});
+//				$("#"+ename).find("option").each(function () {					alert(ename +" = " + $(this).val()); 				});
+				
+			}
+}
+
 function reloadformfield(page){	
-						   var form_fields = $( "#form_fields" ).sortable( "toArray" );									
+						   var form_fields = $( "#form_fields" ).sortable( "toArray" );				   
 							var summerdivtxt = ''; 				//display right block 
 							var tempArr=[]; 
 							for(i=0;i<form_fields.length;i++){							
@@ -469,18 +496,23 @@ function reloadformfield(page){
 								var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
 								var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
 								var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
+								var fprepop = $(document.getElementById(form_fields[i]+"Prepop")).val();	
+								var freq = $(document.getElementById(form_fields[i]+"Req")).val();	
 								//add array
 								tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-								summerdivtxt += getFormCode("textbox",form_fields[i],flabel,frequire,fprefill,""); 	
+								summerdivtxt += getFormCode("textbox",form_fields[i],fFieldName,flabel,frequire,fprefill,""); 	
 							}//end for i
 							if(page=='new'){
 								angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('selectItem',tempArr);
 								angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('tempArr',tempArr);		
+							}else{
+								angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
+								angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
 							}
 							$('#summerblock').html(summerdivtxt); 		
 }
 
-function getFormCode(fieldType,fieldID,label,required,prepopulated,option){	
+function getFormCode(fieldType,fieldID,fieldName,label,required,prepopulated,option){	
 		var tmpReq = ""; 
 		var tmpPrepop=""; 
 		var redstar = ""; 		
@@ -489,7 +521,7 @@ function getFormCode(fieldType,fieldID,label,required,prepopulated,option){
 				redstar += '<span style="color:red;">&#42;</span>'	; 
 		}
 		if(prepopulated == "Yes"){
-				tmpPrepop = '##'+label+'##'; 						
+				tmpPrepop = '##'+fieldName+'##'; 						
 		}
 
 	    var temphtml ='<div class="form-group"><label>'+label+'</label>'+redstar ;
@@ -499,6 +531,12 @@ function getFormCode(fieldType,fieldID,label,required,prepopulated,option){
 		}else if(fieldType == "hidden"){						
 				temphtml += ' <input type="hidden" name="'+label+' value="'+tmpPrepop+'"> '; 
 
+		}else if(fieldType == "state"){
+				temphtml += getStateBox(); 
+
+/*		}else if(fieldType == "country"){
+				temphtml += getStateBox(); 
+*/ 
 		}else if(fieldType == "dropdown"){
 				temphtml += ' <select name="'+label+'> '+option+'</select> '; 
 
@@ -518,6 +556,77 @@ function getFormCode(fieldType,fieldID,label,required,prepopulated,option){
 };
 
 
+function getStateBox(){
+		var stateHTML ='<select style="font-size: 16px" name="State" id="State">'; 
+			  stateHTML +='<option value="">Choose Your State</option>';
+			  stateHTML +='<option value="AL">Alabama</option>';
+			  stateHTML +='<option value="AK">Alaska</option>';
+			  stateHTML +='<option value="AB">Alberta</option>';
+			  stateHTML +='<option value="AZ">Arizona</option>';
+			  stateHTML +='<option value="AR">Arkansas</option>';
+			  stateHTML +='<option value="BC">British Columbia</option>';
+			  stateHTML +='<option value="CA">California</option>';
+			  stateHTML +='<option value="CO">Colorado</option>';
+			  stateHTML +='<option value="CT">Connecticut</option>';
+			  stateHTML +='<option value="DE">Delaware</option>';
+			  stateHTML +='<option value="DC">District of Columbia</option>';
+			  stateHTML +='<option value="FL">Florida</option>';
+			  stateHTML +='<option value="GA">Georgia</option>';
+			  stateHTML +='<option value="HI">Hawaii</option>';
+			  stateHTML +='<option value="ID">Idaho</option>';
+			  stateHTML +='<option value="IL">Illinois</option>';
+			  stateHTML +='<option value="IN">Indiana</option>';
+			  stateHTML +='<option value="IA">Iowa</option>';
+			  stateHTML +='<option value="KS">Kansas</option>';
+			  stateHTML +='<option value="KY">Kentucky</option>';
+			  stateHTML +='<option value="LA">Louisiana</option>';
+			  stateHTML +='<option value="ME">Maine</option>';
+			  stateHTML +='<option value="MB">Manitoba</option>';
+			  stateHTML +='<option value="MD">Maryland</option>';
+			  stateHTML +='<option value="MA">Massachusetts</option>';
+			  stateHTML +='<option value="MI">Michigan</option>';
+			  stateHTML +='<option value="MN">Minnesota</option>';
+			  stateHTML +='<option value="MS">Mississippi</option>';
+			  stateHTML +='<option value="MO">Missouri</option>';
+			  stateHTML +='<option value="MT">Montana</option>';
+			  stateHTML +='<option value="NE">Nebraska</option>';
+			  stateHTML +='<option value="NV">Nevada</option>';
+			  stateHTML +='<option value="NB">New Brunswick</option>';
+			  stateHTML +='<option value="NH">New Hampshire</option>';
+			  stateHTML +='<option value="NJ">New Jersey</option>';
+			  stateHTML +='<option value="NM">New Mexico</option>';
+			  stateHTML +='<option value="NY">New York</option>';
+			  stateHTML +='<option value="NF">Newfoundland & Labrador</option>';
+			  stateHTML +='<option value="NC">North Carolina</option>';
+			  stateHTML +='<option value="ND">North Dakota</option>';
+			  stateHTML +='<option value="NW">Northwest Territories</option>';
+			  stateHTML +='<option value="NS">Nova Scotia</option>';
+			  stateHTML +='<option value="NU">Nunavut</option>';
+			  stateHTML +='<option value="OH">Ohio</option>';
+			  stateHTML +='<option value="OK">Oklahoma</option>';
+			  stateHTML +='<option value="ON">Ontario</option>';
+			  stateHTML +='<option value="OR">Oregon</option>';
+			  stateHTML +='<option value="PA">Pennsylvania</option>';
+			  stateHTML +='<option value="PE">Prince Edward Island</option>';
+			  stateHTML +='<option value="QC">Quebec</option>';
+			  stateHTML +='<option value="RI">Rhode Island</option>';
+			  stateHTML +='<option value="SK">Saskatchewan</option>';
+			  stateHTML +='<option value="SC">South Carolina</option>';
+			  stateHTML +='<option value="SD">South Dakota</option>';
+			  stateHTML +='<option value="TN">Tennessee</option>';
+			  stateHTML +='<option value="TX">Texas</option>';
+			  stateHTML +='<option value="UT">Utah</option>';
+			  stateHTML +='<option value="VT">Vermont</option>';
+			  stateHTML +='<option value="VA">Virginia</option>';
+			  stateHTML +='<option value="WA">Washington</option>';
+			  stateHTML +='<option value="WV">West Virginia</option>';
+			  stateHTML +='<option value="WI">Wisconsin</option>';
+			  stateHTML +='<option value="WY">Wyoming</option>';
+			  stateHTML +='<option value="YU">Yukon</option>';
+			  stateHTML +='<option value="OT">Other</option>';
+			  stateHTML +='</select>';
+			  return stateHTML; 
+}
 </script>
 
 </body>

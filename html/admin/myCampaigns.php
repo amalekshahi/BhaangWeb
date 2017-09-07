@@ -30,7 +30,7 @@
 						<div class="wrapper wrapper-content animated fadeInUp">
 							<div class="ibox">
 								<div class="ibox-title">
-									<h5>My Campaigns</h5>
+									<h5><i class="fa fa-paper-plane-o" style="color:orange"></i> My Campaigns</h5>
 									<div class="ibox-tools">
 										<!--<a href="" class="btn btn-primary btn-xs">Create Folder</a>-->
 									</div>
@@ -86,12 +86,12 @@
 																				<th>&nbsp;</th>
 																			</tr>
 																		</thead>
-																		<tr ng-repeat="item in campaignlist.campaigns | orderBy:'-lastEditDate' | filter:searchText" ng-cloak>
+																		<tr ng-repeat="item in campaignlist.campaigns | orderBy:'lastEditDate':true | filter:searchText" ng-cloak ng-click="goToLink(item)">
 																			<td class="project-status">
-																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}"><span class="badge badge-published"><span class="badge badge-published"><i class="fa fa-rss"></i> {{item.status=='Edit' ? 'LIVE' : 'DRAFT'}}</span></a>
+																				<span class="badge badge-published"><i class="fa fa-rss"></i> {{item.status=='Edit' ? 'LIVE' : 'DRAFT'}}</span>
 																			</td>
 																			<td class="project-title">
-																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}">{{item.campaignName}}</a> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
+																				<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
 																				<br/>
 																				<small>Modified <time am-time-ago="item.lastEditDate"></time></small>
 																			</td>
@@ -106,7 +106,7 @@
 																				<medium>{{Random(10)}}%</medium><br><small class="text-muted">Click-thru Rate</small>
 																			</td>
 																			<td class="project-actions">
-																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
+																				<!--<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" data-toggle="tooltip" title="Copy feature coming soon."><i class="fa fa-clone" style="color:green"></i> Copy </a>-->
 																				<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
 																			</td>
 																		</tr>
@@ -458,6 +458,7 @@
 				</div>
 				<!--  end page-wrapper -->
 			</div>
+        </div>
 
 			<!-- Mainly scripts -->
 			<script src="js/w3data.js"></script>
@@ -514,9 +515,14 @@
 						return false;
 					};
 					$scope.Load();
+					
+					$scope.goToLink = function(item) {
+					window.location = 'edit' + item.campaignType + '.php?campaign_id=' + item.campaignID;
+					};
+					
 				});
 			</script>
-
+        
 	</body>
 
 	</html>

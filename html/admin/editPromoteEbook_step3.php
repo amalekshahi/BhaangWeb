@@ -296,7 +296,8 @@
 				console.log('Success ' + resp.config.data.file.name + 'uploaded');
 				console.log(resp.data);
 				var imgHTML = '<img src="'+resp.data.imgSrc+'">';
-				$scope['editor1'].summernote('code',imgHTML);
+				//$scope['editor1'].summernote('code',imgHTML);
+				$scope.campaign['EMAIL'+emlID+'-HERO-IMAGE'] = imgHTML;
 				$scope.state['Upload'+emlID] = 'Finish';
 			}, function(resp) {
 				console.log('Error status: ' + resp.status);

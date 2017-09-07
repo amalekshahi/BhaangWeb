@@ -107,7 +107,7 @@
 
 																		<div class="input-group date">
 																			<input type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE1-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE1-DATE" name="EMAIL1-SCHEDULE1-DATE" ng-change="dateChange('')" required="">
-																			<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+																			<span class="input-group-addon" onclick="showcalendar();"><i class="fa fa-calendar"></i></span>
 																		</div>
 
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
@@ -219,6 +219,10 @@
 </div>
 
 <script>
+	function showcalendar() {
+		$("#EMAIL1-SCHEDULE1-DATE").datepicker("show");
+	}
+	
 	myApp.controller('step3', function($scope, $http) {
 		//alert('step3');
 		$scope.dateChange = function() {
@@ -231,7 +235,7 @@
 					if ($scope.campaign[emailName + '-WAIT'] != "" && $scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") {
 						var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
 						date2 = addDays(date2, numberOfDaysToAdd);
-						$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDate(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
+						$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
 					} else {
 						$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
 					}
@@ -307,7 +311,7 @@
 			}
 		};
 
-
+		
 
 	});
 </script>

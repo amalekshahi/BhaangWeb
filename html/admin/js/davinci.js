@@ -32,7 +32,9 @@ function getCurrentDateTime() {
 
 function UTCDateTime(){
     var d = new Date();
-    return d.toUTCString();
+    //return d.toUTCString();
+    //return moment(d).utc().format("YYYY-MM-DD hh:mm:ss [GMT]");
+    return moment(d).utc().format("YYYY-MM-DD[T]hh:mm:ss[Z]");
 }
 
 /*

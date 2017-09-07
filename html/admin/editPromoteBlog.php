@@ -324,35 +324,75 @@
 					if (mode == 'Step3') {
 						var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
 						var time1 = $scope.campaign['EMAIL1-SCHEDULE1-TIME'];
-						var timezone = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];
+						var timezone1 = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];
+						var publishProgramID = $scope.campaign['publishProgramID'];
 
-						if ((typeof date1 == 'undefined') || (typeof time1 == 'undefined') || (timezone == "")){
+						
+						
+						if ((typeof date1 == 'undefined') || (typeof time1 == 'undefined') || (timezone1 == "")){
+							$("body").css("cursor", "default");
 							swal('Please set schedule for Email1');
 							$scope.state['Save'] = "Save";
 							return;
 						} else {
-							if (checkdate(date1, time1, timezone)) {
+							if ((typeof publishProgramID == 'undefined') || (publishProgramID == "")) {
+								var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
+								if (checkdate(datetime1, timezone1)) {
+								} else {
+									$("body").css("cursor", "default");
+									swal('Please do not set "PAST" times for Email1');
+									$scope.state['Save'] = "Save";
+									return;
+								}	
 							} else {
-								swal('Please do not set "PAST" times');
-								$scope.state['Save'] = "Save";
-								return;
 							}
 						}
 
 						if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
-							if (($scope.campaign['EMAIL2-WAIT'] == "") || (typeof $scope.campaign['EMAIL2-SCHEDULE1-TIME'] == 'undefined') || ($scope.campaign['EMAIL2-SCHEDULE1-TIME'] == '') || ($scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'] == "")){
+							var wait2 = $scope.campaign['EMAIL2-WAIT'];
+							var time2 = $scope.campaign['EMAIL2-SCHEDULE1-TIME'];
+							var timezone2 = $scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'];
+							if ((wait2 == "") || (typeof time2 == 'undefined') || (time2 == '') || (timezone2 == "")){
+								$("body").css("cursor", "default");
 								swal('Please set schedule for Email2');
 								$scope.state['Save'] = "Save";
 								return;
+							} else {
+								/*
+								var datetime2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];
+								if (checkdate(datetime2, timezone2)) {
+								} else {
+									$("body").css("cursor", "default");
+									swal('Please do not set "PAST" times for Email2');
+									$scope.state['Save'] = "Save";
+									return;
+								}
+								*/
 							}
 						}
+
 						if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){
-							if (($scope.campaign['EMAIL3-WAIT'] == "") || (typeof $scope.campaign['EMAIL3-SCHEDULE1-TIME'] == 'undefined') || ($scope.campaign['EMAIL3-SCHEDULE1-TIME'] == '') || ($scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'] == "")){
+							var wait3 = $scope.campaign['EMAIL3-WAIT'];
+							var time3 = $scope.campaign['EMAIL3-SCHEDULE1-TIME'];
+							var timezone3 = $scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'];
+							if ((wait3 == "") || (typeof time3 == 'undefined') || (time3 == '') || (timezone3 == "")){
+								$("body").css("cursor", "default");
 								swal('Please set schedule for Email3');
 								$scope.state['Save'] = "Save";
 								return;
+							} else {
+								/*
+								var datetime3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];
+								if (checkdate(datetime3, timezone3)) {
+								} else {
+									$("body").css("cursor", "default");
+									swal('Please do not set "PAST" times for Email3');
+									$scope.state['Save'] = "Save";
+									return;
+								}
+								*/
 							}
-						}
+						}						
 
 						
 					}
@@ -563,10 +603,10 @@
 					}
                     //Set schedue to default if EMAIL2 and 3 NOT SET
                     if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
-                        $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
+                        //$scope.campaign['EMAIL2-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
                     }
                     if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){
-                        $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
+                        //$scope.campaign['EMAIL3-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
                     }
 
 				};
@@ -803,7 +843,7 @@
 				return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
 			}
 
-			function formatDate(date) {
+			function formatDateMDY(date) {
 				var year = date.getFullYear();
 				month = date.getMonth() + 1; // months are zero indexed
 				day = date.getDate();
@@ -878,30 +918,21 @@
 				return day + ' ' + monthNames[monthIndex] + ' ' + year;
 			}
 			
-			function checkdate(date1, time1, timezone){
-				
-				if (timezone == 'Pacific Standard Time') {
-					timezone = 'PST';
-				} else if (timezone == 'Mountain  Standard Time') {
-					timezone = 'MST';
-				} else if (timezone == 'Central Standard Time') {
-					timezone = 'CST';
-				} else if (timezone == 'Eastern Standard Time') {
-					timezone = 'EST';
-				} else {
-					timezone = 'PST';
-				}
+			function checkdate(datetime1, timezone1){
+				timezone1 = convertTimezone(timezone1);				
 
-				time1 = convert_to_24h(convertTimeFormat(time1));
+				//time1 = convert_to_24h(convertTimeFormat(time1));
 				
 				// Create date from input value
-				var d1 = new Date(date1+' '+time1+' '+timezone);
-				var inputDate= dateFormat(d1, "yyyy-mm-dd HH:MM:ss",true);
+				var d1 = new Date(datetime1+' '+timezone1);
+				//var inputDate= dateFormat(d1, "yyyy-mm-dd HH:MM:ss",true);
+				var inputDate= dateFormat(d1, "isoDateTime", true);
 				//alert(inputDate);
 
 				// Get today's date
 				var d2 = new Date();
-				var todaysDate= dateFormat(d2, "yyyy-mm-dd HH:MM:ss",true);
+				//var todaysDate= dateFormat(d2, "yyyy-mm-dd HH:MM:ss",true);
+				var todaysDate= dateFormat(d2, "isoDateTime", true);
 				//alert(todaysDate);
 
 				if (inputDate < todaysDate) {
@@ -911,6 +942,22 @@
 					//alert('ok');
 					return true;
 				}
+			}			
+			
+
+			function convertTimezone(timezone) {
+				if (timezone == 'Pacific Standard Time') {
+					timezone = 'PDT';
+				} else if (timezone == 'Mountain  Standard Time') {
+					timezone = 'MDT';
+				} else if (timezone == 'Central Standard Time') {
+					timezone = 'CDT';
+				} else if (timezone == 'Eastern Standard Time') {
+					timezone = 'EDT';
+				} else {
+					timezone = 'PDT';
+				}
+				return timezone;
 			}
 
 

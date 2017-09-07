@@ -230,4 +230,10 @@
             }
         }
 
+	[ng-click] {
+  cursor: pointer;
+	}
+
+		
+		
 	</style>

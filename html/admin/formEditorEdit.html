@@ -20,7 +20,9 @@
 								<ul class="sortable-list connectList agile-list" id="available_fields" >
 									<li class="info-element" id="{{d.fieldID}}" ng-repeat="d in defItem" ng-cloak>{{d.fieldName}}
 										<div class="agile-detail">
-											<a class="pull-right btn btn-xs btn-white" href="#" data-toggle="modal" data-target="#{{d.fieldID}}Modal"><i class="fa fa-cog"></i> Settings</a>
+											<a class="pull-right btn btn-xs btn-white" href="" data-toggle="modal" data-target="#{{d.fieldID}}Modal"><i class="fa fa-cog"></i> Settings</a>
+											<small><i class="fa fa-pencil-square-o"></i> Text line</small>
+<!-- 
 											<small ng-if="d.fieldType=='textbox'"><i class="fa fa-pencil-square-o"></i> Text line</small>
 											<small ng-if="d.fieldType=='email'"><i class="fa fa-envelope"></i> Text line</small>											
 											<small ng-if="d.fieldType=='phone'"> <i class="fa fa-phone"></i> US Phone #</small>
@@ -28,6 +30,7 @@
 											<small ng-if="d.fieldType=='dropdown'"> <i class="fa fa-caret-square-o-down"></i> Drop-down List</small>
 											<small ng-if="d.fieldType=='hidden'"> <i class="fa fa-user-secret"></i> Hidden Field</small>
 											<small ng-if="d.fieldType=='datetime'"> <i class="fa fa-calendar"></i> Datetime</small>	
+ -->
 										</div>
 										<div class="modal inmodal fade" id="{{d.fieldID}}Modal" tabindex="-1" role="dialog"  aria-hidden="true">
 											<div class="modal-dialog modal-sm">
@@ -37,14 +40,14 @@
 														<h4 class="modal-title">Field Settings For: {{d.fieldName}}</h4>
 													</div>
 													<div class="modal-body">
-														<input type="hidden" id="{{d.fieldID}}FieldName" value="{{d.fieldName}}">
-														<input type="hidden" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}">
+														<input type="text" id="{{d.fieldID}}FieldName" value="{{d.fieldName}}" style="display:none;">
+														<input type="text" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}" style="display:none;">
 														<p>Label: <input type="text" id="{{d.fieldID}}Label"  value="{{d.label}}"></p>
-														<p>Required?: <select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No">No</select></p>
-														<p>Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill" ><option value="Yes">Yes<option value="No">No</select></p>
+														<p>Required?: <select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p>Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill" ><option value="Yes">Yes<option value="No" selected>No</select></p>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+														<button type="button" class="btn btn-white" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button>
 														<!-- <button type="button" class="btn btn-primary" ng-click="">Save changes</button> -->
 													</div>
 												</div>
@@ -75,7 +78,9 @@
 									<li class="success-element"  id="{{s.fieldID}}" ng-repeat="s in selectItem" ng-cloak>{{s.fieldName}}
 									<!-- <small ng-if="s.required=='Yes'"> <i aria-hidden="true" class="fa fa-star-o" style="color:red"></i></small> -->
 										<div class="agile-detail">
-											<a class="pull-right btn btn-xs btn-white" href="#" data-toggle="modal" data-target="#{{s.fieldID}}Modal"><i class="fa fa-cog"></i> Settings</a>
+											<a class="pull-right btn btn-xs btn-white" href="" data-toggle="modal" data-target="#{{s.fieldID}}Modal"><i class="fa fa-cog"></i> Settings</a>
+											<small><i class="fa fa-pencil-square-o"></i> Text line</small>
+<!-- 
 											<small ng-if="s.fieldType=='textbox'"><i class="fa fa-pencil-square-o"></i> Text line</small>
 											<small ng-if="s.fieldType=='email'"><i class="fa fa-envelope"></i> Text line</small>											
 											<small ng-if="s.fieldType=='phone'"> <i class="fa fa-phone"></i> US Phone #</small>
@@ -83,6 +88,7 @@
 											<small ng-if="s.fieldType=='dropdown'"> <i class="fa fa-caret-square-o-down"></i> Drop-down List</small>
 											<small ng-if="s.fieldType=='hidden'"> <i class="fa fa-user-secret"></i> Hidden Field</small>
 											<small ng-if="s.fieldType=='datetime'"> <i class="fa fa-calendar"></i> Datetime</small>											
+ -->
 										</div>
 										<div class="modal inmodal fade" id="{{s.fieldID}}Modal" tabindex="-1" role="dialog"  aria-hidden="true">
 											<div class="modal-dialog modal-sm">
@@ -90,16 +96,18 @@
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 														<h4 class="modal-title">Field Settings For: {{s.fieldName}}</h4>
-													</div>
+													</div>													
 													<div class="modal-body">
-														<input type="hidden" name="{{s.fieldID}}FieldName" value="{{s.fieldName}}">
-														<input type="hidden" name="{{s.fieldID}}FieldType" value="{{s.fieldType}}">
+														<input type="text" id="{{s.fieldID}}FieldName" value="{{s.fieldName}}" style="display:none;">
+														<input type="text" id="{{s.fieldID}}FieldType" value="{{s.fieldType}}" style="display:none;">
+														<input type="text" id="{{s.fieldID}}Req" value="{{s.required}}" style="display:none;">
+														<input type="text" id="{{s.fieldID}}Prepop" value="{{s.prepopulated}}" style="display:none;">
 														<p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}" ng-model = "s.label"></p>
 														<p>Required?: <select id="{{s.fieldID}}Require" ng-model="s.required" ng-change=SetRequire();><option value="Yes">Yes<option value="No" selected>No</select></p>
-														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No">No</select></p>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+														<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button>
 														<!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
 													</div>
 												</div>
@@ -163,7 +171,7 @@ $(document).ready(function(){
 							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
 							//add array
 							tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-							summerdivtxt += getFormCode("textbox",form_fields[i],flabel,frequire,fprefill,""); 
+							summerdivtxt += getFormCode("textbox",form_fields[i],fFieldName,flabel,frequire,fprefill,""); 
 						}//end for i
 						angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
 						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);

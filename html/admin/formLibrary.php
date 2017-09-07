@@ -50,7 +50,7 @@
                         <div class="ibox-title">
                             <h5>Your Forms</h5>
                             <div class="ibox-tools">
-                                <a href="formEditorNew.php" class="btn btn-primary btn">+ Create New Form</a>
+                                <a href="formEditor.php#!new" class="btn btn-primary btn">+ Create New Form</a>
                             </div>
                         </div>
                         <div class="ibox-content">
@@ -75,7 +75,7 @@
                                         <td class="project-title">
                                             <a href="formEditor.php?fID={{item.formID}}">{{item['formName']}}</a>
                                             <br/>
-                                            <a href="formEditor.php?fID={{item.formID}}"><small class="text-muted">Last Modified <time am-time-ago="item.modifiedDate"></time></small></a>
+                                            <a href="formEditor.php?fID={{item.formID}}"><small class="text-muted">Modified <time am-time-ago="item.modifiedDate"></time></small></a>
                                         </td>
                                         <td class="project-reach">
                                                 <medium>{{item.fieldLists.length}}</medium><br><small class="text-muted">&nbsp;</small> 
