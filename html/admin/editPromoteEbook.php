@@ -312,6 +312,12 @@
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
 					$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
 				}
+				if (mode == 'Welcome') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.templatesWelcome[$scope.getListIndex('templatesWelcome','content','templateWelcome')].contentRaw;
+				}
+				if (mode == 'ThankYou') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.templatesThankYou[$scope.getListIndex('templatesThankYou','content','templateThankYou')].contentRaw;
+				}
 				$http.put('/couchdb/' + dbName +'/'+campaignID, $scope.campaign).then(function(response){
 					$scope.campaign._rev = response.data.rev;
 
@@ -412,6 +418,7 @@
             };
 			$scope.setInitValue = function(){
 				$scope.initTemplateWelcome();
+				$scope.initTemplateThankyou();
 				$scope.initTemplateEmail('1');
 				$scope.initSender();
 			};
@@ -444,7 +451,7 @@
 			};
 			$scope.initTemplateWelcome = function(){
 				
-				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&resource=pages").then(function(response) {
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 					$scope['templatesWelcome']  = response.data.templates; 
 					$scope.config = response.data.config; 
 					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
@@ -453,20 +460,12 @@
 				
 			};
 			$scope.initTemplateThankyou = function(){
-				if ($scope['openEmail'+emlID] || emlID=='1') { //Email #1 always open.
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&resource=pages").then(function(response) {
-						$scope['templatesAs'+emlID]  = response.data.templates; 
-						if (emlID == '1')
-						{
-							$scope.config = response.data.config; 
-							$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
-						}
-						$("#subjectEmail"+emlID).text($scope.campaign['EMAIL'+emlID+'-SUBJECT']);
-						$scope.SelectChanged('viewEmail'+emlID,'templateEmail'+emlID);
-						$scope.sendersChanged('textSender'+emlID);
-						startEditable(emlID);
-					});
-				}
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
+					$scope['templatesThankYou']  = response.data.templates; 
+					$scope.config = response.data.config; 
+					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+					$scope.SelectChanged('viewThankYou','templateThankYou');
+				});
 			};
 			$scope.initSender = function(){
 				$scope.senders = [];
@@ -479,6 +478,7 @@
 				$scope.openEmail2 = false;
 				$scope.openEmail3 = false;
                 $scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
+				$scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT']);
                 $scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
                 $scope.step4Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DAYS']);
                 $scope.step5Done = $scope.step4Done;
@@ -500,7 +500,14 @@
 					$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' emails ready';
 				}
 
-				
+				var pageDone = '0';
+				if ($scope.step2Done) {
+					pageDone = '1';
+					if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'])) {
+						pageDone = '2';
+					}
+				}
+				$scope.pageProgress = pageDone+' of 2 Pages Configured';
 			};
 			$scope.SelectChanged = function(emailViewID,templateField){
 				//$scope.content = angular.copy($scope.templateEmail1);
@@ -570,15 +577,6 @@
 				  } 
 				}
             };
-			/*$scope.tpIndex = function() {
-				var tplist = 	$scope.templates;
-				for(var i=0;i < tplist.length; i++){
-				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
-				  {
-					return i;
-				  } 
-				}
-            };*/
 			$scope.tpsIndex = function(emlID) {
 				var tplist = 	$scope['templatesAs'+emlID];
 				for(var i=0;i < tplist.length; i++){
@@ -588,19 +586,19 @@
 				  } 
 				}
             };
-			/*$scope.tp2Index = function() {
-				var tplist = 	$scope.templatesAs2;
-				for(var i=0;i < tplist.length; i++){
-				  if (tplist[i]["content"] == $scope.campaign.templateEmail2)
-				  {
-					return i;
-				  } 
-				}
-            };*/
 			$scope.sdIndex = function() {
 				var sdlist = 	$scope.senders;
 				for(var i=0;i < sdlist.length; i++){
 				  if (sdlist[i]["email"] == $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.getListIndex = function(tpName,tpField,cpField) {
+				var tpList = $scope[tpName];
+				for(var i=0;i < tpList.length; i++){
+				  if (tpList[i][tpField] == $scope.campaign[cpField])
 				  {
 					return i;
 				  } 

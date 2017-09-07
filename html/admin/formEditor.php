@@ -487,29 +487,29 @@ function setOptionSelected(ename,defaultVal){
 }
 
 function reloadformfield(page){	
-						   var form_fields = $( "#form_fields" ).sortable( "toArray" );				   
-							var summerdivtxt = ''; 				//display right block 
-							var tempArr=[]; 
-							for(i=0;i<form_fields.length;i++){							
-								var fFieldName = $(document.getElementById(form_fields[i]+"FieldName")).val();	
-								var fFieldType = $(document.getElementById(form_fields[i]+"FieldType")).val();	
-								var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
-								var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
-								var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
-								var fprepop = $(document.getElementById(form_fields[i]+"Prepop")).val();	
-								var freq = $(document.getElementById(form_fields[i]+"Req")).val();	
-								//add array
-								tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-								summerdivtxt += getFormCode("textbox",form_fields[i],fFieldName,flabel,frequire,fprefill,""); 	
-							}//end for i
-							if(page=='new'){
-								angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('selectItem',tempArr);
-								angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('tempArr',tempArr);		
-							}else{
-								angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
-								angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
-							}
-							$('#summerblock').html(summerdivtxt); 		
+	   var form_fields = $( "#form_fields" ).sortable( "toArray" );				   
+		var summerdivtxt = ''; 				//display right block 
+		var tempArr=[]; 
+		for(i=0;i<form_fields.length;i++){							
+			var fFieldName = $(document.getElementById(form_fields[i]+"FieldName")).val();	
+			var fFieldType = $(document.getElementById(form_fields[i]+"FieldType")).val();	
+			var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
+			var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
+			var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
+			var fprepop = $(document.getElementById(form_fields[i]+"Prepop")).val();	
+			var freq = $(document.getElementById(form_fields[i]+"Req")).val();	
+			//add array
+			tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
+			summerdivtxt += getFormCode(fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 	
+		}//end for i
+		if(page=='new'){
+			angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('selectItem',tempArr);
+			angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('tempArr',tempArr);		
+		}else{
+			angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
+			angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
+		}
+		$('#summerblock').html(summerdivtxt); 		
 }
 
 function getFormCode(fieldType,fieldID,fieldName,label,required,prepopulated,option){	
@@ -525,41 +525,361 @@ function getFormCode(fieldType,fieldID,fieldName,label,required,prepopulated,opt
 		}
 
 	    var temphtml ='<div class="form-group"><label>'+label+'</label>'+redstar ;
-		
-		temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
-/*
 		if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
 				temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
 
 		}else if(fieldType == "hidden"){						
 				temphtml += ' <input type="hidden" name="'+label+' value="'+tmpPrepop+'"> '; 
 
+		}else if(fieldType == "state"){
+				temphtml += "<br>"+getStateBox(tmpReq,tmpPrepop); 
+
+		}else if(fieldType == "country"){
+				temphtml += "<br>"+getCountryBox(tmpReq,tmpPrepop); 
+
 		}else if(fieldType == "dropdown"){
-				temphtml += ' <select name="'+label+'> '+option+'</select> '; 
+				temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
+				//fungEdit
+	//			temphtml += ' <select name="'+label+'> '+option+'</select> '; 
 
 		}else if(fieldType == "datetime"){
+
+				temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
+/*fungEdit
 				var datename = fieldID+"_DATE"; 							
 				temphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); < /script>  ' ;
 
 				temphtml += '<div class="form-group" id="'+datename+'"><label>'+label+'</label><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value=""></div></div>' ; 
+*/ 
 					
 		}else if(fieldType == "radio"){
-				temphtml += ' <input type="hidden" name="'+label+' value="'+tmpPrepop+'"> '; 
+			temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
+			//fungEdit
+			//	temphtml += ' <input type="hidden" name="'+label+' value="'+tmpPrepop+'"> '; 
 		}
-*/ 
 		temphtml +="</div>"; 
-
-		//var summerdivtxt += '<label>'+label+'</label>'+redstar+'<input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"></div>' ; 
 		return  temphtml;         
 };
 
-$(document).ready(function(){		
-	
-//	alert("1 = "+angular.element(document.getElementById('myNewCtrl')).scope()); 
-//	alert("2 = "+angular.element(document.getElementById('myCtrl')).scope()); 
+function getStateBox(tmpReq,tmpPrepop){
+		var stateHTML ='<select style="font-size: 16px" name="State" id="State" value="'+tmpPrepop+'">'; 
+			  stateHTML +='<option value="">Choose Your State</option>';
+			  stateHTML +='<option value="AL">Alabama</option>';
+			  stateHTML +='<option value="AK">Alaska</option>';
+			  stateHTML +='<option value="AB">Alberta</option>';
+			  stateHTML +='<option value="AZ">Arizona</option>';
+			  stateHTML +='<option value="AR">Arkansas</option>';
+			  stateHTML +='<option value="BC">British Columbia</option>';
+			  stateHTML +='<option value="CA">California</option>';
+			  stateHTML +='<option value="CO">Colorado</option>';
+			  stateHTML +='<option value="CT">Connecticut</option>';
+			  stateHTML +='<option value="DE">Delaware</option>';
+			  stateHTML +='<option value="DC">District of Columbia</option>';
+			  stateHTML +='<option value="FL">Florida</option>';
+			  stateHTML +='<option value="GA">Georgia</option>';
+			  stateHTML +='<option value="HI">Hawaii</option>';
+			  stateHTML +='<option value="ID">Idaho</option>';
+			  stateHTML +='<option value="IL">Illinois</option>';
+			  stateHTML +='<option value="IN">Indiana</option>';
+			  stateHTML +='<option value="IA">Iowa</option>';
+			  stateHTML +='<option value="KS">Kansas</option>';
+			  stateHTML +='<option value="KY">Kentucky</option>';
+			  stateHTML +='<option value="LA">Louisiana</option>';
+			  stateHTML +='<option value="ME">Maine</option>';
+			  stateHTML +='<option value="MB">Manitoba</option>';
+			  stateHTML +='<option value="MD">Maryland</option>';
+			  stateHTML +='<option value="MA">Massachusetts</option>';
+			  stateHTML +='<option value="MI">Michigan</option>';
+			  stateHTML +='<option value="MN">Minnesota</option>';
+			  stateHTML +='<option value="MS">Mississippi</option>';
+			  stateHTML +='<option value="MO">Missouri</option>';
+			  stateHTML +='<option value="MT">Montana</option>';
+			  stateHTML +='<option value="NE">Nebraska</option>';
+			  stateHTML +='<option value="NV">Nevada</option>';
+			  stateHTML +='<option value="NB">New Brunswick</option>';
+			  stateHTML +='<option value="NH">New Hampshire</option>';
+			  stateHTML +='<option value="NJ">New Jersey</option>';
+			  stateHTML +='<option value="NM">New Mexico</option>';
+			  stateHTML +='<option value="NY">New York</option>';
+			  stateHTML +='<option value="NF">Newfoundland & Labrador</option>';
+			  stateHTML +='<option value="NC">North Carolina</option>';
+			  stateHTML +='<option value="ND">North Dakota</option>';
+			  stateHTML +='<option value="NW">Northwest Territories</option>';
+			  stateHTML +='<option value="NS">Nova Scotia</option>';
+			  stateHTML +='<option value="NU">Nunavut</option>';
+			  stateHTML +='<option value="OH">Ohio</option>';
+			  stateHTML +='<option value="OK">Oklahoma</option>';
+			  stateHTML +='<option value="ON">Ontario</option>';
+			  stateHTML +='<option value="OR">Oregon</option>';
+			  stateHTML +='<option value="PA">Pennsylvania</option>';
+			  stateHTML +='<option value="PE">Prince Edward Island</option>';
+			  stateHTML +='<option value="QC">Quebec</option>';
+			  stateHTML +='<option value="RI">Rhode Island</option>';
+			  stateHTML +='<option value="SK">Saskatchewan</option>';
+			  stateHTML +='<option value="SC">South Carolina</option>';
+			  stateHTML +='<option value="SD">South Dakota</option>';
+			  stateHTML +='<option value="TN">Tennessee</option>';
+			  stateHTML +='<option value="TX">Texas</option>';
+			  stateHTML +='<option value="UT">Utah</option>';
+			  stateHTML +='<option value="VT">Vermont</option>';
+			  stateHTML +='<option value="VA">Virginia</option>';
+			  stateHTML +='<option value="WA">Washington</option>';
+			  stateHTML +='<option value="WV">West Virginia</option>';
+			  stateHTML +='<option value="WI">Wisconsin</option>';
+			  stateHTML +='<option value="WY">Wyoming</option>';
+			  stateHTML +='<option value="YU">Yukon</option>';
+			  stateHTML +='<option value="OT">Other</option>';
+			  stateHTML +='</select>';
+			  return stateHTML; 
+}
 
+function getCountryBox(tmpReq,tmpPrepop){
+	var countryHTML = '<select style="width: 515px;font-size: 16px" name="country" id="Country" value="'+tmpPrepop+'">'; 
+	      countryHTML += '<option value="">Choose Your Country</option>';
+	      countryHTML += '<option value="US">United States</option>';
+	      countryHTML += '<option value="CA">Canada</option>';
+	      countryHTML += '<option value="AF">Afghanistan</option>';
+	      countryHTML += '<option value="AL">Albania</option>';
+	      countryHTML += '<option value="DZ">Algeria</option>';
+	      countryHTML += '<option value="AS">American Samoa</option>';
+	      countryHTML += '<option value="AD">Andorra</option>';
+	      countryHTML += '<option value="AO">Angola</option>';
+	      countryHTML += '<option value="AI">Anguilla</option>';
+	      countryHTML += '<option value="AQ">Antarctica</option>';
+	      countryHTML += '<option value="AG">Antigua and Barbuda</option>';
+	      countryHTML += '<option value="AR">Argentina</option>';
+	      countryHTML += '<option value="AM">Armenia</option>';
+	      countryHTML += '<option value="AW">Aruba</option>';
+	      countryHTML += '<option value="AU">Australia</option>';
+	      countryHTML += '<option value="AT">Austria</option>';
+	      countryHTML += '<option value="AZ">Azerbaijan</option>';
+	      countryHTML += '<option value="BS">Bahamas</option>';
+	      countryHTML += '<option value="BH">Bahrain</option>';
+	      countryHTML += '<option value="BD">Bangladesh</option>';
+	      countryHTML += '<option value="BB">Barbados</option>';
+	      countryHTML += '<option value="BY">Belarus</option>';
+	      countryHTML += '<option value="BE">Belgium</option>';
+	      countryHTML += '<option value="BZ">Belize</option>';
+	      countryHTML += '<option value="BJ">Benin</option>';
+	      countryHTML += '<option value="BM">Bermuda</option>';
+	      countryHTML += '<option value="BT">Bhutan</option>';
+	      countryHTML += '<option value="BO">Bolivia</option>';
+	      countryHTML += '<option value="BA">Bosnia and Herzegowina</option>';
+	      countryHTML += '<option value="BW">Botswana</option>';
+	      countryHTML += '<option value="BV">Bouvet Island</option>';
+	      countryHTML += '<option value="BR">Brazil</option>';
+	      countryHTML += '<option value="IO">British Indian Ocean Territory</option>';
+	      countryHTML += '<option value="BN">Brunei Darussalam</option>';
+	      countryHTML += '<option value="BG">Bulgaria</option>';
+	      countryHTML += '<option value="BF">Burkina Faso</option>';
+	      countryHTML += '<option value="BI">Burundi</option>';
+	      countryHTML += '<option value="KH">Cambodia</option>';
+	      countryHTML += '<option value="CM">Cameroon</option>';
+	      countryHTML += '<option value="CV">Cape Verde</option>';
+	      countryHTML += '<option value="KY">Cayman Islands</option>';
+	      countryHTML += '<option value="CF">Central African Republic</option>';
+	      countryHTML += '<option value="TD">Chad</option>';
+	      countryHTML += '<option value="CL">Chile</option>';
+	      countryHTML += '<option value="CN">China</option>';
+	      countryHTML += '<option value="CX">Christmas Island</option>';
+	      countryHTML += '<option value="CC">Cocos (Keeling) Islands</option>';
+	      countryHTML += '<option value="CO">Colombia</option>';
+	      countryHTML += '<option value="KM">Comoros</option>';
+	      countryHTML += '<option value="CG">Congo</option>';
+	      countryHTML += '<option value="CD">Congo, the Democratic Republic of the</option>';
+	      countryHTML += '<option value="CK">Cook Islands</option>';
+	      countryHTML += '<option value="CR">Costa Rica</option>';
+	      countryHTML += '<option value="CI">Cote d&acute;Ivoire</option>';
+	      countryHTML += '<option value="HR">Croatia (Hrvatska)</option>';
+	      countryHTML += '<option value="CU">Cuba</option>';
+	      countryHTML += '<option value="CY">Cyprus</option>';
+	      countryHTML += '<option value="CZ">Czech Republic</option>';
+	      countryHTML += '<option value="DK">Denmark</option>';
+	      countryHTML += '<option value="DJ">Djibouti</option>';
+	      countryHTML += '<option value="DM">Dominica</option>';
+	      countryHTML += '<option value="DO">Dominican Republic</option>';
+	      countryHTML += '<option value="TP">East Timor</option>';
+	      countryHTML += '<option value="EC">Ecuador</option>';
+	      countryHTML += '<option value="EG">Egypt</option>';
+	      countryHTML += '<option value="SV">El Salvador</option>';
+	      countryHTML += '<option value="GQ">Equatorial Guinea</option>';
+	      countryHTML += '<option value="ER">Eritrea</option>';
+	      countryHTML += '<option value="EE">Estonia</option>';
+	      countryHTML += '<option value="ET">Ethiopia</option>';
+	      countryHTML += '<option value="FK">Falkland Islands (Malvinas)</option>';
+	      countryHTML += '<option value="FO">Faroe Islands</option>';
+	      countryHTML += '<option value="FJ">Fiji</option>';
+	      countryHTML += '<option value="FI">Finland</option>';
+	      countryHTML += '<option value="FR">France</option>';
+	      countryHTML += '<option value="FX">France, Metropolitan</option>';
+	      countryHTML += '<option value="GF">French Guiana</option>';
+	      countryHTML += '<option value="PF">French Polynesia</option>';
+	      countryHTML += '<option value="TF">French Southern Territories</option>';
+	      countryHTML += '<option value="GA">Gabon</option>';
+	      countryHTML += '<option value="GM">Gambia</option>';
+	      countryHTML += '<option value="GE">Georgia</option>';
+	      countryHTML += '<option value="DE">Germany</option>';
+	      countryHTML += '<option value="GH">Ghana</option>';
+	      countryHTML += '<option value="GI">Gibraltar</option>';
+	      countryHTML += '<option value="GR">Greece</option>';
+	      countryHTML += '<option value="GL">Greenland</option>';
+	      countryHTML += '<option value="GD">Grenada</option>';
+	      countryHTML += '<option value="GP">Guadeloupe</option>';
+	      countryHTML += '<option value="GU">Guam</option>';
+	      countryHTML += '<option value="GT">Guatemala</option>';
+	      countryHTML += '<option value="GN">Guinea</option>';
+	      countryHTML += '<option value="GW">Guinea-Bissau</option>';
+	      countryHTML += '<option value="GY">Guyana</option>';
+	      countryHTML += '<option value="HT">Haiti</option>';
+	      countryHTML += '<option value="HM">Heard and Mc Donald Islands</option>';
+	      countryHTML += '<option value="VA">Holy See (Vatican City State)</option>';
+	      countryHTML += '<option value="HN">Honduras</option>';
+	      countryHTML += '<option value="HK">Hong Kong</option>';
+	      countryHTML += '<option value="HU">Hungary</option>';
+	      countryHTML += '<option value="IS">Iceland</option>';
+	      countryHTML += '<option value="IN">India</option>';
+	      countryHTML += '<option value="ID">Indonesia</option>';
+	      countryHTML += '<option value="IR">Iran (Islamic Republic of)</option>';
+	      countryHTML += '<option value="IQ">Iraq</option>';
+	      countryHTML += '<option value="IE">Ireland</option>';
+	      countryHTML += '<option value="IL">Israel</option>';
+	      countryHTML += '<option value="IT">Italy</option>';
+	      countryHTML += '<option value="JM">Jamaica</option>';
+	      countryHTML += '<option value="JP">Japan</option>';
+	      countryHTML += '<option value="JO">Jordan</option>';
+	      countryHTML += '<option value="KZ">Kazakhstan</option>';
+	      countryHTML += '<option value="KE">Kenya</option>';
+	      countryHTML += '<option value="KI">Kiribati</option>';
+	      countryHTML += '<option value="KP">Korea, Democratic People&acute;s Republic of</option>';
+	      countryHTML += '<option value="KR">Korea, Republic of</option>';
+	      countryHTML += '<option value="KW">Kuwait</option>';
+	      countryHTML += '<option value="KG">Kyrgyzstan</option>';
+	      countryHTML += '<option value="LA">Lao People&acute;s Democratic Republic</option>';
+	      countryHTML += '<option value="LV">Latvia</option>';
+	      countryHTML += '<option value="LB">Lebanon</option>';
+	      countryHTML += '<option value="LS">Lesotho</option>';
+	      countryHTML += '<option value="LR">Liberia</option>';
+	      countryHTML += '<option value="LY">Libyan Arab Jamahiriya</option>';
+	      countryHTML += '<option value="LI">Liechtenstein</option>';
+	      countryHTML += '<option value="LT">Lithuania</option>';
+	      countryHTML += '<option value="LU">Luxembourg</option>';
+	      countryHTML += '<option value="MO">Macau</option>';
+	      countryHTML += '<option value="MK">Macedonia, The Former Yugoslav Republic of</option>';
+	      countryHTML += '<option value="MG">Madagascar</option>';
+	      countryHTML += '<option value="MW">Malawi</option>';
+	      countryHTML += '<option value="MY">Malaysia</option>';
+	      countryHTML += '<option value="MV">Maldives</option>';
+	      countryHTML += '<option value="ML">Mali</option>';
+	      countryHTML += '<option value="MT">Malta</option>';
+	      countryHTML += '<option value="MH">Marshall Islands</option>';
+	      countryHTML += '<option value="MQ">Martinique</option>';
+	      countryHTML += '<option value="MR">Mauritania</option>';
+	      countryHTML += '<option value="MU">Mauritius</option>';
+	      countryHTML += '<option value="YT">Mayotte</option>';
+	      countryHTML += '<option value="MX">Mexico</option>';
+	      countryHTML += '<option value="FM">Micronesia, Federated States of</option>';
+	      countryHTML += '<option value="MD">Moldova, Republic of</option>';
+	      countryHTML += '<option value="MC">Monaco</option>';
+	      countryHTML += '<option value="MN">Mongolia</option>';
+	      countryHTML += '<option value="MS">Montserrat</option>';
+	      countryHTML += '<option value="MA">Morocco</option>';
+	      countryHTML += '<option value="MZ">Mozambique</option>';
+	      countryHTML += '<option value="MM">Myanmar</option>';
+	      countryHTML += '<option value="NA">Namibia</option>';
+	      countryHTML += '<option value="NR">Nauru</option>';
+	      countryHTML += '<option value="NP">Nepal</option>';
+	      countryHTML += '<option value="NL">Netherlands</option>';
+	      countryHTML += '<option value="AN">Netherlands Antilles</option>';
+	      countryHTML += '<option value="NC">New Caledonia</option>';
+	      countryHTML += '<option value="NZ">New Zealand</option>';
+	      countryHTML += '<option value="NI">Nicaragua</option>';
+	      countryHTML += '<option value="NE">Niger</option>';
+	      countryHTML += '<option value="NG">Nigeria</option>';
+	      countryHTML += '<option value="NU">Niue</option>';
+	      countryHTML += '<option value="NF">Norfolk Island</option>';
+	      countryHTML += '<option value="MP">Northern Mariana Islands</option>';
+	      countryHTML += '<option value="NO">Norway</option>';
+	      countryHTML += '<option value="OM">Oman</option>';
+	      countryHTML += '<option value="PK">Pakistan</option>';
+	      countryHTML += '<option value="PW">Palau</option>';
+	      countryHTML += '<option value="PA">Panama</option>';
+	      countryHTML += '<option value="PG">Papua New Guinea</option>';
+	      countryHTML += '<option value="PY">Paraguay</option>';
+	      countryHTML += '<option value="PE">Peru</option>';
+	      countryHTML += '<option value="PH">Philippines</option>';
+	      countryHTML += '<option value="PN">Pitcairn</option>';
+	      countryHTML += '<option value="PL">Poland</option>';
+	      countryHTML += '<option value="PT">Portugal</option>';
+	      countryHTML += '<option value="PR">Puerto Rico</option>';
+	      countryHTML += '<option value="QA">Qatar</option>';
+	      countryHTML += '<option value="RE">Reunion</option>';
+	      countryHTML += '<option value="RO">Romania</option>';
+	      countryHTML += '<option value="RU">Russian Federation</option>';
+	      countryHTML += '<option value="RW">Rwanda</option>';
+	      countryHTML += '<option value="KN">Saint Kitts and Nevis</option>';
+	      countryHTML += '<option value="LC">Saint LUCIA</option>';
+	      countryHTML += '<option value="VC">Saint Vincent and the Grenadines</option>';
+	      countryHTML += '<option value="WS">Samoa</option>';
+	      countryHTML += '<option value="SM">San Marino</option>';
+	      countryHTML += '<option value="ST">Sao Tome and Principe</option>';
+	      countryHTML += '<option value="SA">Saudi Arabia</option>';
+	      countryHTML += '<option value="SN">Senegal</option>';
+	      countryHTML += '<option value="SC">Seychelles</option>';
+	      countryHTML += '<option value="SL">Sierra Leone</option>';
+	      countryHTML += '<option value="SG">Singapore</option>';
+	      countryHTML += '<option value="SK">Slovakia (Slovak Republic)</option>';
+	      countryHTML += '<option value="SI">Slovenia</option>';
+	      countryHTML += '<option value="SB">Solomon Islands</option>';
+	      countryHTML += '<option value="SO">Somalia</option>';
+	      countryHTML += '<option value="ZA">South Africa</option>';
+	      countryHTML += '<option value="GS">South Georgia and the South Sandwich Islands</option>';
+	      countryHTML += '<option value="ES">Spain</option>';
+	      countryHTML += '<option value="LK">Sri Lanka</option>';
+	      countryHTML += '<option value="SH">St. Helena</option>';
+	      countryHTML += '<option value="PM">St. Pierre and Miquelon</option>';
+	      countryHTML += '<option value="SD">Sudan</option>';
+	      countryHTML += '<option value="SR">Suriname</option>';
+	      countryHTML += '<option value="SJ">Svalbard and Jan Mayen Islands</option>';
+	      countryHTML += '<option value="SZ">Swaziland</option>';
+	      countryHTML += '<option value="SE">Sweden</option>';
+	      countryHTML += '<option value="CH">Switzerland</option>';
+	      countryHTML += '<option value="SY">Syrian Arab Republic</option>';
+	      countryHTML += '<option value="TW">Taiwan, Province of China</option>';
+	      countryHTML += '<option value="TJ">Tajikistan</option>';
+	      countryHTML += '<option value="TZ">Tanzania, United Republic of</option>';
+	      countryHTML += '<option value="TH">Thailand</option>';
+	      countryHTML += '<option value="TG">Togo</option>';
+	      countryHTML += '<option value="TK">Tokelau</option>';
+	      countryHTML += '<option value="TO">Tonga</option>';
+	      countryHTML += '<option value="TT">Trinidad and Tobago</option>';
+	      countryHTML += '<option value="TN">Tunisia</option>';
+	      countryHTML += '<option value="TR">Turkey</option>';
+	      countryHTML += '<option value="TM">Turkmenistan</option>';
+	      countryHTML += '<option value="TC">Turks and Caicos Islands</option>';
+	      countryHTML += '<option value="TV">Tuvalu</option>';
+	      countryHTML += '<option value="UG">Uganda</option>';
+	      countryHTML += '<option value="UA">Ukraine</option>';
+	      countryHTML += '<option value="AE">United Arab Emirates</option>';
+	      countryHTML += '<option value="GB">United Kingdom</option>';
+	      countryHTML += '<option value="UM">United States Minor Outlying Islands</option>';
+	      countryHTML += '<option value="UY">Uruguay</option>';
+	      countryHTML += '<option value="UZ">Uzbekistan</option>';
+	      countryHTML += '<option value="VU">Vanuatu</option>';
+	      countryHTML += '<option value="VE">Venezuela</option>';
+	      countryHTML += '<option value="VN">Viet Nam</option>';
+	      countryHTML += '<option value="VG">Virgin Islands (British)</option>';
+	      countryHTML += '<option value="VI">Virgin Islands (U.S.)</option>';
+	      countryHTML += '<option value="WF">Wallis and Futuna Islands</option>';
+	      countryHTML += '<option value="EH">Western Sahara</option>';
+	      countryHTML += '<option value="YE">Yemen</option>';
+	      countryHTML += '<option value="YU">Yugoslavia</option>';
+	      countryHTML += '<option value="ZM">Zambia</option>';
+	      countryHTML += '<option value="ZW">Zimbabwe</option>';
+	      countryHTML += '</select>';
+	      return countryHTML;
 
-}); // end document.ready(); 
+}
+
 
 </script>
 

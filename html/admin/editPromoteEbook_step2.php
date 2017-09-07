@@ -1,6 +1,12 @@
-
+<style type="text/css">
+	.window{width: 100%;}
+</style>
+<div class="panel panel-default" ng-controller="step2" id="step2ID">
 	<div class="panel-heading">
-		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"><span class="badge">2</span> &nbsp;Set Up Your Landing Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small class="m-l-sm"><i aria-hidden="true" class="fa fa-file-o"></i> 1 of 2 Pages Configured</small></a></h4>
+		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+		<span class="badge" ng-show="!step2Done">2</span>
+		<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done""></i>
+		&nbsp;Set Up Your Landing Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small class="m-l-sm"><i aria-hidden="true" class="fa fa-file-o"></i> {{pageProgress}}</small></a></h4>
 	</div>
 	<div class="panel-collapse collapse" id="collapseTwo">
 		<div class="panel-body">
@@ -25,14 +31,16 @@
 										<div class="mail-box-header">
 											<!--<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Preview</a>-->
 											<div class="pull-right tooltip-demo">
-												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a> <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail"><i class="fa fa-floppy-o"></i> Save Page</button>
+												<a ng-model="file" ngf-select="upload2Pages($file,'LANDINGPAGE-HERO-IMAGE')" href="" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['LANDINGPAGE-HERO-IMAGE'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['LANDINGPAGE-HERO-IMAGE'] != 'Uploading'"></i> Upload image</a>
+												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
+												<button class="btn btn-primary" ng-click="Save('Welcome')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
 											</div>
 											<div class="col-xs-4">
 												<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
 												<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
 												</select>
-											</div><br>
-											<br>
+											</div>
+											<br><br>
 										</div>
 										<div class="ibox-content">
 											<div class="window">
@@ -56,22 +64,15 @@
 										<div class="mail-box-header">
 											<!--<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Preview</a>-->
 											<div class="pull-right tooltip-demo">
-												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a> <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="mailbox.html" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail"><i class="fa fa-floppy-o"></i> Save Page</button>
+												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
+												<button class="btn btn-primary" ng-click="Save('ThankYou')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
 											</div>
 											<div class="col-xs-4">
-												<select class="chosen-select col-xs-4" data-target=".template_preview" id="template" name="EMAIL-{{email_number}}-template" tabindex="2">
-													<option data-show=".Pick" value="Pick">
-														Pick a template...
-													</option>
-													<option data-show=".PLAIN-EBOOK-THANKS" value="PLAIN-EBOOK-THANKS">
-														Plain: Simple Page
-													</option>
-													<option data-show=".COMPANY-EBOOK-THANKS" value="COMPANY-EBOOK-THANKS">
-														Company Page: Your company logo, call to action button, and address in footer
-													</option>
+												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" style="width: 100%;height: 30px;">
+												<option ng-repeat="x in templatesThankYou | filter:{subdir:'thankyou'}" value="{{x.content}}">{{x.title}}</option>
 												</select>
-											</div><br>
-											<br>
+											</div>
+											<br><br>
 										</div>
 										<div class="ibox-content">
 											<div class="window">
@@ -84,18 +85,7 @@
 												</div>
 												<div class="content">
 													<div class="template_preview">
-														<div class="Pick">
-															<p></p>
-															<p>Your landing page preview will display here after you select a template.</p>
-															<p></p>
-														</div>
-														<div class="PLAIN-EBOOK-THANKS">
-															{{PLAIN-EBOOK-THANKS}}
-														</div>
-														<div class="COMPANY-EBOOK-THANKS">
-															{{COMPANY-EBOOK-THANKS}}
-															<p>&nbsp;</p>
-														</div>
+														<div id="viewThankYou"></div>
 													</div>
 												</div>
 											</div>
@@ -159,3 +149,38 @@
 			</div>
 		</div>
 	</div>
+</div>
+<script>
+	myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload) {
+		$scope.upload2Pages = function (file,field) {
+			$scope.state[field] = 'Uploading';
+			var uploadFileName = "IMG-" + uuidv4();
+			//$scope.editor.summernote('insertNode', imgNode);
+			Upload.upload({
+				url: 'upload.php',
+				method: 'POST',
+				file: file,
+				data: {
+					file: file,
+					's3': 'true',
+					'fileName': uploadFileName,
+					'acctID': 'accountID',
+					'progID': 'programID',
+				}
+			}).then(function(resp) {
+				console.log('Success ' + resp.config.data.file.name + 'uploaded');
+				console.log(resp.data);
+				var imgHTML = "<img src='"+resp.data.imgSrc+"' border='0' style='display:block'>";
+				//$scope['editor1'].summernote('code',imgHTML);
+				$scope.campaign[field] = imgHTML;
+				$scope.state[field] = 'Finish';
+			}, function(resp) {
+				console.log('Error status: ' + resp.status);
+				$scope.state[field] = 'Error';
+			}, function(evt) {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+			});
+		};
+	}]);
+</script>

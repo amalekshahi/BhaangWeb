@@ -22,6 +22,14 @@ function MergeArrayWithArray(& $data,$default)
     //print_r($data);
 }
 
+function DoSummerNote($fileContent,$scopeName,$number)
+{
+    $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
+    // Replace {{SUMMERNOTE(XXXXXX)}} with proper summernote tag
+    $content = preg_replace('/\{{SUMMERNOTE\(([^\}]*)\)}\}/',$editTag ,$fileContent);    
+    return $content;
+}
+
 session_start();
 
 if(empty($_REQUEST['blueprint'])){
@@ -105,24 +113,33 @@ foreach($configs as $config)
         
     }
     
-    //change <viewStyle> to <style>
     $fileContent = $fileContentRaw;
-    // Handle [[REMOVE 
+    // Handle [[REMOVE  to remove data from DV view
     $fileContent = preg_replace('/\[\[REMOVE ([^\]]*)\]\]/',"",$fileContent);
     $fileContentRaw = preg_replace('/\[\[REMOVE ([^\]]*)\]\]/',"$1",$fileContentRaw);
+    // Handle [[ADD  to add data to DV view
+    $fileContent = preg_replace('/\[\[ADD ([^\]]*)\]\]/',"$1",$fileContent);
+    $fileContentRaw = preg_replace('/\[\[ADD ([^\]]*)\]\]/',"",$fileContentRaw);
     
+    //TODO: remove this and handle with <a[[ADD view]] instead.
     $fileContentRaw = str_replace("<aview","<a",$fileContentRaw);
     $fileContentRaw = str_replace("aview>","a>",$fileContentRaw);
 
-    
+    /*  
+        Below only process for DV view
+    */
     //Remove {{RAW 
-    $fileContent = str_replace("{{RAW ","{{",$fileContent);
+    $content = str_replace("{{RAW ","{{",$fileContent);
     
     
     $number = $number + 1;    
+    //TODO: remove this and handle with DoSummerNote instead
     $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
     // Replace {{EMAIL}} with proper summernote tag
-    $content = preg_replace('/\{{(EMAIL[^\}]*)}\}/',$editTag ,$fileContent);
+    $content = preg_replace('/\{{(EMAIL[^\}]*)}\}/',$editTag ,$content);
+    
+    //SUMMERNOTE()
+    $content = DoSummerNote($content,$scopeName,$number);
     
     $noneEditTag = '{{'.$scopeName.'[\'$1\']}}';
     // Replace other tag with normal tag
