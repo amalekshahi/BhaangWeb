@@ -92,8 +92,8 @@
 																			</td>
 																			<td class="project-title">
 																				<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
-																				<br/>
-																				<small>Modified <time am-time-ago="item.lastEditDate"></time></small>
+																				<br/><!-- Roll back to this <span am-time-ago="message.time"></span> -- once timestamp issue is resolved -->
+																				<small>Modified {{item.lastEditDate | amUtc | amLocal | amAdd : '12' : 'hours' | amDateFormat:'MMMM Do YYYY, h:mm a'}}</small>
 																			</td>
 
 																			<td class="project-reach">
