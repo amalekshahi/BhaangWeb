@@ -111,7 +111,7 @@
 											</div>
 										</div>
 										<div class="panel panel-default">
-											<?php include "editPromoteEbook_step2.php"; ?>
+											<?php include "editPromoteEbook_step2_jiew.php"; ?>
 										</div>
 										<div class="panel">
 											<?php include "editPromoteEbook_step3.php"; ?>
@@ -420,6 +420,7 @@
 				$scope.initTemplateWelcome();
 				$scope.initTemplateThankyou();
 				$scope.initTemplateEmail('1');
+				$scope.initListForm();
 				$scope.initSender();
 			};
 			/*$scope.initEmailTemplate = function(){
@@ -465,6 +466,14 @@
 					$scope.config = response.data.config; 
 					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
 					$scope.SelectChanged('viewThankYou','templateThankYou');
+				});
+			};
+			$scope.initListForm = function(){
+				$http.get("/couchdb/" + dbName +"/formLibrary?"+new Date().toString()).then(function(response) {
+					$scope.listForm = response.data.items;
+					if (typeof $scope.listForm == 'undefined') {
+						$scope.listForm = [];
+					}
 				});
 			};
 			$scope.initSender = function(){

@@ -35,10 +35,21 @@
 												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
 												<button class="btn btn-primary" ng-click="Save('Welcome')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
 											</div>
-											<div class="col-xs-4">
-												<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
-												<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
-												</select>
+											<div class="col-xs-6" style="padding-left: 0px;padding-right: 0px;">
+												<div class="col-xs-6">
+													<label>Template</label>
+													<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
+													<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
+													</select>
+												</div>
+												<div class="col-xs-6">
+													<label>Form</label>
+													<!-- <select ng-model="campaign['LANDINGPAGE-FORM']" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
+														<option ng-repeat="x in listForm" value="{{x.formHTML}}">{{x.formName}}</option>
+													</select> -->
+													<select ng-model="campaign['LANDINGPAGE-FORM']" ng-options="x.formHTML as x.formName for x in listForm" style="width: 100%;height: 30px;">
+													</select>
+												</div>
 											</div>
 											<br><br>
 										</div>
