@@ -55,124 +55,77 @@
 							<div class="ibox-title">
 								<h5><i class="fa fa-rocket" aria-hidden="true" style="color:black"></i> Your Campaign Settings <small class="m-l-sm"></small></h5>
 								<div class="ibox-tools">
-									<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>
-									<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
-								</div>
+							<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>
+                            <a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
+                            
+                        </div>
 							</div>
 							<div class="ibox-content">
 								<div class="panel-body">
-<!DOCTYPE html>
-<!--[if IE 8 ]> <html lang="en-US"  class="ie8"> <![endif]-->
-<!--[if IE 9 ]> <html lang="en-US"  class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en-US">
-<!--<![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta content="IE=edge" http-equiv="X-UA-Compatible">
-	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<meta content="MindFireInc" name="author">
-	<meta content="marketing automation case study, digital marketing campaign case studies, marketing automation ebook" name="keywords">
-	<meta content="As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!" name="description">
-	<meta content="Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform" property="og:title">
-	<meta content="MindFire Studio" property="og:site_name">
-	<meta content="[[absoluteUrl]]" property="og:url">
-	<meta content="As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!" property="og:description">
-	<meta content="https://s3-us-west-1.amazonaws.com/mfimarketing/images/Screen+Shot+2017-04-20+at+9.42.04+AM.png" property="og:image">
-	<meta content="summary_large_image" name="twitter:card">
-	<meta content="@mindfireinc" name="twitter:site">
-	<meta content="@RaminZamani" name="twitter:creator">
-	<meta content="Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform" name="twitter:title">
-	<meta content="As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!" name="twitter:description">
-	<meta content="https://s3-us-west-1.amazonaws.com/mfimarketing/images/Screen+Shot+2017-04-20+at+9.42.04+AM.png" name="twitter:image:src">
-	<title>Marketing Automation Case Study: Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform - MindFire Studio</title>
-	
-	<style>
-	   body {
-	     margin-bottom: 120px;
-	   }
-
-	   .footer {
-	     position: absolute;
-	     bottom: 0;
-       left: 0;
-       right: 0;
-       min-height: 60px;
-	     background-color: #333333;
-	     padding-top: 20px;
-	     padding-bottom: 20px;
-	     margin-top: 10px;
-	   }
-	</style>
-	<script async defer src="https://apis.google.com/js/platform.js">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/jquery.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/angular.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/bootstrap.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/ui-bootstrap-tpls.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/angular-social-links.js" type="text/javascript">
-	</script>
-</head>
-<body>
-	<div id="topbar">
-		<div class="container">
-			<p class="pull-right">Contact: (877) 560-3473</p>
-		</div>
-	</div>
-	<div class="clearfix"></div><!-- Static navbar -->
-	<div class="navbar navbar-default navbar-static-top" id="navbar" role="navigation">
-		<div class="container">
-			<a class="navbar-brand" href="/"><img src="http://www.mindfireinc.com/static/images/mindfire_studio_logo.png" width="200px"></a>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<h1><span class="label label-warning pull-right" style="font-size: .4em">Free eBook</span> <div class="hover"><textarea class="summernote" id="summernote" name="LANDINGPAGE-TOP-TEXT">Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform</textarea></div></h1><img alt="Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform" class="img-responsive" src="https://s3-us-west-1.amazonaws.com/mfimarketing/images/Screen+Shot+2017-04-20+at+9.42.04+AM.png"><br>
-				<p><div class="hover"><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!</textarea></div></p>
-			</div>
-			<div class="col-md-4">
-				<br>
-				<div class="well">
-					<form action="/send?a=download" id="rzForm" method="post" name="rzForm" novalidate="">
-						<fieldset>
-							<p class="lead">Download your eBook:</p>
-							<div class="form-group">
-								<label>First Name <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="firstname" required="" type="text" value=""> 
-							</div>
-							<div class="form-group">
-								<label>Last Name <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="lastname" required="" type="text" value=""> 
-							</div>
-							<div class="form-group">
-								<label>Business Email Address <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="email" required="" type="text" value=""> 
-							</div>
-							<div class="form-group">
-								<label>Company <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="company" required="" type="text"> 
-							</div>
-							<div class="form-group">
-								<label>Phone <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="phone" required="" type="text" value="">
-							</div>
-							
-							
-							
-							<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button>
-							<div>
-								<p class="rz-required-note" style="text-align: right;"><i>* Indicates a required field.<br>
-								Answer all required fields to activate the button.</i></p>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</div>
-		</div>
-</div>
-</body>
-</html>									
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<!-- <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green"></i> &nbsp;Identify the Targeted Blog Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-BLOG-POST-URL']}}</small></a></h4> -->
+												<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+													<span class="badge" ng-show="!step1Done">1</span>
+													<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done""></i>
+													&nbsp;Configure Your eBook &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> Still Relevant: A Look at How Millennials Respond to Direct Mail</small>
+												</a></h4>
+											</div>
+											<div class="panel-collapse collapse" id="collapseOne">
+												<div class="panel-body">
+													<div class="ibox-content">
+														<form action="" class="form-horizontal" method="post">
+															<div class="form-group">
+																<label class="col-sm-2 control-label">eBook Name</label>
+																<div class="col-sm-10">
+																	<input class="form-control" placeholder="Crime and Punishment" type="text" ng-model="campaign['URL-eBOOK-NAME']"><span class="help-block m-b-none">Enter the name of your eBook. This will appear on your landing page and other key areas.</span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-2 control-label">eBook Hosting Location</label>
+																<div class="col-sm-10">
+																	<div class="fileinput fileinput-new input-group col-sm-6" data-provides="fileinput">
+																		<div class="form-control" data-trigger="fileinput">
+																			<i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span>
+																		</div><span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Upload your eBook</span> <span class="fileinput-exists">Change</span> <input name="eBookFile" id="eBookFile" type="file"></span> <a class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
+																	</div>
+																	<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="campaign['URL-eBOOK-LOCATION']"><span class="help-block m-b-none">Something like http://www.yahoo.com/myeBook.pdf</span>
+																</div>
+															</div>
+														</form>
+													</div>
+													<div>
+														<p>&nbsp;</p>
+													</div>
+													<div class="hr-line-dashed"></div>
+													<div class="form-group">
+														<div class="col-sm-4 col-sm-offset-2">
+															<!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
+															<input name="programNameHash" type="hidden" value="{{programNameHash}}"><button class="btn btn-primary" ng-click="uploadBeforeSave()"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button> <button class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<?php include "editPromoteEbook_step2_jiew.php"; ?>
+										</div>
+										<div class="panel">
+											<?php include "editPromoteEbook_step3.php"; ?>
+										</div>
+										<div class="panel">
+											<?php include "editPromoteEbook_step4.php"; ?>
+										</div>
+										<div class="panel panel-default">
+											<?php include "editPromoteEbook_step5.php"; ?>
+										</div>
+									</div>
+                                    <div style="float:right;">
+                                        <button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
+                                    </div>
 								</div>
 
 							</div>
@@ -359,6 +312,12 @@
 					$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
 					$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
 				}
+				if (mode == 'Welcome') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.templatesWelcome[$scope.getListIndex('templatesWelcome','content','templateWelcome')].contentRaw;
+				}
+				if (mode == 'ThankYou') {
+					$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.templatesThankYou[$scope.getListIndex('templatesThankYou','content','templateThankYou')].contentRaw;
+				}
 				$http.put('/couchdb/' + dbName +'/'+campaignID, $scope.campaign).then(function(response){
 					$scope.campaign._rev = response.data.rev;
 
@@ -459,7 +418,9 @@
             };
 			$scope.setInitValue = function(){
 				$scope.initTemplateWelcome();
+				$scope.initTemplateThankyou();
 				$scope.initTemplateEmail('1');
+				$scope.initListForm();
 				$scope.initSender();
 			};
 			/*$scope.initEmailTemplate = function(){
@@ -491,7 +452,7 @@
 			};
 			$scope.initTemplateWelcome = function(){
 				
-				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&resource=pages").then(function(response) {
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 					$scope['templatesWelcome']  = response.data.templates; 
 					$scope.config = response.data.config; 
 					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
@@ -500,20 +461,20 @@
 				
 			};
 			$scope.initTemplateThankyou = function(){
-				if ($scope['openEmail'+emlID] || emlID=='1') { //Email #1 always open.
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&resource=pages").then(function(response) {
-						$scope['templatesAs'+emlID]  = response.data.templates; 
-						if (emlID == '1')
-						{
-							$scope.config = response.data.config; 
-							$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
-						}
-						$("#subjectEmail"+emlID).text($scope.campaign['EMAIL'+emlID+'-SUBJECT']);
-						$scope.SelectChanged('viewEmail'+emlID,'templateEmail'+emlID);
-						$scope.sendersChanged('textSender'+emlID);
-						startEditable(emlID);
-					});
-				}
+				$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
+					$scope['templatesThankYou']  = response.data.templates; 
+					$scope.config = response.data.config; 
+					$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+					$scope.SelectChanged('viewThankYou','templateThankYou');
+				});
+			};
+			$scope.initListForm = function(){
+				$http.get("/couchdb/" + dbName +"/formLibrary?"+new Date().toString()).then(function(response) {
+					$scope.listForm = response.data.items;
+					if (typeof $scope.listForm == 'undefined') {
+						$scope.listForm = [];
+					}
+				});
 			};
 			$scope.initSender = function(){
 				$scope.senders = [];
@@ -523,11 +484,17 @@
 				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});                
 			};
 			$scope.setDisplay = function(){
+				$scope.openEmail = {
+					"1":true,
+					"2":false,
+					"3":false,
+				};
 				$scope.openEmail2 = false;
 				$scope.openEmail3 = false;
                 $scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
+				$scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT']);
                 $scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step4Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DAYS']);
+                $scope.step4Done = $scope.step3Done;
                 $scope.step5Done = $scope.step4Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -538,16 +505,26 @@
 						if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])) {
 							emailDone = '2';
 							$scope.openEmail2 = true;
+							$scope.openEmail["2"] = true;
 						}
 						if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])) {
 							emailDone = '3';
 							$scope.openEmail3 = true;
+							$scope.openEmail["3"] = true;
 						}
 					}
 					$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' emails ready';
 				}
 
-				
+				var pageDone = '0';
+				if ($scope.step2Done) {
+					pageDone = '1';
+					if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'])) {
+						pageDone = '2';
+					}
+				}
+				$scope.pageProgress = pageDone+' of 2 Pages Configured';
+				$scope.scheduleProgress = emailDone+' Drip Emails Configured';
 			};
 			$scope.SelectChanged = function(emailViewID,templateField){
 				//$scope.content = angular.copy($scope.templateEmail1);
@@ -617,15 +594,6 @@
 				  } 
 				}
             };
-			/*$scope.tpIndex = function() {
-				var tplist = 	$scope.templates;
-				for(var i=0;i < tplist.length; i++){
-				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
-				  {
-					return i;
-				  } 
-				}
-            };*/
 			$scope.tpsIndex = function(emlID) {
 				var tplist = 	$scope['templatesAs'+emlID];
 				for(var i=0;i < tplist.length; i++){
@@ -635,19 +603,19 @@
 				  } 
 				}
             };
-			/*$scope.tp2Index = function() {
-				var tplist = 	$scope.templatesAs2;
-				for(var i=0;i < tplist.length; i++){
-				  if (tplist[i]["content"] == $scope.campaign.templateEmail2)
-				  {
-					return i;
-				  } 
-				}
-            };*/
 			$scope.sdIndex = function() {
 				var sdlist = 	$scope.senders;
 				for(var i=0;i < sdlist.length; i++){
 				  if (sdlist[i]["email"] == $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])
+				  {
+					return i;
+				  } 
+				}
+            };
+			$scope.getListIndex = function(tpName,tpField,cpField) {
+				var tpList = $scope[tpName];
+				for(var i=0;i < tpList.length; i++){
+				  if (tpList[i][tpField] == $scope.campaign[cpField])
 				  {
 					return i;
 				  } 

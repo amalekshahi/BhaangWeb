@@ -475,12 +475,17 @@
 				$scope.senders.push({"email" : "mcfarsheed@mindfireinc.com","name" : "Mackenzi Farsheed"});                
 			};
 			$scope.setDisplay = function(){
+				$scope.openEmail = {
+					"1":true,
+					"2":false,
+					"3":false,
+				};
 				$scope.openEmail2 = false;
 				$scope.openEmail3 = false;
                 $scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
 				$scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT']);
                 $scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
-                $scope.step4Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DAYS']);
+                $scope.step4Done = $scope.step3Done;
                 $scope.step5Done = $scope.step4Done;
 				if ($scope.campaign.totalEmail > '3')	{
 					$scope.emailProgress = $scope.campaign.totalEmail+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -491,10 +496,12 @@
 						if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])) {
 							emailDone = '2';
 							$scope.openEmail2 = true;
+							$scope.openEmail["2"] = true;
 						}
 						if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])) {
 							emailDone = '3';
 							$scope.openEmail3 = true;
+							$scope.openEmail["3"] = true;
 						}
 					}
 					$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' emails ready';
@@ -508,6 +515,7 @@
 					}
 				}
 				$scope.pageProgress = pageDone+' of 2 Pages Configured';
+				$scope.scheduleProgress = emailDone+' Drip Emails Configured';
 			};
 			$scope.SelectChanged = function(emailViewID,templateField){
 				//$scope.content = angular.copy($scope.templateEmail1);

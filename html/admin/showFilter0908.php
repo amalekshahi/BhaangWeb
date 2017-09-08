@@ -11,12 +11,7 @@ $LISTDEFINITION = $_GET['LISTDEFINITION'];
 $TEST = $_GET['test'];
 $tabData = "";
 
-$OperatorArray = Array("Equal","NotEqual","After","AfterEqual","Before","BeforeEqual","Contains","NotContains","StartsWith","NotStartsWith","EndsWith","NotEndsWith");
-
-$OperatorTextArray = Array("Is","Is not","Greater than","Greater than or equal to","Less than","Less than or equal to","Contains","Does not contain","Starts with","Does not start with","Ends with","Does not end with");
-
-
-
+$OperatorArray = Array("After","AfterEqual","Before","BeforeEqual","Contains","EndsWith","Equal","NotContains","NotEndsWith","NotEqual","NotStartsWith","StartsWith");
 
 /*
 $OperatorOption = "<option value=\"\" ></option>".
@@ -148,10 +143,7 @@ if ($LISTDEFINITION == '') {
 					
 				}
 				$OperatorOption = "<option value=\"\" ></option>";
-				for ($i = 0; $i < sizeOf($OperatorArray); $i++) {
-				//foreach ($OperatorArray as $strTemp){
-					$strTemp = $OperatorArray[$i];
-					$textTemp = $OperatorTextArray[$i];
+				foreach ($OperatorArray as $strTemp){
 					$strTempLower = strtolower($strTemp);
 					$arrtmp = strtolower($Operator);					
 					if ($arrtmp == $strTempLower) {
@@ -159,7 +151,7 @@ if ($LISTDEFINITION == '') {
 					} else {
 						$selected = '';
 					}
-					$OperatorOption .=  "<option value=\"$strTemp\" $selected>$textTemp</option>";
+					$OperatorOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
 				} 
 				
 				$fieldOption = "<option value=\"\" ></option>";
@@ -178,7 +170,7 @@ if ($LISTDEFINITION == '') {
 				$tabData .= "<tr>".
 					"<td>".$Row."<input type=\"hidden\" name=\"rownumber".$Row."\" id=\"rownumber".$Row." value='".$Row."'\"></td>".
 					"<td><select name=\"fieldoption".$Row."\" id=\"fieldoption".$Row."\">".$fieldOption."</select></td>".
-					"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\" style=\"width: 200px;\">".$OperatorOption."</select></td>".
+					"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\">".$OperatorOption."</select></td>".
 					"<td><input type=\"text\" name=\"filtervalue".$Row."\" id=\"filtervalue".$Row."\" value='$Value'></td>".
 					"<td><input type=\"button\" value=\"Delete\" onclick=\"delRow(this,".$Row.")\"></td>".
 					"</tr>";
@@ -211,10 +203,7 @@ if ($LISTDEFINITION == '') {
 						
 					}
 					$OperatorOption = "<option value=\"\" ></option>";
-					for ($i = 0; $i < sizeOf($OperatorArray); $i++) {
-						//foreach ($OperatorArray as $strTemp){
-						$strTemp = $OperatorArray[$i];
-						$textTemp = $OperatorTextArray[$i];
+					foreach ($OperatorArray as $strTemp){
 						$strTempLower = strtolower($strTemp);
 						$arrtmp = strtolower($Operator);					
 						if ($arrtmp == $strTempLower) {
@@ -222,7 +211,7 @@ if ($LISTDEFINITION == '') {
 						} else {
 							$selected = '';
 						}
-						$OperatorOption .=  "<option value=\"$strTemp\" $selected>$textTemp</option>";
+						$OperatorOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
 					} 
 					
 					$fieldOption = "<option value=\"\" ></option>";
@@ -240,10 +229,10 @@ if ($LISTDEFINITION == '') {
 
 					$tabData .= "<tr>".
 						"<td>".$Row."<input type=\"hidden\" name=\"rownumber".$Row."\" id=\"rownumber".$Row." value='".$Row."'\"></td>".
-						"<td><select name=\"fieldoption".$Row."\" id=\"fieldoption".$Row."\" >".$fieldOption."</select></td>".
-						"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\" style=\"width: 200px;\">".$OperatorOption."</select></td>".
+						"<td><select name=\"fieldoption".$Row."\" id=\"fieldoption".$Row."\">".$fieldOption."</select></td>".
+						"<td><select name=\"operatoroption".$Row."\" id=\"operatoroption".$Row."\">".$OperatorOption."</select></td>".
 						"<td><input type=\"text\" name=\"filtervalue".$Row."\" id=\"filtervalue".$Row."\" value='$Value'></td>".
-						"<td><input type=\"button\" value=\"Delete\" onclick=\"delRow(this,".$Row.")\"></td>".
+						"<td><input type=\"button\" value=\"Del\" onclick=\"delRow(this,".$Row.")\"></td>".
 						"</tr>";
 
 					$filterArray[] = $array3;

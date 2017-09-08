@@ -160,9 +160,9 @@ function ImportContacts($TEST, $FileName, $Mapping, $importName, $userTicket, $e
 
 		
 	} else {
-		$errorMessage = "ImportResponse ERROR : <br> ErrorMessage -> ".$ImportResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
-		"ExceptionMessage : ".$ImportResponse->{"Result"}->{"ExceptionMessage"};
-		//$errorMessage = "ImportResponse ERROR : <br> ErrorMessage -> ".$ImportResponse->{"Result"}->{"ErrorMessage"};
+		//$errorMessage = "ImportResponse ERROR : <br> ErrorMessage -> ".$ImportResponse->{"Result"}->{"ErrorMessage"}.'<br>'.
+		//"ExceptionMessage : ".$ImportResponse->{"Result"}->{"ExceptionMessage"};
+		$errorMessage = $ImportResponse->{"Result"}->{"ErrorMessage"};
 	}
 	/*
 	$sql = 'INSERT INTO MF_importContact (id, importTime, importType, filename, email, errorMessage, recordCount, accountName) VALUES (NULL, NOW(), ?, ?, ?, ?, ?, ?)';

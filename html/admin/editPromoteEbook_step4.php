@@ -11,7 +11,7 @@
                             <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step4Done""></i>
                             &nbsp;Write Your Auto-Responder Drip Sequence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <!-- <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>2 Drip Emails Configured</small> -->
-							<small class="m-l-sm"><i aria-hidden="true" class="fa fa-envelope-o"></i> 2 Drip Emails Configured</small>
+							<small class="m-l-sm"><i aria-hidden="true" class="fa fa-envelope-o"></i> {{scheduleProgress}}</small>
                             </a></h4>
     </div>
 <style>
@@ -167,7 +167,7 @@
 															</td>
 															
 														</tr>
-														<tr>
+														<tr ng-show="openEmail['2']">
 															
 															<td class="project-status">
 																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #2</button>
@@ -242,8 +242,8 @@
 								</div>
 							</div>
                             <label class="col-sm-2 control-label"></label>
-							<div class="col-sm-10"><button class="btn btn-primary" ng-disabled="frmStep4.$pristine" ng-click="Save('')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button>
-                                                    <button class="btn btn-white" ng-disabled="frmStep4.$pristine" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel </button></div>
+							<div class="col-sm-10"><button class="btn btn-primary" ng-click="Save('')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button>
+                                                    <button class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel </button></div>
 						</div>
                     </form>
                 </div>

@@ -123,10 +123,10 @@ var myApp = angular.module("myApp", ["ngRoute"]);
 myApp.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl : "formEditorEdit.html"
+		templateUrl : "formEditorEditFung.html"
 	})
 	.when("/new", {
-		templateUrl : "formEditorNew.html"
+		templateUrl : "formEditorNewFung.html"
 	});		 
 });
 

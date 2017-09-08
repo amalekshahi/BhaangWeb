@@ -160,7 +160,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 									 //swal("Save Success", "", "success");
                                      $scope.state['Save'] = "Save";
 								});         
-								$('#filterDiv').hide();
+								//$('#filterDiv').hide();
 						};
 						$scope.cancel = function() {
 								window.location.href="audiences.php"; 
@@ -355,7 +355,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 			var tabData = "<tr>"+
 			"<td>"+counter+"<input type=\"hidden\" name=\"rownumber"+counter+"\" id=\"rownumber"+counter+" value='"+counter+"'\"></td>"+
 			"<td><select name=\"fieldoption"+counter+"\" id=\"fieldoption"+counter+"\">"+FieldOption+"</select></td>"+
-			"<td><select name=\"operatoroption"+counter+"\" id=\"operatoroption"+counter+"\">"+OperatorOption+"</select></td>"+
+			"<td><select name=\"operatoroption"+counter+"\" id=\"operatoroption"+counter+"\"  style=\"width: 200px;\">"+OperatorOption+"</select></td>"+
 			"<td><input type=\"text\" name=\"filtervalue"+counter+"\" id=\"filtervalue"+counter+"\" ng-blur=\"okFilterClick('new');()\"></td>"+
 			"<td><input type=\"button\" value=\"Delete\" onclick=\"delRow(this,"+counter+")\"></td>"+
 			"</tr>";

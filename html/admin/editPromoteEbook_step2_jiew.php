@@ -1,6 +1,12 @@
-
+<style type="text/css">
+	.window{width: 100%;}
+</style>
+<div class="panel panel-default" ng-controller="step2" id="step2ID">
 	<div class="panel-heading">
-		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"><span class="badge">2</span> &nbsp;Set Up Your Landing Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small class="m-l-sm"><i aria-hidden="true" class="fa fa-file-o"></i> 1 of 2 Pages Configured</small></a></h4>
+		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+		<span class="badge" ng-show="!step2Done">2</span>
+		<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done""></i>
+		&nbsp;Set Up Your Landing Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small class="m-l-sm"><i aria-hidden="true" class="fa fa-file-o"></i> {{pageProgress}}</small></a></h4>
 	</div>
 	<div class="panel-collapse collapse" id="collapseTwo">
 		<div class="panel-body">
@@ -9,119 +15,144 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="tabs-container">
-<!DOCTYPE html>
-<!--[if IE 8 ]> <html lang="en-US"  class="ie8"> <![endif]-->
-<!--[if IE 9 ]> <html lang="en-US"  class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en-US">
-<!--<![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta content="IE=edge" http-equiv="X-UA-Compatible">
-	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<meta content="MindFireInc" name="author">
-	<meta content="marketing automation case study, digital marketing campaign case studies, marketing automation ebook" name="keywords">
-	<meta content="As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!" name="description">
-	<meta content="Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform" property="og:title">
-	<meta content="MindFire Studio" property="og:site_name">
-	<meta content="[[absoluteUrl]]" property="og:url">
-	<meta content="As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!" property="og:description">
-	<meta content="https://s3-us-west-1.amazonaws.com/mfimarketing/images/Screen+Shot+2017-04-20+at+9.42.04+AM.png" property="og:image">
-	<meta content="summary_large_image" name="twitter:card">
-	<meta content="@mindfireinc" name="twitter:site">
-	<meta content="@RaminZamani" name="twitter:creator">
-	<meta content="Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform" name="twitter:title">
-	<meta content="As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!" name="twitter:description">
-	<meta content="https://s3-us-west-1.amazonaws.com/mfimarketing/images/Screen+Shot+2017-04-20+at+9.42.04+AM.png" name="twitter:image:src">
-	<title>Marketing Automation Case Study: Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform - MindFire Studio</title>
-	<link href="http://www.mindfireinc.com/static/styles/fa/css/font-awesome.css" rel="stylesheet" type="text/css">
-	<link href="http://www.mindfireinc.com/static/styles/bootstrap-cosmo.css" rel="stylesheet" type="text/css">
-	<link href="http://www.mindfireinc.com/static/styles/app.css" rel="stylesheet" type="text/css">
-	<style>
-	   body {
-	     margin-bottom: 120px;
-	   }
-
-	   .footer {
-	     position: absolute;
-	     bottom: 0;
-       left: 0;
-       right: 0;
-       min-height: 60px;
-	     background-color: #333333;
-	     padding-top: 20px;
-	     padding-bottom: 20px;
-	     margin-top: 10px;
-	   }
-	</style>
-	<script async defer src="https://apis.google.com/js/platform.js">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/jquery.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/angular.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/bootstrap.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/ui-bootstrap-tpls.js" type="text/javascript">
-	</script>
-	<script src="http://www.mindfireinc.com/static/scripts/angular-social-links.js" type="text/javascript">
-	</script>
-</head>
-<body>
-	<div id="topbar">
-		<div class="container">
-			<p class="pull-right">Contact: (877) 560-3473</p>
-		</div>
-	</div>
-	<div class="clearfix"></div><!-- Static navbar -->
-	<div class="navbar navbar-default navbar-static-top" id="navbar" role="navigation">
-		<div class="container">
-			<a class="navbar-brand" href="/"><img src="http://www.mindfireinc.com/static/images/mindfire_studio_logo.png" width="200px"></a>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<h1><span class="label label-warning pull-right" style="font-size: .4em">Free eBook</span> <div class="hover"><textarea class="summernote" id="summernote" name="LANDINGPAGE-TOP-TEXT">Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform</textarea></div></h1><img alt="Silicon Publishing Exceeds Expectations at Dscoop Phoenix using MindFire Marketing Automation Platform" class="img-responsive" src="https://s3-us-west-1.amazonaws.com/mfimarketing/images/Screen+Shot+2017-04-20+at+9.42.04+AM.png"><br>
-				<p><div class="hover"><textarea class="summernote" id="summernote" name="LANDINGPAGE-BODY-TEXT">As a first-time exhibitor in the Ruby Pavilion at Dscoop Phoenix, Silicon Publishing hit a home run in its first at-bat. Download the Case Study now to learn how they did it!</textarea></div></p>
-			</div>
-			<div class="col-md-4">
-				<br>
-				<div class="well">
-					<form action="/send?a=download" id="rzForm" method="post" name="rzForm" novalidate="">
-						<fieldset>
-							<p class="lead">Download your eBook:</p>
-							<div class="form-group">
-								<label>First Name <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="firstname" required="" type="text" value=""> 
-							</div>
-							<div class="form-group">
-								<label>Last Name <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="lastname" required="" type="text" value=""> 
-							</div>
-							<div class="form-group">
-								<label>Business Email Address <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="email" required="" type="text" value=""> 
-							</div>
-							<div class="form-group">
-								<label>Company <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="company" required="" type="text"> 
-							</div>
-							<div class="form-group">
-								<label>Phone <span style="color:red;">&#42;</span></label> <input class="form-control input-sm" name="phone" required="" type="text" value="">
-							</div>
-							
-							
-							
-							<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button>
-							<div>
-								<p class="rz-required-note" style="text-align: right;"><i>* Indicates a required field.<br>
-								Answer all required fields to activate the button.</i></p>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</div>
-		</div>
-</div>
-</body>
-</html>								
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a data-toggle="tab" href="#tab-1"><i aria-hidden="true" class="fa fa-file-text-o" style="color:green"></i> Welcome Page</a>
+									</li>
+									<li class="">
+										<a data-toggle="tab" href="#tab-2"><i aria-hidden="true" class="fa fa-file-text-o" style="color:blue"></i> Thank-You Page</a>
+									</li>
+									<li class="">
+										<a data-toggle="tab" href="#tab-3"><i aria-hidden="true" class="fa fa-cogs"></i> <strong>Landing Page Settings</strong></a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab-1">
+										<div class="mail-box-header">
+											<!--<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Preview</a>-->
+											<div class="pull-right tooltip-demo">
+												<a ng-model="file" ngf-select="upload2Pages($file,'LANDINGPAGE-HERO-IMAGE')" href="" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this page"><span ng-show="state['LANDINGPAGE-HERO-IMAGE'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['LANDINGPAGE-HERO-IMAGE'] != 'Uploading'"></i> Upload image</a>
+												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
+												<button class="btn btn-primary" ng-click="Save('Welcome')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
+											</div>
+											<div class="col-xs-6" style="padding-left: 0px;padding-right: 0px;">
+												<div class="col-xs-6">
+													<label>Template</label>
+													<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
+													<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
+													</select>
+												</div>
+												<div class="col-xs-6">
+													<label>Form</label>
+													<!-- <select ng-model="campaign['LANDINGPAGE-FORM']" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
+														<option ng-repeat="x in listForm" value="{{x.formHTML}}">{{x.formName}}</option>
+													</select> -->
+													<select ng-model="campaign['LANDINGPAGE-FORM']" ng-options="x.formHTML as x.formName for x in listForm" style="width: 100%;height: 30px;">
+													</select>
+												</div>
+											</div>
+											<br><br>
+										</div>
+										<div class="ibox-content">
+											<div class="window">
+												<div class="titlebar">
+													<div class="buttons">
+														<div class="close"></div>
+														<div class="minimize"></div>
+														<div class="zoom"></div>
+													</div><small>eBook Landing Page</small> <!-- window title -->
+												</div>
+												<div class="content">
+													<div class="template_preview">
+														<div id="viewWelcome"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row"></div>
+									</div>
+									<div class="tab-pane" id="tab-2">
+										<div class="mail-box-header">
+											<!--<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Preview</a>-->
+											<div class="pull-right tooltip-demo">
+												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
+												<button class="btn btn-primary" ng-click="Save('ThankYou')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
+											</div>
+											<div class="col-xs-4">
+												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" style="width: 100%;height: 30px;">
+												<option ng-repeat="x in templatesThankYou | filter:{subdir:'thankyou'}" value="{{x.content}}">{{x.title}}</option>
+												</select>
+											</div>
+											<br><br>
+										</div>
+										<div class="ibox-content">
+											<div class="window">
+												<div class="titlebar">
+													<div class="buttons">
+														<div class="close"></div>
+														<div class="minimize"></div>
+														<div class="zoom"></div>
+													</div><small>eBook Landing Page</small> <!-- window title -->
+												</div>
+												<div class="content">
+													<div class="template_preview">
+														<div id="viewThankYou"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row"></div>
+									</div>
+									<div class="tab-pane" id="tab-3">
+										<div class="panel-body">
+											<div class="ibox float-e-margins">
+												<div class="ibox-content">
+													<form action="" class="form-horizontal" method="post">
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Welcome Page URL</label>
+															<div class="col-sm-10">
+																<p><a href="http://www.google.com" id="copytext">http://a-generic-domain-we-buy.com/hash/welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="http://www.google.com" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Thank-You Page URL</label>
+															<div class="col-sm-10">
+																<p><a href="http://www.google.com" id="copytext">http://a-generic-domain-we-buy.com/hash/thank-you.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="http://www.google.com" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Landing Page Domain</label>
+															<div class="col-xs-3">
+																<select class="chosen-select col-xs-4" id="domain" name="domain" tabindex="2">
+																	<option data-show=".Pick" value="Pick">
+																		Pick a domain ...
+																	</option>
+																	<option selected value="d1">
+																		a-generic-domain-we-buy.com
+																	</option>
+																	<option value="d2">
+																		another-generic-domain-we-buy.com
+																	</option>
+																	<option value="d3">
+																		A-domain-they-have-purchased.com
+																	</option>
+																</select>
+																<p></p>
+																<p><a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a></p>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="col-sm-2 control-label">Meta Title</label>
+															<div class="col-sm-10">
+																<input class="form-control" name="URL-eBOOK-NAME" placeholder="Crime and Punishment" type="text" value="{{URL-eBOOK-NAME}}"><span class="help-block m-b-none">Enter the name of your eBook. This will appear on your landing page and other key areas.</span>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -129,3 +160,38 @@
 			</div>
 		</div>
 	</div>
+</div>
+<script>
+	myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload) {
+		$scope.upload2Pages = function (file,field) {
+			$scope.state[field] = 'Uploading';
+			var uploadFileName = "IMG-" + uuidv4();
+			//$scope.editor.summernote('insertNode', imgNode);
+			Upload.upload({
+				url: 'upload.php',
+				method: 'POST',
+				file: file,
+				data: {
+					file: file,
+					's3': 'true',
+					'fileName': uploadFileName,
+					'acctID': 'accountID',
+					'progID': 'programID',
+				}
+			}).then(function(resp) {
+				console.log('Success ' + resp.config.data.file.name + 'uploaded');
+				console.log(resp.data);
+				var imgHTML = "<img src='"+resp.data.imgSrc+"' border='0' style='display:block'>";
+				//$scope['editor1'].summernote('code',imgHTML);
+				$scope.campaign[field] = imgHTML;
+				$scope.state[field] = 'Finish';
+			}, function(resp) {
+				console.log('Error status: ' + resp.status);
+				$scope.state[field] = 'Error';
+			}, function(evt) {
+				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+			});
+		};
+	}]);
+</script>

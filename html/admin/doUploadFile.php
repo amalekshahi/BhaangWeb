@@ -17,6 +17,14 @@ require_once 'commonUtil.php';
 	if(!empty($_FILES['file']['name'])){
         $uploadFilename = $_FILES['file']['name'];
         $ext = pathinfo($uploadFilename, PATHINFO_EXTENSION);
+
+		if ($ext != 'csv') {
+			$message = "Please upload csv file.";
+			echo json_encode( array('success'=>false, 'message' => $message));
+		} else {
+
+		}
+
         $meta = $_POST;
         $imgSrc = "";
         $sourceFile = $_FILES['file']['tmp_name'];
@@ -83,7 +91,7 @@ require_once 'commonUtil.php';
 				$line2 .= $fieldOption."</select></td>";	
 			}
 			$headerdiv = "
-			<table id=\"headertable\" class=\"table table-striped table-bordered \" >		
+			<table id=\"headertable\" class=\"table table-striped table-bordered \" width=\"95%\">		
 
 				<thead><tr>".$line1."</tr></thead>
 				<tbody><tr>".$line2."</tr></tbody>
