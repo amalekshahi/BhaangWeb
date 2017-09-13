@@ -4,7 +4,7 @@
     			<div class="pull-right tooltip-demo">
     			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveForm();"><i class="fa fa-floppy-o" ng-show="state['Save'] != 'Saving'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> Save Form</button>
     			</div>			
-    		    <h3>Form Template: <select id="selectForm" ng-model="selectedForm" ng-change="SelectChanged(this.selectedForm)" ng-cloak>
+    		    <h3>Form Template: <select id="selectForm" ng-model="defID" ng-change="SelectChanged('{{defID}}')" ng-cloak>
 					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
 				</select>
 				</h3>

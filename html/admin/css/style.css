@@ -3591,6 +3591,7 @@ video {
 }
 /* MODAL */
 .modal-content {
+  width: 500px;
   background-clip: padding-box;
   background-color: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0);

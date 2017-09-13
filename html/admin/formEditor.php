@@ -258,10 +258,11 @@ myApp.controller('myCtrl',function($scope,$http) {
             };
 
 			$scope.SelectChanged = function(defFrmID) { //
-				$scope.defID = defFrmID; 
-				$scope.LoadDefault(defFrmID);	//send DefID to reload Available field
+				//$scope.defID = defFrmID; 
+				$scope.LoadDefault($scope.defID);	//send DefID to reload Available field
+//$scope.LoadDefault(defFrmID);	//send DefID to reload Available field
 				//$('.alerttest').html(" formtype = "+ftype);
-            };			
+            };								
 			$scope.Reset = function() {                  
 
             };			
@@ -468,8 +469,9 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
             };
 
 			$scope.SelectChanged = function(defFrmID) { //
-				$scope.defID = defFrmID; 
-				$scope.LoadNewPageDefault(defFrmID);	//send DefID to reload Available field
+				//$scope.defID = defFrmID; 
+//				$scope.LoadNewPageDefault(defFrmID);	//send DefID to reload Available field
+				$scope.LoadNewPageDefault($scope.defID);	//send DefID to reload Available field
 				//$('.alerttest').html(" formtype = "+ftype);
             };			
 			$scope.Reset = function() {                  

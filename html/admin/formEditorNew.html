@@ -4,7 +4,7 @@
     			<div class="pull-right tooltip-demo">
     			    <a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveNewForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
     			</div>			
-    		    <h3>Form Template: <select id="selectForm" ng-model="selectedForm" ng-change="SelectChanged(this.selectedForm)" ng-cloak>
+    		    <h3>Form Template: <select id="selectForm" ng-model="defID" ng-change="SelectChanged({{defID}})" ng-cloak>
 					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
 				</select>
 				</h3>
@@ -42,7 +42,7 @@
 														<input type="hidden" id="{{d.fieldID}}FieldName" value="{{d.fieldName}}">
 														<input type="hidden" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}">
 														<p>Label: <input type="text" id="{{d.fieldID}}Label" value="{{d.label}}"></p>
-														<p>Required?: <select id="{{d.fieldID}}Require" ng-model="d.required"><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p>Required?: <select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
 														<p>Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill"><option value="Yes">Yes<option value="No" selected>No</select></p>
 													</div>
 													<div class="modal-footer">
@@ -102,8 +102,8 @@
 														<input type="text" id="{{s.fieldID}}Req" value="{{s.required}}" style="display:none;">
 														<input type="text" id="{{s.fieldID}}Prepop" value="{{s.prepopulated}}" style="display:none;">
 														<p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}"></p>
-														<p>Required?: <select id="{{s.fieldID}}Require"><option value="Yes">Yes<option value="No" >No</select></p>
-														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"><option value="Yes">Yes<option value="No">No</select></p>
+														<p>Required?: <select id="{{s.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"><option value="Yes">Yes<option value="No"  selected>No</select></p>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-primary" data-dismiss="modal"  onclick="reloadformfield('new')">Close</button>

@@ -132,7 +132,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 							  $scope.audience  = angular.copy($rootScope.master);
 							  indx = $scope.audience.items.getIndexByValue('contactID',cid);						  
 							  if(cid == 'new' || indx == -1){
-								  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":"","LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
+								  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":"","LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator,"lastEditDate":""});
 							  }else{					 
 								 $scope.item = $scope.audience.items[indx];
 								 FArr = $scope.audience.items[indx]['LIST-ARRAY']; 
@@ -205,6 +205,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 				 var LDef = $('#LISTDEFINITION').val();
 				 var LHash= $('#LISTIDHASH').val();
 				 var LDetail = $('#contactDetail').val();	 
+
 				 
 				 var table = document.getElementById('filterTable');				
 				 var rowLength = table.rows.length;
@@ -217,12 +218,12 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 									$rootScope.master.items = [];
 							 } 
 							 $scope.audience  = angular.copy($rootScope.master);						 
-							 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
+							 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator,"lastEditDate":getCurrentDateTime()});
 							$scope.SaveDB(contactID); 
 					},function(errResponse){
 							if (errResponse.status == 404) {
 								$scope.audience = {items:[]};
-								$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator});
+								$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator,"lastEditDate":getCurrentDateTime()});
 								$scope.SaveDB(contactID); 
 							}
 					});
@@ -275,6 +276,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-ARRAY',json.filterArray);
 											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('LIST-OPERATOR',json.CriteriaJoinOperator);
 											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('JOINOPERATOR',JOperator);
+											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('lastEditDate',getCurrentDateTime());
 									}
 									//$('#filterDiv').hide();
 									CountClick(page); 
