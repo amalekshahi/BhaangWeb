@@ -9,7 +9,7 @@
 ?>
 
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 <head>
     <?php include "header.php"; ?>
 </head>	
