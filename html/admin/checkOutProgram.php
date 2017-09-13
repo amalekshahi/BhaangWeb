@@ -40,7 +40,8 @@ function checkoutProgram($TEST, $userTicket, $ACCOUNTID, $ProgramID){
 		foreach ($MamlArray as $MamlChr) {
 			$Maml .= chr($MamlChr);
 		}
-		$file = ROOT_DIR."checkInMAML/".$ACCOUNTID."_".$ProgramID.".maml";
+		//$file = ROOT_DIR."checkInMAML/".$ACCOUNTID."_".$ProgramID.".maml";
+		$file = "checkInMAML/".$ACCOUNTID."_".$ProgramID.".maml";
 		file_put_contents( $file, $Maml );			
 		$success = true;
 	} else {

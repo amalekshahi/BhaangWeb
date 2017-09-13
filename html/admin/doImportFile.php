@@ -9,7 +9,8 @@ $headerValue = $_GET['headerValue'];
 $importName = $_GET['importName']; 	
 $fileName = $_GET['uploadFileName'];
 	
-$file = IMPORTPATH.'importFile/'.$fileName;
+//$file = IMPORTPATH.'importFile/'.$fileName;
+$file = 'import/importFile/'.$fileName;
 
 $delimiter = ",";
 

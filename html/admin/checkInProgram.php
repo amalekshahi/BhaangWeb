@@ -21,7 +21,8 @@ if ($TEST == 't') {
 
 function checkinProgram($TEST, $userTicket, $ACCOUNTID, $ProgramID, $data){
 
-	$file = ROOT_DIR."checkInMAML/".$ACCOUNTID."_".$ProgramID.".maml";
+	//$file = ROOT_DIR."checkInMAML/".$ACCOUNTID."_".$ProgramID.".maml";
+	$file = "checkInMAML/".$ACCOUNTID."_".$ProgramID.".maml";
 	$data = file_get_contents($file, true);
 
 

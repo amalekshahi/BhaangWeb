@@ -38,7 +38,8 @@ require_once 'commonUtil.php';
 
 			$t = date("mdY-His",time());
 			$tmpName = $t.'_'.$uploadFilename;
-			$filename = IMPORTPATH.'importFile/'.$tmpName;
+			//$filename = IMPORTPATH.'importFile/'.$tmpName;
+			$filename = 'import/importFile/'.$tmpName;
 
 			if (!copy($sourceFile, $filename)) {
 				$message =  "failed to copy $sourceFile to $filename...<br>";

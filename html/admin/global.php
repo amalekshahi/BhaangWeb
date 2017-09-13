@@ -287,7 +287,8 @@ function GetContactWithFields($TEST, $userTicket, $filter, $ACCOUNTID, $FieldNam
 
 		$t = date("mdY-His",time());
 		$tmpName = $t.'.csv';
-		$filename = IMPORTPATH.'contactFile/'.$tmpName;
+		//$filename = IMPORTPATH.'contactFile/'.$tmpName;
+		$filename = 'import/contactFile/'.$tmpName;
 		$Contact = trim($Contact);
 		file_put_contents( $filename, $Contact);			
 		$Contactarray = array_map("str_getcsv", explode("\n", $Contact));
