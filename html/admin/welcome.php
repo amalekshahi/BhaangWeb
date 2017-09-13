@@ -3,17 +3,16 @@
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?>
-	<!DOCTYPE html>
+?><!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
 		<?php include "header.php"; ?>
-	
 	</head>
 
 
 	<body class="">
+        <?php include "afterBody.php"; ?>
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<div w3-include-html="leftWrapper.php"></div>
@@ -95,13 +94,14 @@
 												</thead>
 												<tr ng-repeat="item in campaignlist.campaigns | orderBy:'-lastEditDate' | filter:searchText | limitTo:3" ng-cloak ng-click="goToLink(item)">
 													<td class="project-status">
-														<span class="badge badge-published"><span class="badge badge-published"><i class="fa fa-rss"></i> {{item.status=='Edit' ? 'LIVE' : 'DRAFT'}}</span>
+														<span class="badge badge-published"><span class="badge badge-published"><i class="fa fa-rss"></i> {{item.status=='Edit' ? 'LIVE' : 'DRAFT'}}</span></span>
 													</td>
 													<td class="project-title">
 														<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
 														<br/>
-														<!-- Roll back to this <span am-time-ago="message.time"></span> -- once timestamp issue is resolved -->
-														<small>Modified {{item.lastEditDate | amUtc | amLocal | amAdd : '12' : 'hours' | amDateFormat:'MMMM Do YYYY, h:mm a'}}</small>
+														<!-- Roll back to this <span am-time-ago="message.time"></span> once timestamp issue is resolved -->
+														<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}</small>
+                                                        <span am-time-ago="item.lastEditDate"></span> 
 													</td>
 
 													<td class="project-reach">

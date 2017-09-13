@@ -1,0 +1,47 @@
+git config --global user.name "paweenwich"
+git config --global user.email johndoe@example.com
+
+git clone https://github.com/coa0329/Bhaang.git
+git pull
+git add --all;git commit -am "kwang";git push origin master
+git push
+
+git push origin master
+
+unset DISPLAY;git add --all;git commit -am "kwang";git push origin master
+
+kdutta@mindfireinc.com
+MindFire2012
+
+git pull origin master
+
+sudo adduser myuser vboxsf
+
+
+sudo usermod apache --append --groups atrium
+sudo usermod atrium --append --groups apache
+
+What each commands do:
+
+1.git checkout . - Removes Unstaged Tracked files ONLY [Type 2]
+
+
+2.git clean -f - Removes Unstaged UnTracked files ONLY [Type 3]
+
+
+3.git reset --hard - Removes Staged Tracked and UnStaged Tracked files ONLY[Type 1, Type 2]
+
+
+4.git stash -u - Removes all changes [Type 1, Type 2, Type 3]
+
+
+Conclusion:
+
+It's clear that we can use either 
+(1) combination of `git clean -f` and `git reset --hard` 
+
+
+OR
+(2) `git stash -u`
+
+KKKK
