@@ -706,6 +706,129 @@ function echoCallbackString($callback, $loadmore='', $authToken = '', $mpArray){
     )), ')';
 }
 
+function UpdateMAML($xml,$doc)
+{
+    $xpath = new DOMXpath($xml);
+    // scan for at most 10 email
+    $ret = array();
+    $contactRet = array();
+    for($i=1;$i<10;$i++){
+        // check if $doc is define 
+        $scheduleDateTimeName = 'EMAIL'.$i.'-SCHEDULE1-DATETIME';
+        $timeZoneName = 'EMAIL'.$i.'-SCHEDULE1-TIMEZONE';
+        if(property_exists($doc,$scheduleDateTimeName)){
+            // check if not default value
+            $DateTimeValue = $doc->{$scheduleDateTimeName};
+            $TimeZoneValue = $doc->{$timeZoneName};
+            if($DateTimeValue!="" && $DateTimeValue!="01/01/2050 08:00:00 AM"){
+                $subjectText = "Email".$i."Schedule";
+                //$ret[] = $i;
+                $node = $xpath->query("//Schedule/Subject[starts-with(text(),'".$subjectText."')]")->item(0);
+                $scheduleNode  = $node->parentNode;
+                $startNode = $scheduleNode->getElementsByTagName("Start")->item(0);
+                $startNode->setAttribute("DateTime",$DateTimeValue);
+                $scheduleNode->setAttribute("TimeZone",$TimeZoneValue);
+                $ret[] = $xml->saveHTML($scheduleNode);
+            }
+        }
+        
+        //Find Contact nodes
+        $contactText = "Email".$i."Contacts";
+        $nodeList = $xpath->query("//CampaignElement[@Name='".$contactText."']");
+        $CriteriaJoinOperatorValue = $doc->{'EMAIL-FILTER-JOINOPERATOR'};
+        $CriteriaXML = $doc->{'EMAIL-FILTER-CRITERIAROW'};
+        if ($nodeList->length > 0) {
+            $node = $nodeList->item(0);
+            $filterNode = $node->getElementsByTagName("Filter")->item(0);
+            
+            /* delete criteria node */
+            $deleteList = array();
+            $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+            foreach ($criteriaNodes as $n) {
+                $deleteList[] = $n;
+            }
+            foreach ($deleteList as $n) {
+                $filterNode->removeChild($n);
+            }
+            
+            //Set attribute
+            $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+            
+            //add criteria
+            $f = $xml->createDocumentFragment();
+            $f->appendXML($CriteriaXML);
+            $filterNode->appendChild($f);
+            
+            $contactRet[] = $xml->saveHTML($filterNode);
+        }
+        
+        //OPEN-MY-EMAIL "OpenAlertLeadTrigger
+        //$OpenAlertLeadTrigger = $xpath->query("//CampaignElement[@Name='OpenAlertLeadTrigger']")->item(0);
+    }
+    $OpenAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='OpenAlertLeadTrigger']","State",$doc->{'OPEN-MY-EMAIL'});
+    $ClickAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='ClickAlertLeadTrigger']","State",$doc->{'VISIT-MY-BLOCK'});
+    
+    return array(
+        "ContactUpdate" => $contactRet,
+        "Maml"=> $xml->saveHTML(),
+        "EmailUpdate" => $ret,
+        "OpenAlertLeadTrigger" => $xml->saveHTML($OpenAlertLeadTrigger),
+        "ClickAlertLeadTrigger" => $xml->saveHTML($ClickAlertLeadTrigger),
+    );
+}
+
+function AddNewCampaign($dbName,$doc)
+{
+    //Check if we have this ID before
+    $campaignListDoc = couchDB_Get("/$dbName/campaignlist",true);
+    for($i=0;$i<count($campaignListDoc['campaigns']);$i++){
+        $campaignID =  $campaignListDoc['campaigns'][$i]['campaignID'];
+        if($campaignID == $doc->campaignID){
+            return array(
+                    'success'=>false,
+                    'message'=>"duplicate campaign ID found in campaignList  ".$campaignID ,
+            );
+        }
+    }
+    // Save Document
+    $saveRet = couchDB_Save("/$dbName/".$doc->campaignID,$doc);
+    if(!empty($saveRet->error)){
+        return array(
+                'success'=>false,
+                'message'=>"duplicate campaign ID found in document ".$doc->campaignID ,
+        );
+    }
+    // Add and Save campaignList
+    $dateTimeNow = GetStringTimeStamp();
+    $campaignListDoc['campaigns'][] = array(
+        "campaignID" => $doc->campaignID,
+        "accountID"  => $doc->accountID,
+        "campaignName"  =>  $doc->campaignName,
+        "createDate"  => $dateTimeNow,
+        "lastEditDate"  => $dateTimeNow,
+        "status"  => "Edit",
+        "campaignType"  => $doc->campaignType,
+    );
+    $saveCampaignListRet = couchDB_Save("/$dbName/campaignlist",$campaignListDoc);
+    return array(
+        'success'=>true,
+        "saveRet"=>$saveRet,
+        "saveCampaignListRet"=>$saveCampaignListRet,
+    );
+}
+
+function DomSetAttribute($xpath,$path,$attr,$value)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $node->setAttribute($attr,$value);
+        return $node;
+    }
+    return null;
+}
+
+
 function wPrint($data)
 {
     echo nl2br($data);
@@ -721,5 +844,9 @@ function dump_r($data)
     print_r($data);echo "<br>";
 }
 
+function GetStringTimeStamp()
+{
+    return gmdate('Y-m-d\TH:i:s\Z', time()); 
+}
 
 ?>
