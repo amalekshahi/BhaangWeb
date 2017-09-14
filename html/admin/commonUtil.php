@@ -4,6 +4,7 @@ require_once 'global.php';
 
 use Aws\S3\S3Client;
 
+$configFile = "conf/davinci.json";
 $URLRenderFormat = "##URL SRC=\"{{url}}\"##";
 $MISSINGRenderFormat = "MISSING-{{value}}";
 $AWSFormatURL = "https://bkktest.s3.amazonaws.com/{{fileName}}";
@@ -13,6 +14,19 @@ $LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
 $databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
 //$databaseEndpoint = "http://localhost:5984/couchdb"
 
+$davinciConf = davinciSetConfig();
+
+function davinciSetConfig()
+{
+    global $configFile;
+    global $databaseEndpoint;
+    $data = file_get_contents($configFile);    
+    if(!empty($data)){
+        $doc = json_decode($data,false);
+        $databaseEndpoint = $doc->databaseEndPoint;
+    }
+    return $data;
+}
 function couchDB_Get($path,$asArray = false)
 {
     global $databaseEndpoint;
