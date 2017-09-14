@@ -44,11 +44,11 @@
 												</div>
 												<div class="col-xs-6">
 													<label>Form</label>
-													<!-- <select ng-model="campaign['LANDINGPAGE-FORM']" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
+													<select ng-model="campaign['LANDINGPAGE-FORM']" style="width: 100%;height: 30px;">
 														<option ng-repeat="x in listForm" value="{{x.formHTML}}">{{x.formName}}</option>
-													</select> -->
-													<select ng-model="campaign['LANDINGPAGE-FORM']" ng-options="x.formHTML as x.formName for x in listForm" style="width: 100%;height: 30px;">
 													</select>
+													<!-- <select ng-model="campaign['LANDINGPAGE-FORM']" ng-options="x.formHTML as x.formName for x in listForm" style="width: 100%;height: 30px;">
+													</select> -->
 												</div>
 											</div>
 											<br><br>
@@ -122,7 +122,7 @@
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Landing Page Domain</label>
-															<div class="col-xs-3">
+															<div class="col-xs-4">
 																<select class="chosen-select col-xs-4" id="domain" name="domain" tabindex="2">
 																	<option data-show=".Pick" value="Pick">
 																		Pick a domain ...
@@ -136,9 +136,10 @@
 																	<option value="d3">
 																		A-domain-they-have-purchased.com
 																	</option>
-																</select>
-																<p></p>
-																<p><a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a></p>
+																</select><br>
+																<div style="padding-top: 10px;">
+																<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
+																</div>
 															</div>
 														</div>
 														<div class="form-group">
