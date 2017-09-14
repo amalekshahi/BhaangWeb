@@ -82,7 +82,7 @@
 																	<div class="hr-line-dashed"></div>
 																	<label class="control-label">Send a Test Message</label>
 																	<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;"></div>
-																	<div style="width:100%; overflow:hidden;">
+																	<div style="width:100%;height:30px;">
                                                                         <div style="width: calc(100% - 25px); float: left;">
 																			<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
 																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
