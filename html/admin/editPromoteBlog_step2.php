@@ -58,73 +58,44 @@
 
 											<div class="row">
 												<div class="col-lg-4">
-													
-														<div class="ibox-content">
-															<form class="form-horizontal">
-																<div class="form-group">
-																	<div class="col-sm-12">
-																		<div>Select who you want this email to come from. Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
-																		<label class="control-label">From</label>
-																		<!-- Dave commented this out and replaced with what is below for special "chosen" formatting.  If I broke something, you can revert back to this and comment mine out
-																		<select ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" style="width: 100%;height: 30px;">
-																		<option ng-repeat="x in senders" value="{{x.email}}">{{x.name}}&nbsp;({{x.email}})</option>
-																		</select>
-																		-->
-																		<div>
-																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" 
-																						style="height: 30px;" 
-																						ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
+													<div class="ibox-content">
+														<form class="form-horizontal">
+															<div class="form-group">
+																<div class="col-sm-12">
+																	<div>Select who you want this email to come from. Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
+																	<label class="control-label">From</label>
+																	<div>
+																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
 																		<p></p>
-																		</div>
-																		<label class="control-label">Template</label>
-																		<!-- Dave commented this out in favor of the chosen treatment below.  If I screwed something up, feel free to comment mine and out and revert.
-																		<select ng-model="campaign.templateEmail1" ng-change="SelectChanged('viewEmail1','templateEmail1')" style="width: 100%;height: 30px;">
-																			<option ng-repeat="x in templatesAs1" value="{{x.content}}">{{x.title}}</option>
-																		</select>-->
-
-																		<div>
-																		<select chosen placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail1" ng-change="SelectChanged('viewEmail1','templateEmail1')" 
-																						style="width: 100%;height: 30px;" 
-																						ng-options="x.content as x.title for x in templatesAs1">
+																	</div>
+																	<label class="control-label">Template</label>
+																	<div>
+																		<select chosen placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail1" ng-change="SelectChanged('viewEmail1','templateEmail1')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs1">
 																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
-																			</select>
-																			<p></p>
-																		</div>
-																			<label class="control-label">Hero Image</label>
-																			<div>
-																			<a ng-model="file" ngf-select="upload($file,'1')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload1'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload1'] != 'Uploading'"></i> Upload new image ...</a>																				
-																			</div>
-																		<div class="hr-line-dashed"></div>
-																		<label class="control-label">Send a Test Message</label>
-																		
-																		<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;">
-																		<!--
-																			<select ng-model="sendTestContactSelected" style="height: 30px;">
-																				<option ng-repeat="x in sendTestContacts| orderBy:'1'" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
-																			</select>
-																		-->
-																			
-																		</div>
-																		<div>
-																			<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
-																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
-																			</select>
-																			<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
-																		</div>
-																
-																			<label class="control-label"></label>
-																			<a ng-click="SendTest(1)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest1'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest1'] != 'Sending'"></i> Send</a>
-																		</div>
-																<!-- Is this old?
-																	<input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> 
-																	<input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}">																
-																	<input name="programNameHash" type="hidden" value="{{programNameHash}}">
-																-->
-															</form>
-														</div>
-													
-												</div>
-												</div>
+																		</select>
+																		<p></p>
+																	</div>
+																	<label class="control-label">Hero Image</label>
+																	<div>
+																		<a ng-model="file" ngf-select="upload($file,'1')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload1'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload1'] != 'Uploading'"></i> Upload new image ...</a>																				
+																	</div>
+																	<div class="hr-line-dashed"></div>
+																	<label class="control-label">Send a Test Message</label>
+																	<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;"></div>
+																	<div>
+																		<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
+																		<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
+																		</select>
+																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
+																	</div>
+															
+																	<label class="control-label"></label>
+																	<a ng-click="SendTest(1)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest1'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest1'] != 'Sending'"></i> Send</a>
+																</div>
+															</div> <!-- form-group -->
+														</form>
+													</div> <!-- ibox-content -->
+												</div> <!-- col-lg-4 -->
 												<div class="col-lg-8">
 													<div class="ibox-content">
 														<div class="window">
@@ -166,56 +137,43 @@
 											<div class="row" ng-show="openEmail2">
 												<div class="col-lg-4">
 													<div class="ibox-content">
-														<div class="ibox-content">
-															<form action="" class="form-horizontal" method="post" onsubmit="return postForm()">
-																<div class="form-group">
-																	<div class="col-sm-12">
-																		<div>Select who you want this email to from from, then pick a template to format your email.  Then, roll over the various areas of your email to see what you can edit.</div>
-																		<label class="control-label">From</label>
-																		<select ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender2')" style="width: 100%;height: 30px;">
-																		<option ng-repeat="x in senders" value="{{x.email}}">{{x.name}}&nbsp;({{x.email}})</option>
+														<form class="form-horizontal">
+															<div class="form-group">
+																<div class="col-sm-12">
+																	<div>Select who you want this email to come from. Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
+																	<label class="control-label">From</label>
+																	<div>
+																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender2')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
+																		<p></p>
+																	</div>
+																	<label class="control-label">Template</label>
+																	<div>
+																		<select chosen placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail2" ng-change="SelectChanged('viewEmail2','templateEmail2')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs2">
+																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
 																		</select>
+																		<p></p>
 																	</div>
-																</div>
-																<div class="form-group">
-																	<div class="col-sm-12">
-																		<label class="control-label">Template</label>
-																		<select ng-model="campaign.templateEmail2" ng-change="SelectChanged('viewEmail2','templateEmail2')" style="width: 100%;height: 30px;">
-																		<option ng-repeat="x in templatesAs2" value="{{x.content}}">{{x.title}}</option>
+																	<label class="control-label">Hero Image</label>
+																	<div>
+																		<a ng-model="file" ngf-select="upload($file,'2')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload2'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload2'] != 'Uploading'"></i> Upload new image ...</a>																				
+																	</div>
+																	<div class="hr-line-dashed"></div>
+																	<label class="control-label">Send a Test Message</label>
+																	<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;"></div>
+																	<div>
+																		<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
+																		<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
 																		</select>
+																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
 																	</div>
-																	<div class="col-sm-12">
-																		<div class="tooltip-demo">
-																			<label class="control-label"></label>
-																			<a ng-model="file" ngf-select="upload($file,'2')" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="Replace this email's Hero Image"><span ng-show="state['Upload2'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload2'] != 'Uploading'"></i> Upload image to email</a>
-																		</div>
-																	</div>
-																	<div class="col-sm-12">
-																		<div>
-																			<p></p>
-																		</div>
-																		<label class="control-label">Send Test To</label>
-																	</div>
-																	<div class="col-sm-12">
-																		<a class="btn btn-primary" ng-click="OpenRegister()" style="padding: 5px; vertical-align: middle; float: right;height:30px"><i class="fa fa-plus-square-o fa-lg"></i></a>
-																		<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;">
-																			<select ng-model="sendTestContactSelected" style="height: 30px;">
-                                                                        <option ng-repeat="x in sendTestContacts| orderBy:'1'" value="{{x[0]}}">{{x[1]}} {{x[2]}} ({{x[3]}})</option>
-                                                                        </select>
-																		</div>
-																	</div>
-																	<div class="col-sm-12">
-																		<div class="tooltip-demo">
-																			<label class="control-label"></label>
-																			<a ng-click="SendTest(2)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email"><span ng-show="state['SendTest2'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest2'] != 'Sending'"></i> Send me a test email</a>
-																		</div>
-																	</div>
+															
+																	<label class="control-label"></label>
+																	<a ng-click="SendTest(2)" href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest2'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest2'] != 'Sending'"></i> Send</a>
 																</div>
-																<div class="hr-line-dashed"></div><input name="URL-PABP-EML1-FROMADDRESS" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMADDRESS}}"> <input name="URL-PABP-EML1-FROMNAME" type="hidden" value="{{STUDIO_ACCOUNTID-STUDIO_PROGRAMID-PABP-EML1-FROMNAME}}">																<input name="programNameHash" type="hidden" value="{{programNameHash}}">
-															</form>
-														</div>
-													</div>
-												</div>
+															</div> <!-- form-group -->
+														</form>
+													</div> <!-- ibox-content -->
+												</div> <!-- col-lg-4 -->
 												<div class="col-lg-8">
 													<div class="ibox-content">
 														<div class="window">

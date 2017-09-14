@@ -20,7 +20,7 @@
 	</div>
 	<style>
 		.chosen-container {
-			width: 400px !important;
+			width: 100% !important;
 		}
 
 		.chosen-container-multi .chosen-choices li.search-field input[type=text] {
@@ -35,7 +35,7 @@
 					<form class="form-horizontal" name="frmStep3">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Choose Your Audience</label>
-							<div class="col-sm-10">
+							<div class="col-sm-5">
 								<div>
 									<!--<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">-->
 									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME'] for s in audience.items" style="width:400px;" ng-change="ArrangeFilter()">

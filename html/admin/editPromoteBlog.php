@@ -314,7 +314,6 @@
 				$scope.Save = function(mode, silence) {
 					$scope.state['Save'] = "Saving";
 					//alert(mode);
-					$("body").css("cursor", "progress");
 					if (mode == 'Email') {
 						$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
 						$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
@@ -339,7 +338,6 @@
 						
 						
 						if ((typeof date1 == 'undefined') || (typeof time1 == 'undefined') || (timezone1 == "")){
-							$("body").css("cursor", "default");
 							swal('Please set schedule for Email1');
 							$scope.state['Save'] = "Save";
 							return;
@@ -348,7 +346,6 @@
 								var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
 								if (checkdate(datetime1, timezone1)) {
 								} else {
-									$("body").css("cursor", "default");
 									swal('Please do not set "PAST" times for Email1');
 									$scope.state['Save'] = "Save";
 									return;
@@ -362,7 +359,6 @@
 							var time2 = $scope.campaign['EMAIL2-SCHEDULE1-TIME'];
 							var timezone2 = $scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'];
 							if ((wait2 == "") || (typeof time2 == 'undefined') || (time2 == '') || (timezone2 == "")){
-								$("body").css("cursor", "default");
 								swal('Please set schedule for Email2');
 								$scope.state['Save'] = "Save";
 								return;
@@ -371,7 +367,6 @@
 								var datetime2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];
 								if (checkdate(datetime2, timezone2)) {
 								} else {
-									$("body").css("cursor", "default");
 									swal('Please do not set "PAST" times for Email2');
 									$scope.state['Save'] = "Save";
 									return;
@@ -385,7 +380,6 @@
 							var time3 = $scope.campaign['EMAIL3-SCHEDULE1-TIME'];
 							var timezone3 = $scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'];
 							if ((wait3 == "") || (typeof time3 == 'undefined') || (time3 == '') || (timezone3 == "")){
-								$("body").css("cursor", "default");
 								swal('Please set schedule for Email3');
 								$scope.state['Save'] = "Save";
 								return;
@@ -394,7 +388,6 @@
 								var datetime3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];
 								if (checkdate(datetime3, timezone3)) {
 								} else {
-									$("body").css("cursor", "default");
 									swal('Please do not set "PAST" times for Email3');
 									$scope.state['Save'] = "Save";
 									return;
@@ -413,6 +406,9 @@
 						$http.get("/couchdb/" + dbName + '/campaignlist' + "?" + new Date().toString()).then(function(response) {
 							$scope.campaignlist = response.data;
 							if (action == "newCampaign") {
+								if (typeof($scope.campaignlist.campaigns)=='undefined') {
+									$scope.campaignlist.campaigns = [];
+								}
 								$scope.campaignlist.campaigns.push({
 									"campaignID": $scope.campaign.campaignID,
 									"accountID": accountID,
@@ -427,7 +423,6 @@
 								$scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
 							}
 							$http.put('/couchdb/' + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
-								$("body").css("cursor", "default");
 								$scope.setDisplay();
 								if (silence == true) {} else {
 									//swal("Save Campaign Successful.", "", "success");
@@ -439,7 +434,7 @@
 							});
 						}, function(errResponse) {
 							// case new account
-							if (errResponse.status == 404) {
+							if (errResponse.status == 404 || errResponse.status == 504) {
 								$scope.campaignlist = {
 									campaigns: []
 								};
@@ -454,7 +449,6 @@
 									"campaignType": $scope.campaign.campaignType
 								});
 								$http.put('/couchdb/' + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
-									$("body").css("cursor", "default");
 									$scope.setDisplay();
 									//swal("Save Campaign Successful.", "", "success");
 									//alert("Save Campaign Successful.");
