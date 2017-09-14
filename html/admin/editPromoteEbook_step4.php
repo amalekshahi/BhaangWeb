@@ -15,13 +15,7 @@
                             </a></h4>
     </div>
 <style>
-    .chosen-container{
-        width: 400px !important;
-    }
-    .chosen-container-multi .chosen-choices li.search-field input[type=text] {
-        padding-top: 0px;
-    }
-	table.schedule td{padding: 0px !important;}
+    table.schedule td{padding: 0px !important;}
 </style>
     <div class="panel-collapse collapse" id="collapseFour">
         <!--<button ng-click="ParseDate()"></button>-->
