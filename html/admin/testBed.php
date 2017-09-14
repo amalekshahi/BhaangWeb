@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+
+require_once 'commonUtil.php';?><!doctype html>
 <html ng-app="myApp">
 <head>
 <link href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css" rel="stylesheet">
@@ -21,7 +23,7 @@
 </head>
 <body>
 <div class="bg-primary">
-  <h1>TestBed 1.0</h1>
+  <h1>TestBed 1.0 <?php echo $databaseEndpoint;?></h1>
 </div>  
 <style>
 .md-tab {
