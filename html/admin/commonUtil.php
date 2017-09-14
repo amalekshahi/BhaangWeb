@@ -11,6 +11,7 @@ $AWSFormatFileName = "/tmp/{{fileName}}";
 $LocalFormatURL = "https://web2xmm.com/admin/images/{{fileName}}";
 $LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
 $databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
+//$databaseEndpoint = "http://localhost:5984/couchdb"
 
 function couchDB_Get($path,$asArray = false)
 {
