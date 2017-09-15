@@ -13,6 +13,7 @@
 	<head>
 		<?php include "header.php"; ?>
 		<script src="js/date.format.js"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 	</head>
 
 	<body class="">
@@ -37,7 +38,7 @@
 				<div class="row border-bottom">
 					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 						<!-- top wrapper -->
-						<div w3-include-html="topWrapper.php"></div>
+                        <?php include 'topWrapper.php'; ?>
 						<!-- / top wrapper -->
 					</nav>
 				</div>
@@ -68,7 +69,7 @@
 											<div class="ibox-tools">
 												<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>
-												<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
+												<a class="btn btn-white btn-bitbucket btn-xs"  ng-click="DuplicateCampaignClick()"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
 
 											</div>
 										</div>
@@ -219,7 +220,11 @@
 		<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 		<!-- Sweet alert -->
-		<script src="css/sweet/sweetalert-dev.js"></script>
+		<!--<script src="css/sweet/sweetalert-dev.js"></script>-->
+        <!-- user version 2 to support modal input -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
 
 		<!-- TouchSpin -->
 		<script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
@@ -362,11 +367,11 @@
 								$scope.setDisplay();
 								if (silence == true) {} else {
 									//swal("Save Campaign Successful.", "", "success");
-									$scope.state['Save'] = 'Save';
 								}
 								// Kwang backup current to master and clear formState
 								$scope.master = angular.copy($scope.campaign);
 								$scope.clearFormState();
+								$scope.state['Save'] = 'Save';
 							});
 						}, function(errResponse) {
 							// case new account
@@ -467,17 +472,6 @@
 					$scope.initListForm();
 					$scope.initSender();
 				};
-				/*$scope.initEmailTemplate = function(){
-					$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign").then(function(response) {
-						$scope.templates  = response.data.templates; 
-						$scope.config = response.data.config; 
-						$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
-						$("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
-						$scope.SelectChanged('viewEmail1','templateEmail1');
-						$scope.sendersChanged('textSender1');
-						startEditable('1');
-					});
-				};*/
 				$scope.initTemplateEmail = function(emlID) {
 					if ($scope['openEmail' + emlID]) {
 						$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + emlID).then(function(response) {
@@ -787,6 +781,44 @@
 					});
 				};
 
+				$scope.DuplicateCampaignClick = function(){
+                    swal({
+                      title: 'What is your new campaign name?',
+                      input: 'text',
+                      //inputPlaceholder: campaignName + " (copy)",
+                      inputValue: $scope.campaign.campaignName + " (copy)",
+                      showCancelButton: true,
+                    }).then($scope.DuplicateCampaignOK);
+                };
+                
+                $scope.DuplicateCampaignOK = function(newCampaignName){
+                    newCampaignName = newCampaignName.trim();
+                    $http.get("backend.php"+"?" + new Date().toString(),
+                        {
+                          method: "POST",
+                          params: {
+                            cmd: "copy",
+                            acctID: accountID,
+                            progID: campaignID,
+                            name: newCampaignName,
+                            mode: "junk",
+                          }  
+                        }
+                    ).then(function(response) {
+                        console.log(response.data);
+                        if(response.data.success == true){
+                            swal({
+                                type: 'success',
+                                html: "Campaign [" + response.data.newCampaignName + "] created",
+                            });
+                        }else{
+                            swal({
+                                type: 'error',
+                                html: "Campaign [" + response.data.newCampaignName + "] copy fail<br>" + response.data.addRet.message,
+                            });
+                        }
+                    });                
+                }
 				$scope.Load();
 			});
 

@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+
+require_once 'commonUtil.php';?><!doctype html>
 <html ng-app="myApp">
 <head>
 <link href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css" rel="stylesheet">
@@ -21,7 +23,7 @@
 </head>
 <body>
 <div class="bg-primary">
-  <h1>TestBed 1.0</h1>
+  <h1>TestBed 1.0 <?php echo $databaseEndpoint;?></h1>
 </div>  
 <style>
 .md-tab {
@@ -40,6 +42,8 @@
                     <md-select ng-model="backend.cmd">
                         <md-option value="publish">publish</md-option>
                         <md-option value="update">update</md-option>
+                        <md-option value="copy">copy</md-option>                        
+                        <md-option value="userinfo">userinfo</md-option>                        
                         <md-option value="test">test</md-option>
                     </md-select>
                 </md-input-container>  
@@ -58,6 +62,10 @@
                 <md-input-container>
                     <label>progID</label>
                     <input ng-model="backend.progID" placeholder="b81fc4f3c0f9a7cd2856dc97c3b42373">
+                </md-input-container">  
+                <md-input-container  ng-show="backend.cmd=='copy'">
+                    <label>name</label>
+                    <input ng-model="backend.name" placeholder="new campaign namw">
                 </md-input-container>  
                 <md-input-container>
                     <button ng-click="backendClick()">submit</button>
@@ -75,7 +83,6 @@
                     <md-select ng-model="getEmailTemplate.blueprint">
                         <md-option value="PromoteBlog">PromoteBlog</md-option>
                         <md-option value="PromoteEbook">PromoteEbook</md-option>
-                        
                     </md-select>
                 </md-input-container>  
                 <md-input-container>
@@ -130,7 +137,7 @@
         };
         $scope.backendClick = function(){
             $scope.backend.data = {};
-            $http.get("backend_kkk.php"+"?" + new Date().toString(),
+            $http.get("backend.php"+"?" + new Date().toString(),
                 {
                   method: "POST",
                   params: {
@@ -138,6 +145,7 @@
                     acctID: $scope.backend.acctID,
                     progID: $scope.backend.progID,
                     mode: $scope.backend.mode,
+                    name: $scope.backend.name,
                   }  
                 }
             ).then(function(response) {
@@ -165,7 +173,7 @@
         };
         $scope.getEmailTemplateClick = function(){
             $scope.getEmailTemplate.data = {};
-            $http.get("getEmailTemplate_kkk.php"+"?" + new Date().toString(),
+            $http.get("getEmailTemplate.php"+"?" + new Date().toString(),
                 {
                   method: "POST",
                   params: {

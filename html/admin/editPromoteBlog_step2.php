@@ -65,7 +65,7 @@
 																	<div>Select who you want this email to come from. Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
 																	<label class="control-label">From</label>
 																	<div>
-																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
+																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" style="height: 30px;width=100%" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
 																		<p></p>
 																	</div>
 																	<label class="control-label">Template</label>
@@ -82,11 +82,13 @@
 																	<div class="hr-line-dashed"></div>
 																	<label class="control-label">Send a Test Message</label>
 																	<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;"></div>
-																	<div>
-																		<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
-																		<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
-																		</select>
-																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
+																	<div style="width:100%;height:30px;">
+                                                                        <div style="width: calc(100% - 25px); float: left;">
+																			<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
+																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
+																			</select>
+                                                                        </div>
+																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a>
 																	</div>
 															
 																	<label class="control-label"></label>
@@ -160,11 +162,13 @@
 																	<div class="hr-line-dashed"></div>
 																	<label class="control-label">Send a Test Message</label>
 																	<div style="overflow: hidden; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;"></div>
-																	<div>
-																		<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
-																		<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
-																		</select>
-																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-lg" style="color:green"></i></a>
+																	<div style="width:100%;height:30px;">
+                                                                        <div style="width: calc(100% - 25px); float: left;">
+																			<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
+																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
+																			</select>
+                                                                        </div>
+																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a>
 																	</div>
 															
 																	<label class="control-label"></label>

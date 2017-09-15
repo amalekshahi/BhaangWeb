@@ -3,8 +3,7 @@
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');    
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html ng-app="myApp">
 <head>
     <?php include "header.php"; ?>
@@ -19,7 +18,7 @@
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.php"></div>
+                 <?php include 'topWrapper.php'; ?>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -189,9 +188,15 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
     <script src="js/davinci.js"></script>
+    
+	<!-- Sweet alert -->
+    <!-- user version 2 to support modal input 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>    -->
 <!--  -->
 <script>
 	var dbname = "<?php echo $dbName; ?>";
+    var accountID = "<?php echo $accountID; ?>";
     var studioEmail = "<?php echo $email; ?>";
     var studioPassword = "<?php echo $pwd; ?>";
     var myApp = angular.module('myApp', []);
@@ -208,14 +213,31 @@
                 $scope.state = {
                     "SaveAccountSetting":"Save",
                 };
-				//alert("load");				
+                /*
 				$http.get("/couchdb/" + dbname + "/UserInfo").then(function(response) {
 					 $scope.master  = response.data; 
 					 if (typeof $scope.master.items == 'undefined') {
-					   $scope.master.items = [];
+                        $scope.master.items = [];
+                        // So this is new user
 					 } 
 					 $scope.Reset();
-				});
+				});*/
+                // Kwang user backend php instead to handle devault value
+                $http.get("backend.php"+"?" + new Date().toString(),
+                {
+                  method: "POST",
+                  params: {
+                    cmd: "userinfo",
+                    acctID: accountID,     
+                    progID: "yyyy",     // anything that not empty
+                  }  
+                }
+                ).then(function(response) {
+                    console.log(response.data);    
+                    $scope.master = response.data.doc;
+                    $scope.Reset();
+                    //$scope.backend.data = response.data;
+                });
                 
 		};		
 
@@ -224,10 +246,13 @@
                 $scope.state['SaveAccountSetting'] = "Saving";
 				$http.put("/couchdb/" + dbname + "/UserInfo", $scope.userinfo).then(function(response){
 					  $scope.data = response.data;          
-					  $scope.Load();
+					  //$scope.Load();
                       $scope.saveSuccess = true;
                       $scope.state['SaveAccountSetting'] = "Save";
+                      $scope.userinfo._rev = response.data.rev;                      
+                      $scope.master = angular.copy($scope.userinfo);                      
 				 },function(response){
+                      console.log(response.data);    
                       alert("ERROR: can not save!!!");	
                       $scope.state['SaveAccountSetting'] = "Save";                      
 				});         
@@ -235,7 +260,8 @@
 		};		
         
         $scope.Cancel = function(){
-            $scope.Load();
+            //$scope.Load();
+            $scope.Reset();
             $scope.saveSuccess = false;
         };
 		
