@@ -107,7 +107,7 @@ formEditorNew.html
 	<script src="js/plugins/pace/pace.min.js"></script> 
 	<script type="text/JavaScript" src="global.js?n=1"></script> 	
 	<!-- Custom and plugin javascript -->	 
-	<script src="js/moment.js"></script>
+	<!-- <script src="js/moment.js"></script> -->
  	<script src="js/jquery.md5.js"></script>	
 	<script src="js/davinci.js"></script>
 
@@ -130,6 +130,95 @@ myApp.config(function($routeProvider) {
 	});		 
 });
 
+myApp.run(function($globalScope) {
+
+		$globalScope.Func = function() {
+					alert("I'm global foo!");
+        };
+
+		$globalScope.GetDropdownOpt = function() {
+					//fungEdit#36
+					//$http.get("/couchdb/master/Default_FormDropdown'+"?"+new Date().toString()).then(function(response) {
+					$http.get("/couchdb/" + dbName +'/Default_FormDropdown'+"?"+new Date().toString()).then(function(response) {
+								$globalScope.masterDD  = response.data; 
+								if (typeof $globalScope.masterDD == 'undefined') {
+								   $globalScope.masterDD = ;
+								} 
+								$globalScope.dropdownOpt  = angular.copy($globalScope.masterDD);									
+								
+					},function(errResponse){
+								if (errResponse.status == 404) {
+									$globalScope.dropdownlist = ""; 									
+								}							
+					});						
+				
+        };// GetDropdownOpt
+
+		
+        $globalScope.GetFormHTML = function(codeType,fieldType,fieldID,fieldName,label,required,prepopulated,optionArr) {
+					$globalScope.tmpReq = ""; 
+					$globalScope.tmpPrepop=""; 
+					$globalScope.redstar = ""; 		
+					if(required == "Yes"){
+							$globalScope.tmpReq = ' required="" '; 
+							$globalScope.redstar += '<span style="color:red;">&#42;</span>'	; 
+					}
+					if(prepopulated == "Yes"){
+							$globalScope.tmpPrepop = '##'+fieldName+'##'; 						
+					}
+
+					$globalScope.tmphtml ='<div class="form-group"><label>'+label+'</label>'+$globalScope.redstar ;
+					if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
+							$globalScope.tmphtml += ' <input class="form-control input-sm" name="'+label+'" '+$globalScope.tmpReq+' type="text" value="'+$globalScope.tmpPrepop+'"> '; 
+
+					}else if(fieldType == "hidden"){						
+							$globalScope.tmphtml += ' <input type="hidden" name="'+label+' value="'+$globalScope.tmpPrepop+'"> '; 
+
+					}else if(fieldType == "state"){
+							$globalScope.tmphtml += "<br>"+getStateBox($globalScope.tmpReq,$globalScope.tmpPrepop); 
+
+					}else if(fieldType == "country"){
+							$globalScope.tmphtml += "<br>"+getCountryBox($globalScope.tmpReq,$globalScope.tmpPrepop); 
+
+					}else if(fieldType == "dropdown"){
+					if(optionArr != 'undefined'){
+						if(fieldName !="Question1" ){
+
+							$globalScope.tmphtml += ' <input class="form-control input-sm" name="'+label+'" '+$globalScope.tmpReq+' type="text" value="'+$globalScope.tmpPrepop+'"> '; 
+
+						}else{
+
+							$globalScope.tmphtml += ' <select name="'+label+' class="form-control input-sm"> '; 		
+								
+							GetDropdownOpt(); 
+*****							$globalScope.dropdownOpt.
+							$globalScope.tmphtml += ; 		
+							
+					
+							$globalScope.tmphtml += '</select> '; 
+
+						}
+					}//if optionArr
+
+					}else if(fieldType == "datetime"){
+							var datename = fieldID+"_DATE"; 								
+							if(codeType == "HTML"){
+								$globalScope.tmphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); <\/script>' ;
+							}
+							$globalScope.tmphtml += '<div class="form-group" id="'+datename+'"><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control input-sm" value=""></div></div>' ; 
+
+								
+					}else if(fieldType == "radio"){
+						$globalScope.tmphtml += ' <input class="form-control input-sm" name="'+label+'" '+$globalScope.tmpReq+' type="text" value="'+$globalScope.tmpPrepop+'"> '; 
+						//fungEdit
+						//	$globalScope.tmphtml += ' <input type="hidden" name="'+label+' value="'+$globalScope.tmpPrepop+'"> '; 
+					}
+					$globalScope.tmphtml +="</div>"; 
+        };//GetFormHTML
+
+
+});
+
 myApp.controller('myCtrl',function($scope,$http) {
 			$scope.state = {	"Save":"Save",	};
 			$scope.defID = ""; 	
@@ -139,7 +228,8 @@ myApp.controller('myCtrl',function($scope,$http) {
 					$scope.GenSelectedFromHTML(); 
 					$scope.MyCopyItem('formHTML',$scope.selectedFromHTML);
 					$scope.MyCopyItem('allFieldName',$scope.allFieldName); 
-					var today = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js
+//					var today = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js
+					var today = getCurrentDateTime(); 
 					$scope.MyCopyItem('modifiedDate',today);	
 					$scope.MyCopyItem('formType_DefID',$scope.defID);	
 
@@ -206,7 +296,10 @@ myApp.controller('myCtrl',function($scope,$http) {
 				if(load=="new"){
 					$scope.LoadSelect(); 
 				}
-				$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
+//fungEdit#36			
+				//$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
+				$http.get("/couchdb/" + dbName +'/mastertest'+"?"+new Date().toString()).then(function(response) {
+
 							$scope.masterDef  = response.data; 
 							if (typeof $scope.masterDef.items == 'undefined') {
 							   $scope.masterDef.items = [];
@@ -263,13 +356,20 @@ myApp.controller('myCtrl',function($scope,$http) {
 //$scope.LoadDefault(defFrmID);	//send DefID to reload Available field
 				//$('.alerttest').html(" formtype = "+ftype);
             };								
-			$scope.Reset = function() {                  
+			$scope.Reset = function() {
+
+            };
+			
+			$scope.getOptions = function(fieldid) {
+
 
             };			
 
 			$scope.SetRequire = function() {
                   var txt=$scope.selectItem;
             };	
+
+					
 				
 			$scope.GenSelectedFromHTML = function() {
 				reloadformfield('edit'); 
@@ -312,7 +412,8 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 				var frmName = $('#frmName').val(); 
 				var frmtype_defID = $scope.defID; //formType_DefID 
 				var submission = "";
-				var modDate = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js  //modifiedDate
+//				var modDate = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js  //modifiedDate
+				var modDate = getCurrentDateTime(); 
 				var allfield = $scope.allFieldName; //allFieldName
 				var formhtml = $scope.selectedFromHTML;  //formHTML
 
@@ -542,7 +643,7 @@ function reloadformfield(page){
 		$('#summerblock').html(summerdivtxt); 		
 }
 //codeType = "HTML" plus gen <script> tag in code
-function getFormCode(codeType,fieldType,fieldID,fieldName,label,required,prepopulated,option){	
+function getFormCode(codeType,fieldType,fieldID,fieldName,label,required,prepopulated,optionArr){	
 		var tmpReq = ""; 
 		var tmpPrepop=""; 
 		var redstar = ""; 		
@@ -568,9 +669,23 @@ function getFormCode(codeType,fieldType,fieldID,fieldName,label,required,prepopu
 				temphtml += "<br>"+getCountryBox(tmpReq,tmpPrepop); 
 
 		}else if(fieldType == "dropdown"){
+		if(optionArr != 'undefined'){
+			if(fieldName !="Question1" ){
+
 				temphtml += ' <input class="form-control input-sm" name="'+label+'" '+tmpReq+' type="text" value="'+tmpPrepop+'"> '; 
-				//fungEdit
-	//			temphtml += ' <select name="'+label+'> '+option+'</select> '; 
+
+			}else{
+
+				temphtml += ' <select name="'+label+' class="form-control input-sm"> '; 
+				alert(fieldID); 
+					
+				//getdropdown(fieldID); 
+				
+		
+				temphtml += '</select> '; 
+
+			}
+		}//if optionArr
 
 		}else if(fieldType == "datetime"){
 				var datename = fieldID+"_DATE"; 								
