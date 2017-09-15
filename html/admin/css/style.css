@@ -171,7 +171,8 @@ h5 {
 .nav-header {
   padding: 33px 25px;
   background-color: #000000;
-  background-image: url("https://da-vinci-rules-daver78.c9users.io/httpdoc/daver/DV-CMS-UI/DV-logo.png");
+  background-image: url("https://s3-us-west-1.amazonaws.com/bkktest/image/DV-logo.png");
+  
 }
 .pace-done .nav-header {
   transition: all 0.4s;
