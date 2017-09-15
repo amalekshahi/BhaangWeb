@@ -12,6 +12,8 @@
 <html ng-app="myApp">
 <head>
     <?php include "header.php"; ?>
+	<script src="js/date.format.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 </head>
 
 <body class="">
@@ -90,7 +92,9 @@
                                         </td>
 
                                         <td class="project-actions">
-                                            <a href="formEditorCopy.php?fID={{item.formID}}" class="btn btn-white btn-sm"><i class="fa fa-clone" style="color:green"></i> Copy </a>
+                                            <!-- <a href="formEditorCopy.php?fID={{item.formID}}" class="btn btn-white btn-sm" ><i class="fa fa-clone" style="color:green"></i> Copy </a> -->
+											
+                                            <a href="#" class="btn btn-white btn-sm" ng-click="DuplicateFormClick(item.formID,item.formName)"><i class="fa fa-clone" style="color:green"></i> Copy </a>
                                             <a href="formEditor.php?fID={{item.formID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
                                         </td>
                                         
@@ -129,13 +133,25 @@
 
 
 	 <!-- Page-Level Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
+	<script type="text/JavaScript" src="global.js?n=1"></script> 	
+ 	<script src="js/jquery.md5.js"></script>	
+	<script src="js/davinci.js"></script>
+
+	<!-- Sweet alert -->
+	<!--<script src="css/sweet/sweetalert-dev.js"></script>-->
+	<!-- user version 2 to support modal input -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
 
 <script>
 var dbName = "<?php echo $dbName; ?>";
 var myApp = angular.module('myApp', ["angularMoment"]);
 myApp.controller('myCtrl',function($scope,$http) {
+			
 			$scope.Reset = function() {
 				 
 			};
@@ -153,6 +169,89 @@ myApp.controller('myCtrl',function($scope,$http) {
 						}
 				});
 			};
+
+			$scope.DuplicateFormClick = function(frmID,frmName){
+				    $scope.copyID = frmID;
+                    swal({
+                      title: 'What is your new form name?',
+                      input: 'text',
+                      inputValue: frmName + " (COPY)",
+                      showCancelButton: true,
+                    }).then($scope.DuplicateFormOK);
+			};
+
+			$scope.DuplicateFormOK = function(newFormName){
+				newFormName = newFormName.trim();							
+				var indx = $scope.formLib.items.getIndexByValue('formID',$scope.copyID);		
+				$scope.selectFrm = $scope.formLib.items[indx];						
+
+				var submission = "";
+				var modDate = getCurrentDateTime();
+				if(newFormName != ''){
+					var keyword = newFormName+getCurrentDateTime();
+					var resID = $.md5(keyword);      
+
+					$scope.formLib.items.push({
+							"formID":resID,
+							"formName":newFormName,
+							"formType_DefID":$scope.selectFrm.formType_DefID,
+							"submission":submission,
+							"modifiedDate":modDate,
+							"allFieldName":$scope.selectFrm.allFieldName,
+							"formHTML":$scope.selectFrm.formHTML,
+							"fieldLists":$scope.selectFrm.fieldLists
+					});
+					$scope.SaveCopy(resID,newFormName); 
+				}else{
+					swal({
+						type: 'error',
+						html: "Form [" + newFormName + "] copy fail!!",
+					});
+				}
+			};
+
+			$scope.SaveCopy = function(resID,newFormName) {								
+					$http.put('/couchdb/' + dbName +'/formLibrary',  $scope.formLib).then(function(response){
+							swal({
+								type: 'success',
+								html: "Form [" + newFormName + "] created",
+							}).then($scope.Load);
+							
+					},function(errsaveResponse){
+							swal({
+								type: 'error',
+								html: "Form [" + response.data.newFormName + "] copy fail!!",
+							});
+	                });		
+            };
+			
+			$scope.DuplicateFormOK2 = function(newFormName){
+                    newFormName = newFormName.trim();
+                    $http.get("formEditorCopy.php"+"?" + new Date().toString(),
+							{
+							  method: "POST",
+							  params: {
+								fID: $scope.copyID,
+								LName: newFormName,
+							  }  
+							}
+                    ).then(function(response) {
+							console.log(response.data);
+							if(response.data.success == true){
+								swal({
+									type: 'success',
+									html: "Form [" + response.data.newFormName + "] created",
+								}).then(function() {
+									window.location.href = "formLibrary.php";
+								});
+							}else{
+								swal({
+									type: 'error',
+									html: "Form [" + response.data.newFormName + "] copy fail<br>" + response.data.addRet.message,
+								});
+							}
+                    });                
+            };
 
 			$scope.Load();
 });  
