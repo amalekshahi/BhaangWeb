@@ -93,7 +93,6 @@ formEditorNew.html
 </div><!-- page-wrapper -->
 </div><!-- wrapper -->
 
-
 	<!-- Mainly scripts -->
 	<script src="js/jquery-3.1.1.min.js"></script> 	
 	<script src="js/bootstrap.min.js"></script> 
@@ -114,7 +113,6 @@ formEditorNew.html
 <script>
 	
 var fID = getParameterByName("fID");
-//fID = "a1"; 
 var indx = -1; 
 var defIndx = -1; 
 var dbName = "<?php echo $dbName; ?>";
@@ -130,19 +128,19 @@ myApp.config(function($routeProvider) {
 	});		 
 });
 
-myApp.run(function($globalScope) {
-
+/*
+myApp.service('myService', function ($globalScope) { 
 		$globalScope.Func = function() {
 					alert("I'm global foo!");
         };
 
 		$globalScope.GetDropdownOpt = function() {
 					//fungEdit#36
-					//$http.get("/couchdb/master/Default_FormDropdown'+"?"+new Date().toString()).then(function(response) {
-					$http.get("/couchdb/" + dbName +'/Default_FormDropdown'+"?"+new Date().toString()).then(function(response) {
+					$http.get("/couchdb/master/Default_FormDropdown"+"?"+new Date().toString()).then(function(response) {
+					//$http.get("/couchdb/" + dbName +'/Default_FormDropdown'+"?"+new Date().toString()).then(function(response) {
 								$globalScope.masterDD  = response.data; 
 								if (typeof $globalScope.masterDD == 'undefined') {
-								   $globalScope.masterDD = ;
+								   $globalScope.masterDD = "";
 								} 
 								$globalScope.dropdownOpt  = angular.copy($globalScope.masterDD);									
 								
@@ -191,9 +189,8 @@ myApp.run(function($globalScope) {
 							$globalScope.tmphtml += ' <select name="'+label+' class="form-control input-sm"> '; 		
 								
 							GetDropdownOpt(); 
-*****							$globalScope.dropdownOpt.
-							$globalScope.tmphtml += ; 		
-							
+							alert($globalScope.dropdownOpt); 
+							$globalScope.tmphtml += $globalScope.dropdownOpt; 							
 					
 							$globalScope.tmphtml += '</select> '; 
 
@@ -218,8 +215,9 @@ myApp.run(function($globalScope) {
 
 
 });
-
-myApp.controller('myCtrl',function($scope,$http) {
+*/ 
+myApp.controller('myCtrl',function($scope,$http) {   	
+//myApp..controller('myCtrl', ['myService', function ($scope,$http) {
 			$scope.state = {	"Save":"Save",	};
 			$scope.defID = ""; 	
 			$scope.tempArr = []; 
@@ -297,9 +295,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 					$scope.LoadSelect(); 
 				}
 //fungEdit#36			
-				//$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
-				$http.get("/couchdb/" + dbName +'/mastertest'+"?"+new Date().toString()).then(function(response) {
-
+				$http.get("/couchdb/master/Default_FormLibrary"+"?"+new Date().toString()).then(function(response) {
 							$scope.masterDef  = response.data; 
 							if (typeof $scope.masterDef.items == 'undefined') {
 							   $scope.masterDef.items = [];
@@ -357,7 +353,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 				//$('.alerttest').html(" formtype = "+ftype);
             };								
 			$scope.Reset = function() {
-
+				$scope.dropdownOpt  = angular.copy($scope.masterDD);		
             };
 			
 			$scope.getOptions = function(fieldid) {
@@ -387,12 +383,32 @@ myApp.controller('myCtrl',function($scope,$http) {
                   
             };// end GenSelectedFromHTML()		
 			
+			$scope.GetDropdownOpt = function() {  //fungEdit#36					
+					$http.get("/couchdb/master/Default_FormDropdown"+"?"+new Date().toString()).then(function(response) {
+								$scope.masterDD  = response.data; 
+								if (typeof $scope.masterDD == 'undefined') {
+								   $scope.masterDD = "";
+								} 
+								$scope.dropdownOpt  = angular.copy($scope.masterDD);									
+								
+					},function(errResponse){
+								if (errResponse.status == 404) {
+									$scope.dropdownlist = ""; 									
+								}							
+					});						
+				
+        };// GetDropdownOpt
+
+			
+			
 			$scope.LoadDefault('new');				
 });
-
+//}]);
+//end myCtrl
 
 
 myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
+//myApp..controller('myNewCtrl', ['myService', function ($rootScope,$scope,$http) {
 			$scope.state = {	"Save":"Save",	};
 			$scope.defID = ""; 	
 			$scope.tempArr = []; 
@@ -596,13 +612,14 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 						temphtml += getFormCode("HTML",$scope.tempArr[i].fieldType,$scope.tempArr[i].fieldID,$scope.tempArr[i].fieldName,$scope.tempArr[i].label,$scope.tempArr[i].required,$scope.tempArr[i].prepopulated,$scope.tempArr[i].option); 					
 				}//end for i
 				$scope.allFieldName = allFieldName; 
-				$scope.selectedFromHTML = '<form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form>' ; 		
-                  
+				$scope.selectedFromHTML = '<form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form>' ; 	                  
             };// end GenSelectedFromHTML()		
-
 			$scope.LoadNewPageDefault('new');	
-			
-});
+
+
+});			
+//}]);
+//end myNewCtrl
 
 function setOptionSelected(ename,defaultVal){		
 			var eid = document.getElementById(ename);
@@ -677,8 +694,9 @@ function getFormCode(codeType,fieldType,fieldID,fieldName,label,required,prepopu
 			}else{
 
 				temphtml += ' <select name="'+label+' class="form-control input-sm"> '; 
-				alert(fieldID); 
-					
+				alert(fieldID); 				
+
+				angular.element(document.getElementById('myCtrl')).scope().GetDropdownOpt();	
 				//getdropdown(fieldID); 
 				
 		
