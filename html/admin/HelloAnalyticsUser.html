@@ -3,15 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>Hello Analytics - A quickstart guide for JavaScript</title>
+  <script src="js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
 <button id="auth-button" hidden>Authorize</button>
 
 <h1>Hello Analytics</h1>
-
 <textarea cols="80" rows="20" id="query-output"></textarea>
-
+<br>
+<div id="goalDiv" style="display: none">
+	Goal : <br>
+	<input type="button" value="get goal" onclick="getGoal()">  <br>
+	<textarea cols="80" rows="20" id="query-output2"></textarea>
+	<br>
+</div>
 <script>
 
   // Replace with your client ID from the developer console.
@@ -121,6 +127,7 @@ function handleProfiles(response) {
 
     // Query the Core Reporting API.
     queryCoreReportingApi(firstProfileId);
+	$('#goalDiv').show();
   } else {
     console.log('No views (profiles) found for this user.');
   }
@@ -148,6 +155,94 @@ function queryCoreReportingApi(profileId) {
 
   // Add an event listener to the 'auth-button'.
   document.getElementById('auth-button').addEventListener('click', authorize);
+</script>
+
+<script>
+/*
+ * Note: This code assumes you have an authorized Analytics client object.
+ * See the Account Summaries Developer Guide for details.
+ */
+
+/*
+ * Example 1:
+ * Requests a list of all account summaries for the authorized user.
+ */
+function listAccountSummaries() {
+  var request = gapi.client.analytics.management.accountSummaries.list();
+  request.execute(handleResponse);
+}
+
+/*
+ * Example 2:
+ * The results of the list method are passed as the response object.
+ * The following code shows how to iterate through them.
+ */
+function handleResponse(response) {
+  if (response && !response.error) {
+    if (response.items) {
+      printAccountSummaries(response.items);
+    }
+  } else {
+    console.log('There was an error: ' + response.message);
+  }
+}
+
+
+function printAccountSummaries(accounts) {
+  for (var i = 0, account; account = accounts[i]; i++) {
+    console.log('Account id: ' + account.id);
+    console.log('Account name: ' + account.name);
+    console.log('Account kind: ' + account.kind);
+
+    // Print the properties.
+    if (account.webProperties) {
+      printProperties(account.webProperties);
+    }
+  }
+}
+
+
+function printProperties(properties) {
+  for (var j = 0, property; property = properties[j]; j++) {
+    console.log('Property id: ' + property.id);
+    console.log('Property name: ' + property.name);
+    console.log('Property kind: ' + property.kind);
+    console.log('Internal id: ' + property.internalWebPropertyId);
+    console.log('Property level: ' + property.level);
+    console.log('Property url: ' + property.websiteUrl);
+
+    // Print the views (profiles).
+    if (property.profiles) {
+      printProfiles(property.profiles);
+    }
+  }
+}
+
+
+function printProfiles(profiles) {
+  for (var k = 0, profile; profile = profiles[k]; k++) {
+    console.log('Profile id: ' + profile.id);
+    console.log('Profile name: ' + profile.name);
+    console.log('Profile kind: ' + profile.kind);
+    console.log('Profile type: ' + profile.type);
+  }
+}
+
+/*
+ * This request gets an existing goal.
+ */
+function getGoal() {
+  var request = gapi.client.analytics.management.goals.get({
+    'accountId': '106457313',
+    'webPropertyId': 'UA-106457313-1',
+    'profileId': '160328262', // view id
+    'goalId': '1'
+  });
+  request.execute(function (response) { // Handle the response. 
+	var formattedJson = JSON.stringify(response.result, null, 2);
+    document.getElementById('query-output2').value = formattedJson;
+  });
+}
 </script>
 
 <script src="https://apis.google.com/js/client.js?onload=authorize"></script>
