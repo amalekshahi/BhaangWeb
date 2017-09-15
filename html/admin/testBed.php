@@ -43,6 +43,7 @@ require_once 'commonUtil.php';?><!doctype html>
                         <md-option value="publish">publish</md-option>
                         <md-option value="update">update</md-option>
                         <md-option value="copy">copy</md-option>                        
+                        <md-option value="userinfo">userinfo</md-option>                        
                         <md-option value="test">test</md-option>
                     </md-select>
                 </md-input-container>  

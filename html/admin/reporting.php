@@ -29,7 +29,7 @@
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.php"></div>
+				<?php include 'topWrapper.php'; ?>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	

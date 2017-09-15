@@ -2,13 +2,19 @@
 /*
     backend.php
     param
-    cmd = publish/update/test/copy
+    cmd = publish/update/test/copy/userinfo
     acctID = accountID
     progID = programID
     mode = test
     name = new campaignName (only for copy)
 */
 require_once 'commonUtil.php';
+
+function CleanDocument($doc)
+{
+    unset($doc->_rev);
+    unset($doc->_id);
+}
 
 session_start();
 
@@ -38,12 +44,43 @@ $mode = $_REQUEST['mode'];
 $dbName = getDatabaseName($acctID,"");
 //$dateTimeNow = date('Y/m/d H:i:s');
 $dateTimeNow = GetStringTimeStamp(); //gmdate('Y-m-d\TH:i:s\Z', time()); 
-if($cmd!="publish" and $cmd!="update" and $cmd!="test" and $cmd!="copy"){
+if($cmd!="publish" and $cmd!="update" and $cmd!="test" and $cmd!="copy" and $cmd!="userinfo"){
     echo json_encode( 
         array(
             'success'=>false,
             'message'=>"Unknown command [$cmd]",
         ));
+    exit;
+}
+// GetUser Info with default
+if($cmd=="userinfo"){
+    $doc = couchDB_Get("/$dbName/UserInfo");
+    $default = false;
+    if(!empty($doc->error)){
+        //not found need to return from default
+        $default = true;
+        $doc = couchDB_Get("/master/Default_UserInfo");
+        if(!empty($doc->error)){
+            echo json_encode( 
+                array(
+                    'success'=>false,
+                    'cmd'=>$cmd,
+                    'message'=>"Default_UserInfo not found",
+                )
+            );
+            exit;
+        }
+        CleanDocument($doc);
+    }
+    echo json_encode( 
+        array(
+            'success'=>true,
+            'cmd'=>$cmd,
+            'doc'=>$doc,
+            'default'=>$default,
+            'dbName'=>$dbName,
+        )
+    );
     exit;
 }
 // Copy campaign
@@ -86,44 +123,6 @@ if($cmd=="copy"){
     // set new campaignID campaignName
     $doc->campaignID = $newProgID;
     $doc->campaignName = $newCampaignName;
-    /*
-    $campaignListDoc = couchDB_Get("/$dbName/campaignlist",true);
-    //if if we have this one before
-    for($i=0;$i<count($campaignListDoc['campaigns']);$i++){
-        $campaignID =  $campaignListDoc['campaigns'][$i]['campaignID'];
-        if($campaignID == $doc->campaignID){
-            echo json_encode( 
-                array(
-                    'success'=>false,
-                    'cmd'=>$cmd,
-                    'message'=>"duplicate campaign ID found in campaignList  ".$campaignID ,
-                ));
-            exit; 
-        }
-    }
-    
-    $saveRet = couchDB_Save("/$dbName/".$doc->campaignID,$doc);
-    if(!empty($saveRet->error)){
-        echo json_encode( 
-            array(
-                'success'=>false,
-                'cmd'=>$cmd,
-                'message'=>"duplicate campaign ID found in document ".$doc->campaignID ,
-            ));
-        exit; 
-    }
-    
-    $campaignListDoc['campaigns'][] = array(
-        "campaignID" => $doc->campaignID,
-        "accountID"  => $doc->accountID,
-        "campaignName"  =>  $doc->campaignName,
-        "createDate"  => $dateTimeNow,
-        "lastEditDate"  => $dateTimeNow,
-        "status"  => "Edit",
-        "campaignType"  => $doc->campaignType,
-    );
-    $saveCampaignListRet = couchDB_Save("/$dbName/campaignlist",$campaignListDoc);
-    */
     $addRet = AddNewCampaign($dbName,$doc);
     echo json_encode( 
         array(

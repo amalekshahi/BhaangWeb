@@ -3,9 +3,9 @@
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-    $dbName = $_SESSION['DBNAME'];
+/*    $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
-    $accountName = $_SESSION['ACCOUNNAME'];
+    $accountName = $_SESSION['ACCOUNNAME'];*/
 ?><!DOCTYPE html>
 	<html ng-app="myApp">
 
@@ -39,7 +39,7 @@
 				<div class="row border-bottom">
 					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 						<!-- top wrapper -->
-						<div w3-include-html="topWrapper.php"></div>
+                        <?php include 'topWrapper.php'; ?>
 						<!-- / top wrapper -->
 					</nav>
 				</div>
@@ -426,11 +426,13 @@
 								$scope.setDisplay();
 								if (silence == true) {} else {
 									//swal("Save Campaign Successful.", "", "success");
-									$scope.state['Save'] = 'Save';
+									
 								}
+                                
 								// Kwang backup current to master and clear formState
 								$scope.master = angular.copy($scope.campaign);
 								$scope.clearFormState();
+                                $scope.state['Save'] = 'Save';
 							});
 						}, function(errResponse) {
 							// case new account
