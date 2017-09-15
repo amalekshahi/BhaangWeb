@@ -37,6 +37,8 @@ $USERNAME = $_SESSION['USERNAME'];
     // default 
 function dbgClick(from){
     var dbEndpoint = "<?php echo $databaseEndpoint;?>";
+    var dbName = "<?php echo $dbName;?>";
+    var accountID = "<?php echo $accountID; ?>";    
     //alert(dbEndpoint);
     if(from == 'DBView'){
         if (typeof campaignID == 'undefined') {
