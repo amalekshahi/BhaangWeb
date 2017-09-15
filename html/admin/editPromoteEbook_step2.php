@@ -44,7 +44,7 @@
 												</div>
 												<div class="col-xs-6">
 													<label>Form</label>
-													<select ng-model="campaign['LANDINGPAGE-FORM']" style="width: 100%;height: 30px;">
+													<select ng-model="campaign['landing_form']" ng-change="FormChanged('landing_form','LANDINGPAGE-FORM')" style="width: 100%;height: 30px;">
 														<option ng-repeat="x in listForm" value="{{x.formHTML}}">{{x.formName}}</option>
 													</select>
 													<!-- <select ng-model="campaign['LANDINGPAGE-FORM']" ng-options="x.formHTML as x.formName for x in listForm" style="width: 100%;height: 30px;">
@@ -193,6 +193,9 @@
 				var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 				console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
 			});
+		};
+		$scope.FormChanged = function(srcField,tarField) {
+			$scope.campaign[tarField] = $scope.campaign[srcField];
 		};
 	}]);
 </script>
