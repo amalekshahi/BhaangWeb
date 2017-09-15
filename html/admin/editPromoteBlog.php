@@ -251,8 +251,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
-        
-        
 
 		<!-- TouchSpin -->
 		<script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
@@ -686,15 +684,6 @@
 						}
 					}
 				};
-				/*$scope.tpIndex = function() {
-				var tplist = 	$scope.templates;
-				for(var i=0;i < tplist.length; i++){
-				  if (tplist[i]["content"] == $scope.campaign.templateEmail1)
-				  {
-					return i;
-				  } 
-				}
-            };*/
 				$scope.tpsIndex = function(emlID) {
 					var tplist = $scope['templatesAs' + emlID];
 					for (var i = 0; i < tplist.length; i++) {
@@ -703,15 +692,6 @@
 						}
 					}
 				};
-				/*$scope.tp2Index = function() {
-				var tplist = 	$scope.templatesAs2;
-				for(var i=0;i < tplist.length; i++){
-				  if (tplist[i]["content"] == $scope.campaign.templateEmail2)
-				  {
-					return i;
-				  } 
-				}
-            };*/
 				$scope.sdIndex = function() {
 					var sdlist = $scope.senders;
 					for (var i = 0; i < sdlist.length; i++) {
