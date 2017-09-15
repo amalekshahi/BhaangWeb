@@ -86,7 +86,7 @@
 										</tbody>
 									</table>
 								<div class="text-center">
-										<a class="btn btn-success btn-xs" href="showContact.php?cid=-1"><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CONTACTS</a>
+										<a class="btn btn-success btn-xs" href="showContact.php?cid=-1" target="_blank"><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CONTACTS</a>
 									</div>
 									</div>
 								</div>
