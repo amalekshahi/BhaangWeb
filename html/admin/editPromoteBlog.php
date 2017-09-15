@@ -426,11 +426,13 @@
 								$scope.setDisplay();
 								if (silence == true) {} else {
 									//swal("Save Campaign Successful.", "", "success");
-									$scope.state['Save'] = 'Save';
+									
 								}
+                                
 								// Kwang backup current to master and clear formState
 								$scope.master = angular.copy($scope.campaign);
 								$scope.clearFormState();
+                                $scope.state['Save'] = 'Save';
 							});
 						}, function(errResponse) {
 							// case new account
