@@ -77,7 +77,7 @@ function Render(template,data){
     }
     return html;
 } 
-
+/*
 function dbgClick(from){
     if(from == 'DBView'){
         window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
@@ -86,5 +86,5 @@ function dbgClick(from){
         window.open("https://github.com/coa0329/Bhaang/issues", '_blank');
     }
 }
-
+*/
 
