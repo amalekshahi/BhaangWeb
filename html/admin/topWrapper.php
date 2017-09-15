@@ -1,8 +1,12 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
-    session_start();
-    include 'global.php';
-    require_once('loginCredentials.php');
+date_default_timezone_set('America/Los_Angeles');
+session_start();
+$dbName = $_SESSION['DBNAME'];
+$accountID = $_SESSION['ACCOUNTID'];
+$accountName = $_SESSION['ACCOUNNAME'];
+$email = $_SESSION['EMAIL'];
+$pwd = $_SESSION['PWD'];
+$USERNAME = $_SESSION['USERNAME'];
 ?>
 <div class="navbar-header">
   <!-- Commented out for now, until we have Da Vinci wide search
@@ -27,5 +31,26 @@
         </li>                -->
         <li>
             <a href="logout.php"><i class="fa fa-sign-out"></i> Log out </a>
-        </li>        
+        </li>    
 </ul>
+<script>
+    // default 
+function dbgClick(from){
+    var dbEndpoint = "<?php echo $databaseEndpoint;?>";
+    var dbName = "<?php echo $dbName;?>";
+    var accountID = "<?php echo $accountID; ?>";    
+    //alert(dbEndpoint);
+    if(from == 'DBView'){
+        if (typeof campaignID == 'undefined') {
+            window.open(dbEndpoint + "/_utils/document.html?" + dbName + "/campaignlist", '_blank');
+        }else{
+            window.open(dbEndpoint + "/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
+        }
+    }
+    if(from == 'Issue'){
+        window.open("https://github.com/coa0329/Bhaang/issues", '_blank');
+    }
+}
+
+</script>
+

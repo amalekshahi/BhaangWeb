@@ -9,4 +9,6 @@ $accountName = $_SESSION['ACCOUNNAME'];
 $email = $_SESSION['EMAIL'];
 $pwd = $_SESSION['PWD'];
 $USERNAME = $_SESSION['USERNAME'];
+
+require_once 'commonUtil.php';
 ?>
