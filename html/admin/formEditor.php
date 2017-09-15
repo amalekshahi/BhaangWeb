@@ -107,7 +107,6 @@ formEditorNew.html
 	<script src="js/plugins/pace/pace.min.js"></script> 
 	<script type="text/JavaScript" src="global.js?n=1"></script> 	
 	<!-- Custom and plugin javascript -->	 
-	<script src="js/moment.js"></script>
  	<script src="js/jquery.md5.js"></script>	
 	<script src="js/davinci.js"></script>
 
@@ -139,7 +138,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 					$scope.GenSelectedFromHTML(); 
 					$scope.MyCopyItem('formHTML',$scope.selectedFromHTML);
 					$scope.MyCopyItem('allFieldName',$scope.allFieldName); 
-					var today = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js
+					var today = getCurrentDateTime();
 					$scope.MyCopyItem('modifiedDate',today);	
 					$scope.MyCopyItem('formType_DefID',$scope.defID);	
 
@@ -312,7 +311,7 @@ myApp.controller('myNewCtrl',function($rootScope,$scope,$http) {
 				var frmName = $('#frmName').val(); 
 				var frmtype_defID = $scope.defID; //formType_DefID 
 				var submission = "";
-				var modDate = moment().format('MMM D, YYYY HH:mm:ss'); //with moment.js  //modifiedDate
+				var modDate = getCurrentDateTime();
 				var allfield = $scope.allFieldName; //allFieldName
 				var formhtml = $scope.selectedFromHTML;  //formHTML
 
