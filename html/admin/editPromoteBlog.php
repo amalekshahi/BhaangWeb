@@ -104,9 +104,9 @@
 																			</div>
 																		</div>
 																		<div class="form-group">
-																			<label class="col-sm-2 control-label">UTM String</label>
+																			<label class="col-sm-2 control-label">URL Parameters (Optional)</label>
 																			<div class="col-sm-10">
-																				<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">Enter the UTM to the post you wish to promote. We'll use it in your emails.</span>
+																				<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">URL parameters you specify here will be appended to your URL. You can use this for things like UTM and other tracking parameters.</span>
 																			</div>
 																		</div>
 																		<div class="hr-line-dashed"></div>
