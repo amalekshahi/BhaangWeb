@@ -100,8 +100,8 @@
 														<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
 														<br/>
 														<!-- Roll back to this <span am-time-ago="message.time"></span> once timestamp issue is resolved -->
-														<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}</small>
-                                                        <span am-time-ago="item.lastEditDate"></span> 
+														<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}
+                                                        (<span am-time-ago="item.lastEditDate"></span>)</small>
 													</td>
 
 													<td class="project-reach">

@@ -13,6 +13,9 @@ editContactAudience.html
 
 <!DOCTYPE html>
 <html ng-app="myApp">
+<meta http-equiv="expires" content="-1">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
 <head>
     <?php include "header.php"; ?>
     <script src="css/sweet/sweetalert-dev.js"></script>
@@ -76,7 +79,8 @@ editContactAudience.html
 				type: 'get',
 				success: function(json){										
 					if (json.success) {
-						FieldOption = json.fieldOption;						
+						FieldOption = json.fieldOption;			
+						FilterClick();
 					}					
 				}
 			 });
@@ -317,40 +321,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 				 });						  
 		}//end CountClick
 
-		function FilterClick() {
-			$('#altCnt').hide();
-			var table = document.getElementById('filterTable');
-			//var LISTDEFINITION = "";
-			var form_data = $("#idForm").serialize();		
-			//alert(form_data);
-			$.ajax({
-				url: 'showFilter.php', // point to server-side PHP script 
-				dataType: 'json',  // what to expect back from the PHP script, if anything
-				cache: false,
-				contentType: false,
-				processData: false,
-				data: form_data,                         
-				type: 'get',
-				success: function(json){					
-					if (json.success) {
-						var JoinOperator = json.JoinOperator;
-						if (JoinOperator == 'or') {
-							$("#joinrowor").attr("checked", true);
-						} else {
-							$("#joinrowand").attr("checked", true);
-						}
-						$('#filterTable > tbody').html(json.tabData);
-						counter = json.counter;
-						$('#filterDiv').show();
-//						alert(json.filterArray); 
-						FArr = json.filterArray; 
-						FOperator = json.CriteriaJoinOperator; 
-						JOperator = JoinOperator; 
-					}
-				}
-			 });				
-		}
-
+		
 		function AddRow() {
 			var tabData = "<tr>"+
 			"<td>"+counter+"<input type=\"hidden\" name=\"rownumber"+counter+"\" id=\"rownumber"+counter+" value='"+counter+"'\"></td>"+
@@ -371,6 +342,41 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 				counter = 1;
 			}
 			$(row).closest('tr').remove();			
+		}
+
+
+		function FilterClick() {
+		$('#altCnt').hide();
+		var table = document.getElementById('filterTable');
+		//var LISTDEFINITION = "";
+		var form_data = $("#idForm").serialize();		
+		//alert(form_data);
+		$.ajax({
+			url: 'showFilter.php', // point to server-side PHP script 
+			dataType: 'json',  // what to expect back from the PHP script, if anything
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: form_data,                         
+			type: 'get',
+			success: function(json){					
+				if (json.success) {
+					var JoinOperator = json.JoinOperator;
+					if (JoinOperator == 'or') {
+						$("#joinrowor").attr("checked", true);
+					} else {
+						$("#joinrowand").attr("checked", true);
+					}
+					$('#filterTable > tbody').html(json.tabData);
+					counter = json.counter;
+					$('#filterDiv').show();
+//						alert(json.filterArray); 
+					FArr = json.filterArray; 
+					FOperator = json.CriteriaJoinOperator; 
+					JOperator = JoinOperator; 
+				}
+			}
+		 });				
 		}
 
     </script>
