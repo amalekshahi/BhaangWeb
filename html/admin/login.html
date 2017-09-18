@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
+
 <head>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -7,6 +8,8 @@
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-KWJ66T');</script>
+
+	</script>
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,22 +22,23 @@
 	<link rel="icon" href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	
+
 	<!-- Sweet alert -->
 	<script src="css/sweet/sweetalert-dev.js"></script>
 	<link rel="stylesheet" href="css/sweet/sweetalert.css">
 
 	<!-- Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	
+
 	<!-- Chosen -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chosen-localytics/1.8.0/angular-chosen.min.js"></script>
-	
-	
+
+
 </head>
+
 <body class="gray-bg">
-    <!-- The background image will rotate.  We may change them a few times p/week or month -->
+	<!-- The background image will rotate.  We may change them a few times p/week or month -->
 	<div class="container" style="width: 100%; height: auto; min-height: 100%; background-image: url('https://s3.amazonaws.com/mindfiredavinci/img/DV_italy-min.jpg');">
 		<div class="loginColumns animated fadeInDown" ng-controller="myCtrl">
 			<div class="row">
@@ -46,9 +50,9 @@
 								<input type="text" class="form-control" name="email" id="email" placeholder="Username" required="" ng-model="login.userName" autofocus="">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" id="pwd" placeholder="Password"  required="" ng-model="login.passWord">
+								<input type="password" class="form-control" id="pwd" placeholder="Password" required="" ng-model="login.passWord">
 							</div>
-							<div ng-show="state" id="accountDiv" class="form-group"  ng-cloak>
+							<div ng-show="state" id="accountDiv" class="form-group" ng-cloak>
 								<!--<select style="width:100%;" ng-model="mpsSelect">
 								<option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
 								</select>-->
@@ -61,16 +65,17 @@
 							</div>
 							<!-- <a href="dv.php?page=homePage" class="btn btn-primary block full-width m-b" role="button">Login</a> -->
 							<div id="continueDiv">
-								<button class="btn btn-primary block full-width m-b"  ng-click="Login()">Login</button>
+								<button class="btn btn-primary block full-width m-b" ng-click="Login()">Login</button>
 							</div>
-							<div ng-show="alert"  ng-cloak>
+							<div ng-show="alert" ng-cloak>
 								<div class="alert alert-danger">
-								<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
-								<strong> Error! </strong> {{alert.normal}}
+									<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+									<strong> Error! </strong> {{alert.normal}}
 								</div>
 							</div>
-                            <a href="javascript:void(0)" onclick="ForgotPassword()">
-							<p class="text-muted text-center"><small>I'm getting old. I forgot my password!</small></p></a>
+							<a href="javascript:void(0)" onclick="ForgotPassword()">
+								<p class="text-muted text-center"><small>I'm getting old. I forgot my password!</small></p>
+							</a>
 							<div class="ibox-content">
 								<div>
 									<p>&nbsp;</p>
@@ -79,7 +84,8 @@
 							</div>
 						</form>
 						<p class="m-t"></p>
-						<blockquote class="blockquote-reverse"> <!-- We seek to inspire.  We'll find great quotes that have to do with creativity and rotate them here.-->
+						<blockquote class="blockquote-reverse">
+							<!-- We seek to inspire.  We'll find great quotes that have to do with creativity and rotate them here.-->
 							<p>"I begin with an idea and then it becomes something else."</p>
 							<footer>
 								Pablo Picasso
@@ -89,7 +95,8 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="ibox-title"> <!-- We will update the wisdom frequently.  It can also be important news. -->
+					<div class="ibox-title">
+						<!-- We will update the wisdom frequently.  It can also be important news. -->
 						<h3>NEW WISDOM FROM MR. DA VINCI</h3>
 						<div class="ibox-content">
 							<h3>"A Look at How Millennials Respond to Direct Mail"</h3><img alt="Cinque Terre" class="img-thumbnail center-block" src="https://s3-us-west-1.amazonaws.com/marketingmfi/Still_Relevant-A_Look_At_How_Millennials_Respond_To_Direct_Mail_pdf.jpg" width="300">
@@ -103,89 +110,91 @@
 	</div>
 	<!-- Mainly scripts -->
 
-	<script src="js/w3data.js"></script>	
-	<script>w3IncludeHTML();</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!--<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="js/w3data.js"></script>
+	<script>
+		w3IncludeHTML();
+	</script>
+	<script src="js/bootstrap.min.js"></script>
+	<!--<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>-->
-	<script type="text/JavaScript" src="global.js?n=1"></script> 
-    <!-- Custom and plugin javascript -->
-    <!--<script src="js/inspinia.js"></script>-->
-    <script src="js/plugins/pace/pace.min.js"></script>
-    <script src="js/davinci.js"></script>
+	<script type="text/JavaScript" src="global.js?n=1"></script>
+	<!-- Custom and plugin javascript -->
+	<!--<script src="js/inspinia.js"></script>-->
+	<script src="js/plugins/pace/pace.min.js"></script>
+	<script src="js/davinci.js"></script>
 
-	<script>	
+	<script>
 		var myApp = angular.module('myApp', ['localytics.directives']);
-		myApp.controller('myCtrl',function($scope,$http) {		
-			$scope.selectAccount = ""; 
+		myApp.controller('myCtrl', function($scope, $http) {
+			$scope.selectAccount = "";
 			$scope.login = {
-				userName : "tt994613@gmail.com",
-				passWord : "Tu4&Mi2$",
+				userName: "tt994613@gmail.com",
+				passWord: "Tu4&Mi2$",
 			}
-			$scope.myAlert = function(mesg){
+			$scope.myAlert = function(mesg) {
 				$scope.alert = {
-					normal:mesg,
+					normal: mesg,
 				};
-			};        
-			
-			$scope.Login = function(){
+			};
+
+			$scope.Login = function() {
 				$scope.alert = false;
-				if (typeof $scope.state == 'undefined'){
+				if (typeof $scope.state == 'undefined') {
 					$scope.CheckLogin();
-				}else{
+				} else {
 					//if($scope.state == "checked"){
 					//}
 					$scope.RealLogin();
 				}
 			};
-			
-			$scope.CheckLogin = function(){
-				$http.get("/admin/login.php",
-				{
-				  method: "GET",
-				  params: {
-					email: $scope.login.userName,
-					pwd: $scope.login.passWord,
-				  }  
-				}					
-				).then(function(response) {
-					  $scope.login.response = JSON.parse(clearCallBack(response.data));
-					  //alert("success: " +  $scope.login.response.success + "\n errMsg: " +  $scope.login.response.message);
-					  if($scope.login.response.success){	
-							  $scope.login.mps = [];
-							  var mps = $scope.login.response.mps;
-							  for(var i=0;i < mps.length; i++){
-								  $scope.login.mps.push({"id":mps[i][0],"name":mps[i][1]}); 						   
-							  } 
-							  $scope.state = "checked";
-							  //$('#accountDiv').show();
-							  //$('#continueDiv').show();
-							  //$('#loginDiv').hide();		
-					  }else{
-							//alert($scope.login.response.message); 
-							$scope.myAlert($scope.login.response.message); 
-					  }
 
-				},function(response){
-				   $scope.myAlert("A connection error occured. Please try again.");			
+			$scope.CheckLogin = function() {
+				$http.get("/admin/login.php", {
+					method: "GET",
+					params: {
+						email: $scope.login.userName,
+						pwd: $scope.login.passWord,
+					}
+				}).then(function(response) {
+					$scope.login.response = JSON.parse(clearCallBack(response.data));
+					//alert("success: " +  $scope.login.response.success + "\n errMsg: " +  $scope.login.response.message);
+					if ($scope.login.response.success) {
+						$scope.login.mps = [];
+						var mps = $scope.login.response.mps;
+						for (var i = 0; i < mps.length; i++) {
+							$scope.login.mps.push({
+								"id": mps[i][0],
+								"name": mps[i][1]
+							});
+						}
+						$scope.state = "checked";
+						//$('#accountDiv').show();
+						//$('#continueDiv').show();
+						//$('#loginDiv').hide();		
+					} else {
+						//alert($scope.login.response.message); 
+						$scope.myAlert($scope.login.response.message);
+					}
+
+				}, function(response) {
+					$scope.myAlert("A connection error occured. Please try again.");
 					//alert("ERROR: " + response.statusText);
 				});
 
-			};	//end scope.Login
+			}; //end scope.Login
 
-			$scope.RealLogin = function(){
-				if (typeof $scope.mpsSelect == 'undefined'){
-					$scope.myAlert("Please select an account"); 
+			$scope.RealLogin = function() {
+				if (typeof $scope.mpsSelect == 'undefined') {
+					$scope.myAlert("Please select an account");
 					return;
 				}
-				var acct = $scope.mpsSelect.split("|"); 
+				var acct = $scope.mpsSelect.split("|");
 				//alert(acct[0]);
 				//alert(acct[1]);
 				//return;
-				$http.get("/admin/login.php",
-					{
-					  method: "GET",
-					  params: {
+				$http.get("/admin/login.php", {
+					method: "GET",
+					params: {
 						mode: "login",
 						email: $scope.login.userName,
 						pwd: $scope.login.passWord,
@@ -193,45 +202,45 @@
 						//accountName: $('#mpsSelect option:selected').text() ,
 						accountID: acct[0],
 						accountName: acct[1],
-					  }  
 					}
-				).then(function(response) {
-					$scope.login.response = JSON.parse(clearCallBack(response.data));		
+				}).then(function(response) {
+					$scope.login.response = JSON.parse(clearCallBack(response.data));
 					//alert("mpsSelect text =  " + $('#mpsSelect option:selected').text() );
 					//alert("mpsSelect val =  " + $('#mpsSelect option:selected').val() );
-					if($scope.login.response.success){	
+					if ($scope.login.response.success) {
 						//createCookie("canLogin","Yes");
 						//alert('44')
-						window.location="welcome.php";
+						window.location = "welcome.php";
 						//$("#loginForm").attr("action", "welcome.html");
 						//$("#loginForm").submit();		
-					}else{
-						$scope.myAlert($scope.login.response.message); 
-					}						
-				},function(response){
-					  $scope.myAlert("Can not login!");
+					} else {
+						$scope.myAlert($scope.login.response.message);
+					}
+				}, function(response) {
+					$scope.myAlert("Can not login!");
 				});
 			};
-	});		//END myApp
+		}); //END myApp
 
-	function ForgotPassword() {
-		
-		var form_data = $("#loginForm").serialize();							
-		$.ajax({
-			url: 'ForgotPassword.php', // point to server-side PHP script 
-			dataType: 'json',  // what to expect back from the PHP script, if anything
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,                         
-			type: 'get',
-			success: function(json){					
-				if (json.success) {
-					swal("Please check email for the instructions to reset your password.");
+		function ForgotPassword() {
+
+			var form_data = $("#loginForm").serialize();
+			$.ajax({
+				url: 'ForgotPassword.php', // point to server-side PHP script 
+				dataType: 'json', // what to expect back from the PHP script, if anything
+				cache: false,
+				contentType: false,
+				processData: false,
+				data: form_data,
+				type: 'get',
+				success: function(json) {
+					if (json.success) {
+						swal("Please check email for the instructions to reset your password.");
+					}
 				}
-			}
-		 });				
-	}
+			});
+		}
 	</script>
 </body>
+
 </html>
