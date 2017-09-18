@@ -1,6 +1,6 @@
 *.zip
 html/admin/conf/davinci.json
-/var/www-stage/BhaangWeb/html/admin/checkInMAML/*
-/var/www-stage/BhaangWeb/html/admin/mailFiles/*
-/var/www-stage/BhaangWeb/html/admin/import/*
-/var/www-stage/BhaangWeb/html/admin/*.coa
+html/admin/checkInMAML/*
+html/admin/mailFiles/*
+html/admin/import/*
+html/admin/*.coa
