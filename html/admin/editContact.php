@@ -139,7 +139,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 								 if (typeof $rootScope.master.items == 'undefined') {
 								   $rootScope.master.items = [];
 								 } 
-								 okFilterClick("start"); 
+								 //okFilterClick("start"); 
 								 $scope.Reset();
 							});
 						},function(errResponse){
@@ -154,17 +154,18 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 						};
 
 						$scope.SaveEditDB = function() {
-							alert(FArr); 
+							alert(FArr);
 								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){		
                                      $scope.state['Save'] = "Save";
 									 $scope.audience._rev = response.data.rev;                      
 				                     $scope.master = angular.copy($scope.audience);   
 								});  
+							
 						};
 
 						$scope.cancel = function() {
-								$scope.Reset();
-								//window.location.href="audiences.php"; 
+								//$scope.Reset();
+								window.location.href="audiences.php"; 
 						};
 
 						//  put value to item of angular
