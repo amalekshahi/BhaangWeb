@@ -3,4 +3,8 @@ html/admin/conf/davinci.json
 html/admin/checkInMAML/*
 html/admin/mailFiles/*
 html/admin/import/*
+<<<<<<< HEAD
 html/admin/*.coa
+=======
+html/admin/*.coa
+>>>>>>> 140a9182665531e29f0bf91febe244a0d3fcded9
