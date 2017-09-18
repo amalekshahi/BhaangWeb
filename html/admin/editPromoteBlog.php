@@ -361,15 +361,15 @@
 								$scope.state['Save'] = "Save";
 								return;
 							} else {
-								/*
-								var datetime2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];
-								if (checkdate(datetime2, timezone2)) {
+								
+								var datetime2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];								
+								if (comparedate(datetime1, timezone1, datetime2, timezone2)) {
 								} else {
-									swal('Please do not set "PAST" times for Email2');
+									swal('Email2 must have a schedule later than Email1.');
 									$scope.state['Save'] = "Save";
 									return;
 								}
-								*/
+								
 							}
 						}
 
@@ -382,15 +382,20 @@
 								$scope.state['Save'] = "Save";
 								return;
 							} else {
-								/*
-								var datetime3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];
-								if (checkdate(datetime3, timezone3)) {
+								var datetime3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];								
+								if (comparedate(datetime1, timezone1, datetime3, timezone3)) {
 								} else {
-									swal('Please do not set "PAST" times for Email3');
+									swal('Email3 must have a schedule later than Email1.');
 									$scope.state['Save'] = "Save";
 									return;
 								}
-								*/
+
+								if (comparedate(datetime2, timezone2, datetime3, timezone3)) {
+								} else {
+									swal('Email3 must have a schedule later than Email2.');
+									$scope.state['Save'] = "Save";
+									return;
+								}
 							}
 						}						
 
@@ -966,6 +971,35 @@
 					return true;
 				}
 			}			
+
+			function comparedate(datetime1, timezone1, datetime2, timezone2){
+				timezone1 = convertTimezone(timezone1);				
+				timezone2 = convertTimezone(timezone2);
+
+				//alert(datetime1+','+timezone1+','+datetime2+','+timezone2);
+
+				//time1 = convert_to_24h(convertTimeFormat(time1));
+				
+				// Create date from input value
+				var d1 = new Date(datetime1+' '+timezone1);
+				//var Date1= dateFormat(d1, "yyyy-mm-dd HH:MM:ss",true);
+				var Date1= dateFormat(d1, "isoDateTime", true);
+				//alert(Date1);
+
+				// Get today's date
+				var d2 = new Date(datetime2+' '+timezone2);
+				//var Date2= dateFormat(d2, "yyyy-mm-dd HH:MM:ss",true);
+				var Date2= dateFormat(d2, "isoDateTime", true);
+				//alert(Date2);
+
+				if (Date1 < Date2) {
+					//alert('ok');
+					return true;
+				} else {
+					//alert('past date');
+					return false;					
+				}
+			}
 			
 
 			function convertTimezone(timezone) {
