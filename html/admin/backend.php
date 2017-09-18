@@ -43,6 +43,7 @@ $progID = $_REQUEST['progID'];
 $cmd = $_REQUEST['cmd'];
 $mode = $_REQUEST['mode'];
 $dbName = getDatabaseName($acctID,"");
+
 //$dateTimeNow = date('Y/m/d H:i:s');
 $dateTimeNow = GetStringTimeStamp(); //gmdate('Y-m-d\TH:i:s\Z', time()); 
 if($cmd!="publish" and $cmd!="update" and $cmd!="test" and $cmd!="copy" and $cmd!="userinfo"){
@@ -157,6 +158,7 @@ if($cmd=="copy"){
     );
     exit;
 }
+
 
 if($cmd=="test"){
     $doc = couchDB_Get("/$dbName/campaignlist",true);
