@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-KWJ66T');</script>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Da Vinci: Log in</title>
@@ -10,12 +17,21 @@
 	<link href="css/animate.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="icon" href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	
-	<!-- Angular -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<!-- Sweet alert -->
 	<script src="css/sweet/sweetalert-dev.js"></script>
 	<link rel="stylesheet" href="css/sweet/sweetalert.css">
+
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	
+	<!-- Chosen -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chosen-localytics/1.8.0/angular-chosen.min.js"></script>
+	
+	
 </head>
 <body class="gray-bg">
     <!-- The background image will rotate.  We may change them a few times p/week or month -->
@@ -33,9 +49,15 @@
 								<input type="password" class="form-control" id="pwd" placeholder="Password"  required="" ng-model="login.passWord">
 							</div>
 							<div ng-show="state" id="accountDiv" class="form-group"  ng-cloak>
-								<select style="width:100%;" ng-model="mpsSelect">
-										<option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
-								</select>
+								<!--<select style="width:100%;" ng-model="mpsSelect">
+								<option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
+								</select>-->
+								<div>
+									<select class="form-control" ng-model="mpsSelect" style="height: 100px; width: 100%" chosen placeholder-text-single="'Select an Account ...'" ng-options="option.id + '|' + option.name as option.name for option in login.mps | orderBy:'name' ">
+					      		<option value=""></option>
+							 		</select>
+								</div>
+
 							</div>
 							<!-- <a href="dv.php?page=homePage" class="btn btn-primary block full-width m-b" role="button">Login</a> -->
 							<div id="continueDiv">
@@ -83,7 +105,6 @@
 
 	<script src="js/w3data.js"></script>	
 	<script>w3IncludeHTML();</script>
-    <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!--<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>-->
@@ -92,8 +113,9 @@
     <!--<script src="js/inspinia.js"></script>-->
     <script src="js/plugins/pace/pace.min.js"></script>
     <script src="js/davinci.js"></script>
+
 	<script>	
-		var myApp = angular.module('myApp', []);
+		var myApp = angular.module('myApp', ['localytics.directives']);
 		myApp.controller('myCtrl',function($scope,$http) {		
 			$scope.selectAccount = ""; 
 			$scope.login = {
