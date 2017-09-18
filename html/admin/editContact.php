@@ -126,18 +126,12 @@ editContactAudience.html
 		});
 
 myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scope,$http,Upload,$rootScope) {
-                        $scope.state = {
-                            "Save":"Save",
-                        };
+                        $scope.state = {"Save":"Save",};
 						$scope.Reset = function() {
-							  $scope.audience  = angular.copy($rootScope.master);
-							  indx = $scope.audience.items.getIndexByValue('contactID',cid);						  
-							  if(cid == 'new' || indx == -1){
-								  $scope.audience.items.push({"contactID":"","LIST-NAME":"","LIST-COUNT":"0","LIST-DESCRIPTION":"","LIST-DEFINITION":"","LIST-HASH":"","contactDetail":"","LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator,"lastEditDate":""});
-							  }else{					 
-								 $scope.item = $scope.audience.items[indx];
-								 FArr = $scope.audience.items[indx]['LIST-ARRAY']; 
-							  }
+							$scope.audience  = angular.copy($rootScope.master);
+							indx = $scope.audience.items.getIndexByValue('contactID',cid);								  
+							$scope.item = $scope.audience.items[indx];
+							FArr = $scope.audience.items[indx]['LIST-ARRAY']; 							
 						};
 						$scope.Load = function() {
 						$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
@@ -145,25 +139,32 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 								 if (typeof $rootScope.master.items == 'undefined') {
 								   $rootScope.master.items = [];
 								 } 
+								 //okFilterClick("start"); 
 								 $scope.Reset();
 							});
 						},function(errResponse){
-										if (errResponse.status == 404) {
-
-										}
+								if (errResponse.status == 404) {
+									alert("ERROR"); 
+								}
 						};
 						$scope.Save = function() {				
                                 $scope.state['Save'] = "Saving";
 								okFilterClick("saveCount"); 
-								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
-									 $scope.Load();
-									 //alert("Save success");
-									 //swal("Save Success", "", "success");
-                                     $scope.state['Save'] = "Save";
-								});         
-								//$('#filterDiv').hide();
+								$scope.SaveEditDB();        
 						};
+
+						$scope.SaveEditDB = function() {
+							alert(FArr);
+								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){		
+                                     $scope.state['Save'] = "Save";
+									 $scope.audience._rev = response.data.rev;                      
+				                     $scope.master = angular.copy($scope.audience);   
+								});  
+							
+						};
+
 						$scope.cancel = function() {
+								//$scope.Reset();
 								window.location.href="audiences.php"; 
 						};
 
@@ -195,11 +196,11 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 						if(LName != ''){
 							var keyword = LName+getCurrentDateTime();
 							var conID = $.md5(keyword);      //alert(conID); 					
-							$scope.LoadData(conID); 
+							$scope.LoadSaveData(conID); 
 						}
 			};
 
-			$scope.LoadData = function(contactID) {
+			$scope.LoadSaveData = function(contactID) {
 				var LName = $('#LISTNAME').val();
 				 var LCnt = $('#tmpCount').val();   //$('#LISTCOUNT').val();						 
 				 var LDesc = $('#LISTDESCRIPTION').val();
@@ -220,17 +221,17 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 							 } 
 							 $scope.audience  = angular.copy($rootScope.master);						 
 							 $scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator,"lastEditDate":getCurrentDateTime()});
-							$scope.SaveDB(contactID); 
+							$scope.SaveNewDB(contactID); 
 					},function(errResponse){
 							if (errResponse.status == 404) {
 								$scope.audience = {items:[]};
 								$scope.audience.items.push({"contactID":contactID,"LIST-NAME":LName,"LIST-COUNT":LCnt,"LIST-DESCRIPTION":LDesc,"LIST-DEFINITION":LDef,"LISTID-HASH":LHash,"contactDetail":LDetail,"LIST-ARRAY":FArr,"LIST-OPERATOR":FOperator,"JOINOPERATOR":JOperator,"lastEditDate":getCurrentDateTime()});
-								$scope.SaveDB(contactID); 
+								$scope.SaveNewDB(contactID); 
 							}
 					});
 				 }
             };
-			$scope.SaveDB = function(cID) {					
+			$scope.SaveNewDB = function(cID) {					
                 $scope.state['Save'] = "Saving";
                 $http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
                      //alert("Save success");
@@ -246,13 +247,13 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 }]); //myNewCtrl
 	
 			
-		function okFilterClick(page) { //edit for ng-view get parameter to seperate page  [ page = new/saveCount/ ]
+		function okFilterClick(page) { //edit for ng-view get parameter to seperate page  [ page = new/saveCount/start ]
 			    $('#altCnt').hide();	
 				var table = document.getElementById('filterTable');				
 				var rowLength = table.rows.length;
 				//alert("FARR = "+FArr);
-				if (rowLength == 1) {
-					if(FArr == "")		swal("Please set filter."); 
+				if (rowLength == 1 && page != "start") {
+					if(FArr == "" || FArr == null)		swal("Please set filter."); 
 				} else {
 					$('#itemCount').val(counter);
 					//var LISTDEFINITION = "";
@@ -280,8 +281,9 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 											angular.element(document.getElementById('myCtrl')).scope().myCopyItem('lastEditDate',getCurrentDateTime());
 									}
 									//$('#filterDiv').hide();
-									CountClick(page); 
-									
+									if(page!='start'){	
+										CountClick(page); 
+									}									
 								}
 							}
 					});			
