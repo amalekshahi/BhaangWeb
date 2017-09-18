@@ -9,6 +9,7 @@
     name = new campaignName (only for copy)
 */
 require_once 'commonUtil.php';
+date_default_timezone_set("UTC"); 
 
 function CleanDocument($doc)
 {
@@ -111,6 +112,8 @@ if($cmd=="copy"){
             exit; 
         }        
     }
+    $bluePrint = $doc->campaignType;
+    $default = couchDB_Get("/master/Default_".$bluePrint);
     
     $newProgID = md5($newCampaignName);    
     // remove _rev _id
@@ -120,6 +123,22 @@ if($cmd=="copy"){
     $doc->status = "";
     $doc->publishProgramID = "";
     $doc->publishDate = "";
+    // copy schedule audience - schedule from default
+    $clearToDefault = array();
+    foreach ($doc as $key => $value) {
+        //echo "$key => $value\n";
+        $mret1 = preg_match("#^EMAIL-FILTER(.*)$#i", $key);
+        $mret2 = preg_match("#^EMAIL[0-9]+-WAIT(.*)$#i", $key);
+        $mret3 = preg_match("#^EMAIL[0-9]+-SCHEDULE[0-9]+(.*)$#i", $key);
+        $mret4 = preg_match("#^EMAIL[0-9]+-FILTER(.*)$#i", $key);       
+        $mret5 = preg_match("#^filterSelected(.*)$#i", $key);       
+        if($mret1 + $mret2 + $mret3 + $mret4 + $mret5!=0){
+            //if(property_exists($default,$key)){
+                $clearToDefault[] = $key;            
+                $doc->$key = $default->$key;
+            //}
+        }
+    }
     // set new campaignID campaignName
     $doc->campaignID = $newProgID;
     $doc->campaignName = $newCampaignName;
@@ -131,7 +150,9 @@ if($cmd=="copy"){
             'newCampaignName'=>$newCampaignName,
             'newProgID'=>$newProgID,
             'doc'=>$doc,
-            'addRet' => $addRet,
+            'default'=>$default,
+            //'addRet' => $addRet,
+            'clearToDefault'=>$clearToDefault,
         )
     );
     exit;
