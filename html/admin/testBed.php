@@ -52,7 +52,7 @@ require_once 'commonUtil.php';?><!doctype html>
                     <!--<input ng-model="backend.mode" placeholder="[test]">-->
                     <md-select ng-model="backend.mode">
                         <md-option value="">--not set--</md-option>
-                        <md-option value="junk">junk</md-option>
+                        <md-option ng-show="backend.cmd=='update'" value="junk">junk</md-option>
                     </md-select>
                 </md-input-container>  
                 <md-input-container>
@@ -118,6 +118,28 @@ require_once 'commonUtil.php';?><!doctype html>
             </md-content>                  
         </md-content>  
         <div ng-if="login.data" ng-jsoneditor="onLoad" ng-model="login.data" options="login.options" style="width: 98%;"></div>
+      </md-tab label>   
+      
+      <md-tab label="couchDB">
+        <md-content md-theme="docs-dark" layout="column" class="md-padding">          
+            <md-content md-theme="docs-dark" layout="row" layout-padding>    
+                <md-input-container>
+                    <label>path</label>
+                    <input ng-model="couchDB.path" >
+                </md-input-container>  
+                <md-input-container>
+                    <label>method</label>
+                    <md-select ng-model="couchDB.method">
+                        <md-option value="PUT">put</md-option>
+                        <md-option value="GET">get</md-option>
+                    </md-select>
+                </md-input-container>                  
+                <md-input-container>
+                    <button ng-click="couchDBClick()">submit</button>
+                </md-input-container>  
+            </md-content>                  
+        </md-content>  
+        <div ng-if="couchDB.data" ng-jsoneditor="onLoad" ng-model="couchDB.data" options="couchDB.options" style="width: 98%;"></div>
       </md-tab label>        
       
     </md-tabs>
@@ -207,6 +229,27 @@ require_once 'commonUtil.php';?><!doctype html>
                   console.log($scope.login.response);
             });
         };                
+        
+        $scope.couchDB = {
+            options: {mode: 'tree'},
+        };
+        $scope.couchDBClick = function(){
+            $scope.couchDB.data = {};
+            if($scope.couchDB.method == "GET"){
+                $http.get("couchdb.php"+ $scope.couchDB.path + "?" + new Date().toString()).then(function(response) {
+                      $scope.couchDB.data = response.data;
+                      console.log($scope.couchDB.response);
+                });
+            }
+            if($scope.couchDB.method == "PUT"){
+                $http.put('couchdb.php' + $scope.couchDB.path, $scope.couchDB).then(function(response) {
+                      $scope.couchDB.data = response.data;
+                      console.log($scope.couchDB.response);
+                });
+            }
+
+        };                
+        
   }]);
 </script>
 </body>
