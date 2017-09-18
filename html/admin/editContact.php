@@ -154,7 +154,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 						};
 
 						$scope.SaveEditDB = function() {
-							alert(FArr);
+							//alert(FArr);
 								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){		
                                      $scope.state['Save'] = "Save";
 									 $scope.audience._rev = response.data.rev;                      
