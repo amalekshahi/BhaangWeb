@@ -2,3 +2,4 @@ RewriteEngine on
 #RewriteRule ^davichi/_(.*\.php)$ /admin/davichi.php/$1
 #RewriteRule ^davichi/(.*)$ /admin/$1
 RedirectMatch "^/$" "/index.html"
+RewriteRule ^/db(.*)$ /admin/couchdb.php$1
