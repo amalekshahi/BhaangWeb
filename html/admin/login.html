@@ -65,12 +65,12 @@
 							</div>
 							<!-- <a href="dv.php?page=homePage" class="btn btn-primary block full-width m-b" role="button">Login</a> -->
 							<div id="continueDiv">
-								<button class="btn btn-primary block full-width m-b" ng-click="Login()">Login</button>
+								<button class="btn btn-primary block full-width m-b" ng-click="Login()" ng-disabled="loginForm.$invalid">Login</button>
 							</div>
 							<div ng-show="alert" ng-cloak>
 								<div class="alert alert-danger">
 									<!--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
-									<strong> Error! </strong> {{alert.normal}}
+									<strong>Oops!</strong> {{alert.normal}}
 								</div>
 							</div>
 							<a href="javascript:void(0)" onclick="ForgotPassword()">
