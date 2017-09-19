@@ -21,9 +21,6 @@
 		/* button when enabled */
 	}
 </style>
-
-
-
 <div class="panel-heading">
 	<div class="row">
 		<div class="col-sm-3">
