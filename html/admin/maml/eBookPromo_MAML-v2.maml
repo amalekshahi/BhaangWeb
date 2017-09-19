@@ -166,7 +166,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Settings>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL1-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL1-STATE}}" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email1 (Right Now)</Subject>
@@ -198,7 +198,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL2-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL2-STATE}}" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email2 (Right Now)</Subject>
@@ -224,7 +224,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL3-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL3-STATE}}" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email3 (Right Now)</Subject>
