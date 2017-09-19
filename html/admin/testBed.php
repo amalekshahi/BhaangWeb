@@ -154,7 +154,7 @@ require_once 'commonUtil.php';?><!doctype html>
         $scope.backend = {
             cmd:"publish",
             acctID:"16916",
-            progID:"972f5607127bb0582ff5f7b0bebbacdd",
+            progID:"1d528fd7f31ba330223fa579b311c968",
             options: {mode: 'tree'},
         };
         $scope.backendClick = function(){
