@@ -803,12 +803,14 @@ function UpdateMAMLPromoteEbook($xml,$doc)
         $scheduleDayName = 'EMAIL'.$i.'-SCHEDULE1-DAYS';
         $scheduleHourName = 'EMAIL'.$i.'-SCHEDULE1-HOURS';
         $scheduleMinName = 'EMAIL'.$i.'-SCHEDULE1-MINS';
+        $scheduleStateName = 'EMAIL'.$i.'-STATE';
         if(property_exists($doc,$scheduleDayName)){
             $subjectText = "Email".$i."Schedule";
             DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start","Days",$doc->$scheduleDayName);
             DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start","Hours",$doc->$scheduleHourName);
             DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start","Mins",$doc->$scheduleMinName);
-            $node = $xpath->query("//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start")->item(0);            
+            DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']","State",$doc->$scheduleStateName);
+            $node = $xpath->query("//CampaignElement[@Name='Email".$i."']")->item(0);            
             $ret[] = $xml->saveHTML($node);
         }
         //OPEN-MY-EMAIL "OpenAlertLeadTrigger
