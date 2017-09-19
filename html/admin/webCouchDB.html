@@ -26,6 +26,7 @@
 {{saveResult}}
 <div ng-if="obj.data" ng-jsoneditor="onLoad" ng-model="obj.data" options="obj.options" style="width: 98%;"></div>
 </div>
+<script src="js/davinci.js"></script>
 <script>
 var myApp = angular.module('myApp', ['ng.jsoneditor']);
 myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
@@ -34,7 +35,7 @@ myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
         if ($scope.path == "") {
             $scope.path = $scope.defaultPath;
         }
-        $http.get("/couchdb/" + $scope.path + "?"+new Date().toString()).then(function(response) {
+        $http.get(dbEndPoint + "/" + $scope.path + "?"+new Date().toString()).then(function(response) {
             $scope.master  = response.data; 
             $scope.obj.data = $scope.master;
         },function(response){
@@ -43,7 +44,7 @@ myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
     };
     $scope.Save = function(){
         if (typeof $scope.obj.data != 'undefined') {
-            $http.put('/couchdb/' + $scope.path, $scope.obj.data).then(function(response){
+            $http.put(dbEndPoint + "/" + $scope.path, $scope.obj.data).then(function(response){
                 $scope.saveResult = response.data;        
                 $scope.obj.data._rev = $scope.saveResult.rev;
                 $scope.instance.set($scope.obj.data);

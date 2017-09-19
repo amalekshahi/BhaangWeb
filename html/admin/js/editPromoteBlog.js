@@ -141,12 +141,12 @@ myApp.controller('myCtrl', function($scope, $http) {
 
             
         }
-        $http.put('/couchdb/' + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
+        $http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
             $scope.campaign._rev = response.data.rev;
 
             //var currentDate = getCurrentDateTime();
             var currentDate = UTCDateTime(); //use GMT time zone to make angular sort() collrectly
-            $http.get("/couchdb/" + dbName + '/campaignlist' + "?" + new Date().toString()).then(function(response) {
+            $http.get(dbEndPoint + "/" + dbName + '/campaignlist' + "?" + new Date().toString()).then(function(response) {
                 $scope.campaignlist = response.data;
                 if (action == "newCampaign") {
                     if (typeof($scope.campaignlist.campaigns)=='undefined') {
@@ -165,7 +165,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 } else {
                     $scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
                 }
-                $http.put('/couchdb/' + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
+                $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                     $scope.setDisplay();
                     if (silence == true) {} else {
                         //swal("Save Campaign Successful.", "", "success");
@@ -193,7 +193,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                         "status": "Edit",
                         "campaignType": $scope.campaign.campaignType
                     });
-                    $http.put('/couchdb/' + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
+                    $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                         $scope.setDisplay();
                         //swal("Save Campaign Successful.", "", "success");
                         //alert("Save Campaign Successful.");
@@ -236,7 +236,7 @@ myApp.controller('myCtrl', function($scope, $http) {
         }
     };
     $scope.Load = function() {
-        $http.get("/couchdb/" + dbName + '/' + campaignID + "?" + new Date().toString()).then(function(response) {
+        $http.get(dbEndPoint + "/" + dbName + '/' + campaignID + "?" + new Date().toString()).then(function(response) {
             action = 'editCampaign';
             $scope.master = response.data;
             $scope.campaign = angular.copy($scope.master);
@@ -544,7 +544,7 @@ myApp.controller('myCtrl', function($scope, $http) {
         } else {
             $scope.filterList = $scope.campaign['filterSelected'];
         }
-        $http.get("/couchdb/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
+        $http.get(dbEndPoint + "/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
             $scope.masterAu = response.data;
             if (typeof $scope.masterAu.items == 'undefined') {
                 $scope.masterAu.items = [];
