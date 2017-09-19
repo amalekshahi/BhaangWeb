@@ -46,7 +46,7 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 	$scope.Save = function() {
 		//$http.put('/couchdb/' + data.username +'/userinfo', $scope.userinfo).then(function(response){
 		$scope.state['SaveAccountSetting'] = "Saving";
-		$http.put("/couchdb/" + dbname + "/UserInfo", $scope.userinfo).then(function(response){
+		$http.put(dbEndPoint + "/" + dbname + "/UserInfo", $scope.userinfo).then(function(response){
 			  $scope.data = response.data;          
 			  //$scope.Load();
 			  $scope.saveSuccess = true;
@@ -68,7 +68,7 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 
 	$scope.upload = function (file,fieldName) {
 		$scope.state['Upload-'+fieldName] = 'Uploading';
-		var uploadFileName = "IMG-" + uuidv4();
+		var uploadFileName = "IMG-COMPANY-LOGO-" + accountID;
 		//$scope.editor.summernote('insertNode', imgNode);
 		Upload.upload({
 			url: 'upload.php',
