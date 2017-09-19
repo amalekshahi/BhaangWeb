@@ -144,8 +144,8 @@
 		<script>
 			w3IncludeHTML();
 		</script>
-		<script src="js/jquery-3.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<!--<script src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
@@ -153,43 +153,16 @@
 		<script src="js/inspinia.js"></script>
 		<script src="js/plugins/pace/pace.min.js"></script>
 		<script src="js/davinci.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+		<!-- already include in header.php
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
 		<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
 
 		<!-- Page-Level Scripts -->
-		<script>
-			$(document).ready(function() {
-				$("body").tooltip({ selector: '[data-toggle=tooltip]' });
-			});	
-			
-			var dbName = "<?php echo $dbName; ?>";
-			var myApp = angular.module('myApp', ['angularMoment']);
-			myApp.controller('myCtrl', function($scope, $http) {
-				$scope.Reset = function() {
-					$scope.campaignlist = angular.copy($scope.master);
-				};
-				$scope.Load = function() {
-					$http.get("/couchdb/" + dbName + '/campaignlist?' + new Date().toString()).then(function(response) {
-						//$http.get("/couchdb/" + dbName +'/campaignlist?'+new Date().toString()).then(function(response) {
-						$scope.master = response.data;
-						if (typeof $scope.master.campaigns == 'undefined') {
-							$scope.master.campaigns = [];
-						}
-						$scope.Reset();
-					});
-				};
-				$scope.Random = function(range) {
-					return Math.floor((Math.random() * range) + 1);
-				};
-				$scope.Load();
-	
-				$scope.goToLink = function(item) {
-				window.location = 'edit' + item.campaignType + '.php?campaign_id=' + item.campaignID;
-				};
-				
-			});
-		</script>
-
+        <script>
+            // welcome.js need this
+            var dbName = "<?php echo $dbName; ?>";
+        </script>
+		<script src="js/welcome.js"></script>
 	</body>
 
 	</html>
