@@ -24,7 +24,7 @@
 
 		<div id="wrapper">
 			<!-- left wrapper -->
-			<div w3-include-html="leftWrapper.php"></div>
+            <?php include 'leftWrapper.php'; ?>
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg" ng-controller="myCtrl">
                 <!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
@@ -205,17 +205,17 @@
 				<!--/ content -->
 				<div class="footer">
 					<!-- footer -->
-					<div w3-include-html="footer.php"></div>
+					<?php include 'footer.php'; ?>
 					<!-- / footer -->
 				</div>
 			</div>
 			<!--  end page-wrapper -->
 		</div>
 
-		<script src="js/w3data.js"></script>
+		<!--<script src="js/w3data.js"></script>
 		<script>
 			w3IncludeHTML();
-		</script>
+		</script>-->
 		<!-- <script src="js/jquery-3.1.1.min.js"></script> -->
 		<!--<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
