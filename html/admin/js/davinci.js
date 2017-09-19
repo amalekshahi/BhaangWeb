@@ -18,22 +18,11 @@ function getParameterByName_old(name){
 	return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 function getCurrentDateTime() {
-	/*var d = new Date();
-	var m = d.getMonth()+1;
-	var dd = d.getDate();
-	var date = d.getFullYear()+'-'+(m<=9 ? '0' + m : m)+'-'+(dd<=9 ? '0' + dd : dd);
-	var h = d.getHours();
-	var mm = d.getMinutes();
-	var s = d.getSeconds();
-	var time = (h<=9 ? '0' + h : h) + ":" + (mm<=9 ? '0' + mm : mm) + ":" + (s<=9 ? '0' + s : s);
-	return date+' '+time;*/
 	return UTCDateTime();
 }
 
 function UTCDateTime(){
     var d = new Date();
-    //return d.toUTCString();
-    //return moment(d).utc().format("YYYY-MM-DD hh:mm:ss [GMT]");
     return moment(d).utc().format("YYYY-MM-DD[T]hh:mm:ss[Z]");
 }
 
@@ -77,14 +66,5 @@ function Render(template,data){
     }
     return html;
 } 
-/*
-function dbgClick(from){
-    if(from == 'DBView'){
-        window.open("http://web2xmm.com:5984/_utils/document.html?" + dbName + "/" + campaignID, '_blank');
-    }
-    if(from == 'Issue'){
-        window.open("https://github.com/coa0329/Bhaang/issues", '_blank');
-    }
-}
-*/
+
 
