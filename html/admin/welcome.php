@@ -15,7 +15,7 @@
         <?php include "afterBody.php"; ?>
 		<div id="wrapper">
 			<!-- left wrapper -->
-			<div w3-include-html="leftWrapper.php"></div>
+            <?php include 'leftWrapper.php'; ?>
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg">
 				<div class="row border-bottom">
@@ -132,7 +132,7 @@
 				<!--/ content -->
 				<div class="footer">
 					<!-- footer -->
-					<div w3-include-html="footer.php"></div>
+                    <?php include 'footer.php'; ?>
 					<!-- / footer -->
 				</div>
 			</div>
@@ -140,10 +140,10 @@
 		</div>
 
 		<!-- Mainly scripts -->
-		<script src="js/w3data.js"></script>
+		<!--<script src="js/w3data.js"></script>
 		<script>
 			w3IncludeHTML();
-		</script>
+		</script>-->
 		<!--<script src="js/jquery-3.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
