@@ -314,6 +314,9 @@ if($cmd == "publish"){
     file_put_contents($republishReturnFileName,$updateMAML);
     //CheckIn    
     $checkInRet = checkinProgram($ticket,$updateMAML);
+/*    $checkInRet = array(
+        'success'=>true,
+    );*/
     if($checkInRet['success']){
         echo json_encode( 
             array(
