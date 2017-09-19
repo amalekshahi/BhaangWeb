@@ -1,3 +1,4 @@
+var dbEndPoint = "couchdb.php"
 
 /* remove [] */
 function prettyStudioErrorMessage(str)
