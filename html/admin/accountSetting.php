@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');    
@@ -152,7 +152,6 @@
                                     <div class="col-sm-10">
 										<img ng-src="{{userinfo.defCompanyLogo}}" width="180px" border="0" alt="logo">
 										<a ng-model="file" ngf-select="upload($file,'defCompanyLogo')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload-defCompanyLogo'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload-defCompanyLogo'] != 'Uploading'"></i> Upload image ...</a>
-										<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="userinfo.defCompanyLogo"><span class="help-block m-b-none">Something like http://www.yahoo.com/myLogo.jpg</span>
                                     </div>
                                 </div>
 

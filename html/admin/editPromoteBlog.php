@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set("UTC");
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
@@ -217,7 +217,7 @@
 			w3IncludeHTML();
 		</script>-->
 		<!-- <script src="js/jquery-3.1.1.min.js"></script> -->
-		<!--<script src="js/bootstrap.min.js"></script>-->
+		<script src="js/bootstrap.min.js"></script>
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 		<script type="text/JavaScript" src="global.js?n=1"></script>
