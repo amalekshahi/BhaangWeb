@@ -167,9 +167,14 @@ $(document).ready(function(){
 							var flabel = $(document.getElementById(form_fields[i]+"Label")).val();	
 							var frequire = $(document.getElementById(form_fields[i]+"Require")).val();	
 							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
-							//add array
+							
+							//add array							
 							tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-							summerdivtxt += getFormCode("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 
+							
+							//summerdivtxt += angular.injector(['ng', 'myApp']).get("myService").GetFormCodeG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill); 		
+							summerdivtxt += angular.element(document.getElementById('myCtrl')).scope().GetCodeCallG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill);
+							//summerdivtxt += getFormCode("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 
+
 							if(fFieldType == 'datetime'){
 									var datename = form_fields[i]+"_DATE"; 
 									darray.push(datename); 											
