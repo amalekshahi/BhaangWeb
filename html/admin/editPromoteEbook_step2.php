@@ -3,7 +3,7 @@
 </style>
 <div class="panel panel-default" ng-controller="step2" id="step2ID">
 	<div class="panel-heading">
-		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();">
 		<span class="badge" ng-show="!step2Done">2</span>
 		<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done""></i>
 		&nbsp;Set Up Your Landing Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small class="m-l-sm"><i aria-hidden="true" class="fa fa-file-o"></i> {{pageProgress}}</small></a></h4>
