@@ -6,9 +6,7 @@
     $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
-?>
-
-	<!DOCTYPE html>
+?><!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
@@ -68,7 +66,7 @@
 										</thead>
 										<tbody>
 											<tr ng-repeat="item in audience.items | orderBy:'-lastEditDate'" ng-cloak>
-												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
+												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" target="_blank">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
 												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" target="_blank" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
  
 													
