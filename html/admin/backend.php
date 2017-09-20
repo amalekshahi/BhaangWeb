@@ -43,6 +43,9 @@ $progID = $_REQUEST['progID'];
 $cmd = $_REQUEST['cmd'];
 $mode = $_REQUEST['mode'];
 $dbName = getDatabaseName($acctID,"");
+$execTime = array();
+$start_time = microtime(true);
+
 
 //$dateTimeNow = date('Y/m/d H:i:s');
 $dateTimeNow = GetStringTimeStamp(); //gmdate('Y-m-d\TH:i:s\Z', time()); 
@@ -143,6 +146,8 @@ if($cmd=="copy"){
     // set new campaignID campaignName
     $doc->campaignID = $newProgID;
     $doc->campaignName = $newCampaignName;
+
+    
     $addRet = AddNewCampaign($dbName,$doc);
     echo json_encode( 
         array(
@@ -193,7 +198,7 @@ if($cmd=="test"){
 //$configs = json_decode(file_get_contents("conf/template.conf"));
 $masterTemplate = couchDB_Get("/master/templates");
 $blueprints = $masterTemplate->blueprints;
-
+$execTime['GetTemplate'] = microtime(true) - $start_time;$start_time = microtime(true);
 //Read Document
 $doc = couchDB_Get("/$dbName/$progID");
 if(empty($doc->_id)){
@@ -204,6 +209,7 @@ if(empty($doc->_id)){
         ));
     exit;
 }
+$execTime['Read Document'] = microtime(true) - $start_time;$start_time = microtime(true);
 //print_r($configs);
 //echo "<hr><br>";
 //print_r($doc);
@@ -229,19 +235,21 @@ if($templateName == ""){
 
 $templateFileName = "maml/$templateName";
 $tmaml = file_get_contents($templateFileName);
-
+$execTime['GetTemplateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
 if($mode == "junk"){
     $t = time();
     $doc->campaignName = $doc->campaignName."_".$dateTimeNow;
     $doc->campaignID = $doc->campaignID."_".$t;
     
 }
-$finishMAML = studio_url_render($tmaml,$acctID,$progID,$doc);
+$studio_url_render_ret = studio_url_render2($tmaml,$acctID,$progID,$doc);
+$finishMAML = $studio_url_render_ret['template'];
 //Render and upload to S3 if necessary
-
+$execTime['StudioRender'] = microtime(true) - $start_time;$start_time = microtime(true);
 
 $publishFileName = "publish/".$acctID."_".$progID.".maml";
 file_put_contents($publishFileName,$finishMAML);
+$execTime['header'] = microtime(true) - $start_time;$start_time = microtime(true);
 //dump_r($finishMAML);
 if($cmd == "publish"){
     $resp = publishMAML($finishMAML);
@@ -292,16 +300,43 @@ if($cmd == "publish"){
     }
     
 }else{
+    
     $ticket = GetTicketBySession();
+    $execTime['GetTicketBySession'] = microtime(true) - $start_time;$start_time = microtime(true);
+    
+    
     // Update Republish mode
     $publishProgramID = GetMamlProgramID($acctID,$progID);
     $publishMAML = GetPublishedMAML($acctID,$progID);
+    $execTime['GetPublishedMAM'] = microtime(true) - $start_time;$start_time = microtime(true);
+    
     
     $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
+    $execTime['checkoutProgram'] = microtime(true) - $start_time;$start_time = microtime(true);
+    
     // Make sure check out success
+    
     if(!$checkOutRet['success']){
         $undoRet = UndoProgramChanges($ticket, $publishProgramID);	
         $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
+    }
+    $execTime['checkoutProgram2'] = microtime(true) - $start_time;$start_time = microtime(true);
+    
+    if(!$checkOutRet['success']){
+        // something wrong
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'message'=>$checkOutRet['errorMessage'],
+                'time'=>$execTime,
+                'mode'=>"DEBUG",
+                'publishProgramID'=>$publishProgramID,
+                'ticket'=>$ticket,            
+                'checkOutRet'=>$checkOutRet,
+                'publishMAML'=>$publishMAML,
+                'checkOutMAML'=>$checkOutMAML,
+        ));
+        exit;        
     }
     $checkOutMAML = $checkOutRet['Maml'];
     
@@ -310,12 +345,14 @@ if($cmd == "publish"){
     $xml->loadXML($checkOutMAML);
     $updateResult = UpdateMAML($xml,$doc,$campaignType);
     $updateMAML = $updateResult["Maml"];
+    $execTime['UpdateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
 
     // save file for debug
     $republishReturnFileName = "publish/".$acctID."_".$progID."_republish.maml";
     file_put_contents($republishReturnFileName,$updateMAML);
     //CheckIn    
     $checkInRet = checkinProgram($ticket,$updateMAML);
+    $execTime['checkinProgram'] = microtime(true) - $start_time;$start_time = microtime(true);
     /*echo json_encode( 
         array(
             'mode'=>"DEBUG",
@@ -334,7 +371,9 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>true,
+                'time'=> $execTime,
                 'message'=>"Update Done",
+                'studio_url_render_ret'=>$studio_url_render_ret,
                 'publishProgramID'=>$publishProgramID,
                 'ticket'=>$ticket,            
                 //'checkOutMAML'=>$checkOutMAML,
@@ -342,11 +381,13 @@ if($cmd == "publish"){
                 'checkInRet'=>$checkInRet,
                 //'undoRet'=>$undoRet,
                 'updateResult'=>$updateResult,
+                
             ));
     }else{
         echo json_encode( 
             array(
                 'success'=>false,
+                'time'=> $execTime,
                 'message'=>"Update fail",
                 'publishProgramID'=>$publishProgramID,
                 'ticket'=>$ticket,            
