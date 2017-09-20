@@ -51,6 +51,10 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	};
 	$scope.uploadBeforeSave = function () {
 		var file = $('#eBookFile').prop('files')[0];
+		if (file===undefined) {
+			$scope.Save();
+			return false;
+		}
 		var uploadFileName = "eBOOK-" + uuidv4();
 		$scope.state['Save'] = "Saving";
 		Upload.upload({
@@ -125,7 +129,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 						"status": "Edit",
 						"campaignType": $scope.campaign.campaignType
 					});
-					action = 'editCampaign';
+					//action = 'editCampaign';
 				} else {
 					$scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
 				}
@@ -138,6 +142,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					$scope.master = angular.copy($scope.campaign);
 					$scope.clearFormState();
 					$scope.state['Save'] = 'Save';
+					$scope.goEditMode(action);
 				});
 			}, function(errResponse) {
 				// case new account
@@ -157,17 +162,24 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					});
 					$http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
 						$scope.setDisplay();
-						//swal("Save Campaign Successful.", "", "success");
-						//alert("Save Campaign Successful.");
+						$scope.state['Save'] = 'Save';
+						$scope.goEditMode(action);
 					});
 				} else {
 					//alert(errResponse.statusText);
+					$scope.state['Save'] = 'Save';
 					swal(errResponse.statusText);
 				}
-				$scope.state['Save'] = 'Save';
+				
 			});
 
 		});
+		
+	};
+	$scope.goEditMode = function(action) {
+		if (action == "newCampaign") {
+			window.location.href = "editPromoteEbook.php?campaign_id="+campaignID;
+		}
 	};
 	$scope.Cancel = function() {
 		swal({

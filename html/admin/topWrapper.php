@@ -9,8 +9,8 @@ $pwd = $_SESSION['PWD'];
 $USERNAME = $_SESSION['USERNAME'];
 ?>
 <div class="navbar-header">
-  <!-- Commented out for now, until we have Da Vinci wide search
   <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+  <!-- Commented out for now, until we have Da Vinci wide search
   <form role="search" class="navbar-form-custom" action="#">
         <div class="form-group">
             <input type="text" placeholder="Search...." class="form-control" name="top-search" id="top-search">
