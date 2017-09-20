@@ -9,7 +9,6 @@
 
 	<head>
 		<?php include "header.php"; ?>
-		<script src="js/welcome.js"></script>
 	</head>
 
 
