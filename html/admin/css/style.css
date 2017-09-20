@@ -8675,3 +8675,6 @@ body.md-skin {
 .badge{text-transform:uppercase}
 .badge{display:inline-block;padding:.25em .4em;font-size:75%;font-weight:600;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:3px}
 
+.ng-hide-dave {
+  display: none !important;
+}
