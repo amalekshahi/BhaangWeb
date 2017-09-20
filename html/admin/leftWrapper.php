@@ -19,7 +19,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle">
                             <span class="clear"> <span class="block m-t-xs"><a href="myProfileSettings.php"><strong class="font-bold"><br><br><br><br></strong></a></span>
                              </span> 
-                             </span> </a>
+                             </a>
                     </div>
                     <div class="logo-element">
                         DV
