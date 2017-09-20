@@ -51,6 +51,10 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	};
 	$scope.uploadBeforeSave = function () {
 		var file = $('#eBookFile').prop('files')[0];
+		if (file===undefined) {
+			$scope.Save();
+			return false;
+		}
 		var uploadFileName = "eBOOK-" + uuidv4();
 		$scope.state['Save'] = "Saving";
 		Upload.upload({
@@ -75,7 +79,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			console.log('Error status: ' + resp.status);
 		}, function (evt) {
 			var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-			console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+			console.log('progress: ' + progressPercentage + '% ');
 		});
 	};
 	$scope.Save = function(mode, silence) {
@@ -125,7 +129,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 						"status": "Edit",
 						"campaignType": $scope.campaign.campaignType
 					});
-					action = 'editCampaign';
+					//action = 'editCampaign';
 				} else {
 					$scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
 				}
@@ -138,6 +142,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					$scope.master = angular.copy($scope.campaign);
 					$scope.clearFormState();
 					$scope.state['Save'] = 'Save';
+                    //Kwang try auto publish
+                    $scope.Publish(true);
+					$scope.goEditMode(action);
 				});
 			}, function(errResponse) {
 				// case new account
@@ -157,17 +164,24 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					});
 					$http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
 						$scope.setDisplay();
-						//swal("Save Campaign Successful.", "", "success");
-						//alert("Save Campaign Successful.");
+						$scope.state['Save'] = 'Save';
+						$scope.goEditMode(action);
 					});
 				} else {
 					//alert(errResponse.statusText);
+					$scope.state['Save'] = 'Save';
 					swal(errResponse.statusText);
 				}
-				$scope.state['Save'] = 'Save';
+				
 			});
 
 		});
+		
+	};
+	$scope.goEditMode = function(action) {
+		if (action == "newCampaign") {
+			window.location.href = "editPromoteEbook.php?campaign_id="+campaignID;
+		}
 	};
 	$scope.Cancel = function() {
 		swal({
@@ -438,7 +452,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	$scope.CanPublish = function() {
 		return $scope.step1Done == true && $scope.step2Done == true && $scope.step3Done == true && $scope.step4Done == true;
 	};
-	$scope.RePublish = function(){
+	$scope.RePublish = function(silenceMode){
 		console.log("RePublish");
 		$scope.state['Publish'] = "Re Launching";
 		$http({
@@ -455,9 +469,13 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		}).then(function(response) {
 			if (response.data.success == false) {
 				var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
-				swal(response.data.detail.Result.ErrorCode,errorMessage);
+                if(!$scope.silenceMode){
+                    swal(response.data.detail.Result.ErrorCode,errorMessage);
+                }
 			} else {
-				swal(response.data.message);
+                if(!$scope.silenceMode){
+                    swal(response.data.message);
+                }
 			}
 			var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
 			console.log(str); // Logs output to dev tools console.
@@ -465,15 +483,22 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			//alert(response);
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
-			swal("Server Error");
+            if(!$scope.silenceMode){
+                swal("Server Error");
+            }
 			//alert(errResponse);
 		});
 	}
-	$scope.Publish = function() {
+    $scope.silenceMode = false;
+	$scope.Publish = function(silenceMode) {
+        if(typeof silenceMode == "undefined"){
+            silenceMode = false;
+        }
+        $scope.silenceMode = silenceMode;
 		//check if we already publish this campaign
 		if(hasValue($scope.campaign['publishProgramID'])){
 			//alert('Already publish ' + $scope.campaign['publishProgramID']);
-			$scope.RePublish();
+			$scope.RePublish(silenceMode);
 			return;
 		}
 		$scope.state['Publish'] = "Launching";
@@ -491,9 +516,13 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		}).then(function(response) {
 			if (response.data.success == false) {
 				var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
-				swal(response.data.detail.Result.ErrorCode,errorMessage);
+                if(!$scope.silenceMode){
+                    swal(response.data.detail.Result.ErrorCode,errorMessage);
+                }
 			} else {
-				swal(response.data.message);
+                if(!$scope.silenceMode){
+                    swal(response.data.message);
+                }
 				// set public programID back to tree
 				$scope.campaign['publishProgramID'] = response.data.publishProgramID;
 			}
@@ -504,7 +533,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			//alert(response);
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
-			swal("Server Error");
+            if(!$scope.silenceMode){
+                swal("Server Error");
+            }
 			//alert(errResponse);
 		});
 	};

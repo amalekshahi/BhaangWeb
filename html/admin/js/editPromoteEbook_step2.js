@@ -1,3 +1,4 @@
+var editLandingPage = true;
 myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload) {
 	$scope.upload2Pages = function (file,field) {
 		$scope.state[field] = 'Uploading';
@@ -33,3 +34,12 @@ myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload
 		$scope.campaign[tarField] = $scope.campaign[srcField];
 	};
 }]);
+function setLeftBar() {
+	if (editLandingPage) {
+		$("body").addClass("mini-navbar");
+		editLandingPage = false;
+	} else {
+		$("body").removeClass("mini-navbar");
+		editLandingPage = true;
+	}
+}

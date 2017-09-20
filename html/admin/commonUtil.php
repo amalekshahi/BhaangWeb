@@ -363,6 +363,94 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
     return $template;
 }
 
+function studio_url_render2($template,$acctID,$progID,$data,$urlFormat=NULL)
+{
+    global $URLRenderFormat;
+    global $MISSINGRenderFormat;
+    $start_time = microtime(true);
+    $s3_time = 0;
+    $s3_detail = array();
+    if(is_null($urlFormat) == true){    
+        $urlFormat = $URLRenderFormat;
+    }
+    for($loop = 0;$loop < 3; $loop++){
+    //while(true){
+        preg_match_all('/\{{(.*?)\}}/', $template, $matches, PREG_PATTERN_ORDER);
+        $aValue0 = $matches[0];
+        $aValue1 = $matches[1];
+        // somehow unique_array not work using hash instead.
+        $hash = array();
+        if(count($aValue0) == 0){
+            break;
+        }
+        for($i = 0;$i<count($aValue0);$i++){
+            $value0 = $aValue0[$i];
+            $value1 = $aValue1[$i];
+            $renderDirect = true;
+            $renderRaw = false;
+            //wPrint("-- $value0 $value1\n");
+            if(startsWith($value1,"URL ")){
+                $renderDirect = false;
+                $value1 = substr($value1,4);
+                //wPrint("-- change to $value1\n");
+            }
+            if(startsWith($value1,"RAW ")){
+                $renderRaw = true;
+                $value1 = substr($value1,4);
+            }
+            if(array_key_exists($value0,$hash)){
+            }else{
+                $hash[$value0] = $value1;
+                //wPrint("$value0 $value1\n");
+                
+                $filename = str_replace("ACCTID",$acctID,$value1);
+                $filename = str_replace("PROGRAMID",$progID,$filename);
+                $renderValue = "";
+                if(property_exists($data,"$value1")){
+                    if($renderDirect){
+                        $renderValue = $data->$value1;                
+                    }else{
+                        $filename = $filename . ".html";
+                        //Render content before publish to S3
+                        $studio_url_render_ret = studio_url_render2($data->$value1,$acctID,$progID,$data);
+                        $renderedContent = $studio_url_render_ret['template'];
+                        $s3_start_time = microtime(true);
+                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $s3_time = $s3_time +  microtime(true) - $s3_start_time;
+                        $s3_detail[] = array(
+                            "time"=> microtime(true) - $s3_start_time,
+                            "url"=> $filename,
+                        );
+                        //$s3Url = s3_put_contents($filename,$data->$value1,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $renderValue = str_replace("{{url}}", "$s3Url", $URLRenderFormat);
+                    }
+                    $xmlSave = $renderValue;
+                    if($renderRaw==false){
+                        $xmlSave = htmlspecialchars($renderValue);
+                    }
+                    $template = str_replace("$value0", "$xmlSave", $template);
+                }else{
+                    $missingValue = str_replace("{{value}}","$value1",$MISSINGRenderFormat);
+                    $xmlSave = $missingValue;
+                    if($renderRaw==false){
+                        $xmlSave = htmlspecialchars($missingValue);
+                    }
+                    //$xmlSave = htmlspecialchars($missingValue);
+                    $template = str_replace("$value0", "$xmlSave", $template);
+                }
+            }
+        }
+    }
+    return array(
+        "total_time"=>  microtime(true)- $start_time,
+        "s3_time"=> $s3_time,
+        "s3_detail" => $s3_detail,
+        "loop"=>$loop,
+        "template"=>$template,
+    );
+}
+
+
 function RenderFileName($acctID,$progID,$filename)
 {
     $filename = str_replace("ACCTID",$acctID,$filename);

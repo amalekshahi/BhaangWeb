@@ -173,6 +173,9 @@ require_once 'commonUtil.php';?><!doctype html>
             ).then(function(response) {
                   $scope.backend.data = response.data;
                   console.log($scope.backend.response);
+            },function(response){
+                  alert(response.statusText);
+                  console.log(response);
             });
         };
         

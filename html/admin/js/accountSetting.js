@@ -5,6 +5,7 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 		if (!hasValue($scope.userinfo.defCompanyLogo)) {
 			$scope.userinfo.defCompanyLogo = "https://s3.amazonaws.com/mindfiredavinci/img/DV_image_placeholder_180x70.png";
 		}
+		$scope.srcCompanyLogo = $scope.userinfo.defCompanyLogo;
 		$scope.myForm.$setPristine();
 		//$scope.fuser = $scope.userinfo.username;
 		//$scope.fadd = $scope.userinfo.defFromAdd;			
@@ -85,6 +86,7 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 			console.log('Success ' + resp.config.data.file.name + 'uploaded');
 			console.log(resp.data);
 			$scope.userinfo[fieldName] = resp.data.imgSrc;
+			$scope.srcCompanyLogo = resp.data.imgSrc+ "?" + new Date().toString();
 			$scope.state['Upload-'+fieldName] = 'Finish';
 		}, function(resp) {
 			console.log('Error status: ' + resp.status);
