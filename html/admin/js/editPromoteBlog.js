@@ -161,7 +161,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                         "status": "Edit",
                         "campaignType": $scope.campaign.campaignType
                     });
-                    action = 'editCampaign';
+                    //action = 'editCampaign';
                 } else {
                     $scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
                 }
@@ -169,13 +169,12 @@ myApp.controller('myCtrl', function($scope, $http) {
                     $scope.setDisplay();
                     if (silence == true) {} else {
                         //swal("Save Campaign Successful.", "", "success");
-                        
                     }
-                    
                     // Kwang backup current to master and clear formState
                     $scope.master = angular.copy($scope.campaign);
                     $scope.clearFormState();
                     $scope.state['Save'] = 'Save';
+					$scope.goEditMode(action);
                 });
             }, function(errResponse) {
                 // case new account
@@ -195,18 +194,26 @@ myApp.controller('myCtrl', function($scope, $http) {
                     });
                     $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                         $scope.setDisplay();
+						$scope.state['Save'] = 'Save';
+						$scope.goEditMode(action);
                         //swal("Save Campaign Successful.", "", "success");
                         //alert("Save Campaign Successful.");
                     });
                 } else {
                     //alert(errResponse.statusText);
+					$scope.state['Save'] = 'Save';
                     swal(errResponse.statusText);
                 }
-                $scope.state['Save'] = 'Save';
+                
             });
 
         });
     };
+	$scope.goEditMode = function(action) {
+		if (action == "newCampaign") {
+			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID;
+		}
+	};
     $scope.Cancel = function() {
         swal({
             title: "Are you sure?",
