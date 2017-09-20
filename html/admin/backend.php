@@ -296,6 +296,7 @@ if($cmd == "publish"){
     // Update Republish mode
     $publishProgramID = GetMamlProgramID($acctID,$progID);
     $publishMAML = GetPublishedMAML($acctID,$progID);
+    
     $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
     // Make sure check out success
     if(!$checkOutRet['success']){
@@ -303,10 +304,11 @@ if($cmd == "publish"){
         $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
     }
     $checkOutMAML = $checkOutRet['Maml'];
+    
     // Do some work here
     $xml = new DOMDocument();
     $xml->loadXML($checkOutMAML);
-    $updateResult = UpdateMAML($xml,$doc);
+    $updateResult = UpdateMAML($xml,$doc,$campaignType);
     $updateMAML = $updateResult["Maml"];
 
     // save file for debug
@@ -314,6 +316,20 @@ if($cmd == "publish"){
     file_put_contents($republishReturnFileName,$updateMAML);
     //CheckIn    
     $checkInRet = checkinProgram($ticket,$updateMAML);
+    /*echo json_encode( 
+        array(
+            'mode'=>"DEBUG",
+            'publishProgramID'=>$publishProgramID,
+            'ticket'=>$ticket,            
+            //'checkOutMAML'=>$checkOutMAML,
+            //'checkOutRet'=>$checkOutRet,
+            //'checkInRet'=>$checkInRet,
+            //'undoRet'=>$undoRet,
+            'updateResult'=>$updateResult,
+            'campaignType'=>$campaignType,
+    ));
+    exit;*/
+    
     if($checkInRet['success']){
         echo json_encode( 
             array(

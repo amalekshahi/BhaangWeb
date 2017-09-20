@@ -721,7 +721,7 @@ function echoCallbackString($callback, $loadmore='', $authToken = '', $mpArray){
     )), ')';
 }
 
-function UpdateMAML($xml,$doc)
+function UpdateMAMLPromoteBlog($xml,$doc)
 {
     $xpath = new DOMXpath($xml);
     // scan for at most 10 email
@@ -784,11 +784,63 @@ function UpdateMAML($xml,$doc)
     $ClickAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='ClickAlertLeadTrigger']","State",$doc->{'VISIT-MY-BLOCK'});
     
     return array(
+        "type" => "PromoteBlog",
         "ContactUpdate" => $contactRet,
         "Maml"=> $xml->saveHTML(),
         "EmailUpdate" => $ret,
         "OpenAlertLeadTrigger" => $xml->saveHTML($OpenAlertLeadTrigger),
         "ClickAlertLeadTrigger" => $xml->saveHTML($ClickAlertLeadTrigger),
+    );
+}
+
+function UpdateMAMLPromoteEbook($xml,$doc)
+{
+    $xpath = new DOMXpath($xml);
+    // scan for at most 10 email
+    $ret = array();
+    for($i=1;$i<10;$i++){
+        // check if $doc is define 
+        $scheduleDayName = 'EMAIL'.$i.'-SCHEDULE1-DAYS';
+        $scheduleHourName = 'EMAIL'.$i.'-SCHEDULE1-HOURS';
+        $scheduleMinName = 'EMAIL'.$i.'-SCHEDULE1-MINS';
+        $scheduleStateName = 'EMAIL'.$i.'-STATE';
+        if(property_exists($doc,$scheduleDayName)){
+            $subjectText = "Email".$i."Schedule";
+            DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start","Days",$doc->$scheduleDayName);
+            DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start","Hours",$doc->$scheduleHourName);
+            DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']/Schedules/Schedule/Start","Mins",$doc->$scheduleMinName);
+            DomSetAttribute($xpath,"//CampaignElement[@Name='Email".$i."']","State",$doc->$scheduleStateName);
+            $node = $xpath->query("//CampaignElement[@Name='Email".$i."']")->item(0);            
+            $ret[] = $xml->saveHTML($node);
+        }
+        //OPEN-MY-EMAIL "OpenAlertLeadTrigger
+        //$OpenAlertLeadTrigger = $xpath->query("//CampaignElement[@Name='OpenAlertLeadTrigger']")->item(0);
+    }
+    $visitMyEBook = DomSetAttribute($xpath,"//CampaignElement[@Name='VisitAlertLeadTrigger']","State",$doc->{'VISIT-MY-EBOOK'});
+    $downloadMyEBook = DomSetAttribute($xpath,"//CampaignElement[@Name='DownloadAlertLeadTrigger']","State",$doc->{'DOWNLOAD-MY-EBOOK'});
+    //$OpenAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='OpenAlertLeadTrigger']","State",$doc->{'OPEN-MY-EMAIL'});
+    //$ClickAlertLeadTrigger = DomSetAttribute($xpath,"//CampaignElement[@Name='ClickAlertLeadTrigger']","State",$doc->{'VISIT-MY-BLOCK'});
+    
+    return array(
+        "type" => "PromoteEbook",
+        "EmailUpdate" => $ret,
+        "VisitAlertLeadTrigger" => $xml->saveHTML($visitMyEBook),
+        "DownloadAlertLeadTrigger" => $xml->saveHTML($downloadMyEBook),
+        "Maml"=> $xml->saveHTML(),                
+    );
+}
+
+function UpdateMAML($xml,$doc,$campaignType)
+{
+    if($campaignType == "PromoteBlog"){
+        return UpdateMAMLPromoteBlog($xml,$doc);
+    }
+    if($campaignType == "PromoteEbook"){
+        return UpdateMAMLPromoteEbook($xml,$doc);
+    }
+    return array(
+        "success" => false,
+        "message"=> "campaignType not found ".$campaignType,
     );
 }
 

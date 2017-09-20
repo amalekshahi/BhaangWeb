@@ -10,7 +10,11 @@ $pathInfo = $_SERVER['PATH_INFO'];
 $method = $_SERVER['REQUEST_METHOD'];
 if($method=="GET"){
     $ret = couchDB_Get($pathInfo,true);
-    echo json_encode($ret);
+    if(!empty($ret['error'])){
+        http_response_code(404);
+    }else{
+        echo json_encode($ret);
+    }
     exit;
 }
 if($method=="PUT"){

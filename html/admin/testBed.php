@@ -153,8 +153,8 @@ require_once 'commonUtil.php';?><!doctype html>
   myApp.controller('myCtrl',['$scope','$http',function($scope,$http) {
         $scope.backend = {
             cmd:"publish",
-            acctID:"228",
-            progID:"923450c735088df2feaea4f0f81f3b55",
+            acctID:"16916",
+            progID:"1d528fd7f31ba330223fa579b311c968",
             options: {mode: 'tree'},
         };
         $scope.backendClick = function(){
