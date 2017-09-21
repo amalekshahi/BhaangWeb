@@ -223,8 +223,6 @@
 			var dbName = "<?php echo $dbName; ?>";
 		</script>
         <script src="js/audiences.js"></script>
-
-
 	</body>
 
 	</html>

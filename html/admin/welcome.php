@@ -3,17 +3,29 @@
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?>
-	<!DOCTYPE html>
+?><!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
 		<?php include "header.php"; ?>
+		<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>     
+        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+		<!-- Custom and plugin javascript -->
+		<script src="js/inspinia.js"></script>
+		<script src="js/plugins/pace/pace.min.js"></script>
+		<script src="js/davinci.js"></script>
+
 	</head>
-
-
 	<body class="">
 		<?php include "afterBody.php"; ?>
+		<script>
+			// welcome.js need this
+			var dbName = "<?php echo $dbName; ?>";
+            var myApp = angular.module('myApp', ['angularMoment']);
+		</script>
+        <script src="js/welcome.js"></script>
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<?php include 'leftWrapper.php'; ?>
@@ -165,30 +177,6 @@
 			</div>
 			<!--  end page-wrapper -->
 		</div>
-
-		<!-- Mainly scripts -->
-		<!--<script src="js/w3data.js"></script>
-		<script>
-			w3IncludeHTML();
-		</script>-->
-		<!--<script src="js/jquery-3.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>-->
-		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-		<!-- Custom and plugin javascript -->
-		<script src="js/inspinia.js"></script>
-		<script src="js/plugins/pace/pace.min.js"></script>
-		<script src="js/davinci.js"></script>
-		<!-- already include in header.php
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
-		<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
-
-		<!-- Page-Level Scripts -->
-		<script>
-			// welcome.js need this
-			var dbName = "<?php echo $dbName; ?>";
-		</script>
 	</body>
 
 	</html>
