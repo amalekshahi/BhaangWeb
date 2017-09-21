@@ -118,7 +118,7 @@ myApp.service('DisconnectService', ['$rootScope','$http', function($rootScope,$h
 
 	this.GetDropdownOpt = function() {
 					//fungEdit#36
-					$http.get("/couchdb/master/Default_FormDropdown"+"?"+new Date().toString()).then(function(response) {
+					$http.get(dbEndPoint + "/master/Default_FormDropdown"+"?"+new Date().toString()).then(function(response) {
 								$rootScope.masterDD  = response.data; 
 								if (typeof $rootScope.masterDD == 'undefined') {
 								   $rootScope.masterDD = "";

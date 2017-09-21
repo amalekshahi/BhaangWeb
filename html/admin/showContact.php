@@ -119,7 +119,7 @@
 				  getContactClick(); 
             };			
 			$scope.Load = function() {
-                $http.get("/couchdb/" + dbName +'/audienceLists').then(function(response) {
+                $http.get(dbEndPoint + "/" + dbName +'/audienceLists').then(function(response) {
                      $scope.master  = response.data; 
                      if (typeof $scope.master.items == 'undefined') {
                        $scope.master.items = [];

@@ -73,7 +73,7 @@ myApp.controller('myCtrl',function($scope,$http) {
 			};
 			$scope.LoadLibrary = function() {     
 					
-				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
+				$http.get(dbEndPoint + "/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
 							$scope.master  = response.data; 
 							if (typeof $scope.master.items == 'undefined') {
 							   $scope.master.items = [];
@@ -111,7 +111,7 @@ myApp.controller('myCtrl',function($scope,$http) {
                 });				
             };
 			$scope.SaveCopy = function(resID) {								
-					$http.put('/couchdb/' + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
+					$http.put(dbEndPoint + "/" + dbName +'/formLibrary',  $scope.frmlist).then(function(response){
 						//window.location.href="formEditor.php?fID="+resID; 
 						window.location.href="formLibrary.php" ; 
 					});         

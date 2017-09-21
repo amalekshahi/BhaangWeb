@@ -3,16 +3,13 @@
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?>
-
+?><!DOCTYPE html>
+<html ng-app="myApp">
 <!-- ***************************************************
 THIS PAGE USE  <ng-view>
 editContactNewAudience.html
 editContactAudience.html
 *************************************************** -->
-
-<!DOCTYPE html>
-<html ng-app="myApp">
 <meta http-equiv="expires" content="-1">
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Cache-Control" content="no-cache" />
@@ -134,7 +131,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 							FArr = $scope.audience.items[indx]['LIST-ARRAY']; 							
 						};
 						$scope.Load = function() {
-						$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
+						$http.get(dbEndPoint + "/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 								 $rootScope.master  = response.data; 
 								 if (typeof $rootScope.master.items == 'undefined') {
 								   $rootScope.master.items = [];
@@ -155,7 +152,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 
 						$scope.SaveEditDB = function() {
 							//alert(FArr);
-								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){		
+								$http.put(dbEndPoint + "/" + dbName +'/audienceLists',  $scope.audience).then(function(response){		
                                      $scope.state['Save'] = "Save";
 									 $scope.audience._rev = response.data.rev;                      
 				                     $scope.master = angular.copy($scope.audience);   
@@ -178,7 +175,7 @@ myApp.controller('myCtrl',['$scope','$http','Upload','$rootScope',function($scop
 
 						$scope.SaveCnt = function(scnt) {							
 								$scope.myCopyItem('LIST-COUNT',scnt);
-								$http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
+								$http.put(dbEndPoint + "/" + dbName +'/audienceLists',  $scope.audience).then(function(response){
 									 $scope.Load();									 
 								});         
 						};
@@ -214,7 +211,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
 				 if (rowLength == 1) {						
 						swal("Please set filter."); 
 				 } else{
-					$http.get("/couchdb/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
+					$http.get(dbEndPoint + "/" + dbName +'/audienceLists'+"?"+new Date().toString()).then(function(response) {
 							 $rootScope.master  = response.data; 
 							 if (typeof $rootScope.master.items == 'undefined') {
 									$rootScope.master.items = [];
@@ -233,7 +230,7 @@ myApp.controller('myNewCtrl',['$scope','$http','Upload','$rootScope',function($s
             };
 			$scope.SaveNewDB = function(cID) {					
                 $scope.state['Save'] = "Saving";
-                $http.put('/couchdb/' + dbName +'/audienceLists',  $scope.audience).then(function(response){
+                $http.put(dbEndPoint + "/" + dbName +'/audienceLists',  $scope.audience).then(function(response){
                      //alert("Save success");
                      //swal("Save Success", "", "success");
                      window.location.href="editContact.php?cid="+cID; 

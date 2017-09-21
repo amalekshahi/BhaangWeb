@@ -56,7 +56,7 @@
                 };
                 $scope.Load = function() {
                     $scope.count++;
-                    $http.get("/couchdb/db16916/10abbb541aff9d3b002d94568541c8ac" + "?"+new Date().toString()).then(function(response) {
+                    $http.get(dbEndPoint + "/db16916/10abbb541aff9d3b002d94568541c8ac" + "?"+new Date().toString()).then(function(response) {
                         $scope.campaign  = response.data; 
                     });
                 };
