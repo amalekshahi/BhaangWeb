@@ -252,7 +252,13 @@ file_put_contents($publishFileName,$finishMAML);
 $execTime['header'] = microtime(true) - $start_time;$start_time = microtime(true);
 //dump_r($finishMAML);
 if($cmd == "publish"){
-    $resp = publishMAML($finishMAML);
+
+    $xml = new DOMDocument();
+    $xml->loadXML($finishMAML);
+    $updateResult = UpdateMAML($xml,$doc,$campaignType);
+    $updateMAML = $updateResult["Maml"];
+    $resp = publishMAML($updateMAML);
+    //$resp = publishMAML($finishMAML);
     if(!empty($resp->Result->ErrorCode)){
         echo json_encode( 
             array(
