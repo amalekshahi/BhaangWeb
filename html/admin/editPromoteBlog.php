@@ -184,7 +184,7 @@
 						</div>
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5>
+								<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5> 
 								<div class="ibox-tools">
 									<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-external-link" style="color:blue"></i> VIEW MORE PERFORMANCE REPORTS</button>
 									<a class="collapse-link">
