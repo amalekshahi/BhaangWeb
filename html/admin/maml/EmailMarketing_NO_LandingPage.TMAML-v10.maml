@@ -565,12 +565,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email4subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT}}</ContentVariable>
         <ContentVariable Name="email5subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT}}</ContentVariable>
         <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
-	<ContentVariable Name="email1contentonline">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL1CONTENT-ONLINE}}</ContentVariable>
-        <ContentVariable Name="email2contentonline">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL2CONTENT-ONLINE}}</ContentVariable>
-        <ContentVariable Name="email3contentonline">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL3CONTENT-ONLINE}}</ContentVariable>
-        <ContentVariable Name="email4contentonline">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL4CONTENT-ONLINE}}</ContentVariable>
-        <ContentVariable Name="email5contentonline">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5CONTENT-ONLINE}}</ContentVariable>
-        <ContentVariable Name="email6contentonline">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6CONTENT-ONLINE}}</ContentVariable>
+	<ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
+        <ContentVariable Name="email2contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT}}</ContentVariable>
+        <ContentVariable Name="email3contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT}}</ContentVariable>
+        <ContentVariable Name="email4contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
+        <ContentVariable Name="email5contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
+        <ContentVariable Name="email6contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
 	<ContentVariable Name="ClickAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_clickalert.html"##</ContentVariable>
 	<ContentVariable Name="OpenAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_openalert.html"##</ContentVariable>
       </ContentVariables>
