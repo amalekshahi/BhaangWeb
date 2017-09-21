@@ -270,7 +270,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>VisitAlertLeadTrigger (Right Now)</Subject>

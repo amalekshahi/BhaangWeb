@@ -483,9 +483,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			//alert(response);
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
-            if(!$scope.silenceMode){
+            //if(!$scope.silenceMode){
                 swal("Server Error");
-            }
+            //}
 			//alert(errResponse);
 		});
 	}
@@ -533,9 +533,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			//alert(response);
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
-            if(!$scope.silenceMode){
+            //if(!$scope.silenceMode){
                 swal("Server Error");
-            }
+            //}
 			//alert(errResponse);
 		});
 	};

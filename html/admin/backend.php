@@ -303,14 +303,20 @@ if($cmd == "publish"){
     
     $ticket = GetTicketBySession();
     $execTime['GetTicketBySession'] = microtime(true) - $start_time;$start_time = microtime(true);
-    
-    
-    // Update Republish mode
-    $publishProgramID = GetMamlProgramID($acctID,$progID);
-    $publishMAML = GetPublishedMAML($acctID,$progID);
+    $publishProgramID = $doc->publishProgramID; 
+    if(empty($publishProgramID)){
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"Publish Program ID Not found ",
+                'time'=>$execTime,
+                'publishProgramID'=>$publishProgramID,
+                'ticket'=>$ticket,            
+                'doc'=>$doc,
+        ));
+        exit;      
+    }
     $execTime['GetPublishedMAM'] = microtime(true) - $start_time;$start_time = microtime(true);
-    
-    
     $checkOutRet = checkoutProgram($ticket, $acctID, $publishProgramID);	
     $execTime['checkoutProgram'] = microtime(true) - $start_time;$start_time = microtime(true);
     
@@ -333,7 +339,7 @@ if($cmd == "publish"){
                 'publishProgramID'=>$publishProgramID,
                 'ticket'=>$ticket,            
                 'checkOutRet'=>$checkOutRet,
-                'publishMAML'=>$publishMAML,
+                //'publishMAML'=>$publishMAML,
                 'checkOutMAML'=>$checkOutMAML,
         ));
         exit;        
