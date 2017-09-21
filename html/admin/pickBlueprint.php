@@ -54,7 +54,7 @@
 
 
 										<div class="small m-t-xs">
-											New piece of great content? Don't let it gather dust. Promote the b*tch and drive some leads in the process.
+											New piece of great content? Don't let it gather dust. Promote it and drive some leads in the process.
 										</div>
 										<div class="m-t text-righ">
 
