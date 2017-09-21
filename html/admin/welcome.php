@@ -9,7 +9,7 @@
 	<head>
 		<?php include "header.php"; ?>
 		<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>     
-        <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 		<!-- Custom and plugin javascript -->
@@ -25,7 +25,7 @@
 			var dbName = "<?php echo $dbName; ?>";
             var myApp = angular.module('myApp', ['angularMoment','davinci']);
 		</script>
-        <script src="js/welcome.js"></script>
+    <script src="js/welcome.js"></script>
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<?php include 'leftWrapper.php'; ?>
@@ -40,14 +40,14 @@
 				</div>
 
 				<!-- content -->
-				<div class="wrapper wrapper-content animated fadeInRight">
+				<div class="wrapper wrapper-content animated fadeInRight" ng-controller="myCtrl" ng-cloak>
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="text-center m-t-lg">
 								<div class="jumbotron" style="background: url('https://s3.amazonaws.com/mindfiredavinci/img/background_black_gradient-min.jpg') no-repeat center center;">
 									<h1 style="color:white;"><strong>Hi, I'm Da Vinci.</strong></h1>
 									<h4 style="color:white;">&reg; Your Marketing AI.</h4>
-									<p><a class="btn btn-primary dim btn-lg" href="pickBlueprint.php" role="button"><i class="fa fa-spin fa-plus"></i> CREATE A CAMPAIGN</a></p>
+									<p><a class="btn btn-primary dim btn-lg" href="pickBlueprint.php" role="button"><i class="fa fa-spin fa-plus"></i> <span ng-if="numberOfCampaigns===0">CREATE MY FIRST CAMPAIGN</span><span ng-if="numberOfCampaigns===1">CREATE A CAMPAIGN</span></a></p>
 								</div>
 							</div>
 						</div>
@@ -149,19 +149,37 @@
 							<div class="wrapper wrapper-content">
 								<div class="ibox">
 									<div class="ibox-title">
-										<h5><i class="fa fa-paper-plane-o" style="color:orange"></i> Hi <?php echo $USERNAME;?>, welcome to Da Vinci.</h5>
+										<h5><i class="fa fa-paper-plane-o" style="color:orange"></i> Welcome to Da Vinci.</h5>
 									</div>
-										<div class="ibox-content">
-											<p>I'm going to help you generate more leads and sales from your prospects and customers.  Here are a few tips to get you started:</p>
-											<ol>
+									<div class="social-feed-box">
+
+                <div class="social-avatar">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="http://www.mindfireinc.com/static/images/david-rosendahl.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="mailto:daver@mindfireinc.com">
+                            David Rosendahl, Co-Founder 
+                        </a>
+                        <small class="text-muted">Earlier Today</small>
+                    </div>
+                </div>
+                <div class="social-body">
+											<p>Hi <?php echo $USERNAME;?>, I'm Dave.  We built Da Vinci to help you generate more leads and sales using techniques previously only available to large companies and high-tech nerds (we consider ourselves in that group so don't take offense!).</p>											
+											</p>Here are a few tips to get you started:</p>
+											<ul>
 												
 											<li>Click any of the navigation items on the left and take a quick look at the various options.</li>
 											<li>Create a quick sample campaign to get a feel for what's going on here.</li>
-											<li>[Note for Kushal] Please suggest appropriate content based on your experience</li>
-											</ol>
+											<li>[Note for Kushal] Please suggest appropriate content based on your experience.  I have no problem if you replace me as the face of this, too.</li>
+											</ul>
 
-											<p>If you need any help, use the chat box (found on every page), email us a <a href="mailto:support@mindfireinc.com">support@mindfireinc.com</mailto:support@mindfireinc.com> or call us at (877) 560-3473 and press option 2 from the main menu.</p>
-										</div>
+											<p>If you need any help, use the chat box (found on every page), email us a <a href="mailto:support@mindfireinc.com">support@mindfireinc.com</a> or call us at (877) 560-3473 and press option 2 from the main menu.</p>
+
+                    
+                </div>
+            </div>
+									
 								</div>
 							</div>
 						</div>
