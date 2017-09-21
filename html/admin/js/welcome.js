@@ -131,7 +131,9 @@ myApp.controller('seamlessLoginCtrl', function($scope, $http, $window) {
     
     $scope.CheckLogin();
   
-}); 
+});     
+
+
 
 $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });

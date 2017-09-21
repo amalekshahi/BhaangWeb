@@ -26,6 +26,7 @@ $USERNAME = $_SESSION['USERNAME'];
 	<ul class="nav navbar-top-links navbar-right">
 		<li><span class="m-r-sm text-muted welcome-message"><?php echo $USERNAME;?>, you're logged in to <?php echo $accountName;?>.</span></li>
 		<li>
+            <!-- Kwang disable this because it make others page fail due to "seemlessLoginCtrl" not found 
 			<div ng-controller="seamlessLoginCtrl">
 				<form name="loginForm" id="loginForm" class="form-inline" role="form" method="post">
 					<div id="accountDiv" class="form-group" ng-cloak>
@@ -33,18 +34,11 @@ $USERNAME = $_SESSION['USERNAME'];
 								<option value="">-- Switch to another Account ------------------</option>
 								<option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
 								</select>
-						<!--
-                <div>
-									<select class="form-control" ng-model="mpsSelect" style="height: 100px; width: 100%" chosen placeholder-text-single="'Select an Account ...'" ng-options="option.id + '|' + option.name as option.name for option in login.mps | orderBy:'name' ">
-					      		<option value=""></option>
-							 		</select>
-								</div>
-              -->
-
 					</div>
 					<button class="btn btn-primary btn-xs" ng-click="Login()" ng-disabled="loginForm.$invalid">Go</button>
 				</form>
 			</div>
+            -->
 		</li>
 		<li><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i><small>Database</small></a></li>
 		<li><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i><small>GitHub</small></a></li>

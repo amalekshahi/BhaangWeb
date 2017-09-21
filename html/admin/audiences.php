@@ -217,42 +217,12 @@
 		<!-- Custom and plugin javascript -->
 		<script src="js/inspinia.js"></script>
 		<script src="js/plugins/pace/pace.min.js"></script>
+		<script src="js/davinci.js"></script>        
 		<!-- Page-Level Scripts -->
 		<script>
-			$(document).ready(function() {
-				//angular.element('#myCtrl').scope.Load();
-			});
-
 			var dbName = "<?php echo $dbName; ?>";
-			var myApp = angular.module('myApp', ["xeditable"]);
-			myApp.controller('myCtrl', function($scope, $http) {
-				$scope.Reset = function() {
-					$scope.audience = angular.copy($scope.master);
-				};
-				$scope.Load = function() {
-					$http.get("/couchdb/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
-						$scope.master = response.data;
-						if (typeof $scope.master.items == 'undefined') {
-							$scope.master.items = [];
-						}
-						$scope.Reset();
-
-					}, function(errResponse) {
-						if (errResponse.status == 404) {
-							$scope.audience = {
-								items: []
-							};
-						}
-					});
-				};
-
-				$scope.Load();
-			});
-
-			function importContact() {
-				window.location.href = "importContact.php";
-			}
 		</script>
+        <script src="js/audiences.js"></script>
 
 
 	</body>
