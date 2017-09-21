@@ -17,11 +17,12 @@
 				<li class="nav-header">
 					<div class="dropdown profile-element">
 						<a data-toggle="dropdown" class="dropdown-toggle">
-                            <span class="clear"> <span class="block m-t-xs"><a href="myProfileSettings.php"><strong class="font-bold"><br><br><br><br></strong></a></span>
+							<span class="clear"> 
+								<span class="block m-t-xs"><a href="myProfileSettings.php"><strong class="font-bold"><br><br><br><br></strong></a>
+								</span>
 						</span>
 						</a>
 					</div>
-
 					<!-- Dave commented this out so that we don't see top of DV's head when left nav is minimized
 										<div class="logo-element"></div>
 						-->
@@ -35,9 +36,7 @@
 				<li>
 					<a href="myCampaigns.php"><i class="fa fa-paper-plane-o" aria-hidden="true" title="My Campaigns"></i> <span class="nav-label">My Campaigns</span></a>
 				</li>
-
 				<li>
-
 					<a href="assetLibrary.php"><i class="fa fa-files-o" aria-hidden="true" title="Asset Library"></i> <span class="nav-label">Asset Library<span class="label label-warning pull-right">NEW</span></a>
 				</li>
 				<li>
