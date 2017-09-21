@@ -26,6 +26,7 @@ $USERNAME = $_SESSION['USERNAME'];
 	<ul class="nav navbar-top-links navbar-right">
 		<li><span class="m-r-sm text-muted welcome-message"><?php echo $USERNAME;?>, you're logged in to <?php echo $accountName;?>.</span></li>
 		<li>
+            <account-switch/>
             <!-- Kwang disable this because it make others page fail due to "seemlessLoginCtrl" not found 
 			<div ng-controller="seamlessLoginCtrl">
 				<form name="loginForm" id="loginForm" class="form-inline" role="form" method="post">

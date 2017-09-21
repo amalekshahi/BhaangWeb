@@ -23,7 +23,7 @@
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";
-            var myApp = angular.module('myApp', ['angularMoment']);
+            var myApp = angular.module('myApp', ['angularMoment','davinci']);
 		</script>
         <script src="js/welcome.js"></script>
 		<div id="wrapper">
