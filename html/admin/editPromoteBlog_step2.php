@@ -133,7 +133,7 @@
 													<a
 													 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 												</div>
-												<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail2"></a></h3>
+												<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail2" e-style="width: 480px"></a></h3>
 											</div>
 
 											<div class="row" ng-show="openEmail2">

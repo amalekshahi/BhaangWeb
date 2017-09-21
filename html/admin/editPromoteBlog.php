@@ -10,7 +10,20 @@
 		<?php include "header.php"; ?>
 		<script src="js/date.format.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
-        
+   
+		<style>
+			.editable-container.editable-inline,
+			.editable-container.editable-inline .control-group.form-group,
+			.editable-container.editable-inline .control-group.form-group .editable-input,
+			.editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.editable-container.editable-inline .control-group.form-group .editable-input select,
+			.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit])
+			{
+				width: 550px!important;
+				font-size:14px;!important;
+			}
+		
+		</style>
         
 	</head>
 
