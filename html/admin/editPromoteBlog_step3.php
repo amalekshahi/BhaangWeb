@@ -190,7 +190,7 @@
 																</div>
 															</td>
 															<td class="project-title">
-																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT']}}"</h3>
+																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT']}}"</h3>
 																<small>This email is sent to everyone has not yet clicked your Blog Post URL.</small>
 															</td>
 															<td class="project-title">
