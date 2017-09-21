@@ -22,7 +22,7 @@
                              </a>
                     </div>
                     <div class="logo-element">
-                        DV
+                    
                     </div>
                 </li>
 				<li>
