@@ -77,7 +77,7 @@
 																	</div>
 																	<label class="control-label">Hero Image</label>
 																	<div>
-																		<a ng-model="file" ngf-select="upload($file,'1')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload1'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload1'] != 'Uploading'"></i> Upload new image ...</a>																				
+																		<a ng-model="file" ngf-select="upload($file,'1')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image."><span ng-show="state['Upload1'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload1'] != 'Uploading'"></i> Upload new image ...</a>																				
 																	</div>
 																	<div class="hr-line-dashed"></div>
 																	<label class="control-label">Send a Test Message</label>
@@ -88,7 +88,7 @@
 																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
 																			</select>
                                                                         </div>
-																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a>
+																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add a person to your seed list. They'll show up here going forward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a>
 																	</div>
 															
 																	<label class="control-label"></label>
@@ -157,7 +157,7 @@
 																	</div>
 																	<label class="control-label">Hero Image</label>
 																	<div>
-																		<a ng-model="file" ngf-select="upload($file,'2')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload2'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload2'] != 'Uploading'"></i> Upload new image ...</a>																				
+																		<a ng-model="file" ngf-select="upload($file,'2')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image."><span ng-show="state['Upload2'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload2'] != 'Uploading'"></i> Upload new image ...</a>																				
 																	</div>
 																	<div class="hr-line-dashed"></div>
 																	<label class="control-label">Send a Test Message</label>
@@ -168,7 +168,7 @@
 																			<option value=""></option> <!-- Needs this otherwise gets funky.  Known angular issue -->
 																			</select>
                                                                         </div>
-																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a>
+																		<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add a person to your seed list. They'll show up here going forward.orward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a>
 																	</div>
 															
 																	<label class="control-label"></label>
