@@ -9,9 +9,8 @@ if (!hasValue(campaignID)) {
 
 $.fn.editable.defaults.mode = 'inline';
 $.fn.editableform.buttons =
-    '<button type="button" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i></button>' +
-    '<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>' +
-    '<button type="button" class="btn btn-default btn-sm editable-off"><i class="glyphicon glyphicon-trash"></i></button>';
+    '<button type="button" class="btn btn-primary btn-sm editable-submit" title="Done"><i class="glyphicon glyphicon-ok"></i></button>' +
+    '<button type="button" class="btn btn-default btn-sm editable-cancel" title="Cancel"><i class="glyphicon glyphicon-remove"></i></button>';
 
 $(document).ready(function() {
     $('#email_name').editable();
