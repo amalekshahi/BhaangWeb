@@ -269,7 +269,9 @@ if($cmd == "publish"){
                 'maml'=>$publishFileName,
                 'mode'=>$mode,
                 "publishDate"=>$dateTimeNow,
+                "updateMAML"=>$updateMAML,
             ));
+        exit;
     }else{
         //convert byte array maml  and save to file
         $returnMaml = implode(array_map("chr", $resp->Maml));
@@ -302,7 +304,9 @@ if($cmd == "publish"){
                 'detailDoc'=>$docUpdate,
                 //'returnMaml'=>$returnMaml,
                 "publishProgramID"=>$publishProgramID,
+                "updateMAML"=>"$updateMAML",
             ));
+        exit;
     }
     
 }else{

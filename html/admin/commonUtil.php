@@ -861,6 +861,28 @@ function UpdateMAMLPromoteBlog($xml,$doc)
     );
 }
 
+function GetMamlProgramID($acctID,$progID)
+{
+    //$publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+    //$publishMamlContent = file_get_contents($publishReturnFileName);
+    $publishMamlContent = GetPublishedMAML($acctID,$progID);
+    $xml = new DOMDocument();
+    $xml->loadXML($publishMamlContent);
+    $xpath = new DOMXpath($xml);
+    $node = $xpath->query("/Program")->item(0);
+    //$programNode = $xml->getElementsByTagName('Program')->item(0);
+    return $node->getAttribute('DbId');
+}
+
+function GetPublishedMAML($acctID,$progID)
+{
+     $publishReturnFileName = "publish/".$acctID."_".$progID."_return.maml";
+     $publishMamlContent = file_get_contents($publishReturnFileName);
+     return($publishMamlContent);
+}
+
+
+
 function UpdateMAMLPromoteEbook($xml,$doc)
 {
     $xpath = new DOMXpath($xml);
