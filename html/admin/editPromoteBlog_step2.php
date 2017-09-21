@@ -62,7 +62,7 @@
 														<form class="form-horizontal">
 															<div class="form-group">
 																<div class="col-sm-12">
-																	<div>Select who you want this email to come from. Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
+																	<div>Select who this email is from. Once you've picked a template, roll over areas of the email template to see what you can edit. Things like your logo and footer are pulled from <strong>Settings</strong>.</div>
 																	<label class="control-label">From</label>
 																	<div>
 																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender1')" style="height: 30px;width=100%" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
@@ -142,7 +142,7 @@
 														<form class="form-horizontal">
 															<div class="form-group">
 																<div class="col-sm-12">
-																	<div>Select who you want this email to come from. Once you've picked a template, roll over the various text blocks in the email template to see what you can edit.</div>
+																	<div>Select who this email is from. Once you've picked a template, roll over areas of the email template to see what you can edit. Things like your logo and footer are pulled from <strong>Settings</strong>.</div>
 																	<label class="control-label">From</label>
 																	<div>
 																		<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender2')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
