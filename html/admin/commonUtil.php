@@ -450,6 +450,82 @@ function studio_url_render2($template,$acctID,$progID,$data,$urlFormat=NULL)
     );
 }
 
+function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
+{
+    $xml = new DOMDocument();
+    $xml->loadXML($tmaml);
+    $xpath = new DOMXpath($xml);
+    // iterate true data 
+    $renderErrors = array();
+    $renderSuccess = array();
+    //Hanels Doms
+    foreach($mamlInfo->doms as $dom){
+        $attributeName = $dom->attribute;
+        $xpathName = $dom->xpath;
+        $valueFormat = $dom->value;
+        $value = studio_url_render($valueFormat,$acctID,$progID,$doc);
+        $nodeRet = DomSetAttribute($xpath,$xpathName,$attributeName,$value);
+        $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
+    }
+    //Handle Fields
+    foreach($mamlInfo->fields as $field){
+        $numloop = 1;
+        if(property_exists($field,"loop")){
+            $numloop = $field->loop;
+        }
+        for($i=1;$i<=$numloop;$i++){
+            $fieldName = str_replace("#","".$i,$field->name);
+            $xpathName = str_replace("#","".$i,$field->xpath);
+            if(property_exists($doc,$fieldName)){
+            //if(!empty($doc->{$field->name})){
+                if(!empty($field->attribute)){
+                    $nodeRet = DomSetAttribute($xpath,$xpathName,$field->attribute,$doc->{$fieldName});
+                    if(!empty($nodeRet)){
+                        if($fieldName!="campaignName"){ // cmapaignName is whole file (skip this)
+                            $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
+                        }
+                    }else{
+                        $renderErrors[] = $xpathName." not found";
+                    }
+                }else{
+                    // Text mode
+                    $value = $doc->{$fieldName};
+                    if($field->type == "URL"){
+                        $filename = str_replace("ACCTID",$acctID,$fieldName);
+                        $filename = str_replace("PROGRAMID",$progID,$filename);
+                        $filename = $filename . ".html";
+                        //Render content before publish to S3
+                        $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
+                    }
+                    $nodeRet = DomSetText($xpath,$xpathName,$value);
+                    if(!empty($nodeRet)){
+                        //$fields[] =  $xml->saveHTML($nodeRet);
+                        $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
+                    }else{
+                        $renderErrors[] =  $xpathName." not found";
+                    }
+                }
+            }else{
+                $renderErrors[] =  "Field ".$fieldName." not found";
+            }
+        }
+    }
+    return 
+        array(
+            'success'=>true,
+            'cmd'=>$cmd,
+            'mode'=>$mode,
+            'mamlInfoFileName'=>$mamlInfoFileName,
+            'mamlInfo'=>$mamlInfo,
+            'renderErrors'=>$renderErrors,
+            'renderSuccess'=>$renderSuccess,
+            'doc' => $doc,
+            'xml'=>$xml->saveHTML(),
+        );
+}
+
 
 function RenderFileName($acctID,$progID,$filename)
 {
@@ -980,6 +1056,17 @@ function DomSetAttribute($xpath,$path,$attr,$value)
     if ($nodes->length > 0) {
         $node = $nodes->item(0);
         $node->setAttribute($attr,$value);
+        return $node;
+    }
+    return null;
+}
+
+function DomSetText($xpath,$path,$value)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $node->nodeValue = $value;
         return $node;
     }
     return null;
