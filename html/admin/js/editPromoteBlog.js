@@ -51,7 +51,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.Save = function(mode, silence) {
         $scope.state['Save'] = "Saving";
         //alert(mode);
-        if (mode == 'Email') {
+        if (mode == 'Email1') {
             $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
             $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
             $scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();

@@ -237,16 +237,8 @@ if($templateName == ""){
 }
 
 $templateFileName = "maml/$templateName";
-$mamlInfoFileName = "maml/$mamlInfoName";
-$tmaml = file_get_contents($templateFileName);
-$execTime['GetTemplateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
-if($mode == "junk"){
-    $t = time();
-    $doc->campaignName = $doc->campaignName."_".$dateTimeNow;
-    $doc->campaignID = $doc->campaignID."_".$t;
-    
-}
-if($mode == "mamlInfo"){
+if(!empty($mamlInfoName)){
+    $mamlInfoFileName = "maml/$mamlInfoName";
     $mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
     if(json_last_error() != JSON_ERROR_NONE){
         echo json_encode( 
@@ -258,6 +250,28 @@ if($mode == "mamlInfo"){
             ));
         exit;
     }
+}
+
+$tmaml = file_get_contents($templateFileName);
+$execTime['GetTemplateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
+if($mode == "junk"){
+    $t = time();
+    $doc->campaignName = $doc->campaignName."_".$dateTimeNow;
+    $doc->campaignID = $doc->campaignID."_".$t;
+    
+}
+if($mode == "mamlInfo"){
+    /*$mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
+    if(json_last_error() != JSON_ERROR_NONE){
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'cmd'=>$cmd,
+                'mamlInfoFileName'=>$mamlInfoFileName,
+                'message'=>'Json Error '.json_last_error_msg(),
+            ));
+        exit;
+    }*/
     $ret = RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc);
     echo json_encode($ret);
     exit;
@@ -265,20 +279,21 @@ if($mode == "mamlInfo"){
 $renderMode = "studio_url_render";
 //dump_r($finishMAML);
 if($cmd == "publish"){
+    if(!empty($doc->publishProgramID)){
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"publish error",
+                //'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
+                //'mamlInfo'=>$mamlInfo,
+                //'finishMAML'=>$finishMAML,
+                "publishProgramID"=>$doc->publishProgramID,                
+            ));
+        exit;
+    }
     // check if we have $mamlInfoName
     if(!empty($mamlInfoName)){
         $renderMode = "RenderByMamlInfo ".$mamlInfoFileName;
-        $mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
-        if(json_last_error() != JSON_ERROR_NONE){
-            echo json_encode( 
-                array(
-                    'success'=>false,
-                    'cmd'=>$cmd,
-                    'mamlInfoFileName'=>$mamlInfoFileName,
-                    'message'=>'Json Error '.json_last_error_msg(),
-                ));
-            exit;
-        }
         $RenderByMamlInfoRet = RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc);
         $finishMAML = $RenderByMamlInfoRet['xml'];
     }else{
@@ -402,17 +417,6 @@ if($cmd == "publish"){
 
     if(!empty($mamlInfoName)){
         $renderMode = "RenderByMamlInfo ".$mamlInfoFileName;
-        $mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
-        if(json_last_error() != JSON_ERROR_NONE){
-            echo json_encode( 
-                array(
-                    'success'=>false,
-                    'cmd'=>$cmd,
-                    'mamlInfoFileName'=>$mamlInfoFileName,
-                    'message'=>'Json Error '.json_last_error_msg(),
-                ));
-            exit;
-        }
         $updateResult = RenderByMamlInfo($mamlInfo,$checkOutMAML,$acctID,$progID,$doc);
         $updateMAML = $updateResult['xml'];
     }else{
