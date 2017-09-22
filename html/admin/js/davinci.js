@@ -24,7 +24,7 @@ function getCurrentDateTime() {
 
 function UTCDateTime(){
     var d = new Date();
-    return moment(d).utc().format("YYYY-MM-DD[T]hh:mm:ss[Z]");
+    return moment(d).utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]"); // WHO WROTE THIS?  You're the ghost in the machine!  Should be HH not hh
 }
 
 /*
