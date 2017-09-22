@@ -22,9 +22,9 @@
 		.chosen-container {
 			width: 100% !important;
 		}
-
 		.chosen-container-multi .chosen-choices li.search-field input[type=text] {
 			padding-top: 0px;
+			width:120px !important;
 		}
 	</style>
 	<div class="panel-collapse collapse" id="collapseThree">
