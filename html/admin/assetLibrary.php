@@ -50,7 +50,7 @@
 							<div class="col-md-9">
 								<div class="forum-icon">
 									<i class="fa fa-picture-o"></i>
-								</div><a class="forum-item-title" href="forum_post.html">Images</a>
+								</div><a class="forum-item-title" href="fileManager.php">Images</a>
 								<div class="forum-sub-title">
 									Browse Da Vinci's library, or upload and manage your company's images.
 								</div>
