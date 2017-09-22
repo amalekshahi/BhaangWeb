@@ -104,7 +104,7 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 					$('#summerblock').html(summerdivtxt); 
 					if(darray.length > 0 ){
 						for(k=0;k<darray.length;k++){
-							runScriptDate(darray[i]); 
+							//runScriptDate(darray[i]); 
 						}
 					}
 		};//LoadRightBlockG		 
