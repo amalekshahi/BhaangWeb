@@ -279,6 +279,18 @@ if($mode == "mamlInfo"){
 $renderMode = "studio_url_render";
 //dump_r($finishMAML);
 if($cmd == "publish"){
+    if(!empty($doc->publishProgramID)){
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'message'=>"publish error",
+                //'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
+                //'mamlInfo'=>$mamlInfo,
+                //'finishMAML'=>$finishMAML,
+                "publishProgramID"=>$doc->publishProgramID,                
+            ));
+        exit;
+    }
     // check if we have $mamlInfoName
     if(!empty($mamlInfoName)){
         $renderMode = "RenderByMamlInfo ".$mamlInfoFileName;
