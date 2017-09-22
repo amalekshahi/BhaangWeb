@@ -9,6 +9,8 @@
 	<head>
 		<?php include "header.php"; ?>
 		<script src="js/date.format.js"></script>
+				<script src="js/iCheck.js"></script>
+
         <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
    
 		<style>
