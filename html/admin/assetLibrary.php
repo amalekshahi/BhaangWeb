@@ -50,9 +50,9 @@
 							<div class="col-md-9">
 								<div class="forum-icon">
 									<i class="fa fa-picture-o"></i>
-								</div><a class="forum-item-title" href="fileManager.php">Images</a>
+								</div><a class="forum-item-title" href="fileManager.php">Files</a>
 								<div class="forum-sub-title">
-									Browse Da Vinci's library, or upload and manage your company's images.
+									Browse Da Vinci's library of images and other assets, or upload and manage your company's files for use within any of your marketing campaigns.
 								</div>
 							</div>
 							<div class="col-md-1 forum-info">
@@ -105,6 +105,7 @@
 							</div>
 						</div>
 					</div>
+					<!--
 					<div class="forum-item">
 						<div class="row">
 							<div class="col-md-9">
@@ -194,7 +195,8 @@
 								</div>
 							</div>
 						</div>
-					</div>					
+					</div>	
+					-->
 				</div><!-- ibox-content -->
 
 
