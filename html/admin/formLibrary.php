@@ -1,11 +1,8 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
     $dbName = $_SESSION['DBNAME'];
-    $accountID = $_SESSION['ACCOUNTID'];
-    $accountName = $_SESSION['ACCOUNNAME'];
 ?>
 
 <!DOCTYPE html>
@@ -18,21 +15,15 @@
 
 <body class="">
     <div id="wrapper">
-	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.php"></div>
-	<!-- /end left wrapper -->
+	<?php include 'leftWrapper.php'; ?>
 	<div id="page-wrapper" class="gray-bg">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-				<!-- top wrapper -->
 				<?php include 'topWrapper.php'; ?>
-				<!-- / top wrapper -->
 				</nav>
 		</div>	
 <!-- content -->
 <div ng-controller="myCtrl">
-	
-
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
@@ -112,16 +103,12 @@
 </div><!-- myCtrl -->
 <!--/ content -->           
 			<div class="footer fixed">
-			<!-- footer -->
-			<div w3-include-html="footer.php"></div>
-			<!-- / footer -->			
+				<?php include 'footer.php'; ?>
 			</div>
 		</div><!--  end page-wrapper -->
 </div>
 
     <!-- Mainly scripts -->
-	<script src="js/w3data.js"></script>	
-	<script>w3IncludeHTML();</script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
@@ -131,14 +118,11 @@
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-
 	 <!-- Page-Level Scripts -->
 	<script type="text/JavaScript" src="global.js?n=1"></script> 	
  	<script src="js/jquery.md5.js"></script>	
 	<script src="js/davinci.js"></script>
 
-	<!-- Sweet alert -->
-	<!--<script src="css/sweet/sweetalert-dev.js"></script>-->
 	<!-- user version 2 to support modal input -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
@@ -148,117 +132,8 @@
 	<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
 
 <script>
-var dbName = "<?php echo $dbName; ?>";
-var myApp = angular.module('myApp', ["angularMoment"]);
-myApp.controller('myCtrl',function($scope,$http) {
-			
-			$scope.Reset = function() {
-				 
-			};
-			$scope.Load = function() {                
-				$http.get("/couchdb/" + dbName +'/formLibrary'+"?"+new Date().toString()).then(function(response) {
-					 $scope.master  = response.data; 
-					 if (typeof $scope.master.items == 'undefined') {
-					   $scope.master.items = [];
-					 } 
-					  $scope.formLib  = angular.copy($scope.master);
-
-				},function(errResponse){
-						if (errResponse.status == 404) {
-							$scope.formLib = {items:[]};
-						}
-				});
-			};
-
-			$scope.DuplicateFormClick = function(frmID,frmName){
-				    $scope.copyID = frmID;
-                    swal({
-                      title: 'What is your new form name?',
-                      input: 'text',
-                      inputValue: frmName + " (COPY)",
-                      showCancelButton: true,
-                    }).then($scope.DuplicateFormOK);
-			};
-
-			$scope.DuplicateFormOK = function(newFormName){
-				newFormName = newFormName.trim();							
-				var indx = $scope.formLib.items.getIndexByValue('formID',$scope.copyID);		
-				$scope.selectFrm = $scope.formLib.items[indx];						
-
-				var submission = "";
-				var modDate = getCurrentDateTime();
-				if(newFormName != ''){
-					var keyword = newFormName+getCurrentDateTime();
-					var resID = $.md5(keyword);      
-
-					$scope.formLib.items.push({
-							"formID":resID,
-							"formName":newFormName,
-							"formType_DefID":$scope.selectFrm.formType_DefID,
-							"submission":submission,
-							"modifiedDate":modDate,
-							"allFieldName":$scope.selectFrm.allFieldName,
-							"formHTML":$scope.selectFrm.formHTML,
-							"fieldLists":$scope.selectFrm.fieldLists
-					});
-					$scope.SaveCopy(resID,newFormName); 
-				}else{
-					swal({
-						type: 'error',
-						html: "Form [" + newFormName + "] copy fail!!",
-					});
-				}
-			};
-
-			$scope.SaveCopy = function(resID,newFormName) {								
-					$http.put('/couchdb/' + dbName +'/formLibrary',  $scope.formLib).then(function(response){
-							swal({
-								type: 'success',
-								html: "Form [" + newFormName + "] created",
-							}).then($scope.Load);
-							
-					},function(errsaveResponse){
-							swal({
-								type: 'error',
-								html: "Form [" + response.data.newFormName + "] copy fail!!",
-							});
-	                });		
-            };
-			
-			$scope.DuplicateFormOK2 = function(newFormName){
-                    newFormName = newFormName.trim();
-                    $http.get("formEditorCopy.php"+"?" + new Date().toString(),
-							{
-							  method: "POST",
-							  params: {
-								fID: $scope.copyID,
-								LName: newFormName,
-							  }  
-							}
-                    ).then(function(response) {
-							console.log(response.data);
-							if(response.data.success == true){
-								swal({
-									type: 'success',
-									html: "Form [" + response.data.newFormName + "] created",
-								}).then(function() {
-									window.location.href = "formLibrary.php";
-								});
-							}else{
-								swal({
-									type: 'error',
-									html: "Form [" + response.data.newFormName + "] copy fail<br>" + response.data.addRet.message,
-								});
-							}
-                    });                
-            };
-
-			$scope.Load();
-});  
-
+	var dbName = "<?php echo $dbName; ?>";
 </script>
-
-
-
+<script src="js/formLibrary.js"></script>
 </body>
 </html>

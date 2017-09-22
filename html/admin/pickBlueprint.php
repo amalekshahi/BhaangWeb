@@ -54,7 +54,7 @@
 
 
 										<div class="small m-t-xs">
-											New piece of great content? Don't let it gather dust. Promote the b*tch and drive some leads in the process.
+											New piece of great content? Don't let it gather dust. Promote it and drive some leads in the process.
 										</div>
 										<div class="m-t text-righ">
 
@@ -68,11 +68,11 @@
 													<div class="modal-body">
 														<div class="modal-header">
 															<h2>Promote a Blog Post</h2>
-															<p>Da Vinci will drive traffic to a piece of content (like a blog, article, or website page) and help you also generate leads (optional). Start by naming your campaign.</p>
+															<p>Da Vinci will drive traffic to a piece of content (like a blog, article, or website page) and also helps you generate leads (optional). Start by naming your campaign.</p>
 															<form role="form" method="get" action="editPromoteBlog.php">
 																<div class="form-group">
 																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name">
-																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find the campaigns in your Dashboard.</small></span>
+																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
 																<div>
 																	<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>

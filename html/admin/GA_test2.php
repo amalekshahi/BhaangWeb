@@ -1,5 +1,5 @@
 <?php include_once("analyticstracking.php") ?>
 
 <?php
-	echo "hello world";
+	echo "hello world page 2";
 ?>

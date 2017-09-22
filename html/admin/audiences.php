@@ -6,9 +6,7 @@
     $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
-?>
-
-	<!DOCTYPE html>
+?><!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
@@ -19,7 +17,8 @@
 	<body class="">
 		<div id="wrapper">
 			<!-- left wrapper -->
-			<div w3-include-html="leftWrapper.php"></div>
+			<!--<div w3-include-html="leftWrapper.php"></div>-->
+            <?php include 'leftWrapper.php'; ?>
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg">
 				<div class="row border-bottom">
@@ -67,7 +66,7 @@
 										</thead>
 										<tbody>
 											<tr ng-repeat="item in audience.items | orderBy:'-lastEditDate'" ng-cloak>
-												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
+												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" target="_blank">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
 												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" target="_blank" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
  
 													
@@ -198,7 +197,7 @@
 				<!--/ content -->
 				<div class="footer">
 					<!-- footer -->
-					<div w3-include-html="footer.php"></div>
+                    <?php include 'footer.php'; ?>
 					<!-- / footer -->
 				</div>
 			</div>
@@ -206,56 +205,24 @@
 		</div>
 
 		<!-- Mainly scripts -->
-		<script src="js/w3data.js"></script>
+		<!--<script src="js/w3data.js"></script>
 		<script>
 			w3IncludeHTML();
 		</script>
 		<script src="js/jquery-3.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 		<!-- Custom and plugin javascript -->
 		<script src="js/inspinia.js"></script>
 		<script src="js/plugins/pace/pace.min.js"></script>
+		<script src="js/davinci.js"></script>        
 		<!-- Page-Level Scripts -->
 		<script>
-			$(document).ready(function() {
-				//angular.element('#myCtrl').scope.Load();
-			});
-
 			var dbName = "<?php echo $dbName; ?>";
-			var myApp = angular.module('myApp', ["xeditable"]);
-			myApp.controller('myCtrl', function($scope, $http) {
-				$scope.Reset = function() {
-					$scope.audience = angular.copy($scope.master);
-				};
-				$scope.Load = function() {
-					$http.get("/couchdb/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
-						$scope.master = response.data;
-						if (typeof $scope.master.items == 'undefined') {
-							$scope.master.items = [];
-						}
-						$scope.Reset();
-
-					}, function(errResponse) {
-						if (errResponse.status == 404) {
-							$scope.audience = {
-								items: []
-							};
-						}
-					});
-				};
-
-				$scope.Load();
-			});
-
-			function importContact() {
-				window.location.href = "importContact.php";
-			}
 		</script>
-
-
+        <script src="js/audiences.js"></script>
 	</body>
 
 	</html>

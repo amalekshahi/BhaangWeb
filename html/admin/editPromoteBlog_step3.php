@@ -90,10 +90,18 @@
 														</tr>
 														<tr>
 															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #1</button>
+																<div class="widget style1 navy-bg">
+																	<div class="row">
+																		<div class="col-xs-12 text-right">
+																			<span> Sent to Everyone </span>
+
+																			<h2 class="font-bold">Email #1</h2>
+																		</div>
+																	</div>
+																</div>
 															</td>
 															<td class="project-title">
-																<strong>Targeting: All Your Primary Targets</strong><br>
+																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}"</h3>
 																<small>This email is sent to everyone you specify in the above Targeting section.</small>
 															</td>
 															<td class="project-title">
@@ -102,7 +110,7 @@
 																		<!-- <label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for Wednesday August 22, 2017</label>
 																		<small>@ 3:30 PM PST</small><br> 													 -->
 
-																		<label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for</label><br>
+																		<label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for:</label><br>
 
 
 																		<div class="input-group date">
@@ -130,11 +138,19 @@
 														</tr>
 														<tr ng-show="openEmail['2']">
 															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> </i>Email #2</button>
+																<div class="widget style1 navy-bg">
+																	<div class="row">
+																		<div class="col-xs-12 text-right">
+																			<span> Sent to Non-Opens </span>
+
+																			<h2 class="font-bold">Email #2</h2>
+																		</div>
+																	</div>
+																</div>
 															</td>
 															<td class="project-title">
-																<strong>Targeting: Non-Opens</strong><br>
-																<small>This email is sent to everyone who did not open.</small>
+																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT']}}"</h3>
+																<small>This email is sent to everyone who did not open your first email.</small>
 															</td>
 															<td class="project-title">
 																<form class="form-inline" role="form">
@@ -163,11 +179,19 @@
 														<tr ng-show="openEmail['3']">
 
 															<td class="project-status">
-																<button class="btn btn-primary btn-lg" type="button"><span aria-hidden="true" class="fa fa-envelope-o"></span> Email #3</button>
+																<div class="widget style1 navy-bg">
+																	<div class="row">
+																		<div class="col-xs-12 text-right">
+																			<span> Sent to Non-Clickers </span>
+
+																			<h2 class="font-bold">Email #3</h2>
+																		</div>
+																	</div>
+																</div>
 															</td>
 															<td class="project-title">
-																<strong>Targeting: Non-Clickers</strong><br>
-																<small>This email is sent to everyone you who opened but did not click.</small>
+																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT']}}"</h3>
+																<small>This email is sent to everyone has not yet clicked your Blog Post URL.</small>
 															</td>
 															<td class="project-title">
 																<form class="form-inline" role="form">
@@ -196,9 +220,7 @@
 
 													</tbody>
 												</table>
-
 											</div>
-
 										</div>
 									</div>
 								</div>
@@ -217,102 +239,5 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	function showcalendar() {
-		$("#EMAIL1-SCHEDULE1-DATE").datepicker("show");
-	}
-	
-	myApp.controller('step3', function($scope, $http) {
-		//alert('step3');
-		$scope.dateChange = function() {
-			if ($scope.campaign['EMAIL1-SCHEDULE1-DATE'] != "" && $scope.campaign['EMAIL1-SCHEDULE1-TIME'] != "") {
-				$scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE'] + ' ' + convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
-				var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
-				var date2 = date1;
-				for (var i = 2; i <= 3; i++) {
-					var emailName = "EMAIL" + i;
-					if ($scope.campaign[emailName + '-WAIT'] != "" && $scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") {
-						var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
-						date2 = addDays(date2, numberOfDaysToAdd);
-						$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
-					} else {
-						$scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
-					}
-				}
-				ShowScheduleDateTime();
-			}
-		};
-		$scope.Cancel = function() {
-			//$scope.frmStep3.$setPristine();
-			$scope.$parent.Cancel();
-			//$scope.Reset(); // parent scope's Reset()
-		};
-
-
-
-
-		$scope.ArrangeFilter = function() {
-			$scope.AuFilter = angular.copy($scope.masterAu);
-			var auCnt = 0;
-			var auOpr = "";
-			var allRule = "";
-			var selList = [];
-			for (var i = 0; i < $scope.filterList.length; i++) {
-				var indx = $scope.AuFilter.items.getIndexByValue('contactID', $scope.filterList[i]);
-				selList.push($scope.filterList[i]);
-				$scope.auItem = $scope.AuFilter.items[indx];
-				var auItemOpr = $scope.auItem['LIST-OPERATOR'];
-				auOpr += "(";
-				var arrItem = $scope.auItem['LIST-ARRAY'];
-				if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
-					var itemRule = "";
-					for (var k = 0; k < arrItem.length; k++) {
-						auCnt++;
-						//alert(arrItem[k]); 
-						if (arrItem[k] != null) {
-							itemRule = itemRule + '<Criteria Row=\"' + auCnt + '\" Field=\"' + arrItem[k].Field + '\" Operator=\"' + arrItem[k].Operator + '\" Value=\"' + arrItem[k].Value + '\" />';
-						}
-						auOpr += auCnt;
-						var opr = "&amp;"
-						if (arrItem[k].JoinOperator == "or") opr = "|";
-						if (k < arrItem.length - 1) auOpr += opr;
-
-					} // end for k
-					//alert(itemRule ); 
-					allRule += itemRule;
-				}
-				auOpr += ")";
-				if (i < $scope.filterList.length - 1) auOpr += "|";
-			} //end for i		
-			//alert("selected = "+selList); 
-			$scope.campaign['filterSelected'] = selList;
-			//			$scope.campaign['filterSelected'].push(selList);
-			var auRule = "<Filter CriteriaJoinOperator=\"" + auOpr + "\">" + allRule + "</Filter>";
-			//$("#EMAIL1-FILTER").val(auRule);
-			$scope.campaign['EMAIL1-FILTER'] = auRule;
-			$scope.campaign['EMAIL-FILTER-JOINOPERATOR'] = auOpr;
-			$scope.campaign['EMAIL-FILTER-CRITERIAROW'] = allRule;
-			//alert( "val = " + $("#EMAIL1-FILTER").val() ); 					
-		};
-
-
-		$scope.ShowScheduleDateTime = function() {
-			if (hasValue($scope.campaign)) {
-				if (hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'], "01/01/2050 08:00:00 AM")) {
-					var a = moment($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
-					$scope.ScheduleDateTime = a.format('dddd MMMM DD, YYYY [at] h:mm:ss a');
-					return true;
-				} else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		};
-
-		
-
-	});
-</script>
+<script src="js/editPromoteBlog_step3.js"></script>
 <!-- step3 End-->

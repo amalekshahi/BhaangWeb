@@ -21,9 +21,6 @@
 		/* button when enabled */
 	}
 </style>
-
-
-
 <div class="panel-heading">
 	<div class="row">
 		<div class="col-sm-3">
@@ -61,10 +58,14 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Complete my Call-to-Action</label>
-						<div class="col-sm-10">
+						<label class="col-sm-2 control-label">Complete my Call-to-Action<span ng-if="!campaign['CONVERSION-URL']"><small class="text-muted"><br>You need to set your Conversion point in 'Identify the Targeted Blog Post' above.</small></label></span>
+						<div class="col-sm-10" ng-if="campaign['CONVERSION-URL']">
 							<switch ng-model="campaign['CALL-TO-ACTION-']" class="green" ng-change="SwitchChange()"></switch>
 						</div>
+						<div class="col-sm-10" ng-if="!campaign['CONVERSION-URL']">
+							<switch class="disabled"></switch>
+						</div>
+
 					</div>
 					<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->
 				</form>

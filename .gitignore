@@ -4,3 +4,8 @@ html/admin/checkInMAML/*
 html/admin/mailFiles/*
 html/admin/import/*
 html/admin/*.coa
+<<<<<<< HEAD
+=======
+html/admin/templates/emails/*.coa
+
+>>>>>>> stage

@@ -101,7 +101,7 @@ if ($mode == 'login') {
 		
 	} else {
 		//$errorMessage = $authResponse->{"Result"}->{"ErrorMessage"};
-		$errorMessage = 'Incorrect username or password.';
+		$errorMessage = 'Bad username or password.';
 	}
 
 	if( !$isFound ) {

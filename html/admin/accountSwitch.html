@@ -1,0 +1,12 @@
+<div>
+    <form name="loginForm" id="loginForm" class="form-inline" role="form" method="post">
+        <div id="accountDiv" class="form-group" ng-cloak>
+            <select style="width:100%;" ng-model="mpsSelect" ng-change="Login()">
+                    <option value="">-- Switch to another Account ------------------</option>
+                    <option ng-repeat="option in login.mps | orderBy:'name' " value="{{option.id}}|{{option.name}}">{{option.name}}</option>
+                    </select>
+        </div>
+        <!-- Dave removed this for now using ng-change above.  Should be better for User.
+        <button class="btn btn-primary btn-xs" ng-click="Login()" ng-disabled="loginForm.$invalid">Go</button>-->
+    </form>
+</div>

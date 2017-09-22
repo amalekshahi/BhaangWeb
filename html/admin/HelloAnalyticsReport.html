@@ -17,9 +17,11 @@
 <textarea cols="80" rows="20" id="query-output"></textarea>
 
 <script>
-  // Replace with your view ID.
-  var VIEW_ID = '160328262'; // test GA
+  // Replace with your view ID.  
   var VIEW_ID = '147734871'; //	starbucks
+  var VIEW_ID = '132878152'; //	Fresh Start
+  var VIEW_ID = '160328262'; // GA_test
+  
 
   // Query the API and print the results to the page.
   function queryReports() {
@@ -33,24 +35,27 @@
             viewId: VIEW_ID,
             dateRanges: [
               {
-                //startDate: '7daysAgo',
-                //endDate: 'today'
-				"startDate": "2017-09-08", "endDate": "2017-09-08"
+                "startDate": '7daysAgo',
+                "endDate": 'today'
+				//"startDate": "2017-09-08", "endDate": "2017-09-08"
               }
             ],
             metrics: [
-              {"expression": "ga:pageviews"},
-			  {"expression": "ga:sessions"},
-			  {"expression": "ga:users"}
+              {"expression": "ga:users"},
             ],
 			dimensions:
 		     [
 				//{"name": "ga:browser"}, 
-				{"name": "ga:country"}
+				//{"name": "ga:country"},
+				//{"name": "ga:landingPagePath"}				
+				{"name": "ga:pagePath"}
+				//{"name": "ga:uniquePageviews"}
+				
+				
 			],
 			orderBys: [
 		       // {"fieldName": "ga:browser"},
-				{"fieldName": "ga:country"}
+				//{"fieldName": "ga:country"}
 			]
           }
         ]

@@ -230,6 +230,7 @@
 
     <!-- Page-Level Scripts -->
 	<script src="js/jquery.md5.js"></script>
+	<script src="js/davinci.js"></script>    
     <script>
 		var campaignID = getParameterByName("campaignID");    
 		$(document).ready(function() {
@@ -249,7 +250,7 @@
 				}
             };        
             $scope.Load = function() {
-                $http.get("/couchdb/" + dbName +'/'+campaignID+"?"+new Date().toString()).then(function(response) {
+                $http.get(dbEndPoint + "/" + dbName +'/'+campaignID+"?"+new Date().toString()).then(function(response) {
                     $scope.master  = response.data;
                     $scope.campaign  = angular.copy($scope.master);
                     $scope.Reset();

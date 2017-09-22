@@ -168,7 +168,8 @@ $(document).ready(function(){
 							var fprefill = $(document.getElementById(form_fields[i]+"Prefill")).val();	
 							//add array
 							tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-							summerdivtxt += getFormCode("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 	
+							summerdivtxt += angular.element(document.getElementById('myNewCtrl')).scope().GetCodeCallG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,"");
+							//summerdivtxt += getFormCode("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 	
 							if(fFieldType == 'datetime'){
 									var datename = form_fields[i]+"_DATE"; 
 									darray.push(datename); 											

@@ -86,14 +86,15 @@
 																				<th>&nbsp;</th>
 																			</tr>
 																		</thead>
-																		<tr ng-repeat="item in campaignlist.campaigns | orderBy:'lastEditDate':true | filter:searchText" ng-cloak ng-click="goToLink(item)">
+																		<tr ng-repeat="item in campaignlist.campaigns | campaignNameFilter:searchText| orderBy:'lastEditDate':true" ng-cloak ng-click="goToLink(item)">
 																			<td class="project-status">
 																				<span class="badge badge-published"><i class="fa fa-rss"></i> {{item.status=='Edit' ? 'LIVE' : 'DRAFT'}}</span>
 																			</td>
 																			<td class="project-title">
 																				<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
-																				<br/><!-- Roll back to this <span am-time-ago="message.time"></span> -- once timestamp issue is resolved -->
-																				<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}</small>
+																				<br/>
+																				<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}
+                                                                                (<span am-time-ago="item.lastEditDate"></span>)</small> 
 																			</td>
 
 																			<td class="project-reach">
@@ -481,47 +482,8 @@
 
 			<script>
 				var dbName = "<?php echo $dbName; ?>";
-				var myApp = angular.module('myApp', ['angularMoment']);
-				myApp.controller('myCtrl', function($scope, $http) {
-					$scope.Reset = function() {
-						$scope.campaignlist = angular.copy($scope.master);
-					};
-					$scope.Load = function() {
-						$http.get("/couchdb/" + dbName + '/campaignlist').then(function(response) {
-							$scope.master = response.data;
-							if (typeof $scope.master.campaigns == 'undefined') {
-								$scope.master.campaigns = [];
-							}
-							$scope.Reset();
-						});
-					};
-					$scope.Random = function(range) {
-						return Math.floor((Math.random() * range) + 1);
-					};
-					$scope.Search = function() {
-						//alert($scope.searchText);
-						$scope.Load();
-					};
-					$scope.myFilter = function(item) {
-						if (typeof $scope.searchText == 'undefined') {
-							return true;
-						}
-						if ($scope.searchText == '') {
-							return true;
-						}
-						if (item.campaignName.startsWith($scope.searchText)) {
-							return true;
-						}
-						return false;
-					};
-					$scope.Load();
-					
-					$scope.goToLink = function(item) {
-					window.location = 'edit' + item.campaignType + '.php?campaign_id=' + item.campaignID;
-					};
-					
-				});
 			</script>
+            <script src="js/myCampaigns.js"></script>
         
 	</body>
 

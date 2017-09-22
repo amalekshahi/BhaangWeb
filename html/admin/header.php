@@ -53,11 +53,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
+	<!--<script src="js/welcome.js"></script>-->
     
     <!-- ui-switch -->
     <link rel="stylesheet" href="js/angular-ui-switch.min.css"/>
     <script src="js/angular-ui-switch.js"></script>
-
+    <script src="js/angular-davinci.js"></script>
 	<style class="cp-pen-styles">
 	   /*@charset "UTF-8";*/
 	   /* 2015 Johannes Jakob

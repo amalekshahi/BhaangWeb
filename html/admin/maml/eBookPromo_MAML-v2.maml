@@ -1,8 +1,8 @@
 <Program Name="{{campaignName}}" Version="1.0" DbId="0" CheckOutId="0" State="Start">
   <Comment>This is program comment</Comment>
-  <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
+  <Campaign Name="Promote an eBook" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
-      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Promote a Blog Post" Position="450,10" SharedCheckout="False">
+      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Promote an eBook" Position="450,10" SharedCheckout="False">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
             <Subject>Business MicroSite (Right Now)</Subject>
@@ -64,7 +64,7 @@
             <Events />
           </ChildElement>
           <ChildElement Id="16" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Welcome.html" Position="140,50">
-            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="False" IsLoginRequired="False">
               <HtmlContent>##WecomePageContent##</HtmlContent>
             </Properties>
             <Flow>
@@ -166,12 +166,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Settings>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL1-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email1 (Right Now)</Subject>
             <Body />
-            <Start Days="{{EMAIL1-SCHEDULE1-DAYS}}" Hours="{{EMAIL1-SCHEDULE1-HOURS}}" Mins="{{EMAIL1-SCHEDULE1-MINS}}" />
+            <Start Days="0" Hours="0" Mins="0" />
           </Schedule>
         </Schedules>
         <Events>
@@ -198,12 +198,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL2-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email2 (Right Now)</Subject>
             <Body />
-	    <Start Days="{{EMAIL2-SCHEDULE1-DAYS}}" Hours="{{EMAIL2-SCHEDULE1-HOURS}}" Mins="{{EMAIL2-SCHEDULE1-MINS}}" />
+            <Start Days="0" Hours="1" Mins="0" />
           </Schedule>
         </Schedules>
         <Events>
@@ -224,12 +224,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL3-SCHEDULE1-STATE}}" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email3 (Right Now)</Subject>
             <Body />
-            <Start Days="{{EMAIL3-SCHEDULE1-DAYS}}" Hours="{{EMAIL3-SCHEDULE1-HOURS}}" Mins="{{EMAIL3-SCHEDULE1-MINS}}" />
+            <Start Days="0" Hours="3" Mins="0" />
           </Schedule>
         </Schedules>
         <Events>
@@ -270,7 +270,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="{{VISIT-MY-EBOOK}}" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>VisitAlertLeadTrigger (Right Now)</Subject>
@@ -287,7 +287,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##firstname## ##lastname## just visited your website</Subject>
-              <HtmlContent>##VisitLeadAlertContent##</HtmlContent>
+              <HtmlContent>##VistLeadAlertContent##</HtmlContent>
               <TextContent />
             </Message>
           </Messages>
@@ -357,12 +357,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Criteria>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL4-STATE}}" Type="Email" Category="Outbound" Name="Email4" Position="620,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="620,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email4 (Right Now)</Subject>
             <Body />
-	    <Start Days="{{EMAIL4-SCHEDULE1-DAYS}}" Hours="{{EMAIL4-SCHEDULE1-HOURS}}" Mins="{{EMAIL4-SCHEDULE1-MINS}}" />
+            <Start Days="0" Hours="3" Mins="0" />
           </Schedule>
         </Schedules>
         <Events>
@@ -383,12 +383,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL5-STATE}}" Type="Email" Category="Outbound" Name="Email5" Position="790,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="790,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email5 (Right Now)</Subject>
             <Body />
-	    <Start Days="{{EMAIL5-SCHEDULE1-DAYS}}" Hours="{{EMAIL5-SCHEDULE1-HOURS}}" Mins="{{EMAIL5-SCHEDULE1-MINS}}" />            
+            <Start Days="0" Hours="4" Mins="0" />
           </Schedule>
         </Schedules>
         <Events>
@@ -409,12 +409,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="{{EMAIL6-STATE}}" Type="Email" Category="Outbound" Name="Email6" Position="960,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="960,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email6 (Right Now)</Subject>
             <Body />
-	    <Start Days="{{EMAIL6-SCHEDULE1-DAYS}}" Hours="{{EMAIL6-SCHEDULE1-HOURS}}" Mins="{{EMAIL6-SCHEDULE1-MINS}}" />  
             <Start Days="0" Hours="6" Mins="0" />
           </Schedule>
         </Schedules>
@@ -436,7 +435,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="{{DOWNLOAD-MY-EBOOK}}" Type="Email" Category="Outbound" Name="DownloadAlertLeadTrigger" Position="160,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="DownloadAlertLeadTrigger" Position="160,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>DownloadAlertLeadTrigger (Right Now)</Subject>
@@ -495,6 +494,172 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30501" ElementId="1" ChildElementId="16" />
         </HookedEvents>
       </CampaignElement>
+      <CampaignElement Id="30" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Business Microsite" Position="280,520" SharedCheckout="False">
+        <Events />
+        <CallbackTouchPoints>
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci{{accountID}}.m.mdl.io/{{campaignID}}" />
+        </CallbackTouchPoints>
+        <ChildElements>
+          <ChildElement Id="1" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Home.html" Position="460,80">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="True" IsLoginRequired="False">
+              <HtmlContent />
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="2" Name="Email1.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="3" Name="Email2.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="5" Name="Email3.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="4" Name="Email4.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="6" Name="Email5.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+              <FlowNextElement Id="7" Name="Email6.html">
+                <Filter CriteriaJoinOperator="&amp;" />
+              </FlowNextElement>
+            </Flow>
+            <Events />
+          </ChildElement>
+          <ChildElement Id="2" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="120,290">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>##email1contentonline##</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="3" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email2.html" Position="250,290">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>##email2contentonline##</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="4" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email4.html" Position="520,290">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>##email4contentonline##</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="5" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email3.html" Position="400,290">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>##email3contentonline##</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="6" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email5.html" Position="660,290">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>##email5contentonline##</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+          <ChildElement Id="7" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email6.html" Position="820,290">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent>##email6contentonline##</HtmlContent>
+            </Properties>
+            <Flow />
+            <Events />
+          </ChildElement>
+        </ChildElements>
+        <ChildConnections>
+          <ChildConnection StartElementId="1" EndElementId="2" />
+          <ChildConnection StartElementId="1" EndElementId="3" />
+          <ChildConnection StartElementId="1" EndElementId="5" />
+          <ChildConnection StartElementId="1" EndElementId="4" />
+          <ChildConnection StartElementId="1" EndElementId="6" />
+          <ChildConnection StartElementId="1" EndElementId="7" />
+        </ChildConnections>
+        <Properties>
+          <BaseUrlCollection>
+            <BaseUrl Id="1" DbId="0" URL="davinci{{accountID}}.m.mdl.io/{{campaignID}}" Extension="{{campaignID}}" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="davinci{{accountID}}.m.mdl.io" SSL="False" SearchEngineAllowed="False" />		
+          </BaseUrlCollection>
+          <Settings SessionTimeout="20">
+            <InvalidPurl>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Did you type your PURL correctly?&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting an invalid PURL, you cannot use any variables (like ##firstname##) within your content.  --&gt;
+Are you sure you typed your Personalized URL correctly? Please try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</InvalidPurl>
+            <PageNotFound>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page not found!&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting a valid PURL but non-existent page, you can use any variable (like ##firstname##) within your content.  --&gt;
+Oops! ##firstname default="Sir/Madam"##,  we are really sorry but the page you requested could not be found. Please check the URL and try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</PageNotFound>
+            <Error>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Something happened.&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- In addition to supporting any contact variable, this page also supports a special variable: ##error##, which is a system-generated description of the error.--&gt;
+Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please contact the site administrator. The following error has occurred: ##error##
+&lt;/body&gt;
+&lt;/html&gt;
+</Error>
+          </Settings>
+        </Properties>
+      </CampaignElement>
     </CampaignElements>
     <CampaignConnections>
       <CampaignConnection StartElementId="12" EndElementId="7" />
@@ -536,7 +701,13 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="WecomePageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT}}</ContentVariable>
         <ContentVariable Name="DownloadPageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT}}</ContentVariable>
         <ContentVariable Name="DownloadLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html"##</ContentVariable>
-        <ContentVariable Name="VisitLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
+        <ContentVariable Name="VistLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
+        <ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
+        <ContentVariable Name="email2contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT}}</ContentVariable>
+        <ContentVariable Name="email3contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT}}</ContentVariable>
+        <ContentVariable Name="email4contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
+        <ContentVariable Name="email5contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
+        <ContentVariable Name="email6contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>
