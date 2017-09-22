@@ -330,6 +330,11 @@ myApp.controller('myCtrl', function($scope, $http) {
             "2":false,
             "3":false,
         };
+		$scope.disabledEmail = {
+            "1":false,
+            "2":false,
+            "3":false,
+        };
         $scope.openEmail2 = false;
         $scope.openEmail3 = false;
         $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
@@ -355,14 +360,34 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
             $scope.emailProgress = emailDone + ' of 3 Emails Ready';
         }
-        //Set schedue to default if EMAIL2 and 3 NOT SET
-        if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
-            //$scope.campaign['EMAIL2-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
-        }
-        if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){
-            //$scope.campaign['EMAIL3-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
-        }
 
+		var publishProgramID = $scope.campaign['publishProgramID'];
+		if ((typeof publishProgramID == 'undefined') || (publishProgramID == "")) {
+
+		} else {
+			var d1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];
+			if (d1 == "01/01/2050 08:00:00 AM")	{
+				
+			} else {
+				$scope.disabledEmail["1"] = true;
+			}
+			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
+				var d2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];
+				if (d2 == "01/01/2050 08:00:00 AM")	{
+					
+				} else {
+					$scope.disabledEmail["2"] = true;
+				}
+			}
+			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){        
+				var d3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];
+				if (d3 == "01/01/2050 08:00:00 AM")	{
+					
+				} else {
+					$scope.disabledEmail["3"] = true;
+				}
+			}
+		}		
     };
     $scope.SelectChanged = function(emailViewID, templateField) {
         //$scope.content = angular.copy($scope.templateEmail1);

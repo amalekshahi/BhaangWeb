@@ -1,5 +1,5 @@
 function showcalendar() {
-    $("#EMAIL1-SCHEDULE1-DATE").datepicker("show");
+	    $("#EMAIL1-SCHEDULE1-DATE").datepicker("show");
 }
 
 myApp.controller('step3', function($scope, $http) {
