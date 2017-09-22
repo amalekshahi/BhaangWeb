@@ -277,20 +277,13 @@ if($mode == "mamlInfo"){
     exit;
 }
 $renderMode = "studio_url_render";
+if(!empty($doc->publishProgramID)){
+    $cmd = "update";
+}else{
+    $cmd = "publish";
+}
 //dump_r($finishMAML);
 if($cmd == "publish"){
-    if(!empty($doc->publishProgramID)){
-        echo json_encode( 
-            array(
-                'success'=>false,
-                'message'=>"publish error",
-                //'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
-                //'mamlInfo'=>$mamlInfo,
-                //'finishMAML'=>$finishMAML,
-                "publishProgramID"=>$doc->publishProgramID,                
-            ));
-        exit;
-    }
     // check if we have $mamlInfoName
     if(!empty($mamlInfoName)){
         $renderMode = "RenderByMamlInfo ".$mamlInfoFileName;
@@ -318,6 +311,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'message'=>"Studio return error",
                 //'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
                 //'mamlInfo'=>$mamlInfo,
@@ -357,6 +351,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>true,
+                'cmd'=>$cmd,
                 'message'=>"Publish Done",
                 "renderMode"=>$renderMode,                
                 'detail'=>$resp,
@@ -377,6 +372,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'message'=>"Publish Program ID Not found ",
                 'time'=>$execTime,
                 'publishProgramID'=>$publishProgramID,
@@ -402,6 +398,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'message'=>$checkOutRet['errorMessage'],
                 'time'=>$execTime,
                 'mode'=>"DEBUG",
@@ -457,6 +454,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>true,
+                'cmd'=>$cmd,
                 'time'=> $execTime,
                 'renderMode'=>$renderMode,
                 'message'=>"Update Done",
@@ -473,6 +471,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'time'=> $execTime,
                 'renderMode'=>$renderMode,
                 'message'=>"Update fail",
@@ -483,6 +482,7 @@ if($cmd == "publish"){
                 'checkInRet'=>$checkInRet,
                 'undoRet'=>$undoRet,
                 'updateResult'=>$updateResult,
+                'updateMAML'=>$updateMAML,
             ));
     }
 }
