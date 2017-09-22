@@ -369,14 +369,31 @@ myApp.controller('myCtrl', function($scope, $http) {
 			if (d1 == "01/01/2050 08:00:00 AM")	{
 				
 			} else {
-				$scope.disabledEmail["1"] = true;
+
+				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
+				var timezone1 = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];								
+                if (checkdate(datetime1, timezone1)) {
+					$('#datespan1').show();
+					$('#clockspan1').show();
+                } else {
+                    $scope.disabledEmail["1"] = true;
+					$('#datespan1').hide();
+					$('#clockspan1').hide();
+                }				
 			}
 			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
 				var d2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];
 				if (d2 == "01/01/2050 08:00:00 AM")	{
 					
 				} else {
-					$scope.disabledEmail["2"] = true;
+					var datetime2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];								
+					var timezone2 = $scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'];								
+					if (checkdate(datetime2, timezone2)) {
+						$('#clockspan2').show();
+					} else {
+						$scope.disabledEmail["2"] = true;
+						$('#clockspan2').hide();
+					}
 				}
 			}
 			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){        
@@ -384,7 +401,14 @@ myApp.controller('myCtrl', function($scope, $http) {
 				if (d3 == "01/01/2050 08:00:00 AM")	{
 					
 				} else {
-					$scope.disabledEmail["3"] = true;
+					var datetime3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];								
+					var timezone3 = $scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'];								
+					if (checkdate(datetime3, timezone3)) {
+						$('#clockspan3').show();
+					} else {
+						$scope.disabledEmail["3"] = true;
+						$('#clockspan3').hide();
+					}
 				}
 			}
 		}		

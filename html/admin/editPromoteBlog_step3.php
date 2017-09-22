@@ -115,13 +115,13 @@
 
 																		<div class="input-group date">
 																			<input ng-disabled="disabledEmail['1']" type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE1-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE1-DATE" name="EMAIL1-SCHEDULE1-DATE" ng-change="dateChange('')" required="">
-																			<span ng-click="disabledEmail['1']" class="input-group-addon" onclick="showcalendar();"><i class="fa fa-calendar"></i></span>
+																			<span id="datespan1" class="input-group-addon" onclick="showcalendar();"><i class="fa fa-calendar"></i></span>
 																		</div>
 
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input ng-disabled="disabledEmail['1']" type="text" class="form-control" id="EMAIL1-SCHEDULE1-TIME" name="EMAIL1-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE1-TIME']" ng-change="dateChange('')" required="">
-																			<span ng-click="disabledEmail['1']" class="input-group-addon">
-																				<span ng-click="disabledEmail['1']" class="fa fa-clock-o"></span>
+																			<span id="clockspan1" class="input-group-addon">
+																				<span class="fa fa-clock-o"></span>
 																			</span>
 																		</div>
 
@@ -161,7 +161,7 @@
 
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input ng-disabled="disabledEmail['2']" type="text" class="form-control" id="EMAIL2-SCHEDULE1-TIME" name="EMAIL2-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL2-SCHEDULE1-TIME']" ng-change="dateChange('')">
-																			<span class="input-group-addon">
+																			<span id="clockspan2" class="input-group-addon">
 																				<span class="fa fa-clock-o"></span>
 																			</span>
 																		</div>
@@ -202,7 +202,7 @@
 
 																		<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
 																			<input ng-disabled="disabledEmail['3']" type="text" class="form-control" id="EMAIL3-SCHEDULE1-TIME" name="EMAIL3-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL3-SCHEDULE1-TIME']" ng-change="dateChange('')">
-																			<span class="input-group-addon">
+																			<span id="clockspan3" class="input-group-addon">
 																				<span class="fa fa-clock-o"></span>
 																			</span>
 																		</div>
