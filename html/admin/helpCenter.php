@@ -35,12 +35,12 @@
 			<div class="wrapper wrapper-content animated fadeInRight">
 				
 				
-				<div class="ibox-content m-b-sm border-bottom">
+				<div class="ibox-content m-b-sm border-bottom" style="background-image: url(https://itmeo.com/public/webgradients_png/076%20Premium%20Dark.png)">
 					<div class="p-xs">
 						<div class="pull-left m-r-md">
-							<i class="fa fa-question-circle text-navy mid-icon" style="color:green"></i>
+							<i class="fa fa-question-circle text-navy mid-icon" style="color:white"></i>
 						</div>
-						<h2>Help Center</h2><span>Advice and answers from the MindFire Da Vinci Team</span>
+						<h2 style="color:white">Da Vinci Help Center</h2><span style="color:white">Advice and answers from the MindFire Team</span>
 					</div>
 				</div>
 
