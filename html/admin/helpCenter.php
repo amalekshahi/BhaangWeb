@@ -94,98 +94,7 @@
 							</div>
 						</div>
 					</div>
-					<!--
-					<div class="forum-item">
-						<div class="row">
-							<div class="col-md-9">
-								<div class="forum-icon">
-									<i class="fa fa-envelope-o"></i>
-								</div><a class="forum-item-title" href="forum_post.html">Emails</a>
-								<div class="forum-sub-title">
-									Every e-mail you send can be re-used elsewhere, making drip sequences a snap.  Manage your emails, or use any of Da Vini's work and call it your own!
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<span class="views-number">68</span>
-								<div>
-									<small>Emails</small>
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<span class="views-number"></span>
-								<div>
-									<small></small>
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<a href="" class="btn btn-primary btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
-								<div>
-									<small></small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="forum-item">
-						<div class="row">
-							<div class="col-md-9">
-								<div class="forum-icon">
-									<i class="fa fa-file-text"></i>
-								</div><a class="forum-item-title" href="forum_post.html">Pages</a>
-								<div class="forum-sub-title">
-									Web pages for landing pages, microsites, and other web properties.  Use your own, or tap into Da Vinci's collection.
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<span class="views-number">14</span>
-								<div>
-									<small>Pages</small>
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<span class="views-number"></span>
-								<div>
-									<small></small>
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<a href="" class="btn btn-primary btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
-								<div>
-									<small></small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="forum-item">
-						<div class="row">
-							<div class="col-md-9">
-								<div class="forum-icon">
-									<i class="fa fa-book"></i>
-								</div><a class="forum-item-title" href="forum_post.html">e-Books</a>
-								<div class="forum-sub-title">
-									Da Vinci has written numerous e-Books you can put to use immediately.  Or, create your own.  Either way, you get a ready-to-go landing page and a great content piece!
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<span class="views-number">14</span>
-								<div>
-									<small>e-Books</small>
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<span class="views-number"></span>
-								<div>
-									<small></small>
-								</div>
-							</div>
-							<div class="col-md-1 forum-info">
-								<a href="" class="btn btn-primary btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
-								<div>
-									<small></small>
-								</div>
-							</div>
-						</div>
-					</div>	
-					-->
+
 				</div><!-- ibox-content -->
 
 
@@ -196,6 +105,45 @@
 
 
 </div>
+		
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <ul class="notes">
+                <li>
+                    <div>
+                        <h4>Chat With Us</h4>
+
+                        <p>Chat with one of our friendly people, Monday thru Friday, 6a to 5p Pacific Time.</p>
+                        
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h4>Open a Support Ticket</h4>
+
+                        <p>Email us at support@mindfireinc.com.  Responses within 8 business hours.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h4>Call Us</h4>
+
+                        <p>Monday thru Friday, 6a to 5p Pacific time at 1-877-123-1234.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <h4>System Status Notes</h4>
+
+                        <p>There are currently no known issues.  All is quiet on the western front.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>		
+		
 <!--/ content -->           
 			<div class="footer fixed">
 			<!-- footer -->
