@@ -52,7 +52,8 @@ require_once 'commonUtil.php';?><!doctype html>
                     <!--<input ng-model="backend.mode" placeholder="[test]">-->
                     <md-select ng-model="backend.mode">
                         <md-option value="">--not set--</md-option>
-                        <md-option ng-show="backend.cmd=='update'" value="junk">junk</md-option>
+                        <md-option value="junk">junk</md-option>
+                        <md-option value="mamlInfo">mamlInfo</md-option>
                     </md-select>
                 </md-input-container>  
                 <md-input-container>
