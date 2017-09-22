@@ -29,75 +29,173 @@
 				</nav>
 		</div>	
 <!-- content -->
+<div ng-controller="myCtrl">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="wrapper wrapper-content animated fadeInRight">
+				
+				
+				<div class="ibox-content m-b-sm border-bottom">
+					<div class="p-xs">
+						<div class="pull-left m-r-md">
+							<i class="fa fa-question-circle text-navy mid-icon" style="color:green"></i>
+						</div>
+						<h2>Help Center</h2><span>Advice and answers from the MindFire Da Vinci Team</span>
+					</div>
+				</div>
 
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Get Help</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="welcome.php">Home</a>
-                    </li>
-                    <li>
-                        <strong><a>Get Help</a></strong>
-                    </li>
-                    
-                </ol>
-            </div>
-            <div class="col-lg-2">
 
-            </div>
-        </div>
-        <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Everyone needs a little help sometimes. <small>For now, this is internal documentation.</small></h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <form method="post" class="form-horizontal" action="dv.php?page=myProfileSettings&action=submit">
-                                <div><h2>How to Create Da Vinci-friendly MAML Templates</h2></div>
-                                <div><p>1. To allow a user to edit the campaign's content, insert slugs into the MAML using the following syntax:</p>
-                                  <p><pre>{{varName}}</pre> for slugs that are replaced at initial Publish, usually a string of content.  </p>
-                                  <p><pre>{{URL-varName}}</pre> for slugs that pull content from a URL, usually for content edited by the DV end-user </p>
-                                  <p>2.  When Da Vinci opens the MAML template, it replaces:</p>
-                                  <p><pre>{{varName}}</pre> with a string literal.</p>
-                                  <p><pre>{{URL-varName}}</pre> with <pre>##URL SRC="md5HASH-varName"##</pre></p>
-                                  <p>You need to set the Program Name in the MAML using the following special slug:</p>
-                                  <p><pre>{ {PROGRAM-NAME} }</pre></p>
-                                  <p>4. For each slug it finds, DV will add to config.json. DV stores this json as STUDIO_ACCOUNT_ID-STUDIO_PROGRAM_ID-config.json, then publishes the Program.</p>
-                                  <p></p>
-                                  <div class="hr-line-dashed"></div>
-                                  <div><h2>Creating Da Vinci Web UI</h2></div>
-                                  <p>1. When you create your web UI to configure the campaign, you tell DV how to update URL-based content as follows:</p>
-                                  <p><pre>&lt;input type="text" name="URL-varName" value="{{URL-varName}}"&gt;</pre></p>
-                                  <p>2. When you want to save values in your web UI, use:</p>
-                                  <p><pre><code class="html">&lt;form method="post" action="updateCampaignValues"&gt;&lt;input type="submit" value="update"&gt;</code></pre></p>
-                                  <p>3. DV will take the submitted names (varName), and place the "value" into appropriate URL snippet.</p>
+				<div class="ibox-content forum-container">					
+					<div class="forum-item">
+						<div class="row">
+							<div class="col-md-10">
+								<div class="forum-icon">
+									<i class="fa fa-calendar-check-o"></i>
+								</div><a class="forum-item-title" href="fileManager.php">Getting Started</a>
+								<div class="forum-sub-title">
+									Easy steps to get up and running with Da Vinci -- quickly.
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number">4</span>
+								<div>
+									<small>articles in this collection</small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number"></span>
+								<div>
+									<small></small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="forum-item">
+						<div class="row">
+							<div class="col-md-10">
+								<div class="forum-icon">
+									<i class="fa fa-money"></i>
+								</div><a class="forum-item-title" href="formLibrary.php">Generating More Leads</a>
+								<div class="forum-sub-title">
+									Get insider info on how to create more leads, more quickly.
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number">2</span>
+								<div>
+									<small>articles in this collection</small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number"></span>
+								<div>
+									<small></small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--
+					<div class="forum-item">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="forum-icon">
+									<i class="fa fa-envelope-o"></i>
+								</div><a class="forum-item-title" href="forum_post.html">Emails</a>
+								<div class="forum-sub-title">
+									Every e-mail you send can be re-used elsewhere, making drip sequences a snap.  Manage your emails, or use any of Da Vini's work and call it your own!
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number">68</span>
+								<div>
+									<small>Emails</small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number"></span>
+								<div>
+									<small></small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<a href="" class="btn btn-primary btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
+								<div>
+									<small></small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="forum-item">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="forum-icon">
+									<i class="fa fa-file-text"></i>
+								</div><a class="forum-item-title" href="forum_post.html">Pages</a>
+								<div class="forum-sub-title">
+									Web pages for landing pages, microsites, and other web properties.  Use your own, or tap into Da Vinci's collection.
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number">14</span>
+								<div>
+									<small>Pages</small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number"></span>
+								<div>
+									<small></small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<a href="" class="btn btn-primary btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
+								<div>
+									<small></small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="forum-item">
+						<div class="row">
+							<div class="col-md-9">
+								<div class="forum-icon">
+									<i class="fa fa-book"></i>
+								</div><a class="forum-item-title" href="forum_post.html">e-Books</a>
+								<div class="forum-sub-title">
+									Da Vinci has written numerous e-Books you can put to use immediately.  Or, create your own.  Either way, you get a ready-to-go landing page and a great content piece!
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number">14</span>
+								<div>
+									<small>e-Books</small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<span class="views-number"></span>
+								<div>
+									<small></small>
+								</div>
+							</div>
+							<div class="col-md-1 forum-info">
+								<a href="" class="btn btn-primary btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> New</a>
+								<div>
+									<small></small>
+								</div>
+							</div>
+						</div>
+					</div>	
+					-->
+				</div><!-- ibox-content -->
 
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            
-            </div>        
 
+			</div>
+		</div>
+	</div>
+
+
+
+</div>
 <!--/ content -->           
 			<div class="footer fixed">
 			<!-- footer -->
