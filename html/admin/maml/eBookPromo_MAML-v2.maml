@@ -495,7 +495,14 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </HookedEvents>
       </CampaignElement>
       <CampaignElement Id="30" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Business Microsite" Position="280,520" SharedCheckout="False">
-        <Events />
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="True">
+            <Subject>Business Microsite (Right Now)</Subject>
+            <Body />
+            <Start DateTime="02/14/2013 12:00:00 AM" />
+            <End DateTime="02/28/2050 11:59:00 PM" />
+          </Schedule>
+        </Schedules>
         <CallbackTouchPoints>
           <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci{{accountID}}.m.mdl.io/{{campaignID}}" />
         </CallbackTouchPoints>
