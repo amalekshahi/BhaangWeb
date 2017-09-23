@@ -46,7 +46,7 @@
 					<a href="accountSetting.php"><i class="fa fa-wrench" aria-hidden="true" title="Settings"></i> <span class="nav-label">Settings</span></a>
 				</li>
 				<li>
-					<a href="helpCenter.php"><i class="fa fa-question-circle" aria-hidden="true" title="Help"></i> <span class="nav-label">Help Center & Live Chat</span></a>
+					<a href="helpCenter.php"><i class="fa fa-question-circle" aria-hidden="true" title="Help"></i> <span class="nav-label">Help Center</span></a>
 				</li>
 			</ul>
 		</div>
