@@ -92,9 +92,8 @@
 															<td class="project-status">
 																<div class="widget style1 navy-bg">
 																	<div class="row">
-																		<div class="col-xs-12 text-right">
+																		<div class="text-right">
 																			<span> Sent to Everyone </span>
-
 																			<h2 class="font-bold">Email #1</h2>
 																		</div>
 																	</div>
@@ -140,9 +139,8 @@
 															<td class="project-status">
 																<div class="widget style1 navy-bg">
 																	<div class="row">
-																		<div class="col-xs-12 text-right">
+																		<div class="text-right">
 																			<span> Sent to Non-Opens </span>
-
 																			<h2 class="font-bold">Email #2</h2>
 																		</div>
 																	</div>
@@ -177,11 +175,10 @@
 
 														</tr>
 														<tr ng-show="openEmail['3']">
-
 															<td class="project-status">
 																<div class="widget style1 navy-bg">
 																	<div class="row">
-																		<div class="col-xs-12 text-right">
+																		<div class="text-right">
 																			<span> Sent to Non-Clickers </span>
 
 																			<h2 class="font-bold">Email #3</h2>
