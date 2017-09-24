@@ -11,7 +11,7 @@
 		<?php include "header.php"; ?>
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<style>
 			.blueprintHide {
 				opacity: 0.25;

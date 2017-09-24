@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 </head>
 
-<body class="">
+<body class="fixed-sidebar">
     <div id="wrapper">
 	<?php include 'leftWrapper.php'; ?>
 	<div id="page-wrapper" class="gray-bg">

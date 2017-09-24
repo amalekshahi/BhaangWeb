@@ -15,7 +15,7 @@
 		<?php include "header.php"; ?>
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<!-- hhhh -->
 		<div id="wrapper">
 			<!-- left wrapper -->

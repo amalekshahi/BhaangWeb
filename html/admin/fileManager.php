@@ -15,7 +15,7 @@
 
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<div id="wrapper" ng-controller="assetList">
 			<!-- left wrapper -->
 			<!--<div w3-include-html="leftWrapper.php"></div>-->

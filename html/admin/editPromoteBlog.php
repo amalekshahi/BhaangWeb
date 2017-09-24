@@ -29,7 +29,7 @@
         
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<script>
 			//Kwang create myAPP here so all step can access it.
 			var dbName = "<?php echo $dbName; ?>";

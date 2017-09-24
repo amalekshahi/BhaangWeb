@@ -11,7 +11,7 @@
 		<?php include "header.php"; ?>
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<div w3-include-html="leftWrapper.php"></div>

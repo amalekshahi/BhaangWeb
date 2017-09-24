@@ -18,7 +18,7 @@
 		<script src="js/davinci.js"></script>
 
 	</head>
-	<body class="">
+	<body class="fixed-sidebar">
 		<?php include "afterBody.php"; ?>
 		<script>
 			// welcome.js need this
