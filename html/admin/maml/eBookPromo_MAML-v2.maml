@@ -5,14 +5,16 @@
       <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Promote an eBook" Position="450,10" SharedCheckout="False">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
-            <Subject>Business MicroSite (Right Now)</Subject>
+            <Subject>Promote an eBook (Right Now)</Subject>
             <Body />
             <Start DateTime="02/14/2013 12:00:00 AM" />
             <End DateTime="02/28/2050 11:59:00 PM" />
           </Schedule>
         </Schedules>
         <Events />
-        <CallbackTouchPoints />
+        <CallbackTouchPoints>
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://dv_accountID.m.mdl.io/campaignID" />
+        </CallbackTouchPoints>
         <ChildElements>
           <ChildElement Id="9" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="520,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
@@ -86,7 +88,9 @@
           <ChildConnection StartElementId="16" EndElementId="17" />
         </ChildConnections>
         <Properties>
-          <BaseUrlCollection />
+          <BaseUrlCollection>
+            <BaseUrl Id="1" DbId="0" URL="dv_accountID.m.mdl.io/campaignID" Extension="campaignID" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="dv_accountID.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
+          </BaseUrlCollection>
           <Settings SessionTimeout="20">
             <InvalidPurl>&lt;html&gt;
 &lt;head&gt;
@@ -503,8 +507,9 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <End DateTime="02/28/2050 11:59:00 PM" />
           </Schedule>
         </Schedules>
+        <Events />
         <CallbackTouchPoints>
-          <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci{{accountID}}.m.mdl.io/{{campaignID}}" />
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://davinci_accountID.m.mdl.io/campaignID" />
         </CallbackTouchPoints>
         <ChildElements>
           <ChildElement Id="1" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Home.html" Position="460,80">
@@ -586,7 +591,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </ChildConnections>
         <Properties>
           <BaseUrlCollection>
-            <BaseUrl Id="1" DbId="0" URL="davinci{{accountID}}.m.mdl.io/{{campaignID}}" Extension="{{campaignID}}" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="davinci{{accountID}}.m.mdl.io" SSL="False" SearchEngineAllowed="False" />		
+            <BaseUrl Id="1" DbId="0" URL="davinci_accountID.m.mdl.io/campaignID" Extension="campaignID" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="davinci_accountID.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
           </BaseUrlCollection>
           <Settings SessionTimeout="20">
             <InvalidPurl>&lt;html&gt;
