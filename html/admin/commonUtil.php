@@ -324,6 +324,10 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
                 $renderRaw = true;
                 $value1 = substr($value1,4);
             }
+            if(startsWith($value1,"SUMMERNOTE(")){
+                $value1 = substr($value1,11);
+                $value1 = str_replace(")","",$value1);
+            }
             if(array_key_exists($value0,$hash)){
             }else{
                 $hash[$value0] = $value1;
