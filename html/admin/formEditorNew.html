@@ -3,7 +3,7 @@
 	<div class="mail-box-header">
 		<div class="pull-right tooltip-demo">
 			<!--<a href="#" class="btn btn-white btn-xs">Download form HTML <i class="fa fa-code"></i> </a>-->
-			<a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveNewForm();"><i class="fa fa-floppy-o"></i> Save Form</button>
+			<a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title="Leave without saving"><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveNewForm();"><i class="fa fa-floppy-o" ng-show="state['Save'] != 'Saving'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> Save Form</button>
 		</div>
 		<h3>Form Template: <select id="selectForm" ng-model="defID" ng-change="SelectChanged({{defID}})" ng-cloak>
 					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
@@ -208,8 +208,9 @@
 						darray.push(datename);
 					}
 
-				} //end for i
-				angular.element(document.getElementById('myNewCtrl')).scope().MyCopyItem('fieldLists', tempArr);
+				} //end for i				
+//				angular.element(document.getElementById('myNewCtrl')).scope().MyCopyItem('selectItem', tempArr);
+				angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('selectItem', tempArr);
 				angular.element(document.getElementById('myNewCtrl')).scope().CopyScope('tempArr', tempArr);
 				$('.output').html(" form_fields = " + form_fields);
 				$('#summerblock').html(summerdivtxt);

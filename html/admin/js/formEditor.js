@@ -278,7 +278,8 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 			$scope.state = {	"Save":"Save",	};
 			$scope.defID = ""; 	
 			$scope.tempArr = []; 
-			$scope.SaveNewForm = function() {							
+			$scope.SaveNewForm = function() {			
+					$scope.state['Save'] = "Saving";				
 					var LName = $('#frmName').val();			
 					if(LName != ''){
 						var keyword = LName+getCurrentDateTime();
@@ -338,7 +339,7 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
             };
 
 			$scope.SaveDB = function(cID) {					
-                $scope.state['Save'] = "Saving";
+				$scope.state['Save'] = "Save";
 				$http.put(dbEndPoint + "/" + dbname + "/formLibrary",  $scope.frmlist).then(function(response){
 						 window.location.href="formEditor.php?fID="+cID; 
 				});                    
@@ -365,9 +366,10 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 
 			//Default Set Middle block From Start 
 			$scope.LoadNewPageSelect = function(startDefaultMiddleArr) {                
-				$scope.selectItem = [];	
-				$scope.selectItem.push({"fieldID":"Email", "fieldName":"Email", "label": "Email","required": "No","prepopulated": "No","fieldType": "email" }); 
+				$scope.selectItem = [];					
 				$scope.selectItem.push({"fieldID":"FirstName", "fieldName":"First Name", "label": "First Name","required": "No","prepopulated": "No","fieldType": "textbox" }); 				
+				$scope.selectItem.push({"fieldID":"LastName", "fieldName":"Last Name", "label": "Last Name","required": "No","prepopulated": "No","fieldType": "textbox" }); 				
+				$scope.selectItem.push({"fieldID":"Email", "fieldName":"Email", "label": "Email","required": "No","prepopulated": "No","fieldType": "email" }); 
 				service.LoadRightBlockG("",$scope.selectItem); 
 				$scope.tempArr = $scope.selectItem;  						
             };
