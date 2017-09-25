@@ -45,7 +45,7 @@
 										</div>
 										<!-- Email #2 -->
 										<div class="tab-pane" id="email-2">
-											<div class="panel-body" ng-show="!openEmail2">
+											<div class="panel-body" ng-show="!openEmail['2']">
 												<h2>By adding a second email to non-openers, you'll increase engagement rates by an average of 24%.</h2>
 												<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY2')">Create Email Using #1's Content</button>
 													<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW2')">Start With a Blank Email</button></p>
@@ -53,7 +53,7 @@
 											<?php echo $email2; ?>
 										</div>
 										<!-- <div class="tab-pane" id="tab-3">
-											<div class="panel-body" ng-show="!openEmail3">
+											<div class="panel-body" ng-show="!openEmail['3']">
 												<h2>By adding a third email to non-clickers, you'll increase engagement rates by an average of 14%.</h2>
 												<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY3')">Create Email Using #2's Content</button>
 													<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW3')">Start With a Blank Email</button></p>
@@ -63,7 +63,7 @@
 
 										<!-- Jiew -->
 										<div ng-repeat="item in emailList" class="tab-pane" id="tab-{{item.emlID}}">
-											<div class="panel-body" ng-show="!openEmail{{item.emlID}}">
+											<div class="panel-body" ng-show="!openEmail['{{item.emlID}}']">
 												{{item.emlHead}}
 												<!-- <h2>By adding a third email to non-clickers, you'll increase engagement rates by an average of 14%.</h2>
 										<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY3')">Create Email Using #2's Content</button>

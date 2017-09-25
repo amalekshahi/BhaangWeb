@@ -51,7 +51,15 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.Save = function(mode, silence) {
         $scope.state['Save'] = "Saving";
         //alert(mode);
-        if (mode == 'Email1') {
+		for (var key in $scope.openEmail) {
+			if (hasValue($scope.campaign['templateEmail' + key])) {
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope['templatesAs'+key][$scope.tpsIndex(key)].contentRaw;
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
+				$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
+				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
+			}
+		}
+        /*if (mode == 'Email1') {
             $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
             $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
             $scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
@@ -65,7 +73,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
             $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
             $scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
-        }
+        }*/
         if (mode == 'Step3') {
             var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
             var time1 = $scope.campaign['EMAIL1-SCHEDULE1-TIME'];
@@ -172,8 +180,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     // Kwang backup current to master and clear formState
                     $scope.master = angular.copy($scope.campaign);
                     $scope.clearFormState();
-                    $scope.state['Save'] = 'Save';
-					$scope.goEditMode(action);
+                    $scope.goEditMode(action);
                 });
             }, function(errResponse) {
                 // case new account
@@ -193,7 +200,6 @@ myApp.controller('myCtrl', function($scope, $http) {
                     });
                     $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                         $scope.setDisplay();
-						$scope.state['Save'] = 'Save';
 						$scope.goEditMode(action);
                         //swal("Save Campaign Successful.", "", "success");
                         //alert("Save Campaign Successful.");
@@ -210,8 +216,9 @@ myApp.controller('myCtrl', function($scope, $http) {
     };
 	$scope.goEditMode = function(action) {
 		if (action == "newCampaign") {
-			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID;
+			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
+		$scope.state['Save'] = 'Save';
 	};
     $scope.Cancel = function() {
         swal({
@@ -246,7 +253,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             action = 'editCampaign';
             $scope.master = response.data;
             $scope.campaign = angular.copy($scope.master);
-            $scope.openEmail1 = true; //Email #1 always open.
+            //$scope.openEmail1 = true; //Email #1 always open.
             $scope.setInitValue();
             $scope.setDisplay();
             $scope.LoadAudience();
@@ -264,7 +271,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     "publishDate": "",
                     "filterSelected": []
                 };
-                $scope.openEmail1 = true; //Email #1 always open.
+                //$scope.openEmail1 = true; //Email #1 always open.
                 $scope.setInitValue();
                 $scope.setDisplay();
                 $scope.LoadAudience();
@@ -291,7 +298,7 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
     };*/
     $scope.initTemplateEmail = function(emlID) {
-        if ($scope['openEmail' + emlID]) {
+        if ($scope.openEmail[emlID]) {
             $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + emlID).then(function(response) {
                 $scope['templatesAs' + emlID] = response.data.templates;
                 if (emlID == '1') {
@@ -325,18 +332,11 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
     };
     $scope.setDisplay = function() {
-        $scope.openEmail = {
+        $scope.disabledEmail = {
             "1":false,
             "2":false,
             "3":false,
         };
-		$scope.disabledEmail = {
-            "1":false,
-            "2":false,
-            "3":false,
-        };
-        $scope.openEmail2 = false;
-        $scope.openEmail3 = false;
         $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
         $scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
         $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'], "01/01/2050 08:00:00 AM");
@@ -349,12 +349,10 @@ myApp.controller('myCtrl', function($scope, $http) {
                 emailDone = '1';
                 if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])) {
                     emailDone = '2';
-                    $scope.openEmail2 = true;
                     $scope.openEmail["2"] = true;
                 }
                 if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])) {
                     emailDone = '3';
-                    $scope.openEmail3 = true;
                     $scope.openEmail["3"] = true;
                 }
             }
@@ -435,7 +433,7 @@ myApp.controller('myCtrl', function($scope, $http) {
         var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "EMAIL1-VIEW-ONLINE-LINK", "EMAIL1-STUDIO-TRACKER", "templateEmail1"];
         if (cmd.endsWith("2")) {
             currentEmail = '2';
-            $scope.openEmail2 = true;
+            $scope.openEmail['2'] = true;
             if (cmd == 'COPY2') {
                 $scope.copyEmail(email1Fields, '1', '2');
             } else {
@@ -443,7 +441,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
         } else if (cmd.endsWith("3")) {
             currentEmail = '3';
-            $scope.openEmail3 = true;
+            $scope.openEmail['3'] = true;
             if (cmd == 'COPY3') {
                 $scope.copyEmail(email1Fields, '2', '3');
             } else {
@@ -650,6 +648,12 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
         });                
     }
+	$scope.openEmail = {
+		"1":true,
+		"2":false,
+		"3":false,
+	};
+		
     $scope.Load();
 });
 
