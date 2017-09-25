@@ -102,6 +102,28 @@
             "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Domain",
             "value":"davinci{{accountID}}.m.mdl.io"
-        }
+        },
+        {
+            "xpath":"//CampaignElement[@Name='Promote an eBook']/CallbackTouchPoints/CallbackTouchPoint",
+            "attribute":"Callback",
+            "value":"http://dv{{accountID}}.m.mdl.io/{{campaignID}}"
+        },
+        {
+            "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
+            "attribute":"URL",
+            "value":"dv{{accountID}}.m.mdl.io/{{campaignID}}"
+        },
+        {
+            "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
+            "attribute":"Extension",
+            "value":"{{campaignID}}"
+        },
+        {
+            "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
+            "attribute":"Domain",
+            "value":"dv{{accountID}}.m.mdl.io"
+        },
+        
+        
     ]
 }
