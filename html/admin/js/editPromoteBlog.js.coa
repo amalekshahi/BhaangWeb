@@ -9,9 +9,8 @@ if (!hasValue(campaignID)) {
 
 $.fn.editable.defaults.mode = 'inline';
 $.fn.editableform.buttons =
-    '<button type="button" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i></button>' +
-    '<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>' +
-    '<button type="button" class="btn btn-default btn-sm editable-off"><i class="glyphicon glyphicon-trash"></i></button>';
+    '<button type="button" class="btn btn-primary btn-sm editable-submit" title="Done"><i class="glyphicon glyphicon-ok"></i></button>' +
+    '<button type="button" class="btn btn-default btn-sm editable-cancel" title="Cancel"><i class="glyphicon glyphicon-remove"></i></button>';
 
 $(document).ready(function() {
     $('#email_name').editable();
@@ -52,7 +51,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.Save = function(mode, silence) {
         $scope.state['Save'] = "Saving";
         //alert(mode);
-        if (mode == 'Email') {
+        if (mode == 'Email1') {
             $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
             $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
             $scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
@@ -161,7 +160,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                         "status": "Edit",
                         "campaignType": $scope.campaign.campaignType
                     });
-                    action = 'editCampaign';
+                    //action = 'editCampaign';
                 } else {
                     $scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
                 }
@@ -169,13 +168,12 @@ myApp.controller('myCtrl', function($scope, $http) {
                     $scope.setDisplay();
                     if (silence == true) {} else {
                         //swal("Save Campaign Successful.", "", "success");
-                        
                     }
-                    
                     // Kwang backup current to master and clear formState
                     $scope.master = angular.copy($scope.campaign);
                     $scope.clearFormState();
                     $scope.state['Save'] = 'Save';
+					$scope.goEditMode(action);
                 });
             }, function(errResponse) {
                 // case new account
@@ -195,18 +193,26 @@ myApp.controller('myCtrl', function($scope, $http) {
                     });
                     $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                         $scope.setDisplay();
+						$scope.state['Save'] = 'Save';
+						$scope.goEditMode(action);
                         //swal("Save Campaign Successful.", "", "success");
                         //alert("Save Campaign Successful.");
                     });
                 } else {
                     //alert(errResponse.statusText);
+					$scope.state['Save'] = 'Save';
                     swal(errResponse.statusText);
                 }
-                $scope.state['Save'] = 'Save';
+                
             });
 
         });
     };
+	$scope.goEditMode = function(action) {
+		if (action == "newCampaign") {
+			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID;
+		}
+	};
     $scope.Cancel = function() {
         swal({
             title: "Are you sure?",
@@ -324,6 +330,11 @@ myApp.controller('myCtrl', function($scope, $http) {
             "2":false,
             "3":false,
         };
+		$scope.disabledEmail = {
+            "1":false,
+            "2":false,
+            "3":false,
+        };
         $scope.openEmail2 = false;
         $scope.openEmail3 = false;
         $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
@@ -349,14 +360,58 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
             $scope.emailProgress = emailDone + ' of 3 Emails Ready';
         }
-        //Set schedue to default if EMAIL2 and 3 NOT SET
-        if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
-            //$scope.campaign['EMAIL2-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
-        }
-        if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){
-            //$scope.campaign['EMAIL3-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
-        }
 
+		var publishProgramID = $scope.campaign['publishProgramID'];
+		if ((typeof publishProgramID == 'undefined') || (publishProgramID == "")) {
+
+		} else {
+			var d1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];
+			if (d1 == "01/01/2050 08:00:00 AM")	{
+				
+			} else {
+
+				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
+				var timezone1 = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];								
+                if (checkdate(datetime1, timezone1)) {
+					$('#datespan1').show();
+					$('#clockspan1').show();
+                } else {
+                    $scope.disabledEmail["1"] = true;
+					$('#datespan1').hide();
+					$('#clockspan1').hide();
+                }				
+			}
+			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
+				var d2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];
+				if (d2 == "01/01/2050 08:00:00 AM")	{
+					
+				} else {
+					var datetime2 = $scope.campaign['EMAIL2-SCHEDULE1-DATETIME'];								
+					var timezone2 = $scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'];								
+					if (checkdate(datetime2, timezone2)) {
+						$('#clockspan2').show();
+					} else {
+						$scope.disabledEmail["2"] = true;
+						$('#clockspan2').hide();
+					}
+				}
+			}
+			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){        
+				var d3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];
+				if (d3 == "01/01/2050 08:00:00 AM")	{
+					
+				} else {
+					var datetime3 = $scope.campaign['EMAIL3-SCHEDULE1-DATETIME'];								
+					var timezone3 = $scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'];								
+					if (checkdate(datetime3, timezone3)) {
+						$('#clockspan3').show();
+					} else {
+						$scope.disabledEmail["3"] = true;
+						$('#clockspan3').hide();
+					}
+				}
+			}
+		}		
     };
     $scope.SelectChanged = function(emailViewID, templateField) {
         //$scope.content = angular.copy($scope.templateEmail1);
@@ -377,7 +432,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     };
     $scope.startEmail = function(cmd) {
         var currentEmail = '1';
-        var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "templateEmail1"];
+        var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "EMAIL1-VIEW-ONLINE-LINK", "EMAIL1-STUDIO-TRACKER", "templateEmail1"];
         if (cmd.endsWith("2")) {
             currentEmail = '2';
             $scope.openEmail2 = true;
