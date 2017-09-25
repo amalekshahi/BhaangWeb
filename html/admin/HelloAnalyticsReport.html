@@ -5,6 +5,7 @@
   <title>Hello Analytics Reporting API V4</title>
   <meta name="google-signin-client_id" content="578758177970-e8f99ust8j0jneco959s2292lhc94u3j.apps.googleusercontent.com">
   <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+  <script src="js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 
@@ -14,13 +15,32 @@
 <p class="g-signin2" data-onsuccess="queryReports"></p>
 
 <!-- The API response will be printed here. -->
-<textarea cols="80" rows="20" id="query-output"></textarea>
+<div style="display: none">
+<textarea cols="80" rows="20" id="query-output1"></textarea>
+</div>
+<br>
+<div id="query-output2" style="display: none"></div>
+<div id="query-output3"></div>
+
 
 <script>
   // Replace with your view ID.  
   var VIEW_ID = '147734871'; //	starbucks
   var VIEW_ID = '132878152'; //	Fresh Start
   var VIEW_ID = '160328262'; // GA_test
+
+ function GetFilename(url)
+{
+   if (url)
+   {
+      var m = url.toString().match(/.*\/(.+?)\./);
+      if (m && m.length > 1)
+      {
+         return m[1];
+      }
+   }
+   return "";
+}
   
 
   // Query the API and print the results to the page.
@@ -60,13 +80,77 @@
           }
         ]
       }
-    }).then(displayResults, console.error.bind(console));
-  }
+    })
+	.then(function(response) {
+		// Handle response
+		var result = JSON.stringify(response.result, null, 2);
+	    $('#query-output1').val(result);
+		
+		var results = response.result.reports[0].data;
+		//alert(results.rows.length);
+		if (results.rows && results.rows.length) {
+			var table = '<table>';
+			// Put cells in table.
+			for (i = 0; i < results.rows.length; i++) { 
+			  
+			  url = results.rows[i].dimensions;
+			  table = table+'<tr><td>'+ url+'</td></tr>';
+			}
+			table = table+'</table>';
+			$('#query-output2').html(table);
+			//alert(table);
 
-  function displayResults(response) {
-    var formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('query-output').value = formattedJson;
-  }
+		 } else {
+			alert('<p>No Results Found</p>');
+		 }
+
+		 var results = response.result.reports[0].data;
+		//alert(results.rows.length);
+		if (results.rows && results.rows.length) {
+			var table = '<table border="1">'+'<tr><td>page</td><td>campaignID</td><td>contactID</td><td>source</td></tr>';
+			// Put cells in table.
+			for (i = 0; i < results.rows.length; i++) { 
+			  
+			  url = results.rows[i].dimensions;
+			  campaignID = getParameterByName('campaignID',url);
+			  contactID = getParameterByName('contactID',url);
+			  source = getParameterByName('source',url);
+			  filename = GetFilename(url);
+			  if (campaignID && contactID && source) {
+				  table = table+'<tr><td>'+ filename+ '</td><td>'+ campaignID+ '</td><td>'+contactID+'</td><td>'+source+'</td></tr>';
+			  }
+
+			}
+			table = table+'</table>';
+			$('#query-output3').html(table);
+			//alert(table);
+
+		 } else {
+			alert('<p>No Results Found</p>');
+		 }
+
+		 
+	}, function(reason) {
+		// Handle error
+	  console.error.bind(console)
+	});
+
+
+	function getParameterByName(name, url) {
+		if (!url) url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	
+
+
+  }  
+  
 </script>
 
 <!-- Load the JavaScript API client and Sign-in library. -->
