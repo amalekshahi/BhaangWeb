@@ -92,6 +92,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
 
             if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
+				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
                 var wait2 = $scope.campaign['EMAIL2-WAIT'];
                 var time2 = $scope.campaign['EMAIL2-SCHEDULE1-TIME'];
                 var timezone2 = $scope.campaign['EMAIL2-SCHEDULE1-TIMEZONE'];
@@ -113,6 +114,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
 
             if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])){
+				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
                 var wait3 = $scope.campaign['EMAIL3-WAIT'];
                 var time3 = $scope.campaign['EMAIL3-SCHEDULE1-TIME'];
                 var timezone3 = $scope.campaign['EMAIL3-SCHEDULE1-TIMEZONE'];
