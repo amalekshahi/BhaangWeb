@@ -122,8 +122,6 @@
             "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Domain",
             "value":"dv{{accountID}}.m.mdl.io"
-        },
-        
-        
+        }
     ]
 }
