@@ -14,6 +14,9 @@
 		<?php include "header.php"; ?>
 		<script src="js/date.format.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
+		<style type="text/css">
+			.fileinput-filename{white-space: nowrap;text-overflow: ellipsis;width: calc(100% - 20px);}
+		</style>
 	</head>
 
 	<body class="">
