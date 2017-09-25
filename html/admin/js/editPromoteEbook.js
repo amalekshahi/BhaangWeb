@@ -189,6 +189,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			window.location = "editPromoteEbook.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
 		$scope.state['Save'] = 'Save';
+		$scope.$apply();
 	};
 	$scope.Cancel = function() {
 		swal({
@@ -479,12 +480,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			console.log(str); // Logs output to dev tools console.
 			$scope.state['Publish'] = "Launch Program";
 			//alert(response);
+			$scope.state['Save'] = 'Save';
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
             //if(!$scope.silenceMode){
                 swal("Server Error");
             //}
 			//alert(errResponse);
+			$scope.state['Save'] = 'Save';
 		});
 	}
     $scope.silenceMode = false;

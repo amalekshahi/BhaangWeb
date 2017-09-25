@@ -219,6 +219,7 @@ myApp.controller('myCtrl', function($scope, $http) {
 			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
 		$scope.state['Save'] = 'Save';
+		$scope.$apply();
 	};
     $scope.Cancel = function() {
         swal({
@@ -526,10 +527,12 @@ myApp.controller('myCtrl', function($scope, $http) {
             console.log(str); // Logs output to dev tools console.
             $scope.state['Publish'] = "Launch Program";
             //alert(response);
+			$scope.state['Save'] = 'Save';
         }, function(errResponse) {
             $scope.state['Publish'] = "Launch Program";
             swal("Server Error");
             //alert(errResponse);
+			$scope.state['Save'] = 'Save';
         });
     }
     $scope.Publish = function() {
