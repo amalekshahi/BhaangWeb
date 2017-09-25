@@ -1,4 +1,4 @@
-<Program Name="Kwang Ebook 3" Version="1.0" DbId="91" CheckOutId="131" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+<Program Name="Kwang Ebook 3" Version="1.0" DbId="91" CheckOutId="175" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote an eBook" Version="1.0" Id="1" DbId="91" CheckOutId="0" State="Start" Permissions="">
     <CampaignElements>
@@ -166,7 +166,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Settings>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="7" DbId="778" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+      <CampaignElement Id="7" DbId="778" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email1 (Right Now)</Subject>
@@ -686,7 +686,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="unsubscribelink">{{URL TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK}}</ContentVariable>
         <ContentVariable Name="fromemail">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-af915aa5a7a7ac54166b46e5e1d3bd22-FROMEMAIL.html"##</ContentVariable>
         <ContentVariable Name="fromname">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-af915aa5a7a7ac54166b46e5e1d3bd22-FROMNAME.html"##</ContentVariable>
-        <ContentVariable Name="email1content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
+        <ContentVariable Name="email1content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-af915aa5a7a7ac54166b46e5e1d3bd22-EMAIL1CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email2content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-af915aa5a7a7ac54166b46e5e1d3bd22-EMAIL2CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email3content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-af915aa5a7a7ac54166b46e5e1d3bd22-EMAIL3CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email4content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
@@ -702,7 +702,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="DownloadPageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT}}</ContentVariable>
         <ContentVariable Name="DownloadLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html"##</ContentVariable>
         <ContentVariable Name="VistLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
-        <ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
+        <ContentVariable Name="email1contentonline">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-af915aa5a7a7ac54166b46e5e1d3bd22-EMAIL1CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email2contentonline">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-af915aa5a7a7ac54166b46e5e1d3bd22-EMAIL2CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email3contentonline">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-af915aa5a7a7ac54166b46e5e1d3bd22-EMAIL3CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email4contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
