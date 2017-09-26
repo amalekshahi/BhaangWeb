@@ -20,25 +20,6 @@
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
               <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
             </Properties>
-            <Form>
-              <Input Type="DropDownBox" Name="" IsEncrypted="False">
-                <Options>
-                  <Option Score="0" Goal="0" IsDistinct="False">{{option.id}}|{{option.name}}</Option>
-                  <Option Score="0" Goal="0" IsDistinct="False"></Option>
-                </Options>
-                <IsRequired>False</IsRequired>
-              </Input>
-              <Input Type="TextBox" Name="email" IsEncrypted="False">
-                <IsRequired>False</IsRequired>
-                <ValidationRegex />
-                <ValidationRegexMessage />
-              </Input>
-              <Input Type="TextBox" Name="" IsEncrypted="False">
-                <IsRequired>False</IsRequired>
-                <ValidationRegex />
-                <ValidationRegexMessage />
-              </Input>
-            </Form>
             <Flow />
             <Events />
           </ChildElement>
@@ -88,25 +69,6 @@
             <Properties PageType="Page" IsHomePage="True" SkipPage="False" IsLoginRequired="False">
               <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
             </Properties>
-            <Form>
-              <Input Type="DropDownBox" Name="" IsEncrypted="False">
-                <Options>
-                  <Option Score="0" Goal="0" IsDistinct="False">{{option.id}}|{{option.name}}</Option>
-                  <Option Score="0" Goal="0" IsDistinct="False"></Option>
-                </Options>
-                <IsRequired>False</IsRequired>
-              </Input>
-              <Input Type="TextBox" Name="email" IsEncrypted="False">
-                <IsRequired>False</IsRequired>
-                <ValidationRegex />
-                <ValidationRegexMessage />
-              </Input>
-              <Input Type="TextBox" Name="" IsEncrypted="False">
-                <IsRequired>False</IsRequired>
-                <ValidationRegex />
-                <ValidationRegexMessage />
-              </Input>
-            </Form>
             <Flow>
               <FlowNextElement Id="17" Name="Download.html">
                 <Filter CriteriaJoinOperator="&amp;" />
@@ -118,25 +80,6 @@
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
               <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
             </Properties>
-            <Form>
-              <Input Type="DropDownBox" Name="" IsEncrypted="False">
-                <Options>
-                  <Option Score="0" Goal="0" IsDistinct="False">{{option.id}}|{{option.name}}</Option>
-                  <Option Score="0" Goal="0" IsDistinct="False"></Option>
-                </Options>
-                <IsRequired>False</IsRequired>
-              </Input>
-              <Input Type="TextBox" Name="email" IsEncrypted="False">
-                <IsRequired>False</IsRequired>
-                <ValidationRegex />
-                <ValidationRegexMessage />
-              </Input>
-              <Input Type="TextBox" Name="" IsEncrypted="False">
-                <IsRequired>False</IsRequired>
-                <ValidationRegex />
-                <ValidationRegexMessage />
-              </Input>
-            </Form>
             <Flow />
             <Events />
           </ChildElement>

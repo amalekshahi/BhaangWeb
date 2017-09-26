@@ -69,11 +69,21 @@ function Render(template,data){
 } 
 
 function documentConpare(obj1, obj2) {
+    if(typeof obj1 == "undefined"){
+        return false;
+    }
+    if(typeof obj2 == "undefined"){
+        return false;
+    }
 	//Loop through properties in object 1
 	for (var p in obj1) {
 		switch (typeof (obj1[p])) {
 			//Deep compare objects
 			case 'object':
+                if(typeof obj2[p] == "undefined"){
+                    console.log("object differ " + p);
+                    return false;
+                }
 				if (!documentConpare(obj1[p], obj2[p])) {
                     console.log("object differ " + p);
                     return false;
@@ -84,6 +94,10 @@ function documentConpare(obj1, obj2) {
                 continue;
 			//Compare values
 			default:
+                if(typeof obj2[p] == "undefined"){
+                    console.log("prop differ " + p);
+                    return false;
+                }
 				if (obj1[p] != obj2[p]) {
                     console.log("prop differ " + p);
                     return false;

@@ -313,7 +313,7 @@ if($cmd == "publish"){
                 'success'=>false,
                 'cmd'=>$cmd,
                 'message'=>"Studio return error",
-                //'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
+                'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
                 //'mamlInfo'=>$mamlInfo,
                 //'finishMAML'=>$finishMAML,
                 "renderMode"=>$renderMode,                
@@ -429,9 +429,26 @@ if($cmd == "publish"){
     //$execTime['StudioRender'] = microtime(true) - $start_time;$start_time = microtime(true);    
     
     $execTime['UpdateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
-
-    // save file for debug
+    // Check if we publish before and has the same content
     $republishReturnFileName = "publish/".$acctID."_".$progID."_republish.maml";
+    $prevPublish = file_get_contents($republishReturnFileName);
+    if($updateMAML == $prevPublish){
+        echo json_encode( 
+            array(
+                'success'=>true,
+                'cmd'=>$cmd,
+                'time'=> $execTime,
+                'renderMode'=>$renderMode,
+                'message'=>"Update Done (not need to publish)",
+                'publishProgramID'=>$publishProgramID,
+                'ticket'=>$ticket,            
+                'updateResult'=>$updateResult,
+                
+        ));
+        exit;   
+    }
+    file_put_contents("publish/".$acctID."_".$progID."prev_republish.maml",$prevPublish);
+    // save file for debug
     file_put_contents($republishReturnFileName,$updateMAML);
     //CheckIn    
     $checkInRet = checkinProgram($ticket,$updateMAML);
