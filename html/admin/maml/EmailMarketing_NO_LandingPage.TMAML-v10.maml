@@ -8,17 +8,17 @@
             <Subject>Business MicroSite (Right Now)</Subject>
             <Body />
             <Start DateTime="02/14/2013 12:00:00 AM" />
-            <End DateTime="02/28/2050 11:59:00 PM" />
+            <End DateTime="02/28/2020 11:59:00 PM" />
           </Schedule>
         </Schedules>
         <Events />
         <CallbackTouchPoints>
-          <CallbackTouchPoint Id="1" DbId="0" Callback="http://dv16916.m.mdl.io/campaignID" />
+          <CallbackTouchPoint Id="1" DbId="0" Callback="http://dv{{accountID}}.m.mdl.io/{{campaignID}}" />
         </CallbackTouchPoints>
-        <ChildElements>          
-          <ChildElement Id="9" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="200,530">
+        <ChildElements>
+          <ChildElement Id="9" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="300,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
+              <HtmlContent>##email1content##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
@@ -30,79 +30,46 @@
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="11" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email2.html" Position="320,530">
+          <ChildElement Id="11" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email2.html" Position="470,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
+              <HtmlContent>##email2content##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="12" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email3.html" Position="450,530">
+          <ChildElement Id="12" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email3.html" Position="640,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
+              <HtmlContent>##email3content##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="13" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email4.html" Position="590,530">
+          <ChildElement Id="13" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email4.html" Position="140,193">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
+              <HtmlContent>##email4content##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="14" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email5.html" Position="740,530">
+          <ChildElement Id="14" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email5.html" Position="310,190">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
+              <HtmlContent>##email5content##</HtmlContent>
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
-          <ChildElement Id="15" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email6.html" Position="880,530">
+          <ChildElement Id="15" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email6.html" Position="480,190">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
+              <HtmlContent>##email6content##</HtmlContent>
             </Properties>
             <Flow />
-            <Events />
-          </ChildElement>
-          <ChildElement Id="16" DbId="0" Type="Page" IsVersion="False" Name="home.html" Position="480,320">
-            <Properties PageType="Page" IsHomePage="True" SkipPage="True" IsLoginRequired="False">
-              <HtmlContent />
-            </Properties>
-            <Flow>
-              <FlowNextElement Id="9" Name="Email1.html">
-                <Filter CriteriaJoinOperator="&amp;" />
-              </FlowNextElement>
-              <FlowNextElement Id="11" Name="Email2.html">
-                <Filter CriteriaJoinOperator="&amp;" />
-              </FlowNextElement>
-              <FlowNextElement Id="12" Name="Email3.html">
-                <Filter CriteriaJoinOperator="&amp;" />
-              </FlowNextElement>
-              <FlowNextElement Id="13" Name="Email4.html">
-                <Filter CriteriaJoinOperator="&amp;" />
-              </FlowNextElement>
-              <FlowNextElement Id="14" Name="Email5.html">
-                <Filter CriteriaJoinOperator="&amp;" />
-              </FlowNextElement>
-              <FlowNextElement Id="15" Name="Email6.html">
-                <Filter CriteriaJoinOperator="&amp;" />
-              </FlowNextElement>
-            </Flow>
             <Events />
           </ChildElement>
         </ChildElements>
-        <ChildConnections>
-          <ChildConnection StartElementId="16" EndElementId="9" />
-          <ChildConnection StartElementId="16" EndElementId="11" />
-          <ChildConnection StartElementId="16" EndElementId="12" />
-          <ChildConnection StartElementId="16" EndElementId="13" />
-          <ChildConnection StartElementId="16" EndElementId="14" />
-          <ChildConnection StartElementId="16" EndElementId="15" />
-        </ChildConnections>
+        <ChildConnections />
         <Properties>
           <BaseUrlCollection>
-            <BaseUrl Id="1" DbId="0" URL="dv16916.m.mdl.io/campaignID" Extension="campaignID" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="dv16916.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
+            <BaseUrl Id="1" DbId="0" URL="dv{{accountID}}.m.mdl.io/{{campaignID}}" Extension="{{campaignID}}" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="dv{{accountID}}.m.mdl.io" SSL="False" SearchEngineAllowed="False" />
           </BaseUrlCollection>
           <Settings SessionTimeout="20">
             <InvalidPurl>&lt;html&gt;
@@ -185,10 +152,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="230,140" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="12" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="12" Type="Fixed" TimeZone="{{EMAIL1-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule1</Subject>
             <Body />
-            <Start DateTime="08/10/2050 06:40:00 AM" />
+            <Start DateTime="{{EMAIL1-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -217,10 +184,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="390,140" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="{{EMAIL2-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule1</Subject>
             <Body />
-            <Start DateTime="08/10/2050 06:40:00 AM" />
+            <Start DateTime="{{EMAIL2-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -243,10 +210,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email3" Position="540,140" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="{{EMAIL3-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule1</Subject>
             <Body />
-            <Start DateTime="08/10/2050 06:40:00 AM" />
+            <Start DateTime="{{EMAIL3-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -307,7 +274,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20105" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="{{OPEN-MY-EMAIL}}" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>OpenEmailAlert (Right Now)</Subject>
@@ -396,10 +363,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="690,140" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="26" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="26" Type="Fixed" TimeZone="{{EMAIL4-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email4Schedule1</Subject>
             <Body />
-            <Start DateTime="08/10/2050 06:40:00 AM" />
+            <Start DateTime="{{EMAIL4-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -422,10 +389,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="840,140" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="27" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="27" Type="Fixed" TimeZone="{{EMAIL5-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email5Schedule1</Subject>
             <Body />
-            <Start DateTime="08/10/2050 06:40:00 AM" />
+            <Start DateTime="{{EMAIL5-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -448,10 +415,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="990,140" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
-          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="28" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="28" Type="Fixed" TimeZone="{{EMAIL6-SCHEDULE1-TIMEZONE}}" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email6Schedule1</Subject>
             <Body />
-            <Start DateTime="08/10/2050 06:40:00 AM" />
+            <Start DateTime="{{EMAIL6-SCHEDULE1-DATETIME}}" />
           </Schedule>
         </Schedules>
         <Events>
@@ -472,7 +439,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="{{VISIT-MY-BLOCK}}" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>ClickAlertLeadTrigger (Right Now)</Subject>
@@ -565,12 +532,6 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email4subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT}}</ContentVariable>
         <ContentVariable Name="email5subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT}}</ContentVariable>
         <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
-	<ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
-        <ContentVariable Name="email2contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT}}</ContentVariable>
-        <ContentVariable Name="email3contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT}}</ContentVariable>
-        <ContentVariable Name="email4contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
-        <ContentVariable Name="email5contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
-        <ContentVariable Name="email6contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
 	<ContentVariable Name="ClickAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_clickalert.html"##</ContentVariable>
 	<ContentVariable Name="OpenAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_openalert.html"##</ContentVariable>
       </ContentVariables>
