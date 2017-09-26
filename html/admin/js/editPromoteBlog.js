@@ -52,11 +52,10 @@ myApp.controller('myCtrl', function($scope, $http) {
         $scope.state['Save'] = "Saving";
         //alert(mode);
 		for (var key in $scope.openEmail) {
-			if (hasValue($scope.campaign['templateEmail' + key])) {
-				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope['templatesAs'+key][$scope.tpsIndex(key)].contentRaw;
+			if (hasValue($scope['templatesAs'+key])) {
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
 				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
 				$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
-				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
         /*if (mode == 'Email1') {
@@ -221,7 +220,6 @@ myApp.controller('myCtrl', function($scope, $http) {
 			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
 		$scope.state['Save'] = 'Save';
-		$scope.$apply();
 	};
     $scope.Cancel = function() {
         swal({
@@ -477,6 +475,18 @@ myApp.controller('myCtrl', function($scope, $http) {
             startEditable(tar);
         });
     }
+	$scope.getContentRaw = function(templates, selected, field) {
+		for (var i = 0; i < templates.length; i++) {
+            if (templates[i]["content"] == selected) {
+                return templates[i]["contentRaw"];
+            }
+        }
+		if (hasValue($scope.campaign[field])) {
+			return $scope.campaign[field];
+		} else {
+			return '';
+		}
+	}
     $scope.clIndex = function() {
         var cplist = $scope.campaignlist.campaigns;
         for (var i = 0; i < cplist.length; i++) {
@@ -700,13 +710,17 @@ function str_pad(n) {
 }
 
 function convertTimeFormat(timeString) {
-    timeString = timeString.replace("PM", ":00 PM");
-    timeString = timeString.replace("AM", ":00 AM");
+	if (hasValue(timeString)) {
+		timeString = timeString.replace("PM", ":00 PM");
+		timeString = timeString.replace("AM", ":00 AM");
+	} else {
+		timeString = "";
+	}
     return timeString;
 }
 
 function hasValue(obj, defaultValue) {
-    if (obj === undefined || obj == '') {
+    if (obj === undefined || obj == '' || obj == 'null') {
         return false;
     } else {
         //make sure that it is not default if provided

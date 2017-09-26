@@ -39,7 +39,7 @@
 												<div class="col-xs-6">
 													<label>Template</label>
 													<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
-													<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
+													<option ng-repeat="x in templatesWelcome" value="{{x.content}}">{{x.title}}</option>
 													</select>
 												</div>
 												<div class="col-xs-6">
@@ -80,7 +80,7 @@
 											</div>
 											<div class="col-xs-4">
 												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" style="width: 100%;height: 30px;">
-												<option ng-repeat="x in templatesThankYou | filter:{subdir:'thankyou'}" value="{{x.content}}">{{x.title}}</option>
+												<option ng-repeat="x in templatesThankYou" value="{{x.content}}">{{x.title}}</option>
 												</select>
 											</div>
 											<br><br>

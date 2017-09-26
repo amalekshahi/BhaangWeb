@@ -43,7 +43,7 @@ function startEditable(objID) {
 
 }
 
-myApp.controller('myCtrl', function($scope, $http,Upload) {
+myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 	$scope.campaignID = campaignID;
 	$scope.state = {
 		Save: "Save",
@@ -86,15 +86,11 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		$scope.state['Save'] = "Saving";
 		//alert(mode);
 		for (var key in $scope.openEmail) {
-			if (hasValue($scope.campaign['templateEmail' + key])) {
-                try{
-                    $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope['templatesAs'+key][$scope.tpsIndex(key)].contentRaw;
-                    $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-                    $scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
-                    $scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
-                }catch(e){
-                    console.log(e);
-                }
+			if (hasValue($scope['templatesAs'+key])) {
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
+				$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
+				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
 		/*if (mode == 'Email1') {
@@ -116,19 +112,12 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			$scope.campaign['EMAIL3-STATE'] = 'Start';
 		}*/
 		if (hasValue($scope.campaign['templateWelcome'])) {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.templatesWelcome[$scope.getListIndex('templatesWelcome','content','templateWelcome')].contentRaw;
+			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
 		if (hasValue($scope.campaign['templateThankYou'])) {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.templatesThankYou[$scope.getListIndex('templatesThankYou','content','templateThankYou')].contentRaw;
+			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
-        
-        //check if we really need to save this tree
-        if(documentConpare($scope.campaign, $scope.master)){
-            console.log("No change");
-            $scope.state['Save'] = 'Save';
-            return; 
-        }
-        
+		
 		$http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
 			$scope.campaign._rev = response.data.rev;
 
@@ -200,7 +189,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			window.location = "editPromoteEbook.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
 		$scope.state['Save'] = 'Save';
-		$scope.$apply();
 	};
 	$scope.Cancel = function() {
 		swal({
@@ -272,8 +260,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		$scope.initSender();
 	};
 	$scope.initTemplateEmail = function(emlID) {
-		if ($scope.openEmail[emlID]) {
-			$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + emlID).then(function(response) {
+		//if ($scope.openEmail[emlID]) {
+		if (!hasValue($scope['templatesAs'+emlID])) {
+			$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + emlID).then(function(response) {
 				$scope['templatesAs' + emlID] = response.data.templates;
 				if (emlID == '1') {
 					$scope.config = response.data.config;
@@ -288,7 +277,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	};
 	$scope.initTemplateWelcome = function(){
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
-			$scope['templatesWelcome']  = response.data.templates; 
+			$scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
 			$scope.config = response.data.config; 
 			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
 			$scope.SelectChanged('viewWelcome','templateWelcome');
@@ -296,7 +285,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	};
 	$scope.initTemplateThankyou = function(){
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
-			$scope['templatesThankYou']  = response.data.templates; 
+			$scope.templatesThankYou = $filter('filter')(response.data.templates, {subdir:'thankyou'});
 			$scope.config = response.data.config; 
 			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
 			$scope.SelectChanged('viewThankYou','templateThankYou');
@@ -426,6 +415,18 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			startEditable(tar);
 		});
 	}
+	$scope.getContentRaw = function(templates, selected, field) {
+		for (var i = 0; i < templates.length; i++) {
+            if (templates[i]["content"] == selected) {
+                return templates[i]["contentRaw"];
+            }
+        }
+		if (hasValue($scope.campaign[field])) {
+			return $scope.campaign[field];
+		} else {
+			return '';
+		}
+	}
 	$scope.clIndex = function() {
 		var cplist = $scope.campaignlist.campaigns;
 		for (var i = 0; i < cplist.length; i++) {
@@ -478,7 +479,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			}
 		}).then(function(response) {
 			if (response.data.success == false) {
-				var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+				var errorMessage = prettyStudioErrorMessage(response.data.message);
                 if(!$scope.silenceMode){
                     swal(response.data.detail.Result.ErrorCode,errorMessage);
                 }
@@ -791,5 +792,3 @@ function convert_to_24h(time_str) {
 	}
 	return str_pad(hours)+':'+str_pad(minutes)+':'+str_pad(seconds);
 };
-
-
