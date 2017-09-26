@@ -154,6 +154,7 @@ foreach($configs as $config)
         "accountInfo"=>$accountInfo,
         "accountID"=>$accountID,
         "subdir"=>$config->subdir,
+        "blueprint"=>$blueprint,
     );
 }
 

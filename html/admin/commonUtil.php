@@ -483,7 +483,17 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             if(property_exists($doc,$fieldName)){
             //if(!empty($doc->{$field->name})){
                 if(!empty($field->attribute)){
-                    $nodeRet = DomSetAttribute($xpath,$xpathName,$field->attribute,$doc->{$fieldName});
+                    $value = $doc->{$fieldName};
+                    if($field->type == "LINK"){
+                        $filename = str_replace("ACCTID",$acctID,$fieldName);
+                        $filename = str_replace("PROGRAMID",$progID,$filename);
+                        $filename = $filename . ".html";
+                        //Render content before publish to S3
+                        $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $value = $s3Url;
+                    }
+                    $nodeRet = DomSetAttribute($xpath,$xpathName,$field->attribute,$value);
                     if(!empty($nodeRet)){
                         if($fieldName!="campaignName"){ // cmapaignName is whole file (skip this)
                             $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
@@ -502,6 +512,15 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
+                    }
+                    if($field->type == "LINK"){
+                        $filename = str_replace("ACCTID",$acctID,$fieldName);
+                        $filename = str_replace("PROGRAMID",$progID,$filename);
+                        $filename = $filename . ".html";
+                        //Render content before publish to S3
+                        $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $value = $s3Url;
                     }
                     $nodeRet = DomSetText($xpath,$xpathName,$value);
                     if(!empty($nodeRet)){

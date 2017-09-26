@@ -75,24 +75,24 @@
             "attribute":"Mins",
             "loop":6
         },
-	{
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
             "xpath":"//ChildElement[@Name='Email#.html']/Properties/HtmlContent",
-	    "attribute":"URL",
+            "attribute":"URL",
             "type":"LINK",
             "loop":6
         },
-	{
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT",
             "xpath":"//ChildElement[@Name='Welcome.html']/Properties/HtmlContent",
-	    "attribute":"URL",
-            "type":"LINK",
+            "attribute":"URL",
+            "type":"LINK"
         },
-	{
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT",
             "xpath":"//ChildElement[@Name='Download.html']/Properties/HtmlContent",
-	    "attribute":"URL",
-            "type":"LINK",
+            "attribute":"URL",
+            "type":"LINK"
         },
         {
             "name":"EMAIL#-STATE",
