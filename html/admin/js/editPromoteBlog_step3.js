@@ -19,7 +19,7 @@ myApp.controller('step3', function($scope, $http) {
                     $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
                 }
             }
-            ShowScheduleDateTime();
+            $scope.ShowScheduleDateTime();
         }
     };
     $scope.Cancel = function() {
