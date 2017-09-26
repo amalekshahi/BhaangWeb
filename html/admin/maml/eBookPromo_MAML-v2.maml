@@ -203,7 +203,14 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </HookedEvents>
       </CampaignElement>
       <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables">
-        <Events>
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>Email2 (Right Now)</Subject>
+            <Body />
+            <Start Days="0" Hours="0" Mins="0" />
+          </Schedule>
+        </Schedules>
+	<Events>
           <Event EventId="20103" GoalId="1" IsDistinct="False" />
           <Event EventId="20105" GoalId="2" IsDistinct="False" />
         </Events>

@@ -6,13 +6,13 @@
             "attribute":"Name"
         },
         {
-            "name":"VISIT-MY-EBOOK",
-            "xpath":"//CampaignElement[@Name='VisitAlertLeadTrigger']",
+            "name":"OPEN-MY-EMAIL",
+            "xpath":"//CampaignElement[@Name='OpenAlertLeadTrigger']",
             "attribute":"State"
         },
         {
-            "name":"DOWNLOAD-MY-EBOOK",
-            "xpath":"//CampaignElement[@Name='DownloadAlertLeadTrigger']",
+            "name":"VISIT-MY-BLOCK",
+            "xpath":"//CampaignElement[@Name='ClickAlertLeadTrigger']",
             "attribute":"State"
         },
         {
@@ -48,31 +48,15 @@
             "loop":6
         },
         {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT",
-            "xpath":"//ContentVariable[@Name='WecomePageContent']",
-            "type":"URL"
-        },
-        {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT",
-            "xpath":"//ContentVariable[@Name='DownloadPageContent']",
-            "type":"URL"
-        },
-        {
-            "name":"EMAIL#-SCHEDULE1-DAYS",
+            "name":"EMAIL#-SCHEDULE1-DATETIME",
             "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule/Start",
-            "attribute":"Days",
+            "attribute":"DateTime",
             "loop":6
         },
         {
-            "name":"EMAIL#-SCHEDULE1-HOURS",
-            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule/Start",
-            "attribute":"Hours",
-            "loop":6
-        },
-        {
-            "name":"EMAIL#-SCHEDULE1-MINS",
-            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule/Start",
-            "attribute":"Mins",
+            "name":"EMAIL#-SCHEDULE1-TIMEZONE",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule",
+            "attribute":"TimeZone",
             "loop":6
         },
         {
@@ -83,42 +67,30 @@
             "loop":6
         },
         {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT",
-            "xpath":"//ChildElement[@Name='Welcome.html']/Properties/HtmlContent",
-            "attribute":"URL",
-            "type":"LINK"
-        },
-        {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT",
-            "xpath":"//ChildElement[@Name='Download.html']/Properties/HtmlContent",
-            "attribute":"URL",
-            "type":"LINK"
-        },
-        {
             "name":"EMAIL#-STATE",
             "xpath":"//CampaignElement[@Name='Email#']",
             "attribute":"State",
             "loop":6
         }        
     ],
-    "doms":[        
+    "doms":[
         {
-            "xpath":"//CampaignElement[@Name='Promote an eBook']/CallbackTouchPoints/CallbackTouchPoint",
+            "xpath":"//CampaignElement[@Name='Business Microsite']/CallbackTouchPoints/CallbackTouchPoint",
             "attribute":"Callback",
             "value":"http://dv{{accountID}}.m.mdl.io/{{campaignID}}"
         },
         {
-            "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
+            "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"URL",
             "value":"dv{{accountID}}.m.mdl.io/{{campaignID}}"
         },
         {
-            "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
+            "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Extension",
             "value":"{{campaignID}}"
         },
         {
-            "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
+            "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Domain",
             "value":"dv{{accountID}}.m.mdl.io"
         }
