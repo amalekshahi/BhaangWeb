@@ -105,12 +105,12 @@
         {
             "xpath":"//CampaignElement[@Name='Business Microsite']/CallbackTouchPoints/CallbackTouchPoint",
             "attribute":"Callback",
-            "value":"http://davinci{{accountID}}.m.mdl.io/{{campaignID}}"
+            "value":"http://dv{{accountID}}.m.mdl.io/{{campaignID}}"
         },
         {
             "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"URL",
-            "value":"davinci{{accountID}}.m.mdl.io/{{campaignID}}"
+            "value":"dv{{accountID}}.m.mdl.io/{{campaignID}}"
         },
         {
             "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
@@ -120,7 +120,7 @@
         {
             "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Domain",
-            "value":"davinci{{accountID}}.m.mdl.io"
+            "value":"dv{{accountID}}.m.mdl.io"
         },
         {
             "xpath":"//CampaignElement[@Name='Promote an eBook']/CallbackTouchPoints/CallbackTouchPoint",
