@@ -432,7 +432,10 @@ if($cmd == "publish"){
     // Check if we publish before and has the same content
     $republishReturnFileName = "publish/".$acctID."_".$progID."_republish.maml";
     $prevPublish = file_get_contents($republishReturnFileName);
-    if($updateMAML == $prevPublish){
+    // remove checkoutID
+    $prevPublish = preg_replace('/CheckOutId="[0-9]+"/','', $prevPublish);
+    $currentPublish = preg_replace('/CheckOutId="[0-9]+"/','', $updateMAML);
+    if($currentPublish == $prevPublish){
         echo json_encode( 
             array(
                 'success'=>true,
