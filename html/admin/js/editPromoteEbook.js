@@ -87,10 +87,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		//alert(mode);
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope.campaign['templateEmail' + key])) {
-				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope['templatesAs'+key][$scope.tpsIndex(key)].contentRaw;
-				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-				$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
-				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
+                try{
+                    $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope['templatesAs'+key][$scope.tpsIndex(key)].contentRaw;
+                    $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
+                    $scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
+                    $scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
+                }catch(e){
+                    console.log(e);
+                }
 			}
 		}
 		/*if (mode == 'Email1') {
@@ -117,7 +121,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		if (hasValue($scope.campaign['templateThankYou'])) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.templatesThankYou[$scope.getListIndex('templatesThankYou','content','templateThankYou')].contentRaw;
 		}
-		
+        
+        //check if we really need to save this tree
+        if(documentConpare($scope.campaign, $scope.master)){
+            console.log("No change");
+            $scope.state['Save'] = 'Save';
+            return; 
+        }
+        
 		$http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
 			$scope.campaign._rev = response.data.rev;
 
@@ -780,3 +791,5 @@ function convert_to_24h(time_str) {
 	}
 	return str_pad(hours)+':'+str_pad(minutes)+':'+str_pad(seconds);
 };
+
+

@@ -68,4 +68,28 @@ function Render(template,data){
     return html;
 } 
 
+function documentConpare(obj1, obj2) {
+	//Loop through properties in object 1
+	for (var p in obj1) {
+		switch (typeof (obj1[p])) {
+			//Deep compare objects
+			case 'object':
+				if (!documentConpare(obj1[p], obj2[p])) {
+                    console.log("object differ " + p);
+                    return false;
+                }
+				break;
+			//Compare function code
+			case 'function':
+                continue;
+			//Compare values
+			default:
+				if (obj1[p] != obj2[p]) {
+                    console.log("prop differ " + p);
+                    return false;
+                }
+		}
+	}
+	return true;
+};
 
