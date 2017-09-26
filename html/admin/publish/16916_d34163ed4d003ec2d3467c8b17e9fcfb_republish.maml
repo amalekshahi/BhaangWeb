@@ -1,4 +1,4 @@
-<Program Name="Kwang Ebook 5" Version="1.0" DbId="118" CheckOutId="252" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+<Program Name="Kwang Ebook 5" Version="1.0" DbId="118" CheckOutId="272" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote an eBook" Version="1.0" Id="1" DbId="118" CheckOutId="0" State="Start" Permissions="">
     <CampaignElements>
@@ -530,7 +530,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email5subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT}}</ContentVariable>
         <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
         <ContentVariable Name="WecomePageContent">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-WELCOMEPAGECONTENT.html"##</ContentVariable>
-        <ContentVariable Name="DownloadPageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT}}</ContentVariable>
+        <ContentVariable Name="DownloadPageContent">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-DOWNLOADPAGECONTENT.html"##</ContentVariable>
         <ContentVariable Name="DownloadLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html"##</ContentVariable>
         <ContentVariable Name="VistLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
         <ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>

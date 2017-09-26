@@ -456,6 +456,11 @@ function studio_url_render2($template,$acctID,$progID,$data,$urlFormat=NULL)
 
 function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
 {
+    $cacheFileName = "cache/".$acctID."_".$progID."_s3cache.json";
+    $cache = array();
+    if(file_exists($cacheFileName)){
+        $cache = json_decode(file_get_contents($cacheFileName),true);
+    }
     $xml = new DOMDocument();
     $xml->loadXML($tmaml);
     $xpath = new DOMXpath($xml);
@@ -488,10 +493,15 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filename = str_replace("ACCTID",$acctID,$fieldName);
                         $filename = str_replace("PROGRAMID",$progID,$filename);
                         $filename = $filename . ".html";
-                        //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $contentMD5 = md5($renderedContent);
+                        if($cache[$filename] == $contentMD5){
+                            $renderSuccess[] = $fieldName.": skip by s3 cache";
+                            continue;
+                        }
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
+                        $cache[$filename] = $contentMD5;
                     }
                     $nodeRet = DomSetAttribute($xpath,$xpathName,$field->attribute,$value);
                     if(!empty($nodeRet)){
@@ -510,8 +520,14 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filename = $filename . ".html";
                         //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $contentMD5 = md5($renderedContent);
+                        if($cache[$filename] == $contentMD5){
+                            $renderSuccess[] = $fieldName.": skip by s3 cache";
+                            continue;
+                        }
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
+                        $cache[$filename] =$contentMD5;
                     }
                     if($field->type == "LINK"){
                         $filename = str_replace("ACCTID",$acctID,$fieldName);
@@ -519,8 +535,14 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filename = $filename . ".html";
                         //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $contentMD5 = md5($renderedContent);
+                        if($cache[$filename] == $contentMD5){
+                            $renderSuccess[] = $fieldName.": skip by s3 cache";
+                            continue;
+                        }
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
+                        $cache[$filename] = $contentMD5;
                     }
                     $nodeRet = DomSetText($xpath,$xpathName,$value);
                     if(!empty($nodeRet)){
@@ -535,6 +557,8 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             }
         }
     }
+    //save s3 cache
+    file_put_contents($cacheFileName,json_encode($cache));
     return 
         array(
             'success'=>true,
@@ -546,6 +570,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             'renderSuccess'=>$renderSuccess,
             'doc' => $doc,
             'xml'=>$xml->saveHTML(),
+            'cache'=>$cache,
         );
 }
 
