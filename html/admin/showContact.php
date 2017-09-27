@@ -176,7 +176,9 @@
 							Contacts = json.Contact;
 							columns = json.columns;
 							$('#DataTables_Table_1').DataTable({
-								"lengthMenu": [ [25, 50, -1], [25, 50, "All"] ],
+								"lengthMenu": [ [15, 50, -1], [15, 50, "All"] ],
+								"processing": true,
+								buttons: ['copy', 'excel', 'pdf'],
 								stateSave: true, // Remember how the User left the table
 								colReorder: true,
 								language: {
