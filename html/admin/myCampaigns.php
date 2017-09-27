@@ -93,8 +93,7 @@
 																			<td class="project-title">
 																				<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
 																				<br/>
-																				<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}
-                                                                                (<span am-time-ago="item.lastEditDate"></span>)</small> 
+																				<small>Modified <span am-time-ago="item.lastEditDate"></span></small>
 																			</td>
 
 																			<td class="project-reach">
