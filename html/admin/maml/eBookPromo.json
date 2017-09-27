@@ -42,6 +42,12 @@
             "loop":6
         },
         {
+            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#SUBJECT",
+            "xpath":"//ContentVariable[@Name='email#subject']",
+            "type":"URL",
+            "loop":6
+        },        
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
             "xpath":"//ContentVariable[@Name='email#contentonline']",
             "type":"URL",

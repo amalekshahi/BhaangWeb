@@ -237,6 +237,11 @@ if($templateName == ""){
 }
 
 $templateFileName = "maml/$templateName";
+if($mode == "junk"){
+    if(empty($mamlInfoName)){
+        $mamlInfoName = "PromoteBlog.json";
+    }
+}
 if(!empty($mamlInfoName)){
     $mamlInfoFileName = "maml/$mamlInfoName";
     $mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
@@ -314,7 +319,7 @@ if($cmd == "publish"){
                 'cmd'=>$cmd,
                 'message'=>"Studio return error",
                 'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
-                //'mamlInfo'=>$mamlInfo,
+                'mamlInfo'=>$mamlInfo,
                 //'finishMAML'=>$finishMAML,
                 "renderMode"=>$renderMode,                
                 'detail'=>$resp,

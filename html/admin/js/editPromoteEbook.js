@@ -115,7 +115,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
 		if (hasValue($scope.campaign['templateThankYou'])) {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
+			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.getContentRaw($scope.templatesThankYou, $scope.campaign['templateThankYou'], 'TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT');
 		}
         
         //check if we really need to save this tree
@@ -413,7 +413,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				}
 			}
 		}
-		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + tar).then(function(response) {
+		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + tar).then(function(response) {
 			$scope['templatesAs' + tar] = response.data.templates;
 			$scope.config = response.data.config;
 			$("#subjectEmail" + tar).text($scope.campaign['EMAIL' + tar + '-SUBJECT']);

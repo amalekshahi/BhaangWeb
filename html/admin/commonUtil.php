@@ -474,7 +474,11 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
         $valueFormat = $dom->value;
         $value = studio_url_render($valueFormat,$acctID,$progID,$doc);
         $nodeRet = DomSetAttribute($xpath,$xpathName,$attributeName,$value);
-        $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
+        if($nodeRet == null){
+            $renderErrors[] = $xpathName.": Not found";
+        }else{
+            $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
+        }
     }
     //Handle Fields
     foreach($mamlInfo->fields as $field){
@@ -495,10 +499,10 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filename = $filename . ".html";
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
-                        if($cache[$filename] == $contentMD5){
+                        /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
-                        }
+                        }*/
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
                         $cache[$filename] = $contentMD5;
@@ -521,10 +525,10 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
-                        if($cache[$filename] == $contentMD5){
+                        /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
-                        }
+                        }*/
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
                         $cache[$filename] =$contentMD5;
@@ -536,10 +540,10 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
-                        if($cache[$filename] == $contentMD5){
+                        /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
-                        }
+                        }*/
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
                         $cache[$filename] = $contentMD5;
@@ -946,27 +950,29 @@ function UpdateMAMLPromoteBlog($xml,$doc)
         $CriteriaXML = $doc->{'EMAIL-FILTER-CRITERIAROW'};
         if ($nodeList->length > 0) {
             $node = $nodeList->item(0);
-            $filterNode = $node->getElementsByTagName("Filter")->item(0);
-            
-            /* delete criteria node */
-            $deleteList = array();
-            $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
-            foreach ($criteriaNodes as $n) {
-                $deleteList[] = $n;
+            if($node->getElementsByTagName("Filter")->length > 0){
+                $filterNode = $node->getElementsByTagName("Filter")->item(0);
+                
+                /* delete criteria node */
+                $deleteList = array();
+                $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+                foreach ($criteriaNodes as $n) {
+                    $deleteList[] = $n;
+                }
+                foreach ($deleteList as $n) {
+                    $filterNode->removeChild($n);
+                }
+                
+                //Set attribute
+                $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+                
+                //add criteria
+                $f = $xml->createDocumentFragment();
+                $f->appendXML($CriteriaXML);
+                $filterNode->appendChild($f);
+                
+                $contactRet[] = $xml->saveHTML($filterNode);
             }
-            foreach ($deleteList as $n) {
-                $filterNode->removeChild($n);
-            }
-            
-            //Set attribute
-            $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
-            
-            //add criteria
-            $f = $xml->createDocumentFragment();
-            $f->appendXML($CriteriaXML);
-            $filterNode->appendChild($f);
-            
-            $contactRet[] = $xml->saveHTML($filterNode);
         }
         
         //OPEN-MY-EMAIL "OpenAlertLeadTrigger

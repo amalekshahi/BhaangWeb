@@ -42,8 +42,8 @@
             "loop":6
         },
         {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
-            "xpath":"//ContentVariable[@Name='email#contentonline']",
+            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#SUBJECT",
+            "xpath":"//ContentVariable[@Name='email#subject']",
             "type":"URL",
             "loop":6
         },
@@ -67,30 +67,42 @@
             "loop":6
         },
         {
-            "name":"EMAIL#-STATE",
-            "xpath":"//CampaignElement[@Name='Email#']",
-            "attribute":"State",
+            "name":"EMAIL-FILTER-JOINOPERATOR",
+            "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
+            "attribute":"CriteriaJoinOperator",
             "loop":6
-        }        
+        },
+        {
+            "name":"EMAIL-FILTER-CRITERIAROW",
+            "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
+            "type":"NODE",
+            "loop":6
+        },
+        {
+            "name":"EMAIL1-FILTER",
+            "xpath":"//CampaignElement[@Name='Email1Contacts']",
+            "type":"NODE"
+        }
+        
     ],
     "doms":[
         {
-            "xpath":"//CampaignElement[@Name='Business Microsite']/CallbackTouchPoints/CallbackTouchPoint",
+            "xpath":"//CampaignElement[@Name='Business MicroSite']/CallbackTouchPoints/CallbackTouchPoint",
             "attribute":"Callback",
             "value":"http://dv{{accountID}}.m.mdl.io/{{campaignID}}"
         },
         {
-            "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
+            "xpath":"//CampaignElement[@Name='Business MicroSite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"URL",
             "value":"dv{{accountID}}.m.mdl.io/{{campaignID}}"
         },
         {
-            "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
+            "xpath":"//CampaignElement[@Name='Business MicroSite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Extension",
             "value":"{{campaignID}}"
         },
         {
-            "xpath":"//CampaignElement[@Name='Business Microsite']/Properties/BaseUrlCollection/BaseUrl",
+            "xpath":"//CampaignElement[@Name='Business MicroSite']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Domain",
             "value":"dv{{accountID}}.m.mdl.io"
         }
