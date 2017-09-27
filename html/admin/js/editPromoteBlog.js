@@ -36,12 +36,6 @@ $(document).ready(function() {
     });
 });
 
-function startEditable(objID) {
-    $('#subjectEmail' + objID).editable();
-    //$('#template').trigger('change');
-
-}
-
 myApp.controller('myCtrl', function($scope, $http) {
     $scope.campaignID = campaignID;
     $scope.state = {
@@ -54,8 +48,8 @@ myApp.controller('myCtrl', function($scope, $http) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
-				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-				$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
+				//$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
+				//$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
 			}
 		}
         /*if (mode == 'Email1') {
@@ -309,7 +303,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
                 $scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
                 $scope.sendersChanged('textSender' + emlID);
-                startEditable(emlID);
+                $scope.startEditable(emlID);
             });
         }
     };
@@ -472,7 +466,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             $("#subjectEmail" + tar).text($scope.campaign['EMAIL' + tar + '-SUBJECT']);
             $scope.SelectChanged('viewEmail' + tar, 'templateEmail' + tar);
             $scope.sendersChanged('textSender' + tar);
-            startEditable(tar);
+            $scope.startEditable(tar);
         });
     }
 	$scope.getContentRaw = function(templates, selected, field) {
@@ -663,6 +657,15 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
         });                
     }
+	$scope.startEditable = function(objID) {
+		$('#subjectEmail' + objID).editable();
+		//$('#template').trigger('change');
+		$('#subjectEmail' + objID).on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+objID+'SUBJECT'] = params.newValue;
+			$scope.campaign['EMAIL'+objID+'-SUBJECT'] = params.newValue;
+		});
+	}
 	$scope.openEmail = {
 		"1":true,
 		"2":false,
