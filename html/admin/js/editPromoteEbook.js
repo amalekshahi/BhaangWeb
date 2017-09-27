@@ -413,7 +413,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				}
 			}
 		}
-		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + tar).then(function(response) {
+		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + tar).then(function(response) {
 			$scope['templatesAs' + tar] = response.data.templates;
 			$scope.config = response.data.config;
 			$("#subjectEmail" + tar).text($scope.campaign['EMAIL' + tar + '-SUBJECT']);
