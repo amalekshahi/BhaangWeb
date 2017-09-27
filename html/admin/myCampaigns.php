@@ -97,13 +97,13 @@
 																			</td>
 
 																			<td class="project-reach">
-																				<medium>{{Random(10000)|number}}</medium><br><small class="text-muted">&nbsp;</small>
+																				<medium> </medium><br><small class="text-muted">&nbsp;</small>
 																			</td>
 																			<td class="project-completion">
-																				<medium>{{Random(1000)}}</medium><br><small class="text-muted"><i class="fa fa-bullhorn"></i> Clicks to Blog Post</small>
+																				<medium> </medium><br><small class="text-muted"><i class="fa fa-bullhorn"></i> Clicks to Blog Post</small>
 																			</td>
 																			<td class="project-completion">
-																				<medium>{{Random(10)}}%</medium><br><small class="text-muted">Click-thru Rate</small>
+																				<medium> </medium><br><small class="text-muted">Click-thru Rate</small>
 																			</td>
 																			<td class="project-actions">
 																				<!--<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" data-toggle="tooltip" title="Copy feature coming soon."><i class="fa fa-clone" style="color:green"></i> Copy </a>-->
