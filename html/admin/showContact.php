@@ -208,6 +208,7 @@
 					contentType: false,
 					processData: false,
 					data: form_data,
+					responsive: true,
 					type: 'get',
 					success: function(json) {
 						var count = "0";
