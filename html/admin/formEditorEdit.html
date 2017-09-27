@@ -147,10 +147,10 @@
 				</div><!-- row -->
 			</div><!-- fadeInRight -->           
 </div>	<!-- myCtrl -->		
-
+<div class="output2" style="color:red;">
 <script>
 
-$(document).ready(function(){
+$(document).ready(function(){		
 
 	           $("#available_fields, #form_fields, #completed").sortable({
 	               connectWith: ".connectList",
@@ -172,10 +172,7 @@ $(document).ready(function(){
 							
 							//add array							
 							tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-							
-							//summerdivtxt += angular.injector(['ng', 'myApp']).get("myService").GetFormCodeG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill); 		
 							summerdivtxt += angular.element(document.getElementById('myCtrl')).scope().GetCodeCallG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill);
-							//summerdivtxt += getFormCode("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 
 
 							if(fFieldType == 'datetime'){
 									var datename = form_fields[i]+"_DATE"; 
@@ -184,9 +181,9 @@ $(document).ready(function(){
 							}
 						}//end for i
 						angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
-						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
-	                    $('.output').html(" form_fields = "+form_fields);							
+						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);	                    
 						$('#summerblock').html(summerdivtxt); 		
+						$('.output').html(" form_fields = "+form_fields);							
 
 						if(darray.length > 0 ){
 							for(k=0;k<darray.length;k++){

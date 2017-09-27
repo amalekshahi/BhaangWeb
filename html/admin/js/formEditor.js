@@ -255,6 +255,18 @@ myApp.controller('myCtrl', ['$scope','$http','myService', function($scope,$http,
 							$scope.defItem = $scope.deflist.items[index]['fieldLists']; 	
 							$scope.defID = $scope.deflist.items[index]['defaultID'];
 					}
+					if($scope.defItem.length > 10){
+							$("#form_fields").height(900);	
+					}else{
+							$("#form_fields").height(650);	
+					}
+					/*
+					$('.output2').html(" AAA > length = "+$scope.defItem.length + " f-field height = "+$("#form_fields").height() );	
+					var height = Math.max($("#available_fields").height(), $("#form_fields").height());
+					$("#form_fields").height(height);
+//					$("#form_fields").height($("#available_fields").height());
+*/ 
+
             };
 
 			$scope.SelectChanged = function(defFrmID) { //				
@@ -269,8 +281,7 @@ myApp.controller('myCtrl', ['$scope','$http','myService', function($scope,$http,
             };					
 
 			service.GetDropdownOpt(); 
-			$scope.LoadSelect('new');			
-
+			$scope.LoadSelect('new');		
 }]);
 //end myCtrl
 
@@ -433,7 +444,12 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 					}else{
 							$scope.defItem = $scope.deflist.items[index]['fieldLists']; 	
 							$scope.defID = $scope.deflist.items[index]['defaultID'];
-					}					
+					}			
+					if($scope.defItem.length > 10){
+							$("#form_fields").height(900);	
+					}else{
+							$("#form_fields").height(650);	
+					}
             };
 
 			$scope.SelectChanged = function(defFrmID) { //

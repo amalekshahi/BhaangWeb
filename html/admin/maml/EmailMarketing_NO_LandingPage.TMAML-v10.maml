@@ -24,7 +24,7 @@
             <Events />
           </ChildElement>
           <ChildElement Id="10" DbId="0" Type="Page" IsVersion="False" Name="remove.html" Position="120,30">
-            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="False" IsLoginRequired="False">
               <HtmlContent />
             </Properties>
             <Flow />
