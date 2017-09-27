@@ -12,9 +12,9 @@
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";
-      var myApp = angular.module('myApp', ['angularMoment','davinci', 'localytics.directives']);
+			var myApp = angular.module('myApp', ['angularMoment', 'davinci', 'localytics.directives']);
 		</script>
-    <script src="js/welcome.js"></script>
+		<script src="js/welcome.js"></script>
 	</head>
 
 	<body class="fixed-sidebar">

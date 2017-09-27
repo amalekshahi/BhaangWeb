@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['angularMoment']);
+var myApp = angular.module('myApp', ['angularMoment', 'davinci', 'localytics.directives']);
 myApp.controller('myCtrl', function($scope, $http) {
     $scope.Reset = function() {
         $scope.campaignlist = angular.copy($scope.master);
