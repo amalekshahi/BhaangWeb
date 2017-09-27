@@ -37,7 +37,7 @@
 					<a href="myCampaigns.php"><i class="fa fa-paper-plane-o" aria-hidden="true" title="My Campaigns"></i> <span class="nav-label">My Campaigns</span></a>
 				</li>
 				<li>
-					<a href="assetLibrary.php"><i class="fa fa-files-o" aria-hidden="true" title="Asset Library"></i> <span class="nav-label">Asset Library<span class="label label-warning pull-right">NEW</span></a>
+					<a href="assetLibrary.php"><i class="fa fa-files-o" aria-hidden="true" title="Asset Library"></i> <span class="nav-label">Asset Library</span></a>
 				</li>
 				<li>
 					<a href="audiences.php"><i class="fa fa-address-book" aria-hidden="true" title="Audiences"></i> <span class="nav-label">Audiences</span></a>
