@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ["ngFileUpload"]);
+var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives']);
 myApp.controller('myCtrl',function($scope,$http, Upload) {
 	$scope.Reset = function() {				 
 		$scope.userinfo  = angular.copy($scope.master);

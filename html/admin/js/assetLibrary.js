@@ -1,4 +1,4 @@
-var assetLibrary = angular.module('assetLibrary', []);
+var assetLibrary = angular.module('assetLibrary', ['davinci', 'localytics.directives']);
 
 assetLibrary.controller('assetList', function($scope) {
   $scope.showPreview = function(file) {
