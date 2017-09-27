@@ -213,7 +213,7 @@
 						var count = "0";
 						if (json.success) {
 							//var html ="Click <a href='https://web2xmm.com/admin/import/contactFile/"+json.tmpName+"'>here</a> or check your email to download the exported file.";
-							var html = "Click <a href='https://web2xmm.com/admin/import/contactFile/" + json.tmpName + "'>here</a> to download the exported file.";
+							var html = "<a href='https://web2xmm.com/admin/import/contactFile/" + json.tmpName + "'><i class='fa fa-file-text-o' aria-hidden='true'></i> Your file is ready.  Click here to download</a>.";
 							$('#exportdiv').html(html);
 							$('#exportdiv').show();
 						}
