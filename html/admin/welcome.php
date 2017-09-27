@@ -17,13 +17,17 @@
 		<script src="js/plugins/pace/pace.min.js"></script>
 		<script src="js/davinci.js"></script>
 
+		<!-- Chosen -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chosen-localytics/1.8.0/angular-chosen.min.js"></script>
+
 	</head>
 	<body class="fixed-sidebar">
 		<?php include "afterBody.php"; ?>
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";
-            var myApp = angular.module('myApp', ['angularMoment','davinci']);
+            var myApp = angular.module('myApp', ['angularMoment','davinci', 'localytics.directives']);
 		</script>
     <script src="js/welcome.js"></script>
 		<div id="wrapper">
