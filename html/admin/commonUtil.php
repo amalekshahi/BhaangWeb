@@ -474,7 +474,11 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
         $valueFormat = $dom->value;
         $value = studio_url_render($valueFormat,$acctID,$progID,$doc);
         $nodeRet = DomSetAttribute($xpath,$xpathName,$attributeName,$value);
-        $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
+        if($nodeRet == null){
+            $renderErrors[] = $xpathName.": Not found";
+        }else{
+            $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
+        }
     }
     //Handle Fields
     foreach($mamlInfo->fields as $field){
@@ -946,27 +950,29 @@ function UpdateMAMLPromoteBlog($xml,$doc)
         $CriteriaXML = $doc->{'EMAIL-FILTER-CRITERIAROW'};
         if ($nodeList->length > 0) {
             $node = $nodeList->item(0);
-            $filterNode = $node->getElementsByTagName("Filter")->item(0);
-            
-            /* delete criteria node */
-            $deleteList = array();
-            $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
-            foreach ($criteriaNodes as $n) {
-                $deleteList[] = $n;
+            if($node->getElementsByTagName("Filter")->length > 0){
+                $filterNode = $node->getElementsByTagName("Filter")->item(0);
+                
+                /* delete criteria node */
+                $deleteList = array();
+                $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+                foreach ($criteriaNodes as $n) {
+                    $deleteList[] = $n;
+                }
+                foreach ($deleteList as $n) {
+                    $filterNode->removeChild($n);
+                }
+                
+                //Set attribute
+                $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+                
+                //add criteria
+                $f = $xml->createDocumentFragment();
+                $f->appendXML($CriteriaXML);
+                $filterNode->appendChild($f);
+                
+                $contactRet[] = $xml->saveHTML($filterNode);
             }
-            foreach ($deleteList as $n) {
-                $filterNode->removeChild($n);
-            }
-            
-            //Set attribute
-            $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
-            
-            //add criteria
-            $f = $xml->createDocumentFragment();
-            $f->appendXML($CriteriaXML);
-            $filterNode->appendChild($f);
-            
-            $contactRet[] = $xml->saveHTML($filterNode);
         }
         
         //OPEN-MY-EMAIL "OpenAlertLeadTrigger
