@@ -111,19 +111,19 @@
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Welcome Page URL</label>
 															<div class="col-sm-10">
-																<p><a href="http://www.google.com" id="copytext">http://a-generic-domain-we-buy.com/hash/welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="http://www.google.com" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																<p><a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" id="copytext"><?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Thank-You Page URL</label>
 															<div class="col-sm-10">
-																<p><a href="http://www.google.com" id="copytext">http://a-generic-domain-we-buy.com/hash/thank-you.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="http://www.google.com" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																<p><a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" id="copytext"><?php echo $LANDINGPAGEDOMAIN; ?>/Download.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Landing Page Domain</label>
 															<div class="col-xs-4">
-																<select class="chosen-select col-xs-4" id="domain" name="domain" tabindex="2">
+																<select class="chosen-select col-xs-4" id="domain" name="domain" tabindex="2" disabled>
 																	<option data-show=".Pick" value="Pick">
 																		Pick a domain ...
 																	</option>
