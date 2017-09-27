@@ -117,7 +117,7 @@
 																		<div class="form-group">
 																			<label class="col-sm-2 control-label">URL Parameters (optional)</label>
 																			<div class="col-sm-10">
-																				<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">URL parameters you specify here (like UTM tags used by Google Analytics) are appended to your Blog Post URL.</span>
+																				<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">URL parameters you specify here (like UTM tags used by Google Analytics) are appended to your Blog Post URL. <a href="https://support.google.com/analytics/answer/1033863" target="_new">Learn more about UTM here</a>.</span>
 																			</div>
 																		</div>
 																		<div class="hr-line-dashed"></div>
