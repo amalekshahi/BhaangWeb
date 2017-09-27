@@ -82,11 +82,11 @@
                                                 <medium>{{item.submission}}</medium><br><small class="text-muted">people submitted this form</small>
                                         </td>
 
-                                        <td class="project-actions">
-                                            <!-- <a href="formEditorCopy.php?fID={{item.formID}}" class="btn btn-white btn-sm" ><i class="fa fa-clone" style="color:green"></i> Copy </a> -->
-											
+                                        <td class="project-actions">                                         
+											<nobr>
                                             <a href="#" class="btn btn-white btn-sm" ng-click="DuplicateFormClick(item.formID,item.formName)"><i class="fa fa-clone" style="color:green"></i> Copy </a>
                                             <a href="formEditor.php?fID={{item.formID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
+											</nobr>
                                         </td>
                                         
                                     </tr>                                   
