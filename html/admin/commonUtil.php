@@ -495,10 +495,10 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filename = $filename . ".html";
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
-                        if($cache[$filename] == $contentMD5){
+                        /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
-                        }
+                        }*/
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
                         $cache[$filename] = $contentMD5;
@@ -521,10 +521,10 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
-                        if($cache[$filename] == $contentMD5){
+                        /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
-                        }
+                        }*/
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
                         $cache[$filename] =$contentMD5;
@@ -536,10 +536,10 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         //Render content before publish to S3
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
-                        if($cache[$filename] == $contentMD5){
+                        /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
-                        }
+                        }*/
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
                         $cache[$filename] = $contentMD5;
