@@ -108,7 +108,7 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 			var ret = response.data;
 			$scope.sendTestContacts = ret.Contact;
 			var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
-			console.log(str); // Logs output to dev tools console.
+			//console.log(str); // Logs output to dev tools console.
 		}, function(errResponse) {
 			var str = JSON.stringify(errResponse.data, null, 4);
 			console.log(str);

@@ -117,7 +117,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		if (hasValue($scope.campaign['templateThankYou'])) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
-		
+        
+        //check if we really need to save this tree
+        if(documentConpare($scope.campaign, $scope.master)){
+            console.log("No change");
+            $scope.state['Save'] = 'Save';
+            return; 
+        }
+
 		$http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
 			$scope.campaign._rev = response.data.rev;
 

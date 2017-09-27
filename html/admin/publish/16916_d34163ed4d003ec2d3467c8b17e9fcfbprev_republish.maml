@@ -170,7 +170,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Settings>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="7" DbId="1021"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+      <CampaignElement Id="7" DbId="1021"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>Email1 (Right Now)</Subject>
@@ -202,7 +202,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="13" DbId="1022"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+      <CampaignElement Id="13" DbId="1022"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
         <Events>
           <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
           <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
@@ -267,7 +267,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="1024"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+      <CampaignElement Id="19" DbId="1024"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>VisitAlertLeadTrigger (Right Now)</Subject>
@@ -517,7 +517,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="unsubscribelink">{{URL TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK}}</ContentVariable>
         <ContentVariable Name="fromemail">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-d34163ed4d003ec2d3467c8b17e9fcfb-FROMEMAIL.html"##</ContentVariable>
         <ContentVariable Name="fromname">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-d34163ed4d003ec2d3467c8b17e9fcfb-FROMNAME.html"##</ContentVariable>
-        <ContentVariable Name="email1content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
+        <ContentVariable Name="email1content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL1CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email2content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL2CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email3content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL3CONTENT.html"##</ContentVariable>
         <ContentVariable Name="email4content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
@@ -530,7 +530,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email5subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT}}</ContentVariable>
         <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
         <ContentVariable Name="WecomePageContent">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-WELCOMEPAGECONTENT.html"##</ContentVariable>
-        <ContentVariable Name="DownloadPageContent">{{URL TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT}}</ContentVariable>
+        <ContentVariable Name="DownloadPageContent">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-DOWNLOADPAGECONTENT.html"##</ContentVariable>
         <ContentVariable Name="DownloadLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html"##</ContentVariable>
         <ContentVariable Name="VistLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
         <ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
