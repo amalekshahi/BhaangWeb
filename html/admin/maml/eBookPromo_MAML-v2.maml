@@ -210,7 +210,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
             <Start Days="0" Hours="0" Mins="0" />
           </Schedule>
         </Schedules>
-	<Events>
+        <Events>
           <Event EventId="20103" GoalId="1" IsDistinct="False" />
           <Event EventId="20105" GoalId="2" IsDistinct="False" />
         </Events>
@@ -546,6 +546,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email4contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
         <ContentVariable Name="email5contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
         <ContentVariable Name="email6contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
+        <ContentVariable Name="campaignName">{{campaignName}}</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>

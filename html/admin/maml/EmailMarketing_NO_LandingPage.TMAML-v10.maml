@@ -534,6 +534,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
 	<ContentVariable Name="ClickAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_clickalert.html"##</ContentVariable>
 	<ContentVariable Name="OpenAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_openalert.html"##</ContentVariable>
+	<ContentVariable Name="campaignName">{{campaignName}}</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>

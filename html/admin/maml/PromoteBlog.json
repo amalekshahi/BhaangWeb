@@ -31,6 +31,10 @@
             "type":"URL"
         },
         {
+            "name":"campaignName",
+            "xpath":"//ContentVariable[@Name='campaignName']"
+        },
+        {
             "name":"TEXT-LINE-ACCTID-PROGRAMID-FROMNAME",
             "xpath":"//ContentVariable[@Name='fromname']",
             "type":"URL"
