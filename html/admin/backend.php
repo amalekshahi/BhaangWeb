@@ -440,9 +440,9 @@ if($cmd == "publish"){
     $execTime['UpdateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
     // Check if we publish before and has the same content
     $republishReturnFileName = "publish/".$acctID."_".$progID."_republish.maml";
-    $prevPublish = file_get_contents($republishReturnFileName);
+    $prevPublishOrg = file_get_contents($republishReturnFileName);
     // remove checkoutID
-    $prevPublish = preg_replace('/CheckOutId="[0-9]+"/','', $prevPublish);
+    $prevPublish = preg_replace('/CheckOutId="[0-9]+"/','', $prevPublishOrg);
     $currentPublish = preg_replace('/CheckOutId="[0-9]+"/','', $updateMAML);
     if($currentPublish == $prevPublish){
         $undoRet = UndoProgramChanges($ticket, $publishProgramID);	
@@ -461,7 +461,7 @@ if($cmd == "publish"){
         ));
         exit;   
     }
-    file_put_contents("publish/".$acctID."_".$progID."prev_republish.maml",$prevPublish);
+    file_put_contents("publish/".$acctID."_".$progID."_prev_republish.maml",$prevPublishOrg);
     // save file for debug
     file_put_contents($republishReturnFileName,$updateMAML);
     //CheckIn    

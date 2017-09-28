@@ -1,4 +1,4 @@
-<Program Name="coatest-blog-092803" Version="1.0" DbId="152" CheckOutId="372" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+<Program Name="coatest-blog-092803" Version="1.0" DbId="152" CheckOutId="378" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="149" CheckOutId="0" State="Start" Permissions="">
     <CampaignElements>
@@ -259,7 +259,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20105" ElementId="24"></Event>
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="1303" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent" Permissions="">
+      <CampaignElement Id="19" DbId="1303" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>OpenEmailAlert (Right Now)</Subject>
@@ -424,7 +424,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="1308" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent" Permissions="">
+      <CampaignElement Id="25" DbId="1308" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>ClickAlertLeadTrigger (Right Now)</Subject>
