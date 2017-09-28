@@ -87,7 +87,7 @@
 																	<span class="badge" ng-show="!step1Done">1</span>
 																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done""></i>
 																	&nbsp;Configure Your eBook &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																	<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> Still Relevant: A Look at How Millennials Respond to Direct Mail</small>
+																	<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-eBOOK-NAME']}}</small>
 																</a>
 															</h4>
 														</div>
