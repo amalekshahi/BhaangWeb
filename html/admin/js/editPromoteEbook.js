@@ -352,6 +352,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				pageDone = '2';
 			}
 		}
+		$scope.pageDone = parseInt(pageDone); // Dave added this
+		$scope.emailDone = parseInt(emailDone); // Dave added this
 		$scope.pageProgress = pageDone+' of 2 Pages Configured';
 		$scope.scheduleProgress = emailDone+' Drip Emails Configured';
 	};
