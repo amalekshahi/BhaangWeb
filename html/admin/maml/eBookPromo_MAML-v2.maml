@@ -66,7 +66,7 @@
             <Events />
           </ChildElement>
           <ChildElement Id="16" RuleGroup="ContentVariables" DbId="0" Type="Page" IsVersion="False" Name="Welcome.html" Position="140,50">
-            <Properties PageType="Page" IsHomePage="True" SkipPage="False" IsLoginRequired="False">
+            <Properties PageType="AddContact" IsHomePage="True" SkipPage="False" IsLoginRequired="False">
               <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html" />
             </Properties>
             <Flow>
