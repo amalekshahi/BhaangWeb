@@ -454,6 +454,18 @@ function studio_url_render2($template,$acctID,$progID,$data,$urlFormat=NULL)
     );
 }
 
+function GenerateS3FileName($fieldName,$acctID,$progID,$suffix)
+{
+    if (preg_match('/PROGRAMID/',$fieldName)){
+        $filename = str_replace("ACCTID",$acctID,$fieldName);
+        $filename = str_replace("PROGRAMID",$progID,$filename);
+        $filename = $filename . $suffix;
+    }else{
+        $filename = $fieldName . "-" . $acctID . "-" . $progID . $suffix;
+    }
+    return $filename;
+}
+
 function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
 {
     $cacheFileName = "cache/".$acctID."_".$progID."_s3cache.json";
@@ -483,26 +495,33 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
     //Handle Fields
     foreach($mamlInfo->fields as $field){
         $numloop = 1;
+        $startloop = 1;
         if(property_exists($field,"loop")){
             $numloop = $field->loop;
         }
-        for($i=1;$i<=$numloop;$i++){
+        if(property_exists($field,"start")){
+            $startloop = $field->start;
+        }
+        
+        for($i=$startloop;$i<=$numloop;$i++){
             $fieldName = str_replace("#","".$i,$field->name);
             $xpathName = str_replace("#","".$i,$field->xpath);
             if(property_exists($doc,$fieldName)){
-            //if(!empty($doc->{$field->name})){
+                $value = $doc->{$fieldName};
+                if(property_exists($field,"htmldecode")){
+                    if($field->htmldecode){
+                        $value = html_entity_decode($value);
+                    }
+                }
                 if(!empty($field->attribute)){
-                    $value = $doc->{$fieldName};
                     if($field->type == "LINK"){
-                        $filename = str_replace("ACCTID",$acctID,$fieldName);
-                        $filename = str_replace("PROGRAMID",$progID,$filename);
-                        $filename = $filename . ".html";
                         $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                         $contentMD5 = md5($renderedContent);
                         /*if($cache[$filename] == $contentMD5){
                             $renderSuccess[] = $fieldName.": skip by s3 cache";
                             continue;
                         }*/
+                        $filename = GenerateS3FileName($fieldName,$acctID,$progID,".html");
                         $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                         $value = $s3Url;
                         $cache[$filename] = $contentMD5;
@@ -513,47 +532,64 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                             $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
                         }
                     }else{
-                        $renderErrors[] = $xpathName." not found";
+                        $renderErrors[] = $xpathName." not found " . $startloop . ":". $i .":". $numloop ;
                     }
                 }else{
-                    // Text mode
-                    $value = $doc->{$fieldName};
-                    if($field->type == "URL"){
-                        $filename = str_replace("ACCTID",$acctID,$fieldName);
-                        $filename = str_replace("PROGRAMID",$progID,$filename);
-                        $filename = $filename . ".html";
-                        //Render content before publish to S3
-                        $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
-                        $contentMD5 = md5($renderedContent);
-                        /*if($cache[$filename] == $contentMD5){
-                            $renderSuccess[] = $fieldName.": skip by s3 cache";
-                            continue;
-                        }*/
-                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
-                        $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
-                        $cache[$filename] =$contentMD5;
+                    if($field->type == "NODE"){
+                        if(property_exists($field,"deleteAll")){
+                            if($field->deleteAll){
+                                DomDeleteAllChildren($xpath,$xpathName);
+                            }
+                        }
+                        /* delete criteria node */
+                        /*$deleteList = array();
+                        $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+                        foreach ($criteriaNodes as $n) {
+                            $deleteList[] = $n;
+                        }
+                        foreach ($deleteList as $n) {
+                            $filterNode->removeChild($n);
+                        }
+                        
+                        //Set attribute
+                        $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+                        */
+                        //add criteria
+                        DomSetText($xpath,$xpathName,"");
+                        $nodeRet = DomAddNode($xml,$xpath,$xpathName,$value);
+                    }else{
+                        if($field->type == "URL"){
+                            //Render content before publish to S3
+                            $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                            $contentMD5 = md5($renderedContent);
+                            /*if($cache[$filename] == $contentMD5){
+                                $renderSuccess[] = $fieldName.": skip by s3 cache";
+                                continue;
+                            }*/
+                            $filename = GenerateS3FileName($fieldName,$acctID,$progID,".html");                            
+                            $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                            $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
+                            $cache[$filename] =$contentMD5;
+                        }
+                        if($field->type == "LINK"){
+                            //Render content before publish to S3
+                            $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                            $contentMD5 = md5($renderedContent);
+                            /*if($cache[$filename] == $contentMD5){
+                                $renderSuccess[] = $fieldName.": skip by s3 cache";
+                                continue;
+                            }*/
+                            $filename = GenerateS3FileName($fieldName,$acctID,$progID,".html");                            
+                            $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                            $value = $s3Url;
+                            $cache[$filename] = $contentMD5;
+                        }
+                        $nodeRet = DomSetText($xpath,$xpathName,$value);
                     }
-                    if($field->type == "LINK"){
-                        $filename = str_replace("ACCTID",$acctID,$fieldName);
-                        $filename = str_replace("PROGRAMID",$progID,$filename);
-                        $filename = $filename . ".html";
-                        //Render content before publish to S3
-                        $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
-                        $contentMD5 = md5($renderedContent);
-                        /*if($cache[$filename] == $contentMD5){
-                            $renderSuccess[] = $fieldName.": skip by s3 cache";
-                            continue;
-                        }*/
-                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
-                        $value = $s3Url;
-                        $cache[$filename] = $contentMD5;
-                    }
-                    $nodeRet = DomSetText($xpath,$xpathName,$value);
                     if(!empty($nodeRet)){
-                        //$fields[] =  $xml->saveHTML($nodeRet);
                         $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
                     }else{
-                        $renderErrors[] =  $xpathName." not found";
+                        $renderErrors[] = $xpathName." not found " . $startloop . ":". $i .":". $numloop ;
                     }
                 }
             }else{
@@ -1126,6 +1162,41 @@ function DomSetText($xpath,$path,$value)
     return null;
 }
 
+function DomAddNode($xml,$xpath,$path,$value)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $f = $xml->createDocumentFragment();
+        $f->appendXML($value);
+        $node->appendChild($f);
+        return $node;
+    }
+    return null;
+}
+
+function DomDeleteAllChildren($xpath,$path)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        deleteChildren($node);
+    }
+}
+
+function deleteNode($node) { 
+    deleteChildren($node); 
+    $parent = $node->parentNode; 
+    $oldnode = $parent->removeChild($node);
+    return $oldnode;
+} 
+
+function deleteChildren($node) { 
+    while (isset($node->firstChild)) { 
+        deleteChildren($node->firstChild); 
+        $node->removeChild($node->firstChild); 
+    } 
+} 
 
 function wPrint($data)
 {

@@ -2,7 +2,7 @@
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
-      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Busines MicroSite" Position="40,10" SharedCheckout="False">
+      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Business MicroSite" Position="40,10" SharedCheckout="False">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
             <Subject>Business MicroSite (Right Now)</Subject>

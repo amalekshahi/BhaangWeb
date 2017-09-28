@@ -42,7 +42,7 @@
             "loop":6
         },
         {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#SUBJECT",
+            "name":"TEXT-LINE-ACCTID-PROGRAMID-EMAIL#SUBJECT",
             "xpath":"//ContentVariable[@Name='email#subject']",
             "type":"URL",
             "loop":6
@@ -70,12 +70,15 @@
             "name":"EMAIL-FILTER-JOINOPERATOR",
             "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
             "attribute":"CriteriaJoinOperator",
-            "loop":6
+            "loop":6,
+            "start":2,
+            "htmldecode":true
         },
         {
             "name":"EMAIL-FILTER-CRITERIAROW",
             "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
             "type":"NODE",
+            "deleteAll": true,
             "loop":6
         },
         {
