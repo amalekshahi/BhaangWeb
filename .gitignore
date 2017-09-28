@@ -6,8 +6,4 @@ html/admin/import/*
 html/admin/publish/*
 html/admin/cache/*
 html/admin/*.coa
-<<<<<<< HEAD
-=======
 html/admin/templates/emails/*.coa
-
->>>>>>> stage

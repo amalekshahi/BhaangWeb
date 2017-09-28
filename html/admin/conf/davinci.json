@@ -1,4 +1,4 @@
 {
-    "serverName":"Local",
-    "databaseEndPoint":"http://162.243.155.57:5985"
+    "serverName":"Production",
+    "databaseEndPoint":"http://web2xmm.com:5984"
 }
