@@ -8,22 +8,14 @@
 
 	<head>
 		<?php include "header.php"; ?>
-		<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>     
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-		<!-- Custom and plugin javascript -->
-		<script src="js/inspinia.js"></script>
-		<script src="js/plugins/pace/pace.min.js"></script>
-		<script src="js/davinci.js"></script>
 
 	</head>
-	<body class="">
+	<body class="fixed-sidebar">
 		<?php include "afterBody.php"; ?>
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";
-            var myApp = angular.module('myApp', ['angularMoment','davinci']);
+      var myApp = angular.module('myApp', ['angularMoment','davinci', 'localytics.directives']);
 		</script>
     <script src="js/welcome.js"></script>
 		<div id="wrapper">
@@ -115,8 +107,7 @@
 															<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
 															<br/>
 															<!-- Roll back to this <span am-time-ago="message.time"></span> once timestamp issue is resolved -->
-															<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}
-                                                        (<span am-time-ago="item.lastEditDate"></span>)</small>
+															<small>Modified <span am-time-ago="item.lastEditDate"></span></small>
 														</td>
 
 														<td class="project-reach">

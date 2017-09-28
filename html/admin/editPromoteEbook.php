@@ -6,6 +6,7 @@
     $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
+	$LANDINGPAGEDOMAIN = "http://dv{{campaign['accountID']}}.m.mdl.io/{{campaign['campaignID']}}";
 ?>
 
 	<!DOCTYPE html>
@@ -14,6 +15,9 @@
 		<?php include "header.php"; ?>
 		<script src="js/date.format.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
+		<style type="text/css">
+			.fileinput-filename{white-space: nowrap;text-overflow: ellipsis;width: calc(100% - 20px);}
+		</style>
 	</head>
 
 	<body class="">
@@ -137,7 +141,8 @@
 													</div>
 												</div>
 												<div style="float:right;">
-													<button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
+                                                    <!--NO NEED ANYMORE
+													<button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button> -->
 												</div>
 											</div>
 

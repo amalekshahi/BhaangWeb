@@ -39,7 +39,7 @@
 												<div class="col-xs-6">
 													<label>Template</label>
 													<select ng-model="campaign.templateWelcome" ng-change="SelectChanged('viewWelcome','templateWelcome')" style="width: 100%;height: 30px;">
-													<option ng-repeat="x in templatesWelcome | filter:{subdir:'welcome'}" value="{{x.content}}">{{x.title}}</option>
+													<option ng-repeat="x in templatesWelcome" value="{{x.content}}">{{x.title}}</option>
 													</select>
 												</div>
 												<div class="col-xs-6">
@@ -80,7 +80,7 @@
 											</div>
 											<div class="col-xs-4">
 												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" style="width: 100%;height: 30px;">
-												<option ng-repeat="x in templatesThankYou | filter:{subdir:'thankyou'}" value="{{x.content}}">{{x.title}}</option>
+												<option ng-repeat="x in templatesThankYou" value="{{x.content}}">{{x.title}}</option>
 												</select>
 											</div>
 											<br><br>
@@ -111,19 +111,19 @@
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Welcome Page URL</label>
 															<div class="col-sm-10">
-																<p><a href="http://www.google.com" id="copytext">http://a-generic-domain-we-buy.com/hash/welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="http://www.google.com" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																<p><a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank" id="welcomeURL"><?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#welcomeURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Thank-You Page URL</label>
 															<div class="col-sm-10">
-																<p><a href="http://www.google.com" id="copytext">http://a-generic-domain-we-buy.com/hash/thank-you.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="http://www.google.com" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																<p><a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank" id="downloadURL"><?php echo $LANDINGPAGEDOMAIN; ?>/Download.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#downloadURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Landing Page Domain</label>
 															<div class="col-xs-4">
-																<select class="chosen-select col-xs-4" id="domain" name="domain" tabindex="2">
+																<select class="chosen-select col-xs-4" id="domain" name="domain" tabindex="2" disabled>
 																	<option data-show=".Pick" value="Pick">
 																		Pick a domain ...
 																	</option>

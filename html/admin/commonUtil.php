@@ -324,6 +324,10 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
                 $renderRaw = true;
                 $value1 = substr($value1,4);
             }
+            if(startsWith($value1,"SUMMERNOTE(")){
+                $value1 = substr($value1,11);
+                $value1 = str_replace(")","",$value1);
+            }
             if(array_key_exists($value0,$hash)){
             }else{
                 $hash[$value0] = $value1;
@@ -448,6 +452,168 @@ function studio_url_render2($template,$acctID,$progID,$data,$urlFormat=NULL)
         "loop"=>$loop,
         "template"=>$template,
     );
+}
+
+function GenerateS3FileName($fieldName,$acctID,$progID,$suffix)
+{
+    if (preg_match('/PROGRAMID/',$fieldName)){
+        $filename = str_replace("ACCTID",$acctID,$fieldName);
+        $filename = str_replace("PROGRAMID",$progID,$filename);
+        $filename = $filename . $suffix;
+    }else{
+        $filename = $fieldName . "-" . $acctID . "-" . $progID . $suffix;
+    }
+    return $filename;
+}
+
+function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
+{
+    $cacheFileName = "cache/".$acctID."_".$progID."_s3cache.json";
+    $cache = array();
+    if(file_exists($cacheFileName)){
+        $cache = json_decode(file_get_contents($cacheFileName),true);
+    }
+    $xml = new DOMDocument();
+    $xml->loadXML($tmaml);
+    $xpath = new DOMXpath($xml);
+    // iterate true data 
+    $renderErrors = array();
+    $renderSuccess = array();
+    //Hanels Doms
+    foreach($mamlInfo->doms as $dom){
+        $attributeName = $dom->attribute;
+        $xpathName = $dom->xpath;
+        $valueFormat = $dom->value;
+        $value = studio_url_render($valueFormat,$acctID,$progID,$doc);
+        $nodeRet = DomSetAttribute($xpath,$xpathName,$attributeName,$value);
+        if($nodeRet == null){
+            $renderErrors[] = $xpathName.": Not found";
+        }else{
+            $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
+        }
+    }
+    //Handle Fields
+    foreach($mamlInfo->fields as $field){
+        $numloop = 1;
+        $startloop = 1;
+        if(property_exists($field,"loop")){
+            $numloop = $field->loop;
+        }
+        if(property_exists($field,"start")){
+            $startloop = $field->start;
+        }
+        
+        for($i=$startloop;$i<=$numloop;$i++){
+            $fieldName = str_replace("#","".$i,$field->name);
+            $xpathName = str_replace("#","".$i,$field->xpath);
+            if(property_exists($doc,$fieldName)){
+                $value = $doc->{$fieldName};
+                if(property_exists($field,"htmldecode")){
+                    if($field->htmldecode){
+                        $value = html_entity_decode($value);
+                    }
+                }
+                if(!empty($field->attribute)){
+                    if($field->type == "LINK"){
+                        $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                        $contentMD5 = md5($renderedContent);
+                        /*if($cache[$filename] == $contentMD5){
+                            $renderSuccess[] = $fieldName.": skip by s3 cache";
+                            continue;
+                        }*/
+                        $filename = GenerateS3FileName($fieldName,$acctID,$progID,".html");
+                        $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                        $value = $s3Url;
+                        $cache[$filename] = $contentMD5;
+                    }
+                    $nodeRet = DomSetAttribute($xpath,$xpathName,$field->attribute,$value);
+                    if(!empty($nodeRet)){
+                        if($fieldName!="campaignName"){ // cmapaignName is whole file (skip this)
+                            $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
+                        }
+                    }else{
+                        $renderErrors[] = $xpathName." not found " . $startloop . ":". $i .":". $numloop ;
+                    }
+                }else{
+                    if($field->type == "NODE"){
+                        if(property_exists($field,"deleteAll")){
+                            if($field->deleteAll){
+                                DomDeleteAllChildren($xpath,$xpathName);
+                            }
+                        }
+                        /* delete criteria node */
+                        /*$deleteList = array();
+                        $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+                        foreach ($criteriaNodes as $n) {
+                            $deleteList[] = $n;
+                        }
+                        foreach ($deleteList as $n) {
+                            $filterNode->removeChild($n);
+                        }
+                        
+                        //Set attribute
+                        $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+                        */
+                        //add criteria
+                        DomSetText($xpath,$xpathName,"");
+                        $nodeRet = DomAddNode($xml,$xpath,$xpathName,$value);
+                    }else{
+                        if($field->type == "URL"){
+                            //Render content before publish to S3
+                            $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                            $contentMD5 = md5($renderedContent);
+                            /*if($cache[$filename] == $contentMD5){
+                                $renderSuccess[] = $fieldName.": skip by s3 cache";
+                                continue;
+                            }*/
+                            $filename = GenerateS3FileName($fieldName,$acctID,$progID,".html");                            
+                            $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                            $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
+                            $cache[$filename] =$contentMD5;
+                        }else if($field->type == "LINK"){
+                            //Render content before publish to S3
+                            $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                            $contentMD5 = md5($renderedContent);
+                            /*if($cache[$filename] == $contentMD5){
+                                $renderSuccess[] = $fieldName.": skip by s3 cache";
+                                continue;
+                            }*/
+                            $filename = GenerateS3FileName($fieldName,$acctID,$progID,".html");                            
+                            $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
+                            $value = $s3Url;
+                            $cache[$filename] = $contentMD5;
+                        }else{
+                            $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                            $value = $renderedContent;
+                        }
+                        $nodeRet = DomSetText($xpath,$xpathName,$value);
+                    }
+                    if(!empty($nodeRet)){
+                        $renderSuccess[] = $fieldName.":".$xml->saveHTML($nodeRet);
+                    }else{
+                        $renderErrors[] = $xpathName." not found " . $startloop . ":". $i .":". $numloop ;
+                    }
+                }
+            }else{
+                $renderErrors[] =  "Field ".$fieldName." not found";
+            }
+        }
+    }
+    //save s3 cache
+    file_put_contents($cacheFileName,json_encode($cache));
+    return 
+        array(
+            'success'=>true,
+            'cmd'=>$cmd,
+            'mode'=>$mode,
+            'mamlInfoFileName'=>$mamlInfoFileName,
+            'mamlInfo'=>$mamlInfo,
+            'renderErrors'=>$renderErrors,
+            'renderSuccess'=>$renderSuccess,
+            'doc' => $doc,
+            'xml'=>$xml->saveHTML(),
+            'cache'=>$cache,
+        );
 }
 
 
@@ -822,27 +988,29 @@ function UpdateMAMLPromoteBlog($xml,$doc)
         $CriteriaXML = $doc->{'EMAIL-FILTER-CRITERIAROW'};
         if ($nodeList->length > 0) {
             $node = $nodeList->item(0);
-            $filterNode = $node->getElementsByTagName("Filter")->item(0);
-            
-            /* delete criteria node */
-            $deleteList = array();
-            $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
-            foreach ($criteriaNodes as $n) {
-                $deleteList[] = $n;
+            if($node->getElementsByTagName("Filter")->length > 0){
+                $filterNode = $node->getElementsByTagName("Filter")->item(0);
+                
+                /* delete criteria node */
+                $deleteList = array();
+                $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
+                foreach ($criteriaNodes as $n) {
+                    $deleteList[] = $n;
+                }
+                foreach ($deleteList as $n) {
+                    $filterNode->removeChild($n);
+                }
+                
+                //Set attribute
+                $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
+                
+                //add criteria
+                $f = $xml->createDocumentFragment();
+                $f->appendXML($CriteriaXML);
+                $filterNode->appendChild($f);
+                
+                $contactRet[] = $xml->saveHTML($filterNode);
             }
-            foreach ($deleteList as $n) {
-                $filterNode->removeChild($n);
-            }
-            
-            //Set attribute
-            $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
-            
-            //add criteria
-            $f = $xml->createDocumentFragment();
-            $f->appendXML($CriteriaXML);
-            $filterNode->appendChild($f);
-            
-            $contactRet[] = $xml->saveHTML($filterNode);
         }
         
         //OPEN-MY-EMAIL "OpenAlertLeadTrigger
@@ -985,6 +1153,52 @@ function DomSetAttribute($xpath,$path,$attr,$value)
     return null;
 }
 
+function DomSetText($xpath,$path,$value)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $node->nodeValue = $value;
+        return $node;
+    }
+    return null;
+}
+
+function DomAddNode($xml,$xpath,$path,$value)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $f = $xml->createDocumentFragment();
+        $f->appendXML($value);
+        $node->appendChild($f);
+        return $node;
+    }
+    return null;
+}
+
+function DomDeleteAllChildren($xpath,$path)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        deleteChildren($node);
+    }
+}
+
+function deleteNode($node) { 
+    deleteChildren($node); 
+    $parent = $node->parentNode; 
+    $oldnode = $parent->removeChild($node);
+    return $oldnode;
+} 
+
+function deleteChildren($node) { 
+    while (isset($node->firstChild)) { 
+        deleteChildren($node->firstChild); 
+        $node->removeChild($node->firstChild); 
+    } 
+} 
 
 function wPrint($data)
 {

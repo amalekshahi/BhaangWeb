@@ -5,13 +5,19 @@
     require_once('loginCredentials.php');
 ?>
 	<!DOCTYPE html>
-	<html>
+	<html ng-app="myApp">
 
 	<head>
 		<?php include "header.php"; ?>
+		<script>
+			// welcome.js need this
+			var dbName = "<?php echo $dbName; ?>";
+			var myApp = angular.module('myApp', ['angularMoment', 'davinci', 'localytics.directives']);
+		</script>
+		<script src="js/welcome.js"></script>
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<style>
 			.blueprintHide {
 				opacity: 0.25;
@@ -402,16 +408,6 @@
 		<script>
 			w3IncludeHTML();
 		</script>
-		<script src="js/jquery-3.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-		<!-- Custom and plugin javascript -->
-		<script src="js/inspinia.js"></script>
-		<script src="js/plugins/pace/pace.min.js"></script>
-
-
 
 	</body>
 

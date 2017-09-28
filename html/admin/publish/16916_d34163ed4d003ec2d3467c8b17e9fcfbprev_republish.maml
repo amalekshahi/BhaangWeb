@@ -1,0 +1,545 @@
+<Program Name="Kwang Ebook 5" Version="1.0" DbId="118"  State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+  <Comment>This is program comment</Comment>
+  <Campaign Name="Promote an eBook" Version="1.0" Id="1" DbId="118"  State="Start" Permissions="">
+    <CampaignElements>
+      <CampaignElement Id="1" DbId="141"  Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Promote an eBook" Position="450,10" SharedCheckout="False" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
+            <Subject>Promote an eBook (Right Now)</Subject>
+            <Body></Body>
+            <Start DateTime="02/14/2013 12:00:00 AM"></Start>
+            <End DateTime="02/28/2050 11:59:00 PM"></End>
+          </Schedule>
+        </Schedules>
+        <Events></Events>
+        <CallbackTouchPoints>
+          <CallbackTouchPoint Id="1" DbId="86" Callback="http://dv16916.m.mdl.io/d34163ed4d003ec2d3467c8b17e9fcfb"></CallbackTouchPoint>
+        </CallbackTouchPoints>
+        <ChildElements>
+          <ChildElement Id="9" RuleGroup="ContentVariables" DbId="1102" Type="Page" IsVersion="False" Name="Email1.html" Position="520,30">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="10" DbId="1103" Type="Page" IsVersion="False" Name="remove.html" Position="680,310">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="11" RuleGroup="ContentVariables" DbId="1104" Type="Page" IsVersion="False" Name="Email2.html" Position="680,30">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL2CONTENT.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="12" RuleGroup="ContentVariables" DbId="1105" Type="Page" IsVersion="False" Name="Email3.html" Position="850,20">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL3CONTENT.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="13" RuleGroup="ContentVariables" DbId="1106" Type="Page" IsVersion="False" Name="Email4.html" Position="520,160">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="14" RuleGroup="ContentVariables" DbId="1107" Type="Page" IsVersion="False" Name="Email5.html" Position="680,160">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="15" RuleGroup="ContentVariables" DbId="1108" Type="Page" IsVersion="False" Name="Email6.html" Position="860,160">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="16" RuleGroup="ContentVariables" DbId="1109" Type="Page" IsVersion="False" Name="Welcome.html" Position="140,50">
+            <Properties PageType="Page" IsHomePage="True" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-WELCOMEPAGECONTENT.html"></HtmlContent>
+            </Properties>
+            <Flow>
+              <FlowNextElement Id="17" Name="Download.html">
+                <Filter CriteriaJoinOperator="&amp;"></Filter>
+              </FlowNextElement>
+            </Flow>
+            <Events></Events>
+          </ChildElement>
+          <ChildElement Id="17" RuleGroup="ContentVariables" DbId="1110" Type="Page" IsVersion="False" Name="Download.html" Position="140,200">
+            <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/login.html"></HtmlContent>
+            </Properties>
+            <Flow></Flow>
+            <Events></Events>
+          </ChildElement>
+        </ChildElements>
+        <ChildConnections>
+          <ChildConnection StartElementId="16" EndElementId="17"></ChildConnection>
+        </ChildConnections>
+        <Properties>
+          <BaseUrlCollection>
+            <BaseUrl Id="1" DbId="13728" URL="dv16916.m.mdl.io/d34163ed4d003ec2d3467c8b17e9fcfb" Extension="d34163ed4d003ec2d3467c8b17e9fcfb" Outbound_Id="0" Outbound_DbId="0" Parent_Id="0" PurlPosition="Prefix" Domain="dv16916.m.mdl.io" SSL="False" SearchEngineAllowed="False" Inbound_Id="141"></BaseUrl>
+          </BaseUrlCollection>
+          <Settings SessionTimeout="20">
+            <InvalidPurl>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Did you type your PURL correctly?&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting an invalid PURL, you cannot use any variables (like ##firstname##) within your content.  --&gt;
+Are you sure you typed your Personalized URL correctly? Please try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</InvalidPurl>
+            <PageNotFound>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Page not found!&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- Please note that since the Contact is requesting a valid PURL but non-existent page, you can use any variable (like ##firstname##) within your content.  --&gt;
+Oops! ##firstname default="Sir/Madam"##,  we are really sorry but the page you requested could not be found. Please check the URL and try again.
+&lt;/body&gt;
+&lt;/html&gt;
+</PageNotFound>
+            <Error>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Something happened.&lt;/title&gt;
+
+&lt;!-- This message can display HTML, or can automatically redirect to any absolute URL, using javascript:
+
+&lt;script type="text/javascript"&gt;
+window.location = "http://www.microsite-domain.com/your-page.html"
+&lt;/script&gt;
+
+... or a meta refresh:
+
+    &lt;meta http-equiv="refresh" content="0;URL='http://www.microsite-domain.com/your-page.html'"/&gt;    
+
+Either method should be within your &lt;head&gt; tags.  
+
+--&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!-- In addition to supporting any contact variable, this page also supports a special variable: ##error##, which is a system-generated description of the error.--&gt;
+Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please contact the site administrator. The following error has occurred: ##error##
+&lt;/body&gt;
+&lt;/html&gt;
+</Error>
+          </Settings>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="7" DbId="1021"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="60,270" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>Email1 (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="0" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events>
+          <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
+          <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
+        </Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##email1Subject##</Subject>
+              <HtmlContent>##email1content##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="12" DbId="843"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="60,130" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;"></Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="13" DbId="1022"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="260,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Events>
+          <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
+          <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
+        </Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##email2Subject##</Subject>
+              <HtmlContent>##email2content##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="14" DbId="1023"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email3" Position="450,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>Email3 (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="3" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events>
+          <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
+          <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
+        </Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##email3Subject##</Subject>
+              <HtmlContent>##email3content##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="15" DbId="844"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="260,130" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;">
+          <AdvancedFilter CriteriaJoinOperator="&amp;">
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="118" InboundContext="" CampaignId="118" CriteriaOption="1" Operator="Equal" Value="0"></AdvancedCriteria>
+          </AdvancedFilter>
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="16" DbId="845"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="450,130" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;">
+          <AdvancedFilter CriteriaJoinOperator="&amp;">
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="118" InboundContext="" CampaignId="118" CriteriaOption="2" Operator="Equal" Value="0"></AdvancedCriteria>
+          </AdvancedFilter>
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="19" DbId="1024"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="VisitAlertLeadTrigger" Position="540,540" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>VisitAlertLeadTrigger (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="0" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events></Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##fromemail##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##firstname## ##lastname## just visited your website</Subject>
+              <HtmlContent>##VistLeadAlertContent##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="21" DbId="1025"  Version="1.0" State="Stop" Type="OutboundReport" Category="Outbound" Name="ExportData" Position="30,0" SharedCheckout="False" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+            <Subject>ExportData (Right Now)</Subject>
+            <Body></Body>
+            <Start DateTime="08/10/2050 06:40:00 AM"></Start>
+            <Recurrence Frequency="Daily">
+              <Interval>1</Interval>
+            </Recurrence>
+          </Schedule>
+        </Schedules>
+        <Events></Events>
+        <Properties ServiceTypeID="3000" ApplicationVersion="1.0">
+          <Settings Emails="" DataRange="Fixed" FromDate="01/01/2017 00:00" ToDate="01/01/1930 00:00"></Settings>
+          <Configs>
+            <Config Key="Email">kdutta@mindfireinc.com</Config>
+            <Config Key="FtpUrl"></Config>
+            <Config Key="FtpUsername"></Config>
+            <Config Key="FtpPassword"></Config>
+          </Configs>
+          <Fields Schema="Flat">
+            <Field Name="PURL">PURL</Field>
+            <Field Name="First Name">FirstName</Field>
+            <Field Name="Last Name">LastName</Field>
+            <Field Name="Email">Email</Field>
+            <Field Name="Address">Address1</Field>
+            <Field Name="City">City</Field>
+            <Field Name="State">State</Field>
+            <Field Name="Country">Country</Field>
+            <Field Name="Zip">Zip</Field>
+            <Field Name="Event">Event_ID</Field>
+            <Field Name="Event Info">EventOption</Field>
+            <Field Name="Goal">Goal_ID</Field>
+            <Field Name="Outbound">Outbound_ID</Field>
+            <Field Name="Schedule">OutboundSchedule_ID</Field>
+          </Fields>
+          <Criteria All="False">
+            <Outbounds All="False">
+              <Outbound Id="7">
+                <Events All="False">
+                  <Event Id="20103"></Event>
+                  <Event Id="20105"></Event>
+                </Events>
+                <Schedules All="True"></Schedules>
+              </Outbound>
+              <Outbound Id="13">
+                <Events All="False">
+                  <Event Id="20103"></Event>
+                  <Event Id="20105"></Event>
+                </Events>
+                <Schedules All="True"></Schedules>
+              </Outbound>
+              <Outbound Id="14">
+                <Events All="False">
+                  <Event Id="20103"></Event>
+                  <Event Id="20105"></Event>
+                </Events>
+                <Schedules All="True"></Schedules>
+              </Outbound>
+            </Outbounds>
+            <Inbounds All="False"></Inbounds>
+          </Criteria>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="22" DbId="1026"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="620,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>Email4 (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="3" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events>
+          <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
+          <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
+        </Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##email4Subject##</Subject>
+              <HtmlContent>##email4content##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="23" DbId="1027"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="790,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>Email5 (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="4" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events>
+          <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
+          <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
+        </Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##email5Subject##</Subject>
+              <HtmlContent>##email5content##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="24" DbId="1028"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="960,280" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>Email6 (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="6" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events>
+          <Event EventId="20103" GoalId="1" IsDistinct="False"></Event>
+          <Event EventId="20105" GoalId="2" IsDistinct="False"></Event>
+        </Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##email##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##email6Subject##</Subject>
+              <HtmlContent>##email6content##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="25" DbId="1029"  Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="DownloadAlertLeadTrigger" Position="160,410" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="ContentVariables" Permissions="">
+        <Schedules>
+          <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
+            <Subject>DownloadAlertLeadTrigger (Right Now)</Subject>
+            <Body></Body>
+            <Start Days="0" Hours="0" Mins="0"></Start>
+          </Schedule>
+        </Schedules>
+        <Events></Events>
+        <Properties>
+          <Messages>
+            <Message Id="1">
+              <ToAddress>##fromemail##</ToAddress>
+              <FromName>##fromname##</FromName>
+              <FromAddress>##fromemail##</FromAddress>
+              <ReplyTo>##fromemail##</ReplyTo>
+              <Subject>##firstname## ##lastname## just clicked on the link to download your eBook</Subject>
+              <HtmlContent>##DownloadLeadAlertContent##</HtmlContent>
+              <TextContent></TextContent>
+            </Message>
+          </Messages>
+        </Properties>
+      </CampaignElement>
+      <CampaignElement Id="26" DbId="846"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="620,130" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;">
+          <AdvancedFilter CriteriaJoinOperator="&amp;">
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="118" InboundContext="" CampaignId="118" CriteriaOption="2" Operator="Equal" Value="0"></AdvancedCriteria>
+          </AdvancedFilter>
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="27" DbId="847"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="790,130" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;">
+          <AdvancedFilter CriteriaJoinOperator="&amp;">
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="118" InboundContext="" CampaignId="118" CriteriaOption="2" Operator="Equal" Value="0"></AdvancedCriteria>
+          </AdvancedFilter>
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="28" DbId="848"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="960,130" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;">
+          <AdvancedFilter CriteriaJoinOperator="&amp;">
+            <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="118" InboundContext="" CampaignId="118" CriteriaOption="2" Operator="Equal" Value="0"></AdvancedCriteria>
+          </AdvancedFilter>
+        </Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30503" ElementId="1" ChildElementId="17"></Event>
+        </HookedEvents>
+      </CampaignElement>
+      <CampaignElement Id="29" DbId="849"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ContactList" Position="540,400" SharedCheckout="False" Permissions="">
+        <Filter CriteriaJoinOperator="&amp;"></Filter>
+        <HookedEvents TriggerFireContext="Current Child Visit">
+          <Event EventId="30501" ElementId="1" ChildElementId="16"></Event>
+        </HookedEvents>
+      </CampaignElement>
+    </CampaignElements>
+    <CampaignConnections>
+      <CampaignConnection StartElementId="12" EndElementId="7"></CampaignConnection>
+      <CampaignConnection StartElementId="15" EndElementId="13"></CampaignConnection>
+      <CampaignConnection StartElementId="16" EndElementId="14"></CampaignConnection>
+      <CampaignConnection StartElementId="26" EndElementId="22"></CampaignConnection>
+      <CampaignConnection StartElementId="27" EndElementId="23"></CampaignConnection>
+      <CampaignConnection StartElementId="28" EndElementId="24"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="12"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="16"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="26"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="27"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="28"></CampaignConnection>
+      <CampaignConnection StartElementId="12" EndElementId="25"></CampaignConnection>
+      <CampaignConnection StartElementId="29" EndElementId="19"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="29"></CampaignConnection>
+      <CampaignConnection StartElementId="1" EndElementId="15"></CampaignConnection>
+    </CampaignConnections>
+  </Campaign>
+  <RuleGroupSet>
+    <RuleGroup Name="ContentVariables" Description="">
+      <ContentVariables>
+        <ContentVariable Name="domainvar">{{URL TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR}}</ContentVariable>
+        <ContentVariable Name="unsubscribelink">{{URL TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK}}</ContentVariable>
+        <ContentVariable Name="fromemail">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-d34163ed4d003ec2d3467c8b17e9fcfb-FROMEMAIL.html"##</ContentVariable>
+        <ContentVariable Name="fromname">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-d34163ed4d003ec2d3467c8b17e9fcfb-FROMNAME.html"##</ContentVariable>
+        <ContentVariable Name="email1content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL1CONTENT.html"##</ContentVariable>
+        <ContentVariable Name="email2content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL2CONTENT.html"##</ContentVariable>
+        <ContentVariable Name="email3content">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL3CONTENT.html"##</ContentVariable>
+        <ContentVariable Name="email4content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
+        <ContentVariable Name="email5content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
+        <ContentVariable Name="email6content">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
+        <ContentVariable Name="email1subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT}}</ContentVariable>
+        <ContentVariable Name="email2subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT}}</ContentVariable>
+        <ContentVariable Name="email3subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT}}</ContentVariable>
+        <ContentVariable Name="email4subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT}}</ContentVariable>
+        <ContentVariable Name="email5subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL5SUBJECT}}</ContentVariable>
+        <ContentVariable Name="email6subject">{{URL TEXT-LINE-ACCTID-PROGRAMID-EMAIL6SUBJECT}}</ContentVariable>
+        <ContentVariable Name="WecomePageContent">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-WELCOMEPAGECONTENT.html"##</ContentVariable>
+        <ContentVariable Name="DownloadPageContent">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-DOWNLOADPAGECONTENT.html"##</ContentVariable>
+        <ContentVariable Name="DownloadLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html"##</ContentVariable>
+        <ContentVariable Name="VistLeadAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html"##</ContentVariable>
+        <ContentVariable Name="email1contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT}}</ContentVariable>
+        <ContentVariable Name="email2contentonline">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL2CONTENT.html"##</ContentVariable>
+        <ContentVariable Name="email3contentonline">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-d34163ed4d003ec2d3467c8b17e9fcfb-EMAIL3CONTENT.html"##</ContentVariable>
+        <ContentVariable Name="email4contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT}}</ContentVariable>
+        <ContentVariable Name="email5contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT}}</ContentVariable>
+        <ContentVariable Name="email6contentonline">{{URL TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT}}</ContentVariable>
+      </ContentVariables>
+    </RuleGroup>
+  </RuleGroupSet>
+</Program>

@@ -63,6 +63,7 @@ foreach($blueprints as $blueprint)
 {
     if($blueprint->campaignType == $requestBlueprint){
         $flgFound = true;
+        break;
     }
 }
 if(!$flgFound){
@@ -88,7 +89,8 @@ $accountID = $_SESSION['ACCOUNTID'];
 $accountInfo = couchDB_Get("/db$accountID/UserInfo",true);
 MergeArrayWithArray($accountInfo,$default);
 
-$configs = $masterTemplate->{$resourceName};
+//$configs = $masterTemplate->{$resourceName};
+$configs = $blueprint->{$resourceName};
 
 $ret = array();
 $number = 0;
@@ -154,6 +156,7 @@ foreach($configs as $config)
         "accountInfo"=>$accountInfo,
         "accountID"=>$accountID,
         "subdir"=>$config->subdir,
+        "blueprint"=>$blueprint,
     );
 }
 

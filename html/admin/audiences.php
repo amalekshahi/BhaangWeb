@@ -14,7 +14,7 @@
 	</head>
 
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<!--<div w3-include-html="leftWrapper.php"></div>-->
@@ -66,8 +66,8 @@
 										</thead>
 										<tbody>
 											<tr ng-repeat="item in audience.items | orderBy:'-lastEditDate'" ng-cloak>
-												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" target="_blank">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
-												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" target="_blank" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
+												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
+												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
  
 													
 													<ng-pluralize count="item['LIST-COUNT']" 

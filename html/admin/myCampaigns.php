@@ -11,7 +11,7 @@
 		<?php include "header.php"; ?>
 	</head>
 
-	<body class="">
+	<body class="fixed-sidebar">
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<div w3-include-html="leftWrapper.php"></div>
@@ -93,18 +93,17 @@
 																			<td class="project-title">
 																				<strong>{{item.campaignName}}</strong> <small>({{item.campaignType=='PromoteBlog' ? 'Promote a Blog Post' : 'Promote an eBook'}})</small>
 																				<br/>
-																				<small>Modified {{item.lastEditDate | amDateFormat:'MMMM Do YYYY, h:mm a'}}
-                                                                                (<span am-time-ago="item.lastEditDate"></span>)</small> 
+																				<small>Modified <span am-time-ago="item.lastEditDate"></span></small>
 																			</td>
 
 																			<td class="project-reach">
-																				<medium>{{Random(10000)|number}}</medium><br><small class="text-muted">&nbsp;</small>
+																				<medium> </medium><br><small class="text-muted">&nbsp;</small>
 																			</td>
 																			<td class="project-completion">
-																				<medium>{{Random(1000)}}</medium><br><small class="text-muted"><i class="fa fa-bullhorn"></i> Clicks to Blog Post</small>
+																				<medium> </medium><br><small class="text-muted"><i class="fa fa-bullhorn"></i> Clicks to Blog Post</small>
 																			</td>
 																			<td class="project-completion">
-																				<medium>{{Random(10)}}%</medium><br><small class="text-muted">Click-thru Rate</small>
+																				<medium> </medium><br><small class="text-muted">Click-thru Rate</small>
 																			</td>
 																			<td class="project-actions">
 																				<!--<a href="edit{{item.campaignType}}.php?campaign_id={{item.campaignID}}" class="btn btn-white btn-sm" data-toggle="tooltip" title="Copy feature coming soon."><i class="fa fa-clone" style="color:green"></i> Copy </a>-->
@@ -466,19 +465,6 @@
 			<script>
 				w3IncludeHTML();
 			</script>
-			<script src="js/jquery-3.1.1.min.js"></script>
-			<script src="js/bootstrap.min.js"></script>
-			<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-			<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-			<!-- Custom and plugin javascript -->
-			<script src="js/inspinia.js"></script>
-			<script src="js/plugins/pace/pace.min.js"></script>
-			<script src="js/davinci.js"></script>
-
-			<!-- Page-Level Scripts -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
 
 			<script>
 				var dbName = "<?php echo $dbName; ?>";

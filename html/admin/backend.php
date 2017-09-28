@@ -166,6 +166,7 @@ if($cmd=="copy"){
 
 
 if($cmd=="test"){
+    
     $doc = couchDB_Get("/$dbName/campaignlist",true);
     $ret = array();
     for($i=0;$i<count($doc['campaigns']);$i++){
@@ -218,10 +219,12 @@ $campaignType = $doc->campaignType;
 // find maml 
 //echo($campaignType);
 $templateName = "";
+$mamlInfoName = "";
 foreach ($blueprints as $item){
     if($item->campaignType == $campaignType){
         //echo "Found $item->campaignType $item->template";
         $templateName = $item->template;
+        $mamlInfoName = $item->mamlInfo;
     }
 }
 if($templateName == ""){
@@ -234,6 +237,29 @@ if($templateName == ""){
 }
 
 $templateFileName = "maml/$templateName";
+
+/*if($mode == "junk"){
+    if(empty($mamlInfoName)){
+        $mamlInfoName = "PromoteBlog.json";
+    }
+}*/
+if(empty($mamlInfoName)){
+    $mamlInfoName = "PromoteBlog.json";
+}
+
+$mamlInfoFileName = "maml/$mamlInfoName";
+$mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
+if(json_last_error() != JSON_ERROR_NONE){
+    echo json_encode( 
+        array(
+            'success'=>false,
+            'cmd'=>$cmd,
+            'mamlInfoFileName'=>$mamlInfoFileName,
+            'message'=>'Json Error '.json_last_error_msg(),
+        ));
+    exit;
+}
+
 $tmaml = file_get_contents($templateFileName);
 $execTime['GetTemplateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
 if($mode == "junk"){
@@ -242,28 +268,64 @@ if($mode == "junk"){
     $doc->campaignID = $doc->campaignID."_".$t;
     
 }
-$studio_url_render_ret = studio_url_render2($tmaml,$acctID,$progID,$doc);
-$finishMAML = $studio_url_render_ret['template'];
-//Render and upload to S3 if necessary
-$execTime['StudioRender'] = microtime(true) - $start_time;$start_time = microtime(true);
-
-$publishFileName = "publish/".$acctID."_".$progID.".maml";
-file_put_contents($publishFileName,$finishMAML);
-$execTime['header'] = microtime(true) - $start_time;$start_time = microtime(true);
+if($mode == "mamlInfo"){
+    /*$mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
+    if(json_last_error() != JSON_ERROR_NONE){
+        echo json_encode( 
+            array(
+                'success'=>false,
+                'cmd'=>$cmd,
+                'mamlInfoFileName'=>$mamlInfoFileName,
+                'message'=>'Json Error '.json_last_error_msg(),
+            ));
+        exit;
+    }*/
+    $ret = RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc);
+    echo json_encode($ret);
+    exit;
+}
+$renderMode = "studio_url_render";
+if(!empty($doc->publishProgramID)){
+    $cmd = "update";
+}else{
+    $cmd = "publish";
+}
 //dump_r($finishMAML);
 if($cmd == "publish"){
+    // check if we have $mamlInfoName
+    if(!empty($mamlInfoName)){
+        $renderMode = "RenderByMamlInfo ".$mamlInfoFileName;
+        $RenderByMamlInfoRet = RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc);
+        $finishMAML = $RenderByMamlInfoRet['xml'];
+        $updateMAML = $finishMAML;
+    }else{
+        $studio_url_render_ret = studio_url_render2($tmaml,$acctID,$progID,$doc);
+        $finishMAML = $studio_url_render_ret['template'];
+        $xml = new DOMDocument();
+        $xml->loadXML($finishMAML);
+        $updateResult = UpdateMAML($xml,$doc,$campaignType);
+        $updateMAML = $updateResult["Maml"];
+    }
+    
+    $execTime['StudioRender'] = microtime(true) - $start_time;$start_time = microtime(true);
 
-    $xml = new DOMDocument();
-    $xml->loadXML($finishMAML);
-    $updateResult = UpdateMAML($xml,$doc,$campaignType);
-    $updateMAML = $updateResult["Maml"];
+    //Save Publish file to debug
+    $publishFileName = "publish/".$acctID."_".$progID.".maml";
+    file_put_contents($publishFileName,$finishMAML);
+    $execTime['header'] = microtime(true) - $start_time;$start_time = microtime(true);
+
     $resp = publishMAML($updateMAML);
     //$resp = publishMAML($finishMAML);
     if(!empty($resp->Result->ErrorCode)){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'message'=>"Studio return error",
+                'RenderByMamlInfoRet'=>$RenderByMamlInfoRet,
+                'mamlInfo'=>$mamlInfo,
+                //'finishMAML'=>$finishMAML,
+                "renderMode"=>$renderMode,                
                 'detail'=>$resp,
                 'templateFileName'=>$templateFileName,
                 'maml'=>$publishFileName,
@@ -298,11 +360,12 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>true,
+                'cmd'=>$cmd,
                 'message'=>"Publish Done",
+                "renderMode"=>$renderMode,                
                 'detail'=>$resp,
                 'detailCampaignList'=>$docCampaignList,
                 'detailDoc'=>$docUpdate,
-                //'returnMaml'=>$returnMaml,
                 "publishProgramID"=>$publishProgramID,
                 "updateMAML"=>"$updateMAML",
             ));
@@ -318,6 +381,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'message'=>"Publish Program ID Not found ",
                 'time'=>$execTime,
                 'publishProgramID'=>$publishProgramID,
@@ -343,6 +407,7 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'message'=>$checkOutRet['errorMessage'],
                 'time'=>$execTime,
                 'mode'=>"DEBUG",
@@ -355,16 +420,50 @@ if($cmd == "publish"){
         exit;        
     }
     $checkOutMAML = $checkOutRet['Maml'];
-    
-    // Do some work here
-    $xml = new DOMDocument();
-    $xml->loadXML($checkOutMAML);
-    $updateResult = UpdateMAML($xml,$doc,$campaignType);
-    $updateMAML = $updateResult["Maml"];
-    $execTime['UpdateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
 
-    // save file for debug
+    if(!empty($mamlInfoName)){
+        $renderMode = "RenderByMamlInfo ".$mamlInfoFileName;
+        $updateResult = RenderByMamlInfo($mamlInfo,$checkOutMAML,$acctID,$progID,$doc);
+        $updateMAML = $updateResult['xml'];
+    }else{
+        // Just render to update s3 content
+        $studio_url_render_ret = studio_url_render2($tmaml,$acctID,$progID,$doc);
+        //$finishMAML = $studio_url_render_ret['template'];
+        // Do some work here
+        $xml = new DOMDocument();
+        $xml->loadXML($checkOutMAML);
+        $updateResult = UpdateMAML($xml,$doc,$campaignType);
+        $updateMAML = $updateResult["Maml"];
+    }
+    //$execTime['StudioRender'] = microtime(true) - $start_time;$start_time = microtime(true);    
+    
+    $execTime['UpdateMAML'] = microtime(true) - $start_time;$start_time = microtime(true);
+    // Check if we publish before and has the same content
     $republishReturnFileName = "publish/".$acctID."_".$progID."_republish.maml";
+    $prevPublishOrg = file_get_contents($republishReturnFileName);
+    // remove checkoutID
+    $prevPublish = preg_replace('/CheckOutId="[0-9]+"/','', $prevPublishOrg);
+    $currentPublish = preg_replace('/CheckOutId="[0-9]+"/','', $updateMAML);
+    if($currentPublish == $prevPublish){
+        $undoRet = UndoProgramChanges($ticket, $publishProgramID);	
+        $execTime['UndoProgramChanges'] = microtime(true) - $start_time;$start_time = microtime(true);
+        echo json_encode( 
+            array(
+                'success'=>true,
+                'cmd'=>$cmd,
+                'time'=> $execTime,
+                'renderMode'=>$renderMode,
+                'message'=>"Update Done (not need to publish)",
+                'publishProgramID'=>$publishProgramID,
+                'ticket'=>$ticket,            
+                'updateResult'=>$updateResult,
+                'undoRet'=>$undoRet,
+                
+        ));
+        exit;   
+    }
+    file_put_contents("publish/".$acctID."_".$progID."_prev_republish.maml",$prevPublishOrg);
+    // save file for debug
     file_put_contents($republishReturnFileName,$updateMAML);
     //CheckIn    
     $checkInRet = checkinProgram($ticket,$updateMAML);
@@ -387,9 +486,10 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>true,
+                'cmd'=>$cmd,
                 'time'=> $execTime,
+                'renderMode'=>$renderMode,
                 'message'=>"Update Done",
-                'studio_url_render_ret'=>$studio_url_render_ret,
                 'publishProgramID'=>$publishProgramID,
                 'ticket'=>$ticket,            
                 //'checkOutMAML'=>$checkOutMAML,
@@ -403,7 +503,9 @@ if($cmd == "publish"){
         echo json_encode( 
             array(
                 'success'=>false,
+                'cmd'=>$cmd,
                 'time'=> $execTime,
+                'renderMode'=>$renderMode,
                 'message'=>"Update fail",
                 'publishProgramID'=>$publishProgramID,
                 'ticket'=>$ticket,            
@@ -412,6 +514,7 @@ if($cmd == "publish"){
                 'checkInRet'=>$checkInRet,
                 'undoRet'=>$undoRet,
                 'updateResult'=>$updateResult,
+                'updateMAML'=>$updateMAML,
             ));
     }
 }

@@ -1,5 +1,5 @@
 
-var myApp = angular.module('myApp', ["xeditable",'davinci']);
+var myApp = angular.module('myApp', ["xeditable",'davinci','localytics.directives']);
 myApp.controller('myCtrl', function($scope, $http) {
     $scope.Reset = function() {
         $scope.audience = angular.copy($scope.master);

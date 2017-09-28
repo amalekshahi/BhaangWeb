@@ -16,6 +16,8 @@ $.fn.editableform.buttons =
 $(document).ready(function() {
 	$('#email_name').editable();
 
+	new Clipboard('.btn');
+
 	$('.clockpicker').clockpicker({
 		twelvehour: true
 	});
@@ -37,13 +39,7 @@ $(document).ready(function() {
 	});
 });
 
-function startEditable(objID) {
-	$('#subjectEmail' + objID).editable();
-	//$('#template').trigger('change');
-
-}
-
-myApp.controller('myCtrl', function($scope, $http,Upload) {
+myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 	$scope.campaignID = campaignID;
 	$scope.state = {
 		Save: "Save",
@@ -85,7 +81,15 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	$scope.Save = function(mode, silence) {
 		$scope.state['Save'] = "Saving";
 		//alert(mode);
-		if (mode == 'Email') {
+		for (var key in $scope.openEmail) {
+			if (hasValue($scope['templatesAs'+key])) {
+				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
+				//$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
+				//$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
+				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
+			}
+		}
+		/*if (mode == 'Email1') {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
 			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
 			$scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
@@ -102,13 +106,21 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
 			$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
 			$scope.campaign['EMAIL3-STATE'] = 'Start';
+		}*/
+		if (hasValue($scope.campaign['templateWelcome'])) {
+			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
-		if (mode == 'Welcome') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.templatesWelcome[$scope.getListIndex('templatesWelcome','content','templateWelcome')].contentRaw;
+		if (hasValue($scope.campaign['templateThankYou'])) {
+			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.getContentRaw($scope.templatesThankYou, $scope.campaign['templateThankYou'], 'TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT');
 		}
-		if (mode == 'ThankYou') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.templatesThankYou[$scope.getListIndex('templatesThankYou','content','templateThankYou')].contentRaw;
-		}
+        
+        //check if we really need to save this tree
+        if(documentConpare($scope.campaign, $scope.master)){
+            console.log("No change");
+            $scope.state['Save'] = 'Save';
+            return; 
+        }
+
 		$http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
 			$scope.campaign._rev = response.data.rev;
 
@@ -141,10 +153,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					// Kwang backup current to master and clear formState
 					$scope.master = angular.copy($scope.campaign);
 					$scope.clearFormState();
-					$scope.state['Save'] = 'Save';
                     //Kwang try auto publish
                     $scope.Publish(true);
-					$scope.goEditMode(action);
 				});
 			}, function(errResponse) {
 				// case new account
@@ -164,7 +174,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					});
 					$http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
 						$scope.setDisplay();
-						$scope.state['Save'] = 'Save';
 						$scope.goEditMode(action);
 					});
 				} else {
@@ -180,8 +189,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	};
 	$scope.goEditMode = function(action) {
 		if (action == "newCampaign") {
-			window.location.href = "editPromoteEbook.php?campaign_id="+campaignID;
+			window.location = "editPromoteEbook.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
+		$scope.state['Save'] = 'Save';
 	};
 	$scope.Cancel = function() {
 		swal({
@@ -216,7 +226,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			action = 'editCampaign';
 			$scope.master = response.data;
 			$scope.campaign = angular.copy($scope.master);
-			$scope.openEmail1 = true; //Email #1 always open.
+			//$scope.openEmail['1'] = true; //Email #1 always open.
 			$scope.setInitValue();
 			$scope.setDisplay();
 			$scope.LoadAudience();
@@ -234,7 +244,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 					"publishDate": "",
 					"filterSelected": []
 				};
-				$scope.openEmail1 = true; //Email #1 always open.
+				//$scope.openEmail['1'] = true; //Email #1 always open.
 				$scope.setInitValue();
 				$scope.setDisplay();
 				$scope.LoadAudience();
@@ -253,8 +263,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		$scope.initSender();
 	};
 	$scope.initTemplateEmail = function(emlID) {
-		if ($scope['openEmail' + emlID]) {
-			$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + emlID).then(function(response) {
+		//if ($scope.openEmail[emlID]) {
+		if (!hasValue($scope['templatesAs'+emlID]) && $scope.openEmail[emlID]) {
+			$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + emlID).then(function(response) {
 				$scope['templatesAs' + emlID] = response.data.templates;
 				if (emlID == '1') {
 					$scope.config = response.data.config;
@@ -263,13 +274,13 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 				$("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
 				$scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
 				$scope.sendersChanged('textSender' + emlID);
-				startEditable(emlID);
+				$scope.startEditable(emlID);
 			});
 		}
 	};
 	$scope.initTemplateWelcome = function(){
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
-			$scope['templatesWelcome']  = response.data.templates; 
+			$scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
 			$scope.config = response.data.config; 
 			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
 			$scope.SelectChanged('viewWelcome','templateWelcome');
@@ -277,7 +288,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 	};
 	$scope.initTemplateThankyou = function(){
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
-			$scope['templatesThankYou']  = response.data.templates; 
+			$scope.templatesThankYou = $filter('filter')(response.data.templates, {subdir:'thankyou'});
 			$scope.config = response.data.config; 
 			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
 			$scope.SelectChanged('viewThankYou','templateThankYou');
@@ -311,13 +322,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		});
 	};
 	$scope.setDisplay = function(){
-		$scope.openEmail = {
-			"1":true,
-			"2":false,
-			"3":false,
-		};
-		$scope.openEmail2 = false;
-		$scope.openEmail3 = false;
 		$scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
 		$scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT']);
 		$scope.step3Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
@@ -331,12 +335,10 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 				emailDone = '1';
 				if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])) {
 					emailDone = '2';
-					$scope.openEmail2 = true;
 					$scope.openEmail["2"] = true;
 				}
 				if (hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'])) {
 					emailDone = '3';
-					$scope.openEmail3 = true;
 					$scope.openEmail["3"] = true;
 				}
 			}
@@ -375,7 +377,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 		var email1Fields = ["EMAIL1-BACKGROUND-COLOR", "EMAIL1-BOTTOM-TEXT", "EMAIL1-BUTTON-COLOR", "EMAIL1-CTA-TEXT", "EMAIL1-HERO-IMAGE", "EMAIL1-NAME", "EMAIL1-SUBJECT", "EMAIL1-TOP-TEXT", "EMAIL1-VIEW-ONLINE-LINK", "EMAIL1-STUDIO-TRACKER", "templateEmail1"];
 		if (cmd.endsWith("2")) {
 			currentEmail = '2';
-			$scope.openEmail2 = true;
+			$scope.openEmail['2'] = true;
 			if (cmd == 'COPY2') {
 				$scope.copyEmail(email1Fields, '1', '2');
 			} else {
@@ -383,7 +385,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			}
 		} else if (cmd.endsWith("3")) {
 			currentEmail = '3';
-			$scope.openEmail3 = true;
+			$scope.openEmail['3'] = true;
 			if (cmd == 'COPY3') {
 				$scope.copyEmail(email1Fields, '2', '3');
 			} else {
@@ -407,14 +409,26 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 				}
 			}
 		}
-		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + tar).then(function(response) {
+		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + tar).then(function(response) {
 			$scope['templatesAs' + tar] = response.data.templates;
 			$scope.config = response.data.config;
 			$("#subjectEmail" + tar).text($scope.campaign['EMAIL' + tar + '-SUBJECT']);
 			$scope.SelectChanged('viewEmail' + tar, 'templateEmail' + tar);
 			$scope.sendersChanged('textSender' + tar);
-			startEditable(tar);
+			$scope.startEditable(tar);
 		});
+	}
+	$scope.getContentRaw = function(templates, selected, field) {
+		for (var i = 0; i < templates.length; i++) {
+            if (templates[i]["content"] == selected) {
+                return templates[i]["contentRaw"];
+            }
+        }
+		if (hasValue($scope.campaign[field])) {
+			return $scope.campaign[field];
+		} else {
+			return '';
+		}
 	}
 	$scope.clIndex = function() {
 		var cplist = $scope.campaignlist.campaigns;
@@ -468,7 +482,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			}
 		}).then(function(response) {
 			if (response.data.success == false) {
-				var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+				var errorMessage = prettyStudioErrorMessage(response.data.message);
                 if(!$scope.silenceMode){
                     swal(response.data.detail.Result.ErrorCode,errorMessage);
                 }
@@ -481,12 +495,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			console.log(str); // Logs output to dev tools console.
 			$scope.state['Publish'] = "Launch Program";
 			//alert(response);
+			$scope.state['Save'] = 'Save';
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
             //if(!$scope.silenceMode){
                 swal("Server Error");
             //}
 			//alert(errResponse);
+			$scope.state['Save'] = 'Save';
 		});
 	}
     $scope.silenceMode = false;
@@ -525,11 +541,15 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
                 }
 				// set public programID back to tree
 				$scope.campaign['publishProgramID'] = response.data.publishProgramID;
+
+				
 			}
 			$scope.state['Publish'] = "Launch Program";
 			var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
 			console.log(str);
-			
+
+			//Go to edit mode
+			$scope.goEditMode(action);
 			//alert(response);
 		}, function(errResponse) {
 			$scope.state['Publish'] = "Launch Program";
@@ -537,6 +557,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
                 swal("Server Error");
             //}
 			//alert(errResponse);
+			//Go to edit mode
+			$scope.goEditMode(action);
 		});
 	};
 	// Kwang clear form state
@@ -618,6 +640,20 @@ myApp.controller('myCtrl', function($scope, $http,Upload) {
 			}
 		});                
 	}
+	$scope.startEditable = function(objID) {
+		$('#subjectEmail' + objID).editable();
+		//$('#template').trigger('change');
+		$('#subjectEmail' + objID).on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+objID+'SUBJECT'] = params.newValue;
+			$scope.campaign['EMAIL'+objID+'-SUBJECT'] = params.newValue;
+		});
+	}
+	$scope.openEmail = {
+		"1":true,
+		"2":false,
+		"3":false,
+	};
 	$scope.Load();
 });
 

@@ -43,7 +43,7 @@
 														<input type="text" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}" style="display:none;">
 														<p>Label: <input type="text" id="{{d.fieldID}}Label"  value="{{d.label}}"></p>
 														<p>Required?: <select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
-														<p>Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill" ><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill" ><option value="Yes">Yes<option value="No" selected>No</select></p>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-white" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button>
@@ -102,7 +102,7 @@
 														<input type="text" id="{{s.fieldID}}Prepop" value="{{s.prepopulated}}" style="display:none;">
 														<p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}" ng-model = "s.label"></p>
 														<p>Required?: <select id="{{s.fieldID}}Require" ng-model="s.required" ng-change=SetRequire();><option value="Yes">Yes<option value="No" selected>No</select></p>
-														<p>Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No">No</select></p>
+														<p ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No">No</select></p>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button>
@@ -117,13 +117,15 @@
 							</div>
 						</div>
 					</div><!-- col-lg-4 -->					
-					<div class="col-lg-4">
-						<div class="ibox">
-							<div class="ibox-content">
-								<h3>Preview & Edit Labels & Text</h3>
-								
+			<div class="col-lg-4">
+				<div class="ibox">
+					<div class="ibox-content product-box active">
+						<span class="label label-danger pull-right">LIVE FORM PREVIEW</span>
+						<div class="product-desc">
+
+							<div>
 								<div class="well">
-												<style type="text/css">.input-sm{ border: 1px solid #ccc;}</style>
+									<style type="text/css">.input-sm{ border: 1px solid #ccc;}</style>
 												<form action="/send?a=download" id="rzForm" method="post" name="rzForm" novalidate="">
 													<fieldset>													
 															<div><p class="lead">Download your eBook:</p></div>
@@ -145,10 +147,10 @@
 				</div><!-- row -->
 			</div><!-- fadeInRight -->           
 </div>	<!-- myCtrl -->		
-
+<div class="output2" style="color:red;">
 <script>
 
-$(document).ready(function(){
+$(document).ready(function(){		
 
 	           $("#available_fields, #form_fields, #completed").sortable({
 	               connectWith: ".connectList",
@@ -170,20 +172,19 @@ $(document).ready(function(){
 							
 							//add array							
 							tempArr.push({"fieldID":form_fields[i], "fieldName":fFieldName, "label": flabel,"required": frequire,"prepopulated": fprefill,"fieldType": fFieldType }); 
-							
-							//summerdivtxt += angular.injector(['ng', 'myApp']).get("myService").GetFormCodeG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill); 		
 							summerdivtxt += angular.element(document.getElementById('myCtrl')).scope().GetCodeCallG("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill);
-							//summerdivtxt += getFormCode("",fFieldType,form_fields[i],fFieldName,flabel,frequire,fprefill,""); 
 
 							if(fFieldType == 'datetime'){
 									var datename = form_fields[i]+"_DATE"; 
-									darray.push(datename); 											
+									darray.push(datename); 		
+									//runScriptDate(datename); 
 							}
 						}//end for i
 						angular.element(document.getElementById('myCtrl')).scope().MyCopyItem('fieldLists',tempArr);
-						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);
-	                    $('.output').html(" form_fields = "+form_fields);							
+						angular.element(document.getElementById('myCtrl')).scope().CopyScope('tempArr',tempArr);	                    
 						$('#summerblock').html(summerdivtxt); 		
+						$('.output').html(" form_fields = "+form_fields);							
+
 						if(darray.length > 0 ){
 							for(k=0;k<darray.length;k++){
 								runScriptDate(darray[i]); 
@@ -192,6 +193,12 @@ $(document).ready(function(){
 	               }
 	           }).disableSelection();			 
 
+			   
+
 }); // end document.ready(); 
 
 </script>
+
+<!-- <script>$(document).ready(function(){$("#BirthDate_DATE .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); </script> -->
+
+<!-- <script>$(document).ready(function(){$("#BirthDate_DATE .input-group.date").datepicker({todayBtn: "linked"});}); </script>  -->

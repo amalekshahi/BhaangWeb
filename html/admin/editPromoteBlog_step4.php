@@ -40,8 +40,8 @@
 			<div class="ibox-content">
 				<form action="" class="form-horizontal" method="post">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Notify me when people:</label>
-						<div class="col-sm-10">
+						<div>
+							<span>Notify me at <kbd><?php echo $email; ?></kbd> when people:</span>
 						</div>
 					</div>
 					<div class="form-group">

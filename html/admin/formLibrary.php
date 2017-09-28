@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 </head>
 
-<body class="">
+<body class="fixed-sidebar">
     <div id="wrapper">
 	<?php include 'leftWrapper.php'; ?>
 	<div id="page-wrapper" class="gray-bg">
@@ -82,11 +82,11 @@
                                                 <medium>{{item.submission}}</medium><br><small class="text-muted">people submitted this form</small>
                                         </td>
 
-                                        <td class="project-actions">
-                                            <!-- <a href="formEditorCopy.php?fID={{item.formID}}" class="btn btn-white btn-sm" ><i class="fa fa-clone" style="color:green"></i> Copy </a> -->
-											
+                                        <td class="project-actions">                                         
+											<nobr>
                                             <a href="#" class="btn btn-white btn-sm" ng-click="DuplicateFormClick(item.formID,item.formName)"><i class="fa fa-clone" style="color:green"></i> Copy </a>
                                             <a href="formEditor.php?fID={{item.formID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil" style="color:green"></i> Edit </a>
+											</nobr>
                                         </td>
                                         
                                     </tr>                                   
@@ -108,28 +108,12 @@
 		</div><!--  end page-wrapper -->
 </div>
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
-
-	 <!-- Page-Level Scripts -->
-	<script type="text/JavaScript" src="global.js?n=1"></script> 	
- 	<script src="js/jquery.md5.js"></script>	
 	<script src="js/davinci.js"></script>
 
 	<!-- user version 2 to support modal input -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
 	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/angular.moment/1.0.1/angular-moment.min.js"></script>
 
 <script>
 	var dbName = "<?php echo $dbName; ?>";
