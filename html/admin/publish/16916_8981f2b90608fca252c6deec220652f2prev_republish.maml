@@ -176,7 +176,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="12" DbId="1072"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False" Permissions=""><Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter></CampaignElement>
+      <CampaignElement Id="12" DbId="1072"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False" Permissions=""><Filter CriteriaJoinOperator="(1)|(2)|(3)"><Criteria Row="1" Field="FirstName" Operator="StartsWith" Value="coa"></Criteria><Criteria Row="2" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="3" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter></CampaignElement>
       <CampaignElement Id="13" DbId="1301"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="390,140" SharedCheckout="False" RuleGroup="EmailContent" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="3" Status="Completed" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
@@ -205,7 +205,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="14" DbId="1302"  Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email3" Position="540,140" SharedCheckout="False" RuleGroup="EmailContent" Permissions="">
         <Schedules>
-          <Schedule DbId="0" Id="1" Status="Scheduled" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+          <Schedule DbId="0" Id="1" Status="Completed" TargetAudiences="16" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule1</Subject>
             <Body></Body>
             <Start DateTime="09/27/2017 09:38:00 PM"></Start>
@@ -230,11 +230,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="15" DbId="1073"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="390,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2)|(3)"><Criteria Row="1" Field="FirstName" Operator="StartsWith" Value="coa"></Criteria><Criteria Row="2" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="3" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="16" DbId="1074"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="540,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2)|(3)"><Criteria Row="1" Field="FirstName" Operator="StartsWith" Value="coa"></Criteria><Criteria Row="2" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="3" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="17" DbId="1075"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="250,290" SharedCheckout="False" Permissions="">
@@ -448,15 +448,15 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="26" DbId="1077"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="690,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2)|(3)"><Criteria Row="1" Field="FirstName" Operator="StartsWith" Value="coa"></Criteria><Criteria Row="2" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="3" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="27" DbId="1078"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="840,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2)|(3)"><Criteria Row="1" Field="FirstName" Operator="StartsWith" Value="coa"></Criteria><Criteria Row="2" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="3" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="28" DbId="1079"  Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="990,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)"><Criteria Row="1" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2)|(3)"><Criteria Row="1" Field="FirstName" Operator="StartsWith" Value="coa"></Criteria><Criteria Row="2" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="3" Field="Email" Operator="Equal" Value="tt994613+901@gmail.com"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
     </CampaignElements>
