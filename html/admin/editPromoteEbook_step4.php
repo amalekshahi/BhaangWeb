@@ -14,7 +14,7 @@
 			</div>
 			<div class="col-sm-9">
 				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour">
-        <small class="m-l-sm" ng-show="emailDone > 0"><i aria-hidden="true" class="fa fa-envelope-o" ng-show="emailDone > 0"></i> {{scheduleProgress}}</small> </a></h4>
+        <small class="m-l-sm" ng-show="emailDone > 0"><i aria-hidden="true" class="fa fa-clock-o" ng-show="emailDone > 0"></i> {{scheduleProgress}}</small> </a></h4>
 			</div>
 		</div>
 	</div>
