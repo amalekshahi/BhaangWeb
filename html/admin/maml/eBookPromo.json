@@ -26,9 +26,13 @@
             "type":"URL"
         },
         {
-            "name":"TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL",
-            "xpath":"//ContentVariable[@Name='fromemail']",
+            "name":"TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK",
+            "xpath":"//ContentVariable[@Name='unsubscribelink']",
             "type":"URL"
+        },
+        {
+            "name":"campaignName",
+            "xpath":"//ContentVariable[@Name='campaignName']"
         },
         {
             "name":"TEXT-LINE-ACCTID-PROGRAMID-FROMNAME",
