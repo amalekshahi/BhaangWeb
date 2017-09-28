@@ -3,6 +3,8 @@ html/admin/conf/davinci.json
 html/admin/checkInMAML/*
 html/admin/mailFiles/*
 html/admin/import/*
+html/admin/publish/*
+html/admin/cache/*
 html/admin/*.coa
 html/admin/templates/emails/*.coa
 
