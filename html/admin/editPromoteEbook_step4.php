@@ -9,7 +9,7 @@
                             <h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour">
                             <span class="badge" ng-show="!step4Done">4</span>
                             <i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step4Done""></i>
-                            &nbsp;Write Your Auto-Responder Drip Sequence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;Set Your Drip's Timing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <!-- <small class="m-l-sm" ng-show="ShowScheduleDateTime()"><i class="fa fa-dot-circle-o" aria-hidden="true"></i>2 Drip Emails Configured</small> -->
 							<small class="m-l-sm"><i aria-hidden="true" class="fa fa-envelope-o"></i> {{scheduleProgress}}</small>
                             </a></h4>
