@@ -291,7 +291,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##firstname## ##lastname## just visited your website</Subject>
-              <HtmlContent>##VistLeadAlertContent##</HtmlContent>
+              <HtmlContent URL="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_visitleadtrigger.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -456,7 +456,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##firstname## ##lastname## just clicked on the link to download your eBook</Subject>
-              <HtmlContent>##DownloadLeadAlertContent##</HtmlContent>
+              <HtmlContent URL="https://s3-us-west-1.amazonaws.com/bkktest/template/ebook_downloadleadtrigger.html" />
               <TextContent />
             </Message>
           </Messages>
