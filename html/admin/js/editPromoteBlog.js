@@ -352,6 +352,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 }
             }
             $scope.emailProgress = emailDone + ' of 3 Emails Ready';
+						$scope.emailDone = emailDone;
         }
 
 		var publishProgramID = $scope.campaign['publishProgramID'];
