@@ -111,7 +111,7 @@
 																						<i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span>
 																					</div><span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Upload your eBook</span> <span class="fileinput-exists">Change</span> <input name="eBookFile" id="eBookFile" type="file"></span> <a class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
 																				</div>
-																				<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="campaign['URL-eBOOK-LOCATION']"><span class="help-block m-b-none">Something like http://www.yahoo.com/myeBook.pdf</span>
+																				<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="campaign['URL-eBOOK-LOCATION']"><span class="help-block m-b-none">This can be any web-accessible location like: <a href="https://s3-us-west-1.amazonaws.com/marketingmfi/USPS_10_Steps_to_Help_Create_a_Successful_Direct_Mail_Campaign.pdf" target="_new"><code><small>https://s3-us-west-1.amazonaws.com/marketingmfi/USPS_10_Steps_to_Help_Create_a_Successful_Direct_Mail_Campaign.pdf</small></code></a></span>
 																			</div>
 																		</div>
 																	</form>
