@@ -1,4 +1,4 @@
-<Program Name="coatest-blog-092801" Version="1.0" DbId="151" CheckOutId="377" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+<Program Name="coatest-blog-092801" Version="1.0" DbId="151" CheckOutId="383" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="148" CheckOutId="0" State="Start" Permissions="">
     <CampaignElements>
@@ -176,7 +176,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="12" DbId="1064" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False" Permissions=""><Filter CriteriaJoinOperator="(1)|(2|3)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria></Filter></CampaignElement>
+      <CampaignElement Id="12" DbId="1064" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False" Permissions=""><Filter CriteriaJoinOperator="(1)|(2|3)|(4|5)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="4" Field="City" Operator="NotEqual" Value="Irvine"></Criteria><Criteria Row="5" Field="City" Operator="NotEqual" Value="Bangkok"></Criteria></Filter></CampaignElement>
       <CampaignElement Id="13" DbId="1292" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="390,140" SharedCheckout="False" RuleGroup="EmailContent" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="3" Status="Completed" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
@@ -230,11 +230,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="15" DbId="1065" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="390,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)|(2|3)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2|3)|(4|5)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="4" Field="City" Operator="NotEqual" Value="Irvine"></Criteria><Criteria Row="5" Field="City" Operator="NotEqual" Value="Bangkok"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="16" DbId="1066" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="540,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)|(2|3)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2|3)|(4|5)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="4" Field="City" Operator="NotEqual" Value="Irvine"></Criteria><Criteria Row="5" Field="City" Operator="NotEqual" Value="Bangkok"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="17" DbId="1067" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="250,290" SharedCheckout="False" Permissions="">
@@ -448,15 +448,15 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Properties>
       </CampaignElement>
       <CampaignElement Id="26" DbId="1069" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="690,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)|(2|3)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2|3)|(4|5)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="4" Field="City" Operator="NotEqual" Value="Irvine"></Criteria><Criteria Row="5" Field="City" Operator="NotEqual" Value="Bangkok"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="27" DbId="1070" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="840,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)|(2|3)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2|3)|(4|5)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="4" Field="City" Operator="NotEqual" Value="Irvine"></Criteria><Criteria Row="5" Field="City" Operator="NotEqual" Value="Bangkok"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="28" DbId="1071" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="990,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="(1)|(2|3)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria></Filter>
+        <Filter CriteriaJoinOperator="(1)|(2|3)|(4|5)"><Criteria Row="1" Field="IsSeed" Operator="NotEqual" Value="True"></Criteria><Criteria Row="2" Field="State" Operator="Equal" Value="CA"></Criteria><Criteria Row="3" Field="State" Operator="Equal" Value="NY"></Criteria><Criteria Row="4" Field="City" Operator="NotEqual" Value="Irvine"></Criteria><Criteria Row="5" Field="City" Operator="NotEqual" Value="Bangkok"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
     </CampaignElements>
