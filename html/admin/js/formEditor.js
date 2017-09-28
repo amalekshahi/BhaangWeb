@@ -51,7 +51,7 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 					$rootScope.tmphtml ='<div class="form-group"><label>'+label+'</label>'+$rootScope.redstar ;
 					if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
 
-							$rootScope.tmphtml += ' <input class="form-control input-sm" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
+							$rootScope.tmphtml += ' <input class="form-control input-sm" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 
 					}else if(fieldType == "hidden"){		
 						
@@ -59,7 +59,7 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 	
 					}else if(fieldType == "dropdown"  || fieldType == "state"  || fieldType == "country"){
 
-							$rootScope.tmphtml += ' <select name="'+fieldID+'" class="form-control input-sm"> '; 		
+							$rootScope.tmphtml += ' <select id="'+fieldID+'" name="'+fieldID+'" class="form-control input-sm" '+$rootScope.tmpReq+'> '; 		
 							//alert("["+fieldName +"] = " +  $rootScope.dropdownOpt[fieldName] );		
 							if(typeof $rootScope.dropdownOpt != 'undefined') {
 								$rootScope.tmphtml += $rootScope.dropdownOpt[fieldName];
@@ -73,11 +73,11 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 							if(codeType == "HTML"){
 								$rootScope.tmphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); <\/script>' ;
 							}
-							$rootScope.tmphtml += '<div class="form-group" id="'+datename+'"><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control input-sm" value="" name="'+fieldID+'"></div></div>' ; 
+							$rootScope.tmphtml += '<div class="form-group" id="'+datename+'"><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control input-sm" value="" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+'></div></div>' ; 
 								
 					}else if(fieldType == "radio"){
 
-						$rootScope.tmphtml += ' <input class="form-control input-sm" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
+						$rootScope.tmphtml += ' <input class="form-control input-sm" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 					}
 
 					$rootScope.tmphtml +="</div>"; 
