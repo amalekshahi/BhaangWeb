@@ -209,9 +209,6 @@
 		<!-- X-editable -->
 		<script src="js/plugins/bootstrap-editable/boostrap-editable.js"></script>
 
-		<!-- Clipboard -->
-		<script src="js/plugins/clipboard/clipboard.min.js"></script>
-
 		<!-- clockpicker -->
 		<script src="js/plugins/clockpicker/clockpicker.js"></script>
 
@@ -230,6 +227,9 @@
 
 		<!-- Jasny -->
 		<script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+		<!-- Clipboard -->
+		<script src="js/plugins/clipboard/clipboard.min.js"></script>
 
 		<!-- Page-Level Scripts -->
 		<script src="js/jquery.md5.js"></script>
