@@ -570,8 +570,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                             $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                             $value = str_replace("{{url}}", "$s3Url","##URL SRC=\"{{url}}\"##");
                             $cache[$filename] =$contentMD5;
-                        }
-                        if($field->type == "LINK"){
+                        }else if($field->type == "LINK"){
                             //Render content before publish to S3
                             $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
                             $contentMD5 = md5($renderedContent);
@@ -583,6 +582,9 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                             $s3Url = s3_put_contents($filename,$renderedContent,array("$acctID"=>$acctID,"$progID"=>$progID));
                             $value = $s3Url;
                             $cache[$filename] = $contentMD5;
+                        }else{
+                            $renderedContent = studio_url_render($value,$acctID,$progID,$doc);
+                            $value = $renderedContent;
                         }
                         $nodeRet = DomSetText($xpath,$xpathName,$value);
                     }
