@@ -446,6 +446,7 @@ if($cmd == "publish"){
     $currentPublish = preg_replace('/CheckOutId="[0-9]+"/','', $updateMAML);
     if($currentPublish == $prevPublish){
         $undoRet = UndoProgramChanges($ticket, $publishProgramID);	
+        $execTime['UndoProgramChanges'] = microtime(true) - $start_time;$start_time = microtime(true);
         echo json_encode( 
             array(
                 'success'=>true,
