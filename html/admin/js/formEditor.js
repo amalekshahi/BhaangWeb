@@ -45,13 +45,13 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 							$rootScope.redstar += '<span style="color:red;">&#42;</span>'	; 
 					}
 					if(prepopulated == "Yes"){
-							$rootScope.tmpPrepop = '##'+fieldName+'##'; 						
+							$rootScope.tmpPrepop = '##'+fieldID+'##'; 						
 					}
 
 					$rootScope.tmphtml ='<div class="form-group"><label>'+label+'</label>'+$rootScope.redstar ;
 					if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
 
-							$rootScope.tmphtml += ' <input class="form-control input-sm" name="'+label+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
+							$rootScope.tmphtml += ' <input class="form-control input-sm" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 
 					}else if(fieldType == "hidden"){		
 						
@@ -73,11 +73,11 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 							if(codeType == "HTML"){
 								$rootScope.tmphtml += ' <script>$(document).ready(function(){$("#'+datename +' .input-group.date").datepicker({todayBtn: "linked",keyboardNavigation: false,forceParse: false,calendarWeeks: true,autoclose: true});}); <\/script>' ;
 							}
-							$rootScope.tmphtml += '<div class="form-group" id="'+datename+'"><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control input-sm" value=""></div></div>' ; 
+							$rootScope.tmphtml += '<div class="form-group" id="'+datename+'"><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control input-sm" value="" name="'+fieldID+'"></div></div>' ; 
 								
 					}else if(fieldType == "radio"){
 
-						$rootScope.tmphtml += ' <input class="form-control input-sm" name="'+label+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
+						$rootScope.tmphtml += ' <input class="form-control input-sm" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 					}
 
 					$rootScope.tmphtml +="</div>"; 
