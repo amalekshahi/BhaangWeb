@@ -72,7 +72,7 @@
 											<h5><i class="fa fa-rocket" aria-hidden="true" style="color:black"></i> Your Campaign Settings <small class="m-l-sm"></small></h5>
 											<div class="ibox-tools">
 												<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>
+												<!--<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>-->
 												<a class="btn btn-white btn-bitbucket btn-xs"  ng-click="DuplicateCampaignClick()"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
 
 											</div>
@@ -82,14 +82,16 @@
 												<div class="panel-group" id="accordion">
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<h4 class="panel-title">
-																<a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
-																	<span class="badge" ng-show="!step1Done">1</span>
-																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done""></i>
-																	&nbsp;Configure Your eBook nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																	<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> {{campaign['URL-eBOOK-NAME']}}</small>
-																</a>
-															</h4>
+															<div class="row">
+																<div class="col-sm-3">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"><span class="badge" ng-show="!step1Done">1</span>
+																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Configure Your eBook</a></h4>
+																</div>
+																<div class="col-sm-9">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+                                  <small class="m-l-sm" ng-show="campaign['URL-eBOOK-NAME']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-eBOOK-NAME']"></i> {{campaign['URL-eBOOK-NAME']}}</small> </a></h4>
+																</div>
+															</div>
 														</div>
 														<div class="panel-collapse collapse" id="collapseOne">
 															<div class="panel-body">
@@ -113,9 +115,6 @@
 																			</div>
 																		</div>
 																	</form>
-																</div>
-																<div>
-																	<p>&nbsp;</p>
 																</div>
 																<div class="hr-line-dashed"></div>
 																<div class="form-group">
