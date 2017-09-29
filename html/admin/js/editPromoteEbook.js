@@ -89,29 +89,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
-		/*if (mode == 'Email1') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
-			$scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
-			$scope.campaign['EMAIL1-STATE'] = 'Start';
-		}
-		if (mode == 'Email2') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tpsIndex('2')].contentRaw;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
-			$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
-			$scope.campaign['EMAIL2-STATE'] = 'Start';
-		}
-		if (mode == 'Email3') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
-			$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
-			$scope.campaign['EMAIL3-STATE'] = 'Start';
-		}*/
 		if (hasValue($scope.campaign['templateWelcome'])) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
 		if (hasValue($scope.campaign['templateThankYou'])) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.getContentRaw($scope.templatesThankYou, $scope.campaign['templateThankYou'], 'TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT');
+		}
+		if (hasValue($scope.campaign['landing_form'])) {
+			$scope.campaign['LANDINGPAGE-STUDIO-FORM'] = $scope.getSelectedOtherField($scope.listForm, $scope.campaign['landing_form'], 'LANDINGPAGE-STUDIO-FORM', "formHTML", "studioHTML");
 		}
         
         //check if we really need to save this tree
@@ -424,6 +409,18 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		for (var i = 0; i < templates.length; i++) {
             if (templates[i]["content"] == selected) {
                 return templates[i]["contentRaw"];
+            }
+        }
+		if (hasValue($scope.campaign[field])) {
+			return $scope.campaign[field];
+		} else {
+			return '';
+		}
+	}
+	$scope.getSelectedOtherField = function(templates, selected, saveField, optionField, otherField) {
+		for (var i = 0; i < templates.length; i++) {
+            if (templates[i][optionField] == selected) {
+                return templates[i][otherField];
             }
         }
 		if (hasValue($scope.campaign[field])) {
