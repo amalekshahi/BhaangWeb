@@ -4,17 +4,25 @@
 	$email2 = str_replace('##emailid##','2',$emailHTMLTemplate);
 ?>
 	<style>
-		.chosen-container{width: 100% !important;}
+		.chosen-container {
+			width: 100% !important;
+		}
 	</style>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chosen-localytics/1.8.0/angular-chosen.min.js"></script>
 	<div class="panel panel-default" ng-controller="step3" id="step3ID">
+
 		<div class="panel-heading">
-			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
-				<span class="badge" ng-show="!step3Done">3</span>
-				<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done""></i>
-				&nbsp;Write Your Email Sequence &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small class="m-l-sm"> <i class="fa fa-envelope-o" aria-hidden="true"></i> {{emailProgress}}</small></a>
-			</h4>
+			<div class="row">
+				<div class="col-sm-3">
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">3</span>
+					<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Write Your Email Drip Sequence</a></h4>
+				</div>
+				<div class="col-sm-9">
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
+          <small class="m-l-sm" ng-show="emailDone > 0"><i aria-hidden="true" class="fa fa-envelope-o" ng-show="emailDone > 0"></i> {{emailProgress}}</small> </a></h4>
+				</div>
+			</div>
 		</div>
 		<div class="panel-collapse collapse" id="collapseThree">
 			<div class="panel-body">
@@ -80,5 +88,5 @@
 			</div>
 		</div>
 	</div>
-				
-		<script src="js/editPromoteEbook_step3.js"></script>
+
+	<script src="js/editPromoteEbook_step3.js"></script>

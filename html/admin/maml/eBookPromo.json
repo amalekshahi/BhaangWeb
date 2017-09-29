@@ -99,6 +99,10 @@
             "type":"LINK"
         },
         {
+            "name":"TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT_KKK",
+            "xpath":"//ChildElement[@Name='Welcome.html']/Properties/HtmlContent"
+        },
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT",
             "xpath":"//ChildElement[@Name='Download.html']/Properties/HtmlContent",
             "attribute":"URL",

@@ -100,12 +100,15 @@
 																</div>
 															</td>
 															<td class="project-title">
-																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}"</h3>
-																<small>This email is sent to everyone you specify in the above Targeting section.</small>
+																<h3 ng-show="emailDone == 0"><i class="fa fa-info-circle" aria-hidden="true" style="color:orange"></i> You need to create this Email in Step <span class="badge">2</span> before you can set a Schedule.</h3>
+																<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] != null">Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}"</h3>
+																<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] == null"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red"></i> Warning: You're still using the default Subject line for your Email.</h3>
+																<small ng-show="emailDone == 0">Once you create your masterpiece, you'll be able to set a date and time for deployment.</small>
+																<small ng-show="emailDone > 0">This email is sent to everyone you specify in the above Targeting section.</small>
 															</td>
 															<td class="project-title">
 																<form class="form-inline" role="form">
-																	<div class="form-group">
+																	<div class="form-group" ng-show="emailDone > 0">
 																		<!-- <label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for Wednesday August 22, 2017</label>
 																		<small>@ 3:30 PM PST</small><br> 													 -->
 

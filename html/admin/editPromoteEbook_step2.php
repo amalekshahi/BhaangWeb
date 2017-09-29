@@ -1,13 +1,24 @@
 <style type="text/css">
-	.window{width: 100%;}
+	.window {
+		width: 100%;
+	}
 </style>
 <div class="panel panel-default" ng-controller="step2" id="step2ID">
+
 	<div class="panel-heading">
-		<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();">
-		<span class="badge" ng-show="!step2Done">2</span>
-		<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done""></i>
-		&nbsp;Set Up Your Landing Page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <small class="m-l-sm"><i aria-hidden="true" class="fa fa-file-o"></i> {{pageProgress}}</small></a></h4>
+		<div class="row">
+			<div class="col-sm-3">
+				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();"><span class="badge" ng-show="!step2Done">2</span>
+				<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Set Up Your Landing Page</a></h4>
+			</div>
+			<div class="col-sm-9">
+				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+        <small class="m-l-sm" ng-show="pageDone > 0"><i aria-hidden="true" class="fa fa-file-o" ng-show="pageDone > 0"></i> {{pageProgress}}</small> </a></h4>
+			</div>
+		</div>
 	</div>
+
+
 	<div class="panel-collapse collapse" id="collapseTwo">
 		<div class="panel-body">
 			<div class="row wrapper border-bottom white-bg page-heading">
@@ -33,7 +44,9 @@
 											<div class="pull-right tooltip-demo">
 												<a ng-model="file" ngf-select="upload2Pages($file,'LANDINGPAGE-HERO-IMAGE')" href="" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this page"><span ng-show="state['LANDINGPAGE-HERO-IMAGE'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['LANDINGPAGE-HERO-IMAGE'] != 'Uploading'"></i> Upload image</a>
 												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
-												<button class="btn btn-primary" ng-click="Save('Welcome')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
+												<button class="btn btn-primary" ng-click="Save('Welcome')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button>
+												<a
+												 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 											</div>
 											<div class="col-xs-6" style="padding-left: 0px;padding-right: 0px;">
 												<div class="col-xs-6">
@@ -60,7 +73,8 @@
 														<div class="close"></div>
 														<div class="minimize"></div>
 														<div class="zoom"></div>
-													</div><small>eBook Landing Page</small> <!-- window title -->
+													</div><small>eBook Landing Page</small>
+													<!-- window title -->
 												</div>
 												<div class="content">
 													<div class="template_preview">
@@ -76,7 +90,9 @@
 											<!--<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Preview</a>-->
 											<div class="pull-right tooltip-demo">
 												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
-												<button class="btn btn-primary" ng-click="Save('ThankYou')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button><a class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a> 
+												<button class="btn btn-primary" ng-click="Save('ThankYou')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button>
+												<a
+												 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 											</div>
 											<div class="col-xs-4">
 												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" style="width: 100%;height: 30px;">
@@ -92,7 +108,8 @@
 														<div class="close"></div>
 														<div class="minimize"></div>
 														<div class="zoom"></div>
-													</div><small>eBook Landing Page</small> <!-- window title -->
+													</div><small>eBook Landing Page</small>
+													<!-- window title -->
 												</div>
 												<div class="content">
 													<div class="template_preview">
@@ -111,13 +128,17 @@
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Welcome Page URL</label>
 															<div class="col-sm-10">
-																<p><a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank" id="copytext"><?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																<p>
+																	<a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank" id="welcomeURL">
+																		<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#welcomeURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
 															<label class="col-sm-2 control-label">Thank-You Page URL</label>
 															<div class="col-sm-10">
-																<p><a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank" id="copytext"><?php echo $LANDINGPAGEDOMAIN; ?>/Download.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#copytext"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																<p>
+																	<a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank" id="downloadURL">
+																		<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#downloadURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
@@ -138,7 +159,7 @@
 																	</option>
 																</select><br>
 																<div style="padding-top: 10px;">
-																<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
+																	<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
 																</div>
 															</div>
 														</div>

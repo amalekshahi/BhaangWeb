@@ -16,6 +16,8 @@ $.fn.editableform.buttons =
 $(document).ready(function() {
 	$('#email_name').editable();
 
+	new Clipboard('.btn');
+
 	$('.clockpicker').clockpicker({
 		twelvehour: true
 	});
@@ -340,7 +342,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					$scope.openEmail["3"] = true;
 				}
 			}
-			$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' emails ready';
+			$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' Emails Ready';
 		}
 
 		var pageDone = '0';
@@ -350,8 +352,10 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				pageDone = '2';
 			}
 		}
+		$scope.pageDone = parseInt(pageDone); // Dave added this
+		$scope.emailDone = parseInt(emailDone); // Dave added this
 		$scope.pageProgress = pageDone+' of 2 Pages Configured';
-		$scope.scheduleProgress = emailDone+' Drip Emails Configured';
+		$scope.scheduleProgress = emailDone+' of '+$scope.campaign.totalEmail+' Configured';
 	};
 	$scope.SelectChanged = function(emailViewID, templateField) {
 		//$scope.content = angular.copy($scope.templateEmail1);

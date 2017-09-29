@@ -87,7 +87,10 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 			if (response.data.success == false) {
 				swal("Fail");
 			} else {
-				swal("Success");
+				swal({
+					title: "Sent!",
+					text: "Check the inbox in a few seconds.",
+				});
 			}
 			//$scope.state['Publish'] = "Launch Program";
 			$scope.state['SendTest' + index] = "Send Test";
