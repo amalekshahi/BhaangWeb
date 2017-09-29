@@ -34,6 +34,29 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 					});						
 				
         };// GetDropdownOpt		
+
+		this.GetStudioCodeG = function(fieldType,fieldID) {	
+					$rootScope.tmphtml2  = ""; 
+					if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
+							$rootScope.tmphtml2 +='<Input Type="TextBox" Name="'+fieldID+'" IsEncrypted="False"><IsRequired>False</IsRequired><ValidationRegex /><ValidationRegexMessage /></Input>'; 
+
+					}else if(fieldType == "hidden"){								
+							$rootScope.tmphtml2 +='<Input Type="Hidden" Name="'+fieldID+'" IsEncrypted="False"><IsRequired>False</IsRequired></Input>' ; 
+	
+					}else if(fieldType == "dropdown"  || fieldType == "state"  || fieldType == "country"){
+							$rootScope.tmphtml2 +='<Input Type="DropDownBox" Name="'+fieldID+'" IsEncrypted="False"><Options><Option Score="0" Goal="0" IsDistinct="False"></Option></Options><IsRequired>False</IsRequired></Input>' ; 
+
+					}else if(fieldType == "datetime"){
+							$rootScope.tmphtml2 +='<Input Type="TextBox" Name="'+fieldID+'" IsEncrypted="False"><IsRequired>False</IsRequired><ValidationRegex /><ValidationRegexMessage /></Input>'; 
+								
+					}else if(fieldType == "radio"){
+						$rootScope.tmphtml2 +='<Input Type="RadioBox" Name="'+fieldID+'" IsEncrypted="False"><Options><Option Score="0" Goal="0" IsDistinct="False"></Option></Options><IsRequired>False</IsRequired></Input>' ;
+
+					}else if(fieldType == "checkbox"){
+						$rootScope.tmphtml2 +='<Input Type="RadioBox" Name="'+fieldID+'" IsEncrypted="False"><Options><Option Score="0" Goal="0" IsDistinct="False"></Option></Options><IsRequired>False</IsRequired></Input>' ;
+					}
+					return $rootScope.tmphtml2; 
+        };//GetStudioCodeG
 		
 		this.GetFormCodeG = function(codeType,fieldType,fieldID,fieldName,label,required,prepopulated) {				
 		//codeType = "HTML" plus gen <script> tag in code
@@ -47,18 +70,15 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 					if(prepopulated == "Yes"){
 							$rootScope.tmpPrepop = '##'+fieldID+'##'; 						
 					}
-
 					$rootScope.tmphtml ='<div class="form-group"><label>'+label+'</label>'+$rootScope.redstar ;
-					if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
 
+					if(fieldType == "textbox" || fieldType == "email" || fieldType == "mobile" || fieldType == "phone"){
 							$rootScope.tmphtml += ' <input class="form-control input-sm" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 
-					}else if(fieldType == "hidden"){		
-						
-							$rootScope.tmphtml += ' <input type="hidden" name="'+label+' value="'+$rootScope.tmpPrepop+'"> '; 
+					}else if(fieldType == "hidden"){								
+							$rootScope.tmphtml += ' <input type="hidden" name="'+fieldID+' value="'+$rootScope.tmpPrepop+'"> '; 
 	
 					}else if(fieldType == "dropdown"  || fieldType == "state"  || fieldType == "country"){
-
 							$rootScope.tmphtml += ' <select id="'+fieldID+'" name="'+fieldID+'" class="form-control input-sm" '+$rootScope.tmpReq+'> '; 		
 							//alert("["+fieldName +"] = " +  $rootScope.dropdownOpt[fieldName] );		
 							if(typeof $rootScope.dropdownOpt != 'undefined') {
@@ -76,7 +96,9 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 							$rootScope.tmphtml += '<div class="form-group" id="'+datename+'"><div class="input-group date"><span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control input-sm" value="" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+'></div></div>' ; 
 								
 					}else if(fieldType == "radio"){
+						$rootScope.tmphtml += ' <input class="form-control input-sm" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 
+					}else if(fieldType == "checkbox"){
 						$rootScope.tmphtml += ' <input class="form-control input-sm" id="'+fieldID+'" name="'+fieldID+'" '+$rootScope.tmpReq+' type="text" value="'+$rootScope.tmpPrepop+'"> '; 
 					}
 
@@ -107,21 +129,26 @@ myApp.service('myService', ['$rootScope','$http', function($rootScope,$http) {
 							//runScriptDate(darray[i]); 
 						}
 					}
-		};//LoadRightBlockG		 
+		};//LoadRightBlockG		 		
 
 		this.GenSelectedFromHTMLG = function(page,tempArr) {
 				var retArr = this.reloadformfieldG(page); 
 				var temphtml = ""; 
+				var tempstudio = ""; 
 				var allFieldName =""; 
 
 				for(i=0;i<tempArr.length;i++){						
 						allFieldName += tempArr[i].fieldName;
 						if(i<tempArr.length-1){		allFieldName +=", ";		}										
-						temphtml += this.GetFormCodeG("HTML",tempArr[i].fieldType,tempArr[i].fieldID,tempArr[i].fieldName,tempArr[i].label,tempArr[i].required,tempArr[i].prepopulated);				
+
+						tempstudio += this.GetStudioCodeG(tempArr[i].fieldType,tempArr[i].fieldID,tempArr[i].fieldName) ;
+						temphtml += this.GetFormCodeG("HTML",tempArr[i].fieldType,tempArr[i].fieldID,tempArr[i].fieldName,tempArr[i].label,tempArr[i].required,tempArr[i].prepopulated);	
 				}//end for i
 				
 				$rootScope.allFieldName = allFieldName; 
-				$rootScope.selectedFromHTML = '<form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form>' ; return retArr;            
+				$rootScope.selectedFromHTML = '<form action="#" id="rzForm" name="rzForm" method="post"><fieldset>'+temphtml+'<button class="btn btn-lg btn-block btn-warning" type="submit">Download Now!</button><p class="rz-required-note"><i>* Indicates a required field.<br>Answer all required fields to activate the button.</i></p> </fieldset></form>' ; 
+				$rootScope.studioHTML =  "<Form>"+ tempstudio + "</Form>" ;	
+				return retArr;            
             };// end GenSelectedFromHTMLG()		
 		
 		this.reloadformfieldG = function(page) {
@@ -157,6 +184,7 @@ myApp.controller('myCtrl', ['$scope','$http','myService', function($scope,$http,
 					$scope.MyCopyItem('fieldLists',tempArr);	
 					$scope.MyCopyItem('formHTML',$scope.selectedFromHTML);
 					$scope.MyCopyItem('allFieldName',$scope.allFieldName); 
+					$scope.MyCopyItem('studioHTML',$scope.studioHTML); 					
 					var today = getCurrentDateTime();
 					$scope.MyCopyItem('modifiedDate',today);	
 					$scope.MyCopyItem('formType_DefID',$scope.defID);	
@@ -311,6 +339,7 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 				var submission = "";
 				var modDate = getCurrentDateTime(); 
 				var allfield = $scope.allFieldName; //allFieldName
+				var studiohtml = $scope.studioHTML;				
 				var formhtml = $scope.selectedFromHTML;  //formHTML
 
 				$http.get(dbEndPoint + "/" + dbname + "/formLibrary"+"?"+new Date().toString()).then(function(response) {
@@ -326,6 +355,7 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 									"submission":submission,
 									"modifiedDate":modDate,
 									"allFieldName":allfield,
+									"studioHTML":studiohtml,
 									"formHTML":formhtml,
 									"fieldLists":$scope.selectItem
 							});
@@ -340,6 +370,7 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 										"submission":submission,
 										"modifiedDate":modDate,
 										"allFieldName":allfield,
+										"studioHTML":studiohtml,
 										"formHTML":formhtml,
 										"fieldLists":$scope.selectItem
 									});
