@@ -5,7 +5,7 @@ assetLibrary.controller('assetList', function($scope) {
     //alert(file);
     $scope.showPreviewFile = file;
   };
-  $scope.folders = ["Images","HTML Emails","HTML Pages", "eBooks"];
+  $scope.folders = ["Images","HTML Emails","HTML Pages", "eBooks", "Videos", "Blueprint Defaults"];
   $scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  
   $scope.files = [
     {

@@ -57,7 +57,7 @@
 							<div class="col-md-9">
 								<div class="forum-icon">
 									<i class="fa fa-picture-o"></i>
-								</div><a class="forum-item-title" href="fileManager.php">Files</a>
+								</div><a class="forum-item-title" href="fileManager.php">Content</a>
 								<div class="forum-sub-title">
 									Browse Da Vinci's library of images and other assets, or upload and manage your company's files for use within any of your marketing campaigns.
 								</div>
@@ -65,7 +65,7 @@
 							<div class="col-md-1 forum-info">
 								<span class="views-number">1,216</span>
 								<div>
-									<small>Images</small>
+									<small>Assets</small>
 								</div>
 							</div>
 							<div class="col-md-1 forum-info">
