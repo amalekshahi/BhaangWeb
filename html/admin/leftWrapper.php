@@ -1,3 +1,4 @@
+l
 <?php
 //    date_default_timezone_set('America/Los_Angeles');
 //    session_start();
@@ -28,7 +29,7 @@
 						-->
 				</li>
 				<li>
-					<a href="welcome.php"><i class="fa fa-th-large" aria-hidden="true" title="Home"></i> <span class="nav-label">Home</span></a>
+					<a href="welcome.php"><i class="fa fa-home" aria-hidden="true" title="Home"></i> <span class="nav-label">Home</span></a>
 				</li>
 				<li>
 					<a href="pickBlueprint.php"><i class="fa fa-plus" aria-hidden="true" title="Create a Campaign"></i> <span class="nav-label">Create a Campaign</span></a>
