@@ -197,7 +197,7 @@ function uuidv4() {
 }
 
 function CloseRegister() {
-	var scope = angular.element(document.getElementById('step2ID')).scope();
+	var scope = angular.element(document.getElementById('step3ID')).scope();
 	scope.LoadSendTestContact();
 	//alert('LoadSendTestContact done');        
 }

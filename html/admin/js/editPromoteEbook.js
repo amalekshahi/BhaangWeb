@@ -84,8 +84,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
-				//$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-				//$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
 				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
@@ -248,7 +246,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$scope.initSender();
 	};
 	$scope.initTemplateEmail = function(emlID) {
-		//if ($scope.openEmail[emlID]) {
 		if (!hasValue($scope['templatesAs'+emlID]) && $scope.openEmail[emlID]) {
 			$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + emlID).then(function(response) {
 				$scope['templatesAs' + emlID] = response.data.templates;
