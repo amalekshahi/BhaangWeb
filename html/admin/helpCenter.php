@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
@@ -8,25 +8,20 @@
     $accountName = $_SESSION['ACCOUNNAME'];
 ?>
 
-	<!DOCTYPE html>
-		<html ng-app="myApp">
-
-	<head>
-		<?php include "header.php"; ?>
-		<script>
-			// welcome.js need this
-			var dbName = "<?php echo $dbName; ?>";
-			var myApp = angular.module('myApp', ['angularMoment', 'davinci', 'localytics.directives']);
-		</script>
-		<script src="js/welcome.js"></script>
-	</head>
-
-	<body class="fixed-sidebar">
-		<!-- hhhh -->
+<!DOCTYPE html>
+	<html ng-app="myApp">
+<head>
+	<?php include "header.php"; ?>
+	<script>
+		// welcome.js need this
+		var dbName = "<?php echo $dbName; ?>";
+		var myApp = angular.module('myApp', ['angularMoment', 'davinci', 'localytics.directives']);
+	</script>
+	<script src="js/welcome.js"></script>
+</head>
+<body class="fixed-sidebar">
 		<div id="wrapper">
-			<!-- left wrapper -->
-			<div w3-include-html="leftWrapper.php"></div>
-			<!-- /end left wrapper -->
+			<?php include 'leftWrapper.php'; ?>
 			<div id="page-wrapper" class="gray-bg">
 				<div class="row border-bottom">
 					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
@@ -165,23 +160,10 @@
 
 				<!--/ content -->
 				<div class="footer fixed">
-					<!-- footer -->
-					<div w3-include-html="footer.php"></div>
-					<!-- / footer -->
+					<?php include 'footer.php'; ?>
 				</div>
 			</div>
 			<!--  end page-wrapper -->
 		</div>
-
-		<!-- Mainly scripts -->
-		<script src="js/w3data.js"></script>
-		<script>
-			w3IncludeHTML();
-		</script>
-
-		<!-- Page-Level Scripts -->
-
-
-	</body>
-
-	</html>
+</body>
+</html>
