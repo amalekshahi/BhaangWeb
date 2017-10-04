@@ -48,25 +48,8 @@ myApp.controller('myCtrl', function($scope, $http) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
-				//$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-				//$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
 			}
 		}
-        /*if (mode == 'Email1') {
-            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
-            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
-            $scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
-        }
-        if (mode == 'Email2') {
-            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tpsIndex('2')].contentRaw;
-            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
-            $scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
-        }
-        if (mode == 'Email3') {
-            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
-            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
-            $scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
-        }*/
         if (mode == 'Step3') {
             var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
             var time1 = $scope.campaign['EMAIL1-SCHEDULE1-TIME'];
@@ -281,19 +264,8 @@ myApp.controller('myCtrl', function($scope, $http) {
         $scope.initTemplateEmail('1');
         $scope.initSender();
     };
-    /*$scope.initEmailTemplate = function(){
-        $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign").then(function(response) {
-            $scope.templates  = response.data.templates; 
-            $scope.config = response.data.config; 
-            $scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
-            $("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
-            $scope.SelectChanged('viewEmail1','templateEmail1');
-            $scope.sendersChanged('textSender1');
-            startEditable('1');
-        });
-    };*/
     $scope.initTemplateEmail = function(emlID) {
-        if ($scope.openEmail[emlID]) {
+        if (!hasValue($scope['templatesAs'+emlID]) && $scope.openEmail[emlID]) {
             $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + emlID).then(function(response) {
                 $scope['templatesAs' + emlID] = response.data.templates;
                 if (emlID == '1') {
