@@ -30,7 +30,8 @@
 		</div>
 		<div class="col-sm-9">
 			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFive">
-      <small class="m-l-sm" ng-show="campaign['URL-eBOOK-NAME']"><i aria-hidden="true" class="fa fa-bell-o" ng-show="campaign['URL-eBOOK-NAME']"></i> Alerted on Visits and Downloads</small> </a></h4>
+				<small class="m-l-sm" ng-show="hasNotifications"><i aria-hidden="true" class="fa fa-bell-o"></i> {{labelNotifications}}</small>
+			</a></h4>
 		</div>
 	</div>
 </div>

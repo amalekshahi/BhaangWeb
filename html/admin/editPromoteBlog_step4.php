@@ -29,7 +29,9 @@
 		</div>
 
 		<div class="col-sm-9">
-			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour"><small class="m-l-sm"> <i class="fa fa-bell-o" aria-hidden="true"></i> Alerted on Clicks, Opens, and Conversions</small></a></h4>
+			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour">
+				<small class="m-l-sm" ng-show="hasNotifications"><i aria-hidden="true" class="fa fa-bell-o"></i> {{labelNotifications}}</small>
+			</a></h4>
 		</div>
 	</div>
 

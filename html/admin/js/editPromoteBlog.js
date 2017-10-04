@@ -377,7 +377,34 @@ myApp.controller('myCtrl', function($scope, $http) {
 					}
 				}
 			}
-		}		
+		}
+		
+		$scope.hasNotifications = false;
+		$scope.labelNotifications = 'Alerted on';
+		if (hasValue($scope.campaign['OPEN-MY-EMAIL-'], false)) {
+			$scope.hasNotifications = true;
+			$scope.labelNotifications += ' Opens';
+		}
+		if (hasValue($scope.campaign['VISIT-MY-BLOCK-'], false)) {
+			$scope.hasNotifications = true;
+			if ($scope.labelNotifications == 'Alerted on') {
+				$scope.labelNotifications += ' Clicks';
+			} else {
+				if (hasValue($scope.campaign['CALL-TO-ACTION-'], false)) {
+					$scope.labelNotifications += ', Clicks';
+				} else {
+					$scope.labelNotifications += ' and Clicks';
+				}
+			}
+		}
+		if (hasValue($scope.campaign['CALL-TO-ACTION-'], false)) {
+			$scope.hasNotifications = true;
+			if ($scope.labelNotifications == 'Alerted on') {
+				$scope.labelNotifications += ' Conversions';
+			} else {
+				$scope.labelNotifications += ' and Conversions';
+			}
+		}
     };
     $scope.SelectChanged = function(emailViewID, templateField) {
         //$scope.content = angular.copy($scope.templateEmail1);

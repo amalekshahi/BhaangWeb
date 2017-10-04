@@ -338,6 +338,21 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$scope.emailDone = parseInt(emailDone); // Dave added this
 		$scope.pageProgress = pageDone+' of 2 Pages Configured';
 		$scope.scheduleProgress = emailDone+' of '+$scope.campaign.totalEmail+' Configured';
+
+		$scope.hasNotifications = false;
+		$scope.labelNotifications = 'Alerted on';
+		if (hasValue($scope.campaign['VISIT-MY-EBOOK-'], false)) {
+			$scope.hasNotifications = true;
+			$scope.labelNotifications += ' Visits';
+		}
+		if (hasValue($scope.campaign['DOWNLOAD-MY-EBOOK-'], false)) {
+			$scope.hasNotifications = true;
+			if ($scope.labelNotifications == 'Alerted on') {
+				$scope.labelNotifications += ' Downloads';
+			} else {
+				$scope.labelNotifications += ' and Downloads';
+			}
+		}
 	};
 	$scope.SelectChanged = function(emailViewID, templateField) {
 		//$scope.content = angular.copy($scope.templateEmail1);
