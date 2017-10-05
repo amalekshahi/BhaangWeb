@@ -10,8 +10,7 @@ if (!hasValue(campaignID)) {
 $.fn.editable.defaults.mode = 'inline';
 $.fn.editableform.buttons =
 	'<button type="button" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i></button>' +
-	'<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>' +
-	'<button type="button" class="btn btn-default btn-sm editable-off"><i class="glyphicon glyphicon-trash"></i></button>';
+	'<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>';
 
 $(document).ready(function() {
 	$('#email_name').editable();
@@ -127,6 +126,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					//action = 'editCampaign';
 				} else {
 					$scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
+					$scope.campaignlist.campaigns[$scope.clIndex()].campaignName = $scope.campaign.campaignName;
 				}
 				$http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
 					$scope.setDisplay();
@@ -210,6 +210,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.master = response.data;
 			$scope.campaign = angular.copy($scope.master);
 			//$scope.openEmail['1'] = true; //Email #1 always open.
+			$scope.setCampaignName();
 			$scope.setInitValue();
 			$scope.setDisplay();
 			$scope.LoadAudience();
@@ -228,6 +229,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					"filterSelected": []
 				};
 				//$scope.openEmail['1'] = true; //Email #1 always open.
+				$scope.setCampaignName();
 				$scope.setInitValue();
 				$scope.setDisplay();
 				$scope.LoadAudience();
@@ -238,7 +240,19 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		});
 
 	};
-	$scope.setInitValue = function() {
+	$scope.setCampaignName = function() {
+        $("#editCampaignName").text($scope.campaign.campaignName);
+		$("#editCampaignName").editable({
+			tpl: '<input type="text" maxlength="50">'
+		});
+		//$('#template').trigger('change');
+		$("#editCampaignName").on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign.campaignName = params.newValue;
+			$scope.Save();
+		});
+    };
+    $scope.setInitValue = function() {
 		$scope.initTemplateWelcome();
 		$scope.initTemplateThankyou();
 		$scope.initTemplateEmail('1');
