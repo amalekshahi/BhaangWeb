@@ -17,6 +17,37 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 		<style type="text/css">
 			.fileinput-filename{white-space: nowrap;text-overflow: ellipsis;width: calc(100% - 20px);}
+
+			.editable-container.editable-inline,
+			.editable-container.editable-inline .control-group.form-group,
+			.editable-container.editable-inline .control-group.form-group .editable-input,
+			.editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.editable-container.editable-inline .control-group.form-group .editable-input select,
+			.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: 550px!important;
+				font-size: 14px;
+				!important;
+			}
+
+			#editCampaignName.editable-click {
+			  color: #fff;
+			  border-color: #fff;
+			}
+			.campaign-title .editable-container.editable-inline,
+			.campaign-title .editable-container.editable-inline .control-group.form-group,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input select,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: 440px !important;
+				background-color: inherit;				
+			}
+			.btn.btn-default.btn-sm.editable-cancel {
+				color: #676a6c;
+			}
+			.campaign-title .editable-container.editable-inline {
+				margin-right: 87px !important;
+			}
 		</style>
 	</head>
 
@@ -56,9 +87,9 @@
 								<div class="col-xs-4">
 									<i class="fa fa-book fa-5x"></i>
 								</div>
-								<div class="col-xs-8 text-right">
+								<div class="col-xs-8 text-right campaign-title">
 									<span> Promote an eBook </span>
-									<h2 class="font-bold">{{campaign.campaignName}}</h2>
+									<h2 class="font-bold"><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="editCampaignName" e-maxlength="50"></a></h2>
 								</div>
 
 							</div>

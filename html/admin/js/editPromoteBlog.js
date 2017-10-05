@@ -149,6 +149,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     //action = 'editCampaign';
                 } else {
                     $scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
+					$scope.campaignlist.campaigns[$scope.clIndex()].campaignName = $scope.campaign.campaignName;
                 }
                 $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                     $scope.setDisplay();
@@ -232,6 +233,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             $scope.master = response.data;
             $scope.campaign = angular.copy($scope.master);
             //$scope.openEmail1 = true; //Email #1 always open.
+			$scope.setCampaignName();
             $scope.setInitValue();
             $scope.setDisplay();
 			$scope.LoadDefaultPromoteBlog(); 
@@ -251,6 +253,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     "filterSelected": []
                 };
                 //$scope.openEmail1 = true; //Email #1 always open.
+				$scope.setCampaignName();
                 $scope.setInitValue();
                 $scope.setDisplay();
                 $scope.LoadAudience();
@@ -260,6 +263,18 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
         });
 
+    };
+	$scope.setCampaignName = function() {
+        $("#editCampaignName").text($scope.campaign.campaignName);
+		$("#editCampaignName").editable({
+			tpl: '<input type="text" maxlength="50">'
+		});
+		//$('#template').trigger('change');
+		$("#editCampaignName").on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign.campaignName = params.newValue;
+			$scope.Save();
+		});
     };
     $scope.setInitValue = function() {
         $scope.initTemplateEmail('1');

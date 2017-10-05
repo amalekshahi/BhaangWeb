@@ -72,7 +72,7 @@
 															<p>Da Vinci will drive traffic to a piece of content (like a blog, article, or website page) and also helps you generate leads (optional). Start by naming your campaign.</p>
 															<form role="form" method="get" action="editPromoteBlog.php">
 																<div class="form-group">
-																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name">
+																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name" maxlength="50">
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
 																<div>
@@ -111,7 +111,7 @@
 															<p>Da Vinci can create Leads for you by promoting an eBook with a Landing Page and auto-responder Email sequence. Start by naming your campaign.</p>
 															<form role="form" method="get" action="editPromoteEbook.php">
 																<div class="form-group">
-																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New eBook" type="input" name="campaign_name">
+																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New eBook" type="input" name="campaign_name" maxlength="50">
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
 																<div>
