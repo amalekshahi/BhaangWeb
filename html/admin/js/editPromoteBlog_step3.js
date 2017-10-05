@@ -11,12 +11,12 @@ myApp.controller('step3', function($scope, $http) {
             var date2 = date1;
             for (var i = 2; i <= 3; i++) {
                 var emailName = "EMAIL" + i;
-                if ($scope.campaign[emailName + '-WAIT'] != "" && $scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") {
+                if ( (typeof $scope.campaign[emailName + '-WAIT'] != 'undefined') && (typeof $scope.campaign[emailName + '-SCHEDULE1-TIME'] != 'undefined') && ($scope.campaign[emailName + '-WAIT'] != "") && ($scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") ) {
                     var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
                     date2 = addDays(date2, numberOfDaysToAdd);
                     $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
                 } else {
-                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
+                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
                 }
             }
             $scope.ShowScheduleDateTime();
