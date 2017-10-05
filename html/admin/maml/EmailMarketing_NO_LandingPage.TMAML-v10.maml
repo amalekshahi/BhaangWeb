@@ -18,7 +18,7 @@
         <ChildElements>
           <ChildElement Id="9" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email1.html" Position="300,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email1content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
             </Properties>
             <Flow />
             <Events />
@@ -32,35 +32,35 @@
           </ChildElement>
           <ChildElement Id="11" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email2.html" Position="470,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email2content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
           <ChildElement Id="12" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email3.html" Position="640,30">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email3content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
           <ChildElement Id="13" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email4.html" Position="140,193">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email4content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
           <ChildElement Id="14" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email5.html" Position="310,190">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email5content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
             </Properties>
             <Flow />
             <Events />
           </ChildElement>
           <ChildElement Id="15" RuleGroup="EmailContent" DbId="0" Type="Page" IsVersion="False" Name="Email6.html" Position="480,190">
             <Properties PageType="Page" IsHomePage="False" SkipPage="False" IsLoginRequired="False">
-              <HtmlContent>##email6content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
             </Properties>
             <Flow />
             <Events />
@@ -170,7 +170,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email1Subject##</Subject>
-              <HtmlContent>##email1content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -200,7 +200,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email2Subject##</Subject>
-              <HtmlContent>##email2content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -226,7 +226,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email3Subject##</Subject>
-              <HtmlContent>##email3content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -377,7 +377,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email4Subject##</Subject>
-              <HtmlContent>##email4content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -403,7 +403,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email5Subject##</Subject>
-              <HtmlContent>##email5content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -429,7 +429,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email6Subject##</Subject>
-              <HtmlContent>##email6content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>

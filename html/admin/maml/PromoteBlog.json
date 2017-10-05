@@ -71,6 +71,13 @@
             "loop":6
         },
         {
+            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
+            "xpath":"//CampaignElement[@Name='Email#']/Properties/Messages/Message/HtmlContent",
+            "attribute":"URL",
+            "type":"LINK",
+            "loop":6
+        },
+        {
             "name":"EMAIL-FILTER-JOINOPERATOR",
             "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
             "attribute":"CriteriaJoinOperator",
