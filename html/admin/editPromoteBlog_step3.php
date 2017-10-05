@@ -8,7 +8,7 @@
 	<div class="panel-heading">
 		<div class="row">
 
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">3</span>
 			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Choose Your Audience & Schedule </a></h4>
 			</div>
@@ -32,28 +32,23 @@
 		<div class="panel-body">
 			<div class="ibox float-e-margins">
 				<div class="ibox-content">
+					<form name="idForm" id="idForm">
+						<input type="hidden" name="LISTDEFINITION"  id="LISTDEFINITION" value="{{campaign['EMAIL1-FILTER']}}">
+					</form>
 					<form class="form-horizontal" name="frmStep3">
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Choose Your Audience</label>
+							<label class="col-sm-3 control-label">Choose Your Audience</label>
 							<div class="col-sm-5">
 								<div>
-									<!--<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">-->
-									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME'] for s in audience.items" style="width:400px;" ng-change="ArrangeFilter()">
+									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" style="width:400px;" ng-change="ArrangeFilter()">
 										 <option value=""></option>
 									</select>
-									<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
-									<!-- <option ng-repeat="option in audience.items" ng-value="option">{{option['LIST-NAME']}}</option>  -->
-									<!-- <select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
-										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
-									</select> -->
-									<!--<input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">-->
-									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>
-								</div>
-								<!--<div>
-									<p>{{campaign['EMAIL1-FILTER']}}</p>
-								</div>-->
+									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence. </span>
+								</div>								
 							</div>
-
+							<div>
+							<input type="text" name="auCount"  id="auCount"  style="border: 0 rgba(0, 0, 0, 0.3);height:30px; text-align: center;" value="" readonly>
+							</div>
 							<div class="row">
 								<!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>

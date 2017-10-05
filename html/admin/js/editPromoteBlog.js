@@ -234,6 +234,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             //$scope.openEmail1 = true; //Email #1 always open.
             $scope.setInitValue();
             $scope.setDisplay();
+			$scope.LoadDefaultPromoteBlog(); 
             $scope.LoadAudience();
             $scope.Reset();
         }, function(errResponse) {
@@ -599,26 +600,68 @@ myApp.controller('myCtrl', function($scope, $http) {
 
     };
 
-    $scope.LoadAudience = function() {
+	$scope.CheckSumAudience = function() {
+			var form_data = $("#idForm").serialize();	
+			var listdefinition = $("#LISTDEFINITION").val(); 
+			$.ajax({
+						url: 'countClick.php', 
+						dataType: 'json',  
+						cache: false,
+						contentType: false,
+						processData: false,
+						data: form_data,   
+						type: 'get',
+						success: function(json){				
+							var sumcount = "Default"; 
+							//alert("cnt = " + json.count); 
+							if (json.success) {
+								if(listdefinition != '<Filter CriteriaJoinOperator=""></Filter>'){								 
+									 sumcount = json.count + " People";			
+								}
+							}
+							$scope.auCount = sumcount; 
+							$("#auCount").val(sumcount) ; 
+						}
+			});		
 
+	}//CheckSumAudience
+
+    $scope.LoadAudience = function() {		
         if (typeof $scope.campaign['filterSelected'] == 'undefined') {
             $scope.filterList = [];
         } else {
             $scope.filterList = $scope.campaign['filterSelected'];
-        }
+        }	
         $http.get(dbEndPoint + "/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
             $scope.masterAu = response.data;
             if (typeof $scope.masterAu.items == 'undefined') {
                 $scope.masterAu.items = [];
             }
             $scope.audience = angular.copy($scope.masterAu);
+			$scope.CheckSumAudience(); 
         }, function(errResponse) {
             if (errResponse.status == 404) {
                 alert("ERROR 404 [audienceLists]");
             }
         });
-    };
-    
+    }; // LoadAudience
+
+    $scope.LoadDefaultPromoteBlog = function(){
+			$http.get(dbEndPoint + "/master/Default_PromoteBlog" + "?" + new Date().toString()).then(function(response) {
+					$scope.masterDefault  = response.data; 
+					if (typeof $scope.masterDefault == 'undefined') {
+					   $scope.masterDefault = "";
+					   $scope.masterDefEmailFilter = '<Filter CriteriaJoinOperator="&"><Criteria Row="1" Field="isseed" Operator="Equal" Value="True" /></Filter>'; 
+					} 
+					$scope.masterDefEmailFilter = $scope.masterDefault['EMAIL1-FILTER']; 
+			}, function(errResponse) {        
+					if (errResponse.status == 404 || errResponse.status == 504) {
+						$scope.masterDefault = "";
+					}
+					$scope.masterDefEmailFilter = '<Filter CriteriaJoinOperator="&"><Criteria Row="1" Field="isseed" Operator="Equal" Value="True" /></Filter>'; 
+			});
+    };//LoadDefaultPromoteBlog
+
     $scope.DuplicateCampaignClick = function(){
         swal({
           title: 'What is your new campaign name?',
