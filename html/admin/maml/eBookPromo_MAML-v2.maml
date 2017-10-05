@@ -190,7 +190,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email1Subject##</Subject>
-              <HtmlContent>##email1content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -222,7 +222,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email2Subject##</Subject>
-              <HtmlContent>##email2content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -248,7 +248,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email3Subject##</Subject>
-              <HtmlContent>##email3content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -381,7 +381,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email4Subject##</Subject>
-              <HtmlContent>##email4content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -407,7 +407,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email5Subject##</Subject>
-              <HtmlContent>##email5content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
@@ -433,7 +433,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email6Subject##</Subject>
-              <HtmlContent>##email6content##</HtmlContent>
+              <HtmlContent URL="http://davincistage.mindfireis.com/admin/under_construction.html" />
               <TextContent />
             </Message>
           </Messages>
