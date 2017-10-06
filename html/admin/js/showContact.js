@@ -65,10 +65,14 @@ var cid = getParameterByName("cid");
 										colReorder: true,
 										language: {
 											"search": "Search People: ",
-									searchPlaceholder: "Start typing here ...",
-									 },
+											searchPlaceholder: "Start typing here ...",
+										},
 										"data": Contacts,
-										"columns": columns
+										"columns": columns,
+										"columnDefs": [{
+											"defaultContent": "",
+										    "targets": "_all"
+										}]
 									});
 								}
 								//reload check countClick
