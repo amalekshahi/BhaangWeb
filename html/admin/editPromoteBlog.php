@@ -204,7 +204,7 @@
 														<?php include "editPromoteBlog_step2.php"; ?>
 													</div>
 													<div class="panel">
-														<?php if ($gates['revamped_schedule'] == TRUE) { include "editPromoteBlog_step3_revamped_schedule.php"; } else { include "editPromoteBlog_step3.php"; } ?>
+														<?php if ($gates['revamped_schedule'] == "TRUE") { include "editPromoteBlog_step3_revamped_schedule.php"; } else { include "editPromoteBlog_step3.php"; } ?>
 													</div>
 													<div class="panel panel-default">
 														<?php include "editPromoteBlog_step4.php"; ?>
