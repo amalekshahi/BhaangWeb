@@ -3,29 +3,48 @@
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?><!DOCTYPE html>
+?>
+	<!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
 		<?php include "header.php"; ?>
 		<script src="js/date.format.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
-   
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
+
 		<style>
 			.editable-container.editable-inline,
 			.editable-container.editable-inline .control-group.form-group,
 			.editable-container.editable-inline .control-group.form-group .editable-input,
 			.editable-container.editable-inline .control-group.form-group .editable-input textarea,
 			.editable-container.editable-inline .control-group.form-group .editable-input select,
-			.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit])
-			{
+			.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
 				width: 550px!important;
-				font-size:14px;!important;
+				font-size: 14px;
+				!important;
 			}
-		
+			#editCampaignName.editable-click {
+			  color: #fff;
+			  border-color: #fff;
+			}
+			.campaign-title .editable-container.editable-inline,
+			.campaign-title .editable-container.editable-inline .control-group.form-group,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input select,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: 440px !important;
+				background-color: inherit;				
+			}
+			.btn.btn-default.btn-sm.editable-cancel {
+				color: #676a6c;
+			}
+			.campaign-title .editable-container.editable-inline {
+				margin-right: 87px !important;
+			}
 		</style>
-        
+
 	</head>
 
 	<body class="fixed-sidebar">
@@ -38,10 +57,10 @@
 
 		<div id="wrapper">
 			<!-- left wrapper -->
-            <?php include 'leftWrapper.php'; ?>
+			<?php include 'leftWrapper.php'; ?>
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg" ng-controller="myCtrl">
-                <!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
+				<!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                 EMAIL1CONTENT={{campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']}}<br>
                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>
                 EMAIL2CONTENT={{campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT']}}<br>
@@ -50,7 +69,7 @@
 				<div class="row border-bottom">
 					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 						<!-- top wrapper -->
-                        <?php include 'topWrapper.php'; ?>
+						<?php include 'topWrapper.php'; ?>
 						<!-- / top wrapper -->
 					</nav>
 				</div>
@@ -64,9 +83,9 @@
 								<div class="col-xs-4">
 									<i class="fa fa-bullhorn fa-5x"></i>
 								</div>
-								<div class="col-xs-8 text-right">
+								<div class="col-xs-8 text-right campaign-title">
 									<span> Promote a Blog Post </span>
-									<h2 class="font-bold">{{campaign.campaignName}}</h2>
+									<h2 class="font-bold"><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="editCampaignName" e-maxlength="50"></a></h2>
 								</div>
 
 							</div>
@@ -93,14 +112,12 @@
 															<div class="row">
 																<div class="col-sm-3">
 																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"><span class="badge" ng-show="!step1Done">1</span>
-														<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Identify the Targeted Blog Post</a></h4>
+																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Identify the Targeted Blog Post</a></h4>
 																</div>
 																<div class="col-sm-9">
 																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
-                                                                        <small class="m-l-sm" ng-show="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}?{{campaign['URL-BLOG-POST-UTM']}}</small>
-                                                                        <small class="m-l-sm" ng-hide="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}</small>
-
-                                                                    </a></h4>
+                                  <small class="m-l-sm" ng-show="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}?{{campaign['URL-BLOG-POST-UTM']}}</small>
+                                  <small class="m-l-sm" ng-hide="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}</small> </a></h4>
 																</div>
 															</div>
 														</div>
@@ -123,7 +140,7 @@
 																		<div class="hr-line-dashed"></div>
 																		<a href="#conversion_tracking" data-toggle="collapse"><mark style="background-color: dark-yellow;"><strong><i aria-hidden="true" class="fa fa-lightbulb-o"></i> OPTIONAL: Track Conversions</strong></mark>  <small>Conversions are steps that a person takes on your site (after visiting your Blog Post URL) that you would like to track such as visits, sign ups or downloads. This turns passive readers into active Leads.</small></a>
 																		<div ng-class="{ 'collapse' : !campaign['CONVERSION-URL-MATCHING-RULE'] || campaign['CONVERSION-URL-MATCHING-RULE']=='' || campaign['CONVERSION-URL-MATCHING-RULE']=='Do not track conversions'}" id="conversion_tracking">
-																			
+
 																			<!--
 																			<div class="alert alert-success" role="alert">
 																				<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> OPTIONAL: Track Conversions Generated By This Post</h3>Mr. Da Vinci recommends that within your Blog Post you have at least one Call to Action (CTA). Your CTA turns passive visitors
@@ -133,7 +150,7 @@
 																			-->
 																			<div>
 																				<p>
-																					
+
 																				</p>
 																			</div>
 																			<div class="form-group">
@@ -164,9 +181,9 @@
 																					<input class="form-control" name="CONVERSION-NAME" placeholder="Describe your list for easy future reference" type="text" ng-model="campaign['CONVERSION-NAME']"><span class="help-block m-b-none">Give your conversion action a name. You'll see this in your Reporting Funnel.</span>
 																				</div>
 																			</div>
-																			</div>
-																			<div class="hr-line-dashed"></div>
-																		
+																		</div>
+																		<div class="hr-line-dashed"></div>
+
 
 
 
@@ -204,7 +221,7 @@
 						</div>
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
-								<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5> 
+								<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5>
 								<div class="ibox-tools">
 									<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-external-link" style="color:blue"></i> VIEW MORE PERFORMANCE REPORTS</button>
 									<a class="collapse-link">
@@ -277,10 +294,10 @@
 
 		<!-- Sweet alert -->
 		<!--<script src="css/sweet/sweetalert-dev.js"></script>-->
-        <!-- user version 2 to support modal input -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
+		<!-- user version 2 to support modal input -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
 
 		<!-- TouchSpin -->
 		<script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>

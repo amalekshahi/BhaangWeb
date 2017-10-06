@@ -30,7 +30,7 @@ $USERNAME = $_SESSION['USERNAME'];
 		</li>
 		<li><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i><small>Database</small></a></li>
 		<li><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i><small>GitHub</small></a></li>
-		<li><a href="logout.php"><i class="fa fa-sign-out"></i> Log out </a>
+		<li><a href="logout.php"><i class="fa fa-power-off"></i> Log out </a>
 		</li>
 	</ul>
 <script>

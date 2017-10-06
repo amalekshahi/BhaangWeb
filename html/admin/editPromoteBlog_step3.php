@@ -8,7 +8,7 @@
 	<div class="panel-heading">
 		<div class="row">
 
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">3</span>
 			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Choose Your Audience & Schedule </a></h4>
 			</div>
@@ -32,28 +32,23 @@
 		<div class="panel-body">
 			<div class="ibox float-e-margins">
 				<div class="ibox-content">
+					<form name="idForm" id="idForm">
+						<input type="hidden" name="LISTDEFINITION"  id="LISTDEFINITION" value="{{campaign['EMAIL1-FILTER']}}">
+					</form>
 					<form class="form-horizontal" name="frmStep3">
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Choose Your Audience</label>
+							<label class="col-sm-3 control-label">Choose Your Audience</label>
 							<div class="col-sm-5">
 								<div>
-									<!--<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options = "s.id as s.listname for s in states"  style="width:400px;" ng-change="ArrangeFilter()">-->
-									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME'] for s in audience.items" style="width:400px;" ng-change="ArrangeFilter()">
+									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" style="width:400px;" ng-change="ArrangeFilter()">
 										 <option value=""></option>
 									</select>
-									<!-- <option ng-repeat="option in audience.items" ng-value="option['LIST-ARRAY']" >{{option['LIST-NAME']}}</option>  -->
-									<!-- <option ng-repeat="option in audience.items" ng-value="option">{{option['LIST-NAME']}}</option>  -->
-									<!-- <select class="chosen-select1" data-placeholder="Choose a List..." multiple style="width:350px;" tabindex="4" ng-model="filterList" ng-change="ArrangeFilter()">
-										<option ng-repeat="option in audience.items" ng-value="option['contactID']">{{option['LIST-NAME']}}</option> 
-									</select> -->
-									<!--<input type="hidden" name="EMAIL1-FILTER"  id="EMAIL1-FILTER" value="">-->
-									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence.</span>
-								</div>
-								<!--<div>
-									<p>{{campaign['EMAIL1-FILTER']}}</p>
-								</div>-->
+									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence. </span>
+								</div>								
 							</div>
-
+							<div>
+							<input type="text" name="auCount"  id="auCount"  style="border: 0 rgba(0, 0, 0, 0.3);height:30px; text-align: center;" value="" readonly>
+							</div>
 							<div class="row">
 								<!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>
                                 EMAIL2-SCHEDULE1-DATETIME={{campaign['EMAIL2-SCHEDULE1-DATETIME']}}<br>
@@ -100,12 +95,15 @@
 																</div>
 															</td>
 															<td class="project-title">
-																<h3>Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}"</h3>
-																<small>This email is sent to everyone you specify in the above Targeting section.</small>
+																<h3 ng-show="emailDone == 0"><i class="fa fa-info-circle" aria-hidden="true" style="color:orange"></i> You need to create this Email in Step <span class="badge">2</span> before you can set a Schedule.</h3>
+																<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] != null">Subject: "{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}"</h3>
+																<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] == null"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red"></i> Warning: You're still using the default Subject line for your Email.</h3>
+																<small ng-show="emailDone == 0">Once you create your masterpiece, you'll be able to set a date and time for deployment.</small>
+																<small ng-show="emailDone > 0">This email is sent to everyone you specify in the above Targeting section.</small>
 															</td>
 															<td class="project-title">
 																<form class="form-inline" role="form">
-																	<div class="form-group">
+																	<div class="form-group" ng-show="emailDone > 0">
 																		<!-- <label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for Wednesday August 22, 2017</label>
 																		<small>@ 3:30 PM PST</small><br> 													 -->
 

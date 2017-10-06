@@ -26,8 +26,8 @@
             "type":"URL"
         },
         {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK",
-            "xpath":"//ContentVariable[@Name='unsubscribelink']",
+            "name":"TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL",
+            "xpath":"//ContentVariable[@Name='fromemail']",
             "type":"URL"
         },
         {
@@ -46,7 +46,7 @@
             "loop":6
         },
         {
-            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#SUBJECT",
+            "name":"TEXT-LINE-ACCTID-PROGRAMID-EMAIL#SUBJECT",
             "xpath":"//ContentVariable[@Name='email#subject']",
             "type":"URL",
             "loop":6
@@ -93,6 +93,13 @@
             "loop":6
         },
         {
+            "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
+            "xpath":"//CampaignElement[@Name='Email#']/Properties/Messages/Message/HtmlContent",
+            "attribute":"URL",
+            "type":"LINK",
+            "loop":6
+        },
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT",
             "xpath":"//ChildElement[@Name='Welcome.html']/Properties/HtmlContent",
             "attribute":"URL",
@@ -101,6 +108,11 @@
         {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT_KKK",
             "xpath":"//ChildElement[@Name='Welcome.html']/Properties/HtmlContent"
+        },
+        {
+            "name":"LANDINGPAGE-STUDIO-FORM-XXX",
+            "xpath":"//ChildElement[@Name='Welcome.html']/Form",
+            "type":"NODE"
         },
         {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT",

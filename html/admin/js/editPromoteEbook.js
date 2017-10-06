@@ -10,8 +10,7 @@ if (!hasValue(campaignID)) {
 $.fn.editable.defaults.mode = 'inline';
 $.fn.editableform.buttons =
 	'<button type="button" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i></button>' +
-	'<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>' +
-	'<button type="button" class="btn btn-default btn-sm editable-off"><i class="glyphicon glyphicon-trash"></i></button>';
+	'<button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button>';
 
 $(document).ready(function() {
 	$('#email_name').editable();
@@ -84,34 +83,17 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
-				//$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-				//$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
 				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
-		/*if (mode == 'Email1') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
-			$scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
-			$scope.campaign['EMAIL1-STATE'] = 'Start';
-		}
-		if (mode == 'Email2') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tpsIndex('2')].contentRaw;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
-			$scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
-			$scope.campaign['EMAIL2-STATE'] = 'Start';
-		}
-		if (mode == 'Email3') {
-			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
-			$scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
-			$scope.campaign['EMAIL3-STATE'] = 'Start';
-		}*/
 		if (hasValue($scope.campaign['templateWelcome'])) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT'] = $scope.getContentRaw($scope.templatesWelcome, $scope.campaign['templateWelcome'], 'TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT');
 		}
 		if (hasValue($scope.campaign['templateThankYou'])) {
 			$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT'] = $scope.getContentRaw($scope.templatesThankYou, $scope.campaign['templateThankYou'], 'TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT');
+		}
+		if (hasValue($scope.campaign['landing_form'])) {
+			$scope.campaign['LANDINGPAGE-STUDIO-FORM'] = $scope.getSelectedOtherField($scope.listForm, $scope.campaign['landing_form'], 'LANDINGPAGE-STUDIO-FORM', "formHTML", "studioHTML");
 		}
         
         //check if we really need to save this tree
@@ -144,6 +126,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					//action = 'editCampaign';
 				} else {
 					$scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
+					$scope.campaignlist.campaigns[$scope.clIndex()].campaignName = $scope.campaign.campaignName;
 				}
 				$http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
 					$scope.setDisplay();
@@ -227,6 +210,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.master = response.data;
 			$scope.campaign = angular.copy($scope.master);
 			//$scope.openEmail['1'] = true; //Email #1 always open.
+			$scope.setCampaignName();
 			$scope.setInitValue();
 			$scope.setDisplay();
 			$scope.LoadAudience();
@@ -245,6 +229,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					"filterSelected": []
 				};
 				//$scope.openEmail['1'] = true; //Email #1 always open.
+				$scope.setCampaignName();
 				$scope.setInitValue();
 				$scope.setDisplay();
 				$scope.LoadAudience();
@@ -255,7 +240,19 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		});
 
 	};
-	$scope.setInitValue = function() {
+	$scope.setCampaignName = function() {
+        $("#editCampaignName").text($scope.campaign.campaignName);
+		$("#editCampaignName").editable({
+			tpl: '<input type="text" maxlength="50">'
+		});
+		//$('#template').trigger('change');
+		$("#editCampaignName").on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign.campaignName = params.newValue;
+			$scope.Save();
+		});
+    };
+    $scope.setInitValue = function() {
 		$scope.initTemplateWelcome();
 		$scope.initTemplateThankyou();
 		$scope.initTemplateEmail('1');
@@ -263,7 +260,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$scope.initSender();
 	};
 	$scope.initTemplateEmail = function(emlID) {
-		//if ($scope.openEmail[emlID]) {
 		if (!hasValue($scope['templatesAs'+emlID]) && $scope.openEmail[emlID]) {
 			$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&as=" + emlID).then(function(response) {
 				$scope['templatesAs' + emlID] = response.data.templates;
@@ -342,7 +338,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					$scope.openEmail["3"] = true;
 				}
 			}
-			$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' emails ready';
+			$scope.emailProgress = emailDone+' of '+$scope.campaign.totalEmail+' Emails Ready';
 		}
 
 		var pageDone = '0';
@@ -352,8 +348,25 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				pageDone = '2';
 			}
 		}
+		$scope.pageDone = parseInt(pageDone); // Dave added this
+		$scope.emailDone = parseInt(emailDone); // Dave added this
 		$scope.pageProgress = pageDone+' of 2 Pages Configured';
-		$scope.scheduleProgress = emailDone+' Drip Emails Configured';
+		$scope.scheduleProgress = emailDone+' of '+$scope.campaign.totalEmail+' Configured';
+
+		$scope.hasNotifications = false;
+		$scope.labelNotifications = 'Alerted on';
+		if (hasValue($scope.campaign['VISIT-MY-EBOOK-'], false)) {
+			$scope.hasNotifications = true;
+			$scope.labelNotifications += ' Visits';
+		}
+		if (hasValue($scope.campaign['DOWNLOAD-MY-EBOOK-'], false)) {
+			$scope.hasNotifications = true;
+			if ($scope.labelNotifications == 'Alerted on') {
+				$scope.labelNotifications += ' Downloads';
+			} else {
+				$scope.labelNotifications += ' and Downloads';
+			}
+		}
 	};
 	$scope.SelectChanged = function(emailViewID, templateField) {
 		//$scope.content = angular.copy($scope.templateEmail1);
@@ -422,6 +435,18 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		for (var i = 0; i < templates.length; i++) {
             if (templates[i]["content"] == selected) {
                 return templates[i]["contentRaw"];
+            }
+        }
+		if (hasValue($scope.campaign[field])) {
+			return $scope.campaign[field];
+		} else {
+			return '';
+		}
+	}
+	$scope.getSelectedOtherField = function(templates, selected, saveField, optionField, otherField) {
+		for (var i = 0; i < templates.length; i++) {
+            if (templates[i][optionField] == selected) {
+                return templates[i][otherField];
             }
         }
 		if (hasValue($scope.campaign[field])) {

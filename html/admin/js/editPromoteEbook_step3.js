@@ -87,7 +87,10 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 			if (response.data.success == false) {
 				swal("Fail");
 			} else {
-				swal("Success");
+				swal({
+					title: "Sent!",
+					text: "Check the inbox in a few seconds.",
+				});
 			}
 			//$scope.state['Publish'] = "Launch Program";
 			$scope.state['SendTest' + index] = "Send Test";
@@ -194,7 +197,7 @@ function uuidv4() {
 }
 
 function CloseRegister() {
-	var scope = angular.element(document.getElementById('step2ID')).scope();
+	var scope = angular.element(document.getElementById('step3ID')).scope();
 	scope.LoadSendTestContact();
 	//alert('LoadSendTestContact done');        
 }

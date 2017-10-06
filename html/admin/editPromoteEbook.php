@@ -17,6 +17,37 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 		<style type="text/css">
 			.fileinput-filename{white-space: nowrap;text-overflow: ellipsis;width: calc(100% - 20px);}
+
+			.editable-container.editable-inline,
+			.editable-container.editable-inline .control-group.form-group,
+			.editable-container.editable-inline .control-group.form-group .editable-input,
+			.editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.editable-container.editable-inline .control-group.form-group .editable-input select,
+			.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: 550px!important;
+				font-size: 14px;
+				!important;
+			}
+
+			#editCampaignName.editable-click {
+			  color: #fff;
+			  border-color: #fff;
+			}
+			.campaign-title .editable-container.editable-inline,
+			.campaign-title .editable-container.editable-inline .control-group.form-group,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input select,
+			.campaign-title .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: 440px !important;
+				background-color: inherit;				
+			}
+			.btn.btn-default.btn-sm.editable-cancel {
+				color: #676a6c;
+			}
+			.campaign-title .editable-container.editable-inline {
+				margin-right: 87px !important;
+			}
 		</style>
 	</head>
 
@@ -56,9 +87,9 @@
 								<div class="col-xs-4">
 									<i class="fa fa-book fa-5x"></i>
 								</div>
-								<div class="col-xs-8 text-right">
+								<div class="col-xs-8 text-right campaign-title">
 									<span> Promote an eBook </span>
-									<h2 class="font-bold">{{campaign.campaignName}}</h2>
+									<h2 class="font-bold"><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="editCampaignName" e-maxlength="50"></a></h2>
 								</div>
 
 							</div>
@@ -72,7 +103,7 @@
 											<h5><i class="fa fa-rocket" aria-hidden="true" style="color:black"></i> Your Campaign Settings <small class="m-l-sm"></small></h5>
 											<div class="ibox-tools">
 												<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>
+												<!--<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>-->
 												<a class="btn btn-white btn-bitbucket btn-xs"  ng-click="DuplicateCampaignClick()"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
 
 											</div>
@@ -82,14 +113,16 @@
 												<div class="panel-group" id="accordion">
 													<div class="panel panel-default">
 														<div class="panel-heading">
-															<h4 class="panel-title">
-																<a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
-																	<span class="badge" ng-show="!step1Done">1</span>
-																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done""></i>
-																	&nbsp;Configure Your eBook &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																	<small class="m-l-sm"><i aria-hidden="true" class="fa fa-crosshairs fa-lg"></i> Still Relevant: A Look at How Millennials Respond to Direct Mail</small>
-																</a>
-															</h4>
+															<div class="row">
+																<div class="col-sm-3">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"><span class="badge" ng-show="!step1Done">1</span>
+																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Configure Your eBook</a></h4>
+																</div>
+																<div class="col-sm-9">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+                                  <small class="m-l-sm" ng-show="campaign['URL-eBOOK-NAME']"><i aria-hidden="true" class="fa fa-book" ng-show="campaign['URL-eBOOK-NAME']"></i> {{campaign['URL-eBOOK-NAME']}}</small> </a></h4>
+																</div>
+															</div>
 														</div>
 														<div class="panel-collapse collapse" id="collapseOne">
 															<div class="panel-body">
@@ -109,13 +142,10 @@
 																						<i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span>
 																					</div><span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Upload your eBook</span> <span class="fileinput-exists">Change</span> <input name="eBookFile" id="eBookFile" type="file"></span> <a class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
 																				</div>
-																				<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="campaign['URL-eBOOK-LOCATION']"><span class="help-block m-b-none">Something like http://www.yahoo.com/myeBook.pdf</span>
+																				<p class="text-muted">Or specify the URL it is hosted at:</p><input class="form-control" placeholder="http://www.s3.com" type="text" ng-model="campaign['URL-eBOOK-LOCATION']"><span class="help-block m-b-none">This can be any web-accessible location like: <a href="https://s3-us-west-1.amazonaws.com/marketingmfi/USPS_10_Steps_to_Help_Create_a_Successful_Direct_Mail_Campaign.pdf" target="_new"><code><small>https://s3-us-west-1.amazonaws.com/marketingmfi/USPS_10_Steps_to_Help_Create_a_Successful_Direct_Mail_Campaign.pdf</small></code></a></span>
 																			</div>
 																		</div>
 																	</form>
-																</div>
-																<div>
-																	<p>&nbsp;</p>
 																</div>
 																<div class="hr-line-dashed"></div>
 																<div class="form-group">

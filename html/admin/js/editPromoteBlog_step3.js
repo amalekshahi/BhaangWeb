@@ -11,12 +11,12 @@ myApp.controller('step3', function($scope, $http) {
             var date2 = date1;
             for (var i = 2; i <= 3; i++) {
                 var emailName = "EMAIL" + i;
-                if ($scope.campaign[emailName + '-WAIT'] != "" && $scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") {
+                if ( (typeof $scope.campaign[emailName + '-WAIT'] != 'undefined') && (typeof $scope.campaign[emailName + '-SCHEDULE1-TIME'] != 'undefined') && ($scope.campaign[emailName + '-WAIT'] != "") && ($scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") ) {
                     var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
                     date2 = addDays(date2, numberOfDaysToAdd);
                     $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
                 } else {
-                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "";
+                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
                 }
             }
             $scope.ShowScheduleDateTime();
@@ -29,47 +29,52 @@ myApp.controller('step3', function($scope, $http) {
     };
 
     $scope.ArrangeFilter = function() {
-        $scope.AuFilter = angular.copy($scope.masterAu);
-        var auCnt = 0;
-        var auOpr = "";
-        var allRule = "";
-        var selList = [];
-        for (var i = 0; i < $scope.filterList.length; i++) {
-            var indx = $scope.AuFilter.items.getIndexByValue('contactID', $scope.filterList[i]);
-            selList.push($scope.filterList[i]);
-            $scope.auItem = $scope.AuFilter.items[indx];
-            var auItemOpr = $scope.auItem['LIST-OPERATOR'];
-            auOpr += "(";
-            var arrItem = $scope.auItem['LIST-ARRAY'];
-            if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
-                var itemRule = "";
-                for (var k = 0; k < arrItem.length; k++) {
-                    auCnt++;
-                    //alert(arrItem[k]); 
-                    if (arrItem[k] != null) {
-                        itemRule = itemRule + '<Criteria Row=\"' + auCnt + '\" Field=\"' + arrItem[k].Field + '\" Operator=\"' + arrItem[k].Operator + '\" Value=\"' + arrItem[k].Value + '\" />';
-                    }
-                    auOpr += auCnt;
-                    var opr = "&amp;"
-                    if (arrItem[k].JoinOperator == "or") opr = "|";
-                    if (k < arrItem.length - 1) auOpr += opr;
+			$scope.AuFilter = angular.copy($scope.masterAu);
+			var auCnt = 0;
+			var auOpr = "";
+			var allRule = "";
+			var selList = [];
+			for (var i = 0; i < $scope.filterList.length; i++) {
+				var indx = $scope.AuFilter.items.getIndexByValue('contactID', $scope.filterList[i]);
+				selList.push($scope.filterList[i]);
+				$scope.auItem = $scope.AuFilter.items[indx];
+				var auItemOpr = $scope.auItem['LIST-OPERATOR'];
+				auOpr += "(";
+				var arrItem = $scope.auItem['LIST-ARRAY'];
+				if (typeof $scope.auItem['LIST-ARRAY'] != 'undefined') {
+					var itemRule = "";
+					for (var k = 0; k < arrItem.length; k++) {
+						auCnt++;
+						//alert(arrItem[k]); 
+						if (arrItem[k] != null) {
+							itemRule = itemRule + '<Criteria Row=\"' + auCnt + '\" Field=\"' + arrItem[k].Field + '\" Operator=\"' + arrItem[k].Operator + '\" Value=\"' + arrItem[k].Value + '\" />';
+						}
+						auOpr += auCnt;
+						var opr = "&amp;"
+						if (arrItem[k].JoinOperator == "or") opr = "|";
+						if (k < arrItem.length - 1) auOpr += opr;
 
-                } // end for k
-                //alert(itemRule ); 
-                allRule += itemRule;
-            }
-            auOpr += ")";
-            if (i < $scope.filterList.length - 1) auOpr += "|";
-        } //end for i		
-        //alert("selected = "+selList); 
-        $scope.campaign['filterSelected'] = selList;
-        //			$scope.campaign['filterSelected'].push(selList);
-        var auRule = "<Filter CriteriaJoinOperator=\"" + auOpr + "\">" + allRule + "</Filter>";
-        //$("#EMAIL1-FILTER").val(auRule);
-        $scope.campaign['EMAIL1-FILTER'] = auRule;
-        $scope.campaign['EMAIL-FILTER-JOINOPERATOR'] = auOpr;
-        $scope.campaign['EMAIL-FILTER-CRITERIAROW'] = allRule;
-        //alert( "val = " + $("#EMAIL1-FILTER").val() ); 					
+					} // end for k
+					//alert(itemRule ); 
+					allRule += itemRule;
+				}
+				auOpr += ")";
+				if (i < $scope.filterList.length - 1) auOpr += "|";
+			} //end for i		
+
+			$scope.campaign['filterSelected'] = selList;
+			//$scope.campaign['filterSelected'].push(selList);
+			var auRule = $scope.masterDefEmailFilter; // set default
+			if(auOpr.length > 0){
+				auRule = "<Filter CriteriaJoinOperator=\"" + auOpr + "\">" + allRule + "</Filter>";
+			}
+
+			//$("#EMAIL1-FILTER").val(auRule);
+			$scope.campaign['EMAIL1-FILTER'] = auRule;
+			$scope.campaign['EMAIL-FILTER-JOINOPERATOR'] = auOpr;
+			$scope.campaign['EMAIL-FILTER-CRITERIAROW'] = allRule;
+			$("#LISTDEFINITION").val(auRule) ; 
+			$scope.CheckSumAudience(); 
     };
 
 

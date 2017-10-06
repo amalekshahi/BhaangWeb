@@ -48,25 +48,8 @@ myApp.controller('myCtrl', function($scope, $http) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
-				//$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $("#subjectEmail"+key).text();
-				//$scope.campaign['EMAIL'+key+'-SUBJECT'] = $("#subjectEmail"+key).text();
 			}
 		}
-        /*if (mode == 'Email1') {
-            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT'] = $scope.templatesAs1[$scope.tpsIndex('1')].contentRaw;
-            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] = $("#subjectEmail1").text();
-            $scope.campaign['EMAIL1-SUBJECT'] = $("#subjectEmail1").text();
-        }
-        if (mode == 'Email2') {
-            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'] = $scope.templatesAs2[$scope.tpsIndex('2')].contentRaw;
-            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT'] = $("#subjectEmail2").text();
-            $scope.campaign['EMAIL2-SUBJECT'] = $("#subjectEmail2").text();
-        }
-        if (mode == 'Email3') {
-            $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL3CONTENT'] = $scope.templatesAs3[$scope.tpsIndex('3')].contentRaw;
-            $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT'] = $("#subjectEmail3").text();
-            $scope.campaign['EMAIL3-SUBJECT'] = $("#subjectEmail3").text();
-        }*/
         if (mode == 'Step3') {
             var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
             var time1 = $scope.campaign['EMAIL1-SCHEDULE1-TIME'];
@@ -166,6 +149,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     //action = 'editCampaign';
                 } else {
                     $scope.campaignlist.campaigns[$scope.clIndex()].lastEditDate = currentDate;
+					$scope.campaignlist.campaigns[$scope.clIndex()].campaignName = $scope.campaign.campaignName;
                 }
                 $http.put(dbEndPoint + "/" + dbName + '/campaignlist', $scope.campaignlist).then(function(response) {
                     $scope.setDisplay();
@@ -249,8 +233,10 @@ myApp.controller('myCtrl', function($scope, $http) {
             $scope.master = response.data;
             $scope.campaign = angular.copy($scope.master);
             //$scope.openEmail1 = true; //Email #1 always open.
+			$scope.setCampaignName();
             $scope.setInitValue();
             $scope.setDisplay();
+			$scope.LoadDefaultPromoteBlog(); 
             $scope.LoadAudience();
             $scope.Reset();
         }, function(errResponse) {
@@ -267,6 +253,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     "filterSelected": []
                 };
                 //$scope.openEmail1 = true; //Email #1 always open.
+				$scope.setCampaignName();
                 $scope.setInitValue();
                 $scope.setDisplay();
                 $scope.LoadAudience();
@@ -277,23 +264,24 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
 
     };
+	$scope.setCampaignName = function() {
+        $("#editCampaignName").text($scope.campaign.campaignName);
+		$("#editCampaignName").editable({
+			tpl: '<input type="text" maxlength="50">'
+		});
+		//$('#template').trigger('change');
+		$("#editCampaignName").on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign.campaignName = params.newValue;
+			$scope.Save();
+		});
+    };
     $scope.setInitValue = function() {
         $scope.initTemplateEmail('1');
         $scope.initSender();
     };
-    /*$scope.initEmailTemplate = function(){
-        $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign").then(function(response) {
-            $scope.templates  = response.data.templates; 
-            $scope.config = response.data.config; 
-            $scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
-            $("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
-            $scope.SelectChanged('viewEmail1','templateEmail1');
-            $scope.sendersChanged('textSender1');
-            startEditable('1');
-        });
-    };*/
     $scope.initTemplateEmail = function(emlID) {
-        if ($scope.openEmail[emlID]) {
+        if (!hasValue($scope['templatesAs'+emlID]) && $scope.openEmail[emlID]) {
             $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + emlID).then(function(response) {
                 $scope['templatesAs' + emlID] = response.data.templates;
                 if (emlID == '1') {
@@ -352,6 +340,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 }
             }
             $scope.emailProgress = emailDone + ' of 3 Emails Ready';
+						$scope.emailDone = emailDone;
         }
 
 		var publishProgramID = $scope.campaign['publishProgramID'];
@@ -404,7 +393,34 @@ myApp.controller('myCtrl', function($scope, $http) {
 					}
 				}
 			}
-		}		
+		}
+		
+		$scope.hasNotifications = false;
+		$scope.labelNotifications = 'Alerted on';
+		if (hasValue($scope.campaign['OPEN-MY-EMAIL-'], false)) {
+			$scope.hasNotifications = true;
+			$scope.labelNotifications += ' Opens';
+		}
+		if (hasValue($scope.campaign['VISIT-MY-BLOCK-'], false)) {
+			$scope.hasNotifications = true;
+			if ($scope.labelNotifications == 'Alerted on') {
+				$scope.labelNotifications += ' Clicks';
+			} else {
+				if (hasValue($scope.campaign['CALL-TO-ACTION-'], false)) {
+					$scope.labelNotifications += ', Clicks';
+				} else {
+					$scope.labelNotifications += ' and Clicks';
+				}
+			}
+		}
+		if (hasValue($scope.campaign['CALL-TO-ACTION-'], false)) {
+			$scope.hasNotifications = true;
+			if ($scope.labelNotifications == 'Alerted on') {
+				$scope.labelNotifications += ' Conversions';
+			} else {
+				$scope.labelNotifications += ' and Conversions';
+			}
+		}
     };
     $scope.SelectChanged = function(emailViewID, templateField) {
         //$scope.content = angular.copy($scope.templateEmail1);
@@ -599,26 +615,68 @@ myApp.controller('myCtrl', function($scope, $http) {
 
     };
 
-    $scope.LoadAudience = function() {
+	$scope.CheckSumAudience = function() {
+			var form_data = $("#idForm").serialize();	
+			var listdefinition = $("#LISTDEFINITION").val(); 
+			$.ajax({
+						url: 'countClick.php', 
+						dataType: 'json',  
+						cache: false,
+						contentType: false,
+						processData: false,
+						data: form_data,   
+						type: 'get',
+						success: function(json){				
+							var sumcount = "Default"; 
+							//alert("cnt = " + json.count); 
+							if (json.success) {
+								if(listdefinition != '<Filter CriteriaJoinOperator=""></Filter>'){								 
+									 sumcount = json.count + " People";			
+								}
+							}
+							$scope.auCount = sumcount; 
+							$("#auCount").val(sumcount) ; 
+						}
+			});		
 
+	}//CheckSumAudience
+
+    $scope.LoadAudience = function() {		
         if (typeof $scope.campaign['filterSelected'] == 'undefined') {
             $scope.filterList = [];
         } else {
             $scope.filterList = $scope.campaign['filterSelected'];
-        }
+        }	
         $http.get(dbEndPoint + "/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
             $scope.masterAu = response.data;
             if (typeof $scope.masterAu.items == 'undefined') {
                 $scope.masterAu.items = [];
             }
             $scope.audience = angular.copy($scope.masterAu);
+			$scope.CheckSumAudience(); 
         }, function(errResponse) {
             if (errResponse.status == 404) {
                 alert("ERROR 404 [audienceLists]");
             }
         });
-    };
-    
+    }; // LoadAudience
+
+    $scope.LoadDefaultPromoteBlog = function(){
+			$http.get(dbEndPoint + "/master/Default_PromoteBlog" + "?" + new Date().toString()).then(function(response) {
+					$scope.masterDefault  = response.data; 
+					if (typeof $scope.masterDefault == 'undefined') {
+					   $scope.masterDefault = "";
+					   $scope.masterDefEmailFilter = '<Filter CriteriaJoinOperator="&"><Criteria Row="1" Field="isseed" Operator="Equal" Value="True" /></Filter>'; 
+					} 
+					$scope.masterDefEmailFilter = $scope.masterDefault['EMAIL1-FILTER']; 
+			}, function(errResponse) {        
+					if (errResponse.status == 404 || errResponse.status == 504) {
+						$scope.masterDefault = "";
+					}
+					$scope.masterDefEmailFilter = '<Filter CriteriaJoinOperator="&"><Criteria Row="1" Field="isseed" Operator="Equal" Value="True" /></Filter>'; 
+			});
+    };//LoadDefaultPromoteBlog
+
     $scope.DuplicateCampaignClick = function(){
         swal({
           title: 'What is your new campaign name?',

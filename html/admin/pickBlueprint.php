@@ -56,18 +56,13 @@
                                 </span>
 										<small class="text-muted">Average CTR: 1.49%</small>
 										<a href="#" class="product-name"> Promote a Blog Post</a>
-
-
-
 										<div class="small m-t-xs">
 											New piece of great content? Don't let it gather dust. Promote it and drive some leads in the process.
 										</div>
 										<div class="m-t text-righ">
-
 											<!--<a href="dv.php?page=createCampaign" class="btn btn-xs btn-outline btn-primary">Launch <i class="fa fa-long-arrow-right"></i> </a>-->
 											<a data-toggle="modal" class="btn btn-xs btn-outline btn-primary" href="#modal-form">Launch <i class="fa fa-long-arrow-right"> </i></a>
 										</div>
-
 										<div aria-hidden="true" class="modal fade" id="modal-form">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -77,7 +72,46 @@
 															<p>Da Vinci will drive traffic to a piece of content (like a blog, article, or website page) and also helps you generate leads (optional). Start by naming your campaign.</p>
 															<form role="form" method="get" action="editPromoteBlog.php">
 																<div class="form-group">
-																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name">
+																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name" maxlength="50">
+																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
+																</div>
+																<div>
+																	<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="ibox">
+								<div class="ibox-content product-box">
+									<img src="https://s3.amazonaws.com/mindfiredavinci/img/ebook_blueprint.png" class="img-responsive" />
+									<div class="product-desc">
+										<span class="product-price">Lead Gen</span>
+										<small class="text-muted">Average # of Downloads: 323</small>
+										<a href="#" class="product-name"> Promote an eBook</a>
+										<div class="small m-t-xs">
+											The Great Gatsby doesn't stand a chance against your latest eBook. Drive downloads and leads now!.
+										</div>
+										<div class="m-t text-righ">
+											<a data-toggle="modal" class="btn btn-xs btn-outline btn-primary" href="#modal-form-2">Launch <i class="fa fa-long-arrow-right"> </i></a>
+										</div>
+										<div aria-hidden="true" class="modal fade" id="modal-form-2">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-body">
+														<div class="modal-header">
+															<h2>Promote an eBook</h2>
+															<p>Da Vinci can create Leads for you by promoting an eBook with a Landing Page and auto-responder Email sequence. Start by naming your campaign.</p>
+															<form role="form" method="get" action="editPromoteEbook.php">
+																<div class="form-group">
+																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New eBook" type="input" name="campaign_name" maxlength="50">
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
 																<div>
@@ -94,75 +128,14 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
-							<div class="ibox">
-								<div class="ibox-content product-box">
-
-									<img src="https://s3.amazonaws.com/mindfiredavinci/img/ebook_blueprint.png" class="img-responsive" />
-									<div class="product-desc">
-										<span class="product-price">
-                                    Lead Gen
-                                </span>
-										<small class="text-muted">Average # of Downloads: 323</small>
-										<a href="#" class="product-name"> Promote an eBook</a>
-
-										<div class="small m-t-xs">
-											The Great Gatsby doesn't stand a chance against your latest eBook. Drive downloads and leads now!.
-										</div>
-										<div class="m-t text-righ">
-
-											<a data-toggle="modal" class="btn btn-xs btn-outline btn-primary" href="#modal-form-2">Launch <i class="fa fa-long-arrow-right"> </i></a>
-										</div>
-
-										<div aria-hidden="true" class="modal fade" id="modal-form-2">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-body">
-														<div class="row">
-															<div class="col-sm-6 b-r">
-																<h3 class="m-t-none m-b">Let's Get Started!</h3>
-																<p>Start by naming your campaign.</p>
-																<form role="form" method="get" action="editPromoteEbook.php">
-																	<div class="form-group">
-																		<!--<label>Name</label>--><input class="form-control" placeholder="My fancy first campaign" type="input" name="campaign_name">
-																		<span class="help-block m-b-none">A good campaign name helps you easily identify the campaigns you've created in your Dashboard.</span>
-																	</div>
-																	<div>
-
-																		<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
-																	</div>
-																</form>
-															</div>
-															<div class="col-sm-6">
-																<h4>Not feeling creative yet?</h4>
-																<p>Don't worry. You can always change this later.</p>
-																<p class="text-center"><a href=""><i class="fa fa-plus big-icon"></i></a></p>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-
 						<div class="col-md-3 blueprintHide">
 							<div class="ibox">
 								<div class="ibox-content product-box">
-
 									<img src="https://s3.amazonaws.com/mindfiredavinci/img/webinar_blueprint.png" class="img-responsive" />
 									<div class="product-desc">
-										<span class="product-price">
-                                    Lead Gen
-                                </span>
+										<span class="product-price">Lead Gen</span>
 										<small class="text-muted">Average Conversion Rate: 33.4%</small>
 										<a href="#" class="product-name"> Drive Webinar Signups</a>
-
-
-
 										<div class="small m-t-xs">
 											Need to XYZ? Get started now, and drive some leads while you're at it.
 										</div>
