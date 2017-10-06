@@ -1,4 +1,6 @@
 <?php
+ini_set("memory_limit","-1");
+set_time_limit(0);
 date_default_timezone_set('America/Los_Angeles');
 session_start();
 require_once 'commonUtil.php';
