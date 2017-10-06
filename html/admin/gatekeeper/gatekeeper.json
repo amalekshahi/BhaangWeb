@@ -1,11 +1,24 @@
-[
-  {
-    "Name": "Test Flag",
-    "Description": "First gatekeeper flag",
-    "Code_Nick": "test",
-    "Status": "test",
-    "Filter": "daver@mindfireinc.com"
+[{
+    "Name": "Revamped Schedule",
+    "Description": "Users can more easily test their sequence and configure multiple waves without having to duplicate campaigns. #132",
+    "Code_Nick": "revamped_schedule",
+    "Status": "Testing",
+    "Who_Can_See": "daver@mindfireinc.com"
   },
-  {},
-  {}
+  {
+    "Name": "Dummy1",
+    "Description": "Desc",
+    "Code_Nick": "dummy1",
+    "Status": "--",
+    "Who_Can_See": ""
+
+  },
+  {
+    "Name": "Dummy2",
+    "Description": "Another one",
+    "Code_Nick": "dummy2",
+    "Status": "--",
+    "Who_Can_See": "daver@mindfireinc.com, kdutta@mindfireinc.com"
+
+  }
 ]
