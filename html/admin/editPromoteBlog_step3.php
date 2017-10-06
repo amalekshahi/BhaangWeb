@@ -8,7 +8,7 @@
 	<div class="panel-heading">
 		<div class="row">
 
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">3</span>
 			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Choose Your Audience & Schedule </a></h4>
 			</div>
