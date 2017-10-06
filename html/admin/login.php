@@ -42,6 +42,17 @@ if ($mode == 'login') {
             $_SESSION['PARTNERPASSWORD'] = $PartnerPassword;
             $_SESSION['login'] = true;
             $_SESSION['DBNAME'] = $dbName;
+		
+						// Dave added this to handle Da Vinci Gatekeeper flags
+						$config = file_get_contents("./gatekeeper/gatekeeper.json");
+						$gates = json_decode($config, TRUE); // Load the current gatekeeper config
+						
+						foreach ($gates as $g) { // Create the array of gates for this user in format gate_name = TRUE or gate_name = FALSE.
+							$_SESSION['GATES'][$g['Code_Nick']] = strpos($g['Who_Can_See'], $email) !== FALSE ? "TRUE" : "FALSE";
+						}	
+					
+						//$_SESSION['GATES'] = "yo!"; 
+						// End of gates logic
 
 			$ticket = getTicket($accountID, $email, $pwd, $PartnerGuid, $PartnerPassword);
 			$username = GetUserinfo("", $ticket);

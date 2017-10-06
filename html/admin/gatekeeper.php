@@ -6,6 +6,7 @@
     $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
+		$gates = $_SESSION['GATES'];
 ?>
 
 	<!DOCTYPE html>
@@ -30,6 +31,7 @@
 				<!-- content -->
 				<div>
 					<div class="row">
+						<?php echo "gates: "; print_r($gates); ?>
 						<div class="col-lg-12">
 							<div class="wrapper wrapper-content animated fadeInRight">
 								<div class="widget style1 navy-bg">
@@ -91,22 +93,28 @@
 												<div class="forum-sub-title">
 													<input type="text" class="form-control" ng-model="gate.Who_Can_See">
 												</div>
-
-
-
 											</div>
 										</div>
 									</div>
-									
-
 								</div>
 								<!-- ibox-content -->
 								<div class="ibox-content forum-container">
-									json here
-
+									<div>
+										<h3>How to Use Gatekeeper <small>Instructions for php and HTML/angularjs</small></h3>
+										<p>
+											<span><strong>PHP</strong>: <code>if (gatekeeper_allowed('revamped_schedule')) { run_this_new_code(); } else { run_this_old_code(); }</code></span>
+										</p>
+										<p>
+											<span><strong>HTML/angularjs</strong>: <code>ng-show="revamped_schedule"</code></span>
+										</p>
+									</div>
+									<hr/>
+									<div>
+										<h3>Current Gatekeeper Flags for <?php echo $email ?> <?php print_r($gates); ?></h3>
+										<p>Your access to revamped_schedule is <span ng-show="<?php $gates['revamped_schedule']?>">true</span></p>
+										<p>Your access to dummy2 is true</p>
+									</div>
 								</div>
-
-
 							</div>
 						</div>
 					</div>
