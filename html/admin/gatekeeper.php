@@ -104,7 +104,7 @@
 											Configuration is stored in <code>/gatekeeper/gatekeeper.json</code>.  Add as many flags as you need and give access accordingly.  The above UI needs to update the json (not done yet).
 										</p>
 										<p>
-											Once the json is configured, you can use the flags in your PHP or HTML/Angularjs as shown below.
+											Once the json is configured, add <code>$gates = $_SESSION['GATES'];</code> to the top of the .php where you need to use flags.  Then use the syntax show below.
 										</p>
 										<p>
 											<span><strong>PHP</strong>: <code>if (gatekeeper_allowed('revamped_schedule')) { run_this_new_code(); } else { run_this_old_code(); } // Just sample.  Not done with this yet</code></span>
@@ -115,8 +115,8 @@
 									</div>
 									<hr/>
 									<div>
-										<h3>Examples</h3>
-										<p>Current Gatekeeper Flags for <?php echo $email ?>: <?php print_r($gates); ?></p>
+										<h3>Your Current Flags & Examples (look in gatekeeper.php)</h3>
+										<p>Current Gatekeeper Flags for <?php echo $email ?>: <code><?php print_r($gates); ?></code></p>
 										<p>Your access to <code>revamped_schedule</code> is <?php echo $gates['revamped_schedule']?></p>
 										<p>Your access to <code>dummy2</code> is true <?php echo $gates['dummy2']?></p>
 									</div>
