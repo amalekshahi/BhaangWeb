@@ -1,5 +1,7 @@
 <?php
-    session_start();
+	ini_set("memory_limit","-1");
+	set_time_limit(0);
+	session_start();
     include 'global.php';
     require_once('loginCredentials.php');
     $dbname = $_SESSION['DBNAME'];
