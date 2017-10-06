@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Test Flag",
+    "Description": "First gatekeeper flag",
+    "Code_Nick": "test",
+    "Status": "test",
+    "Filter": "daver@mindfireinc.com"
+  },
+  {},
+  {}
+]
