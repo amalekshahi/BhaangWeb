@@ -99,7 +99,7 @@
 										<div class="ibox-title">
 											<h5><i class="fa fa-rocket" aria-hidden="true" style="color:black"></i> Your Campaign Settings <small class="m-l-sm"></small></h5>
 											<div class="ibox-tools">
-												<?php if ($gates['revamped_schedule'] == "TRUE") { echo "<a class='btn btn-white btn-bitbucket btn-xs' href='editPromoteBlog_revamped_schedule.php?campaign_id={{campaignID}}'><i class='fa fa-flag' aria-hidden='true' style='color:red'></i> Switch to the Enhanced Layout</a>"; }?>
+												<?php if ($gates['revamped_schedule'] == "TRUE") { echo "<a class='btn btn-white btn-bitbucket btn-xs' href='editPromoteBlog_revamped_schedule.php?campaign_id={{campaignID}}'><i class='fa fa-flag' aria-hidden='true' style='color:red'></i> Switch to the New Layout</a>"; }?>
 												<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<!--<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>-->
 												<a class="btn btn-white btn-bitbucket btn-xs" ng-click="DuplicateCampaignClick()"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
