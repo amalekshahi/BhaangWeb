@@ -197,13 +197,13 @@
 														</div>
 													</div>
 													<div class="panel">
-														<?php include "editPromoteBlog_step2.php"; ?>
-													</div>
-													<div class="panel">
-														<?php include "editPromoteBlog_step3.php"; ?>
+														<?php include "editPromoteBlog_step2_revamped_schedule.php"; ?>
 													</div>
 													<div class="panel panel-default">
-														<?php include "editPromoteBlog_step4.php"; ?>
+														<?php include "editPromoteBlog_step4_revamped_schedule.php"; ?>
+													</div>
+													<div class="panel">
+														<?php include "editPromoteBlog_step3_revamped_schedule.php"; ?>
 													</div>
 												</div>
 												<div style="float:right;">

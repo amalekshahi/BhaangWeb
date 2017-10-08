@@ -10,8 +10,8 @@
 		<div class="row">
 
 			<div class="col-sm-3">
-				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">3</span>
-			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Set Your Schedule & Audiences</a></h4>
+				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">4</span>
+			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Choose Audiences & Schedule For Send</a></h4>
 			</div>
 
 			<div class="col-sm-9">

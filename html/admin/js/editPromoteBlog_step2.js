@@ -1,3 +1,5 @@
+var editEmail = true;
+
 $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });	
@@ -184,6 +186,16 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
     };
     $scope.LoadSendTestContact();
 }]);
+
+function setLeftBar() {
+	if (editEmail) {
+		$("body").addClass("mini-navbar");
+		editEmail = false;
+	} else {
+		$("body").removeClass("mini-navbar");
+		editEmail = true;
+	}
+}
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
