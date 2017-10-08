@@ -4,6 +4,16 @@ $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });	
 
+$(document).ready(function() {
+
+  $('.footable').footable({
+    "expandFirst": false
+  });
+
+ });
+
+
+
 myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, Upload) {
     //var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
     //var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};

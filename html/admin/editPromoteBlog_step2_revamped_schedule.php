@@ -22,6 +22,97 @@
 			</div>
 		</div>
 		<div class="panel-collapse collapse" id="collapseTwo">
+			
+			<!-- Start New -->
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>FooTable with row toggler, sorting and pagination</h5>
+
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <table class="footable table table-stripped toggle-arrow-tiny">
+                                <thead>
+                                <tr>
+																	<th data-hide="all"></th>
+																	<th data-toggle="true">Sent To</th>
+																	<th>Subject</th>
+																	<th>From</th>
+                                  <th>Delay Between Emails</th>
+                                  <th>Status</th>
+																	<th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><?php echo $email1; ?></td>
+																		<td>Email #1: Sent to Everyone You're Targeting</td>
+                                    <td>"Subject here"</td>
+                                    <td>daver@mindfireinc.com</td>
+                                    <td>5 Days</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                    <td>--</td>
+                                </tr>
+                                <tr>
+																		<td><?php echo $email2; ?></td>
+                                    <td>Email #2: Sent to Non-Openers</td>
+                                    <td>"Subject here"</td>
+                                    <td>daver@mindfireinc.com</td>
+                                    <td>5 Days</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                    <td>--</td>                                </tr>
+                                <tr>
+																		<td><?php echo $email3; ?></td>
+                                    <td>Email #3: Sent to Non-Clickers</td>
+                                    <td>"Subject here"</td>
+                                    <td>daver@mindfireinc.com</td>
+                                    <td>5 Days</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                    <td>--</td>
+                                </tr>
+                                
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			 <!-- End New --> 
+			
+			
+			
+			
+			<!-- Old from here down -->
+			
 			<div class="panel-body">
 				<div class="row wrapper border-bottom white-bg page-heading">
 					<div class="wrapper wrapper-content animated fadeIn gray-bg">
@@ -89,3 +180,7 @@
 		</div>
 	</div>
     <script src="js/editPromoteBlog_step2.js"></script>
+		
+				<!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>		
+		
