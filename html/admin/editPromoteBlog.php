@@ -99,6 +99,7 @@
 										<div class="ibox-title">
 											<h5><i class="fa fa-rocket" aria-hidden="true" style="color:black"></i> Your Campaign Settings <small class="m-l-sm"></small></h5>
 											<div class="ibox-tools">
+												<?php if ($gates['revamped_schedule'] == "TRUE") { echo "<a class='btn btn-white btn-bitbucket btn-xs' href=''><i class='fa fa-flag' aria-hidden='true' style='color:red'></i> Switch to new mode</a>"; }?>
 												<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<!--<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>-->
 												<a class="btn btn-white btn-bitbucket btn-xs" ng-click="DuplicateCampaignClick()"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
@@ -184,11 +185,6 @@
 																			</div>
 																		</div>
 																		<div class="hr-line-dashed"></div>
-
-
-
-
-
 																		<div class="form-group">
 																			<div class="col-sm-4 col-sm-offset-2">
 																				<!--<input type="hidden" name="programNameHash" value="{{programNameHash}}">-->
@@ -204,7 +200,7 @@
 														<?php include "editPromoteBlog_step2.php"; ?>
 													</div>
 													<div class="panel">
-														<?php if ($gates['revamped_schedule'] == "TRUE") { include "editPromoteBlog_step3_revamped_schedule.php"; } else { include "editPromoteBlog_step3.php"; } ?>
+														<?php include "editPromoteBlog_step3.php"; ?>
 													</div>
 													<div class="panel panel-default">
 														<?php include "editPromoteBlog_step4.php"; ?>
