@@ -6,9 +6,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-  $('.footable').footable({
-    "expandFirst": false
-  });
+  $('.footable').footable();
 
  });
 

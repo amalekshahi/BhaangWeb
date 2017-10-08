@@ -1,5 +1,5 @@
 <?php
-	$emailHTMLTemplate = file_get_contents('eachEmailCode.html');
+	$emailHTMLTemplate = file_get_contents('eachEmailCode_revamped_schedule.html');
 	$email1 = str_replace('##emailid##','1',$emailHTMLTemplate);
 	$email2 = str_replace('##emailid##','2',$emailHTMLTemplate);
 	$email3 = str_replace('##emailid##','3',$emailHTMLTemplate);
@@ -12,7 +12,7 @@
 
 			<div class="row">
 				<div class="col-sm-3">
-					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();"><span class="badge" ng-show="!step2Done">2</span><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Configure Your Email Sequence
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"><span class="badge" ng-show="!step2Done">2</span><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Configure Your Email Sequence
 			</h4>
 		</div>
 		<div class="col-sm-9">
@@ -25,85 +25,40 @@
 			
 			<!-- Start New -->
 
-<div class="row">
+				 <div class="row m-t-lg">
                 <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>FooTable with row toggler, sorting and pagination</h5>
+                    <div class="tabs-container">
 
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
+                        <div class="tabs-left">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#email-1"> Email #1: Sent to Everyone Targeted</a></li>
+                                <li class=""><a data-toggle="tab" href="#email-2"> Email #2: Sent to Non-Openers</a></li>
+																<li class=""><a data-toggle="tab" href="#email-2"> Email #3: Sent to Non-Clickers</a></li>
+                            </ul>
+                            <div class="tab-content ">
+                                <div id="email-1" class="tab-pane active">
+                                    <div class="panel-body">
+                                      <?php echo $email1; ?>  
+                                    </div>
+                                </div>
+                                <div id="email-2" class="tab-pane">
+                                    <div class="panel-body">
+																			<?php echo $email2; ?>
+                                    </div>
+                                </div>
+                                <div id="email-3" class="tab-pane">
+                                    <div class="panel-body">
+																			<?php echo $email3; ?>
+                                    </div>
+                                </div>
 
-                            <table class="footable table table-stripped toggle-arrow-tiny">
-                                <thead>
-                                <tr>
-																	<th data-hide="all"></th>
-																	<th data-toggle="true">Sent To</th>
-																	<th>Subject</th>
-																	<th>From</th>
-                                  <th>Delay Between Emails</th>
-                                  <th>Status</th>
-																	<th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><?php echo $email1; ?></td>
-																		<td>Email #1: Sent to Everyone You're Targeting</td>
-                                    <td>"Subject here"</td>
-                                    <td>daver@mindfireinc.com</td>
-                                    <td>5 Days</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                    <td>--</td>
-                                </tr>
-                                <tr>
-																		<td><?php echo $email2; ?></td>
-                                    <td>Email #2: Sent to Non-Openers</td>
-                                    <td>"Subject here"</td>
-                                    <td>daver@mindfireinc.com</td>
-                                    <td>5 Days</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                    <td>--</td>                                </tr>
-                                <tr>
-																		<td><?php echo $email3; ?></td>
-                                    <td>Email #3: Sent to Non-Clickers</td>
-                                    <td>"Subject here"</td>
-                                    <td>daver@mindfireinc.com</td>
-                                    <td>5 Days</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                    <td>--</td>
-                                </tr>
-                                
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td colspan="5">
-                                        <ul class="pagination pull-right"></ul>
-                                    </td>
-                                </tr>
-                                </tfoot>
-                            </table>
+													</div>
 
                         </div>
+
                     </div>
                 </div>
+               
             </div>
 
 			 <!-- End New --> 

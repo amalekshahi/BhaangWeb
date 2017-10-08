@@ -304,6 +304,10 @@
 		<!-- Page-Level Scripts -->
 		<script src="js/jquery.md5.js"></script>
 		<script src="js/editPromoteBlog.js"></script>
+
+		<!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+
 		
 	</body>
 
