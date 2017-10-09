@@ -17,7 +17,7 @@ editContactAudience.html
     <script src="css/sweet/sweetalert-dev.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>     
 </head>
-<body class="">
+<body class="fixed-sidebar">
     <div id="wrapper">
 	<!-- left wrapper -->
 	  <?php include 'leftWrapper.php'; ?>

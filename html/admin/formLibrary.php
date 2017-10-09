@@ -107,14 +107,12 @@
 			</div>
 		</div><!--  end page-wrapper -->
 </div>
-
 	<script src="js/davinci.js"></script>
-
+	<script type="text/JavaScript" src="global.js?n=1"></script>
+ 	<script src="js/jquery.md5.js"></script>	
 	<!-- user version 2 to support modal input -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>        
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.common.js"></script>-->
-
 <script>
 	var dbName = "<?php echo $dbName; ?>";
 </script>
