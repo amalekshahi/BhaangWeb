@@ -31,9 +31,9 @@
 
                         <div class="tabs-left">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#email-1"> Email #1: Sent to Everyone Targeted</a></li>
-                                <li class=""><a data-toggle="tab" href="#email-2"> Email #2: Sent to Non-Openers</a></li>
-																<li class=""><a data-toggle="tab" href="#email-2"> Email #3: Sent to Non-Clickers</a></li>
+                                <li class="active"><a data-toggle="tab" href="#email-1"> Day 1: Sent to Everyone Targeted</a></li>
+                                <li class=""><a data-toggle="tab" href="#email-2"> Day 3: Sent to Non-Openers</a></li>
+																<li class=""><a data-toggle="tab" href="#email-2"> Day 5: Sent to Non-Clickers</a></li>
                             </ul>
                             <div class="tab-content ">
                                 <div id="email-1" class="tab-pane active">
