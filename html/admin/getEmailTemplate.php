@@ -11,16 +11,7 @@
 #require_once 'global.php';
 require_once 'commonUtil.php';
 
-function MergeArrayWithArray(& $data,$default)
-{
-    foreach($default as $key => $value){
-        if (!array_key_exists($key,$data)) {
-            //echo "Merge $key<br>\n";
-            $data[$key] = $value;
-        }
-    }
-    //print_r($data);
-}
+
 
 function DoSummerNote($fileContent,$scopeName,$number)
 {
