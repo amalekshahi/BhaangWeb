@@ -53,8 +53,6 @@ function Render(template,data){
     var reg = /\{{(.*?)\}}/;
     var html = template;
     while (match = reg.exec(html)) {
-        // first shows the match: <h1>,h1
-        // then shows the match: </h1>,/h1
         var slugPattern = match[0];
         var slug = match[1];
         var renderRaw = false;
@@ -65,8 +63,24 @@ function Render(template,data){
         html = html.replace(slugPattern,data[slug]);
         console.log(slug);
     }
+    html = RenderSharpSharp(html,data['accountID']);
     return html;
 } 
+
+function RenderSharpSharp(template,acctID){
+    var s3URL = "##URL SRC=\"https://bkktest.s3.amazonaws.com/tmp/{{ACCTID}}-{{FIELDNAME}}.html\"##";
+    var reg = /##(def[^#]+)##/;
+    var html = template;
+    while (match = reg.exec(html)) {
+        var slugPattern = match[0];
+        var slug = match[1];
+        var sharpsharpData = s3URL.replace("{{ACCTID}}",acctID);
+        sharpsharpData = sharpsharpData.replace("{{FIELDNAME}}",slug);
+        html = html.replace(slugPattern,sharpsharpData);
+        console.log(sharpsharpData);
+    }
+    return html;
+}
 
 function documentConpare(obj1, obj2) {
     if(typeof obj1 == "undefined"){
