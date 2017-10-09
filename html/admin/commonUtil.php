@@ -555,7 +555,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
                         */
                         //add criteria
-                        DomSetText($xpath,$xpathName,"");
+                        //DomSetText($xpath,$xpathName,"");
                         $nodeRet = DomAddNode($xml,$xpath,$xpathName,$value);
                     }else{
                         if($field->type == "URL"){
@@ -601,6 +601,8 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
     }
     //save s3 cache
     file_put_contents($cacheFileName,json_encode($cache));
+    $xmlResult = $xml->saveHTML();
+    $xmlResult = studio_url_render($xmlResult,$acctID,$progID,$doc);
     return 
         array(
             'success'=>true,
@@ -611,7 +613,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             'renderErrors'=>$renderErrors,
             'renderSuccess'=>$renderSuccess,
             'doc' => $doc,
-            'xml'=>$xml->saveHTML(),
+            'xml'=>$xmlResult,
             'cache'=>$cache,
         );
 }
@@ -638,6 +640,60 @@ function MergeStdClassWithArray($data,$default)
             $data ->{$key} = $value;
         }
     }
+}
+
+function MergeArrayWithArray(& $data,$default)
+{
+    foreach($default as $key => $value){
+        if (!array_key_exists($key,$data)) {
+            //echo "Merge $key<br>\n";
+            $data[$key] = $value;
+        }
+    }
+    //print_r($data);
+}
+
+function MergeStdClassWithStdClass($data,$default,$override = false)
+{
+    foreach(get_object_vars($default) as $key => $value) {
+        if(property_exists ( $data , $key )){
+            if($override){
+                $data ->{$key} = $value;
+            }
+        }else{
+            $data ->{$key} = $value;
+        }
+    }
+}
+
+function CleanDocument($doc)
+{
+    unset($doc->_rev);
+    unset($doc->_id);
+}
+
+function GetUserInfoFromDB($dbName)
+{
+    $doc = couchDB_Get("/$dbName/UserInfo");
+    $default = false;
+    if(!empty($doc->error)){
+        //not found need to return from default
+        $default = true;
+        $doc = couchDB_Get("/master/Default_UserInfo");
+        if(!empty($doc->error)){
+            return  array(
+                    'success'=>false,
+                    'message'=>"Default_UserInfo not found",
+                );
+        }
+        CleanDocument($doc);
+    }
+    return array(
+            'success'=>true,
+            'doc'=>$doc,
+            'default'=>$default,
+            'dbName'=>$dbName,
+    );
 }
 
 //$func = function($name,$value)

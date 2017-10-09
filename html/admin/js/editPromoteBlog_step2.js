@@ -73,6 +73,8 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
         var fromAddress = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
         var fromName = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME'];
         var renderedHtml = Render(html, $scope.campaign);
+        //renderedHtml = RenderSharpSharp(renderedHtml,accountID);
+        //alert(renderedHtml);
         var subject = $("#subjectEmail" + index).text();
         //alert($scope.campaign['EMAIL1-HERO-IMAGE']);
         $http({
