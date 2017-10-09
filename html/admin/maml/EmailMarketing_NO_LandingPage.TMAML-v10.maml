@@ -528,12 +528,12 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="ClickAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_clickalert.html"##</ContentVariable>
         <ContentVariable Name="OpenAlertContent">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/template/promoteblog_openalert.html"##</ContentVariable>
         <ContentVariable Name="campaignName">{{campaignName}}</ContentVariable>
-        <ContentVariable Name="companyAddress">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyAddress.html"##</ContentVariable>
-        <ContentVariable Name="companyPhone">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyPhone.html"##</ContentVariable>
-        <ContentVariable Name="companyName">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyName.html"##</ContentVariable>
-	<ContentVariable Name="companyLogo">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyLogo.html"##</ContentVariable>
-	<ContentVariable Name="viewOnlineMessage">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defViewOnline.html"##</ContentVariable>
-	<ContentVariable Name="unsubscribeLinkS3">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defUnsubscribe.html"##</ContentVariable>
+        <ContentVariable Name="defCompanyAddress">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyAddress.html"##</ContentVariable>
+        <ContentVariable Name="defCompanyPhone">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyPhone.html"##</ContentVariable>
+        <ContentVariable Name="defCompanyName">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyName.html"##</ContentVariable>
+	<ContentVariable Name="defCompanyLogo">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyLogo.html"##</ContentVariable>
+	<ContentVariable Name="defViewOnline">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defViewOnline.html"##</ContentVariable>
+	<ContentVariable Name="defUnsubscribe">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defUnsubscribe.html"##</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>
