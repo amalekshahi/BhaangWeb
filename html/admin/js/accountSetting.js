@@ -53,7 +53,20 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 			  $scope.saveSuccess = true;
 			  $scope.state['SaveAccountSetting'] = "Save";
 			  $scope.userinfo._rev = response.data.rev;                      
-			  $scope.master = angular.copy($scope.userinfo);                      
+			  $scope.master = angular.copy($scope.userinfo);         
+              //save content to s3
+              $http.get("backend.php"+"?" + new Date().toString(),
+                {
+                  method: "POST",
+                  params: {
+                    cmd: "userinfo2s3",
+                    acctID: accountID,     
+                    progID: "yyyy",     // anything that not empty
+                  }  
+                }
+                ).then(function(response) {
+                    console.log(response.data);    
+                });
 		 },function(response){
 			  console.log(response.data);    
 			  alert("ERROR: can not save!!!");	
