@@ -2888,7 +2888,7 @@ a.forum-item-title:hover {
   background: #fff;
   border: 1px solid #e7eaec;
   border-radius: 2px;
-  padding: 20px;
+  padding: 5px;
   position: relative;
 }
 .tabs-container .nav-tabs > li.active > a,
