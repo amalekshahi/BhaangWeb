@@ -18,10 +18,15 @@ $PARTNERPASSWORD = $_SESSION['PARTNERPASSWORD'];
 $ACCOUNNAME = $_SESSION['ACCOUNNAME'];
 
 // encode html
-$htmlContent = htmlspecialchars($HtmlContent);
+$htmlContent = htmlspecialchars($HtmlContent, ENT_XML1);
+
+
+
 $subjectContent = htmlspecialchars($subject);
 //$ContactID = "75";
 $PropertiesXML = "<Properties>  <Messages>    <Message Id=\"1\">      <ToAddress>##email##</ToAddress>      <FromName>$FromName</FromName>      <FromAddress>$FromAddress</FromAddress>      <ReplyTo>$FromAddress</ReplyTo>      <Subject>$subjectContent</Subject>      <HtmlContent>$htmlContent</HtmlContent>      <TextContent />    </Message>  </Messages></Properties>";
+
+file_put_contents('xxx001.txt',$PropertiesXML);
 
 function sendTest($TEST, $userTicket, $ContactID, $PropertiesXML){
 	$errorMessage = '';
