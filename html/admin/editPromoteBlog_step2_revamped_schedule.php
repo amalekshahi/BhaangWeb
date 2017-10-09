@@ -12,7 +12,7 @@
 
 			<div class="row">
 				<div class="col-sm-3">
-					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo"><span class="badge" ng-show="!step2Done">2</span><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Configure Your Email Sequence
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();"><span class="badge" ng-show="!step2Done">2</span><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Configure Your Email Sequence
 			</h4>
 		</div>
 		<div class="col-sm-9">
@@ -135,7 +135,4 @@
 		</div>
 	</div>
     <script src="js/editPromoteBlog_step2.js"></script>
-		
-				<!-- FooTable -->
-    <script src="js/plugins/footable/footable.all.min.js"></script>		
-		
+				
