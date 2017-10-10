@@ -29,12 +29,12 @@
 		.label-email-subject {
 			white-space: nowrap;
 			text-overflow: ellipsis;
-			width: calc(100% - 80px);
+			max-width: calc(100% - 80px);
 			display: inline-block;
 			overflow: hidden;
 		}
 		.input-group{display: inline-flex;}
-		.input-group-btn {width: unset;}
+		.input-group-btn, .input-group-addon{width: unset;}
 		.form-control{padding: 6px 0;}
 		@media screen and (max-width:767px){
 		}
