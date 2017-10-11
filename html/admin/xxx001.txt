@@ -1,4 +1,4 @@
-<Properties>  <Messages>    <Message Id="1">      <ToAddress>##email##</ToAddress>      <FromName>Boonsom Coa</FromName>      <FromAddress>boonsom@mindfireinc.com</FromAddress>      <ReplyTo>boonsom@mindfireinc.com</ReplyTo>      <Subject>[BLOG POST] You need to see this.</Subject>      <HtmlContent>&lt;!--  
+<Properties>  <Messages>    <Message Id="1">      <ToAddress>##email##</ToAddress>      <FromName>Boonsom Coa</FromName>      <FromAddress>boonsom@mindfireinc.com</FromAddress>      <ReplyTo>boonsom@mindfireinc.com</ReplyTo>      <Subject>this is email 1 of 3</Subject>      <HtmlContent>&lt;!--  
     View should not see this 
      
 --&gt;
@@ -26,7 +26,7 @@
 			&lt;/td&gt;
 			&lt;tr&gt;
 				&lt;td valign="middle" style="padding:5px 0;text-align:left"&gt;
-					&lt;img src="##companyLogo##" alt="logo" width="180px" border="0"&gt;
+					&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-COMPANY-LOGO-17124.png" alt="logo" width="180px" border="0"&gt;
 				&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
@@ -40,13 +40,13 @@
 				&lt;table border="0" width="100%" cellpadding="0" cellspacing="0" align="center"&gt;
 					&lt;tr id="viewonlineRow"&gt;
 						&lt;td valign="top" align="center" style="padding-top:10px; padding-right:20px; padding-bottom:10px; padding-left:0;"&gt;
-							&lt;a href="http://##purl##.dv17124.m.mdl.io/e192bef10584af85c5a5322edf23480d/Email1.html" target="_blank"&gt;##viewOnlineMessage##&lt;/a&gt;&lt;/td&gt;
+							&lt;a href="http://##purl##.dv17124.m.mdl.io/902ee6920a5346c2fece7f89e3798b2b/Email1.html" target="_blank"&gt;##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defViewOnline.html"##&lt;/a&gt;&lt;/td&gt;
 					&lt;/tr&gt;
 					&lt;tr&gt;
 						&lt;td align="center"&gt;
 							&lt;!-- &lt;div class="hover"&gt;&lt;img src='https://s3.amazonaws.com/mindfiredavinci/img/DV_image_placeholder_600x300.png' border='0' style='display:block'&gt;&lt;/div&gt; --&gt;
 							&lt;div class="hover"&gt;
-							 &lt;a href="http://davincistage.mindfireis.com/admin/GA_test2.php?campaignID=e192bef10584af85c5a5322edf23480d&amp;contactID=##id##&amp;source=EMAIL1&amp;utm_medium=email&amp;utm_source=Blog&amp;utm_campaign=My+Blog&amp;utm_term=Write"&gt;&lt;img src='https://s3.amazonaws.com/mindfiredavinci/img/DV_image_placeholder_600x300.png' border='0' style='display:block'&gt;&lt;/a&gt;
+							 &lt;a href="http://davincistage.mindfireis.com/admin/GA_test2.php?campaignID=902ee6920a5346c2fece7f89e3798b2b&amp;contactID=##id##&amp;source=EMAIL1&amp;utm_medium=email&amp;utm_source=Blog&amp;utm_campaign=My+Blog&amp;utm_term=Write"&gt;&lt;img src='https://s3.amazonaws.com/mindfiredavinci/img/DV_image_placeholder_600x300.png' border='0' style='display:block'&gt;&lt;/a&gt;
 							&lt;/div&gt;
 						&lt;/td&gt;						
 					&lt;/tr&gt;
@@ -65,7 +65,7 @@
 								&lt;table cellspacing="0" cellpadding="0" border="0" style="margin:0"&gt;
 									&lt;tr&gt;
 										&lt;td style="border-radius:3px;background-color:GREEN;text-align:center"&gt;
-											&lt;a href="http://davincistage.mindfireis.com/admin/GA_test2.php?campaignID=e192bef10584af85c5a5322edf23480d&amp;contactID=##id##&amp;source=EMAIL1&amp;utm_medium=email&amp;utm_source=Blog&amp;utm_campaign=My+Blog&amp;utm_term=Write" style="color:#ffffff;font-family:sans-serif;font-size:15px;line-height:15px;text-align:center;text-decoration:none;display:block;padding:15px 20px;border:1px solid #444444;border-radius:3px"&gt;
+											&lt;a href="http://davincistage.mindfireis.com/admin/GA_test2.php?campaignID=902ee6920a5346c2fece7f89e3798b2b&amp;contactID=##id##&amp;source=EMAIL1&amp;utm_medium=email&amp;utm_source=Blog&amp;utm_campaign=My+Blog&amp;utm_term=Write" style="color:#ffffff;font-family:sans-serif;font-size:15px;line-height:15px;text-align:center;text-decoration:none;display:block;padding:15px 20px;border:1px solid #444444;border-radius:3px"&gt;
 												&lt;div class="hover"&gt;&lt;b&gt;CLICK HERE&lt;/b&gt;&lt;/div&gt;
 											&lt;/a&gt;
 										&lt;/td&gt;
@@ -85,7 +85,7 @@
 	&lt;table border="0" width="100%" cellpadding="0" cellspacing="0" align="center"&gt;
 		&lt;tr&gt;
 			&lt;td style="text-align:center;padding:20px;font-family:sans-serif;font-size:12px;line-height:18px;color:#888888"&gt;
-				If you no longer wish to receive these emails, you can &lt;a href='##unsubscribeLinkS3##' style="color:#444444;padding:0;text-decoration:underline"&gt;unsubscribe&lt;/a&gt;&lt;br&gt; ##companyName## • ##companyAddress## • &lt;span&gt;##companyPhone##&lt;/span&gt;&lt;br&gt;
+				If you no longer wish to receive these emails, you can &lt;a href='##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defUnsubscribe.html"##' style="color:#444444;padding:0;text-decoration:underline"&gt;unsubscribe&lt;/a&gt;&lt;br&gt; ##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defCompanyName.html"## • ##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defCompanyAddress.html"## • &lt;span&gt;##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defCompanyPhone.html"##&lt;/span&gt;&lt;br&gt;
 			&lt;/td&gt;
 		&lt;/tr&gt;
 	&lt;/table&gt;
