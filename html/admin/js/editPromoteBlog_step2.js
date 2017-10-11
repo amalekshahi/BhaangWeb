@@ -64,7 +64,7 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
             swal("Please select address to send to");
             return;
         }
-        $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL' + index + 'CONTENT'] = $scope['templatesAs' + index][$scope.tpsIndex(index)].contentRaw;
+        $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL' + index + 'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+index], $scope.campaign['templateEmail'+index], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+index+'CONTENT');
         $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL' + index + 'SUBJECT'] = $("#subjectEmail" + index).text();
         $scope.campaign['EMAIL' + index + '-SUBJECT'] = $("#subjectEmail" + index).text();
 

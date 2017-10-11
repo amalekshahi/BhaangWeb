@@ -35,7 +35,7 @@
 		}
 		.input-group{display: inline-flex;}
 		.input-group-btn, .input-group-addon{width: unset;}
-		.form-control{padding: 6px 0;}
+		.form-control{padding: 6px 10px;}
 		@media screen and (max-width:767px){
 		}
 		@media (min-width:768px){
@@ -129,8 +129,8 @@
 													<div class="col-lg-5">
 														<div style="width:100%;">
 															<h3 ng-show="emailDone == 0"><i class="fa fa-info-circle" aria-hidden="true" style="color:orange"></i> You need to create this Email in Step <span class="badge">2</span> before you can set a Schedule.</h3>
-															<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] != null" style="display: flex;">Subject:&nbsp;"<div  class="label-email-subject">{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}</div>"</h3>
-															<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] == null"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red"></i> Warning: You're still using the default Subject line for your Email.</h3>
+															<h3 ng-show="emailDone > 0 && campaign['EMAIL1-SUBJECT'] != null" style="display: flex;">Subject:&nbsp;"<div  class="label-email-subject">{{campaign['EMAIL1-SUBJECT']}}</div>"</h3>
+															<h3 ng-show="emailDone > 0 && campaign['EMAIL1-SUBJECT'] == null"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red"></i> Warning: You're still using the default Subject line for your Email.</h3>
 															<small ng-show="emailDone == 0">Once you create your masterpiece, you'll be able to set a date and time for deployment.</small>
 															<small ng-show="emailDone > 0">This email is sent to everyone you specify in the above Targeting section.</small>
 														</div>
@@ -181,7 +181,7 @@
 													</div>
 													<div class="col-lg-5">
 														<div style="width:100%;">
-															<h3 style="display: flex;">Subject:&nbsp;"<div  class="label-email-subject">{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT']}}</div>"</h3>
+															<h3 style="display: flex;">Subject:&nbsp;"<div  class="label-email-subject">{{campaign['EMAIL2-SUBJECT']}}</div>"</h3>
 															<small>This email is sent to everyone who did not open your first email.</small>
 														</div>
 													</div>
@@ -229,7 +229,7 @@
 													</div>
 													<div class="col-lg-5">
 														<div style="width:100%;">
-															<h3 style="display: flex;">Subject:&nbsp;"<div  class="label-email-subject">{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT']}}</div>"</h3>
+															<h3 style="display: flex;">Subject:&nbsp;"<div  class="label-email-subject">{{campaign['EMAIL3-SUBJECT']}}</div>"</h3>
 															<small>This email is sent to everyone has not yet clicked your Blog Post URL.</small>
 														</div>
 													</div>
@@ -291,10 +291,10 @@
 															</td>
 															<td class="project-title">
 																<h3 ng-show="emailDone == 0"><i class="fa fa-info-circle" aria-hidden="true" style="color:orange"></i> You need to create this Email in Step <span class="badge">2</span> before you can set a Schedule.</h3>
-																<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] != null">	<div style="display: inline-flex;">
-																	Subject:&nbsp;"<div  class="label-email-subject">{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT']}}</div>"
+																<h3 ng-show="emailDone > 0 && campaign['EMAIL1-SUBJECT'] != null">	<div style="display: inline-flex;">
+																	Subject:&nbsp;"<div  class="label-email-subject">{{campaign['EMAIL1-SUBJECT']}}</div>"
 																</div></h3>
-																<h3 ng-show="emailDone > 0 && campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT'] == null"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red"></i> Warning: You're still using the default Subject line for your Email.</h3>
+																<h3 ng-show="emailDone > 0 && campaign['EMAIL1-SUBJECT'] == null"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red"></i> Warning: You're still using the default Subject line for your Email.</h3>
 																<small ng-show="emailDone == 0">Once you create your masterpiece, you'll be able to set a date and time for deployment.</small>
 																<small ng-show="emailDone > 0">This email is sent to everyone you specify in the above Targeting section.</small>
 															</td>
@@ -342,7 +342,7 @@
 																</div>
 															</td>
 															<td class="project-title">
-																<h3><div style="display: inline-flex;">	Subject:&nbsp;"<div  class="label-email-subject">{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL2SUBJECT']}}</div>"</div></h3>
+																<h3><div style="display: inline-flex;">	Subject:&nbsp;"<div  class="label-email-subject">{{campaign['EMAIL2-SUBJECT']}}</div>"</div></h3>
 																<small>This email is sent to everyone who did not open your first email.</small>
 															</td>
 															<td class="project-title">
@@ -382,7 +382,7 @@
 																</div>
 															</td>
 															<td class="project-title">
-																<h3><div style="display: inline-flex;">	Subject:&nbsp;"<div  class="label-email-subject">{{campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL3SUBJECT']}}</div>"</div></h3>
+																<h3><div style="display: inline-flex;">	Subject:&nbsp;"<div  class="label-email-subject">{{campaign['EMAIL3-SUBJECT']}}</div>"</div></h3>
 																<small>This email is sent to everyone has not yet clicked your Blog Post URL.</small>
 															</td>
 															<td class="project-title">
