@@ -11,7 +11,7 @@
 
 			<div class="col-sm-3">
 				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">4</span>
-			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Choose Audiences & Schedule For Send</a></h4>
+			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Schedule Broadcasts </a></h4>
 			</div>
 
 			<div class="col-sm-9">
@@ -41,7 +41,7 @@
 					</form>
 					<form class="form-horizontal" name="frmStep3">
 						<div class="row">
-							<div class="col-lg-12">
+							<!--<div class="col-lg-12">
 
 								<div>
 
@@ -151,9 +151,9 @@
 									</div>
 
 
-								</div>
+								</div>-->
 							</div>
-							<div class="hr-line-dashed"></div>
+							<!--<div class="hr-line-dashed"></div>-->
 							<div class="form-group">
 								<table class="table table-hover">
 									<thead>
@@ -164,7 +164,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
+										<!--<tr>
 											<td><strong>My Test List </strong></td>
 											<td><form class="form-inline">
 												Send <select class="form-control input-sm" name="account">
@@ -188,9 +188,9 @@
 											</td>
 											<td>
 												<a class="btn btn-danger btn-bitbucket"><i class="fa fa-play-circle-o"></i> TEST THIS SEQUENCE NOW</a>
-												<!--<input type="text" name="auCount"  id="auCount" value="" readonly>-->
+												<!--<input type="text" name="auCount"  id="auCount" value="" readonly>
 											</td>
-										</tr>
+										</tr>-->
 										<tr>
 											<td><strong>My Prospects </strong><small><i class="fa fa-pencil" aria-hidden="true"></i></small></td>
 											<td><select chosen multiple placeholder-text-multiple="'Choose Your Lists...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" ng-change="ArrangeFilter()">

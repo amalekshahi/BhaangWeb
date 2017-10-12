@@ -12,7 +12,7 @@
 
 			<div class="row">
 				<div class="col-sm-3">
-					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();"><span class="badge" ng-show="!step2Done">2</span><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Configure Your Email Sequence
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" class="fullscreen-link"><span class="badge" ng-show="!step2Done">2</span><i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Configure Your Email Sequence
 			</h4>
 		</div>
 		<div class="col-sm-9">
@@ -25,17 +25,16 @@
 			
 			<!-- Start New -->
 
-				 <div class="row m-t-sm">
+				 <div class="row m-t-sm" >
                 <div class="col-lg-12">
-                    <div class="tabs-container">
-
+                    <div class="tabs-container" >
                         <div class="tabs-left">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#email-1"> Day 1: Sent to Everyone Targeted</a></li>
-                                <li class=""><a data-toggle="tab" href="#email-2"> Day 3: Sent to Non-Openers</a></li>
-																<li class=""><a data-toggle="tab" href="#email-2"> Day 5: Sent to Non-Clickers</a></li>
+                                <li class="active"><a data-toggle="tab" href="#email-1" style="padding-left: 10px;"> Day 1: Sent to Everyone Targeted</a></li>
+                                <li class=""><a data-toggle="tab" href="#email-2" style="padding-left: 10px;"> Day 3: Sent to Non-Openers</a></li>
+																<li class=""><a data-toggle="tab" href="#email-2" style="padding-left: 10px;"> Day 5: Sent to Non-Clickers</a></li>
                             </ul>
-                            <div class="tab-content ">
+                            <div class="tab-content">
                                 <div id="email-1" class="tab-pane active">
                                     <div class="panel-body">
                                       <?php echo $email1; ?>  
@@ -55,6 +54,7 @@
 													</div>
 
                         </div>
+											
 
                     </div>
                 </div>

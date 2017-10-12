@@ -14,9 +14,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 
-    <!-- FooTable -->
-    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
-
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+		
 		<style>
 			.editable-container.editable-inline,
 			.editable-container.editable-inline .control-group.form-group,
@@ -149,7 +149,7 @@
 											</div>
 										</div>
 										<div class="ibox-content">
-											<div class="panel-body">
+											
 												<div class="panel-group" id="accordion">
 													<div class="panel panel-default">
 														<div class="panel-heading">
@@ -251,7 +251,7 @@
 												<div style="float:right;">
 													<button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
 												</div>
-											</div>
+											
 										</div>
 									</div>
 								</div>
@@ -305,7 +305,7 @@
 			w3IncludeHTML();
 		</script>-->
 		<!-- <script src="js/jquery-3.1.1.min.js"></script> -->
-		<script src="js/bootstrap.min.js"></script>
+		<!--<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 		<script type="text/JavaScript" src="global.js?n=1"></script>

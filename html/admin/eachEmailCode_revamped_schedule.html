@@ -1,8 +1,245 @@
 <div class="row" ng-show="openEmail['##emailid##']">
-	<div class="col-sm-9">
-	<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail##emailid##"></a></h3>
-	<div class="hr-line-dashed"></div>
+	<!--<div class="col-sm-11">
+
+	<div class="fixedContainer">
+    This is experimental
+</div>
+
+		<!--<nav class="navbar navbar-fixed-top" role="navigation">
+
+			<div class="row">
+				<div class="col-xs-4">
+					<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail##emailid##"></a></h3>
+				</div>
+				<div class="col-xs-8">
+					<form class="form-horizontal">
+						<ul class="nav navbar-top-links navbar-right">
+							<li>
+								<span class="m-r-sm text-muted welcome-message">EMAIL EDITOR</span>
+							</li>
+							<li>
+								<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">This Email <span class="caret"></span></button>
+
+							</li>
+							<li>
+								<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">All Emails <span class="caret"></span></button>
+							</li>
+							<li>
+								<button class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-wrench"></i> Settings</button>
+							</li>
+
+
+							<li class="dropdown">
+
+
+							</li>
+							<li>
+								<button class="btn btn-white btn-xs" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
+							</li>
+							<li>
+								<button class="btn btn-primary btn-xs" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Email</button>
+							</li>
+						</ul>
+
+						<div class="form-group">
+						</div>
+					</form>
+				</div>
+			</div>
+		</nav>
+
+
+
+	</div>-->
+	<div class="col-sm-10">
+		
+		
+		<div marginwidth="0" marginheight="0" bgcolor="#f4f4f4" style="margin:0;padding:0">
+	<table border="0" width="700" cellpadding="0" cellspacing="0" align="center" style="margin:auto">
+		<tr>
+			<td> <h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail##emailid##"></a></h3>
+</td>
+</tr>
+</table>
+</div>
+
+		
+		
+		
+		
+		<div class="window">
+			<div class="titlebar">
+				<div class="buttons">
+					<div class="close"></div>
+					<div class="minimize"></div>
+					<div class="zoom"></div>
+				</div><small><span id="textSender##emailid##">New Email from:</span></small>
+			</div>
+			<div class="content">
+				<div class="template_preview">
+					<div id="viewEmail##emailid##"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-1">
+		
+	<div class="fixedContainer">
+		<div class="theme-config">
+    <div class="theme-config-box">
+        <div class="spin-icon">
+            <i class="fa fa-cogs fa-spin"></i> 
+        </div>
+        <div class="skin-settings">
+            <div class="title">Settings <br>
+            <small style="text-transform: none;font-weight: 400">
+                Config your Email.
+            </small></div>
+            <div class="setings-item">
+                    <span>
+                        Send on:
+                    </span>
+
+                <div class="switch">Day 1
+                </div>
+            </div>
+            <div class="setings-item">
+                    <span>
+                        From:
+                    </span>
+
+                <div class="switch">
+                </div>
+            </div>
+					            <div class="setings-item">
+                    <span>
+                        Template:
+                    </span>
+
+                <div class="switch">
+                </div>
+            </div>
+
+            <div class="title">Skins!</div>
+            <div class="setings-item default-skin">
+                    <span class="skin-name ">
+                         <a href="#" class="s-skin-0">
+                             Default
+                         </a>
+                    </span>
+            </div>
+            <div class="setings-item blue-skin">
+                    <span class="skin-name ">
+                        <a href="#" class="s-skin-1">
+                            Blue light
+                        </a>
+                    </span>
+            </div>
+        </div>
+    </div>
+			
+</div>
+		
+		
+		
+		
+		
+	<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}}</button><br>
+	<button class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-paper-plane"></i> Send Test</button><br>
+		</div>
+		<style>
+		
+		.fixedContainer {
+    position: fixed;
+		z-index: 100;
+}
+
+	.modal.right .modal-dialog {
+		position: fixed;
+		margin: auto;
+		width: 320px;
+		height: 100%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+		        transform: translate3d(0%, 0, 0);
+	}
+
+	.modal.right .modal-content {
+		height: 100%;
+		overflow-y: auto;
+	}
+	
+	.modal.right .modal-body {
+		padding: 15px 15px 80px;
+	}
+    
+/*Right*/
+	.modal.right.fade .modal-dialog {
+		right: -320px;
+		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+		        transition: opacity 0.3s linear, right 0.3s ease-out;
+	}
+	
+	.modal.right.fade.in .modal-dialog {
+		right: 0;
+	}
+
+/* ----- MODAL STYLE ----- */
+	.modal-content {
+		border-radius: 10;
+		border: none;
+	}
+
+	.modal-header {
+		border-bottom-color: #EEEEEE;
+		background-color: #FAFAFA;
+	}
+
+			
+			
+		</style>
+	
+	
+</div>
+	
+
+	
+	<script>
+	
+	    $('.spin-icon').click(function (){
+        $(".theme-config-box").toggleClass("show");
+    });
+
+	
+	</script>
+	
+	
+	<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</p>
+				</div>
+
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div>
+	
+	</div>
+
 <!--
+	<div class="col-sm-8">
+		<div class="hr-line-dashed"></div>
 		<form class="form-inline">
 			<div class="form-group">
 				<label>From</label>
@@ -33,7 +270,6 @@
 							</select>
 			<p></p>
 		</div>
--->
 		
 		<div class="window">
 			<div class="titlebar">
@@ -42,7 +278,6 @@
 					<div class="minimize"></div>
 					<div class="zoom"></div>
 				</div><small><span id="textSender##emailid##">New Email from:</span></small>
-				<!-- window title -->
 			</div>
 			<div class="content">
 				<div class="template_preview">
@@ -50,48 +285,28 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-sm-1"></div>
-	<div class="col-sm-2">
+	</div>-->
+	<!--
+	<div class="col-sm-3">
 		<form class="form-horizontal" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
 			<div class="form-group">
 
-				<!--
 						<div>Select who this email is from. Once you've picked a template, roll over areas of the email template to see what you can edit. Things like your logo and footer are pulled from <strong>Settings</strong>.</div>
 						<label class="control-label">From</label>
 						<div>
 							<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
 							<p></p>
 						</div>
-						-->
-
-				<button class="btn btn-primary btn-sm" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Email</button>
-				<a class="btn btn-white btn-sm" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a><br>
-					<div class="hr-line-dashed"></div>
-				<label>Send on:</label><br>
-					<div class="hr-line-dashed"></div>
-				<label>Change:</label><br>
-				<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Template <span class="caret"></span></button>
-				<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Hero Image <span class="caret"></span></button><br>
-				<div class="hr-line-dashed"></div>
-				<label>Test:</label><br>
-				<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">This Email <span class="caret"></span></button><br>
-				<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" aria-expanded="false">Entire Sequence <span class="caret"></span></button><br>
-					<div class="hr-line-dashed"></div>
-					<!--
 						<label class="control-label">Hero Image</label>
 						<div>
 							<a ng-model="file" ngf-select="upload($file,'##emailid##')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image."><span ng-show="state['Upload##emailid##'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload##emailid##'] != 'Uploading'"></i> Upload new image ...</a>																				
 							<a ng-model="file" ngf-select="upload($file,'##emailid##')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="Choose an image from your Asset Library."><span ng-show="state['Upload##emailid##'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-globe" ng-show="state['Upload##emailid##'] != 'Uploading'"></i> Pick from Asset Library</a>																				
 						</div>
--->
-					<!--
 
 
 					<label class="control-label"></label>
 					<a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-block btn-xs" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest##emailid##'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send</a>
--->
 			</div>
 		</form>
 	</div>
-</div>
+-->

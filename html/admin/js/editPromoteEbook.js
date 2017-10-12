@@ -83,6 +83,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $scope.campaign['EMAIL'+key+'-SUBJECT'];
 				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
@@ -463,14 +464,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			}
 		}
 	};
-	$scope.tpsIndex = function(emlID) {
-		var tplist = $scope['templatesAs' + emlID];
-		for (var i = 0; i < tplist.length; i++) {
-			if (tplist[i]["content"] == $scope.campaign['templateEmail' + emlID]) {
-				return i;
-			}
-		}
-	};
 	$scope.sdIndex = function() {
 		var sdlist = $scope.senders;
 		for (var i = 0; i < sdlist.length; i++) {
@@ -670,8 +663,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		//$('#template').trigger('change');
 		$('#subjectEmail' + objID).on('save', function(e, params) {
 			//alert('Saved value: ' + params.newValue);
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+objID+'SUBJECT'] = params.newValue;
 			$scope.campaign['EMAIL'+objID+'-SUBJECT'] = params.newValue;
+			$scope.$apply();
 		});
 	}
 	$scope.openEmail = {

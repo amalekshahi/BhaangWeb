@@ -479,7 +479,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
     // iterate true data 
     $renderErrors = array();
     $renderSuccess = array();
-    //Hanels Doms
+    //handle Doms
     foreach($mamlInfo->doms as $dom){
         $attributeName = $dom->attribute;
         $xpathName = $dom->xpath;
@@ -492,7 +492,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
         }
     }
-    //Handle Fields
+    //handle Fields
     foreach($mamlInfo->fields as $field){
         $numloop = 1;
         $startloop = 1;
@@ -541,6 +541,12 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                                 DomDeleteAllChildren($xpath,$xpathName);
                             }
                         }
+                        if(property_exists($field,"deleteNode")){
+                            $deleteNodeName = $field->deleteNode;
+                            DomDeleteChildNode($xpath,$xpathName,$deleteNodeName);
+                        }
+                        
+                        
                         /* delete criteria node */
                         /*$deleteList = array();
                         $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
@@ -602,6 +608,9 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
     //save s3 cache
     file_put_contents($cacheFileName,json_encode($cache));
     $xmlResult = $xml->saveHTML();
+    // change MFInput back to Input from DomAddNode
+    $xmlResult = str_replace("MFInput", "Input",$xmlResult);
+    // Render {{}} that might be left
     $xmlResult = studio_url_render($xmlResult,$acctID,$progID,$doc);
     return 
         array(
@@ -1226,7 +1235,19 @@ function DomAddNode($xml,$xpath,$path,$value)
     if ($nodes->length > 0) {
         $node = $nodes->item(0);
         $f = $xml->createDocumentFragment();
-        $f->appendXML($value);
+        // Somehow php dom does not like <Input>
+        // so we change to <MFInput> and will change back later after serialize to xml string
+        $data = str_replace("Input", "MFInput", $value);
+
+        $f->appendXML($data);
+        /*
+        $docB = new DomDocument();
+        // Somehow php dom does not like <Input>
+        // so we change to <MFInput> and will change back later after serialize to xml string
+        $data = str_replace("Input", "MFInput", $value);
+        $docB->loadXML($data);
+        $f = $xml->importNode($docB->documentElement, true);
+        */
         $node->appendChild($f);
         return $node;
     }
@@ -1239,6 +1260,21 @@ function DomDeleteAllChildren($xpath,$path)
     if ($nodes->length > 0) {
         $node = $nodes->item(0);
         deleteChildren($node);
+    }
+}
+
+function DomDeleteChildNode($xpath,$path,$nodeName)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $criteriaNodes = $node->getElementsByTagName($nodeName);
+        foreach ($criteriaNodes as $n) {
+            $deleteList[] = $n;
+        }
+        foreach ($deleteList as $n) {
+            $node->removeChild($n);
+        }
     }
 }
 
