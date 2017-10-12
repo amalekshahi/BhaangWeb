@@ -1,15 +1,7 @@
 <?php
-
-
-//date_default_timezone_set('America/Los_Angeles');
 date_default_timezone_set("UTC"); 
 require('config.php');
-
-
-
 ini_set("memory_limit", "-1");
-
-
 
 function callService($endpoint, $request)
 {

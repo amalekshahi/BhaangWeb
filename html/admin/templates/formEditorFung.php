@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');

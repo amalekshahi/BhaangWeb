@@ -1,9 +1,3 @@
-<?php
-//    date_default_timezone_set('America/Los_Angeles');
-//    session_start();
-//    include 'global.php';
-//    require_once('loginCredentials.php');
-?>
 	<nav class="navbar-default navbar-static-side" role="navigation">
 		<div class="sidebar-collapse">
 			<ul class="nav metismenu" id="side-menu">

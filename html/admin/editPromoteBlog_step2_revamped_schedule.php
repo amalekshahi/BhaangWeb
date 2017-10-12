@@ -28,7 +28,6 @@
 				 <div class="row m-t-sm" >
                 <div class="col-lg-12">
                     <div class="tabs-container" >
-
                         <div class="tabs-left">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#email-1" style="padding-left: 10px;"> Day 1: Sent to Everyone Targeted</a></li>
@@ -55,6 +54,7 @@
 													</div>
 
                         </div>
+											
 
                     </div>
                 </div>

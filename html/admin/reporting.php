@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
@@ -23,7 +23,7 @@
 
 <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.php"></div>
+	<?php include 'leftWrapper.php'; ?>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg" ng-controller="myCtrl">
 		<div class="row border-bottom">
@@ -152,7 +152,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td style="vertical-align: middle;"><img class="img-circle" src="http://www.mindfireinc.com/static/images/david-rosendahl.jpg" style="width: 70%;"></td>
+										<td style="vertical-align: middle;"><img class="img-circle" src="https://www.mindfireinc.com/static/images/david-rosendahl.jpg" style="width: 70%;"></td>
 										<td style="vertical-align: middle;">Email #2: Sent to Non-Openers<br>
 										<small>Sent Saturday August 19 at 8:15 AM</small></td>
 										<td style="vertical-align: middle;">21,340</td>
@@ -187,17 +187,14 @@
 <!--/ content -->           
 			<div class="footer">
 			<!-- footer -->
-			<div w3-include-html="footer.php"></div>
+			<?php include 'footer.php'; ?>
 			<!-- / footer -->			
 			</div>
         </div>
     </div><!--  end page-wrapper -->
-</div>
-	
-	<script src="js/w3data.js"></script>	
-	<script>w3IncludeHTML();</script>
-    <!-- <script src="js/jquery-3.1.1.min.js"></script> -->
-    <script src="js/bootstrap.min.js"></script>
+</div>	
+    
+
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/JavaScript" src="global.js?n=1"></script>
