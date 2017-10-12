@@ -1,8 +1,10 @@
 <?php
+	date_default_timezone_set("UTC");
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html ng-app="myApp">
 <!-- ***************************************************
 THIS PAGE USE  <ng-view>

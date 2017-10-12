@@ -20,13 +20,13 @@
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.html"></div>
+	<?php include 'leftWrapper.php'; ?>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.html"></div>
+				<?php include 'topWrapper.php'; ?>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -248,18 +248,12 @@
 
 <!--/ content -->           
 			<div class="footer">
-				<!-- footer -->
-				<div w3-include-html="footer.html"></div>
-				<!-- / footer -->			
+				<?php include 'footer.php'; ?>
 			</div>
 		</div><!--  end page-wrapper -->
 </div>
 
-    <!-- Mainly scripts -->
-	<script src="js/w3data.js"></script>	
-	<script>w3IncludeHTML();</script>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- Mainly scripts -->	
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
@@ -272,6 +266,7 @@
     <script src="js/plugins/bootstrap-markdown/markdown.js"></script>
 
     <!-- Page-Level Scripts -->
+	<script type="text/JavaScript" src="global.js?n=1"></script> 
 	<script src="js/jquery.md5.js"></script>
     <script>
 		var action = getParameterByName("action");

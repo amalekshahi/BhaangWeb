@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
@@ -14,7 +14,7 @@
 	<body class="fixed-sidebar">
 		<div id="wrapper">
 			<!-- left wrapper -->
-			<div w3-include-html="leftWrapper.php"></div>
+			<?php include 'leftWrapper.php'; ?>
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg">
 				<div class="row border-bottom">
@@ -452,25 +452,17 @@
 					<!--/ content -->
 					<div class="footer">
 						<!-- footer -->
-						<div w3-include-html="footer.php"></div>
+						<?php include 'footer.php'; ?>
 						<!-- / footer -->
 					</div>
 				</div>
 				<!--  end page-wrapper -->
 			</div>
         </div>
-
 			<!-- Mainly scripts -->
-			<script src="js/w3data.js"></script>
-			<script>
-				w3IncludeHTML();
-			</script>
-
 			<script>
 				var dbName = "<?php echo $dbName; ?>";
 			</script>
-            <script src="js/myCampaigns.js"></script>
-        
+            <script src="js/myCampaigns.js"></script>        
 	</body>
-
 	</html>

@@ -26,13 +26,13 @@
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.html"></div>
+	<?php include 'leftWrapper.php'; ?>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg" ng-controller="myCtrl">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.html"></div>
+				<?php include 'topWrapper.php'; ?>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -143,7 +143,7 @@
 <!--/ content -->           
 			<div class="footer">
 				<!-- footer -->
-				<div w3-include-html="footer.html"></div>
+				<?php include 'footer.php'; ?>
 				<!-- / footer -->			
 			</div>
 		</div><!--  end page-wrapper -->

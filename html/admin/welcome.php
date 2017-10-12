@@ -1,21 +1,21 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?><!DOCTYPE html>
+?>
+	<!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
 		<?php include "header.php"; ?>
-
 	</head>
 	<body class="fixed-sidebar">
 		<?php include "afterBody.php"; ?>
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";
-      var myApp = angular.module('myApp', ['angularMoment','davinci', 'localytics.directives']);
+		    var myApp = angular.module('myApp', ['angularMoment','davinci', 'localytics.directives']);
 		</script>
     <script src="js/welcome.js"></script>
 		<div id="wrapper">
@@ -146,7 +146,7 @@
 
                 <div class="social-avatar">
                     <a href="" class="pull-left">
-                        <img alt="image" src="http://www.mindfireinc.com/static/images/david-rosendahl.jpg">
+                        <img alt="image" src="https://www.mindfireinc.com/static/images/david-rosendahl.jpg">
                     </a>
                     <div class="media-body">
                         <a href="mailto:daver@mindfireinc.com">

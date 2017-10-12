@@ -1,19 +1,15 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('UTC');
 session_start();
 require_once 'commonUtil.php';
-
 $ProgramID = $_GET['ProgramID'];
 $TEST = $_GET['test'];
-
 $ACCOUNTID = $_SESSION['ACCOUNTID'];
 $EMAIL = $_SESSION['EMAIL'];
 $PWD = $_SESSION['PWD'];
 $PARTNERGUID = $_SESSION['PARTNERGUID'];
 $PARTNERPASSWORD = $_SESSION['PARTNERPASSWORD'];
 $ACCOUNNAME = $_SESSION['ACCOUNNAME'];
-
-
 
 if ($TEST == 't') {
 	echo "ProgramID : $ProgramID<br>";

@@ -159,7 +159,7 @@
 																	</option>
 																</select><br>
 																<div style="padding-top: 10px;">
-																	<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
+																	<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="https://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
 																</div>
 															</div>
 														</div>
