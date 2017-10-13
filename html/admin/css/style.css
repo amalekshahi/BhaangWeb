@@ -7653,37 +7653,67 @@ body.rtls.top-navigation .footer.fixed {
  *     */
 .theme-config {
   position: absolute;
-  top: 90px;
+  top: 80px;
   right: 0;
   overflow: hidden;
 }
+
+.sendTest-config {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  overflow: hidden;
+}
+
+.sendTest-config-box {
+  margin-right: -320px;
+  position: relative;
+  transition-duration: 0.8s;
+}
+
 .theme-config-box {
   margin-right: -320px;
   position: relative;
-  z-index: 2000;
+  z-index: 1050;
   transition-duration: 0.8s;
 }
-.theme-config-box.show {
+.theme-config-box.show, .sendTest-config-box.show {
   margin-right: 0;
 }
+
 .spin-icon {
-  background: #1ab394;
+  background: #808080;
   position: absolute;
   padding: 7px 10px 7px 13px;
   border-radius: 20px 0 0 20px;
-  font-size: 16px;
+  font-size: 12px;
   top: 0;
   left: 0;
   width: 40px;
   color: #fff;
   cursor: pointer;
 }
-.skin-settings {
+
+.sendTest-icon {
+  background: #008000;
+  position: absolute;
+  padding: 7px 10px 7px 13px;
+  border-radius: 20px 0 0 20px;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+  width: 40px;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.skin-settings, .sendTest-settings {
   width: 320px;
   margin-left: 40px;
   background: #f3f3f4;
 }
-.skin-settings .title {
+.skin-settings .title, .sendTest-settings {
   background: #efefef;
   text-align: center;
   text-transform: uppercase;
@@ -7692,7 +7722,7 @@ body.rtls.top-navigation .footer.fixed {
   padding: 10px 15px;
   font-size: 12px;
 }
-.setings-item {
+.setings-item, .sendTest-item {
   padding: 10px 30px;
 }
 .setings-item.skin {
