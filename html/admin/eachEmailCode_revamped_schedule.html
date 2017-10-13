@@ -52,21 +52,22 @@
 
 	</div>-->
 	<div class="col-sm-10">
-		
-		
-		<div marginwidth="0" marginheight="0" bgcolor="#f4f4f4" style="margin:0;padding:0">
-	<table border="0" width="700" cellpadding="0" cellspacing="0" align="center" style="margin:auto">
-		<tr>
-			<td> <h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail##emailid##"></a></h3>
-</td>
-</tr>
-</table>
-</div>
 
-		
-		
-		
-		
+
+		<div marginwidth="0" marginheight="0" bgcolor="#f4f4f4" style="margin:0;padding:0">
+			<table border="0" width="700" cellpadding="0" cellspacing="0" align="center" style="margin:auto">
+				<tr>
+					<td>
+						<h3>Subject: <a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="subjectEmail##emailid##"></a></h3>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+
+
+
 		<div class="window">
 			<div class="titlebar">
 				<div class="buttons">
@@ -83,140 +84,124 @@
 		</div>
 	</div>
 	<div class="col-sm-1">
-		
-	<div class="fixedContainer">
-		<div class="theme-config">
-    <div class="theme-config-box">
-        <div class="spin-icon">
-            <i class="fa fa-cogs fa-spin"></i> 
-        </div>
-        <div class="skin-settings">
-            <div class="title">Settings <br>
-            <small style="text-transform: none;font-weight: 400">
+
+		<div class="fixedContainer">
+			<div class="theme-config">
+				<div class="theme-config-box">
+					<div class="spin-icon">
+						<i class="fa fa-cogs fa-spin"></i>
+					</div>
+					<div class="skin-settings">
+						<div class="title">Settings <br>
+							<small style="text-transform: none;font-weight: 400">
                 Config your Email.
             </small></div>
-            <div class="setings-item">
-                    <span>
+						<div class="setings-item">
+							<span>
                         Send on:
                     </span>
 
-                <div class="switch">Day 1
-                </div>
-            </div>
-            <div class="setings-item">
-                    <span>
-                        From:
+							<div class="switch">Day 1
+							</div>
+						</div>
+						<div class="setings-item">
+							<span>
+                        				<label>From</label>
+											<div>
+				<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
+			</div>
+
                     </span>
 
-                <div class="switch">
-                </div>
-            </div>
-					            <div class="setings-item">
-                    <span>
-                        Template:
+						</div>
+						<div class="setings-item">
+							<span>
+                        		<label class="control-label">Template</label>
+		<div>
+			<select chosen placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail##emailid##" ng-change="SelectChanged('viewEmail##emailid##','templateEmail##emailid##')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs##emailid##">
+								<option value=""></option> 
+							</select>
+			<p></p>
+		</div>
+
                     </span>
 
-                <div class="switch">
-                </div>
-            </div>
+						</div>
+					</div>
+				</div>
 
-            <div class="title">Skins!</div>
-            <div class="setings-item default-skin">
-                    <span class="skin-name ">
-                         <a href="#" class="s-skin-0">
-                             Default
-                         </a>
-                    </span>
-            </div>
-            <div class="setings-item blue-skin">
-                    <span class="skin-name ">
-                        <a href="#" class="s-skin-1">
-                            Blue light
-                        </a>
-                    </span>
-            </div>
-        </div>
-    </div>
-			
-</div>
-		
-		
-		
-		
-		
-	<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}}</button><br>
-	<button class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-paper-plane"></i> Send Test</button><br>
+			</div>
+
+
+
+
+
+			<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}}</button><br>
+			<button class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-paper-plane"></i> Send Test</button><br>
 		</div>
 		<style>
-		
-		.fixedContainer {
-    position: fixed;
-		z-index: 100;
-}
+			.fixedContainer {
+				position: fixed;
+				z-index: 100;
+			}
 
-	.modal.right .modal-dialog {
-		position: fixed;
-		margin: auto;
-		width: 320px;
-		height: 100%;
-		-webkit-transform: translate3d(0%, 0, 0);
-		    -ms-transform: translate3d(0%, 0, 0);
-		     -o-transform: translate3d(0%, 0, 0);
-		        transform: translate3d(0%, 0, 0);
-	}
+			.modal.right .modal-dialog {
+				position: fixed;
+				margin: auto;
+				width: 320px;
+				height: 100%;
+				-webkit-transform: translate3d(0%, 0, 0);
+				-ms-transform: translate3d(0%, 0, 0);
+				-o-transform: translate3d(0%, 0, 0);
+				transform: translate3d(0%, 0, 0);
+			}
 
-	.modal.right .modal-content {
-		height: 100%;
-		overflow-y: auto;
-	}
-	
-	.modal.right .modal-body {
-		padding: 15px 15px 80px;
-	}
-    
-/*Right*/
-	.modal.right.fade .modal-dialog {
-		right: -320px;
-		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-		        transition: opacity 0.3s linear, right 0.3s ease-out;
-	}
-	
-	.modal.right.fade.in .modal-dialog {
-		right: 0;
-	}
+			.modal.right .modal-content {
+				height: 100%;
+				overflow-y: auto;
+			}
 
-/* ----- MODAL STYLE ----- */
-	.modal-content {
-		border-radius: 10;
-		border: none;
-	}
+			.modal.right .modal-body {
+				padding: 15px 15px 80px;
+			}
+			/*Right*/
 
-	.modal-header {
-		border-bottom-color: #EEEEEE;
-		background-color: #FAFAFA;
-	}
+			.modal.right.fade .modal-dialog {
+				right: -320px;
+				-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+				-moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+				-o-transition: opacity 0.3s linear, right 0.3s ease-out;
+				transition: opacity 0.3s linear, right 0.3s ease-out;
+			}
 
-			
-			
+			.modal.right.fade.in .modal-dialog {
+				right: 0;
+			}
+			/* ----- MODAL STYLE ----- */
+
+			.modal-content {
+				border-radius: 10;
+				border: none;
+			}
+
+			.modal-header {
+				border-bottom-color: #EEEEEE;
+				background-color: #FAFAFA;
+			}
 		</style>
-	
-	
-</div>
-	
 
-	
+
+	</div>
+
+
+
 	<script>
-	
-	    $('.spin-icon').click(function (){
-        $(".theme-config-box").toggleClass("show");
-    });
-
-	
+		$('.spin-icon').click(function() {
+			$(".theme-config-box").toggleClass("show");
+		});
 	</script>
-	
-	
+
+
 	<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -227,15 +212,19 @@
 				</div>
 
 				<div class="modal-body">
-					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put
+						a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+						raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
 					</p>
 				</div>
 
-			</div><!-- modal-content -->
-		</div><!-- modal-dialog -->
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
 	</div>
-	
-	</div>
+
+</div>
 
 <!--
 	<div class="col-sm-8">
@@ -255,7 +244,7 @@
 			<a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest##emailid##'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send</a>
 
 		</form>
-
+t
 
 
 		<label class="control-label">From</label>
@@ -286,7 +275,7 @@
 			</div>
 		</div>
 	</div>-->
-	<!--
+<!--
 	<div class="col-sm-3">
 		<form class="form-horizontal" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
 			<div class="form-group">
