@@ -83,8 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-1">
-
+	<div class="col-sm-1" style="float: right;">
 		<div class="fixedContainer">
 			<div class="theme-config">
 				<div class="theme-config-box">
@@ -94,135 +93,88 @@
 					<div class="skin-settings">
 						<div class="title">Settings <br>
 							<small style="text-transform: none;font-weight: 400">
-                Config your Email.
+                Select who this email is from and a template.  Then roll over areas of the email template to see what you can edit.
             </small></div>
 						<div class="setings-item">
 							<span>
-                        Send on:
-                    </span>
-
-							<div class="switch">Day 1
-							</div>
+                        				<label>Send On</label>
+											<div class="input-group form-group-sm">
+												<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+							<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
 						</div>
+
+						</span>
+
+					</div>
 						<div class="setings-item">
 							<span>
                         				<label>From</label>
-											<div>
-				<select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
-			</div>
-
-                    </span>
-
+											<div class="input-group form-group-sm">
+												<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+							<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
 						</div>
-						<div class="setings-item">
-							<span>
+
+						</span>
+
+					</div>
+					<div class="setings-item">
+						<span>
                         		<label class="control-label">Template</label>
-		<div>
-			<select chosen placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail##emailid##" ng-change="SelectChanged('viewEmail##emailid##','templateEmail##emailid##')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs##emailid##">
+		<div class="input-group form-group-sm">
+												<span class="input-group-addon"><i class="fa fa-file" aria-hidden="true"></i></span>
+						<select class="form-control input-sm" placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail##emailid##" ng-change="SelectChanged('viewEmail##emailid##','templateEmail##emailid##')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs##emailid##">
 								<option value=""></option> 
 							</select>
-			<p></p>
-		</div>
-
-                    </span>
-
-						</div>
+						<p></p>
 					</div>
-				</div>
 
+					</span>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}}</button><br>
+	<button class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-paper-plane"></i> Send Test</button><br>
+</div>
+<style>
+	.fixedContainer {
+		position: fixed;
+		z-index: 100;
+	}
+</style>
+
+
+</div>
+
+<script>
+	$('.spin-icon').click(function() {
+		$(".theme-config-box").toggleClass("show");
+	});
+</script>
+
+
+<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
 			</div>
 
-
-
-
-
-			<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}}</button><br>
-			<button class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-paper-plane"></i> Send Test</button><br>
-		</div>
-		<style>
-			.fixedContainer {
-				position: fixed;
-				z-index: 100;
-			}
-
-			.modal.right .modal-dialog {
-				position: fixed;
-				margin: auto;
-				width: 320px;
-				height: 100%;
-				-webkit-transform: translate3d(0%, 0, 0);
-				-ms-transform: translate3d(0%, 0, 0);
-				-o-transform: translate3d(0%, 0, 0);
-				transform: translate3d(0%, 0, 0);
-			}
-
-			.modal.right .modal-content {
-				height: 100%;
-				overflow-y: auto;
-			}
-
-			.modal.right .modal-body {
-				padding: 15px 15px 80px;
-			}
-			/*Right*/
-
-			.modal.right.fade .modal-dialog {
-				right: -320px;
-				-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-				-moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-				-o-transition: opacity 0.3s linear, right 0.3s ease-out;
-				transition: opacity 0.3s linear, right 0.3s ease-out;
-			}
-
-			.modal.right.fade.in .modal-dialog {
-				right: 0;
-			}
-			/* ----- MODAL STYLE ----- */
-
-			.modal-content {
-				border-radius: 10;
-				border: none;
-			}
-
-			.modal-header {
-				border-bottom-color: #EEEEEE;
-				background-color: #FAFAFA;
-			}
-		</style>
-
-
-	</div>
-
-
-
-	<script>
-		$('.spin-icon').click(function() {
-			$(".theme-config-box").toggleClass("show");
-		});
-	</script>
-
-
-	<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
-				</div>
-
-				<div class="modal-body">
-					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put
-						a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-						raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-					</p>
-				</div>
-
+			<div class="modal-body">
+				<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put
+					a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+					raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				</p>
 			</div>
-			<!-- modal-content -->
+
 		</div>
-		<!-- modal-dialog -->
+		<!-- modal-content -->
 	</div>
+	<!-- modal-dialog -->
+</div>
 
 </div>
 
