@@ -30,7 +30,7 @@
                     <div class="tabs-container" >
                         <div class="tabs-left">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#email-1" style="padding-left: 10px;"> Day 1: Sent to Everyone Targeted</a></li>
+                                <li class="active"><a data-toggle="tab" href="#email-1" style="padding-left: 10px;"> <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;"></span> Day 1: Sent to Everyone Targeted</a></li>
                                 <li class=""><a data-toggle="tab" href="#email-2" style="padding-left: 10px;"> Day 3: Sent to Non-Openers</a></li>
 																<li class=""><a data-toggle="tab" href="#email-2" style="padding-left: 10px;"> Day 5: Sent to Non-Clickers</a></li>
                             </ul>

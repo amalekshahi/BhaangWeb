@@ -198,40 +198,53 @@
 									</select>
 												<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence. </span>
 												<br>
+												<form class="form-inline">
+												<div> <!-- Not sure why this needs to be here in order for the form below to be inline.  Huh?  --> 
+												</div>
+											 </form>
 												<form class="form-inline" role="form">
-													<div class="form-group" ng-show="emailDone > 0">
+												<div class="input-group form-group-sm"  ng-show="emailDone > 0">
 														<!-- <label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Scheduled for Wednesday August 22, 2017</label>
 																		<small>@ 3:30 PM PST</small><br> 													 -->
 
-														<label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Start This Audience On:</label><br>
-
-
-														<div class="input-group date">
+													<label for="wait2"><i aria-hidden="true" class="fa fa-clock-o fa-lg"></i> Start This Audience On:</label><br>
+												<div class="input-group form-group-sm">
 															<input ng-disabled="disabledEmail['1']" type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE1-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE1-DATE" name="EMAIL1-SCHEDULE1-DATE"
 															 ng-change="dateChange('')" required="">
 															<span id="datespan1" class="input-group-addon" onclick="showcalendar();"><i class="fa fa-calendar"></i></span>
 														</div>
-
-														<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
-															<input ng-disabled="disabledEmail['1']" type="text" class="form-control" id="EMAIL1-SCHEDULE1-TIME" name="EMAIL1-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE1-TIME']" ng-change="dateChange('')" required="">
-															<span id="clockspan1" class="input-group-addon">
-																				<span class="fa fa-clock-o"></span>
-															</span>
-														</div>
-
-														<select ng-disabled="disabledEmail['1']" class="form-control" id="EMAIL1-SCHEDULE1-TIMEZONE" name="EMAIL1-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL1-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')" required="">
+												<div class="input-group form-group-sm clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
+												<input ng-disabled="disabledEmail['1']" type="text" class="form-control" id="EMAIL1-SCHEDULE1-TIME" name="EMAIL1-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE1-TIME']" ng-change="dateChange('')" required="">
+												<span id="clockspan1" class="input-group-addon">
+												<span class="fa fa-clock-o"></span>
+												</span>
+												</div>
+												<div class="input-group form-group-sm">
+												<select ng-disabled="disabledEmail['1']" class="form-control" id="EMAIL1-SCHEDULE1-TIMEZONE" name="EMAIL1-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL1-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')" required="">
 																			<option value="Pacific Standard Time" >PST</option> 
 																			<option value="Mountain Standard Time">MST</option> 
 																			<option value="Central America Standard Time">CST</option> 
 																			<option value="Eastern Standard Time">EST</option>
 																		</select>
-													</div>
+														</div>
+												</div>
 												</form>
 											</td>
 											<td>
-												<small class="label label-primary" name="auCount"  id="auCount"><i class="fa fa-users"></i> 16 people</small>
+												<div class="widget  p-lg text-center" style="padding-bottom: 0px;padd-top: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 0px;">
+                        <div class="m-b-md" style="margin-bottom: 0px;">
+                            <i class="fa fa-user-circle-o fa-4x"></i>
+                            <h1 class="m-xs">6,124</h1>
+                            <h3 class="font-bold no-margins">
+                                People
+                            </h3>
+                            <small>In this Schedule</small>
+                        </div>
+                    </div>
+												<!--<small class="label label-primary" name="auCount"  id="auCount"><i class="fa fa-users"></i> 16 people</small>-->
 												<!--<input type="text" name="auCount"  id="auCount" value="" readonly>-->
 											</td>
+											<td style="vertical-align:middle"><button class="btn btn-primary" ng-click="Save('Step3')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} </button></td>
 										</tr>
 										<tr>
 											<td><a class="btn btn-white btn-bitbucket">

@@ -7646,14 +7646,12 @@ body.rtls.top-navigation .footer.fixed {
   left: 0;
 }
 /*
- *  *
- *   *   This is style for skin config
- *    *   Use only in demo theme
- *     *
- *     */
+* We uses these for the little "Test" and "Settings" sliders in Email
+*/
+
 .theme-config {
   position: absolute;
-  top: 80px;
+  top: 75px;
   right: 0;
   overflow: hidden;
 }
