@@ -7677,19 +7677,26 @@ body.rtls.top-navigation .footer.fixed {
   z-index: 1050;
   transition-duration: 0.8s;
 }
-.theme-config-box.show, .sendTest-config-box.show {
+
+.theme-config-box.show {
   margin-right: 0;
 }
+
+.sendTest-config-box.show {
+  margin-right: 0;
+  z-index: 2000;
+}
+
 
 .spin-icon {
   background: #808080;
   position: absolute;
   padding: 7px 10px 7px 13px;
   border-radius: 20px 0 0 20px;
-  font-size: 12px;
+  font-size: 10px;
   top: 0;
   left: 0;
-  width: 40px;
+  width: 90px;
   color: #fff;
   cursor: pointer;
 }
@@ -7699,10 +7706,10 @@ body.rtls.top-navigation .footer.fixed {
   position: absolute;
   padding: 7px 10px 7px 13px;
   border-radius: 20px 0 0 20px;
-  font-size: 12px;
+  font-size: 10px;
   top: 0;
   left: 0;
-  width: 40px;
+  width: 90px;
   color: #fff;
   cursor: pointer;
 }
@@ -7710,7 +7717,7 @@ body.rtls.top-navigation .footer.fixed {
 
 .skin-settings, .sendTest-settings {
   width: 320px;
-  margin-left: 40px;
+  margin-left: 90px;
   background: #f3f3f4;
 }
 .skin-settings .title, .sendTest-settings {
