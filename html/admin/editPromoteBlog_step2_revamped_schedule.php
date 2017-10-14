@@ -36,7 +36,7 @@
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a data-toggle="tab" href="#email-1" style="padding-left: 10px;">
-										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;"></span> Day 1: Sent to Everyone Targeted
+										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;"></span> Day 1: Sent to Everyone
 									</a>
 								</li>
 								<li class="">
