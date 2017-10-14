@@ -150,7 +150,7 @@
 										</div>
 										<div class="ibox-content">
 											
-												<div class="panel-group" id="accordion">
+												<div class="panel-group" id="accordion" style="margin-bottom: 0px;">
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<div class="row">
