@@ -185,10 +185,10 @@
 						<div class="tabs-left">
 							<ul class="nav nav-tabs">
 								<li class="active">
-									<a data-toggle="tab" href="#tab-your-company">Your Company</a>
+									<a data-toggle="tab" href="#tab-your-company"><i class="fa fa-building" aria-hidden="true"></i> Global Settings for <?php echo $accountName;?></a>
 								</li>
 								<li class="">
-									<a data-toggle="tab" href="#tab-you">You</a>
+									<a data-toggle="tab" href="#tab-you"><i class="fa fa-user-o" aria-hidden="true"></i> Settings for <?php echo $USERNAME;?></a>
 								</li>
 								<li class="">
 									<a data-toggle="tab" href="#tab-tracking-code">Tracking Code</a>
@@ -198,16 +198,20 @@
 									<a data-toggle="tab" href="#tab-5">Sender Addresses</a>
 								</li>-->
 								<li class="">
-									<a data-toggle="tab" href="#tab-3rd-party-products">3rd Party Product Linking</a>
+									<a data-toggle="tab" href="#tab-3rd-party-products"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Integrations</a>
 								</li>
 								<li class="">
 									<a data-toggle="tab" href="#tab-grading-and-scoring">Grading & Scoring</a>
+								</li>
+								<li class="">
+									<a data-toggle="tab" href="#tab-grading-and-scoring"><i class="fa fa-credit-card" aria-hidden="true"></i> Billing</a>
 								</li>								
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab-your-company">
-									<div class="panel-body">
-									    <h2>Company Contact Information</h2>
+									<!--<div class="panel-body">
+									 
+										<h2>Company Contact Information</h2>
 									    <p>This information is used in all your Emails and Landing Pages.</p>
 										<p><label>Company Name</label><input class="form-control" name="COMPANY-NAME" placeholder="Big Shiz Inc" type="text" value="{{COMPANY-NAME}}"><small>Your company's name. Appears many places, including emails and landing pages.</small></p>
 										<p><label>Address Street</label><input class="form-control" name="ADDRESS-STREET" placeholder="123 West Road" type="text" value="{{ADDRESS-STREET}}"><small>Your company's street address.</small></p>
@@ -228,6 +232,82 @@
 									    
 									    <p>&nbsp;</p>
 									<input name="action" type="hidden" value="saveProfileSettings"> <button class="btn btn-primary" type="submit">Save</button> <button class="btn btn-white" type="submit">Cancel</button>
+									
+									</div>-->
+									<div class="panel-body">
+										
+									<div><h2>Marketing Settings</h2></div>
+										<!--
+												<div class="form-group"><label class="col-sm-2 control-label">From Email</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="you@something.com" name="defFromAdd" ng-model="userinfo.defFromAdd">
+													<span class="help-block m-b-none">The email you're sending from (and to which people will reply).</span></div>
+												</div>
+												<div class="form-group"><label class="col-sm-2 control-label">From Email Name</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Bill Gates" name="defFromName" ng-model="userinfo.defFromName">
+													<span class="help-block m-b-none">What do they call you?</span>
+													</div>
+												</div>
+-->
+												<div class="form-group"><label class="col-sm-2 control-label">Unsubscribe Link</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="http://domain/unsubscribe" name="defUnsubscribe" ng-model="userinfo.defUnsubscribe">
+													<span class="help-block m-b-none">How to unsubscribe?</span>
+													</div>
+												</div>
+
+												<div class="form-group"><label class="col-sm-2 control-label">View Online Message</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="View online message" name="defViewOnline" ng-model="userinfo.defViewOnline">
+													<span class="help-block m-b-none">View online message to show in the emails.</span>
+													</div>
+												</div>
+
+												<div class="form-group"><label class="col-sm-2 control-label">Company Name</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Company Name" name="defCompanyName" ng-model="userinfo.defCompanyName">
+													<span class="help-block m-b-none">Company Name</span>
+													</div>
+												</div>
+
+												<div class="form-group"><label class="col-sm-2 control-label">Company Address</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Company Address" name="defCompanyAddress" ng-model="userinfo.defCompanyAddress">
+													<span class="help-block m-b-none">Company Address</span>
+													</div>
+												</div>
+
+												<div class="form-group"><label class="col-sm-2 control-label">Company Phone</label>
+													<div class="col-sm-10">
+													<input type="text" class="form-control" placeholder="Company Phone" name="defCompanyPhone" ng-model="userinfo.defCompanyPhone">
+													<span class="help-block m-b-none">Company Phone</span>
+													</div>
+												</div>
+
+												<div class="form-group"><label class="col-sm-2 control-label">Company Logo</label>
+													<div class="col-sm-10">
+														<a ng-model="file" ngf-select="upload($file,'defCompanyLogo')" href="" style="vertical-align: top;" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload-defCompanyLogo'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload-defCompanyLogo'] != 'Uploading'"></i> Upload image ...</a>
+														<img ng-src="{{srcCompanyLogo}}" width="180px" border="0" alt="logo">
+													</div>
+												</div>
+
+												<div class="hr-line-dashed"></div>            
+												
+												<div class="form-group">
+													<div class="col-sm-4 col-sm-offset-2">
+														<input type="hidden" name="action" value="saveProfileSettings">
+														<button ng-disabled="myForm.$pristine" class="btn btn-primary" ng-click="Save()" ><i class="fa fa-floppy-o" ng-show="state['SaveAccountSetting'] == 'Save'"></i><span ng-show="state['SaveAccountSetting'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['SaveAccountSetting']}}</button>
+														<button ng-disabled="myForm.$pristine" class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
+													</div>
+												</div>
+												<div ng-show="saveSuccess && myForm.$pristine"  ng-cloak>
+													<div class="alert alert-success">
+													<strong> Success! </strong> Save success.
+													</div>
+												</div>
+										
+										
 									</div>
 									
 								</div>
