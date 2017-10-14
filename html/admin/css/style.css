@@ -7720,6 +7720,7 @@ body.rtls.top-navigation .footer.fixed {
   width: 320px;
   margin-left: 90px;
   background: #f3f3f4;
+  opacity: .95;
 }
 .skin-settings .title, .sendTest-settings {
   background: #efefef;
