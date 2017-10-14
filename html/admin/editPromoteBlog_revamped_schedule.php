@@ -159,7 +159,7 @@
 																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Identify the Targeted Blog Post</a></h4>
 																</div>
 																<div class="col-sm-9">
-																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne" class="accordion-toggle collapsed">
                                   <small class="m-l-sm" ng-show="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}?{{campaign['URL-BLOG-POST-UTM']}}</small>
                                   <small class="m-l-sm" ng-hide="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}</small> </a></h4>
 																</div>

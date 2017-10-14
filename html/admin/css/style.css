@@ -8713,3 +8713,16 @@ body.md-skin {
 .ng-hide-dave {
   display: none !important;
 }
+
+/* This controls the plus and minus symboles in the accordion */
+
+.accordion-toggle:after {
+    font-family: 'Glyphicons Halflings';  
+    color: #b4b3b3;
+    content: "\e082";  
+    float: right;          
+}
+
+ .accordion-toggle.collapsed:after {
+    content: "\e081";   
+}

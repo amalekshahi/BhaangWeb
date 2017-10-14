@@ -16,7 +16,7 @@
 			</div>
 			<div class="col-sm-9">
 				<h4 class="panel-title">
-					<a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
+					<a data-parent="#accordion" data-toggle="collapse" href="#collapseThree" class="accordion-toggle collapsed">
 						<small class="m-l-sm" ng-show="ShowScheduleDateTime()">
 							<i class="fa fa-dot-circle-o" aria-hidden="true"></i> Scheduled for {{ScheduleDateTime}} ({{campaign['EMAIL1-SCHEDULE1-TIMEZONE']}})
 						</small>
