@@ -123,10 +123,10 @@
 					<div class="col-lg-12">
 						<div class="widget style1 blue-bg">
 							<div class="row">
-								<div class="col-xs-4">
+								<div class="col-xs-3">
 									<i class="fa fa-bullhorn fa-5x"></i>
 								</div>
-								<div class="col-xs-8 text-right campaign-title">
+								<div class="col-xs-9 text-right campaign-title">
 									<span> Promote a Blog Post </span>
 									<h2 class="font-bold"><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="editCampaignName" e-maxlength="50"></a></h2>
 								</div>
