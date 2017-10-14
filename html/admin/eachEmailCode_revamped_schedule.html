@@ -144,32 +144,30 @@
 								</div>
 								<div class="setings-item">
 									<span>
-										<label>Send this Email to:</label>
+										<label>Test This Email</label>
 										<form class="form-inline">
 											<div class="input-group form-group-sm">
-												
-													<div style="width: 375px">
+													<div style="width: 350px; padding-bottom: 5px">
 														<select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'">
 															<option value=""></option>
 															<!-- Needs this otherwise gets funky.  Known angular issue -->
 														</select>
-													
 													<a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward.">
-														<i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i>
+														<i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i> 
 													</a>
 												</div>
 												<a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top">
 													<span ng-show="state['SendTest##emailid##'] == 'Sending'">
 														<i class="glyphicon glyphicon-refresh spinning"></i>
 													</span>
-													<i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send </a>
+													<i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send This Email</a>
 											</div>
 										</form>
 									</span>
 								</div>
 								<div class="setings-item">
 									<span>
-										<label>Send entire Email Sequence</label>
+										<label>Test All Emails in This Sequence</label>
 										<div class="input-group form-group-sm">
 											<form class="form-inline">
 												<div class="input-group form-group-sm">
@@ -180,7 +178,7 @@
 														<option>in 10 minutes</option>
 														<option>At HH:MM</option>
 													</select>
-												</div> to
+												</div><small> send to </small>
 												<div class="input-group form-group-sm">
 													<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
 														<option>
@@ -190,7 +188,7 @@
 														<option>Some other list</option>
 														<option>These email addresses: </option>
 													</select>
-												</div>and wait
+												</div><small> and wait </small>
 												<div class="input-group form-group-sm">
 													<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
 														<option>1 minute</option>
@@ -198,8 +196,8 @@
 														<option>3 minutes</option>
 														<option>5 minutes</option>
 														<option>x minutes:</option>
-													</select> between Emails
-												</div>
+													</select>
+												</div><small> between Emails </small>
 											</form>
 										</div>
 									</span>
