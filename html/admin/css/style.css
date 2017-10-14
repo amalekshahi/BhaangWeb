@@ -7667,13 +7667,13 @@ body.rtls.top-navigation .footer.fixed {
 }
 
 .sendTest-config-box {
-  margin-right: -320px;
+  margin-right: -420px;
   position: relative;
   transition-duration: 0.8s;
 }
 
 .theme-config-box {
-  margin-right: -320px;
+  margin-right: -420px;
   position: relative;
   z-index: 1050;
   transition-duration: 0.8s;
@@ -7717,7 +7717,7 @@ body.rtls.top-navigation .footer.fixed {
 
 
 .skin-settings, .sendTest-settings {
-  width: 320px;
+  width: 420px;
   margin-left: 90px;
   background: #f3f3f4;
   opacity: .95;
