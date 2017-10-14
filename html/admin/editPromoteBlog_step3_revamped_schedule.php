@@ -99,6 +99,7 @@
 																				<span class="fa fa-clock-o"></span>
 																			</span>
 																		</div>
+																		<!-- I would prefer if we pull this from global settings and not require the User to enter it everytime
 																		<div class="input-group form-group-sm">
 																			<select ng-disabled="disabledEmail['1']" class="form-control" id="EMAIL1-SCHEDULE1-TIMEZONE" name="EMAIL1-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL1-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')" required="">
 																				<option value="Pacific Standard Time" >PST</option>
@@ -106,6 +107,15 @@
 																				<option value="Central America Standard Time">CST</option>
 																				<option value="Eastern Standard Time">EST</option>
 																			</select>
+																		</div>
+																		-->
+																		<div class="input-group form-group-sm">&nbsp;
+																			<div class="checkbox">
+																				<label>
+																					<input type="checkbox" value="">
+																					Boomerang this Audience
+																				</label>
+																			</div>
 																		</div>
 																	</div>
 																</form>
