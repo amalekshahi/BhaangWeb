@@ -15,7 +15,7 @@ $.fn.editableform.buttons =
 $(document).ready(function() {
 	$('#email_name').editable();
 
-	new Clipboard('.btn');
+	new Clipboard('.btn-copy');
 
 	$('.clockpicker').clockpicker({
 		twelvehour: true

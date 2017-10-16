@@ -786,6 +786,7 @@ function s3_put_contents($fileName,$data,$metaData=array())
         'Key'        => $path,
         'Body'        => $data,
         'ACL'		 => 'public-read',
+		'CacheControl'  => 'max-age=0',
         'Metadata'   => $metaData,
     ));
     return $result['ObjectURL'];
