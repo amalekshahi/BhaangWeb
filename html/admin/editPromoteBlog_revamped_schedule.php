@@ -14,9 +14,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 
-		<!-- FooTable -->
-		<link href="css/plugins/footable/footable.core.css" rel="stylesheet">
-
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+		
 		<style>
 			.editable-container.editable-inline,
 			.editable-container.editable-inline .control-group.form-group,
@@ -47,6 +47,45 @@
 			.campaign-title .editable-container.editable-inline {
 				margin-right: 87px !important;
 			}
+			
+			/* MODAL FADE LEFT RIGHT BOTTOM */
+.modal.fade:not(.in).left .modal-dialog {
+	-webkit-transform: translate3d(-25%, 0, 0);
+	transform: translate3d(-25%, 0, 0);
+}
+.modal.fade:not(.in).right .modal-dialog {
+	-webkit-transform: translate3d(25%, 0, 0);
+	transform: translate3d(25%, 0, 0);
+}
+.modal.fade:not(.in).bottom .modal-dialog {
+	-webkit-transform: translate3d(0, 25%, 0);
+	transform: translate3d(0, 25%, 0);
+}
+
+.modal.right .modal-dialog {
+	position:absolute;
+	top:0;
+	right:0;
+	margin:0;
+}
+
+.modal.left .modal-dialog {
+	position:absolute;
+	top:0;
+	left:0;
+	margin:0;
+}
+
+.modal.left .modal-dialog.modal-sm {
+	max-width:300px;
+}
+
+.modal.left .modal-content, .modal.right .modal-content {
+	min-height:100vh;
+	border:0;
+}
+			
+			
 		</style>
 
 	</head>
@@ -84,10 +123,10 @@
 					<div class="col-lg-12">
 						<div class="widget style1 blue-bg">
 							<div class="row">
-								<div class="col-xs-4">
+								<div class="col-xs-3">
 									<i class="fa fa-bullhorn fa-5x"></i>
 								</div>
-								<div class="col-xs-8 text-right campaign-title">
+								<div class="col-xs-9 text-right campaign-title">
 									<span> Promote a Blog Post </span>
 									<h2 class="font-bold"><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="editCampaignName" e-maxlength="50"></a></h2>
 								</div>
@@ -102,7 +141,7 @@
 										<div class="ibox-title">
 											<h5><i class="fa fa-rocket" aria-hidden="true" style="color:black"></i> Your Campaign Settings <small class="m-l-sm"></small></h5>
 											<div class="ibox-tools">
-												<?php if ($gates['revamped_schedule'] == "TRUE") { echo "<a class='btn btn-white btn-bitbucket btn-xs' href='editPromoteBlog_revamped_schedule.php?campaign_id={{campaignID}}'><i class='fa fa-flag' aria-hidden='true' style='color:red'></i> Switch to the New Layout</a>"; }?>
+												<?php if ($gates['revamped_schedule'] == "TRUE") { echo "<a class='btn btn-white btn-bitbucket btn-xs' href='editPromoteBlog.php?campaign_id={{campaignID}}'><i class='fa fa-flag' aria-hidden='true' style='color:red'></i> Switch to the Old Layout</a>"; }?>
 												<a class="fullscreen-link"><i class="fa fa-expand"></i> Toggle distraction-free mode</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<!--<a class="btn btn-white btn-bitbucket btn-xs"><i aria-hidden="true" class="fa fa-pause" style="color:orange"></i> PAUSE CAMPAIGN</a>-->
 												<a class="btn btn-white btn-bitbucket btn-xs" ng-click="DuplicateCampaignClick()"><i aria-hidden="true" class="fa fa-clone" style="color:green"></i> DUPLICATE CAMPAIGN</a>
@@ -110,8 +149,8 @@
 											</div>
 										</div>
 										<div class="ibox-content">
-											<div class="panel-body">
-												<div class="panel-group" id="accordion">
+											
+												<div class="panel-group" id="accordion" style="margin-bottom: 0px;">
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<div class="row">
@@ -120,7 +159,7 @@
 																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Identify the Targeted Blog Post</a></h4>
 																</div>
 																<div class="col-sm-9">
-																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne" class="accordion-toggle collapsed">
                                   <small class="m-l-sm" ng-show="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}?{{campaign['URL-BLOG-POST-UTM']}}</small>
                                   <small class="m-l-sm" ng-hide="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}</small> </a></h4>
 																</div>
@@ -200,19 +239,20 @@
 														</div>
 													</div>
 													<div class="panel">
-														<?php include "editPromoteBlog_step2.php"; ?>
-													</div>
-													<div class="panel">
-														<?php include "editPromoteBlog_step3.php"; ?>
+														<?php include "editPromoteBlog_step2_revamped_schedule.php"; ?>
 													</div>
 													<div class="panel panel-default">
-														<?php include "editPromoteBlog_step4.php"; ?>
+														<?php include "editPromoteBlog_step4_revamped_schedule.php"; ?>
+													</div>
+													<div class="panel">
+														<?php include "editPromoteBlog_step3_revamped_schedule.php"; ?>
 													</div>
 												</div>
+											<!-- Commented this out to show that we want to remove the burden of publishing from the User
 												<div style="float:right;">
 													<button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
 												</div>
-											</div>
+											-->
 										</div>
 									</div>
 								</div>
@@ -260,7 +300,13 @@
 			</div>
 			<!--  end page-wrapper -->
 		</div>
-		<script src="js/bootstrap.min.js"></script>
+
+		<!--<script src="js/w3data.js"></script>
+		<script>
+			w3IncludeHTML();
+		</script>-->
+		<!-- <script src="js/jquery-3.1.1.min.js"></script> -->
+		<!--<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 		<script type="text/JavaScript" src="global.js?n=1"></script>
@@ -300,7 +346,9 @@
 		<script src="js/editPromoteBlog.js"></script>
 
 		<!-- FooTable -->
-		<script src="js/plugins/footable/footable.all.min.js"></script>
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+
+		
 	</body>
 
 	</html>

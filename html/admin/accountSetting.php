@@ -4,8 +4,9 @@
     include 'global.php';
     require_once('loginCredentials.php');    
     $dbName = $_SESSION['DBNAME'];
-	$accountID = $_SESSION['ACCOUNTID'];
+		$accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
+		$gates = $_SESSION['GATES'];
 ?>
 <!DOCTYPE html>
 <html ng-app="myApp">
@@ -44,13 +45,11 @@
 									<div class="ibox-title">
 										<h5>Let's get to know each other. <small>A few simple questions from a complex man.</small></h5>
 										<div class="ibox-tools">								
+											<?php if ($gates['tabbed_settings'] == "TRUE") { echo "<a class='btn btn-white btn-bitbucket btn-xs' href='accountSetting_tabbed_settings.php'><i class='fa fa-flag' aria-hidden='true' style='color:red'></i> Switch to the New Layout</a>"; }?>
 											<a class="collapse-link">
 												<i class="fa fa-chevron-up"></i>
 											</a>
-											<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-												<i class="fa fa-wrench"></i>
-											</a>
-											<!-- <ul class="dropdown-menu dropdown-user">
+												<!-- <ul class="dropdown-menu dropdown-user">
 												<li><a href="#">Config option 1</a>
 												</li>
 												<li><a href="#">Config option 2</a>

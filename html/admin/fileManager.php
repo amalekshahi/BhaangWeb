@@ -1,5 +1,5 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
@@ -18,7 +18,6 @@
 	<body class="fixed-sidebar">
 		<div id="wrapper" ng-controller="assetList">
 			<!-- left wrapper -->
-			<!--<div w3-include-html="leftWrapper.php"></div>-->
 			<?php include 'leftWrapper.php'; ?>
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg">
@@ -131,7 +130,7 @@
 															</td>
 															<td><i class="fa fa-circle" aria-hidden="true" style="color:green; font-size: 8px"></i><small class="text-muted"></small></td>
 
-															<td ng-mouseover=showPreview(file.Thumbnail) a href="http://www.yahoo.com">
+															<td ng-mouseover=showPreview(file.Thumbnail) a href="https://www.yahoo.com">
 																<img ng-src="{{file.Thumbnail}}" class="img-thumbnail" width="95">
 															</td>
 															<td ng-mouseover=showPreview(file.Thumbnail)>
