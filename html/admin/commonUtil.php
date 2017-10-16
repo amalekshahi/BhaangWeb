@@ -479,7 +479,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
     // iterate true data 
     $renderErrors = array();
     $renderSuccess = array();
-    //Hanels Doms
+    //handle Doms
     foreach($mamlInfo->doms as $dom){
         $attributeName = $dom->attribute;
         $xpathName = $dom->xpath;
@@ -492,7 +492,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             $renderSuccess[] = $valueFormat.":".$xml->saveHTML($nodeRet);
         }
     }
-    //Handle Fields
+    //handle Fields
     foreach($mamlInfo->fields as $field){
         $numloop = 1;
         $startloop = 1;
@@ -541,6 +541,12 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                                 DomDeleteAllChildren($xpath,$xpathName);
                             }
                         }
+                        if(property_exists($field,"deleteNode")){
+                            $deleteNodeName = $field->deleteNode;
+                            DomDeleteChildNode($xpath,$xpathName,$deleteNodeName);
+                        }
+                        
+                        
                         /* delete criteria node */
                         /*$deleteList = array();
                         $criteriaNodes = $filterNode->getElementsByTagName("Criteria");
@@ -555,7 +561,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
                         $filterNode->setAttribute("CriteriaJoinOperator",$CriteriaJoinOperatorValue);
                         */
                         //add criteria
-                        DomSetText($xpath,$xpathName,"");
+                        //DomSetText($xpath,$xpathName,"");
                         $nodeRet = DomAddNode($xml,$xpath,$xpathName,$value);
                     }else{
                         if($field->type == "URL"){
@@ -601,6 +607,11 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
     }
     //save s3 cache
     file_put_contents($cacheFileName,json_encode($cache));
+    $xmlResult = $xml->saveHTML();
+    // change MFInput back to Input from DomAddNode
+    $xmlResult = str_replace("MFInput", "Input",$xmlResult);
+    // Render {{}} that might be left
+    $xmlResult = studio_url_render($xmlResult,$acctID,$progID,$doc);
     return 
         array(
             'success'=>true,
@@ -611,7 +622,7 @@ function RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc)
             'renderErrors'=>$renderErrors,
             'renderSuccess'=>$renderSuccess,
             'doc' => $doc,
-            'xml'=>$xml->saveHTML(),
+            'xml'=>$xmlResult,
             'cache'=>$cache,
         );
 }
@@ -638,6 +649,60 @@ function MergeStdClassWithArray($data,$default)
             $data ->{$key} = $value;
         }
     }
+}
+
+function MergeArrayWithArray(& $data,$default)
+{
+    foreach($default as $key => $value){
+        if (!array_key_exists($key,$data)) {
+            //echo "Merge $key<br>\n";
+            $data[$key] = $value;
+        }
+    }
+    //print_r($data);
+}
+
+function MergeStdClassWithStdClass($data,$default,$override = false)
+{
+    foreach(get_object_vars($default) as $key => $value) {
+        if(property_exists ( $data , $key )){
+            if($override){
+                $data ->{$key} = $value;
+            }
+        }else{
+            $data ->{$key} = $value;
+        }
+    }
+}
+
+function CleanDocument($doc)
+{
+    unset($doc->_rev);
+    unset($doc->_id);
+}
+
+function GetUserInfoFromDB($dbName)
+{
+    $doc = couchDB_Get("/$dbName/UserInfo");
+    $default = false;
+    if(!empty($doc->error)){
+        //not found need to return from default
+        $default = true;
+        $doc = couchDB_Get("/master/Default_UserInfo");
+        if(!empty($doc->error)){
+            return  array(
+                    'success'=>false,
+                    'message'=>"Default_UserInfo not found",
+                );
+        }
+        CleanDocument($doc);
+    }
+    return array(
+            'success'=>true,
+            'doc'=>$doc,
+            'default'=>$default,
+            'dbName'=>$dbName,
+    );
 }
 
 //$func = function($name,$value)
@@ -721,6 +786,7 @@ function s3_put_contents($fileName,$data,$metaData=array())
         'Key'        => $path,
         'Body'        => $data,
         'ACL'		 => 'public-read',
+		'CacheControl'  => 'max-age=0',
         'Metadata'   => $metaData,
     ));
     return $result['ObjectURL'];
@@ -1170,7 +1236,19 @@ function DomAddNode($xml,$xpath,$path,$value)
     if ($nodes->length > 0) {
         $node = $nodes->item(0);
         $f = $xml->createDocumentFragment();
-        $f->appendXML($value);
+        // Somehow php dom does not like <Input>
+        // so we change to <MFInput> and will change back later after serialize to xml string
+        $data = str_replace("Input", "MFInput", $value);
+
+        $f->appendXML($data);
+        /*
+        $docB = new DomDocument();
+        // Somehow php dom does not like <Input>
+        // so we change to <MFInput> and will change back later after serialize to xml string
+        $data = str_replace("Input", "MFInput", $value);
+        $docB->loadXML($data);
+        $f = $xml->importNode($docB->documentElement, true);
+        */
         $node->appendChild($f);
         return $node;
     }
@@ -1183,6 +1261,21 @@ function DomDeleteAllChildren($xpath,$path)
     if ($nodes->length > 0) {
         $node = $nodes->item(0);
         deleteChildren($node);
+    }
+}
+
+function DomDeleteChildNode($xpath,$path,$nodeName)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        $criteriaNodes = $node->getElementsByTagName($nodeName);
+        foreach ($criteriaNodes as $n) {
+            $deleteList[] = $n;
+        }
+        foreach ($deleteList as $n) {
+            $node->removeChild($n);
+        }
     }
 }
 

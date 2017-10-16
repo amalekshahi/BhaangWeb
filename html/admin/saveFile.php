@@ -1,5 +1,5 @@
 <?php
-	date_default_timezone_set('America/Chicago');
+	date_default_timezone_set('UTC');
 
 	$importTime = date("YmdHis");
 	$contact = "12345";

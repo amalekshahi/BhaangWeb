@@ -2,20 +2,15 @@
 /*
     backend.php
     param
-    cmd = publish/update/test/copy/userinfo
+    cmd = publish/update/test/copy/userinfo/userinfo2s3
     acctID = accountID
     progID = programID
     mode = test
     name = new campaignName (only for copy)
 */
+$commands = array("publish","update","test","copy","userinfo","userinfo2s3");
 require_once 'commonUtil.php';
 date_default_timezone_set("UTC"); 
-
-function CleanDocument($doc)
-{
-    unset($doc->_rev);
-    unset($doc->_id);
-}
 
 session_start();
 
@@ -49,7 +44,8 @@ $start_time = microtime(true);
 
 //$dateTimeNow = date('Y/m/d H:i:s');
 $dateTimeNow = GetStringTimeStamp(); //gmdate('Y-m-d\TH:i:s\Z', time()); 
-if($cmd!="publish" and $cmd!="update" and $cmd!="test" and $cmd!="copy" and $cmd!="userinfo"){
+//if($cmd!="publish" and $cmd!="update" and $cmd!="test" and $cmd!="copy" and $cmd!="userinfo"){
+if(!in_array($cmd,$commands)){
     echo json_encode( 
         array(
             'success'=>false,
@@ -57,35 +53,32 @@ if($cmd!="publish" and $cmd!="update" and $cmd!="test" and $cmd!="copy" and $cmd
         ));
     exit;
 }
-// GetUser Info with default
-if($cmd=="userinfo"){
-    $doc = couchDB_Get("/$dbName/UserInfo");
-    $default = false;
-    if(!empty($doc->error)){
-        //not found need to return from default
-        $default = true;
-        $doc = couchDB_Get("/master/Default_UserInfo");
-        if(!empty($doc->error)){
-            echo json_encode( 
-                array(
-                    'success'=>false,
-                    'cmd'=>$cmd,
-                    'message'=>"Default_UserInfo not found",
-                )
-            );
-            exit;
+if($cmd=="userinfo2s3"){
+    $userInfoRet = GetUserInfoFromDB($dbName);
+    $userInfo = $userInfoRet['doc'];
+    $fields = array();
+    foreach(get_object_vars($userInfo) as $key => $value) {
+        if(startsWith($key,"def")){
+            //$fields[] = $key;
+            //https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyPhone.html
+            $s3FileName = $acctID."-".$key.".html";
+            //$fields[] = $s3FileName;
+            $s3Url = s3_put_contents($s3FileName,$value,array("$acctID"=>$acctID,"$progID"=>$progID));
+            $fields[] = $s3Url;
         }
-        CleanDocument($doc);
     }
     echo json_encode( 
         array(
             'success'=>true,
             'cmd'=>$cmd,
-            'doc'=>$doc,
-            'default'=>$default,
-            'dbName'=>$dbName,
-        )
-    );
+            'fields'=>$fields,
+        ));
+    exit;
+}
+// GetUser Info with default
+if($cmd=="userinfo"){
+    $ret = GetUserInfoFromDB($dbName);
+    echo json_encode($ret);
     exit;
 }
 // Copy campaign
@@ -210,6 +203,9 @@ if(empty($doc->_id)){
         ));
     exit;
 }
+$userInfoRet = GetUserInfoFromDB($dbName);
+$userInfo = $userInfoRet['doc'];
+
 $execTime['Read Document'] = microtime(true) - $start_time;$start_time = microtime(true);
 //print_r($configs);
 //echo "<hr><br>";
@@ -280,10 +276,16 @@ if($mode == "mamlInfo"){
             ));
         exit;
     }*/
+    
+    MergeStdClassWithStdClass($doc,$userInfo,true);
     $ret = RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc);
+    $ret['userInfo'] = $userInfo;
     echo json_encode($ret);
     exit;
 }
+
+MergeStdClassWithStdClass($doc,$userInfo,true);
+
 $renderMode = "studio_url_render";
 if(!empty($doc->publishProgramID)){
     $cmd = "update";

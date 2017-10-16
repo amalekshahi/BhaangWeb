@@ -1,40 +1,24 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('UTC');
 session_start();
 include 'global.php';
 require_once('loginCredentials.php');
 ?>
-
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audience</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-
-
-	<!-- Angular -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
-
-
+	<?php include "header.php"; ?>
 </head>
 <body class="">
     <div id="wrapper">
 	<!-- left wrapper -->
-	<div w3-include-html="leftWrapper.html"></div>
+	<?php include 'leftWrapper.php'; ?>
 	<!-- /end left wrapper -->
 	<div id="page-wrapper" class="gray-bg">
 		<div class="row border-bottom">
 				 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
 				<!-- top wrapper -->
-				<div w3-include-html="topWrapper.html"></div>
+				<?php include 'topWrapper.php'; ?>
 				<!-- / top wrapper -->
 				</nav>
 		</div>	
@@ -76,23 +60,16 @@ require_once('loginCredentials.php');
 <!--/ content -->           
 			<div class="footer">
 				<!-- footer -->
-				<div w3-include-html="footer.html"></div>
+				<?php include 'footer.php'; ?>
 				<!-- / footer -->			
 			</div>
 		</div><!--  end page-wrapper -->
 </div>
 
     <!-- Mainly scripts -->
-	<script src="js/w3data.js"></script>	
-	<script>w3IncludeHTML();</script>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/JavaScript" src="global.js?n=1"></script> 
-	<script type="text/JavaScript" src="checkLogin.js"></script> 
-
-
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>

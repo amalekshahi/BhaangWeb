@@ -130,7 +130,7 @@
 															<div class="col-sm-10">
 																<p>
 																	<a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank" id="welcomeURL">
-																		<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#welcomeURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																		<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html</a> &nbsp;&nbsp;&nbsp;<a class="btn btn-white btn-sm btn-copy" data-clipboard-target="#welcomeURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Welcome.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
@@ -138,7 +138,7 @@
 															<div class="col-sm-10">
 																<p>
 																	<a href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank" id="downloadURL">
-																		<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html</a> &nbsp;<a class="btn btn-white btn-sm" data-clipboard-target="#downloadURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
+																		<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html</a> &nbsp;<a class="btn btn-white btn-sm btn-copy" data-clipboard-target="#downloadURL"><i class="fa fa-copy"></i> Copy URL</a> <a class="btn btn-white btn-sm" href="<?php echo $LANDINGPAGEDOMAIN; ?>/Download.html" target="_blank"><i class="fa fa-external-link"></i> Open in New Window</a></p>
 															</div>
 														</div>
 														<div class="form-group">
@@ -159,7 +159,7 @@
 																	</option>
 																</select><br>
 																<div style="padding-top: 10px;">
-																	<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="http://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
+																	<a class="btn btn-success btn-block btn-sm" data-placement="top" data-toggle="tooltip" href="https://www.godaddy.com" target="_blank" title="Domains are cool."><i class="fa fa-share-square-o"></i> Buy my own domain for $11 p/year</a>
 																</div>
 															</div>
 														</div>

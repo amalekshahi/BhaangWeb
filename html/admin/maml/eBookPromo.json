@@ -110,9 +110,11 @@
             "xpath":"//ChildElement[@Name='Welcome.html']/Properties/HtmlContent"
         },
         {
-            "name":"LANDINGPAGE-STUDIO-FORM-XXX",
-            "xpath":"//ChildElement[@Name='Welcome.html']/Form",
-            "type":"NODE"
+            "name":"LANDINGPAGE-STUDIO-FORM",
+            "xpath":"//ChildElement[@Name='Welcome.html']",
+            "type":"NODE",
+            "deleteNode":"Form"
+            
         },
         {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-DOWNLOADPAGECONTENT",

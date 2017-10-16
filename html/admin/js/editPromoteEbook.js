@@ -15,7 +15,7 @@ $.fn.editableform.buttons =
 $(document).ready(function() {
 	$('#email_name').editable();
 
-	new Clipboard('.btn');
+	new Clipboard('.btn-copy');
 
 	$('.clockpicker').clockpicker({
 		twelvehour: true
@@ -83,6 +83,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		for (var key in $scope.openEmail) {
 			if (hasValue($scope['templatesAs'+key])) {
 				$scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+key], $scope.campaign['templateEmail'+key], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+key+'CONTENT');
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+key+'SUBJECT'] = $scope.campaign['EMAIL'+key+'-SUBJECT'];
 				$scope.campaign['EMAIL'+key+'-STATE'] = 'Start';
 			}
 		}
@@ -463,14 +464,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			}
 		}
 	};
-	$scope.tpsIndex = function(emlID) {
-		var tplist = $scope['templatesAs' + emlID];
-		for (var i = 0; i < tplist.length; i++) {
-			if (tplist[i]["content"] == $scope.campaign['templateEmail' + emlID]) {
-				return i;
-			}
-		}
-	};
 	$scope.sdIndex = function() {
 		var sdlist = $scope.senders;
 		for (var i = 0; i < sdlist.length; i++) {
@@ -530,6 +523,36 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.state['Save'] = 'Save';
 		});
 	}
+    $scope.PublishProgram = function(pAccountID,pCampaignID) {
+        $http({
+            method: 'POST',
+            url: 'backend.php' + "?" + new Date().toString(),
+            data: ObjecttoParams({
+                "cmd": "publish",
+                "acctID": pAccountID,
+                "progID": pCampaignID,
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(response) {
+            if (response.data.success == false) {
+                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+                //swal(response.data.detail.Result.ErrorCode,errorMessage);
+            } else {
+                //swal(response.data.message);
+                // set public programID back to tree
+                $scope.campaign['publishProgramID'] = response.data.publishProgramID;
+            }
+            var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
+            console.log(str);
+            //alert(response);
+        }, function(errResponse) {
+            //swal("Server Error");
+            //alert(errResponse);
+        });
+
+    }    
     $scope.silenceMode = false;
 	$scope.Publish = function(silenceMode) {
         if(typeof silenceMode == "undefined"){
@@ -657,6 +680,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					type: 'success',
 					html: "Campaign [" + response.data.newCampaignName + "] created",
 				});
+                $scope.PublishProgram(accountID,response.data.newProgID);
 			}else{
 				swal({
 					type: 'error',
@@ -670,8 +694,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		//$('#template').trigger('change');
 		$('#subjectEmail' + objID).on('save', function(e, params) {
 			//alert('Saved value: ' + params.newValue);
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL'+objID+'SUBJECT'] = params.newValue;
 			$scope.campaign['EMAIL'+objID+'-SUBJECT'] = params.newValue;
+			$scope.$apply();
 		});
 	}
 	$scope.openEmail = {

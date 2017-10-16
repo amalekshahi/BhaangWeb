@@ -27,7 +27,7 @@
 	
 	  function fetch(token) {
 		//($versionPHP)
-		var url = 'http://web2xmm.com/admin/getGoogleContact.php?callback=?';
+		var url = 'https://web2xmm.com/admin/getGoogleContact.php?callback=?';
 		$.getJSON(url, { 
 			access_token : token.access_token
 		} )
@@ -44,7 +44,7 @@
 
 		/*
 	    $.ajax({		
-		    url: "http://web2xmm.com/admin/getGoogleContact.php?access_token=" + token.access_token + "&alt=json",
+		    url: "https://web2xmm.com/admin/getGoogleContact.php?access_token=" + token.access_token + "&alt=json",
 		    dataType: "jsonp",
 		    success:function(data) {
 					// display all your data in console	

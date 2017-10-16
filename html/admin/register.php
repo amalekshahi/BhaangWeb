@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php include "header.php"; ?>
 	<title>Add Someone to Your Seeed List</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="css/animate.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
-	<!-- Angular -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<!-- Sweet alert -->
 	<script src="css/sweet/sweetalert-dev.js"></script>
-	<link rel="stylesheet" href="css/sweet/sweetalert.css">
 </head>
 
 <body class="gray-bg">
@@ -52,16 +43,7 @@
 		<hr/>
 		
 	</div>
-	<!-- Mainly scripts -->
-
-	<script src="js/w3data.js"></script>
-	<script>
-		w3IncludeHTML();
-	</script>
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<!--<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>-->
+	<!-- Mainly scripts -->	
 	<script type="text/JavaScript" src="global.js?n=1"></script>
 	<!-- Custom and plugin javascript -->
 	<!--<script src="js/inspinia.js"></script>-->

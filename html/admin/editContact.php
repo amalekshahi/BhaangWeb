@@ -1,8 +1,10 @@
 <?php
+	date_default_timezone_set("UTC");
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html ng-app="myApp">
 <!-- ***************************************************
 THIS PAGE USE  <ng-view>
@@ -17,7 +19,7 @@ editContactAudience.html
     <script src="css/sweet/sweetalert-dev.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>     
 </head>
-<body class="">
+<body class="fixed-sidebar">
     <div id="wrapper">
 	<!-- left wrapper -->
 	  <?php include 'leftWrapper.php'; ?>

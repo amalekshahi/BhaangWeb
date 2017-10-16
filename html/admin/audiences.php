@@ -1,31 +1,25 @@
 <?php
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('UTC');
     session_start();
     include 'global.php';
     require_once('loginCredentials.php');
     $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
-?><!DOCTYPE html>
+?>
+	<!DOCTYPE html>
 	<html ng-app="myApp">
 
 	<head>
 		<?php include "header.php"; ?>
 	</head>
-
-
 	<body class="fixed-sidebar">
 		<div id="wrapper">
-			<!-- left wrapper -->
-			<!--<div w3-include-html="leftWrapper.php"></div>-->
             <?php include 'leftWrapper.php'; ?>
-			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg">
 				<div class="row border-bottom">
 					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-						<!-- top wrapper -->
                         <?php include 'topWrapper.php'; ?>
-						<!-- / top wrapper -->
 					</nav>
 				</div>
 				<!-- content -->
@@ -66,8 +60,8 @@
 										</thead>
 										<tbody>
 											<tr ng-repeat="item in audience.items | orderBy:'-lastEditDate'" ng-cloak>
-												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
-												<td class="project-title"><a href="showContact.php?cid={{item.contactID}}" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
+												<td class="project-title"><a target="_blank" href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
+												<td class="project-title"><a target="_blank" href="showContact.php?cid={{item.contactID}}" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
  
 													
 													<ng-pluralize count="item['LIST-COUNT']" 
@@ -196,24 +190,15 @@
 				<!-- myCtrl -->
 				<!--/ content -->
 				<div class="footer">
-					<!-- footer -->
                     <?php include 'footer.php'; ?>
-					<!-- / footer -->
 				</div>
 			</div>
 			<!--  end page-wrapper -->
 		</div>
 
 		<!-- Mainly scripts -->
-		<!--<script src="js/w3data.js"></script>
-		<script>
-			w3IncludeHTML();
-		</script>
-		<script src="js/jquery-3.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
 		<!-- Custom and plugin javascript -->
 		<script src="js/inspinia.js"></script>
 		<script src="js/plugins/pace/pace.min.js"></script>
@@ -224,5 +209,4 @@
 		</script>
         <script src="js/audiences.js"></script>
 	</body>
-
 	</html>

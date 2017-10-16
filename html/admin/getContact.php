@@ -1,5 +1,7 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
+ini_set("memory_limit","-1");
+set_time_limit(0);
+date_default_timezone_set('UTC');
 session_start();
 require_once 'commonUtil.php';
 

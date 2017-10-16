@@ -1,6 +1,14 @@
+var editEmail = true;
+
 $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });	
+
+$(document).ready(function() {
+
+  $('.footable').footable();
+
+ });
 
 myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, Upload) {
     //var email4 = {emlID : '4',tabLabel : 'Email #4: Sent to Non-Order',emlHead : 'Thsi is Email #4 Content.'};
@@ -56,7 +64,7 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
             swal("Please select address to send to");
             return;
         }
-        $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL' + index + 'CONTENT'] = $scope['templatesAs' + index][$scope.tpsIndex(index)].contentRaw;
+        $scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL' + index + 'CONTENT'] = $scope.getContentRaw($scope['templatesAs'+index], $scope.campaign['templateEmail'+index], 'TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+index+'CONTENT');
         $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-EMAIL' + index + 'SUBJECT'] = $("#subjectEmail" + index).text();
         $scope.campaign['EMAIL' + index + '-SUBJECT'] = $("#subjectEmail" + index).text();
 
@@ -65,6 +73,8 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
         var fromAddress = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
         var fromName = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME'];
         var renderedHtml = Render(html, $scope.campaign);
+        //renderedHtml = RenderSharpSharp(renderedHtml,accountID);
+        //alert(renderedHtml);
         var subject = $("#subjectEmail" + index).text();
         //alert($scope.campaign['EMAIL1-HERO-IMAGE']);
         $http({
@@ -173,6 +183,20 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
+    
+    $scope.smnOptions = {
+        popover: {
+            air: [
+                ['color', ['color']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        }
+    };
 
     $scope.OpenRegister = function() {
         var w = 500;
@@ -184,6 +208,16 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
     };
     $scope.LoadSendTestContact();
 }]);
+
+function setLeftBar() {
+	if (editEmail) {
+		$("body").addClass("mini-navbar");
+		editEmail = false;
+	} else {
+		$("body").removeClass("mini-navbar");
+		editEmail = true;
+	}
+}
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
