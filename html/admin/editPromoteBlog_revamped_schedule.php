@@ -123,10 +123,10 @@
 					<div class="col-lg-12">
 						<div class="widget style1 blue-bg">
 							<div class="row">
-								<div class="col-xs-4">
+								<div class="col-xs-3">
 									<i class="fa fa-bullhorn fa-5x"></i>
 								</div>
-								<div class="col-xs-8 text-right campaign-title">
+								<div class="col-xs-9 text-right campaign-title">
 									<span> Promote a Blog Post </span>
 									<h2 class="font-bold"><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="editCampaignName" e-maxlength="50"></a></h2>
 								</div>
@@ -150,7 +150,7 @@
 										</div>
 										<div class="ibox-content">
 											
-												<div class="panel-group" id="accordion">
+												<div class="panel-group" id="accordion" style="margin-bottom: 0px;">
 													<div class="panel panel-default">
 														<div class="panel-heading">
 															<div class="row">
@@ -159,7 +159,7 @@
 																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Identify the Targeted Blog Post</a></h4>
 																</div>
 																<div class="col-sm-9">
-																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne" class="accordion-toggle collapsed">
                                   <small class="m-l-sm" ng-show="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}?{{campaign['URL-BLOG-POST-UTM']}}</small>
                                   <small class="m-l-sm" ng-hide="campaign['URL-BLOG-POST-UTM']"><i aria-hidden="true" class="fa fa-crosshairs fa-lg" ng-show="campaign['URL-BLOG-POST-URL']"></i> {{campaign['URL-BLOG-POST-URL']}}</small> </a></h4>
 																</div>
@@ -248,10 +248,11 @@
 														<?php include "editPromoteBlog_step3_revamped_schedule.php"; ?>
 													</div>
 												</div>
+											<!-- Commented this out to show that we want to remove the burden of publishing from the User
 												<div style="float:right;">
 													<button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
 												</div>
-											
+											-->
 										</div>
 									</div>
 								</div>
