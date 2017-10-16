@@ -28,14 +28,34 @@
 <div ng-controller="myCtrl">
     Test SummerNote
     <summernote ng-model="summerText" editor="editor" on-image-upload="imageUpload(files,'editor')"></summernote><br>
-    
-    <summernote ng-model="summerText2" editor="editor1" on-image-upload="imageUpload(files,'editor1')"></summernote><br>
     {{summerText}}
+    <summernote ng-model="summerText2" editor="editor1" on-image-upload="imageUpload(files,'editor1')"></summernote><br>
+    {{summerText2}}
+    <hr>
+    Airmode<br>
+    <summernote ng-model="summerText3" config="options"></summernote><br>
 </div>
 <script>
     var myApp = angular.module('myApp',  ['summernote',"ngFileUpload"]);
     myApp.controller('myCtrl',['$scope','$http','Upload',function($scope,$http,Upload) {
-        $scope.summerText = "Summer Text 2"; 
+        $scope.summerText = "Summer Text 1"; 
+        $scope.summerText2 = "Summer Text 2"; 
+        $scope.summerText3 = "Summer Text 3"; 
+        $scope.options = {
+            airMode: true,
+            popover: {
+              air: [
+                ['color', ['color']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+              ]
+            }
+          };
+
         $scope.imageUpload = function(files,editor){
             var uploadFileName = "IMG-" + uuidv4();
             //$scope.editor.summernote('insertNode', imgNode);
