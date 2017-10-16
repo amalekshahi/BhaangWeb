@@ -33,6 +33,19 @@ myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload
 	$scope.FormChanged = function(srcField,tarField) {
 		$scope.campaign[tarField] = $scope.campaign[srcField];
 	};
+    $scope.smnOptions = {
+        popover: {
+            air: [
+                ['color', ['color']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        }
+    };
 }]);
 function setLeftBar() {
 	if (editLandingPage) {

@@ -551,6 +551,36 @@ myApp.controller('myCtrl', function($scope, $http) {
 			$scope.state['Save'] = 'Save';
         });
     }
+    $scope.PublishProgram = function(pAccountID,pCampaignID) {
+        $http({
+            method: 'POST',
+            url: 'backend.php' + "?" + new Date().toString(),
+            data: ObjecttoParams({
+                "cmd": "publish",
+                "acctID": pAccountID,
+                "progID": pCampaignID,
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(response) {
+            if (response.data.success == false) {
+                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+                //swal(response.data.detail.Result.ErrorCode,errorMessage);
+            } else {
+                //swal(response.data.message);
+                // set public programID back to tree
+                $scope.campaign['publishProgramID'] = response.data.publishProgramID;
+            }
+            var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
+            console.log(str);
+            //alert(response);
+        }, function(errResponse) {
+            //swal("Server Error");
+            //alert(errResponse);
+        });
+
+    }
     $scope.Publish = function() {
         //check if we already publish this campaign
         if(hasValue($scope.campaign['publishProgramID'])){
@@ -701,6 +731,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     type: 'success',
                     html: "Campaign [" + response.data.newCampaignName + "] created",
                 });
+                $scope.PublishProgram(accountID,response.data.newProgID);
             }else{
                 swal({
                     type: 'error',

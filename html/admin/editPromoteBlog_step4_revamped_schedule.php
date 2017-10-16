@@ -29,7 +29,7 @@
 		</div>
 
 		<div class="col-sm-9">
-			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour">
+			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour" class="accordion-toggle collapsed">
 				<small class="m-l-sm" ng-show="hasNotifications"><i aria-hidden="true" class="fa fa-bell-o"></i> {{labelNotifications}}</small>
 			</a></h4>
 		</div>

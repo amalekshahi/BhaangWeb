@@ -183,6 +183,20 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
+    
+    $scope.smnOptions = {
+        popover: {
+            air: [
+                ['color', ['color']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        }
+    };
 
     $scope.OpenRegister = function() {
         var w = 500;

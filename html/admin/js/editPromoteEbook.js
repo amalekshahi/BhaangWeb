@@ -15,7 +15,7 @@ $.fn.editableform.buttons =
 $(document).ready(function() {
 	$('#email_name').editable();
 
-	new Clipboard('.btn');
+	new Clipboard('.btn-copy');
 
 	$('.clockpicker').clockpicker({
 		twelvehour: true
@@ -523,6 +523,36 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.state['Save'] = 'Save';
 		});
 	}
+    $scope.PublishProgram = function(pAccountID,pCampaignID) {
+        $http({
+            method: 'POST',
+            url: 'backend.php' + "?" + new Date().toString(),
+            data: ObjecttoParams({
+                "cmd": "publish",
+                "acctID": pAccountID,
+                "progID": pCampaignID,
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(response) {
+            if (response.data.success == false) {
+                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+                //swal(response.data.detail.Result.ErrorCode,errorMessage);
+            } else {
+                //swal(response.data.message);
+                // set public programID back to tree
+                $scope.campaign['publishProgramID'] = response.data.publishProgramID;
+            }
+            var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
+            console.log(str);
+            //alert(response);
+        }, function(errResponse) {
+            //swal("Server Error");
+            //alert(errResponse);
+        });
+
+    }    
     $scope.silenceMode = false;
 	$scope.Publish = function(silenceMode) {
         if(typeof silenceMode == "undefined"){
@@ -650,6 +680,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 					type: 'success',
 					html: "Campaign [" + response.data.newCampaignName + "] created",
 				});
+                $scope.PublishProgram(accountID,response.data.newProgID);
 			}else{
 				swal({
 					type: 'error',

@@ -2901,6 +2901,7 @@ a.forum-item-title:hover {
 .tabs-container .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
+  padding-left: 1px;
 }
 .tabs-container .tab-pane .panel-body {
   border-top: none;
@@ -2948,6 +2949,8 @@ a.forum-item-title:hover {
 .tabs-container .tab-content > .tab-pane,
 .tabs-container .pill-content > .pill-pane {
   display: none;
+  padding-right: 1px;
+  padding-bottom: 1px;  
 }
 .tabs-container .tab-content > .active,
 .tabs-container .pill-content > .active {
@@ -7646,44 +7649,80 @@ body.rtls.top-navigation .footer.fixed {
   left: 0;
 }
 /*
- *  *
- *   *   This is style for skin config
- *    *   Use only in demo theme
- *     *
- *     */
+* We uses these for the little "Test" and "Settings" sliders in Email
+*/
+
 .theme-config {
   position: absolute;
-  top: 90px;
+  top: 75px;
   right: 0;
   overflow: hidden;
 }
-.theme-config-box {
-  margin-right: -220px;
+
+.sendTest-config {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  overflow: hidden;
+}
+
+.sendTest-config-box {
+  margin-right: -420px;
   position: relative;
-  z-index: 2000;
   transition-duration: 0.8s;
 }
+
+.theme-config-box {
+  margin-right: -420px;
+  position: relative;
+  z-index: 1050;
+  transition-duration: 0.8s;
+}
+
 .theme-config-box.show {
   margin-right: 0;
 }
+
+.sendTest-config-box.show {
+  margin-right: 0;
+  z-index: 2000;
+}
+
+
 .spin-icon {
-  background: #1ab394;
+  background: #808080;
   position: absolute;
   padding: 7px 10px 7px 13px;
   border-radius: 20px 0 0 20px;
-  font-size: 16px;
+  font-size: 10px;
   top: 0;
   left: 0;
-  width: 40px;
+  width: 90px;
   color: #fff;
   cursor: pointer;
 }
-.skin-settings {
-  width: 220px;
-  margin-left: 40px;
-  background: #f3f3f4;
+
+.sendTest-icon {
+  background: #008000;
+  position: absolute;
+  padding: 7px 10px 7px 13px;
+  border-radius: 20px 0 0 20px;
+  font-size: 10px;
+  top: 0;
+  left: 0;
+  width: 90px;
+  color: #fff;
+  cursor: pointer;
 }
-.skin-settings .title {
+
+
+.skin-settings, .sendTest-settings {
+  width: 420px;
+  margin-left: 90px;
+  background: #f3f3f4;
+  opacity: .95;
+}
+.skin-settings .title, .sendTest-settings {
   background: #efefef;
   text-align: center;
   text-transform: uppercase;
@@ -7692,7 +7731,7 @@ body.rtls.top-navigation .footer.fixed {
   padding: 10px 15px;
   font-size: 12px;
 }
-.setings-item {
+.setings-item, .sendTest-item {
   padding: 10px 30px;
 }
 .setings-item.skin {
@@ -8677,4 +8716,17 @@ body.md-skin {
 
 .ng-hide-dave {
   display: none !important;
+}
+
+/* This controls the plus and minus symboles in the accordion */
+
+.accordion-toggle:after {
+    font-family: 'Glyphicons Halflings';  
+    color: #b4b3b3;
+    content: "\e082";  
+    float: right;          
+}
+
+ .accordion-toggle.collapsed:after {
+    content: "\e081";   
 }
