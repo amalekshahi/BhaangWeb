@@ -240,6 +240,7 @@ myApp.controller('myCtrl', function($scope, $http) {
             $scope.setDisplay();
 			$scope.LoadDefaultPromoteBlog(); 
             $scope.LoadAudience();
+			$scope.LoadReport();
             $scope.Reset();
         }, function(errResponse) {
             if (errResponse.status == 404) {
@@ -259,6 +260,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope.setInitValue();
                 $scope.setDisplay();
                 $scope.LoadAudience();
+				$scope.LoadReport();
             } else {
                 //alert(errResponse.statusText);
                 swal(errResponse.statusText);
@@ -685,6 +687,51 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
     }; // LoadAudience
 
+	$scope.LoadReport = function() {
+		var fd = UTCDateTimeMDT();
+		var td = UTCDateTimeMDT();
+        $http({
+            method: 'GET',
+            url: 'getCampaignReport.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+        }).then(function(response) {
+            if (response.data.success == false) {
+                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+                //swal("fail");
+            } else {
+                //swal("success");
+				
+				var ReportDiv = '<div class="row">'+
+						'<div class="col-xs-3"><small class="stats-label"><i aria-hidden="true" class="fa" style="color:green"></i>Email #</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-users" style="color:green"></i> Targeted People</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-envelope-open-o" style="color:blue"></i> Opens</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-mouse-pointer" style="color:purple"></i> Clicks to Blog Post</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-times-circle" style="color:red"></i> Unsubscribes</small></div>'+
+					'</div>';
+				for (var i = 0; i < response.data.rows.length; i++) {
+					var emailName = getEmailName(response.data.rows[i].Email,'short');
+					ReportDiv = ReportDiv+
+					'<div class="row">'+
+						'<div class="col-xs-3"><h2>'+emailName+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Sent+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Opened+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Clicked+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Unsubscribed+'</h2></div>'+
+					'</div>';
+				}				
+				$('#reportDiv').html(ReportDiv);
+            }
+            
+        }, function(errResponse) {
+            //$scope.state['Publish'] = "Launch Program";
+            //swal("Server Error");
+            //alert(errResponse);
+			//$scope.state['Save'] = 'Save';
+        });
+    
+
+        
+    }; // LoadReport
+
     $scope.LoadDefaultPromoteBlog = function(){
 			$http.get(dbEndPoint + "/master/Default_PromoteBlog" + "?" + new Date().toString()).then(function(response) {
 					$scope.masterDefault  = response.data; 
@@ -758,28 +805,6 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.Load();
 });
 
-function toDate(dateStr) {
-    var parts1 = dateStr.split(" ");
-
-    var parts2 = parts1[0].split("/");
-
-    return new Date(parts2[2], parts2[0] - 1, parts2[1]);
-}
-
-
-function addDays(theDate, days) {
-    return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
-}
-
-function formatDateMDY(date) {
-    var year = date.getFullYear();
-    month = date.getMonth() + 1; // months are zero indexed
-    day = date.getDate();
-
-
-    return str_pad(month) + "/" + str_pad(day) + "/" + year;
-}
-
 function convertTime(timeString) {
     var hourEnd = timeString.indexOf(":");
     var H = +timeString.substr(0, hourEnd);
@@ -789,10 +814,6 @@ function convertTime(timeString) {
 
 
     return timeString; // return adjusted time or original string
-}
-
-function str_pad(n) {
-    return String("0" + n).slice(-2);
 }
 
 function convertTimeFormat(timeString) {

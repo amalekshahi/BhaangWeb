@@ -191,25 +191,8 @@
                         </a>
 								</div>
 							</div>
-							<div class="ibox-content">
-								<div class="row">
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-users" style="color:green"></i> Targeted People</small>
-										<h2>643</h2>
-									</div>
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-envelope-open-o" style="color:blue"></i> Opens</small>
-										<h2>64 (17%)</h2>
-									</div>
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-mouse-pointer" style="color:purple"></i> Clicks to Blog Post</small>
-										<h2>13 (11%)</h2>
-									</div>
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-times-circle" style="color:red"></i> Unsubscribes</small>
-										<h2>2 (1%)</h2>
-									</div>
-								</div>
+							<div class="ibox-content" id="reportDiv">
+								
 							</div>
 						</div>
 					</div>
