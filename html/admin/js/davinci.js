@@ -27,6 +27,17 @@ function UTCDateTime(){
     return moment(d).utc().format("YYYY-MM-DD[T]HH:mm:ss[Z]"); // WHO WROTE THIS?  You're the ghost in the machine!  Should be HH not hh
 }
 
+function UTCDateTimeMDT(){
+    var d = new Date();
+    return moment(d).utc().format("MM/DD/YYYY"); 
+}
+
+function ShowScheduleDateTime(datetime) {
+	var a = moment(datetime);
+    datetime = a.format('dddd MMMM DD YYYY [at] h:mm a');
+    return  datetime;
+}
+
 /*
     Remove JSONP Style Call back data
     (xxxxxxxx) -> xxxxxxx
@@ -121,3 +132,57 @@ function documentConpare(obj1, obj2) {
 	return true;
 };
 
+function getEmailName(emailName,mode,campaignType) {
+	if (mode == 'long') {
+		if (campaignType == 'PromoteBlog') {		
+			if (emailName == 'Email1') {
+				emailName = 'Email #1: Sent to Everyone';
+			} else if (emailName == 'Email2') {
+				emailName = 'Email #2: Sent to Non-Openers';
+			} else if (emailName == 'Email3') {
+				emailName = 'Email #3: Sent to Non-Clickers';
+			}
+		} else {
+			if (emailName == 'Email1') {
+				emailName = 'Email #1: Sent to Everyone Who Downloads';
+			} else if (emailName == 'Email2') {
+				emailName = 'Email #2: Sent to Everyone Who Downloads';
+			}
+		}
+	} else if (mode == 'short') {
+		if (emailName == 'Email1') {
+			emailName = 'Email #1';
+		} else if (emailName == 'Email2') {
+			emailName = 'Email #2';
+		} else if (emailName == 'Email3') {
+			emailName = 'Email #3';
+		}
+	}
+	return emailName;
+}
+
+
+function addDays(theDate, days) {
+	return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
+}
+
+function toDate(dateStr) {
+	var parts1 = dateStr.split(" ");
+
+	var parts2 = parts1[0].split("/");
+
+	return new Date(parts2[2], parts2[0] - 1, parts2[1]);
+}
+
+function formatDateMDY(date) {
+	var year = date.getFullYear();
+	month = date.getMonth() + 1; // months are zero indexed
+	day = date.getDate();
+
+
+	return str_pad(month) + "/" + str_pad(day) + "/" + year;
+}
+
+function str_pad(n) {
+	return String("0" + n).slice(-2);
+}

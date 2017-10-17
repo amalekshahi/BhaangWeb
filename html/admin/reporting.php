@@ -11,6 +11,9 @@
 <html ng-app="myApp">
 <head>
     <?php include "header.php"; ?>
+	<script src="js/date.format.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
     <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
 </head>
 <body class="">
@@ -19,6 +22,8 @@
         var dbName = "<?php echo $dbName; ?>";
 		var accountID = "<?php echo $accountID; ?>";
 		var myApp = angular.module('myApp', ["xeditable","summernote","uiSwitch"]);
+
+		
     </script>
 
 <div id="wrapper">
@@ -118,67 +123,18 @@
 						<h5>How Are Your Emails Performing?</h5>
 						<div class="pull-right">
 							<div class="btn-group">
-								<button class="btn btn-xs btn-white active" type="button">Lifetime</button> <button class="btn btn-xs btn-white" type="button">Today</button> <button class="btn btn-xs btn-white" type="button">Yesterday</button> <button class="btn btn-xs btn-white" type="button">Last 7 Days</button> <button class="btn btn-xs btn-white" type="button">Last 14 Days</button> <button class="btn btn-xs btn-white" type="button">Last 30 Days</button>
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadReport('Lifetime')">Lifetime</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadReport('Today')">Today</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadReport('Yesterday')">Yesterday</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadReport('7Days')">Last 7 Days</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadReport('14Days')">Last 14 Days</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadReport('30Days')">Last 30 Days</button>
 							</div>
 						</div>
 					</div>
 					<div class="ibox-content">
-						<div class="table-responsive">
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th style="width:5%">From</th>
-										<th style="width:25%">Email Name</th>
-										<th style="width:10%"># Sent</th>
-										<th style="width:10%">Opens</th>
-										<th style="width:10%">Clicked</th>
-										<th style="width:10%">Unsub</th>
-										<th style="width:10%">Conversions</th>
-										<th style="width:20%">&nbsp;</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td style="vertical-align: middle;"><img class="img-circle" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/000/15d/357/1e3bb50.jpg" style="width: 70%;">&nbsp;</td>
-										<td style="vertical-align: middle;">Email #1: Sent to Everyone<br>
-										<small>Sent Thursday August 17 at 2:15 PM</small></td>
-										<td style="vertical-align: middle;">24,340</td>
-										<td style="vertical-align: middle;">11,223</td>
-										<td style="vertical-align: middle;">4,213</td>
-										<td style="vertical-align: middle;">2,987</td>
-										<td style="vertical-align: middle;">801</td>
-										<td style="vertical-align: middle;">
-											<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align: middle;"><img class="img-circle" src="https://www.mindfireinc.com/static/images/david-rosendahl.jpg" style="width: 70%;"></td>
-										<td style="vertical-align: middle;">Email #2: Sent to Non-Openers<br>
-										<small>Sent Saturday August 19 at 8:15 AM</small></td>
-										<td style="vertical-align: middle;">21,340</td>
-										<td style="vertical-align: middle;">9,332</td>
-										<td style="vertical-align: middle;">3,473</td>
-										<td style="vertical-align: middle;">1,324</td>
-										<td style="vertical-align: middle;">403</td>
-										<td style="vertical-align: middle;">
-											<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align: middle;"><img class="img-circle" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/000/15d/357/1e3bb50.jpg" style="width: 70%;"></td>
-										<td style="vertical-align: middle;">Email #3: Sent to Non-Clickers<br>
-										<small>Sent Monday August 20 at 4:15 AM</small></td>
-										<td style="vertical-align: middle;">17,182</td>
-										<td style="vertical-align: middle;">3,232</td>
-										<td style="vertical-align: middle;">2,642</td>
-										<td style="vertical-align: middle;">1,188</td>
-										<td style="vertical-align: middle;">201</td>
-										<td style="vertical-align: middle;">
-											<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<div class="table-responsive" id="reportDiv">
+							
 						</div>
 					</div>
 				</div>
@@ -228,7 +184,9 @@
     <!-- Page-Level Scripts -->
 	<script src="js/jquery.md5.js"></script>
 	<script src="js/davinci.js"></script>    
-    <script>
+    <script>	
+
+		
 		var campaignID = getParameterByName("campaignID");    
 		$(document).ready(function() {
             google.charts.load('current', {'packages':['bar']});
@@ -250,11 +208,98 @@
                 $http.get(dbEndPoint + "/" + dbName +'/'+campaignID+"?"+new Date().toString()).then(function(response) {
                     $scope.master  = response.data;
                     $scope.campaign  = angular.copy($scope.master);
+					$scope.LoadReport('');
                     $scope.Reset();
                 },function(errResponse){
                     swal(errResponse.statusText);
                 });
             };
+			$scope.LoadReport = function(mode) {
+				
+				var fd = UTCDateTimeMDT();
+				var td = UTCDateTimeMDT();
+				
+				var tdate = toDate(td);				
+
+				if ((mode == '')	|| (mode == 'Today')) {
+					
+				} else if (mode == 'Lifetime')	{
+					fd = '01/01/1900';
+				} else {
+					if (mode == 'Yesterday') {
+						fd = addDays(tdate, -1);
+					} else if (mode == '7Days') {
+						fd = addDays(tdate, -7);
+					} else if (mode == '14Days') {
+						fd = addDays(tdate, -14);
+					} else if (mode == '30Days') {
+						fd = addDays(tdate, -30);
+					}
+					fd = formatDateMDY(fd);
+				}				
+				//alert(mode+','+fd);
+				$http({
+		            method: 'GET',
+				    url: 'getCampaignReport.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+		        }).then(function(response) {
+				    if (response.data.success == false) {
+		                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+				        //swal("fail");
+		            } else {
+				        //swal("success");
+						var campaignType = $scope.campaign.campaignType;
+
+						var ReportDiv = '<table class="table table-hover">'+
+										'<thead>'+
+											'<tr>'+
+												'<th style="width:5%"></th>'+
+												'<th style="width:25%">Email Name</th>'+
+												'<th style="width:10%"># Sent</th>'+
+												'<th style="width:10%">Opens</th>'+
+												'<th style="width:10%">Clicked</th>'+
+												'<th style="width:10%">Unsub</th>'+
+												'<th style="width:10%">Conversions</th>'+
+												'<th style="width:20%">&nbsp;</th>'+
+											'</tr>'+
+										'</thead>'+
+										'<tbody>';				
+						for (var i = 0; i < response.data.rows.length; i++) {	
+							var emailName = getEmailName(response.data.rows[i].Email,'long',campaignType);
+							var j = i+1;
+							var dt = ShowScheduleDateTime($scope.campaign['EMAIL'+j+'-SCHEDULE1-DATETIME']);
+							
+							ReportDiv = ReportDiv+
+							'<tr>'+
+								'<td style="vertical-align: middle;"><img class="img-circle" src="" style="width: 70%;">&nbsp;</td>'+
+								'<td style="vertical-align: middle;">'+emailName+'<br>';
+								if (campaignType == 'PromoteBlog') {
+									ReportDiv = ReportDiv+'<small>Sent '+dt+'</small>';
+								}
+								ReportDiv = ReportDiv+'</td>'+
+								'<td style="vertical-align: middle;">'+response.data.rows[i].Sent+'</td>'+
+								'<td style="vertical-align: middle;">'+response.data.rows[i].Opened+'</td>'+
+								'<td style="vertical-align: middle;">'+response.data.rows[i].Clicked+'</td>'+
+								'<td style="vertical-align: middle;">'+response.data.rows[i].Unsubscribed+'</td>'+
+								'<td style="vertical-align: middle;">0</td>'+
+								'<td style="vertical-align: middle;">'+
+									'<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>'+
+								'</td>'+
+							'</tr>';
+						}
+						ReportDiv = ReportDiv+
+						'</tbody>'+
+						'</table>';
+						$('#reportDiv').html(ReportDiv);
+		            }
+            
+				}, function(errResponse) {
+		            //$scope.state['Publish'] = "Launch Program";
+				    //swal("Server Error");
+		            //alert(errResponse);
+					//$scope.state['Save'] = 'Save';
+		        });
+        
+			}; // LoadReport
             
             $scope.Load();
 		});
@@ -289,6 +334,8 @@
           // Convert the Classic options to Material options.
           chart.draw(data, google.charts.Bar.convertOptions(options));
         };
+
+		
     </script>
 </body>
 
