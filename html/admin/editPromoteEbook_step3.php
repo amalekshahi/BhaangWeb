@@ -8,8 +8,6 @@
 			width: 100% !important;
 		}
 	</style>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chosen-localytics/1.8.0/angular-chosen.min.js"></script>
 	<div class="panel panel-default" ng-controller="step3" id="step3ID">
 
 		<div class="panel-heading">

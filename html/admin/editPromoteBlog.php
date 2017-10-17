@@ -10,13 +10,6 @@
 
 	<head>
 		<?php include "header.php"; ?>
-		<script src="js/date.format.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
-
-		<!-- FooTable -->
-		<link href="css/plugins/footable/footable.core.css" rel="stylesheet">
-
 		<style>
 			.editable-container.editable-inline,
 			.editable-container.editable-inline .control-group.form-group,

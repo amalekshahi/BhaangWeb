@@ -13,8 +13,6 @@
 	<html ng-app="myApp">
 	<head>
 		<?php include "header.php"; ?>
-		<script src="js/date.format.js"></script>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 		<style type="text/css">
 			.fileinput-filename{white-space: nowrap;text-overflow: ellipsis;width: calc(100% - 20px);}
 
@@ -223,7 +221,7 @@
 			</div>
 			<!--  end page-wrapper -->
 		</div>
-		<!--<script src="js/bootstrap.min.js"></script>-->
+		<!-- <script src="js/bootstrap.min.js"></script> -->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 		<script type="text/JavaScript" src="global.js?n=1"></script>

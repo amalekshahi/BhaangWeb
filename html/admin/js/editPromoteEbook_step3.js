@@ -185,6 +185,19 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 
 		$scope.popup = window.open("register.php", '_blank', 'toolbar=no, menubar=no, location=no, scrollbars=no,resizable=no,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
 	};
+	$scope.smnOptions = {
+        popover: {
+            air: [
+                ['color', ['color']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture']]
+            ]
+        }
+    };
 	$scope.LoadSendTestContact();
 }]);
 
