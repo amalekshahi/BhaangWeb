@@ -206,7 +206,7 @@
 			</div>
 			<!--  end page-wrapper -->
 		</div>
-		<script src="js/bootstrap.min.js"></script>
+		<!--<script src="js/bootstrap.min.js"></script>-->
 		<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 		<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 		<script type="text/JavaScript" src="global.js?n=1"></script>
