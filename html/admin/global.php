@@ -7,7 +7,7 @@ function callService($endpoint, $request)
 {
 	$request_string = json_encode($request); 
 
-	$service = curl_init('http://studio.mdl.io/REST/'.$endpoint);                                                                      
+	$service = curl_init('https://studio.mdl.io/REST/'.$endpoint);                                                                      
 	curl_setopt($service, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 	curl_setopt($service, CURLOPT_POSTFIELDS, $request_string);                                                                  
 	curl_setopt($service, CURLOPT_RETURNTRANSFER, true);                                                                      
