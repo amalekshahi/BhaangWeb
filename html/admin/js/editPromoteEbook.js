@@ -186,9 +186,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "OK!",
 			closeOnConfirm: false
-		}, function() {
+		}).then(function () {
 			$scope.Reset(true);
-
 		});
 	};
 	$scope.Reset = function(alert) {
@@ -687,10 +686,8 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			}           
         }, function(response) {
             $scope.myAlert("A connection error occured. Please try again.");
-
         });
-
-    }; //end LoadReport
+	};
 
 
 	$scope.DuplicateCampaignClick = function(){

@@ -173,16 +173,14 @@
 							$scope.$apply();							
 							if (json.success) {
 								swal({
-										  title: "Import Success", 
-										  text: json.message,
-										  type: "success",
-										  showCancelButton:false,
-										  confirmButtonColor: "#DD6B55",
-										  confirmButtonText: "OK",
-										  closeOnConfirm: true
-								},
-								function(){
-											location.href = 'audiences.php';						  
+										title: "Import Success", 
+										text: json.message,
+										type: "success",
+										showCancelButton:false,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "OK"
+								}).then(function () {
+										location.href = 'audiences.php';						  
 								});
 							}else{
 								
