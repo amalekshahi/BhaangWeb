@@ -202,10 +202,14 @@
 						<div class="tabs-left">
 							<ul class="nav nav-tabs">
 								<li class="active">
-									<a data-toggle="tab" href="#tab-your-company"><i class="fa fa-building" aria-hidden="true"></i> <?php echo $accountName;?></a>
+									<a data-toggle="tab" href="#tab-your-company"><i class="fa fa-building" aria-hidden="true"></i> <?php echo $accountName;?> Global Settings</a>
 								</li>
 								<li class="">
-									<a data-toggle="tab" href="#tab-you"><i class="fa fa-user-o" aria-hidden="true"></i> <?php echo $USERNAME;?></a>
+									<a data-toggle="tab" href="#tab-users"><i class="fa fa-user-o" aria-hidden="true"></i> <?php echo $accountName;?> Users </a>
+								</li>
+
+								<li class="">
+									<a data-toggle="tab" href="#tab-you"><i class="fa fa-user-o" aria-hidden="true"></i> <?php echo $USERNAME;?> Preferences </a>
 								</li>
 								<!--
 								<li class="">
@@ -228,8 +232,62 @@
 									<a data-toggle="tab" href="#tab-billing"><i class="fa fa-credit-card" aria-hidden="true"></i> Billing</a>
 								</li>								
 							</ul>
+												
 							<div class="tab-content">
 								<form role="form">
+																	<div class="tab-pane" id="tab-users">
+																			<div class="panel-body">
+										
+									<h2>Users</h2>
+										<fieldset class="form-horizontal">
+      <div class="row">
+						<div class="col-lg-12">
+							<div class="ibox float-e-margins">
+								<div class="ibox-title">
+									<div class="ibox-tools">
+											<a href="editContact.php?cid=new#!new" class="btn btn-primary btn-sm">+ Add User</a>
+									</div>
+								</div>
+								<div class="ibox-content">
+									<table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Cell Phone</th>
+												<th>Permissions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="item in audience.items | orderBy:'-lastEditDate'" ng-cloak>
+												<td class="project-title"><a target="_blank" href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
+												<td class="project-title"><a target="_blank" href="showContact.php?cid={{item.contactID}}" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
+ 
+													
+													<ng-pluralize count="item['LIST-COUNT']" 
+																				when=	"{'0': 'No one.  How lonely!',
+ 													              	    	'one': 'See this 1 person',
+                       													'other': 'See these {} people'}">
+											  	</ng-pluralize>
+													</a>
+													<span ng-if="item['LIST-COUNT']==0"><small>No Contacts meet this Segment Definition</small></span>
+												</td>
+											<td>
+											<a href="editContact.php?cid={{item.contactID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit User</a>	
+											</td>	
+											</tr>
+										</tbody>
+									</table>
+									</div>
+								</div>
+							</div>
+						</div>
+																				</fieldset>
+																			</form>
+
+										</div>
+									</div>
+	
 								<div class="tab-pane active" id="tab-your-company">
 									<!--<div class="panel-body">
 									 
