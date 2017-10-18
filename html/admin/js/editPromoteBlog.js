@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 myApp.controller('myCtrl', function($scope, $http) {
 
-		/* Dave added this as mock for notifications */
+		/* Dave added this as mock for notifications: scope.notify*, scope.users, and scope.creatOptions */
 		$scope.notifyTheseUsersForOpens  = ['the-currently-logged-in-user@domain.com'];
 		$scope.notifyTheseUsersForVisits  = ['the-currently-logged-in-user@domain.com'];
 		$scope.notifyTheseUsersForCTACompletions  = ['the-currently-logged-in-user@domain.com'];
@@ -52,10 +52,11 @@ myApp.controller('myCtrl', function($scope, $http) {
 			'the-currently-logged-in-user@domain.com',
 		];
 
+	/* Dave added this as mock for notifications; this allows user to add another email address on-the-fly */	
 		$scope.createOption = function(term) {
 			$scope.$apply(function() {
-				$scope.states.push(term);
-				$scope.state.push(term);
+				$scope.users.push(term);
+				$scope.users.push(term);
 			});
 		}
 	

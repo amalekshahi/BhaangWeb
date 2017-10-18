@@ -39,7 +39,7 @@
 <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
 <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
 <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/chosen/chosen.css">
+<link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
 <link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
 <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 
@@ -72,6 +72,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
 <!--<script src="js/welcome.js"></script>-->
+
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen-add-option.js"></script>
+<script src="js/plugins/chosen/angular-chosen.min.js"></script>
 
 <!-- ui-switch -->
 <link rel="stylesheet" href="js/angular-ui-switch.min.css" />
@@ -269,8 +273,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
-<link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
-<script src="js/plugins/chosen/chosen-add-option.js"></script>
-<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
-<script data-require="chosen@*" data-semver="1.0.0" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js"></script>
-<script src="https://rawgit.com/leocaseiro/angular-chosen/master/dist/angular-chosen.min.js"></script>
