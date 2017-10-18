@@ -175,14 +175,8 @@
 																				<input class="form-control" name="URL-BLOG-POST-URL" placeholder="http://www.you-blog-post.com/page.html" type="text" ng-model="campaign['URL-BLOG-POST-URL']"><span class="help-block m-b-none">Enter the URL to the post you wish to promote. We'll use this link in your emails.</span>
 																			</div>
 																		</div>
-																		<div class="form-group">
-																			<label class="col-sm-2 control-label">URL Parameters (optional)</label>
-																			<div class="col-sm-10">
-																				<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">URL parameters you specify here (like UTM tags used by Google Analytics) are appended to your Blog Post URL. <a href="https://support.google.com/analytics/answer/1033863" target="_new">Learn more about UTM here</a>.</span>
-																			</div>
-																		</div>
 																		<div class="hr-line-dashed"></div>
-																		<a href="#conversion_tracking" data-toggle="collapse"><mark style="background-color: dark-yellow;"><strong><i aria-hidden="true" class="fa fa-lightbulb-o"></i> OPTIONAL: Track Conversions</strong></mark>  <small>Conversions are steps that a person takes on your site (after visiting your Blog Post URL) that you would like to track such as visits, sign ups or downloads. This turns passive readers into active Leads.</small></a>
+																		<a href="#conversion_tracking" data-toggle="collapse"><mark style="background-color: dark-yellow;"><strong><i aria-hidden="true" class="fa fa-lightbulb-o"></i> OPTIONAL: Add URL Parameters & Measure Conversions</strong></mark>  <small>Add parameters (like UTM tags), and measure conversions (important steps a person takes after reading your Blog Post, such as requesting a free trial or downloading a whitepaper).</small></a>
 																		<div ng-class="{ 'collapse' : !campaign['CONVERSION-URL-MATCHING-RULE'] || campaign['CONVERSION-URL-MATCHING-RULE']=='' || campaign['CONVERSION-URL-MATCHING-RULE']=='Do not track conversions'}" id="conversion_tracking">
 
 																			<!--
@@ -197,6 +191,14 @@
 
 																				</p>
 																			</div>
+																																					<div class="form-group">
+																			<label class="col-sm-2 control-label">URL Parameters</label>
+																			<div class="col-sm-10">
+																				<input class="form-control" name="URL-BLOG-POST-UTM" placeholder="utm_medium=email&utm_source=Blog&utm_campaign=My+Blog&utm_term=Read" type="text" ng-model="campaign['URL-BLOG-POST-UTM']"><span class="help-block m-b-none">URL parameters you specify here (like UTM tags used by Google Analytics) are appended to your Blog Post URL. <a href="https://support.google.com/analytics/answer/1033863" target="_new">Learn more about UTM here</a>.</span>
+																			</div>
+																		</div>
+																			<div class="hr-line-dashed"></div>
+
 																			<div class="form-group">
 																				<label class="col-sm-2 control-label">Conversion URL</label>
 																				<div class="col-sm-2">
