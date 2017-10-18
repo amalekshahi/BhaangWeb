@@ -6,6 +6,7 @@ session_start();
 require_once 'commonUtil.php';
 
 $campaignName = $_GET['campaignName'];
+$programID = $_GET['programID'];
 $fd = $_GET['fd'];
 $td = $_GET['td'];
 //$campaignName = 'coatest-blog-101003';
