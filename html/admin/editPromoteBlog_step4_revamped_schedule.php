@@ -47,26 +47,58 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Open my Emails</label>
-						<div class="col-sm-10">
-							<switch ng-model="campaign['OPEN-MY-EMAIL-']" class="green" ng-change="SwitchChange()"></switch>
+						<label class="col-sm-2 control-label">Open my Emails <switch ng-model="campaign['OPEN-MY-EMAIL-']" class="green" ng-change="SwitchChange()"></switch></label>
+						<div class="col-sm-6">
+														<select multiple
+        chosen
+        create-option-text="'Create item'"
+        persistent-create-option="true"
+        skip-no-results="true"
+        create-option="createOption"
+        ng-model="state"
+        ng-options="s for s in states">
+  <option value=""></option>
+</select>
+
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Visit my Blog Post</label>
-						<div class="col-sm-10">
-							<switch ng-model="campaign['VISIT-MY-BLOCK-']" class="green" ng-change="SwitchChange()"></switch>
+						<label class="col-sm-2 control-label">Visit my Blog Post <switch ng-model="campaign['VISIT-MY-BLOCK-']" class="green" ng-change="SwitchChange()"></switch></label>
+						<div class="col-sm-6">
+							<select multiple
+        chosen
+        create-option-text="'Create item'"
+        persistent-create-option="true"
+        skip-no-results="true"
+        create-option="createOption"
+        ng-model="state"
+        ng-options="s for s in states">
+  <option value=""></option>
+</select>
+							
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Complete my Call-to-Action<span ng-if="!campaign['CONVERSION-URL']"><small class="text-muted"><br>You need to set your Conversion point in 'Identify the Targeted Blog Post' above.</small></label></span>
-						<div class="col-sm-10" ng-if="campaign['CONVERSION-URL']">
-							<switch ng-model="campaign['CALL-TO-ACTION-']" class="green" ng-change="SwitchChange()"></switch>
-						</div>
-						<div class="col-sm-10" ng-if="!campaign['CONVERSION-URL']">
-							<switch class="disabled"></switch>
-						</div>
+						<label class="col-sm-2 control-label">Complete my Call-to-Action
+							<switch ng-if="campaign['CONVERSION-URL']" ng-model="campaign['CALL-TO-ACTION-']" class="green" ng-change="SwitchChange()"></switch>
+							<switch class="disabled" ng-if="!campaign['CONVERSION-URL']"></switch>
+						</label>
+						<span ng-if="!campaign['CONVERSION-URL']"><small class="text-muted"><br>You need to set your Conversion point in 'Identify the Targeted Blog Post' above.</small></span>	
+					<div class="col-sm-6">
+									<select multiple
+        chosen
+        create-option-text="'Create item'"
+        persistent-create-option="true"
+        skip-no-results="true"
+        create-option="createOption"
+        ng-model="state"
+        ng-options="s for s in states">
+  <option value=""></option>
+</select>
+						
+					</div>
+						
 
 					</div>
 					<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->

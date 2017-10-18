@@ -37,7 +37,24 @@ $(document).ready(function() {
 });
 
 myApp.controller('myCtrl', function($scope, $http) {
-    $scope.campaignID = campaignID;
+	
+		$scope.state = ['California', 'Arizona'];
+		$scope.states = [
+			'kdutta@mindfireinc.com',
+			'daver@mindfireinc.com',
+			'mcfarsheed@mindfireinc.com',
+			'demandgen@mindfireinc.com'
+		];
+
+		$scope.createOption = function(term) {
+			$scope.$apply(function() {
+				$scope.states.push(term);
+				$scope.state.push(term);
+			});
+		}
+	
+	
+		$scope.campaignID = campaignID;
     $scope.state = {
         Save: "Save",
         Publish: "Launch Program",

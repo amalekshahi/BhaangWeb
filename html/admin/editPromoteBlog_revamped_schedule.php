@@ -316,9 +316,6 @@
 		<script src="js/plugins/pace/pace.min.js"></script>
 		<script src="js/davinci.js"></script>
 
-		<!-- Chosen -->
-		<!-- <script src="js/plugins/chosen/chosen.jquery.js"></script> -->
-
 		<!-- X-editable -->
 		<script src="js/plugins/bootstrap-editable/boostrap-editable.js"></script>
 
