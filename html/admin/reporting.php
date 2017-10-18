@@ -134,7 +134,36 @@
 					</div>
 					<div class="ibox-content">
 						<div class="table-responsive" id="reportDiv">
-							
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th style="width:5%"></th>
+										<th style="width:25%">Email Name</th>
+										<th style="width:10%"># Sent</th>
+										<th style="width:10%">Opens</th>
+										<th style="width:10%">Clicked</th>
+										<th style="width:10%">Unsub</th>
+										<th style="width:10%">Conversions</th>
+										<th style="width:20%">&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in campaign.report">
+									<td style="vertical-align: middle;"><img class="img-circle" src="" style="width: 70%;">&nbsp;</td>
+									<td style="vertical-align: middle;">{{item.emailName}}<br>
+									{{item.emailSent}}
+									</td>
+									<td style="vertical-align: middle;">{{item.Sent}}</td>
+									<td style="vertical-align: middle;">{{item.Opened}}</td>
+									<td style="vertical-align: middle;">{{item.Clicked}}</td>
+									<td style="vertical-align: middle;">{{item.Unsubscribed}}</td>
+									<td style="vertical-align: middle;">{{item.Conversions}}</td>
+									<td style="vertical-align: middle;">
+										<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>
+									</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -208,12 +237,14 @@
                 $http.get(dbEndPoint + "/" + dbName +'/'+campaignID+"?"+new Date().toString()).then(function(response) {
                     $scope.master  = response.data;
                     $scope.campaign  = angular.copy($scope.master);
-					$scope.LoadReport('');
+					$scope.LoadReport('7Days');
                     $scope.Reset();
                 },function(errResponse){
                     swal(errResponse.statusText);
                 });
             };
+
+			
 			$scope.LoadReport = function(mode) {
 				
 				var fd = UTCDateTimeMDT();
@@ -221,7 +252,7 @@
 				
 				var tdate = toDate(td);				
 
-				if ((mode == '')	|| (mode == 'Today')) {
+				if ((mode == '') || (mode == 'Today')) {
 					
 				} else if (mode == 'Lifetime')	{
 					fd = '01/01/1900';
@@ -246,57 +277,29 @@
 		                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
 				        //swal("fail");
 		            } else {
-				        //swal("success");
 						var campaignType = $scope.campaign.campaignType;
-
-						var ReportDiv = '<table class="table table-hover">'+
-										'<thead>'+
-											'<tr>'+
-												'<th style="width:5%"></th>'+
-												'<th style="width:25%">Email Name</th>'+
-												'<th style="width:10%"># Sent</th>'+
-												'<th style="width:10%">Opens</th>'+
-												'<th style="width:10%">Clicked</th>'+
-												'<th style="width:10%">Unsub</th>'+
-												'<th style="width:10%">Conversions</th>'+
-												'<th style="width:20%">&nbsp;</th>'+
-											'</tr>'+
-										'</thead>'+
-										'<tbody>';				
-						for (var i = 0; i < response.data.rows.length; i++) {	
-							var emailName = getEmailName(response.data.rows[i].Email,'long',campaignType);
+						$scope.campaign.report = [];
+						var report = response.data.rows;
+						for (var i = 0; i < report.length; i++) {
+							var emailName = getEmailName(report[i].Email,'long',campaignType);
 							var j = i+1;
-							var dt = ShowScheduleDateTime($scope.campaign['EMAIL'+j+'-SCHEDULE1-DATETIME']);
-							
-							ReportDiv = ReportDiv+
-							'<tr>'+
-								'<td style="vertical-align: middle;"><img class="img-circle" src="" style="width: 70%;">&nbsp;</td>'+
-								'<td style="vertical-align: middle;">'+emailName+'<br>';
-								if (campaignType == 'PromoteBlog') {
-									ReportDiv = ReportDiv+'<small>Sent '+dt+'</small>';
-								}
-								ReportDiv = ReportDiv+'</td>'+
-								'<td style="vertical-align: middle;">'+response.data.rows[i].Sent+'</td>'+
-								'<td style="vertical-align: middle;">'+response.data.rows[i].Opened+'</td>'+
-								'<td style="vertical-align: middle;">'+response.data.rows[i].Clicked+'</td>'+
-								'<td style="vertical-align: middle;">'+response.data.rows[i].Unsubscribed+'</td>'+
-								'<td style="vertical-align: middle;">0</td>'+
-								'<td style="vertical-align: middle;">'+
-									'<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>'+
-								'</td>'+
-							'</tr>';
-						}
-						ReportDiv = ReportDiv+
-						'</tbody>'+
-						'</table>';
-						$('#reportDiv').html(ReportDiv);
+							var dt = '';
+							if (campaignType == 'PromoteBlog') {
+								dt = 'Sent '+ShowScheduleDateTime($scope.campaign['EMAIL'+j+'-SCHEDULE1-DATETIME']);
+							}
+							$scope.campaign.report.push({
+								"emailName": emailName,
+								"emailSent" : dt,
+								"Sent": report[i].Sent,
+								"Opened": report[i].Opened,
+								"Clicked": report[i].Clicked,
+								"Unsubscribed": report[i].Unsubscribed,
+								"Conversions": "0",
+							});
+						}						
 		            }
             
 				}, function(errResponse) {
-		            //$scope.state['Publish'] = "Launch Program";
-				    //swal("Server Error");
-		            //alert(errResponse);
-					//$scope.state['Save'] = 'Save';
 		        });
         
 			}; // LoadReport
