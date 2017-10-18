@@ -8,7 +8,7 @@ $configFile = "conf/davinci.json";
 $URLRenderFormat = "##URL SRC=\"{{url}}\"##";
 $MISSINGRenderFormat = "MISSING-{{value}}";
 $AWSFormatURL = "https://bkktest.s3.amazonaws.com/{{fileName}}";
-$AWSFormatFileName = "/tmp/{{fileName}}";
+$AWSFormatFileName = "/stage/{{fileName}}";
 $LocalFormatURL = "https://web2xmm.com/admin/images/{{fileName}}";
 $LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
 $databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
@@ -16,14 +16,19 @@ $databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
 
 $davinciConf = davinciSetConfig();
 
+
 function davinciSetConfig()
 {
     global $configFile;
     global $databaseEndpoint;
+    global $AWSFormatFileName;
     $data = file_get_contents($configFile);    
     if(!empty($data)){
         $doc = json_decode($data,false);
         $databaseEndpoint = $doc->databaseEndPoint;
+        if(!empty($doc->s3Path)){
+            $AWSFormatFileName = $doc->s3Path . "/{{fileName}}";
+        }
     }
     return $data;
 }
@@ -326,6 +331,10 @@ function studio_url_render($template,$acctID,$progID,$data,$urlFormat=NULL)
             }
             if(startsWith($value1,"SUMMERNOTE(")){
                 $value1 = substr($value1,11);
+                $value1 = str_replace(")","",$value1);
+            }
+            if(startsWith($value1,"SUMMERNOTETEXT(")){
+                $value1 = substr($value1,15);
                 $value1 = str_replace(")","",$value1);
             }
             if(array_key_exists($value0,$hash)){

@@ -59,23 +59,6 @@
 <body>
 <div  ng-app="myApp" ng-controller="myCtrl">
 <div class="container">
-<!--<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1">
-        <div class="image-upload-container">
-        <img class="image-upload" src="{{url}}" alt="" />
-          <div class="overlay">
-          <div class="image-upload-form center">
-                <div class="btn-group" ng-model="file" ngf-select="upload($file,'kwang')">
-              <span class="btn btn-default">
-                <i class="fa fa-upload"  title="Align Left"></i> Change
-              </span>
-            </div>
-          </div>
-          </div>
-        </div>    
-    </div>
-</div> -->
 <div class="row">
     <div class="col-sm-6"><image-Upload model="urla" /></div>
     <div class="col-sm-6"><image-Upload model="urlb" /></div>

@@ -71,6 +71,14 @@ function Render(template,data){
             renderRaw = true;
             slug = slug.substring(4);
         }
+        if(slug.startsWith("SUMMERNOTE(")){
+            slug = slug.substring(11);
+            slug = slug.replace(")", ""); 
+        }
+        if(slug.startsWith("SUMMERNOTETEXT(")){
+            slug = slug.substring(15);
+            slug = slug.replace(")", "");
+        }
         html = html.replace(slugPattern,data[slug]);
         console.log(slug);
     }

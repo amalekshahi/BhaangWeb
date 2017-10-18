@@ -23,7 +23,7 @@ require_once 'commonUtil.php';?><!doctype html>
 </head>
 <body>
 <div class="bg-primary">
-  <h1>TestBed 1.0 <?php echo $databaseEndpoint;?></h1>
+  <h1>TestBed 1.0 <?php echo $databaseEndpoint;?> s3Path=<?php echo $AWSFormatFileName;?></h1>
 </div>  
 <style>
 .md-tab {

@@ -53,16 +53,40 @@
         },
         {
             "name":"EMAIL#-SCHEDULE1-DATETIME",
-            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule/Start",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule1']/Start",
+            "attribute":"DateTime",
+            "loop":6
+        },
+        {
+            "name":"EMAIL#-SCHEDULE2-DATETIME",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule2']/Start",
+            "attribute":"DateTime",
+            "loop":6
+        },
+        {
+            "name":"EMAIL#-SCHEDULE3-DATETIME",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule3']/Start",
             "attribute":"DateTime",
             "loop":6
         },
         {
             "name":"EMAIL#-SCHEDULE1-TIMEZONE",
-            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule1']",
             "attribute":"TimeZone",
             "loop":6
         },
+        {
+            "name":"EMAIL#-SCHEDULE2-TIMEZONE",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule2']",
+            "attribute":"TimeZone",
+            "loop":6
+        },
+        {
+            "name":"EMAIL#-SCHEDULE3-TIMEZONE",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule3']",
+            "attribute":"TimeZone",
+            "loop":6
+        },        
         {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
             "xpath":"//ChildElement[@Name='Email#.html']/Properties/HtmlContent",
@@ -86,18 +110,60 @@
             "htmldecode":true
         },
         {
+            "name":"EMAIL-FILTER-JOINOPERATOR",
+            "xpath":"//CampaignElement[@Name='Email#Contacts1']/Filter",
+            "attribute":"CriteriaJoinOperator",
+            "loop":6,
+            "start":2,
+            "htmldecode":true
+        },        
+        {
+            "name":"EMAIL-FILTER-JOINOPERATOR",
+            "xpath":"//CampaignElement[@Name='Email#Contacts2']/Filter",
+            "attribute":"CriteriaJoinOperator",
+            "loop":6,
+            "start":2,
+            "htmldecode":true
+        },        
+        {
             "name":"EMAIL-FILTER-CRITERIAROW",
             "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
             "type":"NODE",
-            "deleteAll": true,
+            "deleteNode":"Criteria",
+            "loop":6
+        },
+        {
+            "name":"EMAIL-FILTER-CRITERIAROW",
+            "xpath":"//CampaignElement[@Name='Email#Contacts1']/Filter",
+            "type":"NODE",
+            "deleteNode":"Criteria",
+            "loop":6
+        },
+        {
+            "name":"EMAIL-FILTER-CRITERIAROW",
+            "xpath":"//CampaignElement[@Name='Email#Contacts2']/Filter",
+            "type":"NODE",
+            "deleteNode":"Criteria",
             "loop":6
         },
         {
             "name":"EMAIL1-FILTER",
             "xpath":"//CampaignElement[@Name='Email1Contacts']",
+            "deleteNode":"Filter",
+            "type":"NODE"
+        },
+        {
+            "name":"EMAIL1-FILTER",
+            "xpath":"//CampaignElement[@Name='Email1Contacts1']",
+            "deleteNode":"Filter",
+            "type":"NODE"
+        },
+        {
+            "name":"EMAIL1-FILTER",
+            "xpath":"//CampaignElement[@Name='Email1Contacts2']",
+            "deleteNode":"Filter",
             "type":"NODE"
         }
-        
     ],
     "doms":[
         {

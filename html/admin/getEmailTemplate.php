@@ -15,11 +15,18 @@ require_once 'commonUtil.php';
 
 function DoSummerNote($fileContent,$scopeName,$number)
 {
-    $editTag = '<summernote airMode config="smnOptions" ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
-    // Replace {{SUMMERNOTE(XXXXXX)}} with proper summernote tag
+    $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
     $content = preg_replace('/\{{SUMMERNOTE\(([^\}]*)\)}\}/',$editTag ,$fileContent);    
     return $content;
 }
+
+function DoSummerNoteText($fileContent,$scopeName,$number)
+{
+    $editTag = '<summernote airMode config="smnOptions" ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
+    $content = preg_replace('/\{{SUMMERNOTETEXT\(([^\}]*)\)}\}/',$editTag ,$fileContent);    
+    return $content;
+}
+
 
 session_start();
 
@@ -133,6 +140,8 @@ foreach($configs as $config)
     
     //SUMMERNOTE()
     $content = DoSummerNote($content,$scopeName,$number);
+    //SUMMERNOTETEXT()
+    $content = DoSummerNoteText($content,$scopeName,$number);
     
     $noneEditTag = '{{'.$scopeName.'[\'$1\']}}';
     // Replace other tag with normal tag

@@ -231,6 +231,10 @@ if($templateName == ""){
         ));
     exit;
 }
+//HARD CODE TO TEST VERSION 12
+//if($templateName == "EmailMarketing_NO_LandingPage.TMAML-v10.maml"){
+    //$templateName = "EmailMarketing_NO_LandingPage.TMAML-v12.maml";
+//}
 
 $templateFileName = "maml/$templateName";
 
@@ -265,21 +269,10 @@ if($mode == "junk"){
     
 }
 if($mode == "mamlInfo"){
-    /*$mamlInfo = json_decode(file_get_contents($mamlInfoFileName));
-    if(json_last_error() != JSON_ERROR_NONE){
-        echo json_encode( 
-            array(
-                'success'=>false,
-                'cmd'=>$cmd,
-                'mamlInfoFileName'=>$mamlInfoFileName,
-                'message'=>'Json Error '.json_last_error_msg(),
-            ));
-        exit;
-    }*/
-    
     MergeStdClassWithStdClass($doc,$userInfo,true);
     $ret = RenderByMamlInfo($mamlInfo,$tmaml,$acctID,$progID,$doc);
     $ret['userInfo'] = $userInfo;
+    $ret['template'] = $templateName;
     echo json_encode($ret);
     exit;
 }
