@@ -11,7 +11,11 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-    <?php include "header.php"; ?>
+   <?php include "header.php"; ?>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-color-picker/3.4.8/angularjs-color-picker.css" rel="stylesheet">    
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-color-picker/3.4.8/themes/angularjs-color-picker-bootstrap.css" rel="stylesheet">    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-color-picker/3.4.8/angularjs-color-picker.js"></script>    
 </head>
 
 <body class="fixed-sidebar">
@@ -279,8 +283,9 @@
 																	<option value="month">month</option> 
 																</select></div>
                                             </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Meta Tag Title:</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control" placeholder="..."></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Button Color:</label>
+                                                <div class="col-sm-10"><color-picker options="colorPickerOptions" ng-model="userinfo.defButtonColor"></color-picker>
+																							<span class="help-block m-b-none">This is used for your call-to-action buttons in emails and landing pages.</span>	</div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Meta Tag Description:</label>
                                                 <div class="col-sm-10"><input type="text" class="form-control" placeholder="Sheets containing Lorem"></div>
