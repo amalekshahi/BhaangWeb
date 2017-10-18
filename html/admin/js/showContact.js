@@ -16,6 +16,7 @@ var cid = getParameterByName("cid");
 							$scope.audience = angular.copy($scope.master);
 							indx = $scope.audience.items.getIndexByValue('contactID', cid);
 							if (cid == 'new' || indx == -1) {
+								/*
 								$scope.audience.items.push({
 									"contactID": "",
 									"LIST-NAME": "",
@@ -24,7 +25,7 @@ var cid = getParameterByName("cid");
 									"LIST-DEFINITION": "",
 									"LIST-HASH": "",
 									"contactDetail": ""
-								});
+								}); */ 
 							} else {
 								$scope.item = $scope.audience.items[indx];
 							}
@@ -55,7 +56,7 @@ var cid = getParameterByName("cid");
 								var count = "0";
 								if (json.success) {
 									Contacts = json.Contact;
-									$scope.item['LIST-COUNT'] = Contacts.length; 
+									if (cid != "-1")		$scope.item['LIST-COUNT'] = Contacts.length; 
 									columns = json.columns;
 									$('#DataTables_Table_1').DataTable({
 										"lengthMenu": [ [15, 50, -1], [15, 50, "All"] ],

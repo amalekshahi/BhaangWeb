@@ -207,18 +207,17 @@ myApp.controller('myCtrl', function($scope, $http) {
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "OK!",
-            closeOnConfirm: false
-        }, function() {
-            $scope.Reset(true);
-
+            confirmButtonText: "OK!"
+		}).then(function () {
+			$scope.Reset(true);
         });
     };
+
     $scope.Reset = function(alert) {
         $scope.campaign = angular.copy($scope.master);
-        $("#subjectEmail1").text($scope.campaign['EMAIL1-SUBJECT']);
-        $("#subjectEmail2").text($scope.campaign['EMAIL2-SUBJECT']);
-		$("#subjectEmail3").text($scope.campaign['EMAIL3-SUBJECT']);
+		$('#subjectEmail1').editable("setValue",$scope.campaign['EMAIL1-SUBJECT']);
+		$('#subjectEmail2').editable("setValue",$scope.campaign['EMAIL2-SUBJECT']);
+		$('#subjectEmail3').editable("setValue",$scope.campaign['EMAIL3-SUBJECT']);
         if (alert) {
             $scope.$apply();
             $scope.SelectChanged('viewEmail1', 'templateEmail1');
@@ -689,13 +688,15 @@ myApp.controller('myCtrl', function($scope, $http) {
                 alert("ERROR 404 [audienceLists]");
             }
         });
-    }; // LoadAudience	
+    }; // LoadAudience
 
 	$scope.LoadReport = function() {
 		var fd = UTCDateTimeMDT();
 		var td = UTCDateTimeMDT();		
 		var tdate = toDate(td);	
 		fd = addDays(tdate, -7);
+		fd = formatDateMDY(fd);
+		$scope.showreport = false;
         $http.get("getCampaignReport.php", {
             method: "GET",
             params: {
@@ -706,10 +707,12 @@ myApp.controller('myCtrl', function($scope, $http) {
             }
         }).then(function(response) {
 			if (response.data.success == false) {
+				
 			} else {
 				$scope.campaign.report = [];
 				var report = response.data.rows;
                 for (var i = 0; i < report.length; i++) {
+					$scope.showreport = true;
 					var emailName = getEmailName(report[i].Email,'short');
                     $scope.campaign.report.push({
 						"emailName": emailName,
@@ -722,10 +725,8 @@ myApp.controller('myCtrl', function($scope, $http) {
 			}           
         }, function(response) {
             $scope.myAlert("A connection error occured. Please try again.");
-
         });
-
-    }; //end LoadReport
+    }; // LoadReport
 
     $scope.LoadDefaultPromoteBlog = function(){
 			$http.get(dbEndPoint + "/master/Default_PromoteBlog" + "?" + new Date().toString()).then(function(response) {
