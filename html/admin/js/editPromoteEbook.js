@@ -651,12 +651,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			}
 		});
 	};
-
+	
 	$scope.LoadReport = function() {
 		var fd = UTCDateTimeMDT();
 		var td = UTCDateTimeMDT();		
 		var tdate = toDate(td);	
 		fd = addDays(tdate, -7);
+		fd = formatDateMDY(fd);
+		$scope.showreport = false;
         $http.get("getCampaignReport.php", {
             method: "GET",
             params: {
@@ -667,10 +669,12 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
             }
         }).then(function(response) {
 			if (response.data.success == false) {
+				
 			} else {
 				$scope.campaign.report = [];
 				var report = response.data.rows;
                 for (var i = 0; i < report.length; i++) {
+					$scope.showreport = true;
 					var emailName = getEmailName(report[i].Email,'short');
                     $scope.campaign.report.push({
 						"emailName": emailName,
@@ -687,6 +691,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
         });
 
     }; //end LoadReport
+
 
 	$scope.DuplicateCampaignClick = function(){
 		swal({
