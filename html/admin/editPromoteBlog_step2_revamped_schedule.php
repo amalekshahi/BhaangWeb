@@ -4,8 +4,10 @@
 	$email2 = str_replace('##emailid##','2',$emailHTMLTemplate);
 	$email3 = str_replace('##emailid##','3',$emailHTMLTemplate);
 ?>
+<!--
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chosen-localytics/1.8.0/angular-chosen.min.js"></script>
+-->
 <div class="panel panel-default" ng-controller="step2" id="step2ID">
 	<div class="panel-heading">
 		<div class="row">

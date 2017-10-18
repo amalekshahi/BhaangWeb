@@ -43,38 +43,37 @@
 				<form action="" class="form-horizontal" method="post">
 					<div class="form-group">
 						<div>
-							<span>Notify me at <kbd><?php echo $email; ?></kbd> when people:</span>
+							<span>As people interact with your Campaign, when would you like to be alerted, and who should I tell?</span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Open my Emails <switch ng-model="campaign['OPEN-MY-EMAIL-']" class="green" ng-change="SwitchChange()"></switch></label>
 						<div class="col-sm-6">
-														<select multiple
-        chosen
-        create-option-text="'Create item'"
-        persistent-create-option="true"
-        skip-no-results="true"
-        create-option="createOption"
-        ng-model="state"
-        ng-options="s for s in states">
-  <option value=""></option>
-</select>
-
+							<select multiple
+								chosen
+								create-option-text="'Create item'"
+								persistent-create-option="true"
+								skip-no-results="true"
+								create-option="createOption"
+								ng-model="user"
+								ng-options="u for u in users">
+  							<option value=""></option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Visit my Blog Post <switch ng-model="campaign['VISIT-MY-BLOCK-']" class="green" ng-change="SwitchChange()"></switch></label>
 						<div class="col-sm-6">
 							<select multiple
-        chosen
-        create-option-text="'Create item'"
-        persistent-create-option="true"
-        skip-no-results="true"
-        create-option="createOption"
-        ng-model="state"
-        ng-options="s for s in states">
-  <option value=""></option>
-</select>
+								chosen
+								create-option-text="'Create item'"
+								persistent-create-option="true"
+								skip-no-results="true"
+								create-option="createOption"
+								ng-model="user"
+								ng-options="u for u in users">
+  							<option value=""></option>
+							</select>
 							
 						</div>
 					</div>
@@ -86,17 +85,16 @@
 						</label>
 						<span ng-if="!campaign['CONVERSION-URL']"><small class="text-muted"><br>You need to set your Conversion point in 'Identify the Targeted Blog Post' above.</small></span>	
 					<div class="col-sm-6">
-									<select multiple
-        chosen
-        create-option-text="'Create item'"
-        persistent-create-option="true"
-        skip-no-results="true"
-        create-option="createOption"
-        ng-model="state"
-        ng-options="s for s in states">
-  <option value=""></option>
-</select>
-						
+							<select multiple
+								chosen
+								create-option-text="'Create item'"
+								persistent-create-option="true"
+								skip-no-results="true"
+								create-option="createOption"
+								ng-model="user"
+								ng-options="u for u in users">
+  							<option value=""></option>
+							</select>						
 					</div>
 						
 

@@ -37,9 +37,10 @@ $(document).ready(function() {
 });
 
 myApp.controller('myCtrl', function($scope, $http) {
+
+		$scope.user  = [];
 	
-		$scope.state = ['California', 'Arizona'];
-		$scope.states = [
+		$scope.users = [
 			'kdutta@mindfireinc.com',
 			'daver@mindfireinc.com',
 			'mcfarsheed@mindfireinc.com',
