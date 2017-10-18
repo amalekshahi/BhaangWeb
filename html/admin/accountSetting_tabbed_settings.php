@@ -461,7 +461,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="form-group">
+											<div class="form-group"I>
 												<label class="col-sm-2 control-label">Switch to "Box" mode?</label>
 												<div class="col-sm-10">
 													<div class="switch">
@@ -478,13 +478,25 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="tab-3rd-party-products">
+									
+								<div class="panel-body">
+									<h2>Integrations</h2>
+									<fieldset class="form-horizontal">
+										<div class="form-group">
+											<label class="col-sm-3 control-label"><i class="fa fa-google" aria-hidden="true" style="color:red"></i>  Google Analytics Tracking Code<br><small class="text-muted">Google Analytics helps you track visitors to your campaigns, and generates reports that help you with your marketing.  <a href="">Learn more about Google Analytics</a>.</small></label>
+											<div class="col-sm-9"><br><input type="text" class="form-control" placeholder="Paste your Google ID here, like: UA-83447148-1" name="google_tracking_code" ng-model="userinfo.GoogleAccessToken">
+													<span class="help-block m-b-none">Get help finding your Google Analytics Tracking ID.</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label"><i class="fa fa-facebook-official" aria-hidden="true" style="color:blue"></i> Facebook Pixel ID<br><small class="text-muted">The Facebook Pixel enables you to create Facebook ad campaigns that find new prospects and engages existing Clients.  <a href="">Learn more about the Facebook Pixel here</a>.</small></label>
+											<div class="col-sm-9"><br><input type="text" class="form-control" placeholder="Paste your Facebook Pixel ID here, like: 120261521652622" name="facebook_pixel_id" ng-model="userinfo.FaceBookAccessToken">
+													<span class="help-block m-b-none">Get help finding your Facebook Pixel ID.</span>
+											</div>
+										</div>
+								</div>									
+									
 									<div class="panel-body">
-										<!--
-										<p><label><i class="fa fa-google" aria-hidden="true" style="color:red"></i> Google Analytics Tracking Code</label><input class="form-control" name="google_tracking_code" placeholder="UA-83447148-1" type="text" value="{{google_tracking_code}}"><small>To find your tracking ID, sign in to your Analytics account, click Admin, select an account from the menua in the ACCOUNT column, and select a property.  Under PROPERTY, click Tracking Info > Tracking Code.</small> </p>
-										<p><label><i class="fa fa-facebook-official" aria-hidden="true" style="color:blue"></i> Facebook Pixel ID</label><input class="form-control" name="facebook_pixel_id" placeholder="120261521652622" type="text" value="{{facebook_pixel_id}}"><small>Find your Pixel ID by going to your Ads Manager, going to the pixel section and looking under the Pixel Name. To learn more about the Facebook Pixel, <a href="https://www.facebook.com/business/help/952192354843755/?ref=u2u">please visit this link from Facebook's Help Center</a>.</small></p>
-    									<p>&nbsp;</p>
-    									<input name="action" type="hidden" value="saveProfileSettings"> <button class="btn btn-primary" type="submit">Save</button> <button class="btn btn-white" type="submit">Cancel</button>
-										-->
 									</div>
 								</div>
 								<div class="tab-pane" id="tab-tracking-code">
