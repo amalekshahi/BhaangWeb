@@ -218,7 +218,6 @@ myApp.controller('myCtrl', function($scope, $http) {
 		$('#subjectEmail1').editable("setValue",$scope.campaign['EMAIL1-SUBJECT']);
 		$('#subjectEmail2').editable("setValue",$scope.campaign['EMAIL2-SUBJECT']);
 		$('#subjectEmail3').editable("setValue",$scope.campaign['EMAIL3-SUBJECT']);
-
         if (alert) {
             $scope.$apply();
             $scope.SelectChanged('viewEmail1', 'templateEmail1');
@@ -295,6 +294,11 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
                 $scope.sendersChanged('textSender' + emlID);
                 $scope.startEditable(emlID);
+                $scope.campaign['defButtonStyle'] = {
+                    "background-color":"#" + $scope.campaign['defButtonColor'] ,
+                    "border-radius":"3px",
+                    "text-align":"center",
+                };
             });
         }
     };

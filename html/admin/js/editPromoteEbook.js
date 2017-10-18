@@ -273,6 +273,11 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
 				$scope.sendersChanged('textSender' + emlID);
 				$scope.startEditable(emlID);
+                $scope.campaign['defButtonStyle'] = {
+                    "background-color":"#" + $scope.campaign['defButtonColor'] ,
+                    "border-radius":"3px",
+                    "text-align":"center",
+                };                
 			});
 		}
 	};

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives']);
+var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives','color.picker']);
 myApp.controller('myCtrl',function($scope,$http, Upload) {
 	$scope.Reset = function() {				 
 		$scope.userinfo  = angular.copy($scope.master);
@@ -109,8 +109,13 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 			console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
 		});
 	};
+    
+    $scope.colorPickerOptions = {
+        format: "hex",
+    };
 	
 	$scope.Load();
+
 
 });// end myApp.controller(myCtrl)
 

@@ -61,10 +61,10 @@
 						&lt;td style="padding-right:30px;padding-left:30px;padding-top:0;padding-bottom:0;font-family:sans-serif;font-size:16px;line-height:22px;color:#444444"&gt;
 							&lt;div&gt;
 								&lt;br&gt;
-								&lt;div class="hover"&gt;Hi ##firstname##, I think this directly impacts you. 12121&lt;/div&gt;
+								&lt;div class="hover"&gt;Hi ##firstname##, I think this directly impacts you.&lt;/div&gt;
 								&lt;table cellspacing="0" cellpadding="0" border="0" style="margin:0"&gt;
 									&lt;tr&gt;
-										&lt;td style="border-radius:3px;background-color:GREEN;text-align:center"&gt;
+										&lt;td ng-style="campaign['defButtonStyle']" style="border-radius:3px;background-color:#220080;text-align:center"&gt;
 											&lt;a href="www.google.com?campaignID=855376bc31edf8165b15b836a274294c&amp;contactID=##id##&amp;source=EMAIL1&amp;undefined" style="color:#ffffff;font-family:sans-serif;font-size:15px;line-height:15px;text-align:center;text-decoration:none;display:block;padding:15px 20px;border:1px solid #444444;border-radius:3px"&gt;
 												&lt;div class="hover"&gt;&lt;b&gt;CLICK HERE&lt;/b&gt;&lt;/div&gt;
 											&lt;/a&gt;
