@@ -64,7 +64,7 @@
 								<div class="hover">{{RAW SUMMERNOTETEXT(EMAIL1-TOP-TEXT)}}</div>
 								<table cellspacing="0" cellpadding="0" border="0" style="margin:0">
 									<tr>
-										<td style="border-radius:3px;background-color:GREEN;text-align:center">
+										<td ng-style="campaign['defButtonStyle']" [[REMOVE style="border-radius:3px;background-color:#{{RAW defButtonColor}};text-align:center"]]>
 											<aview href="[[REMOVE {{TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR}}/Welcome.html]]" style="color:#ffffff;font-family:sans-serif;font-size:15px;line-height:15px;text-align:center;text-decoration:none;display:block;padding:15px 20px;border:1px solid #444444;border-radius:3px">
 												<div class="hover"><b>{{RAW SUMMERNOTETEXT(EMAIL1-CTA-TEXT)}}</b></div>
 											</aview>
