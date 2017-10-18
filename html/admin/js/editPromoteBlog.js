@@ -52,13 +52,29 @@ myApp.controller('myCtrl', function($scope, $http) {
 			'the-currently-logged-in-user@domain.com',
 		];
 
-	/* Dave added this as mock for notifications; this allows user to add another email address on-the-fly */	
-		$scope.createOption = function(term) {
+	/* Dave added this as mock for notifications; this allows user to add another email address on-the-fly.  Feel free to keep DRY here and re-write to save lines */	
+		$scope.addUserForOpens = function(term) {
 			$scope.$apply(function() {
 				$scope.users.push(term);
-				$scope.users.push(term);
+				$scope.notifyTheseUsersForOpens.push(term);
 			});
 		}
+
+		$scope.addUserForVisits = function(term) {
+			$scope.$apply(function() {
+				$scope.users.push(term);
+				$scope.notifyTheseUsersForVisits.push(term);
+			});
+		}
+
+		$scope.addUserForCTACompletions = function(term) {
+			$scope.$apply(function() {
+				$scope.users.push(term);
+				$scope.notifyTheseUsersForCTACompletions.push(term);
+			});
+		}
+		
+		
 	
 	
 		$scope.campaignID = campaignID;

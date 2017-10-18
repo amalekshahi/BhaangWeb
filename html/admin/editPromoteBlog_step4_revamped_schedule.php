@@ -59,10 +59,10 @@
 						<div class="col-sm-6">
 							<select multiple
 								chosen
-								create-option-text="'Create item'"
+								create-option-text="'Add this email'"
 								persistent-create-option="true"
 								skip-no-results="true"
-								create-option="createOption"
+								create-option="addUserForOpens"
 								ng-model="notifyTheseUsersForOpens"
 								ng-options="u for u in users">
 								<option value=""></option>
@@ -76,10 +76,10 @@
 						<div class="col-sm-6">
 							<select multiple
 								chosen
-								create-option-text="'Create item'"
+								create-option-text="'Add this email'"
 								persistent-create-option="true"
 								skip-no-results="true"
-								create-option="createOption"
+								create-option="addUserForVisits"
 								ng-model="notifyTheseUsersForVisits"
 								ng-options="u for u in users">
 								<option value=""></option>
@@ -100,10 +100,10 @@
 							<div class="col-sm-6">
 								<select multiple
 								chosen
-								create-option-text="'Create item'"
+								create-option-text="'Add this email'"
 								persistent-create-option="true"
 								skip-no-results="true"
-								create-option="createOption"
+								create-option="addUserForCTACompletions"
 								ng-model="notifyTheseUsersForCTACompletions"
 								ng-options="u for u in users">
 									<option value=""></option>
