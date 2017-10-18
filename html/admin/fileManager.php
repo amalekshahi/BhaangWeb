@@ -45,16 +45,19 @@
 											<a href="" class="file-control">HTML Pages</a>
 											<a href="" class="file-control">eBooks</a>
 										-->
-
+<!-- 
 										<div class="hr-line-dashed"></div>
 										<button class="btn btn-primary btn-block"><i class="fa fa-upload" aria-hidden="true"></i> Upload a New File</button>
 										<div class="hr-line-dashed"></div>
+ -->
+
 										<h5>Shortcuts</h5>
 										<ul class="folder-list" style="padding: 0">
-											<li class="pull-right"><button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-plus"></i> New Folder</button></li>
-											<li><a href=""><i class="fa fa-files-o"></i> Uploads</a></li>
+											<!-- <li class="pull-right"><button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-plus"></i> New Folder</button></li>
+											<li><a href=""><i class="fa fa-files-o"></i> Uploads</a></li> -->
 											<li ng-repeat="folder in folders"><a href=""><i class="fa fa-folder" style="color:orange"></i> {{folder}}</a></li>
 										</ul>
+
 										<!--
 											<h5 class="tag-title">Tags</h5>
 											<ul class="tag-list" style="padding: 0" ng-repeat="tag in tags">
@@ -86,7 +89,7 @@
 								</div>
 							</div>
 							<div class="col-lg-9">
-								<div class="ibox-content m-b-sm border-bottom">
+								<div class="ibox-content">
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="form-group">
@@ -104,8 +107,21 @@
 
 											<div class="ibox-content">
 												<div class="ibox-tools pull-left">
+													<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-upload"></i> Upload</button>
+													<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Folder</button>
+													<select name="actionCmd" class="btn btn-white btn-xs" >
+														<option value="Action" selected><i aria-hidden="true" class="fa fa-tasks"></i> Action</option>
+														<option value="Copy URL">Copy URL</option>
+														<option value="Download">Download</option>
+														<option value="Rename">Rename</option>
+														<option value="Delete">Delete</option>
+														<option value="Move">Move</option>
+													</select>
+													
+
+													<!-- 
 													<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-trash-o"></i> Delete</button>
-													<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-arrows"></i> Move</button>
+													<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-arrows"></i> Move</button> -->
 
 												</div>
 

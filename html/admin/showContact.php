@@ -67,14 +67,14 @@
 		</div>
 		<!-- myCtrl -->
 		<!--/ content -->
+		<div class="footer">
+			<!-- footer -->
+			<?php include 'footer.php'; ?>
+			<!-- / footer -->
+		</div>
 	</div>
 	<!--  end page-wrapper -->
 </div>
-<!-- end id=wrapper -->
-
-<!--  footer -->
-<div class="footer">
-	<?php include 'footer.php'; ?>
 </div>
 
 <!-- Mainly scripts -->
