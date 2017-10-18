@@ -43,7 +43,7 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "Yes, delete it!",
 			closeOnConfirm: false
-		}, function() {
+		}).then(function () {
 			$scope.emailList.splice($scope.emailList.indexOf(tab), 1);
 			$scope.emlIndex--;
 			$scope.$apply();
