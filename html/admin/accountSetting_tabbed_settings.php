@@ -268,8 +268,16 @@
 </div>
 																							
                                             </div>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Price:</label>
-                                                <div class="col-sm-10"><input type="text" class="form-control" placeholder="$160.00"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Email Protection:</label>
+                                                <div class="col-sm-10">Allow no more than <select required="">
+																	<option value="1" >1</option> 
+																	<option value="2">2</option> 
+																</select> emails sent to each person per <select required="">
+																	<option value="hour" >hour</option> 
+																	<option value="day">day</option> 
+																	<option value="week">week</option> 
+																	<option value="month">month</option> 
+																</select></div>
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Meta Tag Title:</label>
                                                 <div class="col-sm-10"><input type="text" class="form-control" placeholder="..."></div>
