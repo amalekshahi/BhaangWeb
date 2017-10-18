@@ -38,13 +38,18 @@ $(document).ready(function() {
 
 myApp.controller('myCtrl', function($scope, $http) {
 
-		$scope.user  = [];
-	
+		/* Dave added this as mock for notifications */
+		$scope.notifyTheseUsersForOpens  = ['the-currently-logged-in-user@domain.com'];
+		$scope.notifyTheseUsersForVisits  = ['the-currently-logged-in-user@domain.com'];
+		$scope.notifyTheseUsersForCTACompletions  = ['the-currently-logged-in-user@domain.com'];
+
+	/* Dave added this as mock for notifications; this will likely need to read from CouchDB */	
 		$scope.users = [
 			'kdutta@mindfireinc.com',
 			'daver@mindfireinc.com',
 			'mcfarsheed@mindfireinc.com',
-			'demandgen@mindfireinc.com'
+			'demandgen@mindfireinc.com',
+			'the-currently-logged-in-user@domain.com',
 		];
 
 		$scope.createOption = function(term) {
