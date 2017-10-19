@@ -299,13 +299,13 @@
 			<h2>Payment Info</h2>
 			<div class="row">
 						<div class="col-sm-4">
-							<div class="ibox float-e-margins">
+							<div class="ibox float-e-margins" style="margin-bottom: 0px;">
 								<div class="ibox-title">
 									<h5>Next Billing</h5>
 									<div ibox-tools></div>
 								</div>
 								<div class="ibox-content">
-									<ul class="list-group">
+									<ul class="list-group" style="margin-bottom: 0px;">
 										<li class="list-group-item">
 											<span class="badge badge-primary">&nbsp;DATE&nbsp;</span> November 8th, 2017
 										</li>
@@ -317,18 +317,18 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="ibox float-e-margins">
+							<div class="ibox float-e-margins" style="margin-bottom: 0px;">
 								<div class="ibox-title">
 									<h5>Payment Details</h5>
 
 									<div ibox-tools></div>
 								</div>
 								<div class="ibox-content">
-									<ul class="list-group">
+									<ul class="list-group" style="margin-bottom: 0px;">
 										<li class="list-group-item">
 											<span class="badge badge-primary">&nbsp;CREDIT CARD&nbsp;</span> xxxx xxxx xxxx 8405
 										</li>
-										<li class="list-group-item ">
+										<li class="list-group-item">
 											<button type="button" class="btn btn-default btn-xs">CHANGE PAYMENT METHOD</button>
 										</li>
 									</ul>
@@ -336,17 +336,17 @@
 							</div>
 						</div>
 						<div class="col-sm-3">
-							<div class="ibox float-e-margins">
+							<div class="ibox float-e-margins" style="margin-bottom: 0px;">
 								<div class="ibox-title">
 									<h5>Information</h5>
 									<span class="pull-right">
 										<div ibox-tools></div>
 								</div>
 								<div class="ibox-content">
-									<p>Invoices</p>
-									<p>Change invoice details</p>
-									<p>Change billing notifications</p>
-									<p>Contact us about your bill</p>
+									<p><a href="">Invoices</a></p>
+									<p><a href="">Change invoice details</a></p>
+									<p><a href="">Change billing notifications</a></p>
+									<p><a href="">Contact us about your bill</a></p>
 								</div>
 							</div>
 						</div>							
