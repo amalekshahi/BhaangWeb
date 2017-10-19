@@ -20,6 +20,12 @@
 </head>
 
 <body class="fixed-sidebar">
+<script>
+	//Kwang create myAPP here so all step can access it.
+	var dbName = "<?php echo $dbName; ?>";
+	var accountID = "<?php echo $accountID; ?>";
+	var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives','color.picker']);
+</script>
 <div id="wrapper">
 		<!-- left wrapper -->
 		<?php include 'leftWrapper.php'; ?>
