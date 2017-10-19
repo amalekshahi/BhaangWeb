@@ -260,37 +260,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-								<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5>
-								<div class="ibox-tools">
-									<button class="btn btn-white btn-xs" ng-click="ViewReport()"><i aria-hidden="true" class="fa fa-external-link" style="color:blue"></i> VIEW MORE PERFORMANCE REPORTS</button>
-									<a class="collapse-link">
-                        	<i class="fa fa-chevron-up"></i>
-                        </a>
-								</div>
-							</div>
-							<div class="ibox-content">
-								<div class="row">
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-users" style="color:green"></i> Targeted People</small>
-										<h2>643</h2>
-									</div>
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-envelope-open-o" style="color:blue"></i> Opens</small>
-										<h2>64 (17%)</h2>
-									</div>
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-mouse-pointer" style="color:purple"></i> Clicks to Blog Post</small>
-										<h2>13 (11%)</h2>
-									</div>
-									<div class="col-xs-3">
-										<small class="stats-label"><i aria-hidden="true" class="fa fa-times-circle" style="color:red"></i> Unsubscribes</small>
-										<h2>2 (1%)</h2>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php include "dv_report.php"; ?>	
 					</div>
 				</div>
 				<!--/ content -->

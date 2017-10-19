@@ -214,7 +214,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.setInitValue();
 			$scope.setDisplay();
 			$scope.LoadAudience();
-			$scope.LoadReport();
 			$scope.Reset();
 		}, function(errResponse) {
 			if (errResponse.status == 404) {
@@ -234,7 +233,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope.setInitValue();
 				$scope.setDisplay();
 				$scope.LoadAudience();
-				$scope.LoadReport();
 			} else {
 				//alert(errResponse.statusText);
 				swal(errResponse.statusText);
@@ -630,12 +628,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		//alert('SwitchChange');
 	};
 
-	$scope.ViewReport = function() {
-		//window.location.href = "reporting.php?campaignID=" + campaignID;
-		window.open("reporting.php?campaignID=" + campaignID);
-
-	};
-
 	$scope.LoadAudience = function() {
 
 		if (typeof $scope.campaign['filterSelected'] == 'undefined') {
@@ -655,45 +647,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			}
 		});
 	};
-	
-	$scope.LoadReport = function() {
-		var fd = UTCDateTimeMDT();
-		var td = UTCDateTimeMDT();		
-		var tdate = toDate(td);	
-		fd = addDays(tdate, -7);
-		fd = formatDateMDY(fd);
-		$scope.showreport = false;
-        $http.get("getCampaignReport.php", {
-            method: "GET",
-            params: {
-                campaignName: $scope.campaign.campaignName,
-				programID: $scope.campaign.publishProgramID,
-                fd: fd,
-				td: td,
-            }
-        }).then(function(response) {
-			if (response.data.success == false) {
-				
-			} else {
-				$scope.campaign.report = [];
-				var report = response.data.rows;
-                for (var i = 0; i < report.length; i++) {
-					$scope.showreport = true;
-					var emailName = getEmailName(report[i].Email,'short');
-                    $scope.campaign.report.push({
-						"emailName": emailName,
-                        "Sent": report[i].Sent,
-                        "Opened": report[i].Opened,
-						"Clicked": report[i].Clicked,
-						"Unsubscribed": report[i].Unsubscribed,
-                    });
-                }
-			}           
-        }, function(response) {
-            $scope.myAlert("A connection error occured. Please try again.");
-        });
-	};
-
 
 	$scope.DuplicateCampaignClick = function(){
 		swal({

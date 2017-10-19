@@ -1,5 +1,5 @@
 <!-- report Start -->
-<div class="ibox float-e-margins" ng-show="showreport==true">
+<div class="ibox float-e-margins" ng-show="showreport==true" ng-controller="dvreport">
 	<div class="ibox-title" >
 		<h5><i aria-hidden="true" class="fa fa-bar-chart" style="color:black"></i> Performance Snapshot</h5>
 		<div class="ibox-tools">
@@ -24,4 +24,5 @@
 		</div>
 	</div>
 </div>
+<script src="js/dv_report.js"></script>
 <!-- report End-->
