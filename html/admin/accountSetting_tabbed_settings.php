@@ -4,9 +4,9 @@
     include 'global.php';
     require_once('loginCredentials.php');    
     $dbName = $_SESSION['DBNAME'];
-	$accountID = $_SESSION['ACCOUNTID'];
+		$accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
-	$gates = $_SESSION['GATES'];
+		$gates = $_SESSION['GATES'];
 ?>
 	<!DOCTYPE html>
 	<html ng-app="myApp">
@@ -69,6 +69,12 @@
 													<a data-toggle="tab" href="#tab-you"><i class="fa fa-user-o" aria-hidden="true"></i> <?php echo $USERNAME;?> Preferences </a>
 												</li>-->
 												<li class="">
+													<a data-toggle="tab" href="#tab-email-settings"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email Settings</a>
+												</li>
+												<li class="">
+													<a data-toggle="tab" href="#tab-grading-and-scoring"><i class="fa fa-star-o" aria-hidden="true"></i> Grading & Scoring</a>
+												</li>
+												<li class="">
 													<a data-toggle="tab" href="#tab-3rd-party-products"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Integrations</a>
 												</li>
 												<li class="">
@@ -77,17 +83,12 @@
 											</ul>
 											<div class="tab-content">
 												<form role="form">
-													<div class="tab-pane" id="tab-users">
+												<div class="tab-pane" id="tab-users">
 														<div class="panel-body">
 															<h2><i class="fa fa-user" aria-hidden="true"></i> Users at <?php echo $accountName;?></h2>
 															<fieldset class="form-horizontal">
-															
-																	
 																				<div class="ibox-tools">
-																					<!-- <a href="" class="btn btn-primary btn-sm">+ Add User</a> -->
 																					<button class="btn btn-primary btn-sm" ng-click="AddUser()">+ Add a User</button>
-																					<!-- <button class="btn btn-primary" ng-click="EditUser(item)">Edit</button>
-																					<button class="btn btn-primary" ng-click="DeleteUser(item)">Delete</button> -->																																	
 																				</div>
 																			<div id="senderData" ng-show="state['senderData'] == 'true'">
 																				<input type="hidden" id="senderID" name="senderID">
@@ -147,8 +148,6 @@
 																					</tbody>
 																				</table>
 																			</div>																			
-																	
-																
 															</fieldset>
 													</form>
 												</div>
@@ -187,7 +186,30 @@
 																	<span class="help-block m-b-none"></span>
 																</div>
 															</div>
-															<div class="hr-line-dashed"></div>
+														</fieldset>
+													</div>
+												</div>
+												<div class="tab-pane" id="tab-grading-and-scoring">
+													<div class="panel-body">
+														<h2>Grading & Scoring</h2>
+															<p>To measure the value of the people interacting with your marketing programs, I've set up the following for you. Feel free to change.</p>
+															<div class="form-group form-inline">
+																<div class="col-sm-8">
+																<label for="opens"><i aria-hidden="true" class="fa fa-envelope-open-o"></i>&nbsp;</label>
+																	<input class="touchspin-points form-control input-sm" id="opens" type="text" value="0" name="opens" style="width:50px; text-align: center"> points when people <strong>open</strong> any of my emails for the first time.</small>
+																	<p></p>
+																	<label for="clicks"><i aria-hidden="true" class="fa fa-mouse-pointer"></i>&nbsp;&nbsp;</label>
+																	<input class="touchspin-points form-control input-sm" id="opens" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>click</strong> any of my email CTAs for the first time.</small>
+																	<p></p>
+																	<label for="download"><i aria-hidden="true" class="fa fa-download"></i>&nbsp;</label>
+																	<input class="touchspin-points form-control input-sm" id="downloads" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>download</strong> any of my eBooks or other assets for the first time.</small>
+																</div>
+															</div>
+														</div>
+												</div>	
+												<div class="tab-pane" id="tab-email-settings">
+													<div class="panel-body">
+														<fieldset>
 															<h2>Global Email Settings</h2>
 															<div class="form-group"><label class="col-sm-4 control-label">Email Protection <br><small class="text-muted">This is a global setting that protects you from sending more emails that appropriate to your database.</small></label>
 																<div class="col-sm-8"><br>Allow no more than <select required="">
@@ -209,25 +231,9 @@
 																	<input type="text" class="form-control" placeholder="View online message" name="defViewOnline" ng-model="userinfo.defViewOnline">
 																	<span class="help-block m-b-none"></span> </div>
 															</div>
-															<div class="hr-line-dashed"></div>
-															<h2>Grading & Scoring</h2>
-															<p>To measure the value of the people interacting with your marketing programs, I've set up the following for you. Feel free to change.</p>
-															<div class="form-group form-inline">
-																<div class="col-sm-8">
-																<label for="opens"><i aria-hidden="true" class="fa fa-envelope-open-o"></i>&nbsp;</label>
-																	<input class="touchspin-points form-control input-sm" id="opens" type="text" value="0" name="opens" style="width:50px; text-align: center"> points when people <strong>open</strong> any of my emails for the first time.</small>
-																	<p></p>
-																	<label for="clicks"><i aria-hidden="true" class="fa fa-mouse-pointer"></i>&nbsp;&nbsp;</label>
-																	<input class="touchspin-points form-control input-sm" id="opens" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>click</strong> any of my email CTAs for the first time.</small>
-																	<p></p>
-																	<label for="download"><i aria-hidden="true" class="fa fa-download"></i>&nbsp;</label>
-																	<input class="touchspin-points form-control input-sm" id="downloads" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>download</strong> any of my eBooks or other assets for the first time.</small>
-																	
-																</div>
-															</div>
 														</fieldset>
 													</div>
-												</div>
+												</div>									
 												<div class="tab-pane" id="tab-you">
 													<div class="panel-body">
 														<h2>Your Preferences</h2>
@@ -268,195 +274,188 @@
 														<input name="action" type="hidden" value="saveProfileSettings"> <button class="btn btn-primary" type="submit">Save</button> <button class="btn btn-white" type="submit">Cancel</button>
 													</div>
 												</div>
-											<div class="tab-pane" id="tab-grading-and-scoring">
-		<div class="panel-body">
-			<h2>Grading & Scoring</h2>
-			<p>To measure the value of the people interacting with your marketing programs, I've set up the following for you. Feel free to change.</p>
-			<form role="form">
-				<div class="form-group form-inline">
-					<label for="opens"><i aria-hidden="true" class="fa fa-envelope-open-o"></i>&nbsp;</label>
-					<input class="touchspin-points form-control input-sm" id="opens" type="text" value="0" name="opens" style="width:50px; text-align: center"> points when people <strong>open</strong> any of my emails for the first time.</small>
-					<p></p>
-					<label for="clicks"><i aria-hidden="true" class="fa fa-mouse-pointer"></i>&nbsp;&nbsp;</label>
-					<input class="touchspin-points form-control input-sm" id="opens" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>click</strong> any of my email CTAs for the first time.</small>
-					<p></p>
-					<label for="download"><i aria-hidden="true" class="fa fa-download"></i>&nbsp;</label>
-					<input class="touchspin-points form-control input-sm" id="downloads" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>download</strong> any of my eBooks or other assets for the first time.</small>
-
-				</div>
-
-			</form>
-
-			<input name="action" type="hidden" value="saveProfileSettings"> <button class="btn btn-primary" type="submit">Save</button> <button class="btn btn-white" type="submit">Cancel</button>
-		</div>
-	</div>
-											<div class="tab-pane" id="tab-billing">
-		<div class="panel-body">
-			<fieldset class="form-horizontal">
-			<h2>Plans & Billing</h2>
-			<p><strong>Questions about plans and pricing?</strong></p>
-			<p>The MindFire Da Vinci team is available to answer your questions. <a href="helpCenter.php" target="_blank">Get help here</a>.</p> 
-			<p>MindFire also offers enterprise-grade service packages for high volume marketers.  Contact our Customer Success team for a no obligations consultation or demo.</p>
-			<h2>Payment Info</h2>
-			<div class="row">
-						<div class="col-sm-4">
-							<div class="ibox float-e-margins" style="margin-bottom: 0px;">
-								<div class="ibox-title">
-									<h5>Next Billing</h5>
-									<div ibox-tools></div>
-								</div>
-								<div class="ibox-content">
-									<ul class="list-group" style="margin-bottom: 0px;">
-										<li class="list-group-item">
-											<span class="badge badge-primary">&nbsp;DATE&nbsp;</span> November 8th, 2017
-										</li>
-										<li class="list-group-item ">
-											<span class="badge badge-warning">&nbsp;AMOUNT DUE&nbsp;</span> $495.00
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="ibox float-e-margins" style="margin-bottom: 0px;">
-								<div class="ibox-title">
-									<h5>Payment Details</h5>
-
-									<div ibox-tools></div>
-								</div>
-								<div class="ibox-content">
-									<ul class="list-group" style="margin-bottom: 0px;">
-										<li class="list-group-item">
-											<span class="badge badge-primary">&nbsp;CREDIT CARD&nbsp;</span> xxxx xxxx xxxx 8405
-										</li>
-										<li class="list-group-item">
-											<button type="button" class="btn btn-default btn-xs">CHANGE PAYMENT METHOD</button>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="ibox float-e-margins" style="margin-bottom: 0px;">
-								<div class="ibox-title">
-									<h5>Information</h5>
-									<span class="pull-right">
-										<div ibox-tools></div>
-								</div>
-								<div class="ibox-content">
-									<p><a href="">Invoices</a></p>
-									<p><a href="">Change invoice details</a></p>
-									<p><a href="">Change billing notifications</a></p>
-									<p><a href="">Contact us about your bill</a></p>
-								</div>
-							</div>
-						</div>							
-			</div>
-			<h2>Your Account & Sub-Accounts</h2>
-				<hr/>
-			<div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="contact-box center-version">
-                    <a href="#">
-                        <img alt="image" class="img-circle" src="http://www.pngall.com/wp-content/uploads/2016/05/Coming-Soon-Free-Download-PNG.png">
-                        <h3 class="m-b-xs"><strong><?php echo $accountName;?></strong></h3>
-                        <div class="font-bold">Added 4/14/2013</div>
-                        <div class="font-bold">$150 p/mo</div>
-											<hr/>
-											<span><strong>Details:</strong><br>Unlimited Emails<br>1,000 Contacts</span>
-                    </a>
-                    <div class="contact-box-footer">
-                        <div class="m-t-xs btn-group">
-                            <a class="btn btn-xs btn-white"> Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-					<div class="col-lg-4">
-                <div class="contact-box center-version">
-                    <a href="#">
-                        <img alt="image" class="img-circle" src="http://www.dbq.edu/media/Calendar/UD-logo-combined-3_web.jpg">
-                        <h3 class="m-b-xs"><strong>University of Dubuque</strong></h3>
-                        <div class="font-bold">Added 1/23/2015</div>
-                        <div class="font-bold">$150 p/mo</div>
-											<hr/>
-											<span><strong>Details:</strong><br>Unlimited Emails<br>1,000 Contacts</span>
-                    </a>
-                    <div class="contact-box-footer">
-                        <div class="m-t-xs btn-group">
-                            <a class="btn btn-xs btn-white"> Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box center-version">
-                    <a href="#">
-                        <img alt="image" class="img-circle" src="http://www.arc.losrios.edu/Images/Images-arc/Support_Services/TransferCenter/CSU%20Logos/CSULong-Beach-Logo.jpg">
-                        <h3 class="m-b-xs"><strong>Cal State Longbeach</strong></h3>
-                        <div class="font-bold">Added 7/3/2015</div>
-                        <div class="font-bold">$450 p/mo</div>
-											<hr/>
-											<span><strong>Details:</strong><br>Unlimited Emails<br>10,000 Contacts</span>
-                    </a>
-                    <div class="contact-box-footer">
-                        <div class="m-t-xs btn-group">
-                            <a class="btn btn-xs btn-white"> Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box center-version">
-                    <a href="#">
-                        <img alt="image" class="img-circle" src="https://brand.uiowa.edu/sites/brand.uiowa.edu/files/color-ffcd00_on_black.png">
-                        <h3 class="m-b-xs"><strong>University of Iowa</strong></h3>
-                        <div class="font-bold">Added 3/14/2015</div>
-                        <div class="font-bold">$350 p/mo</div>
-											<hr/>
-											<span><strong>Details:</strong><br>Unlimited Emails<br>5,000 Contacts</span>
-                    </a>
-                    <div class="contact-box-footer">
-                        <div class="m-t-xs btn-group">
-                            <a class="btn btn-xs btn-white"> Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-box center-version">
-                    <a href="#">
-                        <img alt="image" class="img-circle" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Harvard_Wreath_Logo_1.svg/1200px-Harvard_Wreath_Logo_1.svg.pngg">
-                        <h3 class="m-b-xs"><strong>Harvard</strong></h3>
-                        <div class="font-bold">Added 1/23/2015</div>
-                        <div class="font-bold">$150 p/mo</div>
-											<hr/>
-											<span><strong>Details:</strong><br>Unlimited Emails<br>1,000 Contacts</span>
-                    </a>
-                    <div class="contact-box-footer">
-                        <div class="m-t-xs btn-group">
-                            <a class="btn btn-xs btn-white"> Edit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-
-
-        </div>
-        </div>	
-				</fieldset>
-				</div>
-			</div>
-		</div>
-	</div>
+												<div class="tab-pane" id="tab-grading-and-scoring">
+												<div class="panel-body">
+													<h2>Grading & Scoring</h2>
+													<p>To measure the value of the people interacting with your marketing programs, I've set up the following for you. Feel free to change.</p>
+													<form role="form">
+														<div class="form-group form-inline">
+															<label for="opens"><i aria-hidden="true" class="fa fa-envelope-open-o"></i>&nbsp;</label>
+															<input class="touchspin-points form-control input-sm" id="opens" type="text" value="0" name="opens" style="width:50px; text-align: center"> points when people <strong>open</strong> any of my emails for the first time.</small>
+															<p></p>
+															<label for="clicks"><i aria-hidden="true" class="fa fa-mouse-pointer"></i>&nbsp;&nbsp;</label>
+															<input class="touchspin-points form-control input-sm" id="opens" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>click</strong> any of my email CTAs for the first time.</small>
+															<p></p>
+															<label for="download"><i aria-hidden="true" class="fa fa-download"></i>&nbsp;</label>
+															<input class="touchspin-points form-control input-sm" id="downloads" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>download</strong> any of my eBooks or other assets for the first time.</small>
+														</div>
+													</form>
+													<input name="action" type="hidden" value="saveProfileSettings"> <button class="btn btn-primary" type="submit">Save</button> <button class="btn btn-white" type="submit">Cancel</button>
+												</div>
+											</div>
+												<div class="tab-pane" id="tab-billing">
+												<div class="panel-body">
+													<fieldset class="form-horizontal">
+													<h2>Plans & Billing</h2>
+													<p><strong>Questions about plans and pricing?</strong></p>
+													<p>The MindFire Da Vinci team is available to answer your questions. <a href="helpCenter.php" target="_blank">Get help here</a>.</p> 
+													<p>MindFire also offers enterprise-grade service packages for high volume marketers.  Contact our Customer Success team for a no obligations consultation or demo.</p>
+													<h2>Payment Info</h2>
+													<div class="row">
+																<div class="col-sm-4">
+																	<div class="ibox float-e-margins" style="margin-bottom: 0px;">
+																		<div class="ibox-title">
+																			<h5>Next Billing</h5>
+																			<div ibox-tools></div>
+																		</div>
+																		<div class="ibox-content">
+																			<ul class="list-group" style="margin-bottom: 0px;">
+																				<li class="list-group-item">
+																					<span class="badge badge-primary">&nbsp;DATE&nbsp;</span> November 8th, 2017
+																				</li>
+																				<li class="list-group-item ">
+																					<span class="badge badge-warning">&nbsp;AMOUNT DUE&nbsp;</span> $495.00
+																				</li>
+																			</ul>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-4">
+																	<div class="ibox float-e-margins" style="margin-bottom: 0px;">
+																		<div class="ibox-title">
+																			<h5>Payment Details</h5>
+																			<div ibox-tools></div>
+																		</div>
+																		<div class="ibox-content">
+																			<ul class="list-group" style="margin-bottom: 0px;">
+																				<li class="list-group-item">
+																					<span class="badge badge-primary">&nbsp;CREDIT CARD&nbsp;</span> xxxx xxxx xxxx 8405
+																				</li>
+																				<li class="list-group-item">
+																					<button type="button" class="btn btn-default btn-xs">CHANGE PAYMENT METHOD</button>
+																				</li>
+																			</ul>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-3">
+																	<div class="ibox float-e-margins" style="margin-bottom: 0px;">
+																		<div class="ibox-title">
+																			<h5>Information</h5>
+																			<span class="pull-right">
+																				<div ibox-tools></div>
+																		</div>
+																		<div class="ibox-content">
+																			<p><a href="">Invoices</a></p>
+																			<p><a href="">Change invoice details</a></p>
+																			<p><a href="">Change billing notifications</a></p>
+																			<p><a href="">Contact us about your bill</a></p>
+																		</div>
+																	</div>
+																</div>							
+													</div>
+													<h2>Your Account & Sub-Accounts</h2>
+														<hr/>
+													<div class="wrapper wrapper-content animated fadeInRight">
+														<div class="row">
+																<div class="col-lg-4">
+																		<div class="contact-box center-version">
+																				<a href="#">
+																						<img alt="image" class="img-circle" src="http://www.pngall.com/wp-content/uploads/2016/05/Coming-Soon-Free-Download-PNG.png">
+																						<h3 class="m-b-xs"><strong><?php echo $accountName;?></strong></h3>
+																						<div class="font-bold">Added 4/14/2013</div>
+																						<div class="font-bold">$150 p/mo</div>
+																					<hr/>
+																					<span><strong>Details:</strong><br>Unlimited Emails<br>1,000 Contacts</span>
+																				</a>
+																				<div class="contact-box-footer">
+																						<div class="m-t-xs btn-group">
+																								<a class="btn btn-xs btn-white"> Edit</a>
+																						</div>
+																				</div>
+																		</div>
+																</div>
+															<div class="col-lg-4">
+																		<div class="contact-box center-version">
+																				<a href="#">
+																						<img alt="image" class="img-circle" src="http://www.dbq.edu/media/Calendar/UD-logo-combined-3_web.jpg">
+																						<h3 class="m-b-xs"><strong>University of Dubuque</strong></h3>
+																						<div class="font-bold">Added 1/23/2015</div>
+																						<div class="font-bold">$150 p/mo</div>
+																					<hr/>
+																					<span><strong>Details:</strong><br>Unlimited Emails<br>1,000 Contacts</span>
+																				</a>
+																				<div class="contact-box-footer">
+																						<div class="m-t-xs btn-group">
+																								<a class="btn btn-xs btn-white"> Edit</a>
+																						</div>
+																				</div>
+																		</div>
+																</div>
+																<div class="col-lg-4">
+																		<div class="contact-box center-version">
+																				<a href="#">
+																						<img alt="image" class="img-circle" src="http://www.arc.losrios.edu/Images/Images-arc/Support_Services/TransferCenter/CSU%20Logos/CSULong-Beach-Logo.jpg">
+																						<h3 class="m-b-xs"><strong>Cal State Longbeach</strong></h3>
+																						<div class="font-bold">Added 7/3/2015</div>
+																						<div class="font-bold">$450 p/mo</div>
+																					<hr/>
+																					<span><strong>Details:</strong><br>Unlimited Emails<br>10,000 Contacts</span>
+																				</a>
+																				<div class="contact-box-footer">
+																						<div class="m-t-xs btn-group">
+																								<a class="btn btn-xs btn-white"> Edit</a>
+																						</div>
+																				</div>
+																		</div>
+																</div>
+																<div class="col-lg-4">
+																		<div class="contact-box center-version">
+																				<a href="#">
+																						<img alt="image" class="img-circle" src="https://brand.uiowa.edu/sites/brand.uiowa.edu/files/color-ffcd00_on_black.png">
+																						<h3 class="m-b-xs"><strong>University of Iowa</strong></h3>
+																						<div class="font-bold">Added 3/14/2015</div>
+																						<div class="font-bold">$350 p/mo</div>
+																					<hr/>
+																					<span><strong>Details:</strong><br>Unlimited Emails<br>5,000 Contacts</span>
+																				</a>
+																				<div class="contact-box-footer">
+																						<div class="m-t-xs btn-group">
+																								<a class="btn btn-xs btn-white"> Edit</a>
+																						</div>
+																				</div>
+																		</div>
+																</div>
+																<div class="col-lg-4">
+																		<div class="contact-box center-version">
+																				<a href="#">
+																						<img alt="image" class="img-circle" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Harvard_Wreath_Logo_1.svg/1200px-Harvard_Wreath_Logo_1.svg.pngg">
+																						<h3 class="m-b-xs"><strong>Harvard</strong></h3>
+																						<div class="font-bold">Added 1/23/2015</div>
+																						<div class="font-bold">$150 p/mo</div>
+																					<hr/>
+																					<span><strong>Details:</strong><br>Unlimited Emails<br>1,000 Contacts</span>
+																				</a>
+																				<div class="contact-box-footer">
+																						<div class="m-t-xs btn-group">
+																								<a class="btn btn-xs btn-white"> Edit</a>
+																						</div>
+																				</div>
+																		</div>
+																</div>
+														</div>
+													</div>	
+												</fieldset>
+											</div>
 										</div>
-									</div>
+										</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
+				</form>
+			</div>
+		</div>
 	<!-- myCtrl -->
 	<!--/ content -->
 	<div class="footer">
