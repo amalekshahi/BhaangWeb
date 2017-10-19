@@ -42,6 +42,11 @@
 																			<h3>First, we'll need some basic information to help set up your account.</h3>
                                     </div>
                                 </div>
+                                <div class="form-group"><label class="col-sm-4 control-label">Your Company's Website</label>
+                                    <div class="col-sm-8">
+																			<input type="text" placeholder="http://www.something.com" class="form-control input-lg m-b">
+                                    </div>
+                                </div>
                                 <div class="form-group"><label class="col-sm-4 control-label">Email Address</label>
                                     <div class="col-sm-8">
 																			<input type="text" placeholder="you@email.com" class="form-control input-lg m-b">
