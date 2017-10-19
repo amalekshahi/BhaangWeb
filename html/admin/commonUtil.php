@@ -692,25 +692,31 @@ function CleanDocument($doc)
 
 function GetUserInfoFromDB($dbName)
 {
+    $docDefault = couchDB_Get("/master/Default_UserInfo");
+
     $doc = couchDB_Get("/$dbName/UserInfo");
     $default = false;
     if(!empty($doc->error)){
         //not found need to return from default
         $default = true;
-        $doc = couchDB_Get("/master/Default_UserInfo");
+        /*$doc = couchDB_Get("/master/Default_UserInfo");
         if(!empty($doc->error)){
             return  array(
                     'success'=>false,
                     'message'=>"Default_UserInfo not found",
                 );
-        }
+        }*/
+        $doc = $docDefault;
         CleanDocument($doc);
+    }else{
+        MergeStdClassWithStdClass($doc,$docDefault,false);
     }
     return array(
             'success'=>true,
             'doc'=>$doc,
             'default'=>$default,
             'dbName'=>$dbName,
+            'docDefault'=>$docDefault,
     );
 }
 
