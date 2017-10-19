@@ -270,12 +270,30 @@ myApp.controller('myCtrl', function($scope, $http) {
         $("#editCampaignName").text($scope.campaign.campaignName);
 		$("#editCampaignName").editable({
 			tpl: '<input type="text" maxlength="50">'
+			,validate:function(value){
+				if($.trim(value) == '') {
+						//swal("Oops...","Please enter Campaign Name!","warning");
+						return 'Campaign Name is required';
+				}
+			}
 		});
 		//$('#template').trigger('change');
 		$("#editCampaignName").on('save', function(e, params) {
-			//alert('Saved value: ' + params.newValue);
 			$scope.campaign.campaignName = params.newValue;
 			$scope.Save();
+			/*if($.trim(params.newValue) == '') {
+				swal({
+					title: "Oops...",
+					text: "Please enter Campaign Name!",
+					type: "warning",
+					confirmButtonText: "OK!"
+				}).then(function () {
+					$('#editCampaignName').editable("setValue",$scope.campaign.campaignName);
+				});				
+			} else {
+				$scope.campaign.campaignName = params.newValue;
+				$scope.Save();
+			}*/
 		});
     };
     $scope.setInitValue = function() {

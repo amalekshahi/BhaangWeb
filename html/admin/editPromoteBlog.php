@@ -40,6 +40,11 @@
 			.campaign-title .editable-container.editable-inline {
 				margin-right: 87px !important;
 			}
+			.has-error .help-block {
+			    /*color: #FF6632;*/
+				color: white;
+				/*text-shadow: 2px 2px #000000;*/
+			}
 		</style>
 
 	</head>

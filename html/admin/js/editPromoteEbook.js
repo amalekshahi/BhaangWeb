@@ -246,12 +246,30 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
         $("#editCampaignName").text($scope.campaign.campaignName);
 		$("#editCampaignName").editable({
 			tpl: '<input type="text" maxlength="50">'
+			,validate:function(value){
+				if($.trim(value) == '') {
+						//swal("Oops...","Please enter Campaign Name!","warning");
+						return 'Campaign Name is required';
+				}
+			}
 		});
 		//$('#template').trigger('change');
 		$("#editCampaignName").on('save', function(e, params) {
-			//alert('Saved value: ' + params.newValue);
 			$scope.campaign.campaignName = params.newValue;
 			$scope.Save();
+			/*if($.trim(params.newValue) == '') {
+				swal({
+					title: "Oops...",
+					text: "Please enter Campaign Name!",
+					type: "warning",
+					confirmButtonText: "OK!"
+				}).then(function () {
+					$('#editCampaignName').editable("setValue",$scope.campaign.campaignName);
+				});				
+			} else {
+				$scope.campaign.campaignName = params.newValue;
+				$scope.Save();
+			}*/
 		});
     };
     $scope.setInitValue = function() {
@@ -273,11 +291,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
 				$scope.sendersChanged('textSender' + emlID);
 				$scope.startEditable(emlID);
-                $scope.campaign['defButtonStyle'] = {
-                    "background-color":"#" + $scope.campaign['defButtonColor'] ,
-                    "border-radius":"3px",
-                    "text-align":"center",
-                };                
 			});
 		}
 	};
@@ -655,45 +668,48 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			}
 		});
 	};
-	
+
 	$scope.LoadReport = function() {
 		var fd = UTCDateTimeMDT();
-		var td = UTCDateTimeMDT();		
-		var tdate = toDate(td);	
-		fd = addDays(tdate, -7);
-		fd = formatDateMDY(fd);
-		$scope.showreport = false;
-        $http.get("getCampaignReport.php", {
-            method: "GET",
-            params: {
-                campaignName: $scope.campaign.campaignName,
-				programID: $scope.campaign.publishProgramID,
-                fd: fd,
-				td: td,
-            }
+		var td = UTCDateTimeMDT();
+        $http({
+            method: 'GET',
+            url: 'getCampaignReport.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
         }).then(function(response) {
-			if (response.data.success == false) {
+            if (response.data.success == false) {
+                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+                //swal("fail");
+            } else {
+                //swal("success");
 				
-			} else {
-				$scope.campaign.report = [];
-				var report = response.data.rows;
-                for (var i = 0; i < report.length; i++) {
-					$scope.showreport = true;
-					var emailName = getEmailName(report[i].Email,'short');
-                    $scope.campaign.report.push({
-						"emailName": emailName,
-                        "Sent": report[i].Sent,
-                        "Opened": report[i].Opened,
-						"Clicked": report[i].Clicked,
-						"Unsubscribed": report[i].Unsubscribed,
-                    });
-                }
-			}           
-        }, function(response) {
-            $scope.myAlert("A connection error occured. Please try again.");
+				var ReportDiv = '<div class="row">'+
+						'<div class="col-xs-3"><small class="stats-label"><i aria-hidden="true" class="fa" style="color:green"></i>Email #</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-users" style="color:green"></i> Targeted People</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-envelope-open-o" style="color:blue"></i> Opens</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-mouse-pointer" style="color:purple"></i> Clicks to Blog Post</small></div>'+
+						'<div class="col-xs-2"><small class="stats-label"><i aria-hidden="true" class="fa fa-times-circle" style="color:red"></i> Unsubscribes</small></div>'+
+					'</div>';
+				for (var i = 0; i < response.data.rows.length; i++) {
+					var emailName = getEmailName(response.data.rows[i].Email,'short');
+					ReportDiv = ReportDiv+
+					'<div class="row">'+
+						'<div class="col-xs-3"><h2>'+emailName+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Sent+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Opened+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Clicked+'</h2></div>'+
+						'<div class="col-xs-2"><h2>'+response.data.rows[i].Unsubscribed+'</h2></div>'+
+					'</div>';
+				}				
+				$('#reportDiv').html(ReportDiv);
+            }
+            
+        }, function(errResponse) {
+            //$scope.state['Publish'] = "Launch Program";
+            //swal("Server Error");
+            //alert(errResponse);
+			//$scope.state['Save'] = 'Save';
         });
 	};
-
 
 	$scope.DuplicateCampaignClick = function(){
 		swal({
