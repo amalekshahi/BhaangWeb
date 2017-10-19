@@ -29,32 +29,32 @@
 	<?php echo $accountName;?> on page
 	<?php echo basename($_SERVER[REQUEST_URI]);?>
 </title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-<link href="css/animate.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link rel="icon" href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" type="image/x-icon" />
-<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
-<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-<link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
-<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-<link data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" />
-<link rel="stylesheet" href="https://websemantics.github.io/Image-Select/src/ImageSelect.css">
-<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
+<link href="css/animate.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" rel="icon" type="image/x-icon" />
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet"/>
+<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet"/>
+<link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet"/>
+<link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet"/>
+<link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css" data-require="chosen@*" data-semver="1.0.0" rel="stylesheet" />
+<link href="https://websemantics.github.io/Image-Select/src/ImageSelect.css" rel="stylesheet" />
+<link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet" />
 
 <!-- x-editable (bootstrap version) -->
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.6/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet" />
 
 <!-- Sweet alert -->
-<link rel="stylesheet" href="css/sweet/sweetalert.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
+<link href="css/sweet/sweetalert.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet" />
 
 <!-- TouchSpin -->
-<link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+<link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
 
 <!-- FooTable -->
-<link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+<link href="css/plugins/footable/footable.core.css" rel="stylesheet" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
@@ -71,7 +71,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-summernote/0.8.1/angular-summernote.js"></script>
-<!--<script src="js/welcome.js"></script>-->
 
 <!-- Chosen -->
 <script src="js/plugins/chosen/chosen-add-option.js"></script>
@@ -272,4 +271,4 @@
 <script src="js/date.format.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
