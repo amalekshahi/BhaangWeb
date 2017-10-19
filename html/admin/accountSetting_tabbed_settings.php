@@ -64,9 +64,10 @@
 												<li class="">
 													<a data-toggle="tab" href="#tab-users"><i class="fa fa-user-o" aria-hidden="true"></i> <?php echo $accountName;?> Users </a>
 												</li>
+												<!-- Haven't found a need for this, yet.  I think we will though.
 												<li class="">
 													<a data-toggle="tab" href="#tab-you"><i class="fa fa-user-o" aria-hidden="true"></i> <?php echo $USERNAME;?> Preferences </a>
-												</li>
+												</li>-->
 												<li class="">
 													<a data-toggle="tab" href="#tab-3rd-party-products"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Integrations</a>
 												</li>
