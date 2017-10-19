@@ -62,7 +62,7 @@
 												<div class="col-xs-7 col-md-7">
 													<div class="form-group">
 														<label>Expiration Date</label>
-														<input type="text" class="form-control" name="Expiry" placeholder="MM / YY" required="">
+														<input type="text" class="form-control" name="Expiration" placeholder="MM / YY" required="">
 													</div>
 												</div>
 												<div class="col-xs-5 col-md-5 pull-right">

@@ -4,8 +4,6 @@
     include 'global.php';
     require_once('loginCredentials.php');    
     $dbName = $_SESSION['DBNAME'];
-		$accountID = $_SESSION['ACCOUNTID'];
-    $accountName = $_SESSION['ACCOUNNAME'];
 		$gates = $_SESSION['GATES'];
 ?>
 	<!DOCTYPE html>
