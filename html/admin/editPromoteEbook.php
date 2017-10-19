@@ -183,9 +183,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="ibox float-e-margins">
-							<?php include "dv_report.php"; ?>
-						</div>
+						<?php include "dv_report.php"; ?>	
 					</div>
 				</div>
 				<!--/ content -->

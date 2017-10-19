@@ -214,7 +214,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			$scope.setInitValue();
 			$scope.setDisplay();
 			$scope.LoadAudience();
-			$scope.LoadReport();
 			$scope.Reset();
 		}, function(errResponse) {
 			if (errResponse.status == 404) {
@@ -234,7 +233,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope.setInitValue();
 				$scope.setDisplay();
 				$scope.LoadAudience();
-				$scope.LoadReport();
 			} else {
 				//alert(errResponse.statusText);
 				swal(errResponse.statusText);
@@ -641,12 +639,6 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$scope.campaign['VISIT-MY-EBOOK'] = MapTrueFalse($scope.campaign['VISIT-MY-EBOOK-'], "Start", "Stop");
 		$scope.Save("", true); //silence save
 		//alert('SwitchChange');
-	};
-
-	$scope.ViewReport = function() {
-		//window.location.href = "reporting.php?campaignID=" + campaignID;
-		window.open("reporting.php?campaignID=" + campaignID);
-
 	};
 
 	$scope.LoadAudience = function() {

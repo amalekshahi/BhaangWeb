@@ -37,7 +37,47 @@ $(document).ready(function() {
 });
 
 myApp.controller('myCtrl', function($scope, $http) {
-    $scope.campaignID = campaignID;
+
+		/* Dave added this as mock for notifications: scope.notify*, scope.users, and scope.creatOptions */
+		$scope.notifyTheseUsersForOpens  = ['the-currently-logged-in-user@domain.com'];
+		$scope.notifyTheseUsersForVisits  = ['the-currently-logged-in-user@domain.com'];
+		$scope.notifyTheseUsersForCTACompletions  = ['the-currently-logged-in-user@domain.com'];
+
+	/* Dave added this as mock for notifications; this will likely need to read from CouchDB */	
+		$scope.users = [
+			'kdutta@mindfireinc.com',
+			'daver@mindfireinc.com',
+			'mcfarsheed@mindfireinc.com',
+			'demandgen@mindfireinc.com',
+			'the-currently-logged-in-user@domain.com',
+		];
+
+	/* Dave added this as mock for notifications; this allows user to add another email address on-the-fly.  Feel free to keep DRY here and re-write to save lines */	
+		$scope.addUserForOpens = function(term) {
+			$scope.$apply(function() {
+				$scope.users.push(term);
+				$scope.notifyTheseUsersForOpens.push(term);
+			});
+		}
+
+		$scope.addUserForVisits = function(term) {
+			$scope.$apply(function() {
+				$scope.users.push(term);
+				$scope.notifyTheseUsersForVisits.push(term);
+			});
+		}
+
+		$scope.addUserForCTACompletions = function(term) {
+			$scope.$apply(function() {
+				$scope.users.push(term);
+				$scope.notifyTheseUsersForCTACompletions.push(term);
+			});
+		}
+		
+		
+	
+	
+		$scope.campaignID = campaignID;
     $scope.state = {
         Save: "Save",
         Publish: "Launch Program",
@@ -238,7 +278,6 @@ myApp.controller('myCtrl', function($scope, $http) {
             $scope.setDisplay();
 			$scope.LoadDefaultPromoteBlog(); 
             $scope.LoadAudience();
-			$scope.LoadReport();
             $scope.Reset();
         }, function(errResponse) {
             if (errResponse.status == 404) {
@@ -258,7 +297,6 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope.setInitValue();
                 $scope.setDisplay();
                 $scope.LoadAudience();
-				$scope.LoadReport();
             } else {
                 //alert(errResponse.statusText);
                 swal(errResponse.statusText);
@@ -656,12 +694,6 @@ myApp.controller('myCtrl', function($scope, $http) {
         //alert('SwitchChange');
     };
 
-    $scope.ViewReport = function() {
-        //window.location.href = "reporting.php?campaignID=" + campaignID;
-        window.open("reporting.php?campaignID=" + campaignID);
-
-    };
-
 	$scope.CheckSumAudience = function() {
 			var form_data = $("#idForm").serialize();	
 			var listdefinition = $("#LISTDEFINITION").val(); 
@@ -708,43 +740,7 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
     }; // LoadAudience
 
-	$scope.LoadReport = function() {
-		var fd = UTCDateTimeMDT();
-		var td = UTCDateTimeMDT();		
-		var tdate = toDate(td);	
-		fd = addDays(tdate, -7);
-		fd = formatDateMDY(fd);
-		$scope.showreport = false;
-        $http.get("getCampaignReport.php", {
-            method: "GET",
-            params: {
-                campaignName: $scope.campaign.campaignName,
-				programID: $scope.campaign.publishProgramID,
-                fd: fd,
-				td: td,
-            }
-        }).then(function(response) {
-			if (response.data.success == false) {
-				
-			} else {
-				$scope.campaign.report = [];
-				var report = response.data.rows;
-                for (var i = 0; i < report.length; i++) {
-					$scope.showreport = true;
-					var emailName = getEmailName(report[i].Email,'short');
-                    $scope.campaign.report.push({
-						"emailName": emailName,
-                        "Sent": report[i].Sent,
-                        "Opened": report[i].Opened,
-						"Clicked": report[i].Clicked,
-						"Unsubscribed": report[i].Unsubscribed,
-                    });
-                }
-			}           
-        }, function(response) {
-            $scope.myAlert("A connection error occured. Please try again.");
-        });
-    }; // LoadReport
+	
 
     $scope.LoadDefaultPromoteBlog = function(){
 			$http.get(dbEndPoint + "/master/Default_PromoteBlog" + "?" + new Date().toString()).then(function(response) {
