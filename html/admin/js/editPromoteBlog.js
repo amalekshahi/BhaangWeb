@@ -341,24 +341,40 @@ myApp.controller('myCtrl', function($scope, $http) {
         }
     };
     $scope.initSender = function() {
-        $scope.senders = [];
-        $scope.senders.push({
-            "email": "boonsom@mindfireinc.com",
-            "name": "Boonsom Coa"
-        });
-        $scope.senders.push({
-            "email": "kdutta@mindfireinc.com",
-            "name": "Kushal Dutta"
-        });
-        $scope.senders.push({
-            "email": "daver@mindfireinc.com",
-            "name": "David Rosendahl"
-        });
-        $scope.senders.push({
-            "email": "mcfarsheed@mindfireinc.com",
-            "name": "Mackenzi Farsheed"
-        });
-    };
+		
+		$scope.senders = [];
+		$scope.senders.push({
+			"email": "boonsom@mindfireinc.com",
+			"name": "Boonsom Coa"
+		});
+		$scope.senders.push({
+			"email": "kdutta@mindfireinc.com",
+			"name": "Kushal Dutta"
+		});
+		$scope.senders.push({
+			"email": "daver@mindfireinc.com",
+			"name": "David Rosendahl"
+		});
+		$scope.senders.push({
+			"email": "mcfarsheed@mindfireinc.com",
+			"name": "Mackenzi Farsheed"
+		});
+
+		$http.get(dbEndPoint + "/" + dbName + '/UserInfo' + "?" + new Date().toString()).then(function(response) {
+			$scope.masterAu = response.data;
+			if (typeof $scope.masterAu.users == 'undefined') {				
+				$http.get(dbEndPoint + "/master/Default_UserInfo?" + new Date().toString()).then(function(response) {
+					$scope.masterAu = response.data;
+					if (typeof $scope.masterAu.users == 'undefined') {
+					} else {
+						$scope.senders = angular.copy($scope.masterAu.users);
+					}
+				});			   
+			} else {
+				$scope.senders = angular.copy($scope.masterAu.users);
+			}
+        });		
+    }; // initSender
     $scope.setDisplay = function() {
         $scope.disabledEmail = {
             "1":false,

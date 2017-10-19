@@ -4,9 +4,9 @@
     include 'global.php';
     require_once('loginCredentials.php');    
     $dbName = $_SESSION['DBNAME'];
-		$accountID = $_SESSION['ACCOUNTID'];
+	$accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
-		$gates = $_SESSION['GATES'];
+	$gates = $_SESSION['GATES'];
 ?>
 	<!DOCTYPE html>
 	<html ng-app="myApp">
@@ -20,6 +20,12 @@
 	</head>
 
 	<body class="fixed-sidebar">
+		<script>
+			//Kwang create myAPP here so all step can access it.
+			var dbName = "<?php echo $dbName; ?>";
+			var accountID = "<?php echo $accountID; ?>";
+			var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives','color.picker']);
+		</script>
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<?php include 'leftWrapper.php'; ?>
@@ -46,7 +52,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<form action="dv.php?page=myProfileSettings&action=submit" class="form-horizontal" method="post">
+						<form name="myForm" method="post" class="form-horizontal">
 							<div class="col-lg-12">
 								<div class="ibox float-e-margins">
 									<div class="tabs-container">
@@ -79,44 +85,74 @@
 																		<div class="ibox float-e-margins">
 																			<div class="ibox-title">
 																				<div class="ibox-tools">
-																					<a href="editContact.php?cid=new#!new" class="btn btn-primary btn-sm">+ Add User</a>
+																					<!-- <a href="" class="btn btn-primary btn-sm">+ Add User</a> -->
+																					<button class="btn btn-primary" ng-click="AddUser()">Add</button>
+																					<!-- <button class="btn btn-primary" ng-click="EditUser(item)">Edit</button>
+																					<button class="btn btn-primary" ng-click="DeleteUser(item)">Delete</button> -->																																	
 																				</div>
+																			</div>
+																			<div id="senderData" ng-show="state['senderData'] == 'true'">
+																				<input type="hidden" id="senderID" name="senderID">
+																				<fieldset class="form-horizontal">														
+																					<div class="form-group">
+																						<label class="col-sm-4 control-label">Name</small></label>
+																						<div class="col-sm-8"><input type="text" class="form-control" placeholder="Name" id="senderName" name="senderName"></div>
+																					</div>
+																					<div class="form-group">
+																						<label class="col-sm-4 control-label">Email</small></label>
+																						<div class="col-sm-8"><input type="text" class="form-control" placeholder="Email" id="senderEmail" name="senderEmail"></div>
+																					</div>
+																					<div class="form-group">
+																						<label class="col-sm-4 control-label">Official Name (Used for Emails)</small></label>
+																						<div class="col-sm-8"><input type="text" class="form-control" placeholder="Official Name (Used for Emails)" id="senderOfficialName" name="senderOfficialName"></div>
+																					</div>
+																					<div class="form-group">
+																						<label class="col-sm-4 control-label">Cell</small></label>
+																						<div class="col-sm-8"><input type="text" class="form-control" placeholder="Cell" id="senderCell" name="senderCell"></div>
+																					</div>
+																					<div class="form-group">
+																						<label class="col-sm-4 control-label">Permissions</small></label>
+																						<div class="col-sm-8"><input type="text" class="form-control" placeholder="Permissions" id="senderPermissions" name="senderPermissions"></div>
+																					</div>
+																					<button class="btn btn-primary" ng-click="SetSender()"><i class="fa fa-floppy-o" ng-show="state['SaveUser'] == 'Save'"></i><span ng-show="state['SaveUser'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['SaveUser']}} </button>
+																					<!-- <button class="btn btn-primary" ng-click="SetSender()">{{state['UserMode']}}</button> -->
+																					<button class="btn btn-primary" ng-click="HideSender()">Cancel</button>
+																				</fieldset>
 																			</div>
 																			<div class="ibox-content">
 																				<table datatable="ng" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example">
 																					<thead>
-																						<tr>
+																						<tr>																			
 																							<th>Name</th>
 																							<th>Email</th>
 																							<th>Official Name (Used for Emails)</th>
 																							<th>Cell Phone</th>
-																							<th>Permissions</th>
+																							<th>Permissions</th>	
+																							<th>Action</th>
 																						</tr>
 																					</thead>
 																					<tbody>
-																						<tr ng-repeat="item in audience.items | orderBy:'-lastEditDate'" ng-cloak>
-																							<td class="project-title"><a target="_blank" href="showContact.php?cid={{item.contactID}}">{{item['LIST-NAME']}}</a><br><small>{{item['LIST-DESCRIPTION']}}</small></td>
-																							<td class="project-title"><a target="_blank" href="showContact.php?cid={{item.contactID}}" ng-if="item['LIST-COUNT']>0"><i class="fa fa-users" ng-if="item['LIST-COUNT']>1" style="color:green"></i><i class="fa fa-user" ng-if="item['LIST-COUNT']==1"></i>
-																							<ng-pluralize count="item['LIST-COUNT']" 
-																							when=	"{'0': 'No one.  How lonely!',
- 													              	    	'one': 'See this 1 person',
-                       													'other': 'See these {} people'}">
-											  												</ng-pluralize>
-																							</a>
-																								<span ng-if="item['LIST-COUNT']==0"><small>No Contacts meet this Segment Definition</small></span>
-																							</td>
+																						<tr ng-repeat="item in senders | orderBy:'name'" ng-cloak>						
+																							<td class="project-title">{{item.name}}</td>
+																							<td class="project-title">{{item.email}}</td>
+																							<td class="project-title">{{item.OfficialName}}</td>
+																							<td class="project-title">{{item.Cell}}</td>
+																							<td class="project-title">{{item.Permissions}}</td>		
 																							<td>
-																								<a href="editContact.php?cid={{item.contactID}}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit User</a>
+																								<div class="btn-group">
+																									<button type="button" class="btn btn-default btn" ng-click="EditUser(item);"><i class="glyphicon glyphicon-pencil"></i></button>
+																									<button type="button" class="btn btn-default btn" ng-click="DeleteUser(item);"><i class="glyphicon glyphicon-trash"></i></button>
+																								</div>
 																							</td>
 																						</tr>
 																					</tbody>
 																				</table>
-																			</div>
+																			</div>																			
 																		</div>
 																	</div>
 																</div>
 															</fieldset>
-												</form>
+													</form>
 												</div>
 												</div>
 												<div class="tab-pane active" id="tab-your-company">

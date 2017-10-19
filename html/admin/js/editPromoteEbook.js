@@ -304,6 +304,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		});
 	};
 	$scope.initSender = function() {
+		
 		$scope.senders = [];
 		$scope.senders.push({
 			"email": "boonsom@mindfireinc.com",
@@ -321,7 +322,22 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			"email": "mcfarsheed@mindfireinc.com",
 			"name": "Mackenzi Farsheed"
 		});
-	};
+
+		$http.get(dbEndPoint + "/" + dbName + '/UserInfo' + "?" + new Date().toString()).then(function(response) {
+			$scope.masterAu = response.data;
+			if (typeof $scope.masterAu.users == 'undefined') {				
+				$http.get(dbEndPoint + "/master/Default_UserInfo?" + new Date().toString()).then(function(response) {
+					$scope.masterAu = response.data;
+					if (typeof $scope.masterAu.users == 'undefined') {
+					} else {
+						$scope.senders = angular.copy($scope.masterAu.users);
+					}
+				});			   
+			} else {
+				$scope.senders = angular.copy($scope.masterAu.users);
+			}
+        });		
+    }; //initSender
 	$scope.setDisplay = function(){
 		$scope.step1Done = hasValue($scope.campaign['URL-eBOOK-LOCATION']);
 		$scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-WELCOMEPAGECONTENT']);
