@@ -51,6 +51,9 @@ require_once 'commonUtil.php';
 			$headerValue = $str;
 
 			$arr = explode(",", $str); 
+					
+			// Dave added this to help the User know what to do
+			//array_unshift($arr , '<span class="label label-danger pull-right">Da Vinci Database Columns <i class="fa fa-arrow-right" aria-hidden="true"></i></span>');
 			
 			$delimiter = ",";
 
@@ -73,7 +76,8 @@ require_once 'commonUtil.php';
 			
 			
 			$line1 = "";
-			$line2 = "";
+			// Dave added this also to make life easier for dear User.  Hi User.
+			//$line2 = "<td>DUH</td>";
 			for ($j = 0; $j < $itemCount; $j++) {
 				$arrtmp = strtolower(trim($arr[$j]));
 				$line1 .= "<th>".trim($arr[$j])."</th>";
@@ -91,11 +95,11 @@ require_once 'commonUtil.php';
 				}
 				$line2 .= $fieldOption."</select></td>";	
 			}
+					
 			$headerdiv = "
-			<table id=\"headertable\" class=\"table table-striped table-bordered \" width=\"95%\">		
-
-				<thead><tr>".$line1."</tr></thead>
-				<tbody><tr>".$line2."</tr></tbody>
+			<table id=\"headertable\" class=\"table table-striped table-bordered \">		
+				<thead><tr><th style=\"background-color: white\"><span class=\"label label-danger pull-right\">Your File's Header <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i></span></th>".$line1."</tr></thead>
+				<tbody><tr><th style=\"background-color: white\"><span class=\"label label-warning pull-right\">Database Fields <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i></span></th>".$line2."</tr></tbody>
 			</table>";
             
         }

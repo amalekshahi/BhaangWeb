@@ -132,7 +132,7 @@
 									<input type="text" placeholder="I found Da Vinci via ..." class="form-control input-lg m-b">
 									<p>
 									</p>
-									<button class="btn btn-primary btn-lg" type="submit"><i class="fa fa-arrow-right" aria-hidden="true"></i> Next Step</button>
+									<a href="signUp_ccInfo.php" class="btn btn-primary btn-lg" role="button"><i class="fa fa-arrow-right" aria-hidden="true"></i> Next Step</a>
 								<p class="text-muted" style="font-size: .65em"><br>Copyright ©2017 MindFire, Inc ®. All Rights Reserved. • <a href="http://www.mindfireinc.com/privacy">Privacy Policy</a> • <a href="http://www.mindfireinc.com/static/images/mindfire_acceptable_use_policy.pdf" target="_blank">Acceptable Use Policy</a>								• <a href="http://www.mindfireinc.com/terms ">Terms of Service</a></p>
 							</div>
 						</div>
