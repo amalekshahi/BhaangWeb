@@ -46,6 +46,10 @@
 			.campaign-title .editable-container.editable-inline {
 				margin-right: 87px !important;
 			}
+			.has-error .help-block {
+			    color: white;
+				/*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;*/
+			}
 		</style>
 	</head>
 
@@ -179,9 +183,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="ibox float-e-margins">
-							<?php include "dv_report.php"; ?>
-						</div>
+						<?php include "dv_report.php"; ?>	
 					</div>
 				</div>
 				<!--/ content -->

@@ -2,7 +2,7 @@
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="0" CheckOutId="0" State="Start">
     <CampaignElements>
-      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Business MicroSite" Position="750,350" SharedCheckout="False">
+      <CampaignElement Id="1" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Microsite" Category="Inbound" Name="Business MicroSite" Position="970,330" SharedCheckout="False">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="kdutta@mindfireinc.com" ApprovalRequired="False">
             <Subject>Business MicroSite (Right Now)</Subject>
@@ -150,7 +150,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Settings>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="220,200" SharedCheckout="False" RuleGroup="EmailContent">
+      <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="20,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="30" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule3</Subject>
@@ -190,7 +190,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="400,200" SharedCheckout="False" RuleGroup="EmailContent">
+      <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="180,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="31" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule3</Subject>
@@ -226,7 +226,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email3" Position="550,200" SharedCheckout="False" RuleGroup="EmailContent">
+      <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email3" Position="340,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="33" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule3</Subject>
@@ -262,7 +262,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="15" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="400,90" SharedCheckout="False">
+      <CampaignElement Id="15" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="180,0" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
@@ -270,7 +270,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="16" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="550,90" SharedCheckout="False">
+      <CampaignElement Id="16" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="340,0" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -278,7 +278,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="17" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="250,330" SharedCheckout="False">
+      <CampaignElement Id="17" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="380,480" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Child Visit">
           <Event EventId="20103" ElementId="7" />
@@ -289,7 +289,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20103" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="18" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ClickAlert" Position="420,330" SharedCheckout="False">
+      <CampaignElement Id="18" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ClickAlert" Position="560,470" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Child Visit">
           <Event EventId="20105" ElementId="7" />
@@ -300,7 +300,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20105" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="250,440" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="380,590" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>OpenEmailAlert (Right Now)</Subject>
@@ -323,7 +323,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="720,200" SharedCheckout="False" RuleGroup="EmailContent">
+      <CampaignElement Id="22" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email4" Position="500,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="35" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email4Schedule3</Subject>
@@ -359,7 +359,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="880,200" SharedCheckout="False" RuleGroup="EmailContent">
+      <CampaignElement Id="23" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email5" Position="650,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="37" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email5Schedule3</Subject>
@@ -395,7 +395,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="1060,200" SharedCheckout="False" RuleGroup="EmailContent">
+      <CampaignElement Id="24" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="Email6" Position="800,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="40" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email6Schedule3</Subject>
@@ -431,7 +431,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="420,430" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="560,590" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>ClickAlertLeadTrigger (Right Now)</Subject>
@@ -454,7 +454,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="26" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="720,100" SharedCheckout="False">
+      <CampaignElement Id="26" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="500,0" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -462,7 +462,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="27" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="880,100" SharedCheckout="False">
+      <CampaignElement Id="27" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="650,0" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -470,7 +470,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="28" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="1050,90" SharedCheckout="False">
+      <CampaignElement Id="28" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="800,0" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -482,11 +482,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="30" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts2" Position="170,0" SharedCheckout="False">
+      <CampaignElement Id="30" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts2" Position="20,210" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="31" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts2" Position="410,10" SharedCheckout="False">
+      <CampaignElement Id="31" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts2" Position="180,210" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
@@ -494,7 +494,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="32" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts1" Position="330,70" SharedCheckout="False">
+      <CampaignElement Id="32" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts1" Position="180,100" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="1" Operator="Equal" Value="0" />
@@ -502,7 +502,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="33" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts2" Position="580,0" SharedCheckout="False">
+      <CampaignElement Id="33" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts2" Position="340,210" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -510,7 +510,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="34" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts1" Position="520,0" SharedCheckout="False">
+      <CampaignElement Id="34" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts1" Position="340,100" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -518,7 +518,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="35" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts2" Position="760,0" SharedCheckout="False">
+      <CampaignElement Id="35" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts2" Position="500,210" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -526,7 +526,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="36" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts1" Position="680,0" SharedCheckout="False">
+      <CampaignElement Id="36" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts1" Position="500,100" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -534,7 +534,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="37" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts2" Position="920,0" SharedCheckout="False">
+      <CampaignElement Id="37" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts2" Position="650,210" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -542,7 +542,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="38" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts1" Position="860,0" SharedCheckout="False">
+      <CampaignElement Id="38" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts1" Position="650,100" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -550,7 +550,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="39" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts1" Position="1030,0" SharedCheckout="False">
+      <CampaignElement Id="39" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts1" Position="800,100" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />
@@ -558,7 +558,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="40" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts2" Position="1120,40" SharedCheckout="False">
+      <CampaignElement Id="40" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts2" Position="800,210" SharedCheckout="False">
         <Filter CriteriaJoinOperator="">
           <AdvancedFilter CriteriaJoinOperator="&amp;">
             <AdvancedCriteria Criteria="Achieved a Goal" AllContacts="False" CriteriaId="1" From="01/01/2017" To="01/01/1950" ProgramId="-1" InboundContext="" CampaignId="-1" CriteriaOption="2" Operator="Equal" Value="0" />

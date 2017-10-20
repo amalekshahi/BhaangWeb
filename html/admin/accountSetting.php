@@ -12,9 +12,20 @@
 <html ng-app="myApp">
 <head>
     <?php include "header.php"; ?>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-color-picker/3.4.8/angularjs-color-picker.css" rel="stylesheet">    
+<link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-color-picker/3.4.8/themes/angularjs-color-picker-bootstrap.css" rel="stylesheet">    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-color-picker/3.4.8/angularjs-color-picker.js"></script>
+    
 </head>
 
 <body class="fixed-sidebar">
+<script>
+	//Kwang create myAPP here so all step can access it.
+	var dbName = "<?php echo $dbName; ?>";
+	var accountID = "<?php echo $accountID; ?>";
+	var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives','color.picker']);
+</script>
 <div id="wrapper">
 		<!-- left wrapper -->
 		<?php include 'leftWrapper.php'; ?>
@@ -154,6 +165,14 @@
 													<div class="col-sm-10">
 														<a ng-model="file" ngf-select="upload($file,'defCompanyLogo')" href="" style="vertical-align: top;" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload-defCompanyLogo'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload-defCompanyLogo'] != 'Uploading'"></i> Upload image ...</a>
 														<img ng-src="{{srcCompanyLogo}}" width="180px" border="0" alt="logo">
+                                                        <span class="help-block m-b-none">Company Logo</span>    
+													</div>
+												</div>
+                                                
+												<div class="form-group"><label class="col-sm-2 control-label">Button Color</label>
+													<div class="col-sm-10">
+                                                        <color-picker options="colorPickerOptions" ng-model="userinfo.defButtonColor"></color-picker>
+                                                    <span class="help-block m-b-none">Default button color</span>    
 													</div>
 												</div>
 

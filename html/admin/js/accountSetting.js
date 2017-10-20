@@ -1,4 +1,5 @@
-var myApp = angular.module('myApp', ['ngFileUpload', 'davinci', 'localytics.directives']);
+
+
 myApp.controller('myCtrl',function($scope,$http, Upload) {
 	$scope.Reset = function() {				 
 		$scope.userinfo  = angular.copy($scope.master);
@@ -6,15 +7,18 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 			$scope.userinfo.defCompanyLogo = "https://s3.amazonaws.com/mindfiredavinci/img/DV_image_placeholder_180x70.png";
 		}
 		$scope.srcCompanyLogo = $scope.userinfo.defCompanyLogo;
-		$scope.myForm.$setPristine();
+		$scope.myForm.setPristine();
 		//$scope.fuser = $scope.userinfo.username;
 		//$scope.fadd = $scope.userinfo.defFromAdd;			
 	};
 	$scope.Load = function() {
 		$scope.studioEmail = studioEmail;
 		$scope.studioPassword = studioPassword;
+		$scope.initSender();
 		$scope.state = {
 			"SaveAccountSetting":"Save",
+			"SaveUser":"Save",
+			"senderData":"false"
 		};
 		
 		/*$http.get("/couchdb/" + dbname + "/UserInfo").then(function(response) {
@@ -80,6 +84,23 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 		$scope.saveSuccess = false;
 	};
 
+	$scope.SaveUser = function() {
+		$scope.state['SaveUser'] = "Saving";
+		$scope.userinfo.users = $scope.senders;
+		$http.put(dbEndPoint + "/" + dbname + "/UserInfo", $scope.userinfo).then(function(response){
+			  $scope.data = response.data;          
+			  //$scope.Load();
+			  $scope.saveSuccess = true;
+			  $scope.state['SaveUser'] = "Save";
+			  $scope.userinfo._rev = response.data.rev;                      
+			  $scope.master = angular.copy($scope.userinfo);         
+		 },function(response){
+			  console.log(response.data);    
+			  alert("ERROR: can not save!!!");	
+			  $scope.state['SaveUser'] = "Save";                      
+		}); 		
+    };
+
 	$scope.upload = function (file,fieldName) {
 		$scope.state['Upload-'+fieldName] = 'Uploading';
 		var uploadFileName = "IMG-COMPANY-LOGO-" + accountID;
@@ -109,8 +130,123 @@ myApp.controller('myCtrl',function($scope,$http, Upload) {
 			console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
 		});
 	};
+    
+    $scope.colorPickerOptions = {
+        format: "hex",
+    };
+
+	$scope.AddUser = function() {
+        $scope.state['senderData'] = "true";  
+		$scope.state['UserMode'] = "Add";  
+		$('#senderName').val('');
+		$('#senderEmail').val('');
+		$('#senderOfficialName').val('');
+		$('#senderCell').val('');
+		$('#senderPermissions').val('');
+    };
+
+	$scope.EditUser = function(person) {
+        $scope.state['senderData'] = "true";  
+		$scope.state['UserMode'] = "Edit";  
+		var id = $scope.senders.indexOf(person);
+		$('#senderID').val(id);
+		$('#senderName').val(person.name);
+		$('#senderEmail').val(person.email);
+		$('#senderOfficialName').val(person.OfficialName);
+		$('#senderCell').val(person.Cell);
+		$('#senderPermissions').val(person.Permissions);
+    };
+
+	$scope.DeleteUser = function(person) {
+		var r = confirm("Do you want to delete "+person.email+"?");
+		if (r == true) {
+			var senderID = $scope.senders.indexOf(person);
+			$scope.senders.splice(senderID, 1);
+			$scope.SaveUser();
+		    $scope.state['senderData'] = "false";  
+			$scope.state['UserMode'] = "";
+		} 		 
+    };
+
+	$scope.SetSender = function() {
+		var mode = $scope.state['UserMode'];
+		var senderID = $('#senderID').val();
+		var senderName = $('#senderName').val();
+		var senderEmail = $('#senderEmail').val();
+		var senderOfficialName = $('#senderOfficialName').val();
+		var senderCell = $('#senderCell').val();
+		var senderPermissions = $('#senderPermissions').val();
+		var newArray = {
+			"name": senderName,
+			"email": senderEmail,
+			"OfficialName": senderOfficialName,
+			"Cell": senderCell,
+			"Permissions": senderPermissions
+		}
+		if (mode == 'Edit') {
+			$scope.senders[senderID] = newArray;
+		} else if (mode == 'Add') {
+			$scope.senders.push(newArray);
+		}
+		$scope.SaveUser();
+        $scope.state['senderData'] = "false";  
+		$scope.state['UserMode'] = "";  
+    };
+
+	$scope.HideSender = function() {
+        $scope.state['senderData'] = "false";  
+		$scope.state['UserMode'] = "";  
+    };
+
+	$scope.initSender = function() {		
+		$scope.senders = [];
+		$scope.senders.push({
+			"email": "boonsom@mindfireinc.com",
+			"name": "Boonsom Coa",
+			"OfficialName": "Boonsom Coa",
+			"Cell": "",
+			"Permissions": ""
+		});
+		$scope.senders.push({
+			"email": "kdutta@mindfireinc.com",
+			"name": "Kushal Dutta",
+			"OfficialName": "Kushal Dutta",
+			"Cell": "",
+			"Permissions": ""
+		});
+		$scope.senders.push({
+			"email": "daver@mindfireinc.com",
+			"name": "David Rosendahl",
+			"OfficialName": "David Rosendahl",
+			"Cell": "",
+			"Permissions": ""
+		});
+		$scope.senders.push({
+			"email": "mcfarsheed@mindfireinc.com",
+			"name": "Mackenzi Farsheed",
+			"OfficialName": "Mackenzi Farsheed",
+			"Cell": "",
+			"Permissions": ""
+		});
+
+		$http.get(dbEndPoint + "/" + dbName + '/UserInfo' + "?" + new Date().toString()).then(function(response) {
+			$scope.masterAu = response.data;
+			if (typeof $scope.masterAu.users == 'undefined') {				
+				$http.get(dbEndPoint + "/master/Default_UserInfo?" + new Date().toString()).then(function(response) {
+					$scope.masterAu = response.data;
+					if (typeof $scope.masterAu.users == 'undefined') {
+					} else {
+						$scope.senders = angular.copy($scope.masterAu.users);
+					}
+				});			   
+			} else {
+				$scope.senders = angular.copy($scope.masterAu.users);
+			}
+        });		
+    }; // initSender
 	
 	$scope.Load();
+
 
 });// end myApp.controller(myCtrl)
 

@@ -35,16 +35,50 @@ var cid = getParameterByName("cid");
 
 
 				$scope.GetContactClick = function() {
+                    var ajaxUrl = "getContactEx.php";
 					if (cid != "-1") {
 						$("#havCID").show();
 						$("#LISTDEFINITION").val(angular.element(document.getElementById('myCtrl')).scope().item['LIST-DEFINITION']);
-
+                        ajaxUrl = ajaxUrl + "?LISTDEFINITION=" + encodeURIComponent($scope.item['LIST-DEFINITION']);
 					} else {
 						$("#noCID").show();
 						$("#cid").val("-1");
+                        ajaxUrl = ajaxUrl + "?cid=-1";
 					}
-					var form_data = $("#idForm").serialize();
-					$.ajax({
+                    console.log(ajaxUrl);                    
+                    $http.get(ajaxUrl + "&COUNTONLY=1").then(function(response) {
+                        var contactCount = response.data.recordsTotal;
+                        var serverSide = false;
+                        if(contactCount > 10000){
+                            serverSide = true;
+                            console.log("ServerSide Mode " + contactCount);
+                        }
+                        $scope.serverSide = serverSide;
+                        $('#DataTables_Table_1').DataTable({
+                            //"lengthMenu": [ [15, 50, -1], [15, 50, "All"] ],
+                            "processing": true,
+                            "serverSide": serverSide,
+                            "ajax": ajaxUrl,
+                            //"pagingType": "simple",
+                            buttons: ['copy', 'excel', 'pdf'],
+                            stateSave: true, // Remember how the User left the table
+                            colReorder: true,
+                            language: {
+                                "search": "Search People: ",
+                                searchPlaceholder: "Start typing here ...",
+                            },
+                            //"data": Contacts,
+                            "columns": [{"title":"FirstName"},{"title":"LastName"},{"title":"Email"},{"title":"Phone"},{"title":"Address1"},{"title":"City"},{"title":"State"},{"title":"Zip"}],
+                            "columnDefs": [{
+                                "defaultContent": "",
+                                "targets": "_all"
+                            }]
+                        });                                                            
+                    });
+                    //console.log($scope.item);
+
+					//var form_data = $("#idForm").serialize();
+					/*$.ajax({
 						url: 'getContact.php', // point to server-side PHP script 
 						dataType: 'json', // what to expect back from the PHP script, if anything
 						cache: false,
@@ -82,10 +116,12 @@ var cid = getParameterByName("cid");
 									 $scope.master = angular.copy($scope.audience);   
 								});  
 						}
-					});				
+					});				*/
 				};
 
 				$scope.Load();
+                
+       
 	});
 	
 	function exportContact() {

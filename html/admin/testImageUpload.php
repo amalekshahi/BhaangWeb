@@ -51,8 +51,23 @@
   transform: translate(-50%,-50%);
 }
 
+.image-upload-resize {
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  opacity: 0;
+  transition: opacity .35s ease;
+  transform: translate(-100%,-85%);
+  //cursor: nwse-resize;
+}
+
 .image-upload-container:hover .image-upload-form {
   opacity: 1;
+}
+
+.image-upload-container:hover .image-upload-resize {
+  opacity: 0;
+  color: #fff;
 }
 </style>
 </head>
@@ -137,6 +152,11 @@ myApp.directive('imageUpload', function() {
     };
     return directive;
 });
+
+function dragstart_handler(event)
+{
+    console.log(event);
+}
 </script>
 </body>
 </html>

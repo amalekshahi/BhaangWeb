@@ -70,13 +70,14 @@
 														<div class="modal-header">
 															<h2>Promote a Blog Post</h2>
 															<p>Da Vinci will drive traffic to a piece of content (like a blog, article, or website page) and also helps you generate leads (optional). Start by naming your campaign.</p>
-															<form role="form" method="get" action="editPromoteBlog.php">
+															<form role="form" method="get" action="editPromoteBlog.php" id="form1">
 																<div class="form-group">
 																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name" maxlength="50">
+																	<span id="almsg-form1" style="color: red;display: none;">Campaign Name is required!</span>
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
 																<div>
-																	<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
+																	<button type="button" class="btn btn-lg btn-primary" onclick="beforeSubmit('form1');"><strong>Got it.  Let's Go!</strong></button>
 																</div>
 															</form>
 														</div>
@@ -109,13 +110,14 @@
 														<div class="modal-header">
 															<h2>Promote an eBook</h2>
 															<p>Da Vinci can create Leads for you by promoting an eBook with a Landing Page and auto-responder Email sequence. Start by naming your campaign.</p>
-															<form role="form" method="get" action="editPromoteEbook.php">
+															<form role="form" method="get" action="editPromoteEbook.php" id="form2">
 																<div class="form-group">
 																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New eBook" type="input" name="campaign_name" maxlength="50">
+																	<span id="almsg-form2" style="color: red;display: none;">Campaign Name is required!</span>
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
 																<div>
-																	<button class="btn btn-lg btn-primary" type="submit"><strong>Got it.  Let's Go!</strong></button>
+																	<button class="btn btn-lg btn-primary" type="button" onclick="beforeSubmit('form2');"><strong>Got it.  Let's Go!</strong></button>
 																</div>
 															</form>
 														</div>
@@ -375,5 +377,21 @@
 		</div>	
 		
 	</body>
+<!-- Sweet alert -->
+<!--<script src="css/sweet/sweetalert-dev.js"></script>-->
+<!-- user version 2 to support modal input -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
 
+<script type="text/javascript">
+function beforeSubmit(formid) {
+	var str = $("#"+formid+" input[name=campaign_name]").val();
+	if (str.trim() == '') {
+		//swal("Oops...","Please enter Campaign Name!","warning");
+		$('#almsg-'+formid).show();
+		return false;
+	}
+	$('#'+formid).submit();
+}
+</script>
 	</html>
