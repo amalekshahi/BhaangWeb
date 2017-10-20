@@ -194,3 +194,8 @@ function formatDateMDY(date) {
 function str_pad(n) {
 	return String("0" + n).slice(-2);
 }
+
+function removeChar(s,r) {
+	s = (s.length && s[0] == r) ? s.slice(1) : s;
+	return s;
+}

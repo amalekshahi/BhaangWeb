@@ -163,10 +163,58 @@ myApp.controller('myCtrl', function($scope, $http) {
                         return;
                     }
                 }
-            }						
-
-            
+            }						            
         }
+		
+		// save trigger sendto
+		var selList = [];
+		var emailList = '';		
+		if (typeof($scope.notifyTheseUsersForOpens)=='undefined') {
+			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+			}
+		} else {
+			for (var i = 0; i < $scope.notifyTheseUsersForOpens.length; i++) {
+				selList.push($scope.notifyTheseUsersForOpens[i]);
+				emailList = emailList+','+$scope.notifyTheseUsersForOpens[i];
+			}
+			emailList = removeChar(emailList,',');
+			$scope.campaign['notifyTheseUsersForOpens'] = selList;
+			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] = emailList;
+		}
+		
+		if (typeof($scope.notifyTheseUsersForVisits)=='undefined') {
+			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+			}
+		} else {
+			selList = [];
+			emailList = '';
+			for (var i = 0; i < $scope.notifyTheseUsersForVisits.length; i++) {
+				selList.push($scope.notifyTheseUsersForVisits[i]);
+				emailList = emailList+','+$scope.notifyTheseUsersForVisits[i];
+			}
+			emailList = removeChar(emailList,',');
+			$scope.campaign['notifyTheseUsersForVisits'] = selList;
+			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM'] = emailList;
+		}
+
+		if (typeof($scope.notifyTheseUsersForCTACompletions)=='undefined') {
+			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+			}
+		} else {
+			selList = [];
+			emailList = '';
+			for (var i = 0; i < $scope.notifyTheseUsersForCTACompletions.length; i++) {
+				selList.push($scope.notifyTheseUsersForCTACompletions[i]);
+				emailList = emailList+','+$scope.notifyTheseUsersForCTACompletions[i];
+			}
+			emailList = removeChar(emailList,',');
+			$scope.campaign['notifyTheseUsersForCTACompletions'] = selList;
+			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = emailList;
+		}
+
         $http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
             $scope.campaign._rev = response.data.rev;
 
@@ -377,6 +425,14 @@ myApp.controller('myCtrl', function($scope, $http) {
 			"email": "mcfarsheed@mindfireinc.com",
 			"name": "Mackenzi Farsheed"
 		});
+
+		$scope.notifyTheseUsersForOpens  = $scope.campaign['notifyTheseUsersForOpens'];
+		$scope.notifyTheseUsersForVisits  = $scope.campaign['notifyTheseUsersForVisits'];
+		$scope.notifyTheseUsersForCTACompletions  = $scope.campaign['notifyTheseUsersForCTACompletions'];
+
+		//$scope.notifyTheseUsersForOpens  = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'];
+		//$scope.notifyTheseUsersForVisits  = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM'];
+		//$scope.notifyTheseUsersForCTACompletions  = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'];
 
 		$http.get(dbEndPoint + "/" + dbName + '/UserInfo' + "?" + new Date().toString()).then(function(response) {
 			$scope.masterAu = response.data;

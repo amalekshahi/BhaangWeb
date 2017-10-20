@@ -64,7 +64,7 @@
 								skip-no-results="true"
 								create-option="addUserForOpens"
 								ng-model="notifyTheseUsersForOpens"
-								ng-options="u for u in users">
+								ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders">
 								<option value=""></option>
 							</select>
 						</div>
@@ -81,7 +81,7 @@
 								skip-no-results="true"
 								create-option="addUserForVisits"
 								ng-model="notifyTheseUsersForVisits"
-								ng-options="u for u in users">
+								ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders">
 								<option value=""></option>
 							</select>
 						</div>
@@ -105,12 +105,18 @@
 								skip-no-results="true"
 								create-option="addUserForCTACompletions"
 								ng-model="notifyTheseUsersForCTACompletions"
-								ng-options="u for u in users">
+								ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders">
 									<option value=""></option>
 								</select>
 							</div>
 						</div>
 						<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->
+						<button class="btn btn-primary" ng-click="Save('Step4')">
+							<i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i>
+							<span ng-show="state['Save'] == 'Saving'">
+								<i class="glyphicon glyphicon-refresh spinning"></i>
+							</span> {{state['Save']}} 
+						</button>
 					</form>
 				</div>
 			</div>
