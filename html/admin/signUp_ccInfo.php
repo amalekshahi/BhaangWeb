@@ -2,7 +2,7 @@
     date_default_timezone_set('UTC');
 ?>
 <!DOCTYPE html>
-<html ng-app="myApp" style="height: 100%">
+<html ng-app="myApp">
 
 <head>
 <!-- Google Tag Manager -->
@@ -112,23 +112,53 @@
 													<div class="form-group">
 														<label>Credit Card Number</label>
 														<div class="input-group">
-															<input type="text" class="form-control" name="Number" placeholder="4128 1234 1234 1234" required="" autofocus="">
+															<input type="text" class="form-control input-lg m-b" name="Number" placeholder="4128 1234 1234 1234" required="" autofocus="">
 															<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
 														</div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-xs-7 col-md-7">
+												<div class="col-xs-4 col-md-4">
 													<div class="form-group">
-														<label>Expiration Date</label>
-														<input type="text" class="form-control" name="Expiration" placeholder="MM / YY" required="">
+														<label>Month</label>
+														<select class="form-control input-lg">
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+															<option>4</option>
+															<option>5</option>
+															<option>6</option>
+															<option>7</option>
+															<option>8</option>
+															<option>9</option>
+															<option>10</option>
+															<option>11</option>
+															<option>12</option>
+														</select>
 													</div>
 												</div>
-												<div class="col-xs-5 pull-right">
+												<div class="col-xs-4 col-md-4 pull-center">
+													<div class="form-group">
+														<label>Year</label>
+														<select class="form-control input-lg">
+															<option>17</option>
+															<option>18</option>
+															<option>19</option>
+															<option>20</option>
+															<option>21</option>
+															<option>22</option>
+															<option>23</option>
+															<option>24</option>
+															<option>25</option>
+															<option>26</option>
+														</select>
+													</div>
+												</div>												
+												<div class="col-xs-4 pull-right">
 													<div class="form-group">
 														<label>CV CODE</label>
-														<input type="text" class="form-control" name="CVC" placeholder="CVC" required="">
+														<input type="text" class="form-control input-lg m-b" name="CVC" placeholder="CVC" required="">
 													</div>
 												</div>
 											</div>
@@ -136,20 +166,20 @@
 												<div class="col-xs-12">
 													<div class="form-group">
 														<label>Name on Card</label>
-														<input type="text" class="form-control" name="nameCard" placeholder="Leo Da Vinci">
+														<input type="text" class="form-control input-lg m-b" name="nameCard" placeholder="Leo Da Vinci">
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-xs-12">
-													<button class="btn btn-primary" type="submit">Start Using Da Vinci</button>
+													<button class="btn btn-primary btn-lg" type="submit"><i class="fa fa-play" aria-hidden="true"></i> Start Using Da Vinci</button>
 												</div>
 											</div>
 										</form>
 									</div>
 								</div>
 								<div class="hr-line-dashed"></div>
-								<div class="alert alert-danger" role="alert">You are signing up for a free plan and will not be charged unless you exceed your plan limits. You can cancel anytime.</div>
+								<div class="alert alert-danger" role="alert"><i class="fa fa-bell-o" aria-hidden="true"></i> You are signing up for a free plan and will not be charged unless you exceed your plan limits. You can cancel anytime.</div>
 					</div>
 				</div>				
 			</div>
