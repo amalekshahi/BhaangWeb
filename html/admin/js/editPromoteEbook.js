@@ -879,4 +879,12 @@ function convert_to_24h(time_str) {
 	  hours -= 12;
 	}
 	return str_pad(hours)+':'+str_pad(minutes)+':'+str_pad(seconds);
-};
+}
+
+function miniLeftBar() {
+	$("body").addClass("mini-navbar");
+}
+
+function maxiLeftBar() {
+	$("body").removeClass("mini-navbar");
+}

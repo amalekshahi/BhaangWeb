@@ -240,15 +240,11 @@
 															</div>
 														</div>
 													</div>
-													<div class="panel">
-														<?php include "editPromoteBlog_step2_revamped_schedule.php"; ?>
-													</div>
+													<?php include "editPromoteBlog_step2_revamped_schedule.php"; ?>
 													<div class="panel panel-default">
 														<?php include "editPromoteBlog_step4_revamped_schedule.php"; ?>
 													</div>
-													<div class="panel">
-														<?php include "editPromoteBlog_step3_revamped_schedule.php"; ?>
-													</div>
+													<?php include "editPromoteBlog_step3_revamped_schedule.php"; ?>
 												</div>
 											<!-- Commented this out to show that we want to remove the burden of publishing from the User
 												<div style="float:right;">
