@@ -614,7 +614,8 @@ myApp.controller('myCtrl', function($scope, $http) {
         $http.get("/admin/getEmailTemplate.php?blueprint=PromoteBlog&scopeName=campaign&as=" + tar).then(function(response) {
             $scope['templatesAs' + tar] = response.data.templates;
             $scope.config = response.data.config;
-            $("#subjectEmail" + tar).text($scope.campaign['EMAIL' + tar + '-SUBJECT']);
+            //$("#subjectEmail" + tar).text($scope.campaign['EMAIL' + tar + '-SUBJECT']);
+			$('#subjectEmail'+tar).editable("setValue",$scope.campaign['EMAIL'+tar+'-SUBJECT']);
             $scope.SelectChanged('viewEmail' + tar, 'templateEmail' + tar);
             $scope.sendersChanged('textSender' + tar);
             $scope.startEditable(tar);

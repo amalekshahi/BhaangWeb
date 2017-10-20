@@ -25,11 +25,11 @@
 <div class="panel-heading">
 	<div class="row">
 		<div class="col-sm-3">
-			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFive"><span class="badge" ng-show="!step4Done">5</span> 
+			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFive" onclick="maxiLeftBar();"><span class="badge" ng-show="!step4Done">5</span> 
 			<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step5Done"></i> Configure Notifications & Alerts</a></h4>
 		</div>
 		<div class="col-sm-9">
-			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFive">
+			<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFive" onclick="maxiLeftBar();">
 				<small class="m-l-sm" ng-show="hasNotifications"><i aria-hidden="true" class="fa fa-bell-o"></i> {{labelNotifications}}</small>
 			</a></h4>
 		</div>

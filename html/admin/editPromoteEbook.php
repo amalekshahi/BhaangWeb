@@ -117,11 +117,11 @@
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-sm-3">
-																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne"><span class="badge" ng-show="!step1Done">1</span>
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne" onclick="maxiLeftBar();"><span class="badge" ng-show="!step1Done">1</span>
 																	<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step1Done"></i> Configure Your eBook</a></h4>
 																</div>
 																<div class="col-sm-9">
-																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+																	<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseOne" onclick="maxiLeftBar();">
                                   <small class="m-l-sm" ng-show="campaign['URL-eBOOK-NAME']"><i aria-hidden="true" class="fa fa-book" ng-show="campaign['URL-eBOOK-NAME']"></i> {{campaign['URL-eBOOK-NAME']}}</small> </a></h4>
 																</div>
 															</div>
@@ -159,15 +159,9 @@
 															</div>
 														</div>
 													</div>
-													<div class="panel panel-default">
-														<?php include "editPromoteEbook_step2.php"; ?>
-													</div>
-													<div class="panel">
-														<?php include "editPromoteEbook_step3.php"; ?>
-													</div>
-													<div class="panel">
-														<?php include "editPromoteEbook_step4.php"; ?>
-													</div>
+													<?php include "editPromoteEbook_step2.php"; ?>
+													<?php include "editPromoteEbook_step3.php"; ?>
+													<?php include "editPromoteEbook_step4.php"; ?>
 													<div class="panel panel-default">
 														<?php include "editPromoteEbook_step5.php"; ?>
 													</div>
