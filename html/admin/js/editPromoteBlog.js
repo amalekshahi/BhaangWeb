@@ -171,49 +171,54 @@ myApp.controller('myCtrl', function($scope, $http) {
 		var emailList = '';		
 		if (typeof($scope.notifyTheseUsersForOpens)=='undefined') {
 			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
-				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+				selList.push($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']);
+				emailList = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
 			}
 		} else {
 			for (var i = 0; i < $scope.notifyTheseUsersForOpens.length; i++) {
 				selList.push($scope.notifyTheseUsersForOpens[i]);
 				emailList = emailList+','+$scope.notifyTheseUsersForOpens[i];
 			}
-			emailList = removeChar(emailList,',');
-			$scope.campaign['notifyTheseUsersForOpens'] = selList;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] = emailList;
+			emailList = removeChar(emailList,',');						
 		}
+		$scope.campaign['notifyTheseUsersForOpens'] = selList;
+		$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] = emailList;
 		
+		selList = [];
+		emailList = '';
 		if (typeof($scope.notifyTheseUsersForVisits)=='undefined') {
 			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
-				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+				selList.push($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']);
+				emailList = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
 			}
 		} else {
-			selList = [];
-			emailList = '';
 			for (var i = 0; i < $scope.notifyTheseUsersForVisits.length; i++) {
 				selList.push($scope.notifyTheseUsersForVisits[i]);
 				emailList = emailList+','+$scope.notifyTheseUsersForVisits[i];
 			}
-			emailList = removeChar(emailList,',');
-			$scope.campaign['notifyTheseUsersForVisits'] = selList;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM'] = emailList;
+			emailList = removeChar(emailList,',');						
 		}
+		$scope.campaign['notifyTheseUsersForVisits'] = selList;
+		$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM'] = emailList;
+		
 
+		selList = [];
+		emailList = '';
 		if (typeof($scope.notifyTheseUsersForCTACompletions)=='undefined') {
 			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
-				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+				selList.push($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']);
+				emailList = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
 			}
-		} else {
-			selList = [];
-			emailList = '';
+		} else {			
 			for (var i = 0; i < $scope.notifyTheseUsersForCTACompletions.length; i++) {
 				selList.push($scope.notifyTheseUsersForCTACompletions[i]);
 				emailList = emailList+','+$scope.notifyTheseUsersForCTACompletions[i];
 			}
 			emailList = removeChar(emailList,',');
-			$scope.campaign['notifyTheseUsersForCTACompletions'] = selList;
-			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = emailList;
 		}
+		$scope.campaign['notifyTheseUsersForCTACompletions'] = selList;
+		$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = emailList;
+
 
         $http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
             $scope.campaign._rev = response.data.rev;
