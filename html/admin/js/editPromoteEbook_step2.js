@@ -48,11 +48,9 @@ myApp.controller('step2',['$scope','$http','Upload',function($scope,$http,Upload
     };
 }]);
 function setLeftBar() {
-	if (editLandingPage) {
-		$("body").addClass("mini-navbar");
-		editLandingPage = false;
-	} else {
+	if ($( "body" ).hasClass( "mini-navbar" )) {
 		$("body").removeClass("mini-navbar");
-		editLandingPage = true;
+	} else {
+		$("body").addClass("mini-navbar");
 	}
 }

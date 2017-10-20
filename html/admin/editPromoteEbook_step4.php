@@ -4,11 +4,11 @@
 	<div class="panel-heading">
 		<div class="row">
 			<div class="col-sm-3">
-				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour"><span class="badge" ng-show="!step4Done">4</span>
+				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour" onclick="maxiLeftBar();"><span class="badge" ng-show="!step4Done">4</span>
 				<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step4Done"></i> Set Your Drip's Timing</a></h4>
 			</div>
 			<div class="col-sm-9">
-				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour">
+				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseFour" onclick="maxiLeftBar();">
         <small class="m-l-sm" ng-show="emailDone > 0"><i aria-hidden="true" class="fa fa-clock-o" ng-show="emailDone > 0"></i> {{scheduleProgress}}</small> </a></h4>
 			</div>
 		</div>

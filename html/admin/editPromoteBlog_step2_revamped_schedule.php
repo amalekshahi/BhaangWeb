@@ -3,6 +3,10 @@
 	$email1 = str_replace('##emailid##','1',$emailHTMLTemplate);
 	$email2 = str_replace('##emailid##','2',$emailHTMLTemplate);
 	$email3 = str_replace('##emailid##','3',$emailHTMLTemplate);
+
+	$email1 = preg_replace('/<!--hideE1[^>]*-->([\s\S]*?)<!--hideE1[^>]*-->/', '',$email1);
+	$email2 = preg_replace('/<!--showE1[^>]*-->([\s\S]*?)<!--showE1[^>]*-->/', '',$email2);
+	$email3 = preg_replace('/<!--showE1[^>]*-->([\s\S]*?)<!--showE1[^>]*-->/', '',$email3);
 ?>
 <!--
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
@@ -38,14 +42,18 @@
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a data-toggle="tab" href="#email-1" style="padding-left: 10px;">
-										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;"></span> Day 1: Sent to Everyone
+										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'0'"></span> Day 1: Sent to Everyone
 									</a>
 								</li>
 								<li class="">
-									<a data-toggle="tab" href="#email-2" style="padding-left: 10px;"> Day 3: Sent to Non-Openers</a>
+									<a data-toggle="tab" href="#email-2" style="padding-left: 10px;" ng-click="initTemplateEmail('2');">
+										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'1'"></span> Day 3: Sent to Non-Openers
+									</a>
 								</li>
 								<li class="">
-									<a data-toggle="tab" href="#email-2" style="padding-left: 10px;"> Day 5: Sent to Non-Clickers</a>
+									<a data-toggle="tab" href="#email-3" style="padding-left: 10px;" ng-click="initTemplateEmail('3');">
+										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'2'"></span> Day 5: Sent to Non-Clickers
+									</a>
 								</li>
 							</ul>
 							<div class="tab-content">
@@ -56,14 +64,29 @@
 								</div>
 								<div id="email-2" class="tab-pane">
 									<div class="panel-body">
+										<div class="row" ng-show="!openEmail['2']">
+											<div class="col-sm-10">
+												<h3>By adding a second email to non-openers, you'll increase engagement rates by an average of 24%.</h3>
+												<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY2')">Create Email Using #1's Content</button>
+													<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW2')">Start With a Blank Email</button></p>
+											</div>
+										</div>
 										<?php echo $email2; ?>
 									</div>
 								</div>
 								<div id="email-3" class="tab-pane">
 									<div class="panel-body">
+										<div class="row" ng-show="!openEmail['3']">
+											<div class="col-sm-10">
+												<h3>By adding a third email to non-clickers, you'll increase engagement rates by an average of 14%.</h3>
+												<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY3')">Create Email Using #2's Content</button>
+													<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW3')">Start With a Blank Email</button></p>
+											</div>
+										</div>
 										<?php echo $email3; ?>
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</div>
@@ -74,4 +97,18 @@
 		</div>
 	</div>
 	<script src="js/editPromoteBlog_step2.js"></script>
-				
+	<style>
+		.fixedContainer {
+			position: fixed;
+			z-index: 100;
+		}
+	</style>
+	<script>
+		$('.spin-icon').click(function() {
+			$(".theme-config-box").toggleClass("show");
+		});
+
+		$('.sendTest-icon').click(function() {
+			$(".sendTest-config-box").toggleClass("show");
+		});
+	</script>

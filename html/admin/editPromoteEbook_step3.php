@@ -13,11 +13,11 @@
 		<div class="panel-heading">
 			<div class="row">
 				<div class="col-sm-3">
-					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree"><span class="badge" ng-show="!step3Done">3</span>
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree" onclick="maxiLeftBar();"><span class="badge" ng-show="!step3Done">3</span>
 					<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step3Done"></i> Write Your Email Drip Sequence</a></h4>
 				</div>
 				<div class="col-sm-9">
-					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree">
+					<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseThree" onclick="maxiLeftBar();">
           <small class="m-l-sm" ng-show="emailDone > 0"><i aria-hidden="true" class="fa fa-envelope-o" ng-show="emailDone > 0"></i> {{emailProgress}}</small> </a></h4>
 				</div>
 			</div>
