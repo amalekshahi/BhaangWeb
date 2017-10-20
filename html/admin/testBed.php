@@ -144,6 +144,29 @@ require_once 'commonUtil.php';?><!doctype html>
         <div ng-if="couchDB.data" ng-jsoneditor="onLoad" ng-model="couchDB.data" options="couchDB.options" style="width: 98%;"></div>
       </md-tab label>        
       
+      <md-tab label="getContact">
+        <md-content md-theme="docs-dark" layout="column" class="md-padding">          
+            <md-content md-theme="docs-dark" layout="row" layout-padding>    
+                <md-input-container>
+                    <label>cid</label>
+                    <input ng-model="getContact.cid" >
+                </md-input-container>  
+                <md-input-container>
+                    <label>length</label>
+                    <input ng-model="getContact.length" >
+                </md-input-container>  
+                <md-input-container>
+                    <label>start</label>
+                    <input ng-model="getContact.start" >
+                </md-input-container>  
+                
+                <md-input-container>
+                    <button ng-click="getContactClick()">submit</button>
+                </md-input-container>  
+            </md-content>                  
+        </md-content>  
+        <div ng-if="getContact.data" ng-jsoneditor="onLoad" ng-model="getContact.data" options="getContact.options" style="width: 98%;"></div>
+      </md-tab label>        
     </md-tabs>
   <md-content>
 </div>  
@@ -255,6 +278,22 @@ require_once 'commonUtil.php';?><!doctype html>
 
         };                
         
+        $scope.getContact = {
+            cid:-1,
+            length:10,
+            start:0,
+            options: {mode: 'tree'},
+        };
+        $scope.getContactClick = function(){
+            $scope.getContact.data = {};
+            $http.get("getContactEx.php?cid=" + $scope.getContact.cid + "&start=" + $scope.getContact.start + "&length=" + $scope.getContact.length + "&" + new Date().toString()).then(function(response) {
+                  $scope.getContact.data = response.data;
+                  console.log($scope.getContact.response);
+            },function(response){
+                  alert(response.statusText);
+                  console.log(response);
+            });
+        };          
   }]);
 </script>
 </body>

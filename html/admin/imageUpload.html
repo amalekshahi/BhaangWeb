@@ -1,22 +1,15 @@
 <div class="image-upload-container">
     <img class="image-upload" src="{{model}}" alt="" />
-    <div class="overlay">
+    <div class="image-upload-overlay">
         <div class="image-upload-form center">
             <div class="btn-group" ng-model="file" ngf-select="imageUploadUpload($file,'kwang')">
                 <span class="btn btn-default">
                     <i class="fa fa-upload"  title="Align Left"></i> Change
                 </span>
             </div>
-            <div class="btn-group">
-                <span class="btn btn-default">
-                    <i class="fa fa-expand"  title="Align Left"></i> Expand
-                </span>
-            </div>
-            <div class="btn-group">
-                <span class="btn btn-default">
-                    <i class="fa fa-compress"  title="Align Left"></i> Compress
-                </span>
-            </div>
+        </div>
+        <div class="image-upload-resize">
+            <i class="fa fa-expand fa-flip-horizontal" draggable="true" ondragstart="dragstart_handler(event);"></i>
         </div>
     </div>
 </div>  
