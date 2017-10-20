@@ -43,7 +43,7 @@
 								<div class="ibox-content m-b-sm border-bottom">
 									<div class="p-xs">
 										<div class="pull-left m-r-md">
-											<i class="fa fa-globe text-navy mid-icon" style="color:green"></i>
+											<i class="fa fa-file-text-o text-navy mid-icon"></i>
 										</div>
 										<h2>Upload a CSV</h2><span>Add Contacts to your database</span>
 									</div>
