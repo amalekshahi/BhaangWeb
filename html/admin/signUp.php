@@ -2,7 +2,7 @@
     date_default_timezone_set('UTC');
 ?>
 <!DOCTYPE html>
-<html ng-app="myApp" style="height: 100%">
+<html ng-app="myApp">
 
 <head>
 <!-- Google Tag Manager -->
@@ -105,8 +105,10 @@
 							</div>
 							<div class="form-group"><label class="col-sm-4 control-label">Your Name</label>
 								<form role="form" class="form-inline">
-									<div class="col-sm-8">
+									<div class="col-sm-4">
 										<input type="text" placeholder="Leo" class="form-control input-lg m-b" autofocus="">
+									</div>
+									<div class="col-sm-4 pull-right">
 										<input type="text" placeholder="Da Vinci" class="form-control input-lg m-b">
 									</div>
 							</div>
@@ -131,14 +133,13 @@
 									<p>
 									</p>
 									<button class="btn btn-primary btn-lg" type="submit"><i class="fa fa-arrow-right" aria-hidden="true"></i> Next Step</button>
-							<p class="text-muted" style="font-size: .65em"><br>Copyright ©2017 MindFire, Inc ®. All Rights Reserved. • <a href="http://www.mindfireinc.com/privacy">Privacy Policy</a> • <a href="http://www.mindfireinc.com/static/images/mindfire_acceptable_use_policy.pdf" target="_blank">Acceptable Use Policy</a>								• <a href="http://www.mindfireinc.com/terms ">Terms of Service</a></p>
-
-								</div>
+								<p class="text-muted" style="font-size: .65em"><br>Copyright ©2017 MindFire, Inc ®. All Rights Reserved. • <a href="http://www.mindfireinc.com/privacy">Privacy Policy</a> • <a href="http://www.mindfireinc.com/static/images/mindfire_acceptable_use_policy.pdf" target="_blank">Acceptable Use Policy</a>								• <a href="http://www.mindfireinc.com/terms ">Terms of Service</a></p>
 							</div>
-								</form>
-					</div>
+						</div>
+					</form>
+				</div>
 			</div>
-       <div class="col-md-5 no-float">
+     <div class="col-md-5 no-float">
 						<blockquote class="testimonial">
 							<h1><q class="quote" style="color:white">We've seen 11x more leads since we started using Da Vinci. It's a must-have for any company.</q></h1>
 							<div class="attribution">

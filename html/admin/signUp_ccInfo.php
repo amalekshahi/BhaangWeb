@@ -29,7 +29,7 @@
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 <meta http-equiv="pragma" content="no-cache" />
-<title>Da Vinci Sign Up</title>
+<title>Da Vinci Sign Up</title>	
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
 <link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
 <link href="css/animate.css" rel="stylesheet"/>
@@ -49,6 +49,34 @@
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 <style>
+			/**
+		 * The CSS shown here will not be introduced in the Quickstart guide, but shows
+		 * how you can use CSS to style your Element's container.
+		 */
+		.StripeElement {
+			background-color: white;
+			padding: 8px 12px;
+			border-radius: 4px;
+			border: 1px solid transparent;
+			box-shadow: 0 1px 3px 0 #e6ebf1;
+			-webkit-transition: box-shadow 150ms ease;
+			transition: box-shadow 150ms ease;
+		}
+
+		.StripeElement--focus {
+			box-shadow: 0 1px 3px 0 #cfd7df;
+		}
+
+		.StripeElement--invalid {
+			border-color: #fa755a;
+		}
+
+		.StripeElement--webkit-autofill {
+			background-color: #fefde5 !important;
+		}
+	
+	
+	
 		html,body,.container
 		{
 				height:100%;
@@ -104,77 +132,29 @@
 										<h2 style="margin-top: 0px;">Your Starter Plan Awaits</h2>
 										<strong>Just enter the billing information for this account and we’ll get started.</strong><br>
 										<p class="m-t"><strong>Why do we ask for your credit card?</strong><br>We ask for your credit card to prevent interruption of service should you exceed your plan limits. Your credit card will not be charged as long as you remain on the free plan.</p>
+										<strong>Get started with:<br></strong>
+										<div class="btn-group">
+											<button type="button" class="btn btn-xs btn-white active"><i class="fa fa-cc-visa" aria-hidden="true"></i> Visa</button>
+											<button type="button" class="btn btn-xs btn-white active"><i class="fa fa-cc-mastercard" aria-hidden="true"></i> Master Card</button>
+											<button type="button" class="btn btn-xs btn-white active"><i class="fa fa-cc-amex" aria-hidden="true"></i> American Express</button>
+										</div>
+										<p></p>
 									</div>
 									<div class="col-md-6">
-										<form role="form" id="payment-form">
-											<div class="row">
-												<div class="col-xs-12">
-													<div class="form-group">
-														<label>Credit Card Number</label>
-														<div class="input-group">
-															<input type="text" class="form-control input-lg m-b" name="Number" placeholder="4128 1234 1234 1234" required="" autofocus="">
-															<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-														</div>
-													</div>
+										<script src="https://js.stripe.com/v3/"></script>	
+
+										<form action="" method="post" id="payment-form">
+											<div class="form-row">
+												<label for="card-element">
+													Credit or debit card
+												</label>
+												<div id="card-element">
+													<!-- a Stripe Element will be inserted here. -->
 												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-4 col-md-4">
-													<div class="form-group">
-														<label>Month</label>
-														<select class="form-control input-lg">
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
-															<option>6</option>
-															<option>7</option>
-															<option>8</option>
-															<option>9</option>
-															<option>10</option>
-															<option>11</option>
-															<option>12</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xs-4 col-md-4 pull-center">
-													<div class="form-group">
-														<label>Year</label>
-														<select class="form-control input-lg">
-															<option>17</option>
-															<option>18</option>
-															<option>19</option>
-															<option>20</option>
-															<option>21</option>
-															<option>22</option>
-															<option>23</option>
-															<option>24</option>
-															<option>25</option>
-															<option>26</option>
-														</select>
-													</div>
-												</div>												
-												<div class="col-xs-4 pull-right">
-													<div class="form-group">
-														<label>CV CODE</label>
-														<input type="text" class="form-control input-lg m-b" name="CVC" placeholder="CVC" required="">
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<div class="form-group">
-														<label>Name on Card</label>
-														<input type="text" class="form-control input-lg m-b" name="nameCard" placeholder="Leo Da Vinci">
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<button class="btn btn-primary btn-lg" type="submit"><i class="fa fa-play" aria-hidden="true"></i> Start Using Da Vinci</button>
-												</div>
-											</div>
+												<!-- Used to display form errors -->
+												<div id="card-errors" role="alert"></div>
+											</div><br>
+											<button class="btn btn-primary btn-lg" type="submit" name="submit"><i class="fa fa-arrow-right" aria-hidden="true"></i> Submit Payment Info</button>
 										</form>
 									</div>
 								</div>
@@ -199,7 +179,75 @@
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 <script src="js/davinci.js"></script>
+	
+	<script>
+	
+	// Create a Stripe client
+var stripe = Stripe('pk_test_M9EOPV9VOZhwpNPFOd3etLI8');
+
+// Create an instance of Elements
+var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+  base: {
+    color: '#32325d',
+    lineHeight: '24px',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    }
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};
+
+// Create an instance of the card Element
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>
+card.mount('#card-element');
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+  var displayError = document.getElementById('card-errors');
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
+});
+
+// Handle form submission
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  stripe.createToken(card).then(function(result) {
+    if (result.error) {
+      // Inform the user if there was an error
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the token to your server
+      //stripeTokenHandler(result.token);
+			console.log(result.token.id);
+			alert('We hit stripe and got this token: ' + result.token.id);
+    }
+  });
+});
+	
+	
+	</script>
 
 </body>
 
 </html>
+
+
+
