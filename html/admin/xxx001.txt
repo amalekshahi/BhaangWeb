@@ -1,4 +1,4 @@
-<Properties>  <Messages>    <Message Id="1">      <ToAddress>##email##</ToAddress>      <FromName>Boonsom Coa</FromName>      <FromAddress>boonsom@mindfireinc.com</FromAddress>      <ReplyTo>boonsom@mindfireinc.com</ReplyTo>      <Subject>[BLOG POST LOCAL 2.3] You need to see this.</Subject>      <HtmlContent>&lt;!--  
+<Properties>  <Messages>    <Message Id="1">      <ToAddress>##email##</ToAddress>      <FromName>Boonsom Coa</FromName>      <FromAddress>boonsom@mindfireinc.com</FromAddress>      <ReplyTo>boonsom@mindfireinc.com</ReplyTo>      <Subject>[BLOG POST LOCAL 3.1] You need to see this.</Subject>      <HtmlContent>&lt;!--  
     View should not see this 
      
 --&gt;
@@ -40,13 +40,13 @@
 				&lt;table border="0" width="100%" cellpadding="0" cellspacing="0" align="center"&gt;
 					&lt;tr id="viewonlineRow"&gt;
 						&lt;td valign="top" align="center" style="padding-top:10px; padding-right:20px; padding-bottom:10px; padding-left:0;"&gt;
-							&lt;a href="http://##purl##.dv17124.m.mdl.io/675d2111a2e9fa4dbb015201cbcd2a71/Email1.html" target="_blank"&gt;##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defViewOnline.html"##&lt;/a&gt;&lt;/td&gt;
+							&lt;a href="http://##purl##.dv17124.m.mdl.io/a00b56decd23b6ace89448d6fbd8ed4a/Email1.html" target="_blank"&gt;##URL SRC="https://bkktest.s3.amazonaws.com/tmp/17124-defViewOnline.html"##&lt;/a&gt;&lt;/td&gt;
 					&lt;/tr&gt;
 					&lt;tr&gt;
 						&lt;td align="center"&gt;
-							&lt;!-- &lt;div class="hover"&gt;&lt;p&gt;&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-c30f4f28-fdaa-4d6f-a493-a8637d1d7500.jpg" style="width: 100%;"&gt;&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-4e31d5ca-86fe-4011-a7a6-0f3fa0f274b3.jpg" style="width: 100%;"&gt;&lt;/p&gt;&lt;/div&gt; --&gt;
+							&lt;!-- &lt;div class="hover"&gt;&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-c1ff5716-e072-477e-80f8-709108c1c647.jpg" style="width: 100%;"&gt;&lt;/div&gt; --&gt;
 							&lt;div class="hover"&gt;
-							 &lt;a href="http://www.blog-local2.com?campaignID=675d2111a2e9fa4dbb015201cbcd2a71&amp;contactID=##id##&amp;source=EMAIL1&amp;undefined"&gt;&lt;p&gt;&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-c30f4f28-fdaa-4d6f-a493-a8637d1d7500.jpg" style="width: 100%;"&gt;&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-4e31d5ca-86fe-4011-a7a6-0f3fa0f274b3.jpg" style="width: 100%;"&gt;&lt;/p&gt;&lt;/a&gt;
+							 &lt;a href="http://www.blog-local3.com?campaignID=a00b56decd23b6ace89448d6fbd8ed4a&amp;contactID=##id##&amp;source=EMAIL1&amp;undefined"&gt;&lt;img src="https://bkktest.s3.amazonaws.com/tmp/IMG-c1ff5716-e072-477e-80f8-709108c1c647.jpg" style="width: 100%;"&gt;&lt;/a&gt;
 							&lt;/div&gt;
 						&lt;/td&gt;						
 					&lt;/tr&gt;
@@ -62,16 +62,17 @@
 							&lt;div&gt;
 								&lt;br&gt;
 								&lt;div class="hover"&gt;&lt;p&gt;&lt;strong&gt;Hi ##firstname##&lt;/strong&gt;,&lt;/p&gt;&lt;p&gt;This email introduces a new piece of content, like a blog post, website page, or article. Use this section to entice your readers to click the link below.  The link will take them directly to the &lt;b&gt;Blog Post URL&lt;/b&gt; you set in &lt;i&gt;Step 1: Identify the Targeted Blog Post&lt;/i&gt;.&lt;/p&gt;&lt;/div&gt;
+								&lt;center&gt;
 								&lt;table cellspacing="0" cellpadding="0" border="0" style="margin:0"&gt;
 									&lt;tr&gt;
 										&lt;td ng-style="campaign['defButtonStyle']" style="border-radius:3px;background-color:#5CB35C;text-align:center"&gt;
-											&lt;a href="http://www.blog-local2.com?campaignID=675d2111a2e9fa4dbb015201cbcd2a71&amp;contactID=##id##&amp;source=EMAIL1&amp;undefined" style="color:#ffffff;font-family:sans-serif;font-size:15px;line-height:15px;text-align:center;text-decoration:none;display:block;padding:15px 20px;border:1px solid #444444;border-radius:3px"&gt;
+											&lt;a href="http://www.blog-local3.com?campaignID=a00b56decd23b6ace89448d6fbd8ed4a&amp;contactID=##id##&amp;source=EMAIL1&amp;undefined" style="color:#ffffff;font-family:sans-serif;font-size:15px;line-height:15px;text-align:center;text-decoration:none;display:block;padding:15px 20px;border:1px solid #444444;border-radius:3px"&gt;
 												&lt;div class="hover"&gt;&lt;b&gt;CLICK HERE&lt;/b&gt;&lt;/div&gt;
 											&lt;/a&gt;
 										&lt;/td&gt;
 									&lt;/tr&gt;
 								&lt;/table&gt;
-
+								&lt;/center&gt;
 								&lt;div&gt;
 									&lt;br&gt;
 									&lt;div class="hover"&gt;Use this area to ask a question, solicit feedback, or ask for engagement in your blog’s comment section.  You can also include your signature and contact information like mine below.&lt;p&gt;&lt;br&gt;Leonardo Da Vinci&lt;br&gt;(877) 560-3473&lt;/p&gt;&lt;/div&gt;
