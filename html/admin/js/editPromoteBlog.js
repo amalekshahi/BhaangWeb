@@ -171,7 +171,7 @@ myApp.controller('myCtrl', function($scope, $http) {
 		var emailList = '';		
 		if (typeof($scope.notifyTheseUsersForOpens)=='undefined') {
 			if(hasValue($scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'])){
-				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] =  = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
+				$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM'] = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL'];
 			}
 		} else {
 			for (var i = 0; i < $scope.notifyTheseUsersForOpens.length; i++) {
