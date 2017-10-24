@@ -9,6 +9,8 @@ $URLRenderFormat = "##URL SRC=\"{{url}}\"##";
 $MISSINGRenderFormat = "MISSING-{{value}}";
 $AWSFormatURL = "https://bkktest.s3.amazonaws.com/{{fileName}}";
 $AWSFormatFileName = "/stage/{{fileName}}";
+$AWSAssetFileName = "/{{pathUpload}}/{{fileName}}";
+$AWSAssetPath = "/{{pathUpload}}";
 $LocalFormatURL = "https://web2xmm.com/admin/images/{{fileName}}";
 $LocalFormatFileName = "/var/www/html/admin/images/{{fileName}}";
 $databaseEndpoint = "http://web2xmm.com:5984";	//"http://localhost:5984"
@@ -22,12 +24,21 @@ function davinciSetConfig()
     global $configFile;
     global $databaseEndpoint;
     global $AWSFormatFileName;
+	global $AWSAssetFileName; 
+	global $AWSAssetPath; 
     $data = file_get_contents($configFile);    
     if(!empty($data)){
         $doc = json_decode($data,false);
         $databaseEndpoint = $doc->databaseEndPoint;
         if(!empty($doc->s3Path)){
-            $AWSFormatFileName = $doc->s3Path . "/{{fileName}}";
+            $AWSFormatFileName = $doc->s3Path . "/{{fileName}}";				
+        }
+        if(!empty($doc->s3Server)){
+			//echo "asset path = "; 
+			$AWSAssetPath = $doc->s3Path . "/{{dbname}}" .$doc->s3Server ; 
+//			$AWSAssetFileName = $doc->s3Path . "/{{dbname}}" .$doc->s3Server . $AWSAssetFileName; 
+			$AWSAssetFileName = $AWSAssetPath . $AWSAssetFileName; 	
+			//echo "\n$AWSAssetFileName\n"; 
         }
     }
     return $data;
@@ -785,6 +796,76 @@ function local_put_contents($fileName,$data,$metaData=array())
     $url = str_replace("{{fileName}}", "$fileName", $LocalFormatURL);
     return $url;
 }
+
+function s3_get_asset($dbName,$folder)
+{
+		global $AWSAssetPath; 
+	    $path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
+		$path = str_replace("/tmp", "tmp", $path);	
+		$path = $path . $folder; 
+		//echo "<br>path = $path<br>"; 
+		$client = S3Client::factory(array(
+			'credentials' => array(
+				'key'    => AWSKEY,
+				'secret' => AWSSECRET,
+			)
+		));
+
+		$objects = $client->getListObjectsIterator(array(	
+			"Bucket" => AWSBUCKET,
+			"Prefix" =>  $path
+		));
+		//echo  "<br>Path = " . $path . ".<br>"; 		
+		$json_array  = json_decode($objects, true);
+		$elementCount  = count($json_array);
+		//echo "<br>Keys retrieved  jsonarray = [" . $elementCount . "]<br>";	
+
+		if (empty($objects)) {
+			 //echo "Is empty"; 
+			 //echo json_encode( array('success'=>false));
+			 return array(); 
+		}else{
+			$fileArr = array() ; 
+			$cnt=0; 
+			foreach ($objects as $object) {
+				$cnt ++; 
+				//echo "<br>count = " . $cnt ; 
+				$filename = basename($object['Key']); 
+				if($cnt > 1 ){
+					//echo  "<br>" . $path . "/". $filename . "<br>"; 
+					array_push($fileArr, $path . "/". $filename); 
+				}
+			}
+			return $fileArr;			
+		}
+}//end s3_get_asset();
+
+
+function s3_put_asset($fileName,$data,$dbName,$pathUpload,$metaData=array())
+{
+	global $AWSAssetFileName;
+    $path = str_replace("{{dbname}}", "$dbName", $AWSAssetFileName);	
+	$path = str_replace("{{pathUpload}}", "$pathUpload", $path);
+    $path = str_replace("{{fileName}}", "$fileName", $path);
+	//echo "asset PATH = $path\n"; 
+
+    $client = S3Client::factory(array(
+        'credentials' => array(
+            'key'    => AWSKEY,
+            'secret' => AWSSECRET,
+        )
+    ));
+    $result = $client->putObject(array(
+        'Bucket'     => AWSBUCKET,
+        'Key'        => $path,
+        'Body'        => $data,
+        'ACL'		 => 'public-read',
+		'CacheControl'  => 'max-age=0',
+        'Metadata'   => $metaData,
+    ));
+    return $result['ObjectURL'];
+}
+
 
 function s3_put_contents($fileName,$data,$metaData=array())
 {

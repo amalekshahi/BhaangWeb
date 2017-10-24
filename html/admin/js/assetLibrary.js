@@ -1,120 +1,143 @@
-var assetLibrary = angular.module('assetLibrary', ['davinci', 'localytics.directives']);
+var assetLibrary = angular.module('assetLibrary', ['davinci', 'localytics.directives', "ngFileUpload"]);
+assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($scope, $http, Upload) {
 
-assetLibrary.controller('assetList', function($scope) {
-  $scope.showPreview = function(file) {
-    //alert(file);
-    $scope.showPreviewFile = file;
-  };
-  $scope.folders = ["Images","HTML Emails","HTML Pages", "eBooks", "Videos", "Blueprint Defaults"];
-  $scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  
-  $scope.files = [
-    {
-        Name: {
-            fileName: 'http://mthink.com/legacy/www.crmproject.com/assets/images/CRM6_sp_seller_hamilton.gif',
-            friendlyName: 'Header Image'
-        },
-        Thumbnail: "http://mthink.com/legacy/www.crmproject.com/assets/images/CRM6_sp_seller_hamilton.gif",
-        Description: "Use this for any emails.  This is the only approved masthead that Kushal is OK with.",
-        Type: "Image",
-        Size: "20k",
-        URI:  "http://s3.com/bucket-name/for-client/1.jpg",
-        Dimensions: "105 x 71",
-    },
-    {
-        Name: {
-            fileName: 'http://katcoles.com/files/email_masthead1.jpg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "http://katcoles.com/files/email_masthead1.jpg",      
-        Description: "This one has teh classic Kush typo.  Do you see it?",
-        Type: "Image",
-        Size: "11k",
-        URI:  "http://s3.com/bucket-name/for-client/bucket-name/for-client/2.jpg",
-        Dimensions: "305 x 71",
+		  $scope.showPreview = function(file) {
+					//alert(file);
+					$scope.showPreviewFile = file;
+		  }; 
+		  //$scope.folders = ["Images","HTML Emails","HTML Pages", "eBooks", "Videos", "Blueprint Defaults"];
+		  $scope.folders = ["Images","Videos","Audio Clips","Emails","Web Pages","eBooks","PODCasts","Blueprint Defaults"];
+		  $scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  		
 
-    },
-    {
-        Name: {
-            fileName: 'https://www.leadpages.net/assets/imgs/_rebrand/landing-pages.jpg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "https://www.leadpages.net/assets/imgs/_rebrand/landing-pages.jpg",      
-        Description: "Another image for use in the landing page.",
-        Type: "Image",
-        Size: "144k",
-        URI:  "https://www.leadpages.net/assets/imgs/_rebrand/landing-pages.jpg",
-        Dimensions: "15 x 71",      
-    },
-    {
-        Name: {
-            fileName: 'https://cdn.elegantthemes.com/blog/wp-content/uploads/2016/01/WordPress-eBooks-FT-shutterstock_298676606-adichrisworo.png',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "https://cdn.elegantthemes.com/blog/wp-content/uploads/2016/01/WordPress-eBooks-FT-shutterstock_298676606-adichrisworo.png",      
-        Description: "First upload to Canva",
-        Type: "Image",
-        Size: "12k",
-        URI:  "https://cdn.elegantthemes.com/blog/wp-content/uploads/2016/01/WordPress-eBooks-FT-shutterstock_298676606-adichrisworo.png",
-        Dimensions: "16 x 789",
+		  $scope.upload = function (file,emlID) {
+					$scope.state['UpdFiles'] = 'uploading';
+					var uploadFileName = "IMG-" + uuidv4();
+					//$scope.editor.summernote('insertNode', imgNode);
+					Upload.upload({
+						url: 'uploadS3.php',
+						method: 'POST',
+						file: file,
+						data: {
+							file: file,
+							's3': 'true',
+							'dbName': accID,
+							'pathUpload': pathUpload,
+							'fileName': uploadFileName,
+							'acctID': 'accountID',
+							'progID': 'programID',
+						}
+					}).then(function(resp) {
+						console.log('Success ' + resp.config.data.file.name + 'uploaded');
+						console.log(resp.data);
+						var imgHTML = '<img src="'+resp.data.imgSrc+'">';
+						//$scope.campaign['EMAIL'+emlID+'-HERO-IMAGE'] = imgHTML;
+						$scope.state['UpdFiles'] = 'finish';
+						$scope.Reloadpage();
+					}, function(resp) {
+						console.log('Error status: ' + resp.status);
+						$scope.state['UpdFiles'] = 'error';
+					}, function(evt) {
+						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+						console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+					});
+			};// end upload
 
-    },
-    {
-        Name: {
-            fileName: 'http://wwwimages.adobe.com/content/dam/Adobe/en/products/content-server/images/publisher.jpg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "http://wwwimages.adobe.com/content/dam/Adobe/en/products/content-server/images/publisher.jpg",      
-        Description: "Email masthead.",
-        Type: "Image",
-        Size: "144k",
-        URI:  "http://wwwimages.adobe.com/content/dam/Adobe/en/products/content-server/images/publisher.jpg",
-    },
-    {
-        Name: {
-            fileName: 'https://speckyboy.com/wp-content/uploads/2016/12/free_ebook_2014_02.jpg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "https://speckyboy.com/wp-content/uploads/2016/12/free_ebook_2014_02.jpg",      
-        Description: "Frick.  This one is wrong.  Oh well",
-        Type: "Image",
-        Size: "18k",
-        URI:  "https://speckyboy.com/wp-content/uploads/2016/12/free_ebook_2014_02.jpg",
-    },
-    {
-        Name: {
-            fileName: 'https://ebooklaunch.com/wp-content/uploads/2017/01/ebooklaunch_profilepic-2016_instagram.jpeg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "https://ebooklaunch.com/wp-content/uploads/2017/01/ebooklaunch_profilepic-2016_instagram.jpeg",      
-        Description: "Great image.",
-        Type: "Image",
-        Size: "199k",
-        URI:  "https://ebooklaunch.com/wp-content/uploads/2017/01/ebooklaunch_profilepic-2016_instagram.jpeg",
-    },
-        {
-        Name: {
-            fileName: 'http://s3.com/bucket-name/for-client/bucket-name/for-client/2.jpg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "http://www.mindfireinc.com/static/images/david-rosendahl.jpg",      
-        Description: "Great image.",
-        Type: "Image",
-        Size: "199k",
-        URI:  "http://s3.com/bucket-name/for-client/bucket-name/for-client/2.jpg",
-    },
-        {
-        Name: {
-            fileName: 'http://pad1.whstatic.com/images/thumb/4/41/Choose-an-eBook-Reader-Step-1-Version-2.jpg/aid1119390-v4-728px-Choose-an-eBook-Reader-Step-1-Version-2.jpg',
-            friendlyName: 'Header 2 Image'
-        },
-        Thumbnail: "http://pad1.whstatic.com/images/thumb/4/41/Choose-an-eBook-Reader-Step-1-Version-2.jpg/aid1119390-v4-728px-Choose-an-eBook-Reader-Step-1-Version-2.jpg",      
-        Description: "Great image.",
-        Type: "Image",
-        Size: "199k",
-        URI:  "http://pad1.whstatic.com/images/thumb/4/41/Choose-an-eBook-Reader-Step-1-Version-2.jpg/aid1119390-v4-728px-Choose-an-eBook-Reader-Step-1-Version-2.jpg",
-    }
+			$scope.Reloadpage = function() {
+				location.reload(); 
+			};
+
+			$scope.copyToClipboard = function(x) {
+				  copyClipboard(x); 
+			};// end copyToClipboard
+
+			$scope.GenFile = function(fileLists) {
+				var genFileArr = []; 
+				for(i=0;i<fileLists.length;i++){
+						var namefile = fileLists[i]; 
+						var nameFilePath = "https://bkktest.s3.amazonaws.com/tmp/17124/stage/Images/"; 
+						var fullnamefile = nameFilePath+namefile; 
+						//console.log(" i["+i+"]  ="+namefile); 
+						var fileDetail = { 
+							"fileName":fullnamefile,
+							"friendlyName":namefile
+						}
+//						$scope.files.push({
+						genFileArr.push({
+							"Name":fileDetail,
+							"Thumbnail":fullnamefile,
+							"Description":"This one is picture description.",
+							"Type":"Image",
+							"Size": "11k",
+							"URI": fullnamefile,
+							"Dimensions":"99 x 71"
+						});
+						
+				}//end for
+				return genFileArr; 
+			}; 
+
+			$scope.state = {"showfile":"finish","UpdFiles":"finish"};
+			$scope.Load = function() {
+				//alert("Load"); 
+				var pathfolder = getParameterByName("folder");
+				if(pathfolder == "" || pathfolder == "undefined"){
+					pathfolder = "Images"; 
+				}
+				$('#initFolder').val(pathfolder); 
+				$('#initAccID').val(accID); 
+				$scope.host = pathfolder; 
+				//console.log( " accID = "+ $('#initAccID').val() );  
+				//$('#initAccID').val("17124"); 
+				var form_data = $("#initForm").serialize();
+				$scope.state['showfile'] = "loading";
+				$.ajax({
+					url: 'getFileS3.php', // point to server-side PHP script 
+					dataType: 'json',  // what to expect back from the PHP script, if anything
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form_data,                         
+					type: 'get',
+					success: function(json){					
+						if (json.success) {
+							console.log(json.fileLists); 
+							$scope.files = json.fileLists;							
+							if (typeof $scope.files == 'undefined' || $scope.files == 0) {		
+								$scope.nofile = "yes"; 
+							}else{
+								$scope.nofile = "no"; 
+							}
+							$scope.state['showfile'] = "finish";
+							$scope.$apply();
+						}
+					}
+//				 });
+				 }).then(function(resp) {									
+					$scope.state['showfile'] = "finish";
+				});
+			};// end Load
+
+			$scope.Load(); 			 
+			  
+
+}]);// end assetList
 
 
-    
-  ];
-});
+function copyClipboard(elementId) {
+
+  // Create a "hidden" input
+  var aux = document.createElement("input");
+  // Assign it the value of the specified element
+  console.log(document.getElementById(elementId).innerHTML); 
+  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+  // Append it to the body
+  document.body.appendChild(aux);
+  // Highlight its content
+  aux.select();
+  // Copy the highlighted text
+  document.execCommand("copy");
+  // Remove it from the body
+  document.body.removeChild(aux);
+  swal("Copy to clipboard");
+
+}
