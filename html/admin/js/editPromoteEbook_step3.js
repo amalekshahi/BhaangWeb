@@ -137,6 +137,7 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 			console.log('Success ' + resp.config.data.file.name + 'uploaded');
 			console.log(resp.data);
 			var imgNode = $('<img>').attr('src', resp.data.imgSrc)[0];
+            $scope[editor].summernote('code','');
 			$scope[editor].summernote('insertNode', imgNode);
 		}, function(resp) {
 			console.log('Error status: ' + resp.status);
@@ -185,7 +186,9 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
 
 		$scope.popup = window.open("register.php", '_blank', 'toolbar=no, menubar=no, location=no, scrollbars=no,resizable=no,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
 	};
-	$scope.smnOptions = {
+    $scope.smnOptions = {
+        dialogsInBody: true,
+        //airMode: true,
         popover: {
             air: [
                 ['color', ['color']],
@@ -195,9 +198,21 @@ myApp.controller('step3', ['$scope', '$http', 'Upload', function($scope, $http, 
                 ['para', ['ul', 'paragraph']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture']]
+            ],
+            image: [
+                ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+                ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                ['remove', ['removeMedia']],
+                ['image',['url']],
+                ['change', ['changeImage']]
             ]
+        },
+        buttons: {
+          changeImage: changeImageButton
         }
+        
     };
+
 	$scope.LoadSendTestContact();
 }]);
 

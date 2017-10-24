@@ -34,8 +34,9 @@
 <link href="css/animate.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
 <link href="https://s3.amazonaws.com/mindfiredavinci/img/DV-logo.png" rel="icon" type="image/x-icon" />
-<link href="css/plugins/summernote/summernote.css" rel="stylesheet"/>
-<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet"/>
+<!--<link href="css/plugins/summernote/summernote.css" rel="stylesheet"/>-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"/>
+<!--<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet"/>-->
 <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet"/>
 <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet"/>
 <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet"/>
@@ -58,7 +59,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 
 <!-- Angular -->

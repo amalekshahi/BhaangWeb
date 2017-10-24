@@ -72,7 +72,7 @@
 															<p>Da Vinci will drive traffic to a piece of content (like a blog, article, or website page) and also helps you generate leads (optional). Start by naming your campaign.</p>
 															<form role="form" method="get" action="editPromoteBlog.php" id="form1">
 																<div class="form-group">
-																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name" maxlength="50">
+																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New Blog Post" type="input" name="campaign_name" id="blog_campaign_name" maxlength="50">
 																	<span id="almsg-form1" style="color: red;display: none;">Campaign Name is required!</span>
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
@@ -112,7 +112,7 @@
 															<p>Da Vinci can create Leads for you by promoting an eBook with a Landing Page and auto-responder Email sequence. Start by naming your campaign.</p>
 															<form role="form" method="get" action="editPromoteEbook.php" id="form2">
 																<div class="form-group">
-																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New eBook" type="input" name="campaign_name" maxlength="50">
+																	<!--<label>Name</label>--><input class="form-control" placeholder="My Awesome New eBook" type="input" name="campaign_name" id="ebook_campaign_name" maxlength="50">
 																	<span id="almsg-form2" style="color: red;display: none;">Campaign Name is required!</span>
 																	<span class="help-block m-b-none"><small><i class="fa fa-lightbulb-o" aria-hidden="true"></i> A good campaign name helps you easily find it in your Dashboard.</small></span>
 																</div>
@@ -383,15 +383,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
 
-<script type="text/javascript">
-function beforeSubmit(formid) {
-	var str = $("#"+formid+" input[name=campaign_name]").val();
-	if (str.trim() == '') {
-		//swal("Oops...","Please enter Campaign Name!","warning");
-		$('#almsg-'+formid).show();
-		return false;
-	}
-	$('#'+formid).submit();
-}
-</script>
+		<script type="text/javascript">
+			function beforeSubmit(formid) {
+				var str = $("#"+formid+" input[name=campaign_name]").val();
+				if (str.trim() == '') {
+					//swal("Oops...","Please enter Campaign Name!","warning");
+					$('#almsg-'+formid).show();
+					return false;
+				}
+				$('#'+formid).submit();
+			}
+
+			$('#modal-form').on('shown.bs.modal', function() {
+			  $('#blog_campaign_name').focus();
+			})
+
+			$('#modal-form-2').on('shown.bs.modal', function() {
+			  $('#ebook_campaign_name').focus();
+			})
+		</script>
 	</html>

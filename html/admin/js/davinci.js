@@ -199,3 +199,28 @@ function removeChar(s,r) {
 	s = (s.length && s[0] == r) ? s.slice(1) : s;
 	return s;
 }
+
+var changeImageButton = function (context) {
+      var ui = $.summernote.ui;
+      // create button
+      var button = ui.button({
+        contents: '<i class="fa fa-upload"/>',
+        //contents: '<div class="fileUpload btn btn-primary"><span>Upload</span><input type="file" class="upload" /></div>',
+        tooltip: 'Change',
+        click: function () {
+          // invoke insertText method with 'hello' on editor module.
+            //context.invoke('editor.insertText', 'hello');
+            //var editor = $.summernote.eventHandler.getEditor();
+            //editor.insertImage($('.note-editable'), "http://162.243.155.57:5985/_utils/image/logo.png");
+            //alert('1');
+            //var imgNode = $('<img>').attr('src', "http://162.243.155.57:5985/_utils/image/logo.png")[0];
+            //context.invoke('code',"<img src='http://162.243.155.57:5985/_utils/image/logo.png'>");
+            //context.invoke('editor.insertNode', imgNode);
+            //context.triggerEvent('image.upload');
+            //$scope.imageUpload
+            //context.invoke('code','');
+            context.invoke('imageDialog.show');
+        }
+      });
+      return button.render();   // return button as jquery object
+}

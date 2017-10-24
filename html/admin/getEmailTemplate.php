@@ -15,7 +15,7 @@ require_once 'commonUtil.php';
 
 function DoSummerNote($fileContent,$scopeName,$number)
 {
-    $editTag = '<summernote airMode ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
+    $editTag = '<summernote airMode config="smnOptions" ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
     $content = preg_replace('/\{{SUMMERNOTE\(([^\}]*)\)}\}/',$editTag ,$fileContent);    
     return $content;
 }

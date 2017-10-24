@@ -78,6 +78,7 @@ myApp.controller('myCtrl', function($scope, $http) {
 	
 	
 		$scope.campaignID = campaignID;
+		$scope.campaignName = encodeURIComponent(campaignName); //this for url parameter
     $scope.state = {
         Save: "Save",
         Publish: "Launch Program",
@@ -289,7 +290,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     };
 	$scope.goEditMode = function(action) {
 		if (action == "newCampaign") {
-			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
+			window.location.href = current_page+"?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
 		$scope.state['Save'] = 'Save';
 	};
@@ -308,7 +309,17 @@ myApp.controller('myCtrl', function($scope, $http) {
 
     $scope.Reset = function(alert) {
         $scope.campaign = angular.copy($scope.master);
-		$('#subjectEmail1').editable("setValue",$scope.campaign['EMAIL1-SUBJECT']);
+        if (typeof($scope.campaign['EMAIL1-SUBJECT'])=='undefined') {
+            $scope.campaign['EMAIL1-SUBJECT'] = "";
+        }
+        if (typeof($scope.campaign['EMAIL2-SUBJECT'])=='undefined') {
+            $scope.campaign['EMAIL2-SUBJECT'] = "";
+        }
+        if (typeof($scope.campaign['EMAIL3-SUBJECT'])=='undefined') {
+            $scope.campaign['EMAIL3-SUBJECT'] = "";
+        }
+        
+        $('#subjectEmail1').editable("setValue",$scope.campaign['EMAIL1-SUBJECT']);
 		$('#subjectEmail2').editable("setValue",$scope.campaign['EMAIL2-SUBJECT']);
 		$('#subjectEmail3').editable("setValue",$scope.campaign['EMAIL3-SUBJECT']);
         if (alert) {
