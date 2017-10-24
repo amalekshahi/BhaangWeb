@@ -312,7 +312,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <Properties>
           <Messages>
             <Message Id="1">
-              <ToAddress>##fromemail##</ToAddress>
+              <ToAddress>##OpenAlertLeadFrom##</ToAddress>
               <FromName>##fromname##</FromName>
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
@@ -443,7 +443,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <Properties>
           <Messages>
             <Message Id="1">
-              <ToAddress>##fromemail##</ToAddress>
+              <ToAddress>##ClickAlertLeadFrom##</ToAddress>
               <FromName>##fromname##</FromName>
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
@@ -630,6 +630,9 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="defCompanyLogo">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyLogo.html"##</ContentVariable>
         <ContentVariable Name="defViewOnline">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defViewOnline.html"##</ContentVariable>
         <ContentVariable Name="defUnsubscribe">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defUnsubscribe.html"##</ContentVariable>
+        <ContentVariable Name="OpenAlertLeadFrom">{{URL TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM}}</ContentVariable>
+        <ContentVariable Name="ClickAlertLeadFrom">{{URL TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM}}</ContentVariable>
+        <ContentVariable Name="CallToActionFrom">{{URL TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM}}</ContentVariable>
       </ContentVariables>
     </RuleGroup>
   </RuleGroupSet>

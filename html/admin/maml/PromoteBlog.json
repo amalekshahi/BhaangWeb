@@ -40,6 +40,21 @@
             "type":"URL"
         },
         {
+            "name":"TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM",
+            "xpath":"//ContentVariable[@Name='OpenAlertLeadFrom']",
+            "type":"URL"
+        },
+        {
+            "name":"TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM",
+            "xpath":"//ContentVariable[@Name='ClickAlertLeadFrom']",
+            "type":"URL"
+        },
+        {
+            "name":"TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM",
+            "xpath":"//ContentVariable[@Name='CallToActionFrom']",
+            "type":"URL"
+        },
+        {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
             "xpath":"//ContentVariable[@Name='email#content']",
             "type":"URL",

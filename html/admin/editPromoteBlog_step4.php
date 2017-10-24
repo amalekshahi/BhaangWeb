@@ -43,7 +43,7 @@
 				<form action="" class="form-horizontal" method="post">
 					<div class="form-group">
 						<div>
-							<span>Notify me at <kbd><?php echo $email; ?></kbd> when people:</span>
+							<span>Notify me at <kbd>{{campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']}}</kbd> when people:</span>
 						</div>
 					</div>
 					<div class="form-group">

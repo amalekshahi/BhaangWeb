@@ -281,11 +281,14 @@
 						$scope.campaign.report = [];
 						var report = response.data.rows;
 						for (var i = 0; i < report.length; i++) {
-							var emailName = getEmailName(report[i].Email,'long',campaignType);
+							var em = report[i].Email;
+							var emailName = getEmailName(em,'long',campaignType);
 							var j = i+1;
 							var dt = '';
 							if (campaignType == 'PromoteBlog') {
-								dt = 'Sent '+ShowScheduleDateTime($scope.campaign['EMAIL'+j+'-SCHEDULE1-DATETIME']);
+								if ( (em == 'Email1') || (em == 'Email2') || (em == 'Email3') ) {
+									dt = 'Sent '+ShowScheduleDateTime($scope.campaign['EMAIL'+j+'-SCHEDULE1-DATETIME']);
+								}								
 							}
 							$scope.campaign.report.push({
 								"emailName": emailName,

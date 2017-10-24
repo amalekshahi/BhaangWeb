@@ -12,7 +12,7 @@
 				<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="color:green" ng-show="step2Done"></i> Set Up Your Landing Page</a></h4>
 			</div>
 			<div class="col-sm-9">
-				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+				<h4 class="panel-title"><a data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" onclick="setLeftBar();">
         <small class="m-l-sm" ng-show="pageDone > 0"><i aria-hidden="true" class="fa fa-file-o" ng-show="pageDone > 0"></i> {{pageProgress}}</small> </a></h4>
 			</div>
 		</div>
