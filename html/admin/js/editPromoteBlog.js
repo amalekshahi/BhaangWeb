@@ -78,6 +78,7 @@ myApp.controller('myCtrl', function($scope, $http) {
 	
 	
 		$scope.campaignID = campaignID;
+		$scope.campaignName = encodeURIComponent(campaignName); //this for url parameter
     $scope.state = {
         Save: "Save",
         Publish: "Launch Program",
@@ -289,7 +290,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     };
 	$scope.goEditMode = function(action) {
 		if (action == "newCampaign") {
-			window.location.href = "editPromoteBlog.php?campaign_id="+campaignID+"&nocache=" + new Date().toString();
+			window.location.href = current_page+"?campaign_id="+campaignID+"&nocache=" + new Date().toString();
 		}
 		$scope.state['Save'] = 'Save';
 	};

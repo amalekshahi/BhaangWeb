@@ -95,6 +95,7 @@
 			//Kwang create myAPP here so all step can access it.
 			var dbName = "<?php echo $dbName; ?>";
 			var accountID = "<?php echo $accountID; ?>";
+			var current_page = 'editPromoteBlog_revamped_schedule.php';
 			var myApp = angular.module('myApp', ["localytics.directives", "xeditable", "summernote", "uiSwitch", "ngFileUpload"]);
 		</script>
 
