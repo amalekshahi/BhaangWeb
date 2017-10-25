@@ -361,6 +361,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope.setInitValue();
                 $scope.setDisplay();
                 $scope.LoadAudience();
+				$scope.setDefTimezone();
             } else {
                 //alert(errResponse.statusText);
                 swal(errResponse.statusText);
@@ -368,6 +369,27 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
 
     };
+	$scope.setDefTimezone = function() {
+		$http.get("backend.php"+"?" + new Date().toString(),
+		{
+		  method: "POST",
+		  params: {
+			cmd: "userinfo",
+			acctID: accountID,     
+			progID: "yyyy",     // anything that not empty
+		  }  
+		}
+		).then(function(response) {
+			console.log(response.data);    
+			$scope.userInfo = response.data.doc;
+			var tzFields = ["EMAIL1-SCHEDULE1-TIMEZONE", "EMAIL1-SCHEDULE2-TIMEZONE", "EMAIL1-SCHEDULE3-TIMEZONE", "EMAIL1-SENDTEST-TIMEZONE", "EMAIL2-SCHEDULE1-TIMEZONE", "EMAIL2-SCHEDULE2-TIMEZONE", "EMAIL2-SCHEDULE3-TIMEZONE", "EMAIL2-SENDTEST-TIMEZONE", "EMAIL3-SCHEDULE1-TIMEZONE", "EMAIL3-SCHEDULE2-TIMEZONE", "EMAIL3-SCHEDULE3-TIMEZONE", "EMAIL3-SENDTEST-TIMEZONE", "EMAIL4-SCHEDULE1-TIMEZONE", "EMAIL4-SCHEDULE2-TIMEZONE", "EMAIL4-SCHEDULE3-TIMEZONE", "EMAIL4-SENDTEST-TIMEZONE", "EMAIL5-SCHEDULE1-TIMEZONE", "EMAIL5-SCHEDULE2-TIMEZONE", "EMAIL5-SCHEDULE3-TIMEZONE", "EMAIL5-SENDTEST-TIMEZONE", "EMAIL6-SCHEDULE1-TIMEZONE", "EMAIL6-SCHEDULE2-TIMEZONE", "EMAIL6-SCHEDULE3-TIMEZONE", "EMAIL6-SENDTEST-TIMEZONE"];
+			for (var i = 0; i < tzFields.length; i++) {
+				$scope.campaign[tzFields[i]] = $scope.userInfo.defTimezone;
+			}
+			//$scope.Reset();
+			//$scope.backend.data = response.data;
+		});
+	}
 	$scope.setCampaignName = function() {
         $("#editCampaignName").text($scope.campaign.campaignName);
 		$("#editCampaignName").editable({
@@ -451,17 +473,17 @@ myApp.controller('myCtrl', function($scope, $http) {
 		//$scope.notifyTheseUsersForCTACompletions  = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'];
 
 		$http.get(dbEndPoint + "/" + dbName + '/UserInfo' + "?" + new Date().toString()).then(function(response) {
-			$scope.masterAu = response.data;
-			if (typeof $scope.masterAu.users == 'undefined') {				
+			$scope.masterSD = response.data;
+			if (typeof $scope.masterSD.users == 'undefined') {				
 				$http.get(dbEndPoint + "/master/Default_UserInfo?" + new Date().toString()).then(function(response) {
-					$scope.masterAu = response.data;
-					if (typeof $scope.masterAu.users == 'undefined') {
+					$scope.masterSD = response.data;
+					if (typeof $scope.masterSD.users == 'undefined') {
 					} else {
-						$scope.senders = angular.copy($scope.masterAu.users);
+						$scope.senders = angular.copy($scope.masterSD.users);
 					}
 				});			   
 			} else {
-				$scope.senders = angular.copy($scope.masterAu.users);
+				$scope.senders = angular.copy($scope.masterSD.users);
 			}
         });		
     }; // initSender

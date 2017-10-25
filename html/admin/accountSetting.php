@@ -176,6 +176,18 @@
 													</div>
 												</div>
 
+												<div class="form-group"><label class="col-sm-2 control-label">Timezone</label>
+													<div class="col-sm-10">
+													<select ng-disabled="disabledEmail['1']" class="form-control" id="Timezone" name="Timezone" ng-model="userinfo.defTimezone" required="" style="width: 150px">
+																	<option value="Pacific Standard Time" >Pacific Time</option> 
+																	<option value="Mountain Standard Time">Mountain Time</option> 
+																	<option value="Central America Standard Time">Central Time</option> 
+																	<option value="Eastern Standard Time">Eastern Time</option>
+																</select>
+													<span class="help-block m-b-none">This timezone is used for your scheduled communications, like emails.  Changing this impacts all Users of your organization.</span>
+													</div>
+												</div>
+
 												<div class="hr-line-dashed"></div>            
 												
 												<div class="form-group">
