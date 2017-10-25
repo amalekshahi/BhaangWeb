@@ -20,10 +20,13 @@ function davinciSetConfig()
 {
     global $configFile;
     global $databaseEndpoint;
+	global $serverMode;
     $data = file_get_contents($configFile);    
     if(!empty($data)){
         $doc = json_decode($data,false);
         $databaseEndpoint = $doc->databaseEndPoint;
+		$serverMode = $doc->serverName;
+		$serverMode = strtolower($serverMode);	
     }
     return $data;
 }
