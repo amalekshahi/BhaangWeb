@@ -1315,6 +1315,16 @@ function DomSetAttribute($xpath,$path,$attr,$value)
     return null;
 }
 
+function DomGetAttribute($xpath,$path,$attr)
+{
+    $nodes = $xpath->query($path);
+    if ($nodes->length > 0) {
+        $node = $nodes->item(0);
+        return $node->getAttribute($attr);
+    }
+    return null;
+}
+
 function DomSetText($xpath,$path,$value)
 {
     $nodes = $xpath->query($path);
@@ -1349,6 +1359,12 @@ function DomAddNode($xml,$xpath,$path,$value)
         return $node;
     }
     return null;
+}
+
+function DomCount($xpath,$path)
+{
+    $nodes = $xpath->query($path);
+    return $nodes->length;
 }
 
 function DomDeleteAllChildren($xpath,$path)

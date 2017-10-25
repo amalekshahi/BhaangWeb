@@ -16,9 +16,12 @@ $PARTNERGUID = $_SESSION['PARTNERGUID'];
 $PARTNERPASSWORD = $_SESSION['PARTNERPASSWORD'];
 $ACCOUNNAME = $_SESSION['ACCOUNNAME'];
 
+
 $draw = $_GET['draw']; 
 $limit = $_GET['length'];
 $page = $_GET['start']; 
+$search = $_GET['search'];
+
 
 if(empty($limit)){
     $limit = 10;
@@ -32,9 +35,20 @@ if(empty($page)){
 
 if ($cid == '-1') {
 	$LISTDEFINITION = "<Filter CriteriaJoinOperator=\"&amp;\" />";
+/*    $LISTDEFINITION = <<<'KKK'
+<Filter CriteriaJoinOperator="&amp;">
+    <Criteria Row="1" Field="z_Customer_Status" Operator="NotEqual" Value="Active" />
+    <Criteria Row="2" Field="sfapp_HasOptedOutOfEmail" Operator="NotEqual" Value="1" />
+    <Criteria Row="3" Field="Email" Operator="Contains" Value="@" />
+</Filter>
+KKK;*/
 }	
 
+$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
+$LISTDEFINITION = BuildFilter($LISTDEFINITION,$search['value'],$FieldNames);
+
 $ticket = getTicket($ACCOUNTID, $EMAIL, $PWD, $PARTNERGUID, $PARTNERPASSWORD);
+
 // Get ContactCount becuase the one that return with GetContactsByPage is not reliable (change to 0 after couple of call)
 $contactCount = GetContactCount("",$ticket,$LISTDEFINITION,$ACCOUNTID);
 if(!empty($COUNTONLY)){
@@ -47,21 +61,74 @@ if(!empty($COUNTONLY)){
     exit;
 }
 
-$result = GetContactEx($ticket, $LISTDEFINITION,$ACCOUNTID, $draw,$page,$limit);
+
+
+$result = GetContactWithFieldsEx($ticket,$LISTDEFINITION,$ACCOUNTID,$FieldNames,$draw,$page,$limit,$search['value']);
 $result["recordsTotal"] = $contactCount;
 $result["recordsFiltered"] = $contactCount;
+$result["GET"] = $_GET;
 
 echo json_encode($result);
 
+function BuildFilter($filter,$searchValue,$FieldNames)
+{
+    $xml = new DOMDocument();    
+    if(!empty($searchValue)){
+        $xml->loadXML($filter);
+        $xpath = new DOMXpath($xml);
+        $orgCriteriaCount = DomCount($xpath,"//Criteria");
+        $nextIndex = $orgCriteriaCount+1;
+        $moreXML = "";
+        $moreJoin = "";
+        $orgJoin = "";
+        $orgJoinOperator = DomGetAttribute($xpath,"/Filter","CriteriaJoinOperator");
+        if($orgJoinOperator == "&"){
+            for($i=1;$i<=$orgCriteriaCount;$i++){
+                if($orgJoin == ""){
+                    $orgJoin .= "$i";
+                }else{
+                    $orgJoin .= "&$i";
+                }
+            }
+            if($orgJoin!=""){
+                $orgJoin = "($orgJoin)";
+            }
+        }
+        foreach($FieldNames as $fieldName){
+            $moreXML .= "<Criteria Row=\"$nextIndex\" Field=\"$fieldName\" Operator=\"Contains\" Value=\"$searchValue\" />\n";
+            if($moreJoin == ""){
+                $moreJoin .= "$nextIndex";
+            }else{
+                $moreJoin .= "|$nextIndex";
+            }
+            $nextIndex += 1;
+        }
+        $moreJoin = "($moreJoin)";
+        if($orgJoinOperator == "&"){
+            if($orgJoin!=""){
+                $finalJoin = $orgJoin . "&" .  $moreJoin;    
+            }else{
+                $finalJoin = $moreJoin;    
+            }
+        }else{
+            $finalJoin = $orgJoinOperator . "&" .  $moreJoin;    
+        }
+        DomSetAttribute($xpath,"/Filter","CriteriaJoinOperator",$finalJoin);
+        $newfilter = str_replace('</Filter>',$moreXML.'</Filter>', $xml->saveHTML());
+        $filter = $newfilter;
+    }
+    return $filter;
+}
 
-function GetContactEx($userTicket, $filter,$ACCOUNTID,$draw,$page,$limit){	
+
+function GetContactEx($userTicket, $filter,$ACCOUNTID,$draw,$page,$limit,$searchValue){	
 	
 	$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
-	$result = GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID,$FieldNames,$draw,$page,$limit);
+	$result = GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID,$FieldNames,$draw,$page,$limit,$searchValue);
 	return $result;
 }
 
-function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$draw,$page,$limit){
+function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$draw,$page,$limit,$searchValue){
     $start_time = microtime(true);
     $execTime = array();
 
@@ -76,7 +143,47 @@ function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$dr
         $limit = 2147483647;
         $page = 0;
     }
-
+    /*
+    $xml = new DOMDocument();    
+    if(!empty($searchValue)){
+        $xml->loadXML($filter);
+        $xpath = new DOMXpath($xml);
+        $orgCriteriaCount = DomCount($xpath,"//Criteria");
+        $nextIndex = $orgCriteriaCount+1;
+        $moreXML = "";
+        $moreJoin = "";
+        $orgJoin = "";
+        $orgJoinOperator = DomGetAttribute($xpath,"/Filter","CriteriaJoinOperator");
+        if($orgJoinOperator == "&"){
+            for($i=1;$i<=$orgCriteriaCount;$i++){
+                if($orgJoin == ""){
+                    $orgJoin .= "$i";
+                }else{
+                    $orgJoin .= "&$i";
+                }
+            }
+            $orgJoin = "($orgJoin)";
+        }
+        foreach($FieldNames as $fieldName){
+            $moreXML .= "<Criteria Row=\"$nextIndex\" Field=\"$fieldName\" Operator=\"Contains\" Value=\"$searchValue\" />\n";
+            if($moreJoin == ""){
+                $moreJoin .= "$nextIndex";
+            }else{
+                $moreJoin .= "|$nextIndex";
+            }
+            $nextIndex += 1;
+        }
+        $moreJoin = "($moreJoin)";
+        if($orgJoinOperator == "&"){
+            $finalJoin = $orgJoin . "&" .  $moreJoin;    
+        }else{
+            $finalJoin = $orgJoinOperator . "&" .  $moreJoin;    
+        }
+        DomSetAttribute($xpath,"/Filter","CriteriaJoinOperator",$finalJoin);
+        $newfilter = str_replace('</Filter>',$moreXML.'</Filter>', $xml->saveHTML());
+        $filter = $newfilter;
+    }
+    */
 	$ContactListRequest   = array
 	(
 		"Credentials" => array
@@ -164,6 +271,14 @@ function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$dr
             "ContactListResponse"=>$ContactListResponse,
             "limit" => $limit,
             "page" => $page,
+            "filter" => $filter,
+            "search" => $searchValue,
+            //"xml" => $xml->saveHTML(),
+            //"orgCriteriaCount" => $orgCriteriaCount,
+            //"moreXML" => $moreXML,
+            //"finalJoin" => $finalJoin,
+            //"orgJoinOperator" => $orgJoinOperator,
+            //"newfilter" => $newfilter,
     );
 	return $result;
 
