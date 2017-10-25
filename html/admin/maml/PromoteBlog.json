@@ -85,6 +85,12 @@
             "loop":6
         },
         {
+            "name":"EMAIL#-SENDTEST-DATETIME",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#SendTest']/Start",
+            "attribute":"DateTime",
+            "loop":3
+        },
+        {
             "name":"EMAIL#-SCHEDULE1-TIMEZONE",
             "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule1']",
             "attribute":"TimeZone",
@@ -101,6 +107,12 @@
             "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#Schedule3']",
             "attribute":"TimeZone",
             "loop":6
+        },
+        {
+            "name":"EMAIL#-SENDTEST-TIMEZONE",
+            "xpath":"//CampaignElement[@Name='Email#']/Schedules/Schedule[Subject='Email#SendTest']",
+            "attribute":"TimeZone",
+            "loop":3
         },        
         {
             "name":"TEXT-AREA-ACCTID-PROGRAMID-EMAIL#CONTENT",
@@ -176,6 +188,12 @@
         {
             "name":"EMAIL1-FILTER",
             "xpath":"//CampaignElement[@Name='Email1Contacts2']",
+            "deleteNode":"Filter",
+            "type":"NODE"
+        },
+        {
+            "name":"EMAIL-SENDTEST-FILTER",
+            "xpath":"//CampaignElement[@Name='sendTestList']",
             "deleteNode":"Filter",
             "type":"NODE"
         }

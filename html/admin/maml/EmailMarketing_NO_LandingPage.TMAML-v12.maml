@@ -152,6 +152,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="7" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email1" Position="20,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
+          <Schedule DbId="0" Id="6" Status="Scheduled" TargetAudiences="41" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+            <Subject>Email1SendTest</Subject>
+            <Body />
+            <Start DateTime="10/18/2050 09:59:00 AM" />
+          </Schedule>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="30" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email1Schedule3</Subject>
             <Body />
@@ -192,6 +197,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="13" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="180,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
+          <Schedule DbId="0" Id="6" Status="Scheduled" TargetAudiences="41" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+            <Subject>Email2SendTest</Subject>
+            <Body />
+            <Start DateTime="10/18/2050 09:59:00 AM" />
+          </Schedule>
           <Schedule DbId="0" Id="5" Status="Scheduled" TargetAudiences="31" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email2Schedule3</Subject>
             <Body />
@@ -228,6 +238,11 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="14" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email3" Position="340,330" SharedCheckout="False" RuleGroup="EmailContent">
         <Schedules>
+          <Schedule DbId="0" Id="4" Status="Scheduled" TargetAudiences="41" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
+            <Subject>Email3SendTest</Subject>
+            <Body />
+            <Start DateTime="10/18/2050 09:59:00 AM" />
+          </Schedule>
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="33" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
             <Subject>Email3Schedule3</Subject>
             <Body />
@@ -278,7 +293,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
-      <CampaignElement Id="17" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="380,480" SharedCheckout="False">
+      <CampaignElement Id="17" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="500,470" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Child Visit">
           <Event EventId="20103" ElementId="7" />
@@ -289,7 +304,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20103" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="18" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ClickAlert" Position="560,470" SharedCheckout="False">
+      <CampaignElement Id="18" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="ClickAlert" Position="650,470" SharedCheckout="False">
         <Filter CriteriaJoinOperator="&amp;" />
         <HookedEvents TriggerFireContext="Current Child Visit">
           <Event EventId="20105" ElementId="7" />
@@ -300,7 +315,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           <Event EventId="20105" ElementId="24" />
         </HookedEvents>
       </CampaignElement>
-      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="380,590" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="19" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="OpenAlertLeadTrigger" Position="500,590" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>OpenEmailAlert (Right Now)</Subject>
@@ -431,7 +446,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
           </Messages>
         </Properties>
       </CampaignElement>
-      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="560,590" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
+      <CampaignElement Id="25" DbId="0" CheckOutId="0" Version="1.0" State="Stop" Type="Email" Category="Outbound" Name="ClickAlertLeadTrigger" Position="650,590" SharedCheckout="False" IsTrackingRequired="False" RuleGroup="EmailContent">
         <Schedules>
           <Schedule DbId="0" Id="1" Status="Scheduled" Type="Offset" ContactScope="Both" ReevaluateTriggerFilter="False">
             <Subject>ClickAlertLeadTrigger (Right Now)</Subject>
@@ -566,6 +581,10 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         </Filter>
         <HookedEvents TriggerFireContext="Current Visit" />
       </CampaignElement>
+      <CampaignElement Id="41" DbId="0" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="sendTestList" Position="180,470" SharedCheckout="False">
+        <Filter CriteriaJoinOperator="&amp;" />
+        <HookedEvents TriggerFireContext="Current Visit" />
+      </CampaignElement>
     </CampaignElements>
     <CampaignConnections>
       <CampaignConnection StartElementId="12" EndElementId="7" />
@@ -600,6 +619,9 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       <CampaignConnection StartElementId="37" EndElementId="23" />
       <CampaignConnection StartElementId="39" EndElementId="24" />
       <CampaignConnection StartElementId="40" EndElementId="24" />
+      <CampaignConnection StartElementId="41" EndElementId="7" />
+      <CampaignConnection StartElementId="41" EndElementId="13" />
+      <CampaignConnection StartElementId="41" EndElementId="14" />
     </CampaignConnections>
   </Campaign>
   <RuleGroupSet>
@@ -630,7 +652,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="defCompanyLogo">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defCompanyLogo.html"##</ContentVariable>
         <ContentVariable Name="defViewOnline">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defViewOnline.html"##</ContentVariable>
         <ContentVariable Name="defUnsubscribe">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defUnsubscribe.html"##</ContentVariable>
-	<ContentVariable Name="defButtonColor">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defButtonColor.html"##</ContentVariable>
+        <ContentVariable Name="defButtonColor">##URL SRC="https://s3-us-west-1.amazonaws.com/bkktest/tmp/{{accountID}}-defButtonColor.html"##</ContentVariable>
         <ContentVariable Name="OpenAlertLeadFrom">{{URL TEXT-LINE-ACCTID-PROGRAMID-OPENMYEMAILFROM}}</ContentVariable>
         <ContentVariable Name="ClickAlertLeadFrom">{{URL TEXT-LINE-ACCTID-PROGRAMID-VISITMYBLOCKFROM}}</ContentVariable>
         <ContentVariable Name="CallToActionFrom">{{URL TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM}}</ContentVariable>

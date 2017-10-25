@@ -25,11 +25,14 @@ function davinciSetConfig()
     global $databaseEndpoint;
     global $AWSFormatFileName;
 	global $AWSAssetFileName; 
-	global $AWSAssetPath; 
+	global $AWSAssetPath;
+	global $serverMode;
     $data = file_get_contents($configFile);    
     if(!empty($data)){
         $doc = json_decode($data,false);
         $databaseEndpoint = $doc->databaseEndPoint;
+		$serverMode = $doc->serverName;
+		$serverMode = strtolower($serverMode);	
         if(!empty($doc->s3Path)){
             $AWSFormatFileName = $doc->s3Path . "/{{fileName}}";				
         }
