@@ -1,6 +1,5 @@
 <?php
 date_default_timezone_set('UTC');
-include 'commonUtil.php';
 session_start();
 $dbName = $_SESSION['DBNAME'];
 $accountID = $_SESSION['ACCOUNTID'];
@@ -39,9 +38,9 @@ if ($serverMode == 'production') {
 		<li><span class="m-r-sm text-muted welcome-message"><?php echo $USERNAME;?>, you're logged in to <?php echo $accountName;?>.</span></li>
 		<li>
     <account-switch/>
-		</li>
-		<li <?php echo $showDB;?>><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i><small>Database</small></a></li>
-		<li <?php echo $showGH;?>><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i><small>GitHub</small></a></li>
+		</li>		
+		<li<?php echo $showDB;?>><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i><small>Database</small></a></li>
+		<li<?php echo $showGH;?>><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i><small>GitHub</small></a></li>
 		<li><a href="logout.php"><i class="fa fa-power-off"></i> Log out </a>
 		</li>
 	</ul>
