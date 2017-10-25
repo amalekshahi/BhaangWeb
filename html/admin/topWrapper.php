@@ -1,5 +1,6 @@
 <?php
 date_default_timezone_set('UTC');
+include 'commonUtil.php';
 session_start();
 $dbName = $_SESSION['DBNAME'];
 $accountID = $_SESSION['ACCOUNTID'];
