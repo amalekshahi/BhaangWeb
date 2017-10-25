@@ -255,6 +255,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                     $scope.master = angular.copy($scope.campaign);
                     $scope.clearFormState();
                     $scope.goEditMode(action);
+					$scope.Publish(true);
                 });
             }, function(errResponse) {
                 // case new account
@@ -668,9 +669,10 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.CanPublish = function() {
         return $scope.step1Done == true && $scope.step2Done == true && $scope.step3Done == true && $scope.step4Done == true;
     };
-    $scope.RePublish = function(){
+    $scope.RePublish = function(silenceMode){
         console.log("RePublish");
         $scope.state['Publish'] = "Re Launching";
+		$scope.state['Save'] = 'Saving';
         $http({
             method: 'POST',
             url: 'backend.php' + "?" + new Date().toString(),
@@ -685,9 +687,13 @@ myApp.controller('myCtrl', function($scope, $http) {
         }).then(function(response) {
             if (response.data.success == false) {
                 var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
-                swal(response.data.detail.Result.ErrorCode,errorMessage);
+				if(!$scope.silenceMode){
+	                swal(response.data.detail.Result.ErrorCode,errorMessage);
+				}
             } else {
-                swal(response.data.message);
+				if(!$scope.silenceMode){
+	                swal(response.data.message);
+				}
             }
             var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
             console.log(str); // Logs output to dev tools console.
@@ -696,7 +702,9 @@ myApp.controller('myCtrl', function($scope, $http) {
 			$scope.state['Save'] = 'Save';
         }, function(errResponse) {
             $scope.state['Publish'] = "Launch Program";
-            swal("Server Error");
+			if(!$scope.silenceMode){
+	            swal("Server Error");
+			}
             //alert(errResponse);
 			$scope.state['Save'] = 'Save';
         });
@@ -731,14 +739,20 @@ myApp.controller('myCtrl', function($scope, $http) {
         });
 
     }
-    $scope.Publish = function() {
+    $scope.Publish = function(silenceMode) {
+        if(typeof silenceMode == "undefined"){
+            silenceMode = false;
+        }
+        $scope.silenceMode = silenceMode;
+
         //check if we already publish this campaign
         if(hasValue($scope.campaign['publishProgramID'])){
             //alert('Already publish ' + $scope.campaign['publishProgramID']);
-            $scope.RePublish();
+            $scope.RePublish(silenceMode);
             return;
         }
         $scope.state['Publish'] = "Launching";
+		$scope.state['Save'] = "Saving";
         $http({
             method: 'POST',
             url: 'backend.php' + "?" + new Date().toString(),
@@ -753,20 +767,28 @@ myApp.controller('myCtrl', function($scope, $http) {
         }).then(function(response) {
             if (response.data.success == false) {
                 var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
-                swal(response.data.detail.Result.ErrorCode,errorMessage);
+				if(!$scope.silenceMode){
+	                swal(response.data.detail.Result.ErrorCode,errorMessage);
+				}
             } else {
-                swal(response.data.message);
+				if(!$scope.silenceMode){
+	                swal(response.data.message);
+				}
                 // set public programID back to tree
                 $scope.campaign['publishProgramID'] = response.data.publishProgramID;
             }
             $scope.state['Publish'] = "Launch Program";
+			$scope.state['Save'] = "Save";
             var str = JSON.stringify(response.data, null, 4); // (Optional) beautiful indented output.
             console.log(str);
             
             //alert(response);
         }, function(errResponse) {
             $scope.state['Publish'] = "Launch Program";
-            swal("Server Error");
+			$scope.state['Save'] = "Save";
+			if(!$scope.silenceMode){
+	            swal("Server Error");
+			}
             //alert(errResponse);
         });
     };

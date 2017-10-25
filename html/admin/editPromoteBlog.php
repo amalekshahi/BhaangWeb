@@ -204,9 +204,9 @@
 														<?php include "editPromoteBlog_step4.php"; ?>
 													</div>
 												</div>
-												<div style="float:right;">
+												<!-- <div style="float:right;">
 													<button class="btn btn-primary" ng-disabled="!CanPublish()" ng-click="Publish()"><i class="fa fa-paper-plane" ng-show="state['Publish'] == 'Launch Program'">></i><span ng-show="state['Publish'] != 'Launch Program'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Publish']}}</button>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div>
