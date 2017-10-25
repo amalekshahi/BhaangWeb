@@ -177,7 +177,7 @@
 																	<span class="help-block m-b-none"></span> </div>
 															</div>
 															<div class="form-group"><label class="col-sm-4 control-label">Your Organization's Timezone <br><small class="text-muted">This timezone is used for your scheduled communications, like emails.  Changing this impacts all Users of your organization.</small></label>
-																<div class="col-sm-8"> <br><select ng-disabled="disabledEmail['1']" class="form-control" id="EMAIL1-SCHEDULE1-TIMEZONE" name="EMAIL1-SCHEDULE1-TIMEZONE" ng-model="campaign['EMAIL1-SCHEDULE1-TIMEZONE']" ng-change="dateChange('')" required="" style="width: 150px">
+																<div class="col-sm-8"> <br><select ng-disabled="disabledEmail['1']" class="form-control" id="Timezone" name="Timezone" ng-model="userinfo.defTimezone" required="" style="width: 150px">
 																	<option value="Pacific Standard Time" >Pacific Time</option> 
 																	<option value="Mountain Standard Time">Mountain Time</option> 
 																	<option value="Central America Standard Time">Central Time</option> 
