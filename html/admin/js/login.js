@@ -10,6 +10,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.login = {
         userName: "",
         passWord: "",
+	}
     $scope.myAlert = function(mesg) {
         $scope.alert = {
             normal: mesg,
