@@ -159,7 +159,10 @@ require_once 'commonUtil.php';?><!doctype html>
                     <label>start</label>
                     <input ng-model="getContact.start" >
                 </md-input-container>  
-                
+                <md-input-container>
+                    <label>search</label>
+                    <input ng-model="getContact.search" >
+                </md-input-container>                  
                 <md-input-container>
                     <button ng-click="getContactClick()">submit</button>
                 </md-input-container>  
@@ -282,11 +285,16 @@ require_once 'commonUtil.php';?><!doctype html>
             cid:-1,
             length:10,
             start:0,
+            search:"",
             options: {mode: 'tree'},
         };
         $scope.getContactClick = function(){
             $scope.getContact.data = {};
-            $http.get("getContactEx.php?cid=" + $scope.getContact.cid + "&start=" + $scope.getContact.start + "&length=" + $scope.getContact.length + "&" + new Date().toString()).then(function(response) {
+            var search = "";
+            if($scope.getContact.search != ""){
+                search = "&" +  encodeURIComponent("search[value]") + "=" + $scope.getContact.search;
+            }
+            $http.get("getContactEx.php?cid=" + $scope.getContact.cid + "&draw=1&start=" + $scope.getContact.start + "&length=" + $scope.getContact.length + search + "&" + new Date().toString()).then(function(response) {
                   $scope.getContact.data = response.data;
                   console.log($scope.getContact.response);
             },function(response){

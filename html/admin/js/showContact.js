@@ -51,14 +51,15 @@ var cid = getParameterByName("cid");
                         var serverSide = false;
                         if(contactCount > 10000){
                             serverSide = true;
-                            console.log("ServerSide Mode " + contactCount);
+                            console.log("ServerSide Mode: contactCount=" + contactCount);
                         }
                         $scope.serverSide = serverSide;
                         $('#DataTables_Table_1').DataTable({
-                            //"lengthMenu": [ [15, 50, -1], [15, 50, "All"] ],
+                            "lengthMenu":  [ 10, 30, 50, 100, 500 ],
                             "processing": true,
                             "serverSide": serverSide,
                             "ajax": ajaxUrl,
+                            "pageLength":30,
                             //"pagingType": "simple",
                             buttons: ['copy', 'excel', 'pdf'],
                             stateSave: true, // Remember how the User left the table
