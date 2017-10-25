@@ -82,12 +82,12 @@ function BuildFilter($filter,$searchValue,$FieldNames)
         $moreJoin = "";
         $orgJoin = "";
         $orgJoinOperator = DomGetAttribute($xpath,"/Filter","CriteriaJoinOperator");
-        if($orgJoinOperator == "&"){
+        if($orgJoinOperator == "&" || $orgJoinOperator == "|"){
             for($i=1;$i<=$orgCriteriaCount;$i++){
                 if($orgJoin == ""){
                     $orgJoin .= "$i";
                 }else{
-                    $orgJoin .= "&$i";
+                    $orgJoin .= $orgJoinOperator . "$i";
                 }
             }
             if($orgJoin!=""){
@@ -104,7 +104,7 @@ function BuildFilter($filter,$searchValue,$FieldNames)
             $nextIndex += 1;
         }
         $moreJoin = "($moreJoin)";
-        if($orgJoinOperator == "&"){
+        if($orgJoinOperator == "&" || $orgJoinOperator == "|"){
             if($orgJoin!=""){
                 $finalJoin = $orgJoin . "&" .  $moreJoin;    
             }else{
