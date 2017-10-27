@@ -65,6 +65,18 @@
 			olark.configure('system.ask_for_phone', 'hidden' );
 			olark.configure("locale.welcome_title", "LIVE CHAT SUPPORT");
 			olark.configure("locale.chatting_title", "CHATTING");  
+			olark('api.visitor.updateEmailAddress', {
+				emailAddress: '<?php echo $email; ?>'
+			});
+			olark('api.visitor.updateFullName', {
+				fullName: '<?php echo $USERNAME; ?>'
+			});
+	    olark('api.chat.updateVisitorStatus', {
+        snippet: 'Is in the <?php echo $accountName; ?> sub-account'
+    	});			
+			olark('api.chat.sendNotificationToOperator', {
+      	body: '<?php echo $USERNAME; ?> is a Da Vinci User on the <?php echo basename($_SERVER[REQUEST_URI]);?> page [INFO: <?php echo "dbName: $dbName accountID: $accountID accountName: $accountName"; ?>]'
+       });	
 			olark.identify('3553-726-10-4591');</script>
 		<!-- end olark code -->
 		
