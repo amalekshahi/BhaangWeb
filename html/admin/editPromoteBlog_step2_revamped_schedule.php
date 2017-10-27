@@ -95,20 +95,35 @@
 			<!-- End New -->
 			<!-- Old from here down -->
 		</div>
-	</div>
-	<script src="js/editPromoteBlog_step2.js"></script>
-	<style>
-		.fixedContainer {
-			position: fixed;
-			z-index: 100;
-		}
-	</style>
-	<script>
-		$('.spin-icon').click(function() {
-			$(".theme-config-box").toggleClass("show");
-		});
+		<!-- Move to here for fix bug each step not have margin-top because css .panel-group .panel+.panel -->
+		<script src="js/editPromoteBlog_step2.js"></script>
+		<style>
+			.fixedContainer {
+				position: fixed;
+				z-index: 100;
+			}
+			.input-group{display: inline-flex;}
+			.input-group-btn, .input-group-addon{width: unset;}
+			.form-control{padding: 5px 8px;}
+			@media screen and (max-width:767px){
+			}
+			@media (min-width:768px){
+			}
+			@media (min-width:992px){
+			}
+			@media (min-width:1200px){
+				#EMAIL2-SCHEDULE1-TIME{width: 78px;}
+				#EMAIL3-SCHEDULE1-TIME{width: 78px;}
+			}
+		</style>
+		<script>
+			$('.spin-icon').click(function() {
+				$(".theme-config-box").toggleClass("show");
+			});
 
-		$('.sendTest-icon').click(function() {
-			$(".sendTest-config-box").toggleClass("show");
-		});
-	</script>
+			$('.sendTest-icon').click(function() {
+				$(".sendTest-config-box").toggleClass("show");
+			});
+		</script>
+	</div>
+	
