@@ -45,7 +45,7 @@
 			</ul>
 		</div>
 		
-		<!-- begin olark code -->
+		<!-- Begin olark code (Added by Dave) -->
 			<script type="text/javascript" async>
 			;(function(o,l,a,r,k,y){if(o.olark)return;
 			r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0];
@@ -75,7 +75,7 @@
         snippet: 'Is in the <?php echo $accountName; ?> sub-account'
     	});			
 			olark('api.chat.sendNotificationToOperator', {
-      	body: '<?php echo $USERNAME; ?> is a Da Vinci User on the <?php echo basename($_SERVER[REQUEST_URI]);?> page [INFO: <?php echo "dbName: $dbName accountID: $accountID accountName: $accountName"; ?>]'
+      	body: '<?php echo $USERNAME; ?> is a Da Vinci User on the <?php echo basename($_SERVER[REQUEST_URI]);?> page [INFO: gi<?php echo "dbName: $dbName accountID: $accountID accountName: $accountName"; ?>]'
        });	
 			olark.identify('3553-726-10-4591');</script>
 		<!-- end olark code -->
