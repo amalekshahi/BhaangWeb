@@ -112,13 +112,33 @@
 																			</select>
 																		</div>
 																		-->
-																		<div class="input-group form-group-sm">&nbsp;
-																			<div class="checkbox">
-																				<label>
-																					<input type="checkbox" value="">
-																					Boomerang this Audience
-																				</label>
-																			</div>
+															<div class="hr-line-dashed"></div>
+																		<div class="input-group form-group-sm">
+																			<a href="#boomerang" data-toggle="collapse"><mark style="background-color: dark-yellow;"><strong><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: Boomerang this Audience for More Results</strong></mark><small> Boomerang allows you to easily repeat this schedule.</small></a>
+																					<div class="collapse" id="boomerang">
+																					<br>
+																					<div class="input-group form-group-sm">
+																						<form class="form-inline">
+																							Wait 
+																							<div class="input-group form-group-sm">
+																								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
+																									<option>2</option>
+																									<option>3</option>
+																									<option>4</option>
+																								</select>
+																							</div> weeks then send again to all non-openers in this Audience.  Repeat 
+																							<div class="input-group form-group-sm">
+																								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
+																									<option>1</option>
+																									<option>2</option>
+																									<option>3</option>
+																									<option>4</option>
+																									<option>5</option>
+																								</select>
+																							</div> time(s).<br>
+																						</form>
+																					</div>
+																					</div>
 																		</div>
 																	</div>
 																</form>
