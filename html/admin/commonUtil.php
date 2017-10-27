@@ -3,6 +3,8 @@ require_once '../vendor/autoload.php';
 require_once 'global.php';
 
 use Aws\S3\S3Client;
+//use Guzzle\Common\Collection;
+use Guzzle\Service\Exception\ValidationException; 
 
 $configFile = "conf/davinci.json";
 $URLRenderFormat = "##URL SRC=\"{{url}}\"##";
@@ -35,9 +37,11 @@ function davinciSetConfig()
         }
         if(!empty($doc->s3Server)){
 			//echo "asset path = "; 
+			
 			$AWSAssetPath = $doc->s3Path . "/{{dbname}}" .$doc->s3Server ; 
-//			$AWSAssetFileName = $doc->s3Path . "/{{dbname}}" .$doc->s3Server . $AWSAssetFileName; 
 			$AWSAssetFileName = $AWSAssetPath . $AWSAssetFileName; 	
+
+//			$AWSAssetFileName = $doc->s3Path . "/{{dbname}}" .$doc->s3Server . $AWSAssetFileName; 
 			//echo "\n$AWSAssetFileName\n"; 
         }
     }
@@ -229,18 +233,10 @@ function couchDB_UpdateEx($path,$param,$where){
     }
 }
 
-
-
-
-
-
-
-
 function getDatabaseName($acctID,$acctName)
 {
     return  "db" . $acctID;
 }
-
 
 /*
     Simple json to template render using Mustache syntax
@@ -797,6 +793,44 @@ function local_put_contents($fileName,$data,$metaData=array())
     return $url;
 }
 
+function s3_delete_asset($dbName,$filepath)
+{
+		//global $AWSAssetPath; 
+	    //$path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
+		//$path = str_replace("/tmp", "tmp", $path);	
+		$path = $filepath; 
+
+		echo "<br>path = $path<br>"; 
+		$client = S3Client::factory(array(
+			'credentials' => array(
+				'key'    => AWSKEY,
+				'secret' => AWSSECRET,
+			)
+		));
+		$result = null;
+		try {			
+/*
+			$result = $client->deleteObject(array(	
+				"Bucket" => AWSBUCKET,
+				"Key" =>  $path,
+			));
+*/ 
+			$objArr = array('Key'=>$path); 
+			$delArr = array('Objects'=>$objArr,'Quiet'=>false); 
+			$result = $client->deleteObjects(array(
+				'Bucket' => AWSBUCKET,
+				'Delete' => $delArr,
+			));
+
+		} catch (Exception $e) {
+			echo json_encode(array('success'=>false,'errorMsg'=>"Delete file[" . $path . "] <br>error:[ " . $e . "]"));
+		}
+		echo "<br>marker=".$result['DeleteMarker'] ;
+		echo "<br>message=".$result['Message'] . "<br>" ;
+		//return $result;
+		echo json_encode(array('success'=>true,'result'=>$result));
+}//end s3_delete_asset
+
 function s3_get_asset($dbName,$folder)
 {
 		global $AWSAssetPath; 
@@ -815,31 +849,29 @@ function s3_get_asset($dbName,$folder)
 			"Bucket" => AWSBUCKET,
 			"Prefix" =>  $path
 		));
-		//echo  "<br>Path = " . $path . ".<br>"; 		
-		$json_array  = json_decode($objects, true);
-		$elementCount  = count($json_array);
-		//echo "<br>Keys retrieved  jsonarray = [" . $elementCount . "]<br>";	
-
 		if (empty($objects)) {
-			 //echo "Is empty"; 
 			 //echo json_encode( array('success'=>false));
 			 return array(); 
 		}else{
 			$fileArr = array() ; 
 			$cnt=0; 
+			$size=0; 
+			
 			foreach ($objects as $object) {
 				$cnt ++; 
-				//echo "<br>count = " . $cnt ; 
 				$filename = basename($object['Key']); 
 				if($cnt > 1 ){
-					//echo  "<br>" . $path . "/". $filename . "<br>"; 
-					array_push($fileArr, $path . "/". $filename); 
+					$size = $size+$object['Size'];
+					$sizeTxt = formatSizeUnits($size);					
+					$data = array('fpath' => $path . "/" ,'fname' => $filename , 'fsize' =>$sizeTxt);
+					//array_push($fileArr, $path . "/". $filename); 
+					array_push($fileArr,$data); 
+					//echo  "<br>" . $filename . " = ". $sizeTxt . "<br>"; 
 				}
 			}
 			return $fileArr;			
 		}
 }//end s3_get_asset();
-
 
 function s3_put_asset($fileName,$data,$dbName,$pathUpload,$metaData=array())
 {
@@ -1407,6 +1439,22 @@ function dump_r($data)
 function GetStringTimeStamp()
 {
     return gmdate('Y-m-d\TH:i:s\Z', time()); 
+}
+function formatSizeUnits($bytes) {
+    if ($bytes >= 1073741824) {
+        $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+    } elseif ($bytes >= 1048576) {
+        $bytes = number_format($bytes / 1048576, 2) . ' MB';
+    } elseif ($bytes >= 1024) {
+        $bytes = number_format($bytes / 1024, 2) . ' KB';
+    } elseif ($bytes > 1) {
+        $bytes = $bytes . ' bytes';
+    } elseif ($bytes == 1) {
+        $bytes = $bytes . ' byte';
+    } else {
+        $bytes = '0 bytes';
+    }
+    return $bytes;
 }
 
 ?>

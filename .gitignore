@@ -6,5 +6,6 @@ html/admin/import/*
 html/admin/publish/*
 html/admin/cache/*
 html/admin/*.coa
+html/admin/*Fung.php
 html/admin/templates/emails/*.coa
 

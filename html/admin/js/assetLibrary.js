@@ -6,7 +6,7 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 					$scope.showPreviewFile = file;
 		  }; 
 		  //$scope.folders = ["Images","HTML Emails","HTML Pages", "eBooks", "Videos", "Blueprint Defaults"];
-		  $scope.folders = ["Images","Videos","Audio Clips","Emails","Web Pages","eBooks","PODCasts","Blueprint Defaults"];
+		  $scope.folders = ["Images","Videos","Audio","Documents","Emails","Web Pages"];
 		  $scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  		
 
 		  $scope.upload = function (file,emlID) {
@@ -42,14 +42,38 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 					});
 			};// end upload
 
+			$scope.DeleteFile = function (fID) {
+					var pfile = $("#filepath"+fID).val(); 
+					console.log(" filepath = "+ pfile); 				
+					$scope.state['delFile'] = 'deleteing';					
+					//alert(" val = "+ $('#LISTDEFINITION').val() ); 		
+					var jsonObj = {"initAccID":accID, "initPathFileName": pfile} ; 
+					$.ajax({
+						type: 'get',
+						url: 'deletefileS3.php', // point to server-side PHP script 						
+						data: jsonObj,
+						success: function(json){												
+							if (json.success) {
+								console.log("result = "+json.result) ;	
+								$scope.state['delFile'] = 'finish';
+								$scope.Reloadpage();	
+							}else{ //false
+								console.log("result = "+json.errorMsg) ;	
+							}
+						}//end success
+					 });	
+			};// end DeleteFile
+
 			$scope.Reloadpage = function() {
-				location.reload(); 
+				$scope.Load(); 
+				//location.reload(); 
 			};
 
 			$scope.copyToClipboard = function(x) {
 				  copyClipboard(x); 
 			};// end copyToClipboard
 
+/*
 			$scope.GenFile = function(fileLists) {
 				var genFileArr = []; 
 				for(i=0;i<fileLists.length;i++){
@@ -75,8 +99,9 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 				}//end for
 				return genFileArr; 
 			}; 
+*/ 
 
-			$scope.state = {"showfile":"finish","UpdFiles":"finish"};
+			$scope.state = {"showfile":"finish","UpdFiles":"finish","delFile":"finish"};
 			$scope.Load = function() {
 				//alert("Load"); 
 				var pathfolder = getParameterByName("folder");
@@ -123,20 +148,13 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 }]);// end assetList
 
 
-function copyClipboard(elementId) {
-
-  // Create a "hidden" input
-  var aux = document.createElement("input");
-  // Assign it the value of the specified element
+function copyClipboard(elementId) { 
+  var aux = document.createElement("input"); 
   console.log(document.getElementById(elementId).innerHTML); 
-  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
-  // Append it to the body
-  document.body.appendChild(aux);
-  // Highlight its content
-  aux.select();
-  // Copy the highlighted text
-  document.execCommand("copy");
-  // Remove it from the body
+  aux.setAttribute("value", document.getElementById(elementId).innerHTML); 
+  document.body.appendChild(aux); 
+  aux.select(); 
+  document.execCommand("copy"); 
   document.body.removeChild(aux);
   swal("Copy to clipboard");
 
