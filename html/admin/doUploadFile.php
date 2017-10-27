@@ -47,8 +47,25 @@ require_once 'commonUtil.php';
 				exit;
 			}
 			$rows = file($sourceFile);
+			$rowCount = count($rows);
+			$rowCount = $rowCount-1;
+			if ($rowCount < 0) {
+				$rowCount = 0;
+			}
 			$str = $rows[0];
 			$headerValue = $str;
+
+			$dataArray = array();
+
+			if ($rowCount > 3) {
+				$rowCountShow = 3;
+			} else {
+				$rowCountShow = $rowCount;
+			}
+
+			for ($j = 1; $j <= $rowCountShow; $j++) {
+				$dataArray[] = $rows[$j];
+			}		
 
 			$arr = explode(",", $str); 
 					
@@ -76,6 +93,10 @@ require_once 'commonUtil.php';
 			
 			
 			$line1 = "";
+			$line2 = "";
+			$line3 = "";
+			$line4 = "";
+			$line5 = "";
 			// Dave added this also to make life easier for dear User.  Hi User.
 			//$line2 = "<td>DUH</td>";
 			for ($j = 0; $j < $itemCount; $j++) {
@@ -93,13 +114,28 @@ require_once 'commonUtil.php';
 					}
 					$fieldOption .=  "<option value=\"$strTemp\" $selected>$strTemp</option>";
 				}
-				$line2 .= $fieldOption."</select></td>";	
+				$line2 .= $fieldOption."</select></td>";
 			}
 					
 			$headerdiv = "
 			<table id=\"headertable\" class=\"table table-striped table-bordered \">		
 				<thead><tr><th style=\"background-color: white\"><span class=\"label label-danger pull-right\">Your File's Header <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i></span></th>".$line1."</tr></thead>
-				<tbody><tr><th style=\"background-color: white\"><span class=\"label label-warning pull-right\">Database Fields <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i></span></th>".$line2."</tr></tbody>
+				<tbody>
+				<tr><th style=\"background-color: white\"><span class=\"label label-warning pull-right\">Database Fields <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i></span></th>".$line2."</tr>";
+
+			for ($i = 0; $i <= $rowCountShow-1; $i++) {
+				$line = '';
+				$dataArr = $dataArray[$i];
+				$dataArr1 = explode(",", $dataArr); 
+				for ($j = 0; $j < $itemCount; $j++) {
+					$line .= "<td>".trim($dataArr1[$j])."</td>";
+				}
+				if ($line != '') {
+					$headerdiv .= "<tr><th style=\"background-color: white\"><span class=\"label label-warning pull-right\"></span></th>".$line."</tr>";
+				}
+			}
+			$headerdiv .= "
+				</tbody>
 			</table>";
             
         }
@@ -113,6 +149,7 @@ require_once 'commonUtil.php';
 				'tmpName' => $tmpName,
 				'headerdiv' => $headerdiv,
 				'itemCount' => $itemCount,
+				'rowCount' => $rowCount,
 				'headerValue' => $headerValue
             )
         );
