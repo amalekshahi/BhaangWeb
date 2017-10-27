@@ -93,19 +93,36 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-														<h4 class="modal-title">Field Settings For: {{s.fieldName}}</h4>
+														<h4 class="modal-title">"<strong>{{s.fieldName}}</strong>" Settings</h4>
 													</div>													
 													<div class="modal-body">
+														<form class="form-inline">
 														<input type="text" id="{{s.fieldID}}FieldName" value="{{s.fieldName}}" style="display:none;">
 														<input type="text" id="{{s.fieldID}}FieldType" value="{{s.fieldType}}" style="display:none;">
 														<input type="text" id="{{s.fieldID}}Req" value="{{s.required}}" style="display:none;">
 														<input type="text" id="{{s.fieldID}}Prepop" value="{{s.prepopulated}}" style="display:none;">
+
+															<div class="form-group">
+																<label for="{{s.fieldID}}Label">What's this field's label in the form? </label>
+																&nbsp;&nbsp;&nbsp;<input type="text" id="{{s.fieldID}}Label" value="{{s.label}}" ng-model = "s.label">
+															</div>
+															<div class="form-group">
+																<label for="{{s.fieldID}}Require">Require this field in order to submit?</label>
+																&nbsp;<select id="{{s.fieldID}}Require" ng-model="s.required" ng-change=SetRequire();><option value="Yes">Yes<option value="No" selected>No</select>
+															</div>															
+															<div class="form-group" ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">
+																<label for="{{s.fieldID}}Prefill">Pre-fill this field if its value is known?</label>
+																<select id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No">No</select>
+															</div>
+														</form>
+														<!--
 														<p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}" ng-model = "s.label"></p>
 														<p>Required?: <select id="{{s.fieldID}}Require" ng-model="s.required" ng-change=SetRequire();><option value="Yes">Yes<option value="No" selected>No</select></p>
 														<p ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No">No</select></p>
+														-->
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button>
+														<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('edit')">Save</button>
 														<!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
 													</div>
 												</div>
