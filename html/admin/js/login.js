@@ -1,9 +1,15 @@
 var myApp = angular.module('myApp', ['localytics.directives']);
 myApp.controller('myCtrl', function($scope, $http) {
     $scope.selectAccount = "";
+	/*
     $scope.login = {
         userName: "tt994613@gmail.com",
         passWord: "Tu4&Mi2$",
+    }
+	*/
+	$scope.login = {
+        userName: "",
+        passWord: "",
     }
     $scope.myAlert = function(mesg) {
         $scope.alert = {

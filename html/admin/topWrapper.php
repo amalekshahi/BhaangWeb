@@ -7,6 +7,17 @@ $accountName = $_SESSION['ACCOUNNAME'];
 $email = $_SESSION['EMAIL'];
 $pwd = $_SESSION['PWD'];
 $USERNAME = $_SESSION['USERNAME'];
+
+$showDB = '';
+$showGH = '';
+davinciSetConfig();
+if ($serverMode == 'production') {
+	$showDB = 'style="display: none"';
+	$showGH = 'style="display: none"';	
+} else {
+	
+}
+
 ?>
 	<script type="text/javascript">
 		var userName = "<?php echo $email; ?>";
@@ -27,9 +38,9 @@ $USERNAME = $_SESSION['USERNAME'];
 		<li><span class="m-r-sm text-muted welcome-message"><?php echo $USERNAME;?>, you're logged in to <?php echo $accountName;?>.</span></li>
 		<li>
     <account-switch/>
-		</li>
-		<li><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i><small>Database</small></a></li>
-		<li><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i><small>GitHub</small></a></li>
+		</li>		
+		<li<?php echo $showDB;?>><a onClick="dbgClick('DBView')"><i class="fa fa-cog" ></i><small>Database</small></a></li>
+		<li<?php echo $showGH;?>><a onClick="dbgClick('Issue')"><i class="fa fa-bug" ></i><small>GitHub</small></a></li>
 		<li><a href="logout.php"><i class="fa fa-power-off"></i> Log out </a>
 		</li>
 	</ul>

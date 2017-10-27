@@ -157,7 +157,7 @@
 							$('#headerValue').val(resp.data.headerValue);
 							$('#fieldDiv').show();
 							$('#importNameDiv').show();
-							$("#rowsUploaded").html(resp.data.itemCount);
+							$("#rowsUploaded").html(resp.data.rowCount);
 							
 						} else {
 							swal(resp.data.message);
