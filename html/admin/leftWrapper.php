@@ -78,6 +78,6 @@
       	body: '<?php echo $USERNAME; ?> is a Da Vinci User on the <?php echo basename($_SERVER[REQUEST_URI]);?> page [INFO: gi<?php echo "dbName: $dbName accountID: $accountID accountName: $accountName"; ?>]'
        });	
 			olark.identify('3553-726-10-4591');</script>
-		<!-- end olark code -->
+		<!-- End olark code -->
 		
 	</nav>
