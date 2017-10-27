@@ -3,13 +3,12 @@
 	$email1 = str_replace('##emailid##','1',$emailHTMLTemplate);
 	$email2 = str_replace('##emailid##','2',$emailHTMLTemplate);
 ?>
-	<style>
-		.chosen-container {
-			width: 100% !important;
-		}
-	</style>
 	<div class="panel panel-default" ng-controller="step3" id="step3ID">
-
+		<style>
+			.chosen-container {
+				width: 100% !important;
+			}
+		</style>
 		<div class="panel-heading">
 			<div class="row">
 				<div class="col-sm-3">
@@ -85,6 +84,6 @@
 				</div>
 			</div>
 		</div>
+		<!-- Move to here for fix bug each step not have margin-top because css .panel-group .panel+.panel -->
+		<script src="js/editPromoteEbook_step3.js"></script>
 	</div>
-
-	<script src="js/editPromoteEbook_step3.js"></script>

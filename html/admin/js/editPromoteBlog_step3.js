@@ -4,7 +4,7 @@ function showcalendar() {
 
 myApp.controller('step3', function($scope, $http) {
     //alert('step3');
-    $scope.dateChange = function() {
+    /*$scope.dateChange = function() {
         if ($scope.campaign['EMAIL1-SCHEDULE1-DATE'] != "" && $scope.campaign['EMAIL1-SCHEDULE1-TIME'] != "") {
             $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE'] + ' ' + convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
             var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
@@ -21,7 +21,7 @@ myApp.controller('step3', function($scope, $http) {
             }
             $scope.ShowScheduleDateTime();
         }
-    };
+    };*/
     $scope.Cancel = function() {
         //$scope.frmStep3.$setPristine();
         $scope.$parent.Cancel();
@@ -78,7 +78,7 @@ myApp.controller('step3', function($scope, $http) {
     };
 
 
-    $scope.ShowScheduleDateTime = function() {
+    /*$scope.ShowScheduleDateTime = function() {
         if (hasValue($scope.campaign)) {
             if (hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'], "01/01/2050 08:00:00 AM")) {
                 var a = moment($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
@@ -90,7 +90,7 @@ myApp.controller('step3', function($scope, $http) {
         } else {
             return false;
         }
-    };
+    };*/
 
     
 

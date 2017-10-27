@@ -165,6 +165,7 @@
 											</div>
 										</div>
 									</div>
+									<!-- Move to here for fix bug each step not have margin-top because css .panel-group .panel+.panel -->
+									<script src="js/editPromoteBlog_step3.js"></script>
 								</div>
-								<script src="js/editPromoteBlog_step3.js"></script>
 								<!-- step3 End-->
