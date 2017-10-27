@@ -49,7 +49,7 @@
 				<form action="" class="form-horizontal" method="post">
 					<div class="form-group">
 						<div>
-							<span>As people interact with your Campaign, when would you like to be alerted, and who should I tell? I can send alerts when:</span>
+							<span>Send Alerts when people perform the following actions to the people listed here:</strong></span>
 						</div>
 					</div>
 					<div class="form-group">
