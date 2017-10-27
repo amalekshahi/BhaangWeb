@@ -1,10 +1,9 @@
-<style type="text/css">
-	.window {
-		width: 100%;
-	}
-</style>
 <div class="panel panel-default" ng-controller="step2" id="step2ID">
-
+	<style type="text/css">
+		.window {
+			width: 100%;
+		}
+	</style>
 	<div class="panel-heading">
 		<div class="row">
 			<div class="col-sm-3">
@@ -182,5 +181,6 @@
 			</div>
 		</div>
 	</div>
+	<!-- Move to here for fix bug each step not have margin-top because css .panel-group .panel+.panel -->
+	<script src="js/editPromoteEbook_step2.js"></script>
 </div>
-<script src="js/editPromoteEbook_step2.js"></script>

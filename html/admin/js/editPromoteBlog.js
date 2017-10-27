@@ -944,6 +944,37 @@ myApp.controller('myCtrl', function($scope, $http) {
 		"2":false,
 		"3":false,
 	};
+	$scope.dateChange = function() {
+        if ($scope.campaign['EMAIL1-SCHEDULE1-DATE'] != "" && $scope.campaign['EMAIL1-SCHEDULE1-TIME'] != "") {
+            $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE'] + ' ' + convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
+            var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
+            var date2 = date1;
+            for (var i = 2; i <= 3; i++) {
+                var emailName = "EMAIL" + i;
+                if ( (typeof $scope.campaign[emailName + '-WAIT'] != 'undefined') && (typeof $scope.campaign[emailName + '-SCHEDULE1-TIME'] != 'undefined') && ($scope.campaign[emailName + '-WAIT'] != "") && ($scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") ) {
+                    var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
+                    date2 = addDays(date2, numberOfDaysToAdd);
+                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
+                } else {
+                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
+                }
+            }
+            $scope.ShowScheduleDateTime();
+        }
+    };
+	$scope.ShowScheduleDateTime = function() {
+        if (hasValue($scope.campaign)) {
+            if (hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'], "01/01/2050 08:00:00 AM")) {
+                var a = moment($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
+                $scope.ScheduleDateTime = a.format('dddd MMMM DD, YYYY [at] h:mm:ss a');
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
 		
     $scope.Load();
 });

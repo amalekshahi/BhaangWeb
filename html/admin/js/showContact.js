@@ -91,7 +91,10 @@ var cid = getParameterByName("cid");
 								var count = "0";
 								if (json.success) {
 									Contacts = json.Contact;
-									if (cid != "-1")		$scope.item['LIST-COUNT'] = Contacts.length; 
+									if (cid != "-1")		{
+										$scope.item['LIST-COUNT'] = Contacts.length; 
+										$scope.item['lastEditDate'] = getCurrentDateTime(); 										
+									}
 									columns = json.columns;
 									$('#DataTables_Table_1').DataTable({
 										"lengthMenu": [ [15, 50, -1], [15, 50, "All"] ],

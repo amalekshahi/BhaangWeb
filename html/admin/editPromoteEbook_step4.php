@@ -245,7 +245,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Move to here for fix bug each step not have margin-top because css .panel-group .panel+.panel -->
+	<script src="js/editPromoteEbook_step4.js"></script>
 </div>
-
-<script src="js/editPromoteEbook_step4.js"></script>
 <!-- step4 End-->
