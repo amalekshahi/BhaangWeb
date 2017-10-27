@@ -796,14 +796,27 @@ function local_put_contents($fileName,$data,$metaData=array())
     return $url;
 }
 
-function s3_delete_asset($dbName,$filepath)
-{
-		//global $AWSAssetPath; 
-	    //$path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
-		//$path = str_replace("/tmp", "tmp", $path);	
-		$path = $filepath; 
 
-		echo "<br>path = $path<br>"; 
+  
+
+function s3_exists($absolutePath)
+{
+		$client = S3Client::factory(array(
+			'credentials' => array(
+				'key'    => AWSKEY,
+				'secret' => AWSSECRET,
+			)
+		));
+
+		$absolutePath = 'profile/avatar/80745d03-c295-4205-bd82-58161f2fd2d1-320.jpg';
+		$result = $client->doesObjectExist( AWSBUCKET, $absolutePath);
+		return $result;        
+}
+
+function s3_delete_asset($dbName,$filepath) //fung
+{
+		$path = $filepath; 
+//		echo "\n<br>path = $path<br>\n"; 
 		$client = S3Client::factory(array(
 			'credentials' => array(
 				'key'    => AWSKEY,
@@ -812,26 +825,32 @@ function s3_delete_asset($dbName,$filepath)
 		));
 		$result = null;
 		try {			
-/*
+
 			$result = $client->deleteObject(array(	
 				"Bucket" => AWSBUCKET,
 				"Key" =>  $path,
 			));
-*/ 
+
+	/*
 			$objArr = array('Key'=>$path); 
-			$delArr = array('Objects'=>$objArr,'Quiet'=>false); 
+			$delArr = array('Objects1'=>$objArr,'Quiet'=>false); 
 			$result = $client->deleteObjects(array(
 				'Bucket' => AWSBUCKET,
 				'Delete' => $delArr,
 			));
-
+*/			
+			var_dump($result); 
 		} catch (Exception $e) {
-			echo json_encode(array('success'=>false,'errorMsg'=>"Delete file[" . $path . "] <br>error:[ " . $e . "]"));
+			echo "ERROR::>>>>".$e->getMessage(); 
+			//echo json_encode(array('success'=>false,'errorMsg'=>"Delete file[" . $path . "] <br>error:[ " . $e . "]"));
+			return $e->getMessage() ; 
 		}
-		echo "<br>marker=".$result['DeleteMarker'] ;
-		echo "<br>message=".$result['Message'] . "<br>" ;
-		//return $result;
-		echo json_encode(array('success'=>true,'result'=>$result));
+
+		//echo "\n<br>marker=".$result['DeleteMarker'] ;
+		//echo "\n<br>message=".$result['Message'] . "\n<br>" ;
+//		return $result['DeleteMarker'];
+		return $result; 
+		//echo json_encode(array('success'=>true,'result'=>$result));
 }//end s3_delete_asset
 
 function s3_get_asset($dbName,$folder)
