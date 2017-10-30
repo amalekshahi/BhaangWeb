@@ -424,6 +424,7 @@ myApp.controller('myCtrl', function($scope, $http) {
     $scope.setInitValue = function() {
         $scope.initTemplateEmail('1');
         $scope.initSender();
+		$scope.startFilterName();
     };
     $scope.initTemplateEmail = function(emlID) {
         if (!hasValue($scope['templatesAs'+emlID]) && $scope.openEmail[emlID]) {
@@ -529,12 +530,12 @@ myApp.controller('myCtrl', function($scope, $http) {
 				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
 				var timezone1 = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];								
                 if (checkdate(datetime1, timezone1)) {
-					$('#datespan1').show();
-					$('#clockspan1').show();
+					$('#datespan1-1').show();
+					$('#clockspan1-1').show();
                 } else {
                     $scope.disabledEmail["1"] = true;
-					$('#datespan1').hide();
-					$('#clockspan1').hide();
+					$('#datespan1-1').hide();
+					$('#clockspan1-1').hide();
                 }				
 			}
 			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
@@ -827,9 +828,9 @@ myApp.controller('myCtrl', function($scope, $http) {
         //alert('SwitchChange');
     };
 
-	$scope.CheckSumAudience = function() {
-			var form_data = $("#idForm").serialize();	
-			var listdefinition = $("#LISTDEFINITION").val(); 
+	$scope.CheckSumAudience = function(filterID) {
+			var form_data = $("#idForm"+filterID).serialize();	
+			var listdefinition = $("#idForm"+filterID+" input[name='LISTDEFINITION']").val(); 
 			$.ajax({
 						url: 'countClick.php', 
 						dataType: 'json',  
@@ -843,29 +844,44 @@ myApp.controller('myCtrl', function($scope, $http) {
 							//alert("cnt = " + json.count); 
 							if (json.success) {
 								if(listdefinition != '<Filter CriteriaJoinOperator=""></Filter>'){								 
-									 sumcount = json.count + " People";			
+									 sumcount = json.count;			
 								}
 							}
-							$scope.auCount = sumcount; 
-							$("#auCount").val(sumcount) ; 
+							$scope.auCount = sumcount+ " People"; 
+							$("#auCount").val($scope.auCount) ; 
+
+							$scope.campaign['filter'+filterID+'Count'] = sumcount; 
+							$scope.$apply();
 						}
 			});		
 
 	}//CheckSumAudience
 
     $scope.LoadAudience = function() {		
-        if (typeof $scope.campaign['filterSelected'] == 'undefined') {
-            $scope.filterList = [];
+        if (typeof $scope.campaign['filter1Selected'] == 'undefined') {
+            $scope.filter1List = [];
         } else {
-            $scope.filterList = $scope.campaign['filterSelected'];
-        }	
+            $scope.filter1List = $scope.campaign['filter1Selected'];
+        }
+		if (typeof $scope.campaign['filter2Selected'] == 'undefined') {
+            $scope.filter2List = [];
+        } else {
+            $scope.filter2List = $scope.campaign['filter2Selected'];
+        }
+		if (typeof $scope.campaign['filter3Selected'] == 'undefined') {
+            $scope.filter3List = [];
+        } else {
+            $scope.filter3List = $scope.campaign['filter3Selected'];
+        }
         $http.get(dbEndPoint + "/" + dbName + '/audienceLists' + "?" + new Date().toString()).then(function(response) {
             $scope.masterAu = response.data;
             if (typeof $scope.masterAu.items == 'undefined') {
                 $scope.masterAu.items = [];
             }
             $scope.audience = angular.copy($scope.masterAu);
-			$scope.CheckSumAudience(); 
+			$scope.CheckSumAudience('1'); 
+			$scope.CheckSumAudience('2'); 
+			$scope.CheckSumAudience('3'); 
         }, function(errResponse) {
             if (errResponse.status == 404) {
                 alert("ERROR 404 [audienceLists]");
@@ -939,24 +955,53 @@ myApp.controller('myCtrl', function($scope, $http) {
 			$scope.$apply();
 		});
 	}
+	$scope.startFilterName = function() {
+		$("#filter1Name").text($scope.campaign.filter1Name);
+		$("#filter2Name").text($scope.campaign.filter2Name);
+		$("#filter3Name").text($scope.campaign.filter3Name);
+
+		$('#filter1Name').editable();
+		//$('#template').trigger('change');
+		$('#filter1Name').on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign['filter1Name'] = params.newValue;
+			$scope.$apply();
+		});
+
+		$('#filter2Name').editable();
+		//$('#template').trigger('change');
+		$('#filter2Name').on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign['filter2Name'] = params.newValue;
+			$scope.$apply();
+		});
+
+		$('#filter3Name').editable();
+		//$('#template').trigger('change');
+		$('#filter3Name').on('save', function(e, params) {
+			//alert('Saved value: ' + params.newValue);
+			$scope.campaign['filter3Name'] = params.newValue;
+			$scope.$apply();
+		});
+	}
 	$scope.openEmail = {
 		"1":true,
 		"2":false,
 		"3":false,
 	};
-	$scope.dateChange = function() {
-        if ($scope.campaign['EMAIL1-SCHEDULE1-DATE'] != "" && $scope.campaign['EMAIL1-SCHEDULE1-TIME'] != "") {
-            $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE1-DATE'] + ' ' + convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE1-TIME']);
-            var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
+	$scope.dateChange = function(filterID) {
+        if ($scope.campaign['EMAIL1-SCHEDULE'+filterID+'-DATE'] != "" && $scope.campaign['EMAIL1-SCHEDULE'+filterID+'-TIME'] != "") {
+            $scope.campaign['EMAIL1-SCHEDULE'+filterID+'-DATETIME'] = $scope.campaign['EMAIL1-SCHEDULE'+filterID+'-DATE'] + ' ' + convertTimeFormat($scope.campaign['EMAIL1-SCHEDULE'+filterID+'-TIME']);
+            var date1 = toDate($scope.campaign['EMAIL1-SCHEDULE'+filterID+'-DATETIME']);
             var date2 = date1;
             for (var i = 2; i <= 3; i++) {
                 var emailName = "EMAIL" + i;
                 if ( (typeof $scope.campaign[emailName + '-WAIT'] != 'undefined') && (typeof $scope.campaign[emailName + '-SCHEDULE1-TIME'] != 'undefined') && ($scope.campaign[emailName + '-WAIT'] != "") && ($scope.campaign[emailName + '-SCHEDULE1-TIME'] != "") ) {
                     var numberOfDaysToAdd = parseInt($scope.campaign[emailName + '-WAIT']);
                     date2 = addDays(date2, numberOfDaysToAdd);
-                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
+                    $scope.campaign[emailName + '-SCHEDULE'+filterID+'-DATETIME'] = formatDateMDY(date2) + ' ' + convertTimeFormat($scope.campaign[emailName + '-SCHEDULE1-TIME']);;
                 } else {
-                    $scope.campaign[emailName + '-SCHEDULE1-DATETIME'] = "01/01/2050 08:00:00 AM";
+                    $scope.campaign[emailName + '-SCHEDULE'+filterID+'-DATETIME'] = "01/01/2050 08:00:00 AM";
                 }
             }
             $scope.ShowScheduleDateTime();

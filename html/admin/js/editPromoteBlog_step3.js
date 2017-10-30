@@ -1,5 +1,5 @@
-function showcalendar() {
-	    $("#EMAIL1-SCHEDULE1-DATE").datepicker("show");
+function showcalendar(filterID) {
+	    $("#EMAIL1-SCHEDULE"+filterID+"-DATE").datepicker("show");
 }
 
 myApp.controller('step3', function($scope, $http) {
@@ -28,15 +28,15 @@ myApp.controller('step3', function($scope, $http) {
         //$scope.Reset(); // parent scope's Reset()
     };
 
-    $scope.ArrangeFilter = function() {
+    $scope.ArrangeFilter = function(filterID) {
 			$scope.AuFilter = angular.copy($scope.masterAu);
 			var auCnt = 0;
 			var auOpr = "";
 			var allRule = "";
 			var selList = [];
-			for (var i = 0; i < $scope.filterList.length; i++) {
-				var indx = $scope.AuFilter.items.getIndexByValue('contactID', $scope.filterList[i]);
-				selList.push($scope.filterList[i]);
+			for (var i = 0; i < $scope['filter'+filterID+'List'].length; i++) {
+				var indx = $scope.AuFilter.items.getIndexByValue('contactID', $scope['filter'+filterID+'List'][i]);
+				selList.push($scope['filter'+filterID+'List'][i]);
 				$scope.auItem = $scope.AuFilter.items[indx];
 				var auItemOpr = $scope.auItem['LIST-OPERATOR'];
 				auOpr += "(";
@@ -59,10 +59,10 @@ myApp.controller('step3', function($scope, $http) {
 					allRule += itemRule;
 				}
 				auOpr += ")";
-				if (i < $scope.filterList.length - 1) auOpr += "|";
+				if (i < $scope['filter'+filterID+'List'].length - 1) auOpr += "|";
 			} //end for i		
 
-			$scope.campaign['filterSelected'] = selList;
+			$scope.campaign['filter'+filterID+'Selected'] = selList;
 			//$scope.campaign['filterSelected'].push(selList);
 			var auRule = $scope.masterDefEmailFilter; // set default
 			if(auOpr.length > 0){
@@ -70,11 +70,11 @@ myApp.controller('step3', function($scope, $http) {
 			}
 
 			//$("#EMAIL1-FILTER").val(auRule);
-			$scope.campaign['EMAIL1-FILTER'] = auRule;
-			$scope.campaign['EMAIL-FILTER-JOINOPERATOR'] = auOpr;
-			$scope.campaign['EMAIL-FILTER-CRITERIAROW'] = allRule;
-			$("#LISTDEFINITION").val(auRule) ; 
-			$scope.CheckSumAudience(); 
+			$scope.campaign['EMAIL'+filterID+'-FILTER'] = auRule;
+			$scope.campaign['EMAIL'+filterID+'-FILTER-JOINOPERATOR'] = auOpr;
+			$scope.campaign['EMAIL'+filterID+'-FILTER-CRITERIAROW'] = allRule;
+			$("#idForm"+filterID+" input[name='LISTDEFINITION']").val(auRule) ; 
+			$scope.CheckSumAudience(filterID); 
     };
 
 
@@ -95,3 +95,8 @@ myApp.controller('step3', function($scope, $http) {
     
 
 });
+
+function showFilter(filterID) {
+	    $("#filter"+filterID).show();
+		$("#addFilter"+filterID).hide();
+}
