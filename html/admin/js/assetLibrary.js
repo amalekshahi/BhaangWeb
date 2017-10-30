@@ -10,7 +10,15 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 		  $scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  		
 
 		  $scope.upload = function (file,emlID) {
+					var fname = ""; 
 					$scope.state['UpdFiles'] = 'uploading';
+					/* //fungedit
+					 for(var i = 0; i < file.length; i++){
+						 files=file[i];
+						 fname=files.fileName;
+					 }
+					console.log(" file.length = "+ file.length + "  filename = "+fname); 
+					*/
 					var uploadFileName = "IMG-" + uuidv4();
 					//$scope.editor.summernote('insertNode', imgNode);
 					Upload.upload({
@@ -36,29 +44,64 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 					}, function(resp) {
 						console.log('Error status: ' + resp.status);
 						$scope.state['UpdFiles'] = 'error';
+						/*
 					}, function(evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 						console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+						*/ 
 					});
 			};// end upload
 
+			$scope.DeleteFileConfirm = function (fID) {
+				swal({
+					  title: 'Are you sure?',
+					  text: "You won't be able to revert this!",
+					  type: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes, delete it!',
+					  cancelButtonText: 'No, cancel!',
+					  confirmButtonClass: 'btn btn-success',
+					  cancelButtonClass: 'btn btn-danger',
+					  buttonsStyling: false
+				 },
+				function(isConfirm){
+					  if (isConfirm) {
+							$scope.DeleteFile(fID); 
+					  } else {
+							swal("Cancelled", "Your imaginary file is safe :)", "error");
+					  }
+				});
+				
+			};// end DeleteFileConfirm
+
 			$scope.DeleteFile = function (fID) {
-					var pfile = $("#filepath"+fID).val(); 
-					console.log(" filepath = "+ pfile); 				
+					$("#initAccID"+fID).val(accID) ; 		
+					//$("#initPathFileName"+fID).val(accID) ); 		
+					var form_data = $("#idForm"+fID).serialize();		
+					//var pfile = $("#filepath"+fID).val(); 
+					//console.log(" filepath = "+ pfile); 				
 					$scope.state['delFile'] = 'deleteing';					
 					//alert(" val = "+ $('#LISTDEFINITION').val() ); 		
-					var jsonObj = {"initAccID":accID, "initPathFileName": pfile} ; 
+					//var jsonObj = {"initAccID":accID, "initPathFileName": pfile} ; 
 					$.ajax({
 						type: 'get',
-						url: 'deletefileS3.php', // point to server-side PHP script 						
-						data: jsonObj,
-						success: function(json){												
+						dataType: 'json',  // what to expect back from the PHP script, if anything
+						url: 'deletefileS3.php', // point to server-side PHP script 	
+						cache: false,
+						contentType: false,
+						processData: false,
+						data: form_data,
+						//data: jsonObj,
+						success: function(json){		
 							if (json.success) {
-								console.log("result = "+json.result) ;	
-								$scope.state['delFile'] = 'finish';
+								$scope.state['delFile'] = 'finish';		
+								swal("Your file was deleted!"); 
 								$scope.Reloadpage();	
+
 							}else{ //false
-								console.log("result = "+json.errorMsg) ;	
+								console.log("result = "+json) ;	
 							}
 						}//end success
 					 });	

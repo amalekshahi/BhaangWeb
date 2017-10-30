@@ -162,6 +162,10 @@
 															 <span id="{{file.ID}}">{{file.Name.fileName}}</span><br><small class="text-muted">{{file.Description}}</small> 
 															 <input type="hidden" name="fileURI" value = "{{file.URI}}">
 															 <input type="hidden" name="filepath{{file.ID}}" id="filepath{{file.ID}}" value = "{{file.fpath}}">
+															 <form method="post" action="" id="idForm{{file.ID}}">
+																<input type="hidden" name="initAccID" id="initAccID{{file.ID}}" value = "">
+																<input type="hidden" name="initPathFileName" id="initPathFileName{{file.ID}}" value = "{{file.fpath}}">
+															 </form>
 															</td>															
 
 															<td class="text-right">
@@ -172,7 +176,7 @@
 																			<ul class="dropdown-menu dropdown-user">
 																				<li><a href="#"  ng-click="copyToClipboard(file.ID);">Grab URL</a>
 																				</li>
-																				<li><a href="#" ng-click="DeleteFile(file.ID);">Delete</a>
+																				<li><a href="#" ng-click="DeleteFileConfirm(file.ID);">Delete</a>
 																				</li>
 																				<li><a href="#" class="underConstruction">Replace</a>
 																				</li>
@@ -248,6 +252,9 @@
 	var accID = "<?php echo $accountID; ?>";
 	//var pathUpload = "Images"; 
 	var pathUpload = getParameterByName("folder");
+	if(pathUpload == "undefined" || pathUpload == "" ){
+		pathUpload = "Images"; 
+	}
 
 </script>
 <script src="js/assetLibrary.js"></script>

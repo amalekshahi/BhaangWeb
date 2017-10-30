@@ -796,9 +796,6 @@ function local_put_contents($fileName,$data,$metaData=array())
     return $url;
 }
 
-
-  
-
 function s3_exists($absolutePath)
 {
 		$client = S3Client::factory(array(
@@ -807,8 +804,7 @@ function s3_exists($absolutePath)
 				'secret' => AWSSECRET,
 			)
 		));
-
-		$absolutePath = 'profile/avatar/80745d03-c295-4205-bd82-58161f2fd2d1-320.jpg';
+		//echo "exist-path = " . $absolutePath . "\n----" ; 
 		$result = $client->doesObjectExist( AWSBUCKET, $absolutePath);
 		return $result;        
 }
@@ -825,32 +821,18 @@ function s3_delete_asset($dbName,$filepath) //fung
 		));
 		$result = null;
 		try {			
-
 			$result = $client->deleteObject(array(	
 				"Bucket" => AWSBUCKET,
 				"Key" =>  $path,
 			));
-
-	/*
-			$objArr = array('Key'=>$path); 
-			$delArr = array('Objects1'=>$objArr,'Quiet'=>false); 
-			$result = $client->deleteObjects(array(
-				'Bucket' => AWSBUCKET,
-				'Delete' => $delArr,
-			));
-*/			
-			var_dump($result); 
+			//var_dump("vardump = ["+$result+"]]]]"); 
 		} catch (Exception $e) {
-			echo "ERROR::>>>>".$e->getMessage(); 
-			//echo json_encode(array('success'=>false,'errorMsg'=>"Delete file[" . $path . "] <br>error:[ " . $e . "]"));
+			echo "ERROR::>>>>".$e->getMessage(); 			
 			return $e->getMessage() ; 
 		}
+		//echo "****marker=[".$result['DeleteMarker'] . "]-----" ;
+		return $result['DeleteMarker'];
 
-		//echo "\n<br>marker=".$result['DeleteMarker'] ;
-		//echo "\n<br>message=".$result['Message'] . "\n<br>" ;
-//		return $result['DeleteMarker'];
-		return $result; 
-		//echo json_encode(array('success'=>true,'result'=>$result));
 }//end s3_delete_asset
 
 function s3_get_asset($dbName,$folder)
@@ -901,7 +883,7 @@ function s3_put_asset($fileName,$data,$dbName,$pathUpload,$metaData=array())
     $path = str_replace("{{dbname}}", "$dbName", $AWSAssetFileName);	
 	$path = str_replace("{{pathUpload}}", "$pathUpload", $path);
     $path = str_replace("{{fileName}}", "$fileName", $path);
-	//echo "asset PATH = $path\n"; 
+	echo "asset PATH = " . $path . "\n"; 
 
     $client = S3Client::factory(array(
         'credentials' => array(
