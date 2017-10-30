@@ -294,7 +294,8 @@ require_once 'commonUtil.php';?><!doctype html>
             if($scope.getContact.search != ""){
                 search = "&" +  encodeURIComponent("search[value]") + "=" + $scope.getContact.search;
             }
-            $http.get("getContactEx.php?cid=" + $scope.getContact.cid + "&draw=1&start=" + $scope.getContact.start + "&length=" + $scope.getContact.length + search + "&" + new Date().toString()).then(function(response) {
+            var order = encodeURIComponent("order[0][column]") + "=2&" + encodeURIComponent("order[0][dir]") + "=asc";
+            $http.get("getContactEx.php?cid=" + $scope.getContact.cid + "&draw=1&start=" + $scope.getContact.start + "&length=" + $scope.getContact.length + search + "&" + order + "&" + new Date().toString()).then(function(response) {
                   $scope.getContact.data = response.data;
                   console.log($scope.getContact.response);
             },function(response){

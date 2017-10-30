@@ -21,6 +21,7 @@ $draw = $_GET['draw'];
 $limit = $_GET['length'];
 $page = $_GET['start']; 
 $search = $_GET['search'];
+$order =  $_GET['order'];
 
 
 if(empty($limit)){
@@ -47,6 +48,7 @@ KKK;*/
 $FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
 $LISTDEFINITION = BuildFilter($LISTDEFINITION,$search['value'],$FieldNames);
 
+
 $ticket = getTicket($ACCOUNTID, $EMAIL, $PWD, $PARTNERGUID, $PARTNERPASSWORD);
 
 // Get ContactCount becuase the one that return with GetContactsByPage is not reliable (change to 0 after couple of call)
@@ -61,14 +63,43 @@ if(!empty($COUNTONLY)){
     exit;
 }
 
+$sortOrder = BuilderOrder($FieldNames,$order);
 
-
-$result = GetContactWithFieldsEx($ticket,$LISTDEFINITION,$ACCOUNTID,$FieldNames,$draw,$page,$limit,$search['value']);
+$result = GetContactWithFieldsEx($ticket,$LISTDEFINITION,$ACCOUNTID,$FieldNames,$draw,$page,$limit,$search['value'],$sortOrder);
 $result["recordsTotal"] = $contactCount;
 $result["recordsFiltered"] = $contactCount;
 $result["GET"] = $_GET;
+$result["SortOrder"] = $sortOrder;
 
 echo json_encode($result);
+
+function BuilderOrder($FieldNames,$order)
+{
+    $ret = "";
+    if(!empty($order)){
+    
+        for($i=0;$i<count($FieldNames);$i++){
+            if(empty($order[$i])){
+                break;
+            }
+            $index = $order[$i]['column'];
+            $dir = $order[$i]['dir'];
+            //return $FieldNames[$index] . " " . strtoupper($dir);
+            if($ret == ""){
+                $ret = $FieldNames[$index] . " " . strtoupper($dir);
+            }else{
+                $ret = $ret . "," . $FieldNames[$index] . " " . strtoupper($dir);
+            }
+        }
+        
+        /*if(!empty($order[0])){
+            $index = $order[0]['column'];
+            $dir = $order[0]['dir'];
+            return $FieldNames[$index] . " " . strtoupper($dir);
+        }*/
+    }
+    return $ret;
+}
 
 function BuildFilter($filter,$searchValue,$FieldNames)
 {
@@ -121,14 +152,14 @@ function BuildFilter($filter,$searchValue,$FieldNames)
 }
 
 
-function GetContactEx($userTicket, $filter,$ACCOUNTID,$draw,$page,$limit,$searchValue){	
+function GetContactEx($userTicket, $filter,$ACCOUNTID,$draw,$page,$limit,$searchValue,$sortOrder){	
 	
 	$FieldNames = array("FirstName","LastName","Email","Phone","Address1","City","State","Zip");
-	$result = GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID,$FieldNames,$draw,$page,$limit,$searchValue);
+	$result = GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID,$FieldNames,$draw,$page,$limit,$searchValue,$sortOrder);
 	return $result;
 }
 
-function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$draw,$page,$limit,$searchValue){
+function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$draw,$page,$limit,$searchValue,$sortOrder){
     $start_time = microtime(true);
     $execTime = array();
 
@@ -196,6 +227,9 @@ function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$dr
         "MaxRows" => $limit,
         "StartRowIndex" => $page,   // actually this is page index rowindex = StartRowIndex*MaxRows
 	);
+    if($sortOrder!=""){
+        $ContactListRequest["SortExpression"] = $sortOrder;
+    }
 	$ContactListResponse = callService("contactservice/GetContactsByPage", $ContactListRequest);
 	$ErrorCode = $ContactListResponse->{"Result"}->{"ErrorCode"};
 	if ($ErrorCode == "") {
@@ -273,6 +307,7 @@ function GetContactWithFieldsEx($userTicket, $filter,$ACCOUNTID, $FieldNames,$dr
             "page" => $page,
             "filter" => $filter,
             "search" => $searchValue,
+            "ContactListRequest" => $ContactListRequest,
             //"xml" => $xml->saveHTML(),
             //"orgCriteriaCount" => $orgCriteriaCount,
             //"moreXML" => $moreXML,
