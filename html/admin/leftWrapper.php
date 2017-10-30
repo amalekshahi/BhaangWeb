@@ -44,4 +44,40 @@
 				</li>
 			</ul>
 		</div>
+		
+		<!-- Begin olark code (Added by Dave) -->
+			<script type="text/javascript" async>
+			;(function(o,l,a,r,k,y){if(o.olark)return;
+			r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0];
+			y.async=1;y.src="//"+a;r.parentNode.insertBefore(y,r);
+			y=o.olark=function(){k.s.push(arguments);k.t.push(+new Date)};
+			y.extend=function(i,j){y("extend",i,j)};
+			y.identify=function(i){y("identify",k.i=i)};
+			y.configure=function(i,j){y("configure",i,j);k.c[i]=j};
+			k=y._={s:[],t:[+new Date],c:{},l:a};
+			})(window,document,"static.olark.com/jsclient/loader.js");
+			/* Add configuration calls below this comment */
+			olark.configure('system.hb_position', 'left');
+			olark.configure('system.hb_chatbox_size', 'sm'); // Small
+			olark.configure("features.prechat_survey", true);
+			olark.configure('system.ask_for_name', 'hidden' );
+			olark.configure('system.ask_for_email', 'hidden' );
+			olark.configure('system.ask_for_phone', 'hidden' );
+			olark.configure("locale.welcome_title", "SUPPORT CHAT");
+			olark.configure("locale.chatting_title", "CHATTING");  
+			olark('api.visitor.updateEmailAddress', {
+				emailAddress: '<?php echo $email; ?>'
+			});
+			olark('api.visitor.updateFullName', {
+				fullName: '<?php echo $USERNAME; ?>'
+			});
+	    olark('api.chat.updateVisitorStatus', {
+        snippet: 'Is in the <?php echo $accountName; ?> sub-account'
+    	});			
+			olark('api.chat.sendNotificationToOperator', {
+      	body: '<?php echo $USERNAME; ?> is a Da Vinci User on the <?php echo basename($_SERVER[REQUEST_URI]);?> page [INFO: gi<?php echo "dbName: $dbName accountID: $accountID accountName: $accountName"; ?>]'
+       });	
+			olark.identify('3553-726-10-4591');</script>
+		<!-- End olark code -->
+		
 	</nav>

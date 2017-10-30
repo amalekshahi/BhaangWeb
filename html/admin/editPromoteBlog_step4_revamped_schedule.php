@@ -49,11 +49,11 @@
 				<form action="" class="form-horizontal" method="post">
 					<div class="form-group">
 						<div>
-							<span>As people interact with your Campaign, when would you like to be alerted, and who should I tell?</span>
+							<span>Send Alerts when people perform the following actions to the people listed here:</strong></span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Open my Emails 
+						<label class="col-sm-3 control-label">Open my Emails 
 							<switch ng-model="campaign['OPEN-MY-EMAIL-']" class="green" ng-change="SwitchChange()"></switch>
 						</label>
 						<div class="col-sm-6">
@@ -70,7 +70,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Visit my Blog Post 
+						<label class="col-sm-3 control-label">Visit my Blog Post 
 							<switch ng-model="campaign['VISIT-MY-BLOCK-']" class="green" ng-change="SwitchChange()"></switch>
 						</label>
 						<div class="col-sm-6">
@@ -87,17 +87,14 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Complete my Call-to-Action
-							
+						<label class="col-sm-3 control-label">Complete Conversions
 							<switch ng-if="campaign['CONVERSION-URL']" ng-model="campaign['CALL-TO-ACTION-']" class="green" ng-change="SwitchChange()"></switch>
 							<switch class="disabled" ng-if="!campaign['CONVERSION-URL']"></switch>
 						</label>
-						<span ng-if="!campaign['CONVERSION-URL']">
-							<small class="text-muted">
-								<br>You need to set your Conversion point in 'Identify the Targeted Blog Post' above.
-								</small>
-							</span>
-							<div class="col-sm-6">
+							
+							<small class="text-muted" ng-if="!campaign['CONVERSION-URL']"><br> &nbsp;&nbsp;&nbsp; <i class="fa fa-bell-o" aria-hidden="true"></i> You need to first set a Conversion point in 'Identify the Targeted Blog Post' above.</small>
+							
+							<div class="col-sm-6" ng-show="campaign['CONVERSION-URL']">
 								<select multiple
 								chosen
 								create-option-text="'Add this email'"
@@ -110,13 +107,17 @@
 								</select>
 							</div>
 						</div>
-						<!-- Team, no save button required.  Let's take the user's input and persist it without requiring them to hit save -->
+					<div class="form-group">
+						<label class="col-sm-3 control-label"></label>
+						<div class="col-sm-6">
 						<button class="btn btn-primary" ng-click="Save('Step4')">
 							<i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i>
 							<span ng-show="state['Save'] == 'Saving'">
 								<i class="glyphicon glyphicon-refresh spinning"></i>
 							</span> {{state['Save']}} 
 						</button>
+						</div>
+					</div>
 					</form>
 				</div>
 			</div>
