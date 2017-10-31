@@ -77,14 +77,14 @@
 							<label class="col-sm-3 control-label">Choose Your Audience</label>
 							<div class="col-sm-5">
 								<div>
-									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filterList" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" style="width:400px;" ng-change="ArrangeFilter()">
+									<select chosen multiple placeholder-text-multiple="'Choose a List...'" ng-model="filter1List" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" style="width:400px;" ng-change="ArrangeFilter('1')">
 										 <option value=""></option>
 									</select>
 									<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence. </span>
 								</div>								
 							</div>
 							<div>
-								<input type="text" name="auCount"  id="auCount"  style="border: 0 rgba(0, 0, 0, 0.3);height:30px; text-align: center;" value="" readonly>
+								<input type="text" name="au1Count"  id="au1Count"  style="border: 0 rgba(0, 0, 0, 0.3);height:30px; text-align: center;" value="" readonly>
 							</div>
 							<div class="row">
 								<!--EMAIL1-SCHEDULE1-DATETIME={{campaign['EMAIL1-SCHEDULE1-DATETIME']}}<br>

@@ -6,7 +6,7 @@ session_start();
 require_once 'commonUtil.php';
 
 $campaignName = $_GET['campaignName'];
-$programID = $_GET['programID'];
+$PROGRAMID = $_GET['programID'];
 $fd = $_GET['fd'];
 $td = $_GET['td'];
 //$campaignName = 'coatest-blog-101003';
@@ -14,50 +14,51 @@ $td = $_GET['td'];
 $TEST = $_GET['test'];
 
 $ACCOUNTID = $_SESSION['ACCOUNTID'];
+$EMAIL = $_SESSION['EMAIL'];
+$PWD = $_SESSION['PWD'];
 
 //echo "$ACCOUNTID<br>";
 
 
-function GetCampaignReport($TEST, $ACCOUNTID, $campaignName, $fd, $td){	
+function GetCampaignReport($TEST, $ACCOUNTID, $PROGRAMID, $campaignName, $fd, $td, $token){	
 
-	$reportURL = "https://studio.dashboard.mdl.io/api/Report//GetAdminReportData?rn=allprogram_allemail_detail&si=0&ai=$ACCOUNTID&st=0&fd=$fd&td=$td&seed=false&datasourceType=redshift";
+	if ($PROGRAMID) {
 
-	$ch = curl_init($reportURL);
+		$reportURL = "https://studio.dashboard.mdl.io/api/Report//GetAdminReportData?rn=allprogram_allemail_detail&si=$PROGRAMID&ai=$ACCOUNTID&st=0&fd=$fd&td=$td&seed=false&datasourceType=redshift&token=$token";	
 
-	//curl_setopt($ch, CURLOPT_MUTE, 1);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	curl_setopt($ch, CURLOPT_POST, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$ch = curl_init($reportURL);
 
-	$rows = curl_exec($ch);
+		//curl_setopt($ch, CURLOPT_MUTE, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($ch, CURLOPT_POST, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-	curl_close($ch);
-		//var_dump($rows);
-		//echo "<br>";
-	$jsonRow = json_decode($rows);
-		//var_dump($jsonRow);
-		//echo "<br>";
-	$rows = array();
-	foreach( $jsonRow as $row1 ) {	
-		//var_dump($row1);
-		//echo "<br>";
-		$Program = $row1->{'Program'};
-		$Email = $row1->{'Email'};
-		$Sent = $row1->{'Sent'};
-		$Delivered = $row1->{'Delivered'};
-		$Opened = $row1->{'Opened'};
-		$Clicked = $row1->{'Clicked'};
-		$FailedToProcess = $row1->{'FailedToProcess'};
-		$HardBounced = $row1->{'HardBounced'};
-		$SoftBounced = $row1->{'SoftBounced'};
-		$Suppressed = $row1->{'Suppressed'};
-		$MarkedAsSpam = $row1->{'MarkedAsSpam'};
-		$Unsubscribed = $row1->{'Unsubscribed'};
-		
-		//echo "$Program, $campaignName<br>";
+		$rows = curl_exec($ch);
 
-		if (strtolower($Program) == strtolower($campaignName)) {
+		curl_close($ch);
+			//var_dump($rows);
+			//echo "<br>";
+		$jsonRow = json_decode($rows);
+			//var_dump($jsonRow);
+			//echo "<br>";
+		$rows = array();
+		foreach( $jsonRow as $row1 ) {	
+			//var_dump($row1);
+			//echo "<br>";
+			$Program = $row1->{'Program'};
+			$Email = $row1->{'Email'};
+			$Sent = $row1->{'Sent'};
+			$Delivered = $row1->{'Delivered'};
+			$Opened = $row1->{'Opened'};
+			$Clicked = $row1->{'Clicked'};
+			$FailedToProcess = $row1->{'FailedToProcess'};
+			$HardBounced = $row1->{'HardBounced'};
+			$SoftBounced = $row1->{'SoftBounced'};
+			$Suppressed = $row1->{'Suppressed'};
+			$MarkedAsSpam = $row1->{'MarkedAsSpam'};
+			$Unsubscribed = $row1->{'Unsubscribed'};			
+			
 			$group = array(					
 				'Program'=>$Program,
 				'Email'=>$Email,
@@ -73,14 +74,21 @@ function GetCampaignReport($TEST, $ACCOUNTID, $campaignName, $fd, $td){
 				'Unsubscribed'=>$Unsubscribed
 			);					
 			$rows[] = $group;
+			
 		}
+		$success = true;
+		
+	} else {
+		$success = false;
+		$rows = null;
 	}
-	$success = true;
+	
 	$result = json_encode( array('success'=>$success, 'rows' => $rows));
 	return $result;
 
 }
 
-$result = GetCampaignReport($TEST, $ACCOUNTID, $campaignName, $fd, $td);
+$token = getToken($ACCOUNTID, $EMAIL, $PWD);
+$result = GetCampaignReport($TEST, $ACCOUNTID, $PROGRAMID, $campaignName, $fd, $td, $token);
 
 echo $result;

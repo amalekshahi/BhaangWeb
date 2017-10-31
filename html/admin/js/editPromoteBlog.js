@@ -596,6 +596,13 @@ myApp.controller('myCtrl', function($scope, $http) {
 				$scope.labelNotifications += ' and Conversions';
 			}
 		}
+
+		if (hasValue($scope.campaign['EMAIL1-SCHEDULE2-DATETIME'],'01/01/2050 08:00:00 AM')) {
+			$scope.openFilter['2'] = true;
+		}
+		if (hasValue($scope.campaign['EMAIL1-SCHEDULE3-DATETIME'],'01/01/2050 08:00:00 AM')) {
+			$scope.openFilter['3'] = true;
+		}
     };
     $scope.SelectChanged = function(emailViewID, templateField) {
         //$scope.content = angular.copy($scope.templateEmail1);
@@ -829,8 +836,8 @@ myApp.controller('myCtrl', function($scope, $http) {
     };
 
 	$scope.CheckSumAudience = function(filterID) {
-			var form_data = $("#idForm"+filterID).serialize();	
-			var listdefinition = $("#idForm"+filterID+" input[name='LISTDEFINITION']").val(); 
+			var form_data = $("#idForm").serialize();	
+			var listdefinition = $("#LISTDEFINITION").val(); 
 			$.ajax({
 						url: 'countClick.php', 
 						dataType: 'json',  
@@ -848,7 +855,7 @@ myApp.controller('myCtrl', function($scope, $http) {
 								}
 							}
 							$scope.auCount = sumcount+ " People"; 
-							$("#auCount").val($scope.auCount) ; 
+							$("#au"+filterID+"Count").val($scope.auCount) ; 
 
 							$scope.campaign['filter'+filterID+'Count'] = sumcount; 
 							$scope.$apply();
@@ -879,9 +886,18 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope.masterAu.items = [];
             }
             $scope.audience = angular.copy($scope.masterAu);
-			$scope.CheckSumAudience('1'); 
-			$scope.CheckSumAudience('2'); 
-			$scope.CheckSumAudience('3'); 
+			if ($scope.openFilter['1']) {
+				$("#LISTDEFINITION").val($scope.campaign['EMAIL1-FILTER']) ; 
+				$scope.CheckSumAudience('1');
+			}
+			if ($scope.openFilter['2']) {
+				$("#LISTDEFINITION").val($scope.campaign['EMAIL2-FILTER']) ; 
+				$scope.CheckSumAudience('2');
+			}
+			if ($scope.openFilter['3']) {
+				$("#LISTDEFINITION").val($scope.campaign['EMAIL3-FILTER']) ; 
+				$scope.CheckSumAudience('3');
+			}
         }, function(errResponse) {
             if (errResponse.status == 404) {
                 alert("ERROR 404 [audienceLists]");
@@ -985,6 +1001,11 @@ myApp.controller('myCtrl', function($scope, $http) {
 		});
 	}
 	$scope.openEmail = {
+		"1":true,
+		"2":false,
+		"3":false,
+	};
+	$scope.openFilter = {
 		"1":true,
 		"2":false,
 		"3":false,

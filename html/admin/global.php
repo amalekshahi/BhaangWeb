@@ -21,6 +21,23 @@ function callService($endpoint, $request)
 	return($response);
 }
 
+function callReportService($environment, $endpoint, $request) {
+	$request_string = json_encode($request); 
+	$service = curl_init($environment.$endpoint);                                                                     
+	curl_setopt($service, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+	curl_setopt($service, CURLOPT_POSTFIELDS, $request_string);                                                                  
+	curl_setopt($service, CURLOPT_RETURNTRANSFER, true);                                                                      
+	curl_setopt($service, CURLOPT_HTTPHEADER, array(                                                                          
+		'Content-Type: application/json',                                                                                
+		'Content-Length: ' . strlen($request_string))                                                                       
+	);                                                                                                                   
+	$response_string = curl_exec($service);
+
+	$response = json_decode($response_string);
+	return($response);
+
+}
+
 
 function getTicket($SelectedAccountID, $email, $pwd, $PartnerGuid = "CampaignLauncherAPIUser", $PartnerPassword = "4e98af380d523688c0504e98af3=") {
 	$authRequest = array
@@ -47,6 +64,17 @@ function getTicket($SelectedAccountID, $email, $pwd, $PartnerGuid = "CampaignLau
 	return $userTicket;
 }
 
+function getToken($ACCOUNTID, $EMAIL, $PWD) {
+	$tokenReq = array(
+        "AccountID"=> $ACCOUNTID,
+		"UserEmail"=> $EMAIL,
+        "UserPass"=> $PWD
+    );
+	
+	$tokenRes = callReportService($environment,"Authenticate", $tokenReq);
+	$token = $tokenRes->{"Token"};
+	return $token;
+}
 
 function getxmediaAPI($account) {
 	$sqltxt = "select * from xmediaAPI where accountname = ? limit 1";

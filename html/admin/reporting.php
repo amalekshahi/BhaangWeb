@@ -140,6 +140,7 @@
 										<th style="width:5%"></th>
 										<th style="width:25%">Email Name</th>
 										<th style="width:10%"># Sent</th>
+										<th style="width:10%">Delivered</th>
 										<th style="width:10%">Opens</th>
 										<th style="width:10%">Clicked</th>
 										<th style="width:10%">Unsub</th>
@@ -154,6 +155,7 @@
 									{{item.emailSent}}
 									</td>
 									<td style="vertical-align: middle;">{{item.Sent}}</td>
+									<td style="vertical-align: middle;">{{item.Delivered}}</td>
 									<td style="vertical-align: middle;">{{item.Opened}}</td>
 									<td style="vertical-align: middle;">{{item.Clicked}}</td>
 									<td style="vertical-align: middle;">{{item.Unsubscribed}}</td>
@@ -271,7 +273,7 @@
 				//alert(mode+','+fd);
 				$http({
 		            method: 'GET',
-				    url: 'getCampaignReport.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+				    url: 'getCampaignReport.php' + "?programID="+$scope.campaign.publishProgramID+"&campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
 		        }).then(function(response) {
 				    if (response.data.success == false) {
 		                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
@@ -294,6 +296,7 @@
 								"emailName": emailName,
 								"emailSent" : dt,
 								"Sent": report[i].Sent,
+								"Delivered": report[i].Delivered,
 								"Opened": report[i].Opened,
 								"Clicked": report[i].Clicked,
 								"Unsubscribed": report[i].Unsubscribed,

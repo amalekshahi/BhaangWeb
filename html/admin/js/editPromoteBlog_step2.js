@@ -220,6 +220,19 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
 
         $scope.popup = window.open("register.php", '_blank', 'toolbar=no, menubar=no, location=no, scrollbars=no,resizable=no,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
     };
+
+	$scope.setFilterSchedule = function() {
+		if (hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'],'01/01/2050 08:00:00 AM')) {
+			$scope.dateChange('1');
+		}
+		if ($scope.openFilter['2']) {
+			$scope.dateChange('2');
+		}
+        if ($scope.openFilter['3']) {
+			$scope.dateChange('3');
+		}
+    };
+
     $scope.LoadSendTestContact();
 }]);
 
