@@ -73,7 +73,7 @@ myApp.controller('step3', function($scope, $http) {
 			$scope.campaign['EMAIL'+filterID+'-FILTER'] = auRule;
 			$scope.campaign['EMAIL'+filterID+'-FILTER-JOINOPERATOR'] = auOpr;
 			$scope.campaign['EMAIL'+filterID+'-FILTER-CRITERIAROW'] = allRule;
-			$("#idForm"+filterID+" input[name='LISTDEFINITION']").val(auRule) ; 
+			$("#LISTDEFINITION").val(auRule) ; 
 			$scope.CheckSumAudience(filterID); 
     };
 
@@ -92,11 +92,9 @@ myApp.controller('step3', function($scope, $http) {
         }
     };*/
 
-    
+	$scope.showFilter = function(filterID) {
+		$scope.openFilter[filterID] = true;
+		$("#addFilter"+filterID).hide();
+	}
 
 });
-
-function showFilter(filterID) {
-	    $("#filter"+filterID).show();
-		$("#addFilter"+filterID).hide();
-}
