@@ -11,8 +11,6 @@
 #require_once 'global.php';
 require_once 'commonUtil.php';
 
-
-
 function DoSummerNote($fileContent,$scopeName,$number)
 {
     $editTag = '<summernote airMode config="smnOptions" ng-model="'.$scopeName.'[\'$1\']" editor="editor'.$number.'" on-image-upload="imageUpload(files,\'editor'.$number.'\')"></summernote>';
@@ -61,6 +59,7 @@ foreach($blueprints as $blueprint)
 {
     if($blueprint->campaignType == $requestBlueprint){
         $flgFound = true;
+        $currentBluePrint = $blueprint;
         break;
     }
 }
@@ -72,6 +71,11 @@ if(!$flgFound){
         ));
     exit;
 }
+
+
+
+//Iterate ContentVariables
+
 
 $default = couchDB_Get("/master/Default_".$requestBlueprint,true);
 if($default['error'] == "not_found"){
@@ -89,6 +93,21 @@ MergeArrayWithArray($accountInfo,$default);
 
 //$configs = $masterTemplate->{$resourceName};
 $configs = $blueprint->{$resourceName};
+
+//Read MAML from $currentBluePrint to get contentVariables
+$mamlFileName = "maml/". $currentBluePrint->template;
+$mamlContent = file_get_contents($mamlFileName);
+$xml = new DOMDocument();
+$xml->loadXML($mamlContent);
+$xpath = new DOMXpath($xml);
+$contentVariables = GetContentVariableList($xpath);
+//Filter only nonempty 
+$contentVariablesNonEmpty = array();
+foreach($contentVariables as $contentVariable){
+    if(!empty($accountInfo[$contentVariable])){
+        $contentVariablesNonEmpty[] = $contentVariable;
+    }
+}
 
 $ret = array();
 $number = 0;
@@ -147,7 +166,12 @@ foreach($configs as $config)
     // Replace other tag with normal tag
     $content = preg_replace('/\{{([^\}]*)}\}/',$noneEditTag ,$content);
     
-
+    // Replace ##contentVariable##
+    foreach($contentVariablesNonEmpty as $contentVariable){
+        $content = str_replace("##$contentVariable##",$accountInfo[$contentVariable],$content);
+    }
+    
+        
     $ret[] = array(
         "fileName"=>$fileName,
         "title"=> $config->title,
@@ -167,6 +191,10 @@ echo json_encode(
             'config'=>$accountInfo,
             'templates'=>$ret,
             'resourceName'=>$resourceName,
+            'currentBluePrint' => $currentBluePrint,
+            //'xml' => $xml->saveHTML(),
+            //'contentVariables'=>$contentVariables,
+            //'contentVariablesNonEmpty'=>$contentVariablesNonEmpty,
         )
     );
 ?>

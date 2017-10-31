@@ -237,6 +237,9 @@ require_once 'commonUtil.php';?><!doctype html>
             ).then(function(response) {
                   $scope.getEmailTemplate.data = response.data;
                   console.log($scope.getEmailTemplate.response);
+            },function(response){
+                  alert(response.statusText);
+                  console.log(response);
             });
         };        
         
