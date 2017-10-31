@@ -13,7 +13,9 @@
 <head>
 	<?php include "header.php"; ?>
 	<!-- Sweet alert -->
-	<script src="css/sweet/sweetalert-dev.js"></script>
+	<!-- <script src="css/sweet/sweetalert-dev.js"></script> -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
 </head>
 
 <body class="fixed-sidebar">
@@ -87,7 +89,7 @@
 													<button ng-if="host=='Web Pages'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="application/hta" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
 <!-- end host -->
 
-													<button class="btn btn-white btn-xs" ng-click="CreateFolder()"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Folder</button>
+													<button class="btn btn-white btn-xs" ng-click="NewFolderClick('')"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Folder</button>
 													<select name="actionCmd" class="btn btn-white btn-xs" >
 														<option value="Action" selected><i aria-hidden="true" class="fa fa-tasks"></i><span color="#808080">-- Action --</span></option>
 														<!-- <option value="Copy URL">Copy URL</option> -->

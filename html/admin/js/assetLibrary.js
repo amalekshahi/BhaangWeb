@@ -52,30 +52,45 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 					});
 			};// end upload
 
-			$scope.CreateFolder = function(mainFolder,folderName) {
+			$scope.NewFolderClick = function(frmName){				    
+                    swal({
+                      title: 'What is your new folder name?',
+                      input: 'text',
+                      inputValue: frmName,
+                      showCancelButton: true,
+                    }).then($scope.NewFolderClickOK);
 
-				$http.get("createS3Folder.php"+"?" + new Date().toString(),
-                {
-					  method: "Get",
-					  params: {
-						initAccID:accID,
-			            mainFolder:mainFolder,  // "Images"
-						folderName:folderName, 						
-					  }  
-				}
-				).then(function(response) {
-					  $scope.getCreateFolder.data = response.data;
-					  console.log("response[CreateFolder] = " + $scope.getEmailTemplate.data);
-					  if($scope.getCreateFolder.data.success){
-						  swal("Folder created."); 
-	  					  $scope.Reloadpage();
-					  }else{
-						  swal("Can not create folder."); 
-					  }
+			};
 
-				});
+			$scope.NewFolderClickOK = function(newFolderName) { // newFolderName from inputValue
+				if(newFolderName != ''){
+						$http.get("createS3Folder.php"+"?" + new Date().toString(),
+						{
+							  method: "Get",
+							  params: {
+								initAccID:accID,
+								mainFolder:$scope.host,  // "Images"
+								folderName:newFolderName, 						
+							  }  
+						}
+						).then(function(response) {							  
+							  console.log("response[CreateFolder] = " + response.data);
+							  if(response.data.success){
+								  swal("Folder created."); 
+								  $scope.Reloadpage();
+							  }else{
+								  swal("Can not create folder."); 
+							  }
+						});
+					
+				}else{
+					swal({
+						type: 'error',
+						html: "Please enter folder name",
+					});
+				}			
 				
-			};// end CreateFolder
+			};// end NewFolderClickOK
 
 			$scope.DeleteFileConfirm = function (fID) {
 				swal({

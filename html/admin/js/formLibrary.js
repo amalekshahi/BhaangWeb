@@ -29,7 +29,7 @@ myApp.controller('myCtrl',function($scope,$http) {
                     }).then($scope.DuplicateFormOK);
 			};
 
-			$scope.DuplicateFormOK = function(newFormName){
+			$scope.DuplicateFormOK = function(newFormName){ // newFormName =inputValue from DuplicateFormClick()
 				newFormName = newFormName.trim();							
 				var indx = $scope.formLib.items.getIndexByValue('formID',$scope.copyID);		
 				$scope.selectFrm = $scope.formLib.items[indx];						

@@ -17,7 +17,6 @@ formEditorNew.html
 	<title>Form Builder</title>
     <?php include "header.php"; ?>	    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>    
-	<script src="js/jquery-3.1.1.min.js"></script>   
 	<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
 </head>
 <body class="fixed-sidebar">

@@ -860,6 +860,29 @@ function s3_delete_asset($dbName,$absolutefilepath)
 
 }//end s3_delete_asset
 
+function s3_get_asset2($dbName,$folder)
+{
+		global $AWSAssetPath; 
+	    $path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
+		$path = str_replace("/tmp", "tmp", $path);	
+		$path = $path . $folder; 
+		//echo "<br>path = $path<br>"; 
+		$client = S3Client::factory(array(
+			'credentials' => array(
+				'key'    => AWSKEY,
+				'secret' => AWSSECRET,
+			)
+		));
+
+		$objects = $client->getListObjectsIterator(array(	
+			"Bucket" => AWSBUCKET,
+			"Prefix" =>  $path,
+			//"Delimiter" => "/",
+		));
+		//var_dump($objects); 
+		//return $objects
+}//end s3_get_asset2
+
 function s3_get_asset($dbName,$folder)
 {
 		global $AWSAssetPath; 
@@ -876,7 +899,8 @@ function s3_get_asset($dbName,$folder)
 
 		$objects = $client->getListObjectsIterator(array(	
 			"Bucket" => AWSBUCKET,
-			"Prefix" =>  $path
+			"Prefix" =>  $path,
+			//"Delimiter" => "/",
 		));
 		if (empty($objects)) {
 			 //echo json_encode( array('success'=>false));
