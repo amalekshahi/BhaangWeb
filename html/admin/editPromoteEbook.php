@@ -178,6 +178,7 @@
 							</div>
 						</div>
 						<?php include "dv_report.php"; ?>	
+						<?php include "dv_ebook_report.php"; ?>	
 					</div>
 				</div>
 				<!--/ content -->

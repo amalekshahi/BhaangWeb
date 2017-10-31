@@ -129,23 +129,15 @@
             "loop":6
         },
         {
-            "name":"EMAIL-FILTER-JOINOPERATOR",
-            "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
+            "name":"EMAIL1-FILTER-JOINOPERATOR",
+            "xpath":"//CampaignElement[@Name='Email#Contacts1']/Filter",
             "attribute":"CriteriaJoinOperator",
             "loop":6,
             "start":2,
             "htmldecode":true
         },
         {
-            "name":"EMAIL-FILTER-JOINOPERATOR",
-            "xpath":"//CampaignElement[@Name='Email#Contacts1']/Filter",
-            "attribute":"CriteriaJoinOperator",
-            "loop":6,
-            "start":2,
-            "htmldecode":true
-        },        
-        {
-            "name":"EMAIL-FILTER-JOINOPERATOR",
+            "name":"EMAIL2-FILTER-JOINOPERATOR",
             "xpath":"//CampaignElement[@Name='Email#Contacts2']/Filter",
             "attribute":"CriteriaJoinOperator",
             "loop":6,
@@ -153,31 +145,33 @@
             "htmldecode":true
         },        
         {
-            "name":"EMAIL-FILTER-CRITERIAROW",
-            "xpath":"//CampaignElement[@Name='Email#Contacts']/Filter",
-            "type":"NODE",
-            "deleteNode":"Criteria",
-            "loop":6
-        },
+            "name":"EMAIL3-FILTER-JOINOPERATOR",
+            "xpath":"//CampaignElement[@Name='Email#Contacts3']/Filter",
+            "attribute":"CriteriaJoinOperator",
+            "loop":6,
+            "start":2,
+            "htmldecode":true
+        },        
         {
-            "name":"EMAIL-FILTER-CRITERIAROW",
+            "name":"EMAIL1-FILTER-CRITERIAROW",
             "xpath":"//CampaignElement[@Name='Email#Contacts1']/Filter",
             "type":"NODE",
             "deleteNode":"Criteria",
             "loop":6
         },
         {
-            "name":"EMAIL-FILTER-CRITERIAROW",
+            "name":"EMAIL2-FILTER-CRITERIAROW",
             "xpath":"//CampaignElement[@Name='Email#Contacts2']/Filter",
             "type":"NODE",
             "deleteNode":"Criteria",
             "loop":6
         },
         {
-            "name":"EMAIL1-FILTER",
-            "xpath":"//CampaignElement[@Name='Email1Contacts']",
-            "deleteNode":"Filter",
-            "type":"NODE"
+            "name":"EMAIL3-FILTER-CRITERIAROW",
+            "xpath":"//CampaignElement[@Name='Email#Contacts3']/Filter",
+            "type":"NODE",
+            "deleteNode":"Criteria",
+            "loop":6
         },
         {
             "name":"EMAIL1-FILTER",
@@ -186,8 +180,14 @@
             "type":"NODE"
         },
         {
-            "name":"EMAIL1-FILTER",
+            "name":"EMAIL2-FILTER",
             "xpath":"//CampaignElement[@Name='Email1Contacts2']",
+            "deleteNode":"Filter",
+            "type":"NODE"
+        },
+        {
+            "name":"EMAIL3-FILTER",
+            "xpath":"//CampaignElement[@Name='Email1Contacts3']",
             "deleteNode":"Filter",
             "type":"NODE"
         },
