@@ -41,6 +41,15 @@
 				width: 440px !important;
 				background-color: inherit;				
 			}
+			.form-group .editable-container.editable-inline,
+			.form-group .editable-container.editable-inline .control-group.form-group,
+			.form-group .editable-container.editable-inline .control-group.form-group .editable-input,
+			.form-group .editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.form-group .editable-container.editable-inline .control-group.form-group .editable-input select,
+			.form-group .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: auto !important;
+				background-color: inherit;				
+			}
 			.btn.btn-default.btn-sm.editable-cancel {
 				color: #676a6c;
 			}

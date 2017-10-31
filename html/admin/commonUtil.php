@@ -1452,6 +1452,17 @@ function DomDeleteChildNode($xpath,$path,$nodeName)
     }
 }
 
+function GetContentVariableList($xpath)
+{
+    $ContentVariables = array();
+    $nodes = $xpath->query("//ContentVariables/ContentVariable");
+    for($i=0;$i<$nodes->length;$i++){
+        $node = $nodes->item($i);
+        $ContentVariables[] = $node->getAttribute("Name");
+    }
+    return $ContentVariables;
+}
+
 function deleteNode($node) { 
     deleteChildren($node); 
     $parent = $node->parentNode; 
