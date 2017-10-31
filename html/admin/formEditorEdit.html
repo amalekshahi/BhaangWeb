@@ -34,19 +34,34 @@
 										<div class="modal inmodal fade" id="{{d.fieldID}}Modal" tabindex="-1" role="dialog"  aria-hidden="true">
 											<div class="modal-dialog modal-sm">
 												<div class="modal-content">
-													<div class="modal-header">
+													<div class="modal-header" style="background-color:white;">
 														<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 														<h4 class="modal-title">Field Settings For: {{d.fieldName}}</h4>
 													</div>
 													<div class="modal-body">
 														<input type="text" id="{{d.fieldID}}FieldName" value="{{d.fieldName}}" style="display:none;">
 														<input type="text" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}" style="display:none;">
-														<p>Label: <input type="text" id="{{d.fieldID}}Label"  value="{{d.label}}"></p>
+														<table border=0 class="form-group">
+														<tr height="25">
+															<td width="250"><label>What's this field's label in the form?</label></td>
+															<td><input type="text" id="{{d.fieldID}}Label"  value="{{d.label}}"></td>
+														</tr>
+														<tr  height="25">
+															<td><label>Require this field in order to submit?</label></td>
+															<td><select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></td>
+														</tr  height="25">
+														<tr ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'">
+															<td><label>Pre-fill this field if its value is known?</label></td>
+															<td><select id="{{d.fieldID}}Prefill"><option value="Yes">Yes<option value="No" selected>No</select></td>
+														</tr>
+														</table>
+														<!-- <p>Label: <input type="text" id="{{d.fieldID}}Label"  value="{{d.label}}"></p>
 														<p>Required?: <select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
-														<p ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill" ><option value="Yes">Yes<option value="No" selected>No</select></p>
+														<p ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select  id="{{d.fieldID}}Prefill" ><option value="Yes">Yes<option value="No" selected>No</select></p> -->
 													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-white" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button>
+													<div class="modal-footer" style="background-color:white;">
+														<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('edit')">Save</button>
+														<!-- <button type="button" class="btn btn-white" data-dismiss="modal" onclick="reloadformfield('edit')">Close</button> -->
 														<!-- <button type="button" class="btn btn-primary" ng-click="">Save changes</button> -->
 													</div>
 												</div>
@@ -91,7 +106,7 @@
 										<div class="modal inmodal fade" id="{{s.fieldID}}Modal" tabindex="-1" role="dialog"  aria-hidden="true">
 											<div class="modal-dialog modal-sm">
 												<div class="modal-content">
-													<div class="modal-header">
+													<div class="modal-header" style="background-color:white;">
 														<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 														<h4 class="modal-title">"<strong>{{s.fieldName}}</strong>" Settings</h4>
 													</div>													
@@ -121,7 +136,7 @@
 														<p ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select  id="{{s.fieldID}}Prefill"  ng-model="s.prepopulated"><option value="Yes">Yes<option value="No">No</select></p>
 														-->
 													</div>
-													<div class="modal-footer">
+													<div class="modal-footer" style="background-color:white;">
 														<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('edit')">Save</button>
 														<!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
 													</div>

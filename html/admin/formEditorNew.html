@@ -1,16 +1,14 @@
 <div ng-controller="myNewCtrl" id="myNewCtrl">
 
 	<div class="mail-box-header">
-		<div class="pull-right tooltip-demo">
-			<!--<a href="#" class="btn btn-white btn-xs">Download form HTML <i class="fa fa-code"></i> </a>-->
+		<div class="pull-right tooltip-demo">		
 			<a class="btn btn-white" data-placement="top" data-toggle="tooltip" href="formLibrary.php" title=""><i class="fa fa-ban"></i> Cancel</a> <button class="btn btn-primary" name="action" type="submit" value="saveEmail" ng-click="SaveNewForm();"><i class="fa fa-floppy-o" ng-show="state['Save'] != 'Saving'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> Save Form</button>
 		</div>
 		<h3>Form Template: <select id="selectForm" ng-model="defID" ng-change="SelectChanged({{defID}})" ng-cloak>
-					<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
-				</select>
+			<option ng-repeat="x in deflist.items" value="{{x.defaultID}}" selected={{x.formSelected}}>{{x.defFormName}}</option>					
+		</select>
 		</h3>
-	</div>
-	<!-- mail-box-header -->
+	</div>	<!-- mail-box-header -->
 
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
@@ -36,19 +34,36 @@
 								<div class="modal inmodal fade" id="{{d.fieldID}}Modal" tabindex="-1" role="dialog" aria-hidden="true">
 									<div class="modal-dialog modal-sm">
 										<div class="modal-content">
-											<div class="modal-header">
+											<div class="modal-header" style="background-color:white;">
 												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 												<h4 class="modal-title">Field Settings For: {{d.fieldName}}</h4>
 											</div>
 											<div class="modal-body">
 												<input type="hidden" id="{{d.fieldID}}FieldName" value="{{d.fieldName}}">
-												<input type="hidden" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}">
-												<p>Label: <input type="text" id="{{d.fieldID}}Label" value="{{d.label}}"></p>
-												<p>Required?: <select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
-												<p ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select id="{{d.fieldID}}Prefill"><option value="Yes">Yes<option value="No" selected>No</select></p>
+												<input type="hidden" id="{{d.fieldID}}FieldType" value="{{d.fieldType}}"> <!-- fung -->
+												<table border=0 class="form-group">
+												<tr height="25">
+													<td width="250"><label>What's this field's label in the form?</label></td>
+													<td><input type="text" id="{{d.fieldID}}Label" value="{{d.label}}"></td>
+												</tr>
+												<tr  height="25">
+													<td><label>Require this field in order to submit?</label></td>
+													<td><select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></td>
+												</tr  height="25">
+												<tr ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'">
+													<td><label>Pre-fill this field if its value is known?</label></td>
+													<td><select id="{{d.fieldID}}Prefill"><option value="Yes">Yes<option value="No" selected>No</select></td>
+												</tr>
+												</table>
+												<!-- 
+												<p><label>What's this field's label in the form?</label>&nbsp;&nbsp;&nbsp;<input type="text" id="{{d.fieldID}}Label" value="{{d.label}}"></p>
+												<p><label>Require this field in order to submit?</label>
+																&nbsp;<select id="{{d.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
+												<p ng-if="d.fieldType == 'textbox' || d.fieldType == 'email' || d.fieldType == 'phone' || d.fieldType == 'mobile'"><label>Pre-fill this field if its value is known?</label>&nbsp;<select id="{{d.fieldID}}Prefill"><option value="Yes">Yes<option value="No" selected>No</select></p> -->
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-white" data-dismiss="modal" onclick="reloadformfield('new')">Close</button>
+											<div class="modal-footer" style="background-color:white;">												
+												<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('new')">Save</button>
+												<!-- <button type="button" class="btn btn-white" data-dismiss="modal" onclick="reloadformfield('new')">Save</button> -->
 												<!-- <button type="button" class="btn btn-primary" ng-click="">Save changes</button> -->
 											</div>
 										</div>
@@ -96,21 +111,36 @@
 									<div class="modal inmodal fade" id="{{s.fieldID}}Modal" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog modal-sm">
 											<div class="modal-content">
-												<div class="modal-header">
+												<div class="modal-header" style="background-color:white;">
 													<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-													<h4 class="modal-title">Field Settings For: {{s.fieldName}}</h4>
+													<h4 class="modal-title">"<strong>{{s.fieldName}}</strong>" Settings</h4>
 												</div>
 												<div class="modal-body">
+													<form class="form-inline">
 													<input type="text" id="{{s.fieldID}}FieldName" value="{{s.fieldName}}" style="display:none;">
 													<input type="text" id="{{s.fieldID}}FieldType" value="{{s.fieldType}}" style="display:none;">
 													<input type="text" id="{{s.fieldID}}Req" value="{{s.required}}" style="display:none;">
 													<input type="text" id="{{s.fieldID}}Prepop" value="{{s.prepopulated}}" style="display:none;">
-													<p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}"></p>
+
+														<div class="form-group">
+																<label for="{{s.fieldID}}Label">What's this field's label in the form? </label><!-- fung -->
+																&nbsp;&nbsp;&nbsp;<input type="text" id="{{s.fieldID}}Label" value="{{s.label}}">
+															</div>
+															<div class="form-group">
+																<label for="{{s.fieldID}}Require">Require this field in order to submit?</label>
+																&nbsp;<select id="{{s.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select>
+															</div>															
+															<div class="form-group" ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">
+																<label for="{{s.fieldID}}Prefill">Pre-fill this field if its value is known?</label>
+																<select id="{{s.fieldID}}Prefill"><option value="Yes">Yes<option value="No"  selected>No</select>
+															</div>
+														</form>
+													<!-- <p>Label: <input type="text" id="{{s.fieldID}}Label" value="{{s.label}}"></p>
 													<p>Required?: <select id="{{s.fieldID}}Require"><option value="Yes">Yes<option value="No" selected>No</select></p>
-													<p ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select id="{{s.fieldID}}Prefill"><option value="Yes">Yes<option value="No"  selected>No</select></p>
+													<p ng-if="s.fieldType == 'textbox' || s.fieldType == 'email' || s.fieldType == 'phone' || s.fieldType == 'mobile'">Pre-fill if already known or Don't display if known : <select id="{{s.fieldID}}Prefill"><option value="Yes">Yes<option value="No"  selected>No</select></p> -->
 												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('new')">Close</button>
+												<div class="modal-footer" style="background-color:white;">
+													<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadformfield('new')">Save</button>
 													<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 												</div>
 											</div>
