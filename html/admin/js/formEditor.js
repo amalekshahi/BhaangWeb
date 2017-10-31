@@ -317,10 +317,10 @@ myApp.controller('myNewCtrl', ['$scope','$http','myService', function($scope,$ht
 			$scope.state = {	"Save":"Save",	};
 			$scope.defID = ""; 	
 			$scope.tempArr = []; 
-			$scope.SaveNewForm = function() {			
-					$scope.state['Save'] = "Saving";				
+			$scope.SaveNewForm = function() {								
 					var LName = $('#frmName').val();			
 					if(LName != ''){
+						$scope.state['Save'] = "Saving";				
 						var keyword = LName+getCurrentDateTime();
 						var conID = $.md5(keyword);      
 						$scope.LoadSaveData(conID); 
