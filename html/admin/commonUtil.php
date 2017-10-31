@@ -3,8 +3,8 @@ require_once '../vendor/autoload.php';
 require_once 'global.php';
 
 use Aws\S3\S3Client;
-//use Guzzle\Common\Collection;
-use Guzzle\Service\Exception\ValidationException; 
+use Guzzle\Service\Resource\Model; 
+
 
 $configFile = "conf/davinci.json";
 $URLRenderFormat = "##URL SRC=\"{{url}}\"##";
@@ -41,7 +41,7 @@ function davinciSetConfig()
         if(!empty($doc->s3Server)){
 			//echo "asset path = "; 
 			
-			$AWSAssetPath = $doc->s3Path . "/{{dbname}}" .$doc->s3Server ; 
+			$AWSAssetPath = $doc->s3Path . "/{{dbname}}" .$doc->s3Server ; // "tmp/dbname/server"
 			$AWSAssetFileName = $AWSAssetPath . $AWSAssetFileName; 	
 
 //			$AWSAssetFileName = $doc->s3Path . "/{{dbname}}" .$doc->s3Server . $AWSAssetFileName; 
@@ -809,10 +809,35 @@ function s3_exists($absolutePath)
 		return $result;        
 }
 
-function s3_delete_asset($dbName,$filepath) //fung
+
+function s3_createFolder_asset($dbName,$mainFolder,$folderName) 
+{	
+		global $AWSAssetPath; 
+	    $awsPath = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
+		$awsPath = str_replace("/tmp", "tmp", $awsPath);	
+		$awsPath = $awsPath . "/" . $mainFolder . "/"; 
+		//echo "<br>awsPath = $awsPath<br>"; 
+		$client = S3Client::factory(array(
+			'credentials' => array(
+				'key'    => AWSKEY,
+				'secret' => AWSSECRET,
+			)
+		));
+		 $result = $client->putObject(array(
+            'Bucket' => AWSBUCKET, // Defines name of Bucket
+            'Key' => $awsPath . $folderName."/", //Defines Folder name
+            'Body' => "",
+            'ACL' => 'public-read' // Defines Permission to that folder
+        ));		
+		//var_dump($result['ObjectURL']); 
+		return  $result['ObjectURL']; 
+
+}// ends3_createFolder_asset
+
+
+function s3_delete_asset($dbName,$absolutefilepath) 
 {
-		$path = $filepath; 
-//		echo "\n<br>path = $path<br>\n"; 
+//		echo "\n<br>absolutefilepath = $absolutefilepath<br>\n"; 
 		$client = S3Client::factory(array(
 			'credentials' => array(
 				'key'    => AWSKEY,
@@ -823,7 +848,7 @@ function s3_delete_asset($dbName,$filepath) //fung
 		try {			
 			$result = $client->deleteObject(array(	
 				"Bucket" => AWSBUCKET,
-				"Key" =>  $path,
+				"Key" =>  $absolutefilepath,
 			));
 			//var_dump("vardump = ["+$result+"]]]]"); 
 		} catch (Exception $e) {

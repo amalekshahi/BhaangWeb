@@ -52,6 +52,31 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 					});
 			};// end upload
 
+			$scope.CreateFolder = function(mainFolder,folderName) {
+
+				$http.get("createS3Folder.php"+"?" + new Date().toString(),
+                {
+					  method: "Get",
+					  params: {
+						initAccID:accID,
+			            mainFolder:mainFolder,  // "Images"
+						folderName:folderName, 						
+					  }  
+				}
+				).then(function(response) {
+					  $scope.getCreateFolder.data = response.data;
+					  console.log("response[CreateFolder] = " + $scope.getEmailTemplate.data);
+					  if($scope.getCreateFolder.data.success){
+						  swal("Folder created."); 
+	  					  $scope.Reloadpage();
+					  }else{
+						  swal("Can not create folder."); 
+					  }
+
+				});
+				
+			};// end CreateFolder
+
 			$scope.DeleteFileConfirm = function (fID) {
 				swal({
 					  title: 'Are you sure?',
@@ -78,13 +103,9 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 
 			$scope.DeleteFile = function (fID) {
 					$("#initAccID"+fID).val(accID) ; 		
-					//$("#initPathFileName"+fID).val(accID) ); 		
 					var form_data = $("#idForm"+fID).serialize();		
 					//var pfile = $("#filepath"+fID).val(); 
-					//console.log(" filepath = "+ pfile); 				
-					$scope.state['delFile'] = 'deleteing';					
-					//alert(" val = "+ $('#LISTDEFINITION').val() ); 		
-					//var jsonObj = {"initAccID":accID, "initPathFileName": pfile} ; 
+					$scope.state['delFile'] = 'deleteing';										
 					$.ajax({
 						type: 'get',
 						dataType: 'json',  // what to expect back from the PHP script, if anything
@@ -145,12 +166,14 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 */ 
 
 			$scope.state = {"showfile":"finish","UpdFiles":"finish","delFile":"finish"};
+
 			$scope.Load = function() {
 				//alert("Load"); 
 				var pathfolder = getParameterByName("folder");
 				if(pathfolder == "" || pathfolder == "undefined"){
 					pathfolder = "Images"; 
 				}
+
 				$('#initFolder').val(pathfolder); 
 				$('#initAccID').val(accID); 
 				$scope.host = pathfolder; 
