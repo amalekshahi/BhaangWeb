@@ -53,11 +53,9 @@
 								<div class="ibox">
 									<div class="ibox-title">
 										<h5><i class="fa fa-paper-plane-o" style="color:orange"></i> Your Most Recent Campaigns</h5>
-										<!--
-													<div class="ibox-tools">
-	                              <a class="btn btn-primary btn-xs" href=""><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CAMPAIGNS</a>
+													<div class="pull-right">
+																<a class="btn btn-success btn-xs" href="myCampaigns.php"><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CAMPAIGNS</a>
                             </div>
-													-->
 									</div>
 									<!--
 											<div class="ibox-content">
@@ -87,7 +85,7 @@
 
 										<div class="project-list">
 
-											<table class="table table-hover">
+											<table class="table table-hover" style="margin-bottom: 0px;">
 												<tbody>
 													<thead>
 														<tr>
@@ -127,9 +125,11 @@
 												</tbody>
 											</table>
 										</div>
+										<!--
 										<div class="text-center">
 											<a class="btn btn-success btn-xs" href="myCampaigns.php"><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CAMPAIGNS</a>
 										</div>
+										-->
 									</div>
 								</div>
 							</div>
