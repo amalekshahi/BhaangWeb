@@ -69,7 +69,18 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Targeted People </span>
-                            <h2 class="font-bold">{{campaign.reportSumarySent}}</h2>
+                            <h2 class="font-bold">{{campaign.reportSumarySent | number}}</h2>
+                        </div>
+                    </div>
+                </div>
+							<div class="widget style1 green-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-envelope-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span> Delivered </span>
+                            <h2 class="font-bold">{{campaign.reportSumaryDelivered | number}} ({{campaign.reportSumaryDeliveredRate | number:0}}%)</h2>
                         </div>
                     </div>
                 </div>
@@ -80,7 +91,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Opens </span>
-                            <h2 class="font-bold">{{campaign.reportSumaryOpened}}</h2>
+                            <h2 class="font-bold">{{campaign.reportSumaryOpened | number}} ({{campaign.reportSumaryOpenedRate | number:0}}%)</h2>
                         </div>
                     </div>
                 </div>
@@ -91,7 +102,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Clicks to Blog Post </span>
-                            <h2 class="font-bold">{{campaign.reportSumaryClicked}}</h2>
+                            <h2 class="font-bold">{{campaign.reportSumaryClicked | number}} ({{campaign.reportSumaryClickedRate | number:0}}%)</h2>
                         </div>
                     </div>
                 </div>
@@ -102,7 +113,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Conversions </span>
-                            <h2 class="font-bold">{{campaign.reportSumaryConversions}}</h2>
+                            <h2 class="font-bold">{{campaign.reportSumaryConversions | number}} ({{campaign.reportSumaryConversionsRate | number:0}}%)</h2>
                         </div>
                     </div>
                 </div>
@@ -155,14 +166,16 @@
 									<small>{{item.emailSent}}</small>
 									</td>
 									<td style="vertical-align: middle;">{{item.Sent | number}}</td>
-									<td style="vertical-align: middle;">{{item.Delivered | number}}</td>
-									<td style="vertical-align: middle;">{{item.Opened | number}}</td>
-									<td style="vertical-align: middle;">{{item.Clicked | number}}</td>
-									<td style="vertical-align: middle;">{{item.Unsubscribed | number}}</td>
-									<td style="vertical-align: middle;">{{item.Conversions | number}}</td>
+									<td style="vertical-align: middle;">{{item.Delivered | number}} ({{item.DeliveredRate | number:0}}%)</td>
+									<td style="vertical-align: middle;">{{item.Opened | number}} ({{item.OpenedRate | number:0}}%)</td>
+									<td style="vertical-align: middle;">{{item.Clicked | number}} ({{item.ClickedRate | number:0}}%)</td>
+									<td style="vertical-align: middle;">{{item.Unsubscribed | number}} ({{item.UnsubscribedRate | number:0}}%)</td>
+									<td style="vertical-align: middle;">{{item.Conversions | number}} ({{item.ConversionsRate | number:0}}%)</td>
+									<!-- Removed for now
 									<td style="vertical-align: middle;">
 										<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>
 									</td>
+									-->
 									</tr>
 								</tbody>
 							</table>
@@ -298,10 +311,15 @@
 								"emailSent" : dt,
 								"Sent": report[i].Sent,
 								"Delivered": report[i].Delivered,
+								"DeliveredRate": 100*(report[i].Delivered/report[i].Sent),
 								"Opened": report[i].Opened,
+								"OpenedRate": 100*(report[i].Opened/report[i].Delivered),
 								"Clicked": report[i].Clicked,
+								"ClickedRate": 100*(report[i].Clicked/report[i].Opened),
 								"Unsubscribed": report[i].Unsubscribed,
+								"UnsubscribedRate": 100*(report[i].Unsubscribed/report[i].Opened),
 								"Conversions": "0",
+								"ConversionsRate": "0",
 							});
 						}						
 		            }
@@ -347,11 +365,16 @@
 						$scope.campaign.reportSumary = [];
 						$scope.campaign.reportSumarySent = response.data.rows[0].Sent;
 						$scope.campaign.reportSumaryDelivered = response.data.rows[0].Delivered;
+						$scope.campaign.reportSumaryDeliveredRate = 100*(response.data.rows[0].Delivered/response.data.rows[0].Sent);									
 						$scope.campaign.reportSumaryOpened = response.data.rows[0].Opened;
+						$scope.campaign.reportSumaryOpenedRate = 100*(response.data.rows[0].Opened/response.data.rows[0].Delivered);
 						$scope.campaign.reportSumaryClicked = response.data.rows[0].Clicked;
+						$scope.campaign.reportSumaryClickedRate = 100*(response.data.rows[0].Clicked/response.data.rows[0].Opened);
 						$scope.campaign.reportSumaryUnsubscribed = response.data.rows[0].Unsubscribed;
+						$scope.campaign.reportSumaryUnsubscribedRate = 100*(response.data.rows[0].Unsubscribed/response.data.rows[0].Opened);
 						$scope.campaign.reportSumaryConversions = '0';
-
+						$scope.campaign.reportSumaryConversionsRate = '0';
+									
 						var data = new google.visualization.arrayToDataTable([
 							['Step', 'People'],
 							["Targeted People", $scope.campaign.reportSumarySent],
