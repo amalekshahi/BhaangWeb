@@ -1,4 +1,4 @@
-<Program Name="Kwang BLOG 6_2017-09-28T03:55:55Z" Version="1.0" DbId="147" CheckOutId="366" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
+<Program Name="Kwang BLOG 6" Version="1.0" DbId="147" CheckOutId="607" State="Start" Permissions="DefineProgramPermission,Edit,View,CalendarView,ReportView,">
   <Comment>This is program comment</Comment>
   <Campaign Name="Promote a Blog Post" Version="1.0" Id="1" DbId="147" CheckOutId="0" State="Start" Permissions="">
     <CampaignElements>
@@ -170,17 +170,15 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email1Subject##</Subject>
-              <HtmlContent>##email1content##</HtmlContent>
+              <HtmlContent URL="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-29eba9ac2e0c0d9467cf12ee4284031e-EMAIL1CONTENT.html">##email1content##</HtmlContent>
               <TextContent></TextContent>
             </Message>
           </Messages>
         </Properties>
       </CampaignElement>
       <CampaignElement Id="12" DbId="1056" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email1Contacts" Position="230,20" SharedCheckout="False" Permissions="">
-        <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria>
-        </Filter>
-      </CampaignElement>
+        
+      <Filter CriteriaJoinOperator="&amp;"><Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria></Filter></CampaignElement>
       <CampaignElement Id="13" DbId="1283" CheckOutId="0" Version="1.0" State="Start" Type="Email" Category="Outbound" Name="Email2" Position="390,140" SharedCheckout="False" RuleGroup="EmailContent" Permissions="">
         <Schedules>
           <Schedule DbId="0" Id="3" Status="Scheduled" TargetAudiences="15" Type="Fixed" TimeZone="Pacific Standard Time" EmailNotification="davinci@mindfireinc.com" ApprovalRequired="False" ContactScope="Both">
@@ -201,7 +199,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email2Subject##</Subject>
-              <HtmlContent>##email2content##</HtmlContent>
+              <HtmlContent URL="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-29eba9ac2e0c0d9467cf12ee4284031e-EMAIL2CONTENT.html">##email2content##</HtmlContent>
               <TextContent></TextContent>
             </Message>
           </Messages>
@@ -227,7 +225,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
               <FromAddress>##fromemail##</FromAddress>
               <ReplyTo>##fromemail##</ReplyTo>
               <Subject>##email3Subject##</Subject>
-              <HtmlContent>##email3content##</HtmlContent>
+              <HtmlContent URL="https://bkktest.s3.amazonaws.com/tmp/TEXT-AREA-16916-29eba9ac2e0c0d9467cf12ee4284031e-EMAIL3CONTENT.html">##email3content##</HtmlContent>
               <TextContent></TextContent>
             </Message>
           </Messages>
@@ -235,14 +233,14 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="15" DbId="1057" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email2Contacts" Position="390,20" SharedCheckout="False" Permissions="">
         <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria>
-        </Filter>
+          
+        <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="16" DbId="1058" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email3Contacts" Position="540,20" SharedCheckout="False" Permissions="">
         <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria>
-        </Filter>
+          
+        <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="17" DbId="1059" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="OpenAlert" Position="250,290" SharedCheckout="False" Permissions="">
@@ -457,20 +455,20 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
       </CampaignElement>
       <CampaignElement Id="26" DbId="1061" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email4Contacts" Position="690,20" SharedCheckout="False" Permissions="">
         <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria>
-        </Filter>
+          
+        <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="27" DbId="1062" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email5Contacts" Position="840,20" SharedCheckout="False" Permissions="">
         <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria>
-        </Filter>
+          
+        <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
       <CampaignElement Id="28" DbId="1063" CheckOutId="0" Version="1.0" State="Start" Type="ContactList" Category="TargetAudience" Name="Email6Contacts" Position="990,20" SharedCheckout="False" Permissions="">
         <Filter CriteriaJoinOperator="&amp;">
-          <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria>
-        </Filter>
+          
+        <Criteria Row="1" Field="isseed" Operator="Equal" Value="True"></Criteria></Filter>
         <HookedEvents TriggerFireContext="Current Visit"></HookedEvents>
       </CampaignElement>
     </CampaignElements>
@@ -500,7 +498,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
   <RuleGroupSet>
     <RuleGroup Name="EmailContent" Description="">
       <ContentVariables>
-        <ContentVariable Name="domainvar">MISSING-TEXT-LINE-ACCTID-PROGRAMID-DOMAINVAR</ContentVariable>
+        <ContentVariable Name="domainvar">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-29eba9ac2e0c0d9467cf12ee4284031e-DOMAINVAR.html"##</ContentVariable>
         <ContentVariable Name="unsubscribelink">MISSING-TEXT-AREA-ACCTID-PROGRAMID-UNSUBSCRIBELINK</ContentVariable>
         <ContentVariable Name="fromemail">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-29eba9ac2e0c0d9467cf12ee4284031e-FROMEMAIL.html"##</ContentVariable>
         <ContentVariable Name="fromname">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-29eba9ac2e0c0d9467cf12ee4284031e-FROMNAME.html"##</ContentVariable>
@@ -510,7 +508,7 @@ Oops! I'm sorry ##firstname default="Sir/Madam"##, something went wrong! Please 
         <ContentVariable Name="email4content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL4CONTENT</ContentVariable>
         <ContentVariable Name="email5content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL5CONTENT</ContentVariable>
         <ContentVariable Name="email6content">MISSING-TEXT-AREA-ACCTID-PROGRAMID-EMAIL6CONTENT</ContentVariable>
-        <ContentVariable Name="email1subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL1SUBJECT</ContentVariable>
+        <ContentVariable Name="email1subject">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-29eba9ac2e0c0d9467cf12ee4284031e-EMAIL1SUBJECT.html"##</ContentVariable>
         <ContentVariable Name="email2subject">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-29eba9ac2e0c0d9467cf12ee4284031e-EMAIL2SUBJECT.html"##</ContentVariable>
         <ContentVariable Name="email3subject">##URL SRC="https://bkktest.s3.amazonaws.com/tmp/TEXT-LINE-16916-29eba9ac2e0c0d9467cf12ee4284031e-EMAIL3SUBJECT.html"##</ContentVariable>
         <ContentVariable Name="email4subject">MISSING-TEXT-LINE-ACCTID-PROGRAMID-EMAIL4SUBJECT</ContentVariable>

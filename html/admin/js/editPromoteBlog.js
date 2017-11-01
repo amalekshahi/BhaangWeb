@@ -432,7 +432,9 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope['templatesAs' + emlID] = response.data.templates;
                 if (emlID == '1') {
                     $scope.config = response.data.config;
-                    $scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
+                    //$scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
+                    //Fixed 189
+                    $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
                 }
                 $("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
                 $scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);

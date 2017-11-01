@@ -283,7 +283,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope['templatesAs' + emlID] = response.data.templates;
 				if (emlID == '1') {
 					$scope.config = response.data.config;
-					$scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
+					//$scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
+                    //Fixed 189
+                    $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
 				}
 				$("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
 				$scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
@@ -296,7 +298,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 			$scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
 			$scope.config = response.data.config; 
-			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+			//$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+            //Fixed 189
+            $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
 			$scope.SelectChanged('viewWelcome','templateWelcome');
 		});
 	};
@@ -304,7 +308,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 			$scope.templatesThankYou = $filter('filter')(response.data.templates, {subdir:'thankyou'});
 			$scope.config = response.data.config; 
-			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+			//$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+            //Fixed 189
+            $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
 			$scope.SelectChanged('viewThankYou','templateThankYou');
 		});
 	};
