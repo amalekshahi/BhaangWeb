@@ -24,7 +24,7 @@
 			<!-- /end left wrapper -->
 			<div id="page-wrapper" class="gray-bg">
 				<div class="row border-bottom">
-					<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+					<nav class="navbar navbar-static-top" role="navigation">
 						<!-- top wrapper -->
 						<?php include 'topWrapper.php'; ?>
 						<!-- / top wrapper -->
@@ -32,11 +32,11 @@
 				</div>
 
 				<!-- content -->
-				<div class="wrapper wrapper-content animated fadeInRight" ng-controller="myCtrl" ng-cloak>
+				<div class="wrapper wrapper-content animated fadeInRight" ng-controller="myCtrl" style="padding-bottom: 0px;padding-top: 0px;" ng-cloak>
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="text-center m-t-lg">
-								<div class="jumbotron" style="background: url('https://s3.amazonaws.com/mindfiredavinci/img/background_black_gradient-min.jpg') no-repeat center center;">
+								<div class="jumbotron" style="background: url('https://s3.amazonaws.com/mindfiredavinci/img/background_black_gradient-min.jpg') no-repeat center center; margin-bottom: 0px; padding-top: 30px;padding-bottom: 30px;">
 									<h1 style="color:white;"><strong>Hi, I'm Da Vinci.</strong></h1>
 									<h4 style="color:white;">&reg; Your Marketing AI.</h4>
 									<p><a class="btn btn-primary dim btn-lg" href="pickBlueprint.php" role="button"><i class="fa fa-spin fa-plus"></i> <span ng-if="numberOfCampaigns===0">CREATE MY FIRST CAMPAIGN</span><span ng-if="numberOfCampaigns===1">CREATE A CAMPAIGN</span></a></p>
