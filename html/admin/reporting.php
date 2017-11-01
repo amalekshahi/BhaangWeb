@@ -133,8 +133,11 @@
                         <div class="media-body ">
                             <small class="pull-right text-navy">1m ago</small>
                             <strong>How to Read Your Results</strong>
-                            <p class="m-b-xs">Across n Emails, you target a total of x unique People.  You were able to deliver to x people (x%), and of those, x People opened the Email (x% Open Rate).  Of the x People who opened your email, x clicked to your Blog Post (x%).  Of those that clicked to your Blog Post, you achieved z conversions (z%).</p>
-                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            <p class="m-b-xs">Across <strong>{{campaign.numberOfEmailsSent | number}}</strong> Emails, you targeted a total of <strong>{{campaign.reportSumarySent | number}}</strong> unique People,   
+															with <strong>{{campaign.reportSumaryDelivered | number}}</strong> People successfully receiving your Email (a <strong>{{campaign.reportSumaryDeliveredRate | number:0}}%</strong> delivery rate).
+															Of those, <strong>{{campaign.reportSumaryOpened | number}}</strong> People <strong>({{campaign.reportSumaryOpenedRate | number:0}}%)</strong> opened an Email, with <strong>{{campaign.reportSumaryClicked | number}}</strong> People <strong>({{campaign.reportSumaryClickedRate | number:0}}%)</strong> clicking to your Blog Post.  
+															Of those that clicked to your Blog Post, you achieved <strong>{{campaign.reportSumaryConversions | number}}</strong> conversions <strong>({{campaign.reportSumaryConversionsRate | number:0}}%)</strong>.</p>
+                            <small class="text-muted">Each of these figures counts each person only once.</small>
                         </div>
                     </div>
 										<div class="chat-element">
@@ -144,8 +147,8 @@
                         <div class="media-body ">
                             <small class="pull-right text-navy">1m ago</small>
                             <strong>Analysis</strong>
-                            <p class="m-b-xs">Your open rate (17%) is above the Da Vinci average. Keep up the good work!  However, your conversion rate (4%) is about 20% under the average. You can <a href="">get feedback in the Da Vinci community forum</a>, or <a href="">talk to an expert to get some help</a>.</p>
-                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            <p class="m-b-xs">Your delivery rate ({{campaign.reportSumaryDeliveredRate | number:0}}%) and open rate ({{campaign.reportSumaryOpenedRate | number:0}}%) are below the Da Vinci average. Darn!  You can <a href="">get feedback in the Da Vinci community forum</a>, or <a href="">talk to an expert to get some help</a>.</p>
+                            <small class="text-muted">Data pulled from a sample of 1,375 Email campaigns.</small>
                         </div>
                     </div>									
 								</div>
@@ -322,6 +325,8 @@
 							var campaignType = $scope.campaign.campaignType;
 							$scope.campaign.report = [];
 							var report = response.data.rows;
+							$scope.campaign.numberOfEmailsSent = "3";
+							
 							for (var i = 0; i < report.length; i++) {
 								var em = report[i].Email;
 								var emailName = getEmailName(em, 'long', campaignType);
