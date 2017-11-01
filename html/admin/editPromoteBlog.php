@@ -212,7 +212,7 @@
 								</div>
 							</div>
 						</div>						
-						<?php include "dv_report.php"; ?>													
+						<?php include "dv_report_mail.php"; ?>													
 					</div>
 				</div>
 				<!--/ content -->

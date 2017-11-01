@@ -177,8 +177,8 @@
 								</div>
 							</div>
 						</div>
-						<?php include "dv_report.php"; ?>	
-						<?php include "dv_ebook_report.php"; ?>	
+						<?php include "dv_report_mail.php"; ?>	
+						<?php include "dv_report_page.php"; ?>	
 					</div>
 				</div>
 				<!--/ content -->
