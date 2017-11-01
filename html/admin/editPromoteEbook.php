@@ -6,7 +6,8 @@
     $dbName = $_SESSION['DBNAME'];
     $accountID = $_SESSION['ACCOUNTID'];
     $accountName = $_SESSION['ACCOUNNAME'];
-	$LANDINGPAGEDOMAIN = "http://dv{{campaign['accountID']}}.m.mdl.io/{{campaign['campaignID']}}";
+	//$LANDINGPAGEDOMAIN = "http://dv{{campaign['accountID']}}.m.mdl.io/{{campaign['campaignID']}}";
+	$LANDINGPAGEDOMAIN = "http://{{campaign['accountID']}}.dv.m.mdl.io/{{campaign['campaignID']}}";
 ?>
 
 	<!DOCTYPE html>
