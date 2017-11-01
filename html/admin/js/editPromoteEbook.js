@@ -682,7 +682,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		var td = UTCDateTimeMDT();
         $http({
             method: 'GET',
-            url: 'getCampaignReport.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+            url: 'getReportEmail.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
         }).then(function(response) {
             if (response.data.success == false) {
                 //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);

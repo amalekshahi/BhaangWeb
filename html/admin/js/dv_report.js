@@ -15,7 +15,7 @@ myApp.controller('dvreport', ['$scope', '$http', 'Upload', function($scope, $htt
 		fd = addDays(tdate, -7);
 		fd = formatDateMDY(fd);
 		$scope.showreport = false;
-        $http.get("getCampaignReport.php", {
+        $http.get("getReportEmail.php", {
             method: "GET",
             params: {
                 campaignName: $scope.report.campaignName,

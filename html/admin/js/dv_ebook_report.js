@@ -15,7 +15,7 @@ myApp.controller('dvebookreport', ['$scope', '$http', 'Upload', function($scope,
 		fd = addDays(tdate, -7);
 		fd = formatDateMDY(fd);
 		$scope.showreportebook = false;
-        $http.get("getReporteBook.php", {
+        $http.get("getReportPage.php", {
             method: "GET",
             params: {
                 campaignName: $scope.report.campaignName,

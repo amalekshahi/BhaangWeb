@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Targeted People </span>
-                            <h2 class="font-bold">44,231</h2>
+                            <h2 class="font-bold">{{campaign.reportSumarySent}}</h2>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Opens </span>
-                            <h2 class="font-bold">27,123</h2>
+                            <h2 class="font-bold">{{campaign.reportSumaryOpened}}</h2>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Clicks to Blog Post </span>
-                            <h2 class="font-bold">3,132</h2>
+                            <h2 class="font-bold">{{campaign.reportSumaryClicked}}</h2>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span> Conversions </span>
-                            <h2 class="font-bold">1,287</h2>
+                            <h2 class="font-bold">{{campaign.reportSumaryConversions}}</h2>
                         </div>
                     </div>
                 </div>
@@ -240,6 +240,7 @@
                     $scope.master  = response.data;
                     $scope.campaign  = angular.copy($scope.master);
 					$scope.LoadReport('7Days');
+					$scope.LoadSummary('7Days');
                     $scope.Reset();
                 },function(errResponse){
                     swal(errResponse.statusText);
@@ -273,7 +274,7 @@
 				//alert(mode+','+fd);
 				$http({
 		            method: 'GET',
-				    url: 'getCampaignReport.php' + "?programID="+$scope.campaign.publishProgramID+"&campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+				    url: 'getReportEmail.php' + "?programID="+$scope.campaign.publishProgramID+"&campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
 		        }).then(function(response) {
 				    if (response.data.success == false) {
 		                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
@@ -309,40 +310,86 @@
 		        });
         
 			}; // LoadReport
+
+
+			$scope.LoadSummary = function(mode) {
+				
+				var fd = UTCDateTimeMDT();
+				var td = UTCDateTimeMDT();
+				
+				var tdate = toDate(td);				
+
+				if ((mode == '') || (mode == 'Today')) {
+					
+				} else if (mode == 'Lifetime')	{
+					fd = '01/01/1900';
+				} else {
+					if (mode == 'Yesterday') {
+						fd = addDays(tdate, -1);
+					} else if (mode == '7Days') {
+						fd = addDays(tdate, -7);
+					} else if (mode == '14Days') {
+						fd = addDays(tdate, -14);
+					} else if (mode == '30Days') {
+						fd = addDays(tdate, -30);
+					}
+					fd = formatDateMDY(fd);
+				}				
+				//alert(mode+','+fd);
+				$http({
+		            method: 'GET',
+				    url: 'getReportEmailSummary.php' + "?programID="+$scope.campaign.publishProgramID+"&campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+		        }).then(function(response) {
+				    if (response.data.success == false) {
+		                //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);
+				        //swal("fail");
+		            } else {
+						$scope.campaign.reportSumary = [];
+						$scope.campaign.reportSumarySent = response.data.rows[0].Sent;
+						$scope.campaign.reportSumaryDelivered = response.data.rows[0].Delivered;
+						$scope.campaign.reportSumaryOpened = response.data.rows[0].Opened;
+						$scope.campaign.reportSumaryClicked = response.data.rows[0].Clicked;
+						$scope.campaign.reportSumaryUnsubscribed = response.data.rows[0].Unsubscribed;
+						$scope.campaign.reportSumaryConversions = '0';
+
+						var data = new google.visualization.arrayToDataTable([
+							['Step', 'People'],
+							["Targeted People", $scope.campaign.reportSumarySent],
+							["Email Opens", $scope.campaign.reportSumaryOpened],
+							["Clicks to Blog Post", $scope.campaign.reportSumaryClicked],
+							["Completed Conversions", $scope.campaign.reportSumaryConversions],
+						]);
+						var options = {
+							width: 800,
+							legend: { position: 'right' },
+							chart: {
+							  title: '',
+							  subtitle: '' },
+							axes: {
+							  x: {
+								0: { side: 'top', label: 'Funnel Step'} // Top x-axis.
+							  },
+							  y: {
+								0: { side: 'bottom', label: '# of Unique People'} // Top x-axis.
+							  }
+							  
+							},
+							bar: { groupWidth: "90%" }
+						  };
+
+						  var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+						  // Convert the Classic options to Material options.
+						  chart.draw(data, google.charts.Bar.convertOptions(options));
+						}
+            
+				}, function(errResponse) {
+		        });
+        
+			}; // LoadSummary
             
             $scope.Load();
 		});
-        function drawStuff() {
-          var data = new google.visualization.arrayToDataTable([
-            ['Step', 'People'],
-            ["Targeted People", 44231],
-            ["Email Opens", 27123],
-            ["Clicks to Blog Post", 3132],
-            ["Completed Conversions", 1287],
-          ]);
-
-          var options = {
-            width: 800,
-            legend: { position: 'right' },
-            chart: {
-              title: '',
-              subtitle: '' },
-            axes: {
-              x: {
-                0: { side: 'top', label: 'Funnel Step'} // Top x-axis.
-              },
-              y: {
-                0: { side: 'bottom', label: '# of Unique People'} // Top x-axis.
-              }
-              
-            },
-            bar: { groupWidth: "90%" }
-          };
-
-          var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-          // Convert the Classic options to Material options.
-          chart.draw(data, google.charts.Bar.convertOptions(options));
-        };
+        
 
 		
     </script>
