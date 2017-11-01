@@ -178,7 +178,7 @@
 				</div>
 
 				<!--/ content -->
-				<div class="footer">
+				<div class="footer fixed">
 					<!-- footer -->
 					<?php include 'footer.php'; ?>
 					<!-- / footer -->
