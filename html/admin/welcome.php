@@ -10,14 +10,15 @@
 	<head>
 		<?php include "header.php"; ?>
 	</head>
+
 	<body class="fixed-sidebar">
 		<?php include "afterBody.php"; ?>
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";
-		    var myApp = angular.module('myApp', ['angularMoment','davinci', 'localytics.directives']);
+			var myApp = angular.module('myApp', ['angularMoment', 'davinci', 'localytics.directives']);
 		</script>
-    <script src="js/welcome.js"></script>
+		<script src="js/welcome.js"></script>
 		<div id="wrapper">
 			<!-- left wrapper -->
 			<?php include 'leftWrapper.php'; ?>
@@ -49,13 +50,13 @@
 					<!-- Some strange bug with empty arrays required me to use 1 or 0 to decide whether or not to display the table [Dave] -->
 					<div class="row" id="myCtrl" ng-if="numberOfCampaigns===1">
 						<div class="col-lg-12">
-							<div class="wrapper wrapper-content">
+							<div class="wrapper wrapper-content" style="padding-bottom: 0px;">
 								<div class="ibox">
 									<div class="ibox-title">
 										<h5><i class="fa fa-paper-plane-o" style="color:orange"></i> Your Most Recent Campaigns</h5>
-													<div class="pull-right">
-																<a class="btn btn-success btn-xs" href="myCampaigns.php"><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CAMPAIGNS</a>
-                            </div>
+										<div class="pull-right">
+											<a class="btn btn-success btn-xs" href="myCampaigns.php"><i aria-hidden="true" class="fa fa-external-link"></i> SEE ALL MY CAMPAIGNS</a>
+										</div>
 									</div>
 									<!--
 											<div class="ibox-content">
@@ -70,9 +71,7 @@
                                 </div>
                             </div>
 											-->
-									<div class="ibox-content">
-
-
+									<div class="ibox-content" style="padding-bottom: 1px;">
 										<!--<div class="row m-b-sm m-t-sm">
                                 <div class="col-md-1">
                                     <button type="button" id="loading-example-btn" class="btn btn-white btn-sm" ><i class="fa fa-refresh"></i> Refresh</button>
@@ -144,33 +143,50 @@
 									</div>
 									<div class="social-feed-box">
 
-                <div class="social-avatar">
-                    <a href="" class="pull-left">
+										<div class="social-avatar">
+											<a href="" class="pull-left">
                         <img alt="image" src="https://www.mindfireinc.com/static/images/david-rosendahl.jpg">
                     </a>
-                    <div class="media-body">
-                        <a href="mailto:daver@mindfireinc.com">
+											<div class="media-body">
+												<a href="mailto:daver@mindfireinc.com">
                             David Rosendahl, Co-Founder 
                         </a>
-                        <small class="text-muted">Earlier Today</small>
-                    </div>
-                </div>
-                <div class="social-body">
-											<p>Hi <?php echo $USERNAME;?>, I'm Dave.  We built Da Vinci to help you generate more leads and sales using techniques previously only available to large companies and high-tech nerds (we consider ourselves in that group so don't take offense!).</p>											
+												<small class="text-muted">Earlier Today</small>
+											</div>
+										</div>
+										<div class="social-body">
+											<p>Hi
+												<?php echo $USERNAME;?>, I'm Dave. We built Da Vinci to help you generate more leads and sales using techniques previously only available to large companies and high-tech nerds (we consider ourselves in that group so don't take offense!).</p>
 											</p>Here are a few tips to get you started:</p>
 											<ul>
-												
-											<li>Click any of the navigation items on the left and take a quick look at the various options.</li>
-											<li>Create a quick sample campaign to get a feel for what's going on here.</li>
-											<li>[Note for Kushal] Please suggest appropriate content based on your experience.  I have no problem if you replace me as the face of this, too.</li>
+
+												<li>Click any of the navigation items on the left and take a quick look at the various options.</li>
+												<li>Create a quick sample campaign to get a feel for what's going on here.</li>
+												<li>[Note for Kushal] Please suggest appropriate content based on your experience. I have no problem if you replace me as the face of this, too.</li>
 											</ul>
 
 											<p>If you need any help, use the chat box (found on every page), email us a <a href="mailto:support@mindfireinc.com">support@mindfireinc.com</a> or call us at (877) 560-3473 and press option 2 from the main menu.</p>
-
-                    
-                </div>
-            </div>
-									
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="ibox float-e-margins" style="border-left-width: 10px; padding-left: 10px; padding-right: 10px;">
+								<div class="ibox-content" style="padding-bottom: 10px;">
+									<div class="chat-element">
+										<a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="https://cdn0.iconfinder.com/data/icons/winter-lollipop/374/Gift.png">
+                        </a>
+										<div class="media-body ">
+											<small class="pull-right text-navy">1d ago</small>
+											<strong>What's New</strong>
+											<p class="m-b-xs">We've made it even easier to drive traffic to your blog posts via <strong>Boomerange</strong>, a feature that allows you to repeat your schedules in the future with only a few clicks.  Enjoy!</p>
+											<small class="text-muted">Need help implementing this feature? Use the chat box in the lower left.  We're here to help.</small>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
