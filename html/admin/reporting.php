@@ -152,14 +152,14 @@
 									<tr ng-repeat="item in campaign.report">
 									<td style="vertical-align: middle;"><img class="img-circle" src="" style="width: 70%;">&nbsp;</td>
 									<td style="vertical-align: middle;">{{item.emailName}}<br>
-									{{item.emailSent}}
+									<small>{{item.emailSent}}</small>
 									</td>
-									<td style="vertical-align: middle;">{{item.Sent}}</td>
-									<td style="vertical-align: middle;">{{item.Delivered}}</td>
-									<td style="vertical-align: middle;">{{item.Opened}}</td>
-									<td style="vertical-align: middle;">{{item.Clicked}}</td>
-									<td style="vertical-align: middle;">{{item.Unsubscribed}}</td>
-									<td style="vertical-align: middle;">{{item.Conversions}}</td>
+									<td style="vertical-align: middle;">{{item.Sent | number}}</td>
+									<td style="vertical-align: middle;">{{item.Delivered | number}}</td>
+									<td style="vertical-align: middle;">{{item.Opened | number}}</td>
+									<td style="vertical-align: middle;">{{item.Clicked | number}}</td>
+									<td style="vertical-align: middle;">{{item.Unsubscribed | number}}</td>
+									<td style="vertical-align: middle;">{{item.Conversions | number}}</td>
 									<td style="vertical-align: middle;">
 										<a class="btn btn-white btn-xs"><i aria-hidden="true" class="fa fa-search-plus" style="color:green"></i> DETAILS</a>
 									</td>
