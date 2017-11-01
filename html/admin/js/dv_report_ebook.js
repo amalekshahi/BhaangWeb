@@ -12,7 +12,7 @@ myApp.controller('dvebookreport', ['$scope', '$http', 'Upload', function($scope,
 		var fd = UTCDateTimeMDT();
 		var td = UTCDateTimeMDT();		
 		var tdate = toDate(td);	
-		fd = addDays(tdate, -7);
+		fd = addDays(tdate, -30);
 		fd = formatDateMDY(fd);
 		$scope.showreportebook = false;
         $http.get("getReportPage.php", {

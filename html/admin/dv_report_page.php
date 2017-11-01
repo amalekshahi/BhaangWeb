@@ -24,5 +24,5 @@
 		</div>
 	</div>
 </div>
-<script src="js/dv_ebook_report.js"></script>
+<script src="js/dv_report_ebook.js"></script>
 <!-- ebook report End-->

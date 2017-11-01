@@ -239,8 +239,8 @@
                 $http.get(dbEndPoint + "/" + dbName +'/'+campaignID+"?"+new Date().toString()).then(function(response) {
                     $scope.master  = response.data;
                     $scope.campaign  = angular.copy($scope.master);
-					$scope.LoadReport('7Days');
-					$scope.LoadSummary('7Days');
+					$scope.LoadReport('30Days');
+					$scope.LoadSummary('30Days');
                     $scope.Reset();
                 },function(errResponse){
                     swal(errResponse.statusText);

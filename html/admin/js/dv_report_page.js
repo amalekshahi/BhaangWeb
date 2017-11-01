@@ -12,7 +12,7 @@ myApp.controller('dvreport', ['$scope', '$http', 'Upload', function($scope, $htt
 		var fd = UTCDateTimeMDT();
 		var td = UTCDateTimeMDT();		
 		var tdate = toDate(td);	
-		fd = addDays(tdate, -7);
+		fd = addDays(tdate, -30);
 		fd = formatDateMDY(fd);
 		$scope.showreport = false;
         $http.get("getReportEmail.php", {

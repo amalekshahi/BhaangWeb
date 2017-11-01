@@ -26,5 +26,5 @@
 		</div>
 	</div>
 </div>
-<script src="js/dv_report.js"></script>
+<script src="js/dv_report_page.js"></script>
 <!-- report End-->
