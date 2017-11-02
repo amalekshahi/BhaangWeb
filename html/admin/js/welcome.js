@@ -1,4 +1,5 @@
 myApp.controller('myCtrl', function($scope, $http) {
+  
     $scope.Reset = function() {
         $scope.campaignlist = angular.copy($scope.master);
         // Added by Dave on 9/20/17 so that UI can know whether or not to display table of campaigns.

@@ -181,7 +181,7 @@
                             <img alt="image" class="img-circle" src="https://cdn0.iconfinder.com/data/icons/winter-lollipop/374/Gift.png">
                         </a>
 										<div class="media-body ">
-											<small class="pull-right text-navy">1d ago</small>
+											<small class="pull-right text-navy">Nov 1, 2017</span></small>
 											<strong>What's New</strong>
 											<p class="m-b-xs">We've made it even easier to drive traffic to your blog posts via <strong>Boomerange</strong>, a feature that allows you to repeat your schedules in the future with only a few clicks.  Enjoy!</p>
 											<small class="text-muted">Need help implementing this feature? Use the chat box in the lower left.  We're here to help.</small>
