@@ -26,6 +26,15 @@
 			<div class="col-xs-2"><h3>{{item.Unsubscribed | number}} ({{item.UnsubscribedRate | number:0}}%)</h3></div>
 			<div class="col-xs-1"><h3>{{item.Conversions | number}} ({{item.ConversionsRate | number:0}}%)</h3></div>
 		</div>
+		<div class="row">
+			<div class="col-xs-1"><h3>Summary</h3></div>
+			<div class="col-xs-2"><h3>{{campaign.reportSumarySent | number}}</h3></div>
+			<div class="col-xs-2"><h3>{{campaign.reportSumaryDelivered | number}} ({{campaign.reportSumaryDeliveredRate | number:0}}%)</h3></div>
+			<div class="col-xs-2"><h3>{{campaign.reportSumaryOpened | number}} ({{campaign.reportSumaryOpenedRate | number:0}}%)</h3></div>
+			<div class="col-xs-2"><h3>{{campaign.reportSumaryClicked | number}} ({{campaign.reportSumaryClickedRate | number:0}}%)</h3></div>
+			<div class="col-xs-2"><h3>{{campaign.reportSumaryUnsubscribed | number}} ({{campaign.reportSumaryUnsubscribedRate | number:0}}%)</h3></div>
+			<div class="col-xs-1"><h3>{{campaign.reportSumaryConversions | number}} ({{campaign.reportSumaryConversionsRate | number:0}}%)</h3></div>
+		</div>
 	</div>
 </div>
 <script src="js/dv_report_mail.js"></script>
