@@ -94,7 +94,7 @@
 																				<input type="hidden" id="senderID" name="senderID">
 																				<fieldset class="form-horizontal">														
 																					<div class="form-group">
-																						<label class="col-sm-4 control-label">Name<br><small class="text-muted">Used for internal purposes only.  You'll only see this name inside Da Vinci.</small></label>
+																						<label class="col-sm-4 control-label">Name<br><small class="text-muted">Used for internal purposes only. You'll only see this name inside Da Vinci.</small></label>
 																						<div class="col-sm-8"><input type="text" class="form-control" placeholder="Leo Da Vinci" id="senderName" name="senderName"></div>
 																					</div>
 																					<div class="form-group">
