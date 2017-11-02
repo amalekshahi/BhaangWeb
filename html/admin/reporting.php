@@ -47,7 +47,12 @@
 						<h5>{{campaign.campaignName}}: Funnel Performance</h5>
 						<div class="pull-right">
 							<div class="btn-group">
-								<button class="btn btn-xs btn-white active" type="button">Lifetime</button> <button class="btn btn-xs btn-white" type="button">Today</button> <button class="btn btn-xs btn-white" type="button">Yesterday</button> <button class="btn btn-xs btn-white" type="button">Last 7 Days</button> <button class="btn btn-xs btn-white" type="button">Last 14 Days</button> <button class="btn btn-xs btn-white" type="button">Last 30 Days</button>
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('Lifetime')">Lifetime</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('Today')">Today</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('Yesterday')">Yesterday</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('7Days')">Last 7 Days</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('14Days')">Last 14 Days</button> 
+								<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('30Days')">Last 30 Days</button>
 							</div>
 						</div>
 					</div>
@@ -345,12 +350,22 @@
 				        //swal("fail");
 		            } else {
 						$scope.campaign.reportSumary = [];
-						$scope.campaign.reportSumarySent = response.data.rows[0].Sent;
-						$scope.campaign.reportSumaryDelivered = response.data.rows[0].Delivered;
-						$scope.campaign.reportSumaryOpened = response.data.rows[0].Opened;
-						$scope.campaign.reportSumaryClicked = response.data.rows[0].Clicked;
-						$scope.campaign.reportSumaryUnsubscribed = response.data.rows[0].Unsubscribed;
-						$scope.campaign.reportSumaryConversions = '0';
+						var report = response.data.rows;
+						if (report.length == 0) {
+							$scope.campaign.reportSumarySent = '0';
+							$scope.campaign.reportSumaryDelivered = '0';
+							$scope.campaign.reportSumaryOpened = '0';
+							$scope.campaign.reportSumaryClicked = '0';
+							$scope.campaign.reportSumaryUnsubscribed = '0';
+							$scope.campaign.reportSumaryConversions = '0';
+						} else {
+							$scope.campaign.reportSumarySent = response.data.rows[0].Sent;
+							$scope.campaign.reportSumaryDelivered = response.data.rows[0].Delivered;
+							$scope.campaign.reportSumaryOpened = response.data.rows[0].Opened;
+							$scope.campaign.reportSumaryClicked = response.data.rows[0].Clicked;
+							$scope.campaign.reportSumaryUnsubscribed = response.data.rows[0].Unsubscribed;
+							$scope.campaign.reportSumaryConversions = '0';
+						}
 
 						var data = new google.visualization.arrayToDataTable([
 							['Step', 'People'],
