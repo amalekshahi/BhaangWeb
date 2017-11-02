@@ -79,7 +79,7 @@
 								<option>11</option>
 								<option>12</option>
 							</select> -->
-							<input ng-disabled="disabledEmail['##emailid##']" class="touchspin2" id="EMAIL##emailid##-WAIT" name="EMAIL##emailid##-WAIT" type="text" value="4" ng-model="campaign['EMAIL##emailid##-WAIT']" style="width:40px; text-align: center" ng-change="setFilterSchedule()">
+							<input ng-disabled="disabledScheduleEmail('##emailid##')" class="touchspin2" id="EMAIL##emailid##-WAIT" name="EMAIL##emailid##-WAIT" type="text" value="4" ng-model="campaign['EMAIL##emailid##-WAIT']" style="width:40px; text-align: center" ng-change="setFilterSchedule()">
 						</div>
 						<!-- <div class="input-group form-group-sm">
 							<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
@@ -114,7 +114,7 @@
 							</select>
 						</div> -->
 						<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
-							<input ng-disabled="disabledEmail['##emailid##']" type="text" class="form-control" id="EMAIL##emailid##-SCHEDULE1-TIME" name="EMAIL##emailid##-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL##emailid##-SCHEDULE1-TIME']" ng-change="setFilterSchedule()">
+							<input ng-disabled="disabledScheduleEmail('##emailid##')" type="text" class="form-control" id="EMAIL##emailid##-SCHEDULE1-TIME" name="EMAIL##emailid##-SCHEDULE1-TIME" placeholder="" type="text" ng-model="campaign['EMAIL##emailid##-SCHEDULE1-TIME']" ng-change="setFilterSchedule()">
 							<span id="clockspan##emailid##" class="input-group-addon">
 								<span class="fa fa-clock-o"></span>
 							</span>
