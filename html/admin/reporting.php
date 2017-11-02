@@ -195,7 +195,8 @@
 												<tr ng-repeat="item in campaign.report">
 													<td style="vertical-align: middle;"><img class="img-circle" src="" style="width: 70%;">&nbsp;</td>
 													<td style="vertical-align: middle;">{{item.emailName}}<br>
-														<small>{{item.emailSent}}</small>
+														<small>{{item.emailSent}}</small><br>
+														<small>From {{item.emailFrom}}</small>
 													</td>
 													<td style="vertical-align: middle;">{{item.Sent | number}}</td>
 													<td style="vertical-align: middle;">{{item.Delivered | number}} ({{item.DeliveredRate | number:0}}%)</td>
@@ -298,6 +299,7 @@
 
 					var td = UTCDateTimeMDT();
 					var fd = setfromdate(mode);
+					var sendfrom = $scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMNAME'];
 					//alert(mode+','+fd);
 					$http({
 						method: 'GET',
@@ -325,6 +327,7 @@
 								$scope.campaign.report.push({
 									"emailName": emailName,
 									"emailSent": dt,
+									"emailFrom": sendfrom,
 									"Sent": report[i].Sent,
 									"Delivered": report[i].Delivered,
 									"DeliveredRate": 100 * (report[i].Delivered / report[i].Sent),
