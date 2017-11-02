@@ -271,8 +271,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		});
     };
     $scope.setInitValue = function() {
-		$scope.initTemplateWelcome();
-		$scope.initTemplateThankyou();
+		//$scope.initTemplateWelcome();
+		//$scope.initTemplateThankyou();
+        $scope.initTemplatePages();
 		$scope.initTemplateEmail('1');
 		$scope.initListForm();
 		$scope.initSender();
@@ -299,7 +300,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			});
 		}
 	};
-	$scope.initTemplateWelcome = function(){
+	/*$scope.initTemplateWelcome = function(){
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 			$scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
 			$scope.config = response.data.config; 
@@ -318,7 +319,19 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
             MergeByStartWith($scope.campaign,$scope.config,"def");
 			$scope.SelectChanged('viewThankYou','templateThankYou');
 		});
-	};
+	};*/
+    $scope.initTemplatePages = function(){
+        $http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
+			$scope.templatesThankYou = $filter('filter')(response.data.templates, {subdir:'thankyou'});
+            $scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
+			$scope.config = response.data.config; 
+			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+            //Fixed 189
+            MergeByStartWith($scope.campaign,$scope.config,"def");
+			$scope.SelectChanged('viewThankYou','templateThankYou');
+            $scope.SelectChanged('viewWelcome','templateWelcome');
+		});
+    }
 	$scope.initListForm = function(){
 		$http.get(dbEndPoint + "/" + dbName +"/formLibrary?"+new Date().toString()).then(function(response) {
 			$scope.listForm = response.data.items;
