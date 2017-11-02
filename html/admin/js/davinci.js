@@ -101,6 +101,18 @@ function RenderSharpSharp(template,acctID){
     return html;
 }
 
+function MergeByStartWith(target,src,startWithValue)
+{
+    var keys = Object.keys(src); 
+    //console.log(keys);
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        if(key.startsWith(startWithValue)){
+            target[key] = src[key];
+        }
+    }
+}
+
 function documentConpare(obj1, obj2) {
     if(typeof obj1 == "undefined"){
         return false;
