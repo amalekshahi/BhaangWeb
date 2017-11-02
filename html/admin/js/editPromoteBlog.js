@@ -55,24 +55,77 @@ myApp.controller('myCtrl', function($scope, $http) {
 	/* Dave added this as mock for notifications; this allows user to add another email address on-the-fly.  Feel free to keep DRY here and re-write to save lines */	
 		$scope.addUserForOpens = function(term) {
 			$scope.$apply(function() {
-				$scope.users.push(term);
-				$scope.notifyTheseUsersForOpens.push(term);
+				//$scope.users.push(term);
+				//$scope.notifyTheseUsersForOpens.push(term);
+				$scope.senders.push({
+					"name": term,
+					"email": term,
+					"OfficialName": term,
+					"Cell": '',
+					"Permissions": ''
+				});
+				var selList = [];
+				for (var i = 0; i < $scope.notifyTheseUsersForOpens.length; i++) {
+					selList.push($scope.notifyTheseUsersForOpens[i]);
+				}
+				selList.push(term);
+				$scope.notifyTheseUsersForOpens = selList;
+				$scope.SaveUser();
 			});
 		}
 
 		$scope.addUserForVisits = function(term) {
 			$scope.$apply(function() {
-				$scope.users.push(term);
-				$scope.notifyTheseUsersForVisits.push(term);
+				//$scope.users.push(term);
+				//$scope.notifyTheseUsersForVisits.push(term);
+				$scope.senders.push({
+					"name": term,
+					"email": term,
+					"OfficialName": term,
+					"Cell": '',
+					"Permissions": ''
+
+				});
+				var selList = [];
+				for (var i = 0; i < $scope.notifyTheseUsersForVisits.length; i++) {
+					selList.push($scope.notifyTheseUsersForVisits[i]);
+				}
+				selList.push(term);
+				$scope.notifyTheseUsersForVisits = selList;
+				$scope.SaveUser();
 			});
 		}
 
 		$scope.addUserForCTACompletions = function(term) {
 			$scope.$apply(function() {
-				$scope.users.push(term);
-				$scope.notifyTheseUsersForCTACompletions.push(term);
+				//$scope.users.push(term);
+				//$scope.notifyTheseUsersForCTACompletions.push(term);
+				$scope.senders.push({
+					"name": term,
+					"email": term,
+					"OfficialName": term,
+					"Cell": '',
+					"Permissions": ''
+				});
+				var selList = [];
+				for (var i = 0; i < $scope.notifyTheseUsersForCTACompletions.length; i++) {
+					selList.push($scope.notifyTheseUsersForCTACompletions[i]);
+				}
+				selList.push(term);
+				$scope.notifyTheseUsersForCTACompletions = selList;
+				$scope.SaveUser();
 			});
 		}
+
+		$scope.SaveUser = function() {
+			$scope.userInfo = angular.copy($scope.masterSD);
+			$scope.userInfo.users = $scope.senders;
+			$http.put(dbEndPoint + "/" + dbName + "/UserInfo", $scope.userInfo).then(function(response){
+				  console.log("error 1 : "+response.data.error+",reason 1 : "+response.data.reason);    
+			 },function(response){
+				  console.log("Success 2 : "+response.data);    
+			}); 		
+		};
 		
 		
 	
@@ -453,19 +506,31 @@ myApp.controller('myCtrl', function($scope, $http) {
 		$scope.senders = [];
 		$scope.senders.push({
 			"email": "boonsom@mindfireinc.com",
-			"name": "Boonsom Coa"
+			"name": "Boonsom Coa",
+			"OfficialName": "Boonsom Coa",
+			"Cell": '',
+			"Permissions": ''
 		});
 		$scope.senders.push({
 			"email": "kdutta@mindfireinc.com",
-			"name": "Kushal Dutta"
+			"name": "Kushal Dutta",
+			"OfficialName": "Kushal Dutta",
+			"Cell": '',
+			"Permissions": ''
 		});
 		$scope.senders.push({
 			"email": "daver@mindfireinc.com",
-			"name": "David Rosendahl"
+			"name": "David Rosendahl",
+			"OfficialName": "David Rosendahl",
+			"Cell": '',
+			"Permissions": ''
 		});
 		$scope.senders.push({
 			"email": "mcfarsheed@mindfireinc.com",
-			"name": "Mackenzi Farsheed"
+			"name": "Mackenzi Farsheed",
+			"OfficialName": "Mackenzi Farsheed",
+			"Cell": '',
+			"Permissions": ''
 		});
 
 		$scope.notifyTheseUsersForOpens  = $scope.campaign['notifyTheseUsersForOpens'];

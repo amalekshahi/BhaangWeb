@@ -176,7 +176,7 @@
             return a.outerHTML ? a.outerHTML : (b = document.createElement("div"), b.appendChild(a), b.innerHTML)
         }, AbstractChosen.browser_is_supported = function() {
             return /iP(od|hone)/i.test(window.navigator.userAgent) ? !1 : /Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent) ? !1 : /IEMobile/i.test(window.navigator.userAgent) ? !1 : /Windows Phone/i.test(window.navigator.userAgent) ? !1 : /BlackBerry/i.test(window.navigator.userAgent) ? !1 : /BB10/i.test(window.navigator.userAgent) ? !1 : "Microsoft Internet Explorer" === window.navigator.appName ? document.documentMode >= 8 : !0
-        }, AbstractChosen.default_multiple_text = "Select Some Options", AbstractChosen.default_single_text = "Select an Option", AbstractChosen.default_no_result_text = "No results match", AbstractChosen.default_create_option_text = "Add Option", AbstractChosen
+        }, AbstractChosen.default_multiple_text = "Select Options", AbstractChosen.default_single_text = "Select an Option", AbstractChosen.default_no_result_text = "No results match", AbstractChosen.default_create_option_text = "Add Option", AbstractChosen
     }(), a = jQuery, a.fn.extend({
         chosen: function(b) {
             return AbstractChosen.browser_is_supported() ? this.each(function(c) {
