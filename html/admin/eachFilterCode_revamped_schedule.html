@@ -5,7 +5,7 @@
 	<!--<input type="text" name="auCount"  id="auCount" value="" readonly></td></tr>-->
 	<tr>
 		<td>
-			<strong><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="filter##filterid##Name"></a></strong>
+			<strong><a data-pk="2" data-title="Email Name" data-type="text" data-emptytext="Your List Name Goes Here ..." data-url="" href="#" id="filter##filterid##Name"></a></strong>
 			<!-- <small>
 				<i class="fa fa-pencil" aria-hidden="true"></i>
 			</small> -->
@@ -82,10 +82,10 @@
 			</form>
 		</td>
 		<td>
-			<div class="widget  p-lg text-center" style="padding-bottom: 0px;padd-top: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 0px;">
+			<div ng-show="campaign.filter##filterid##Count > 0" class="widget  p-lg text-center" style="padding-bottom: 0px;padd-top: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 0px;">
 				<div class="m-b-md" style="margin-bottom: 0px;">
-					<i class="fa fa-user-circle-o fa-4x"></i>
-					<h1 class="m-xs">{{campaign.filter##filterid##Count}}</h1>
+					<i class="fa fa-user-circle-o fa-4x" ng-style="{'color': campaign.filter##filterid##Count > 0 ? 'green': ''}"></i>
+					<h1 class="m-xs">{{campaign.filter##filterid##Count | number}}</h1>
 					<h3 class="font-bold no-margins">People</h3>
 					<small>In this Schedule</small>
 				</div>

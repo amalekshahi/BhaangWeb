@@ -464,6 +464,9 @@ myApp.controller('myCtrl', function($scope, $http) {
                 if (emlID == '1') {
                     $scope.config = response.data.config;
                     $scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
+
+                    //Fixed 189
+                    MergeByStartWith($scope.campaign,$scope.config,"def");
                 }
                 $("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
                 $scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);

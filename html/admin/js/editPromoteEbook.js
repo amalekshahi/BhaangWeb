@@ -271,8 +271,9 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		});
     };
     $scope.setInitValue = function() {
-		$scope.initTemplateWelcome();
-		$scope.initTemplateThankyou();
+		//$scope.initTemplateWelcome();
+		//$scope.initTemplateThankyou();
+        $scope.initTemplatePages();
 		$scope.initTemplateEmail('1');
 		$scope.initListForm();
 		$scope.initSender();
@@ -283,9 +284,14 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 				$scope['templatesAs' + emlID] = response.data.templates;
 				if (emlID == '1') {
 					$scope.config = response.data.config;
-					//$scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
+					$scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
                     //Fixed 189
-                    $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
+                    MergeByStartWith($scope.campaign,$scope.config,"def");
+                    $scope.campaign['defButtonStyle'] = {
+                        "background-color":"#" + $scope.campaign['defButtonColor'] ,
+                        "border-radius":"3px",
+                        "text-align":"center",
+                    };                    
 				}
 				$("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
 				$scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
@@ -294,13 +300,13 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 			});
 		}
 	};
-	$scope.initTemplateWelcome = function(){
+	/*$scope.initTemplateWelcome = function(){
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 			$scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
 			$scope.config = response.data.config; 
-			//$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
             //Fixed 189
-            $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
+            MergeByStartWith($scope.campaign,$scope.config,"def");
 			$scope.SelectChanged('viewWelcome','templateWelcome');
 		});
 	};
@@ -308,12 +314,24 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		$http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
 			$scope.templatesThankYou = $filter('filter')(response.data.templates, {subdir:'thankyou'});
 			$scope.config = response.data.config; 
-			//$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
             //Fixed 189
-            $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
+            MergeByStartWith($scope.campaign,$scope.config,"def");
 			$scope.SelectChanged('viewThankYou','templateThankYou');
 		});
-	};
+	};*/
+    $scope.initTemplatePages = function(){
+        $http.get("/admin/getEmailTemplate.php?blueprint=PromoteEbook&scopeName=campaign&resource=pages").then(function(response) {
+			$scope.templatesThankYou = $filter('filter')(response.data.templates, {subdir:'thankyou'});
+            $scope.templatesWelcome = $filter('filter')(response.data.templates, {subdir:'welcome'});
+			$scope.config = response.data.config; 
+			$scope.campaign = jQuery.extend(true, {},$scope.config,$scope.campaign);
+            //Fixed 189
+            MergeByStartWith($scope.campaign,$scope.config,"def");
+			$scope.SelectChanged('viewThankYou','templateThankYou');
+            $scope.SelectChanged('viewWelcome','templateWelcome');
+		});
+    }
 	$scope.initListForm = function(){
 		$http.get(dbEndPoint + "/" + dbName +"/formLibrary?"+new Date().toString()).then(function(response) {
 			$scope.listForm = response.data.items;
@@ -688,7 +706,7 @@ myApp.controller('myCtrl', function($scope, $http,Upload, $filter) {
 		var td = UTCDateTimeMDT();
         $http({
             method: 'GET',
-            url: 'getCampaignReport.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
+            url: 'getReportEmail.php' + "?campaignName=" +$scope.campaign.campaignName+"&fd="+fd+"&td="+td+"&nocache="+new Date().toString()
         }).then(function(response) {
             if (response.data.success == false) {
                 //var errorMessage = prettyStudioErrorMessage(response.data.detail.Result.ErrorMessage);

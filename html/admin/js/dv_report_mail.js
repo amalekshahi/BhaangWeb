@@ -1,4 +1,4 @@
-myApp.controller('dvebookreport', ['$scope', '$http', 'Upload', function($scope, $http, Upload) {
+myApp.controller('dvreport', ['$scope', '$http', 'Upload', function($scope, $http, Upload) {
 	$scope.Load = function() {
         $http.get(dbEndPoint + "/" + dbName + '/' + campaignID + "?" + new Date().toString()).then(function(response) {    
 			$scope.master = response.data;
@@ -12,10 +12,10 @@ myApp.controller('dvebookreport', ['$scope', '$http', 'Upload', function($scope,
 		var fd = UTCDateTimeMDT();
 		var td = UTCDateTimeMDT();		
 		var tdate = toDate(td);	
-		fd = addDays(tdate, -7);
+		fd = addDays(tdate, -30);
 		fd = formatDateMDY(fd);
-		$scope.showreportebook = false;
-        $http.get("getReporteBook.php", {
+		$scope.showreport = false;
+        $http.get("getReportEmail.php", {
             method: "GET",
             params: {
                 campaignName: $scope.report.campaignName,
@@ -27,19 +27,24 @@ myApp.controller('dvebookreport', ['$scope', '$http', 'Upload', function($scope,
 			if (response.data.success == false) {
 				
 			} else {
-				$scope.reportebookConversion = response.data.conversion;	
-				$scope.reportebookReach = response.data.Reach;	
-				$scope.campaign.reportebook = [];
+				$scope.campaign.report = [];
 				var report = response.data.rows;
                 for (var i = 0; i < report.length; i++) {
-					$scope.showreportebook = true;					
-                    $scope.campaign.reportebook.push({
-						"orderid": report[i].orderid,
-						"Page": report[i].Page,
-                        "Visitors": report[i].Visitors,
-                        "Submits": report[i].Submits,
-						"Clicks": report[i].Clicks,
-						"Responses": report[i].Responses,
+					$scope.showreport = true;
+					var emailName = getEmailName(report[i].Email,'short');
+                    $scope.campaign.report.push({
+						"emailName": emailName,
+                        "Sent": report[i].Sent,
+						"DeliveredRate": 100 * (report[i].Delivered / report[i].Sent),
+						"Delivered": report[i].Delivered,
+						"OpenedRate": 100 * (report[i].Opened / report[i].Delivered),
+                        "Opened": report[i].Opened,
+						"ClickedRate": 100 * (report[i].Clicked / report[i].Opened),
+						"Clicked": report[i].Clicked,
+						"UnsubscribedRate": 100 * (report[i].Unsubscribed / report[i].Opened),
+						"Unsubscribed": report[i].Unsubscribed,
+						"ConversionsRate": "0",
+						"Conversions": "0",
                     });
                 }
 			}           

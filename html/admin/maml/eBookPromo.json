@@ -133,12 +133,12 @@
         {
             "xpath":"//CampaignElement[@Name='Promote an eBook']/CallbackTouchPoints/CallbackTouchPoint",
             "attribute":"Callback",
-            "value":"http://dv{{accountID}}.m.mdl.io/{{campaignID}}"
+            "value":"http://{{accountID}}.dv.m.mdl.io/{{campaignID}}"
         },
         {
             "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"URL",
-            "value":"dv{{accountID}}.m.mdl.io/{{campaignID}}"
+            "value":"{{accountID}}.dv.m.mdl.io/{{campaignID}}"
         },
         {
             "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
@@ -148,7 +148,7 @@
         {
             "xpath":"//CampaignElement[@Name='Promote an eBook']/Properties/BaseUrlCollection/BaseUrl",
             "attribute":"Domain",
-            "value":"dv{{accountID}}.m.mdl.io"
+            "value":"{{accountID}}.dv.m.mdl.io"
         }
     ]
 }
