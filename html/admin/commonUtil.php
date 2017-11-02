@@ -860,7 +860,7 @@ function s3_delete_asset($dbName,$absolutefilepath)
 
 }//end s3_delete_asset
 
-function s3_get_asset2($dbName,$folder)
+function s3_get_asset($dbName,$folder) 
 {
 		global $AWSAssetPath; 
 	    $path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
@@ -873,58 +873,99 @@ function s3_get_asset2($dbName,$folder)
 				'secret' => AWSSECRET,
 			)
 		));
-
 		$objects = $client->getListObjectsIterator(array(	
 			"Bucket" => AWSBUCKET,
 			"Prefix" =>  $path,
 			//"Delimiter" => "/",
 		));
-		//var_dump($objects); 
-		//return $objects
-}//end s3_get_asset2
 
-function s3_get_asset($dbName,$folder)
-{
-		global $AWSAssetPath; 
-	    $path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
-		$path = str_replace("/tmp", "tmp", $path);	
-		$path = $path . $folder; 
-		//echo "<br>path = $path<br>"; 
-		$client = S3Client::factory(array(
-			'credentials' => array(
-				'key'    => AWSKEY,
-				'secret' => AWSSECRET,
-			)
-		));
-
-		$objects = $client->getListObjectsIterator(array(	
-			"Bucket" => AWSBUCKET,
-			"Prefix" =>  $path,
-			//"Delimiter" => "/",
-		));
 		if (empty($objects)) {
-			 //echo json_encode( array('success'=>false));
-			 return array(); 
+			 return ""; 
 		}else{
 			$fileArr = array() ; 
 			$cnt=0; 
 			$size=0; 
+			$firstDir=true; 
 			
 			foreach ($objects as $object) {
 				$cnt ++; 
 				$filename = basename($object['Key']); 
-				if($cnt > 1 ){
-					$size = $size+$object['Size'];
-					$sizeTxt = formatSizeUnits($size);					
-					$data = array('fpath' => $path . "/" ,'fname' => $filename , 'fsize' =>$sizeTxt);
-					//array_push($fileArr, $path . "/". $filename); 
-					array_push($fileArr,$data); 
-					//echo  "<br>" . $filename . " = ". $sizeTxt . "<br>"; 
-				}
+
+				if($cnt > 1){
+						$size = $object['Size'];
+						if($size==0){
+							$firstDir = false; 
+						}
+						if($firstDir){
+							$sizeTxt = formatSizeUnits($size);					
+							$data = array('fpath' => $path . "/" ,'fname' => $filename , 'fsize' =>$sizeTxt);							
+							array_push($fileArr,$data); 
+							//echo  "<br>" . $filename . " = ". $sizeTxt . "<br>"; 
+						}else{
+							//var_dump($fileArr); 
+							return $fileArr;								
+						}
+				}// end cnt > 1
 			}
-			return $fileArr;			
-		}
-}//end s3_get_asset();
+		}// end else
+		//echo "run end<br>"; 
+		return $fileArr;
+		
+}//end s3_get_asset
+
+function s3_getchild_asset($dbName,$folder) //fung
+{
+
+		global $AWSAssetPath; 
+	    $path = str_replace("{{dbname}}", "$dbName", $AWSAssetPath);	
+		$path = str_replace("/tmp", "tmp", $path);	
+		$headerpath = $path; 
+		$path = $path . $folder; 
+		//echo "<br>headerpath = $headerpath<br>"; 
+
+		$client = S3Client::factory(array(
+			'credentials' => array(
+				'key'    => AWSKEY,
+				'secret' => AWSSECRET,
+			)
+		));
+		$objects = $client->getListObjectsIterator(array(	
+			"Bucket" => AWSBUCKET,
+			"Prefix" =>  $path,
+			//"Delimiter" => "/",
+		));
+
+		if (empty($objects)) {
+			 return ""; 
+		}else{
+			$folderArr = array() ; 
+			$cnt=0; 
+			$size=0; 			
+			foreach ($objects as $object) {
+				$cnt ++; 
+				if($cnt > 1){  // skip header								
+
+						$fullpath = $object['Key']; 
+						$originalpath = str_replace($headerpath, "", $fullpath);	
+
+						$foldername = basename($object['Key']); 						
+
+						$size = $object['Size'];
+						if($size==0){
+							//$data = array('fname' => $foldername);
+							$data = array(
+								'fname' => $foldername , 
+								'fpath' =>$originalpath,
+								'fullpath' => $fullpath,
+							);							
+							array_push($folderArr,$data); 
+						}
+				}// end cnt > 1
+			}
+		}// end else
+		return $folderArr;
+
+}//end s3_getchild_asset
 
 function s3_put_asset($fileName,$data,$dbName,$pathUpload,$metaData=array())
 {

@@ -16,6 +16,8 @@
 	<!-- <script src="css/sweet/sweetalert-dev.js"></script> -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.js"></script>
+	<!-- tree view -->
+	<link href="css/treeview.css" rel="stylesheet"/>
 </head>
 
 <body class="fixed-sidebar">
@@ -40,9 +42,24 @@
 											<input type="hidden" name="initAccID" id="initAccID">
 											<input type="hidden" name="initFolder" id = "initFolder">
 										</form>
-										<ul class="folder-list" style="padding: 0">
+<!-- 
+										<div>
+										<ul class="folder-list" style="padding: 0">												
 											<li ng-repeat="folder in folders"><a href="fileManager.php?folder={{folder}}"><i ng-if="folder!=host" class="fa fa-folder" style="color:orange"></i><i ng-if="folder==host" class="fa fa-folder-open" style="color:green;"></i> {{folder}}</a></li>
-										</ul>
+										</ul>										
+										</div>
+ -->
+										<div class="css-treeview">
+											<ul ng-repeat="section in sections">		  
+												  <li><input type="checkbox" id="item-1" /><label for="item-1"></label><a href="fileManager.php?folder={{section.name}}">{{section.name}}</a>
+														<ul ng-if="section.tutorials.length!='0'">     
+																<li ng-repeat="tutorial in section.tutorials">
+																	<i class="fa fa-folder-o" style="color:gray;"></i>&nbsp;&nbsp;<a href="fileManager.php?folder={{section.name}}/{{tutorial.name}}">{{tutorial.name}}</a>
+																</li>					
+														</ul>
+												  </li>
+										   </ul>
+										</div>
 										<div class="clearfix"></div>
 									</div>
 									<div class="ibox-content">
@@ -74,9 +91,14 @@
 										<div class="ibox">
 
 											<div class="ibox-content">
-												<div class="ibox-tools pull-left">													
-<!-- host ["Images","Videos","Audio","Documents","Emails","Web Pages"]; -->
-													<button ng-if="host=='Images'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button><!-- ngf-max-size='5242880' -->			
+												<div class="ibox-tools pull-left">				
+												
+													<button class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
+													<!-- ngf-max-size='5242880' -->			
+
+													<!-- host ["Images","Videos","Audio","Documents","Emails","Web Pages"]; -->
+<!-- 
+													<button ng-if="host=='Images'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
 
 													<button ng-if="host=='Videos'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="Video/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
 
@@ -87,6 +109,7 @@
 													<button ng-if="host=='Emails'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="application/hta,image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
 
 													<button ng-if="host=='Web Pages'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="application/hta" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
+ -->
 <!-- end host -->
 
 													<button class="btn btn-white btn-xs" ng-click="NewFolderClick('')"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Folder</button>
@@ -106,7 +129,6 @@
 												<i ng-show="state['delFile'] != 'deleteing'"></i><span ng-show="state['delFile'] == 'deleteing'"><i class="glyphicon glyphicon-refresh spinning"></i></span> 
 
 												<table class="footable table table-hover toggle-arrow-tiny" data-page-size="15">
-													
 													<thead>
 														<tr>
 															<th data-toggle="true"> </th>
@@ -136,8 +158,8 @@
 															 <input type="hidden" name="fileURI" value = "{{file.URI}}">
 															 <input type="hidden" name="filepath{{file.ID}}" id="filepath{{file.ID}}" value = "{{file.fpath}}">
 															 <form method="post" action="" id="idForm{{file.ID}}">
-																<input type="hidden" name="initAccID{{file.ID}" id="initAccID{{file.ID}}" value = "">
-																<input type="hidden" name="initPathFileName{{file.ID}" id="initPathFileName{{file.ID}}" value = "{{file.fpath}}">
+																<input type="hidden" name="initAccID" id="initAccID{{file.ID}}" value = "">
+																<input type="hidden" name="initPathFileName" id="initPathFileName{{file.ID}}" value = "{{file.fpath}}">
 															 </form>
 															</td>															
 

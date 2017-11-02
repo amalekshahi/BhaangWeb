@@ -93,26 +93,42 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 			};// end NewFolderClickOK
 
 			$scope.DeleteFileConfirm = function (fID) {
-				swal({
-					  title: 'Are you sure?',
-					  text: "You won't be able to revert this!",
-					  type: 'warning',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Yes, delete it!',
-					  cancelButtonText: 'No, cancel!',
-					  confirmButtonClass: 'btn btn-success',
-					  cancelButtonClass: 'btn btn-danger',
-					  buttonsStyling: false
-				 },
-				function(isConfirm){
-					  if (isConfirm) {
-							$scope.DeleteFile(fID); 
-					  } else {
-							swal("Cancelled", "Your imaginary file is safe :)", "error");
-					  }
-				});
+					/*
+					swal({
+						  title: 'Are you sure?',
+						  text: "You won't be able to revert this!",
+						  type: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#3085d6',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: 'Yes, delete it!',
+						  cancelButtonText: 'No, cancel!',
+						  confirmButtonClass: 'btn btn-success',
+						  cancelButtonClass: 'btn btn-danger',
+						  buttonsStyling: false
+					 },
+					function(isConfirm){
+						  if (isConfirm) {
+								$scope.DeleteFile(fID); 
+						  } else {
+								swal("Cancelled", "Your imaginary file is safe :)", "error");
+						  }
+					});
+					*/ 
+
+					swal({
+						  title: 'Are you sure?',
+						  text: "You won't be able to revert this!",
+						  type: 'warning',
+						  showCancelButton: true,
+						  confirmButtonColor: '#3085d6',
+						  cancelButtonColor: '#d33',
+						  confirmButtonText: 'Yes, delete it!'
+					}).then(function(isConfirm) {
+						  if (isConfirm) {
+								$scope.DeleteFile(fID); 
+						  }
+					}); 
 				
 			};// end DeleteFileConfirm
 
@@ -145,7 +161,7 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 
 			$scope.Reloadpage = function() {
 				$scope.Load(); 
-				//location.reload(); 
+				$scope.GetChildrenFolder(); 
 			};
 
 			$scope.copyToClipboard = function(x) {
@@ -223,6 +239,18 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 				});
 			};// end Load
 
+			$scope.GetChildrenFolder = function(){				
+					$http.get("getChildS3.php?initAccID=" + accID).then(function(response){
+								if(response.data.success){							
+									$scope.sections = response.data.sections; 
+								}else{
+									$scope.sections = []; 
+								}	
+					});			
+
+			}; //GetChildrenFolder
+			
+			$scope.GetChildrenFolder(); 
 			$scope.Load(); 			 
 			  
 
