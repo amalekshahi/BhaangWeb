@@ -35,10 +35,16 @@ myApp.controller('dvreport', ['$scope', '$http', 'Upload', function($scope, $htt
                     $scope.campaign.report.push({
 						"emailName": emailName,
                         "Sent": report[i].Sent,
+						"DeliveredRate": 100 * (report[i].Delivered / report[i].Sent),
 						"Delivered": report[i].Delivered,
+						"OpenedRate": 100 * (report[i].Opened / report[i].Delivered),
                         "Opened": report[i].Opened,
+						"ClickedRate": 100 * (report[i].Clicked / report[i].Opened),
 						"Clicked": report[i].Clicked,
+						"UnsubscribedRate": 100 * (report[i].Unsubscribed / report[i].Opened),
 						"Unsubscribed": report[i].Unsubscribed,
+						"ConversionsRate": "0",
+						"Conversions": "0",
                     });
                 }
 			}           

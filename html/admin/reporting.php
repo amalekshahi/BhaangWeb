@@ -47,8 +47,12 @@
 									<h5>{{campaign.campaignName}}: Funnel Performance</h5>
 									<div class="pull-right">
 										<div class="btn-group">
-											<button class="btn btn-xs btn-white active" type="button">Lifetime</button> <button class="btn btn-xs btn-white" type="button">Today</button> <button class="btn btn-xs btn-white" type="button">Yesterday</button> <button class="btn btn-xs btn-white"
-											 type="button">Last 7 Days</button> <button class="btn btn-xs btn-white" type="button">Last 14 Days</button> <button class="btn btn-xs btn-white" type="button">Last 30 Days</button>
+											<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('Lifetime')">Lifetime</button> 
+											<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('Today')">Today</button> 
+											<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('Yesterday')">Yesterday</button> 
+											<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('7Days')">Last 7 Days</button> 
+											<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('14Days')">Last 14 Days</button> 
+											<button class="btn btn-xs btn-white" type="button" ng-click="LoadSummary('30Days')">Last 30 Days</button>
 										</div>
 									</div>
 								</div>
@@ -182,7 +186,7 @@
 													<th style="width:10%">Delivered</th>
 													<th style="width:10%">Opens</th>
 													<th style="width:10%">Clicked</th>
-													<th style="width:10%">Unsub</th>
+													<th style="width:10%">Unsubscribes</th>
 													<th style="width:10%">Conversions</th>
 													<th style="width:20%">&nbsp;</th>
 												</tr>
@@ -292,27 +296,8 @@
 
 				$scope.LoadReport = function(mode) {
 
-					var fd = UTCDateTimeMDT();
 					var td = UTCDateTimeMDT();
-
-					var tdate = toDate(td);
-
-					if ((mode == '') || (mode == 'Today')) {
-
-					} else if (mode == 'Lifetime') {
-						fd = '01/01/1900';
-					} else {
-						if (mode == 'Yesterday') {
-							fd = addDays(tdate, -1);
-						} else if (mode == '7Days') {
-							fd = addDays(tdate, -7);
-						} else if (mode == '14Days') {
-							fd = addDays(tdate, -14);
-						} else if (mode == '30Days') {
-							fd = addDays(tdate, -30);
-						}
-						fd = formatDateMDY(fd);
-					}
+					var fd = setfromdate(mode);
 					//alert(mode+','+fd);
 					$http({
 						method: 'GET',
@@ -362,27 +347,9 @@
 
 				$scope.LoadSummary = function(mode) {
 
-					var fd = UTCDateTimeMDT();
 					var td = UTCDateTimeMDT();
-
-					var tdate = toDate(td);
-
-					if ((mode == '') || (mode == 'Today')) {
-
-					} else if (mode == 'Lifetime') {
-						fd = '01/01/1900';
-					} else {
-						if (mode == 'Yesterday') {
-							fd = addDays(tdate, -1);
-						} else if (mode == '7Days') {
-							fd = addDays(tdate, -7);
-						} else if (mode == '14Days') {
-							fd = addDays(tdate, -14);
-						} else if (mode == '30Days') {
-							fd = addDays(tdate, -30);
-						}
-						fd = formatDateMDY(fd);
-					}
+					var fd = setfromdate(mode);
+					
 					//alert(mode+','+fd);
 					$http({
 						method: 'GET',
@@ -452,6 +419,30 @@
 
 				$scope.Load();
 			});
+
+			function setfromdate(mode){
+				var fd = UTCDateTimeMDT();
+				var td = UTCDateTimeMDT();
+				var tdate = toDate(td);
+
+				if ((mode == '') || (mode == 'Today')) {
+
+				} else if (mode == 'Lifetime') {
+					fd = '01/01/1900';
+				} else {
+					if (mode == 'Yesterday') {
+						fd = addDays(tdate, -1);
+					} else if (mode == '7Days') {
+						fd = addDays(tdate, -7);
+					} else if (mode == '14Days') {
+						fd = addDays(tdate, -14);
+					} else if (mode == '30Days') {
+						fd = addDays(tdate, -30);
+					}
+					fd = formatDateMDY(fd);
+				}
+				return fd;
+			}
 		</script>
 	</body>
 
