@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     $(".touchspin2").TouchSpin({
         initval: 1,
-        min: 0,
+        min: 1,
         max: 100,
         step: 1,
         decimals: 0,
@@ -83,6 +83,37 @@ myApp.controller('myCtrl', function($scope, $http) {
         Save: "Save",
         Publish: "Launch Program",
     };
+	$scope.validateSchedule = function() {
+		var canSave = true;
+		for (var i=1; i<=3; i++) {
+			if ($scope.openFilter[i]) {
+				var date1 = $scope.campaign['EMAIL1-SCHEDULE'+i+'-DATE'];
+				var time1 = $scope.campaign['EMAIL1-SCHEDULE'+i+'-TIME'];
+				var timezone1 = $scope.campaign['EMAIL1-SCHEDULE'+i+'-TIMEZONE'];
+				var publishProgramID = $scope.campaign['publishProgramID'];
+				var tmp = 'Email1';
+				if (hasValue($scope.campaign['filter'+i+'Name'])) {
+					tmp = $scope.campaign['filter'+i+'Name'];
+				}
+				if ((typeof date1 == 'undefined') || (typeof time1 == 'undefined') || (timezone1 == "")){
+					swal('Please set schedule for '+tmp);
+					$scope.state['Save'] = "Save";
+					canSave = false;
+					break;
+				} else {
+					var datetime1 = $scope.campaign['EMAIL1-SCHEDULE'+i+'-DATETIME'];								
+					if (checkdate(datetime1, timezone1)) {
+					} else {
+						swal('Please do not set "PAST" times for '+tmp);
+						$scope.state['Save'] = "Save";
+						canSave = false;
+						break;
+					}
+				}
+			}
+		}
+		return canSave;
+	}
     $scope.Save = function(mode, silence) {
         $scope.state['Save'] = "Saving";
         //alert(mode);
@@ -93,29 +124,29 @@ myApp.controller('myCtrl', function($scope, $http) {
 			}
 		}
         if (mode == 'Step3') {
-            var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
+            /*var date1 = $scope.campaign['EMAIL1-SCHEDULE1-DATE'];
             var time1 = $scope.campaign['EMAIL1-SCHEDULE1-TIME'];
             var timezone1 = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];
             var publishProgramID = $scope.campaign['publishProgramID'];
-
-            
-            
+			var tmp = 'Email1';
+			if (hasValue($scope.campaign['filter1Name'])) {
+				tmp = $scope.campaign['filter1Name'];
+			}
             if ((typeof date1 == 'undefined') || (typeof time1 == 'undefined') || (timezone1 == "")){
-                swal('Please set schedule for Email1');
+                swal('Please set schedule for '+tmp);
                 $scope.state['Save'] = "Save";
                 return;
             } else {
-                if ((typeof publishProgramID == 'undefined') || (publishProgramID == "")) {
-                    var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
-                    if (checkdate(datetime1, timezone1)) {
-                    } else {
-                        swal('Please do not set "PAST" times for Email1');
-                        $scope.state['Save'] = "Save";
-                        return;
-                    }	
-                } else {
-                }
-            }
+                var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
+				if (checkdate(datetime1, timezone1)) {
+				} else {
+					swal('Please do not set "PAST" times for '+tmp);
+					$scope.state['Save'] = "Save";
+					return;
+				}
+            }*/
+			if (!$scope.validateSchedule()) {	return;	}
+
 
             if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
 				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
@@ -432,9 +463,7 @@ myApp.controller('myCtrl', function($scope, $http) {
                 $scope['templatesAs' + emlID] = response.data.templates;
                 if (emlID == '1') {
                     $scope.config = response.data.config;
-                    //$scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
-                    //Fixed 189
-                    $scope.campaign = jQuery.extend(true, {}, $scope.campaign, $scope.config);
+                    $scope.campaign = jQuery.extend(true, {}, $scope.config, $scope.campaign);
                 }
                 $("#subjectEmail" + emlID).text($scope.campaign['EMAIL' + emlID + '-SUBJECT']);
                 $scope.SelectChanged('viewEmail' + emlID, 'templateEmail' + emlID);
@@ -532,12 +561,12 @@ myApp.controller('myCtrl', function($scope, $http) {
 				var datetime1 = $scope.campaign['EMAIL1-SCHEDULE1-DATETIME'];								
 				var timezone1 = $scope.campaign['EMAIL1-SCHEDULE1-TIMEZONE'];								
                 if (checkdate(datetime1, timezone1)) {
-					$('#datespan1-1').show();
-					$('#clockspan1-1').show();
+					$('#datespan1').show();
+					$('#clockspan1').show();
                 } else {
                     $scope.disabledEmail["1"] = true;
-					$('#datespan1-1').hide();
-					$('#clockspan1-1').hide();
+					$('#datespan1').hide();
+					$('#clockspan1').hide();
                 }				
 			}
 			if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL2CONTENT'])){
@@ -571,7 +600,8 @@ myApp.controller('myCtrl', function($scope, $http) {
 				}
 			}
 		}
-		
+		$scope.sentEmail = $scope.setSentEmail();
+
 		$scope.hasNotifications = false;
 		$scope.labelNotifications = 'Alerted on';
 		if (hasValue($scope.campaign['OPEN-MY-EMAIL-'], false)) {
@@ -606,6 +636,27 @@ myApp.controller('myCtrl', function($scope, $http) {
 			$scope.openFilter['3'] = true;
 		}
     };
+	$scope.setSentEmail = function() {
+		var sentEmail = {"E1F1": false, "E1F2": false,"E1F3": false,"E2F1": false,"E2F2": false,"E2F3": false,"E3F1": false,"E3F2": false,"E3F3": false};
+		for (var i=1; i<=3; i++) {
+			for (var j=1; j<=3; j++) {
+				if(hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL'+i+'CONTENT'])){        
+					var dt = $scope.campaign['EMAIL'+i+'-SCHEDULE'+j+'-DATETIME'];
+					if (dt == "01/01/2050 08:00:00 AM")	{
+						
+					} else {
+						var tz = $scope.campaign['EMAIL'+i+'-SCHEDULE'+j+'-TIMEZONE'];								
+						if (checkdate(dt, tz)) {
+							
+						} else {
+							sentEmail['E'+i+'F'+j] = true;
+						}
+					}
+				}
+			}
+		}
+		return sentEmail;
+	}
     $scope.SelectChanged = function(emailViewID, templateField) {
         //$scope.content = angular.copy($scope.templateEmail1);
         $("#" + emailViewID).html($scope.campaign[templateField]);
@@ -1031,7 +1082,17 @@ myApp.controller('myCtrl', function($scope, $http) {
         }
     };
 	$scope.ShowScheduleDateTime = function() {
-        if (hasValue($scope.campaign)) {
+		$scope.showEmail2Days = '';
+		$scope.showEmail3Days = '';
+		if (hasValue($scope.campaign)) {
+			if (hasValue($scope.campaign['EMAIL2-WAIT'])) {
+				var wait2 = parseInt($scope.campaign['EMAIL2-WAIT']);
+				$scope.showEmail2Days = (wait2+1)+'';
+				if (hasValue($scope.campaign['EMAIL3-WAIT'])) {
+					var wait3 = parseInt($scope.campaign['EMAIL3-WAIT']);
+					$scope.showEmail3Days = (wait3+wait2+1)+'';
+				}
+			}
             if (hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'], "01/01/2050 08:00:00 AM")) {
                 var a = moment($scope.campaign['EMAIL1-SCHEDULE1-DATETIME']);
                 $scope.ScheduleDateTime = a.format('dddd MMMM DD, YYYY [at] h:mm:ss a');

@@ -47,12 +47,12 @@
 								</li>
 								<li class="">
 									<a data-toggle="tab" href="#email-2" style="padding-left: 10px;" ng-click="initTemplateEmail('2');">
-										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'1'"></span> Day {{campaign['EMAIL2-WAIT']}}: Sent to Non-Openers
+										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'1'"></span> Day {{showEmail2Days}}: Sent to Non-Openers
 									</a>
 								</li>
 								<li class="">
 									<a data-toggle="tab" href="#email-3" style="padding-left: 10px;" ng-click="initTemplateEmail('3');">
-										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'2'"></span> Day {{campaign['EMAIL3-WAIT']}}: Sent to Non-Clickers
+										<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true" style="color:green; font-size: 8px;" ng-show="emailDone>'2'"></span> Day {{showEmail3Days}}: Sent to Non-Clickers
 									</a>
 								</li>
 							</ul>
