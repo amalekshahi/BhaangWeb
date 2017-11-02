@@ -65,18 +65,20 @@
 								<div id="email-2" class="tab-pane">
 									<div class="panel-body">
 										<div class="row" ng-show="!openEmail['2']">
-											<div class="col-sm-10">
+											<div class="col-sm-11">
 												<p>
 													
 												</p>
-												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: Sending a second email to everyone who did not open your first can raise engagement rates by 24%.</h3> 
+												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: Sending a second email to everyone who didn't open your first can raise engagement rates by 24%.</h3> 
 												<p>
-													This allows to get more engagement, leads, and activity with only a few clicks. How do you want to create this email?  
+													This allows to get more engagement, leads, and activity with only a few clicks.
+													<div class="hr-line-dashed"></div>
+													<strong>How do you want to create this email?</strong> 
 												</p>
 												<p>
-													<button type="button" class="btn btn-primary btn-sm" ng-click="startEmail('COPY2')"><i class="fa fa-clone" aria-hidden="true"></i> Clone my first email to use as a starting point</button> <small>(<strong>Recommended</strong>, but make sure to change your <strong>Subject</strong>)</small>
+													<button type="button" class="btn btn-primary btn-sm" ng-click="startEmail('COPY2')"><i class="fa fa-clone" aria-hidden="true"></i> Clone first Email </button> <small class="text-muted">Recommended.  For the best results, make sure to change your <strong>Subject Line</strong>.</small>
 													<br>
-													<button type="button" class="btn btn-default btn-sm" ng-click="startEmail('NEW2')"><i class="fa fa-file-o" aria-hidden="true"></i> Start with a blank Email</button>
+													<button type="button" class="btn btn-default btn-sm" ng-click="startEmail('NEW2')"><i class="fa fa-file-o" aria-hidden="true"></i> Create new Email</button>
 												</p>
 											</div>
 										</div>
@@ -86,10 +88,18 @@
 								<div id="email-3" class="tab-pane">
 									<div class="panel-body">
 										<div class="row" ng-show="!openEmail['3']">
-											<div class="col-sm-10">
-												<h3>By adding a third email to non-clickers, you'll increase engagement rates by an average of 14%.</h3>
-												<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY3')">Create Email Using #2's Content</button>
-													<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW3')">Start With a Blank Email</button></p>
+											<div class="col-sm-11">
+												<p>
+													
+												</p>
+												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: A third email to everyone who hasn't yet clicked your Blog Post can raise engagement rates by another 14%.</h3> 
+												<p>
+													Don't lose an opportunity to generate more awareness, leads, and conversions with only a few more clicks.
+													<div class="hr-line-dashed"></div>
+													<strong>How do you want to create this email?</strong> 
+												</p>
+											<p><button type="button" class="btn btn-primary btn-sm" ng-click="startEmail('COPY3')"><i class="fa fa-clone" aria-hidden="true"></i> Clone second Email </button> <small class="text-muted">Recommended.  For the best results, make sure to change your <strong>Subject Line</strong> <u>and</u> <strong>Body Copy</strong>.</small><br>
+													<button type="button" class="btn btn-default btn-sm" ng-click="startEmail('NEW3')"><i class="fa fa-file-o" aria-hidden="true"></i> Create new Email</button>
 											</div>
 										</div>
 										<?php echo $email3; ?>
