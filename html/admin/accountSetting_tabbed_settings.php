@@ -211,9 +211,9 @@
 												</div>	
 												<div class="tab-pane" id="tab-email-settings">
 													<div class="panel-body">
-														<fieldset>
+														<fieldset disabled>
 															<h2>Global Email Settings</h2>
-															<div class="form-group"><label class="col-sm-4 control-label">Email Protection <br><small class="text-muted">This is a global setting that protects you from sending more emails that appropriate to your database.</small></label>
+															<div class="form-group"><label class="col-sm-4 control-label">Email Protection <span class="label">COMING SOON</span><br><small class="text-muted">This is a global setting that protects you from sending more emails that appropriate to your database.</small></label>
 																<div class="col-sm-8"><br>Allow no more than <select required="">
 																	<option value="1" >1</option> 
 																	<option value="2">2</option> 
@@ -224,6 +224,8 @@
 																	<option value="month">month</option> 
 																</select></div>
 															</div>
+															</fieldset>
+															<fieldset>
 															<div class="form-group"><label class="col-sm-4 control-label">Unsubscribe Link <br><small class="text-muted">This is used for your call-to-action buttons in emails and landing pages.</small></label>
 																<div class="col-sm-8"><br><input type="text" class="form-control" placeholder="http://domain/unsubscribe" name="defUnsubscribe" ng-model="userinfo.defUnsubscribe">
 																	<span class="help-block m-b-none"></span> </div>
