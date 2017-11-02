@@ -66,9 +66,18 @@
 									<div class="panel-body">
 										<div class="row" ng-show="!openEmail['2']">
 											<div class="col-sm-10">
-												<h3>By adding a second email to non-openers, you'll increase engagement rates by an average of 24%.</h3>
-												<p><button type="button" class="btn btn-primary btn-lg" ng-click="startEmail('COPY2')">Create Email Using #1's Content</button>
-													<button type="button" class="btn btn-default btn-lg" ng-click="startEmail('NEW2')">Start With a Blank Email</button></p>
+												<p>
+													
+												</p>
+												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: Sending a second email to everyone who did not open your first can raise engagement rates by 24%.</h3> 
+												<p>
+													This allows to get more engagement, leads, and activity with only a few clicks. How do you want to create this email?  
+												</p>
+												<p>
+													<button type="button" class="btn btn-primary btn-sm" ng-click="startEmail('COPY2')"><i class="fa fa-clone" aria-hidden="true"></i> Clone my first email to use as a starting point</button> <small>(<strong>Recommended</strong>, but make sure to change your <strong>Subject</strong>)</small>
+													<br>
+													<button type="button" class="btn btn-default btn-sm" ng-click="startEmail('NEW2')"><i class="fa fa-file-o" aria-hidden="true"></i> Start with a blank Email</button>
+												</p>
 											</div>
 										</div>
 										<?php echo $email2; ?>
