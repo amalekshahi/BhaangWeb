@@ -7,7 +7,7 @@
 						<div class="pull-right"><a class="btn btn-white btn-bitbucket btn-xs"><i class="fa fa-database" style="color:green"></i> See Personalization Variables</a>
 						</div>
 						<h3>Subject:
-							<a data-pk="2" data-title="Email Name" data-emptytext="&nbsp;" data-type="text" data-url="" href="#" id="subjectEmail##emailid##"></a>
+							<a data-pk="2" data-title="Email Name" data-emptytext="&nbsp;" data-type="text" data-url="" href="#" id="subjectEmail##emailid##" style="white-space: nowrap;text-overflow: ellipsis;max-width: calc(100% - 275px);display: inline-block;overflow: hidden;"></a>
 						</h3>
 					</td>
 				</tr>
@@ -197,30 +197,33 @@
 						<form class="form-inline">
 							<div class="input-group form-group-sm">
 								<!--<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>-->
-								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
-									<option>Now</option>
-									<option>in 5 minutes</option>
-									<option>in 10 minutes</option>
-									<option>At HH:MM</option>
+								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestStart">
+									<option value="0">Now</option>
+									<option value="5">in 5 minutes</option>
+									<option value="10">in 10 minutes</option>
+									<option disabled>At HH:MM</option>
 								</select>
 							</div><small> send to </small>
 							<div class="input-group form-group-sm">
-								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
+								<!-- <select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
 									<option>
 										<?php echo $email ?>
 									</option>
 									<option>Test list 1</option>
 									<option>Some other list</option>
 									<option>These email addresses: </option>
+								</select> -->
+								<select class="form-control input-sm" placeholder-text-single="'Pick a sender'" ng-model="campaign['EMAIL-SENDTEST-FILTER']" style="width: 100%;height: 30px;" ng-options="s['LIST-DEFINITION'] as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items | filter: lessThan('LIST-COUNT', 10)">
+									<option value="">These email addresses: </option>
 								</select>
-							</div><small> and wait </small>
+							</div><small> and&nbsp;wait </small>
 							<div class="input-group form-group-sm">
-								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
-									<option>1 minute</option>
-									<option>2 minutes</option>
-									<option>3 minutes</option>
-									<option>5 minutes</option>
-									<option>x minutes:</option>
+								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestInterval">
+									<option value="1">1 minute</option>
+									<option value="2">2 minutes</option>
+									<option value="3">3 minutes</option>
+									<option value="5">5 minutes</option>
+									<option disabled>x minutes:</option>
 								</select>
 							</div><small> between Emails </small>
 						</form>

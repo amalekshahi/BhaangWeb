@@ -233,6 +233,12 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
 		}
     };
 
+	$scope.lessThan = function(prop, val){
+		return function(item){
+		  return item[prop] <= val;
+		}
+	}
+
     $scope.LoadSendTestContact();
 }]);
 
