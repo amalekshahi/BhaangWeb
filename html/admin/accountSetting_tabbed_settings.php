@@ -72,7 +72,7 @@
 													<a data-toggle="tab" href="#tab-email-settings"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email Settings</a>
 												</li>
 												<li class="">
-													<a data-toggle="tab" href="#tab-grading-and-scoring"><i class="fa fa-star-o" aria-hidden="true"></i> Grading & Scoring</a>
+													<a data-toggle="tab" href="#tab-grading-and-scoring"><i class="fa fa-star-o" aria-hidden="true"></i> Grading & Scoring <span class="label">COMING SOON</span></a>
 												</li>
 												<li class="">
 													<a data-toggle="tab" href="#tab-3rd-party-products"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Integrations</a>
@@ -192,6 +192,8 @@
 												<div class="tab-pane" id="tab-grading-and-scoring">
 													<div class="panel-body">
 														<h2>Grading & Scoring</h2>
+															<p>I'm going to help you score your prospects and Clients to know who's most engaged.  For example, which prospects are most likely to be ready for a phone call? Which Client is exhibiting signs of interest in buying more of your products?</p>
+															<!--
 															<p>To measure the value of the people interacting with your marketing programs, I've set up the following for you. Feel free to change.</p>
 															<div class="form-group form-inline">
 																<div class="col-sm-8">
@@ -204,7 +206,7 @@
 																	<label for="download"><i aria-hidden="true" class="fa fa-download"></i>&nbsp;</label>
 																	<input class="touchspin-points form-control input-sm" id="downloads" type="text" value="5" name="opens" style="width:50px; text-align: center"> points when people <strong>download</strong> any of my eBooks or other assets for the first time.</small>
 																</div>
-															</div>
+															</div>-->
 														</div>
 												</div>	
 												<div class="tab-pane" id="tab-email-settings">
@@ -296,10 +298,12 @@
 												<div class="tab-pane" id="tab-billing">
 												<div class="panel-body">
 													<fieldset class="form-horizontal">
-													<h2>Plans & Billing</h2>
-													<p><strong>Questions about plans and pricing?</strong></p>
-													<p>The MindFire Da Vinci team is available to answer your questions. <a href="helpCenter.php" target="_blank">Get help here</a>.</p> 
-													<p>MindFire also offers enterprise-grade service packages for high volume marketers.  Contact our Customer Success team for a no obligations consultation or demo.</p>
+														<h2>Plans & Billing</h2>
+														<div class="well well-sm">
+															<p><strong>Questions about plans and pricing?</strong></p>
+															<p>The MindFire Da Vinci team is available to answer your questions. <a href="helpCenter.php" target="_blank">Get help here</a>.</p> 
+															<p>MindFire also offers enterprise-grade service packages for high volume marketers.  Contact our <a href="mailto:demandgen@mindfireinc.com">Customer Success team</a> for a no obligations consultation or demo.</p>
+														</div>
 													<h2>Payment Info</h2>
 													<div class="row">
 																<div class="col-sm-4">
@@ -346,14 +350,17 @@
 																				<div ibox-tools></div>
 																		</div>
 																		<div class="ibox-content">
+																			<!-- Commented these out until they're ready
 																			<p><a href="">Invoices</a></p>
 																			<p><a href="">Change invoice details</a></p>
 																			<p><a href="">Change billing notifications</a></p>
-																			<p><a href="">Contact us about your bill</a></p>
+																			-->
+																			<p><a href="mailto:billing@mindfireinc.com">Contact us about your bill [billing@mindfireinc.com]</a></p>
 																		</div>
 																	</div>
 																</div>							
 													</div>
+														<!-- Commented out for now until ready for release
 													<h2>Your Account & Sub-Accounts</h2>
 														<hr/>
 													<div class="wrapper wrapper-content animated fadeInRight">
@@ -445,6 +452,7 @@
 																</div>
 														</div>
 													</div>	
+														-->
 												</fieldset>
 											</div>
 										</div>
