@@ -250,7 +250,7 @@ myApp.controller('myCtrl', function($scope, $http) {
 			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = emailList;
 		}
 		
-
+		$scope.setSendTestDateTime();
 
         $http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
             $scope.campaign._rev = response.data.rev;
@@ -532,7 +532,11 @@ myApp.controller('myCtrl', function($scope, $http) {
         $scope.step1Done = hasValue($scope.campaign['URL-BLOG-POST-URL']);
         $scope.step2Done = hasValue($scope.campaign['TEXT-AREA-ACCTID-PROGRAMID-EMAIL1CONTENT']);
         $scope.step3Done = hasValue($scope.campaign['EMAIL1-SCHEDULE1-DATETIME'], "01/01/2050 08:00:00 AM");
-        $scope.step4Done = $scope.step3Done;
+		if (current_page == 'editPromoteBlog_revamped_schedule.php') {
+			$scope.step4Done = $scope.step2Done;
+		} else {
+			$scope.step4Done = $scope.step3Done;
+		}
         if ($scope.campaign.totalEmail > '3') {
             $scope.emailProgress = $scope.campaign.totalEmail + ' of ' + $scope.campaign.totalEmail + ' emails ready';
         } else {
@@ -1106,6 +1110,23 @@ myApp.controller('myCtrl', function($scope, $http) {
         } else {
             return false;
         }
+    };
+
+	$scope.setSendTestDateTime = function() {
+		var d = new Date();
+		var startDate = new Date();
+		var numberOfMinsToAdd = 0;
+		if (hasValue($scope.campaign.sendTestStart,'0')) {
+			numberOfMinsToAdd = parseInt($scope.campaign.sendTestStart);
+			startDate = addMinutes(startDate, numberOfMinsToAdd);
+		}
+		numberOfMinsToAdd = parseInt($scope.campaign.sendTestInterval);
+		var sendTest2Date = addMinutes(startDate, numberOfMinsToAdd);
+		var sendTest3Date = addMinutes(sendTest2Date, numberOfMinsToAdd);
+
+		$scope.campaign['EMAIL1-SENDTEST-DATETIME'] = moment(startDate).utc().format('MM/DD/YYYY hh:mm:ss A');
+		$scope.campaign['EMAIL2-SENDTEST-DATETIME'] = moment(sendTest2Date).utc().format('MM/DD/YYYY hh:mm:ss A');
+		$scope.campaign['EMAIL3-SENDTEST-DATETIME'] = moment(sendTest3Date).utc().format('MM/DD/YYYY hh:mm:ss A');
     };
 		
     $scope.Load();

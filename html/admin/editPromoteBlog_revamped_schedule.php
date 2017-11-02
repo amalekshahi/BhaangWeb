@@ -25,12 +25,20 @@
 			.editable-container.editable-inline .control-group.form-group .editable-input select,
 			.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
 				width: 550px!important;
-				font-size: 14px;
+				font-size: 14px; 
 				!important;
 			}
 			#editCampaignName.editable-click {
 			  color: #fff;
 			  border-color: #fff;
+			}
+			.col-sm-10 .editable-container.editable-inline,
+			.col-sm-10 .editable-container.editable-inline .control-group.form-group,
+			.col-sm-10 .editable-container.editable-inline .control-group.form-group .editable-input,
+			.col-sm-10 .editable-container.editable-inline .control-group.form-group .editable-input textarea,
+			.col-sm-10 .editable-container.editable-inline .control-group.form-group .editable-input select,
+			.col-sm-10 .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+				width: 360px !important;				
 			}
 			.campaign-title .editable-container.editable-inline,
 			.campaign-title .editable-container.editable-inline .control-group.form-group,

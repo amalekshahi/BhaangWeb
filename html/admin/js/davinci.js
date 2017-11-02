@@ -186,6 +186,10 @@ function addDays(theDate, days) {
 	return new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
 }
 
+function addMinutes(theDate, mins) {
+	return new Date(theDate.getTime() + mins * 60 * 1000);
+}
+
 function toDate(dateStr) {
 	var parts1 = dateStr.split(" ");
 
