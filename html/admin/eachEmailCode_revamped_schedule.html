@@ -35,34 +35,35 @@
 	<div class="col-sm-1" style="float: right;">
 		<div class="fixedContainer" style="right: 0px;">
 
-<div class="theme-config">
-	<div class="theme-config-box">
-		<div class="spin-icon">
-			<i class="fa fa-cogs"></i> Settings &nbsp;
-		</div>
-		<div class="skin-settings">
-			<div class="title">
-				Settings<br>
-				<small style="text-transform: none;font-weight: 400">
+			<div class="theme-config">
+				<div class="theme-config-box">
+					<div class="spin-icon">
+						<i class="fa fa-cogs"></i> Settings &nbsp;
+					</div>
+					<div class="skin-settings">
+						<div class="title">
+							Settings<br>
+							<!--<small style="text-transform: none; font-weight: 400">
 					Set this email's properties.  For more <a href="">see this help article</a>.
-				</small>
-			</div>
-			<!--showE1-->
-			<div class="setings-item">
-				<span>
-					<label>This Email is Sent on the date you set in 'Schedule Broadcasts'</label>
-				</span>
-			</div>
-			<!--showE1-->
-			<!--hideE1-->
-			<div class="setings-item">
-				<span>
+				</small>-->
+						</div>
+						<!--showE1-->
+						<div class="setings-item">
+							<span class="input-group-addon">
+								<i class="fa fa-calendar" aria-hidden="true"></i>
+								<label>Sent on the date set in 'Schedule Broadcasts'</label>
+							</span>
+						</div>
+						<!--showE1-->
+						<!--hideE1-->
+						<div class="setings-item">
+							<span>
 					<label>Wait to Send How Long After Previous Email?</label>
 					<form class="form-inline" style="display: flex;">
 						<div class="input-group form-group-sm">
 							<span class="input-group-addon">
 								<i class="fa fa-calendar" aria-hidden="true"></i>
-							</span>	
+							</span>
 						</div>
 						<div class="input-group form-group-sm">
 							<!-- <select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
@@ -119,12 +120,12 @@
 								<span class="fa fa-clock-o"></span>
 							</span>
 						</div>
-					</form>
-				</span>
-			</div>
-			<!--hideE1-->
-			<div class="setings-item">
-				<span>
+						</form>
+						</span>
+					</div>
+					<!--hideE1-->
+					<div class="setings-item">
+						<span>
 					<label>Who Is This Email From?</label><small> (Replies go here too)</small>
 					<div class="input-group form-group-sm">
 						<span class="input-group-addon">
@@ -132,22 +133,34 @@
 						</span>
 						<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select>
 					</div>
-				</span>
-			</div>
-			<div class="setings-item">
-				<span>
+					</span>
+				</div>
+				<div class="setings-item">
+					<span>
 					<label class="control-label">Which Template Should This Email Use?</label>
 					<div class="input-group form-group-sm">
 						<span class="input-group-addon">
 							<i class="fa fa-file" aria-hidden="true"></i>
 						</span>
-						<select class="form-control input-sm" placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail##emailid##" ng-change="SelectChanged('viewEmail##emailid##','templateEmail##emailid##')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs##emailid##">
+					<select class="form-control input-sm" placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail##emailid##" ng-change="SelectChanged('viewEmail##emailid##','templateEmail##emailid##')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs##emailid##">
 							<option value=""></option>
 						</select>
-						<p></p>
-					</div>
+					<p></p>
+				</div>
 				</span>
 			</div>
+				<div class="setings-item">
+					<span>
+					<label class="control-label"><i class="fa fa-cog" aria-hidden="true"></i> Advanced</label>
+				</span>
+					<small style="text-transform: none; font-color: black; font-weight: 400">
+					<a href="" style="color:blue;" data-toggle="collapse" data-target="#advanced">See HTML Settings</a>
+				</small>
+					<div id="advanced" class="collapse">
+						<a href="#" class="btn btn-primary btn-xs" role="button"><i class="fa fa-code" aria-hidden="true"></i> Edit HTML</a>
+						<a href="#" class="btn btn-warning btn-xs" role="button"><i class="fa fa-download" aria-hidden="true"></i> Download HTML</a>	
+					</div>
+				</div>						
 		</div>
 	</div>
 </div>
@@ -184,28 +197,28 @@
 								<span ng-show="state['SendTest##emailid##'] == 'Sending'">
 									<i class="glyphicon glyphicon-refresh spinning"></i>
 								</span>
-								<i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send This Email
-							</a>
-						</div>
-					</form>
-				</span>
+				<i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send This Email
+				</a>
 			</div>
-			<div class="setings-item">
-				<span>
+			</form>
+			</span>
+		</div>
+		<div class="setings-item">
+			<span>
 					<label>Test All Emails in This Sequence</label>
 					<div class="input-group form-group-sm">
 						<form class="form-inline">
 							<div class="input-group form-group-sm">
 								<!--<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>-->
-								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestStart">
+			<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestStart">
 									<option value="0">Now</option>
 									<option value="5">in 5 minutes</option>
 									<option value="10">in 10 minutes</option>
 									<option disabled>At HH:MM</option>
 								</select>
-							</div><small> send to </small>
-							<div class="input-group form-group-sm">
-								<!-- <select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
+		</div><small> send to </small>
+		<div class="input-group form-group-sm">
+			<!-- <select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'">
 									<option>
 										<?php echo $email ?>
 									</option>
@@ -213,44 +226,45 @@
 									<option>Some other list</option>
 									<option>These email addresses: </option>
 								</select> -->
-								<select class="form-control input-sm" placeholder-text-single="'Pick a sender'" ng-model="campaign['EMAIL-SENDTEST-FILTER']" style="width: 100%;height: 30px;" ng-options="s['LIST-DEFINITION'] as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items | filter: lessThan('LIST-COUNT', 10)">
+			<select class="form-control input-sm" placeholder-text-single="'Pick a sender'" ng-model="campaign['EMAIL-SENDTEST-FILTER']" style="width: 100%;height: 30px;" ng-options="s['LIST-DEFINITION'] as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items | filter: lessThan('LIST-COUNT', 10)">
 									<option value="">These email addresses: </option>
 								</select>
-							</div><small> and&nbsp;wait </small>
-							<div class="input-group form-group-sm">
-								<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestInterval">
+		</div><small> and&nbsp;wait </small>
+		<div class="input-group form-group-sm">
+			<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestInterval">
 									<option value="1">1 minute</option>
 									<option value="2">2 minutes</option>
 									<option value="3">3 minutes</option>
 									<option value="5">5 minutes</option>
 									<option disabled>x minutes:</option>
 								</select>
-							</div><small> between Emails </small>
-						</form>
-					</div>
-				</span>
-			</div>
-		</div>
+		</div><small> between Emails </small>
+		</form>
 	</div>
+	</span>
+</div>
+</div>
+</div>
 </div>
 
-			<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')">
+<button class="btn btn-primary btn-block" ng-click="Save('Email##emailid##')">
 				<i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i>
 				<span ng-show="state['Save'] == 'Saving'">
 					<i class="glyphicon glyphicon-refresh spinning"></i>
 				</span> {{state['Save']}}
 			</button>
-		</div>
-		
-	</div> <!-- <div class="fixedContainer" style="right: 0px;"> -->
-	
 </div>
-		<!--
+
+</div>
+<!-- <div class="fixedContainer" style="right: 0px;"> -->
+
+</div>
+<!--
 	<div class="col-sm-8"><div class="hr-line-dashed"></div><form class="form-inline"><div class="form-group"><label>From</label><select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select></div><div class="form-group"><label>Send a Test Message</label><select chosen placeholder-text-single="'Pick a person'" ng-model="sendTestContactSelected" style="height: 30px;" ng-options="x[0] as x[1] + ' ' + x[2] + ' (' + x[3] + ') ' for x in sendTestContacts | orderBy:'1'"><option value=""></option></select></div><a ng-click="OpenRegister()" data-toggle="tooltip" data-placement="top" title="Add another person to your seed list.  They'll show up here going forward."><i class="fa fa-plus-circle fa-2x" style="color:green;float:right;"></i></a><a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest##emailid##'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send</a></form>
 t
 
 
 		<label class="control-label">From</label><div><select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select><p></p></div><label class="control-label">Template</label><div><select chosen placeholder-text-single="'Pick a Template'" ng-model="campaign.templateEmail##emailid##" ng-change="SelectChanged('viewEmail##emailid##','templateEmail##emailid##')" style="width: 100%;height: 30px;" ng-options="x.content as x.title for x in templatesAs##emailid##"><option value=""></option></select><p></p></div><div class="window"><div class="titlebar"><div class="buttons"><div class="close"></div><div class="minimize"></div><div class="zoom"></div></div><small><span id="textSender##emailid##">New Email from:</span></small></div><div class="content"><div class="template_preview"><div id="viewEmail##emailid##"></div></div></div></div></div>-->
-		<!--
+<!--
 	<div class="col-sm-3"><form class="form-horizontal" data-spy="affix" data-offset-top="0" data-offset-bottom="0"><div class="form-group"><div>Select who this email is from. Once you've picked a template, roll over areas of the email template to see what you can edit. Things like your logo and footer are pulled from <strong>Settings</strong>.</div><label class="control-label">From</label><div><select chosen placeholder-text-single="'Pick a sender (replies go here too)'" ng-model="campaign['TEXT-LINE-ACCTID-PROGRAMID-FROMEMAIL']" ng-change="sendersChanged('textSender##emailid##')" style="height: 30px;" ng-options="x.email as x.name + ' (' + x.email + ')' for x in senders"></select><p></p></div><label class="control-label">Hero Image</label><div><a ng-model="file" ngf-select="upload($file,'##emailid##')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image."><span ng-show="state['Upload##emailid##'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload##emailid##'] != 'Uploading'"></i> Upload new image ...</a><a ng-model="file" ngf-select="upload($file,'##emailid##')" href="" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="Choose an image from your Asset Library."><span ng-show="state['Upload##emailid##'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-globe" ng-show="state['Upload##emailid##'] != 'Uploading'"></i> Pick from Asset Library</a></div><label class="control-label"></label><a ng-click="SendTest(##emailid##)" href="" class="btn btn-success btn-block btn-xs" data-toggle="tooltip" data-placement="top" title="After you select someone from the list, press this button and I'll send you the email."><span ng-show="state['SendTest##emailid##'] == 'Sending'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-share-square-o" ng-show="state['SendTest##emailid##'] != 'Sending'"></i> Send</a></div></form></div>
 -->
