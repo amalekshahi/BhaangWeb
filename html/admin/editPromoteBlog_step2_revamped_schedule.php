@@ -69,7 +69,7 @@
 												<p>
 													
 												</p>
-												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: Sending a second email to everyone who didn't open your first can raise engagement rates by 24%.</h3> 
+												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> Sending a second email to everyone who didn't open your first can raise engagement rates by 24%.</h3> 
 												<p>
 													This allows to get more engagement, leads, and activity with only a few clicks.
 													<div class="hr-line-dashed"></div>
@@ -92,7 +92,7 @@
 												<p>
 													
 												</p>
-												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> TIP: A third email to everyone who hasn't yet clicked your Blog Post can raise engagement rates by another 14%.</h3> 
+												<h3><i aria-hidden="true" class="fa fa-lightbulb-o"></i> A third email to those who haven't clicked your Blog Post can raise engagement rates by another 14%.</h3> 
 												<p>
 													Don't lose an opportunity to generate more awareness, leads, and conversions with only a few more clicks.
 													<div class="hr-line-dashed"></div>
