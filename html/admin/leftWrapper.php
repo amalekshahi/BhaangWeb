@@ -64,7 +64,8 @@
 			olark.configure('system.ask_for_email', 'hidden' );
 			olark.configure('system.ask_for_phone', 'hidden' );
 			olark.configure("locale.welcome_title", "SUPPORT CHAT");
-			olark.configure("locale.chatting_title", "CHATTING");  
+			olark.configure("locale.chatting_title", "CHATTING");
+			olark.configure('features.attention_grabber', false );
 			olark('api.visitor.updateEmailAddress', {
 				emailAddress: '<?php echo $email; ?>'
 			});

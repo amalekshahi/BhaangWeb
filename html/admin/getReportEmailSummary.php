@@ -24,7 +24,7 @@ function GetCampaignReport($TEST, $ACCOUNTID, $PROGRAMID, $campaignName, $fd, $t
 
 	if ($PROGRAMID) {
 
-		$reportURL = "https://studio.dashboard.mdl.io/api/Report//GetAdminReportData?rn=allprogram_allemail_detail&si=$PROGRAMID&ai=$ACCOUNTID&st=0&fd=$fd&td=$td&seed=false&datasourceType=redshift&token=$token";	
+		$reportURL = "https://studio.dashboard.mdl.io/api/Report//GetAdminReportData?rn=allprogram_allemail_summary&si=$PROGRAMID&ai=$ACCOUNTID&st=0&fd=$fd&td=$td&seed=false&datasourceType=redshift&token=$token";	
 
 		$ch = curl_init($reportURL);
 
@@ -46,7 +46,6 @@ function GetCampaignReport($TEST, $ACCOUNTID, $PROGRAMID, $campaignName, $fd, $t
 		foreach( $jsonRow as $row1 ) {	
 			//var_dump($row1);
 			//echo "<br>";
-			$Program = $row1->{'Program'};
 			$Email = $row1->{'Email'};
 			$Sent = $row1->{'Sent'};
 			$Delivered = $row1->{'Delivered'};
@@ -59,8 +58,7 @@ function GetCampaignReport($TEST, $ACCOUNTID, $PROGRAMID, $campaignName, $fd, $t
 			$MarkedAsSpam = $row1->{'MarkedAsSpam'};
 			$Unsubscribed = $row1->{'Unsubscribed'};			
 			
-			$group = array(					
-				'Program'=>$Program,
+			$group = array(									
 				'Email'=>$Email,
 				'Sent'=>$Sent,
 				'Delivered'=>$Delivered,
@@ -83,7 +81,7 @@ function GetCampaignReport($TEST, $ACCOUNTID, $PROGRAMID, $campaignName, $fd, $t
 		$rows = null;
 	}
 	
-	$result = json_encode( array('success'=>$success, 'rows' => $rows));
+	$result = json_encode( array('success'=>$success, 'rows' => $rows, 'reportURL' => $reportURL));
 	return $result;
 
 }

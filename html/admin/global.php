@@ -21,9 +21,9 @@ function callService($endpoint, $request)
 	return($response);
 }
 
-function callReportService($environment, $endpoint, $request) {
+function callReportService($endpoint, $request) {
 	$request_string = json_encode($request); 
-	$service = curl_init($environment.$endpoint);                                                                     
+	$service = curl_init("https://studio.dashboard.mdl.io/api/Report/".$endpoint);                                                                     
 	curl_setopt($service, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 	curl_setopt($service, CURLOPT_POSTFIELDS, $request_string);                                                                  
 	curl_setopt($service, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -71,7 +71,7 @@ function getToken($ACCOUNTID, $EMAIL, $PWD) {
         "UserPass"=> $PWD
     );
 	
-	$tokenRes = callReportService($environment,"Authenticate", $tokenReq);
+	$tokenRes = callReportService("Authenticate", $tokenReq);
 	$token = $tokenRes->{"Token"};
 	return $token;
 }

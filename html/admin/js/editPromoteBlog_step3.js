@@ -97,4 +97,8 @@ myApp.controller('step3', function($scope, $http) {
 		$("#addFilter"+filterID).hide();
 	}
 
+	$scope.disabledScheduleEmail = function (emailID) {
+		return sentEmail['E'+emailID+'F1'] && sentEmail['E'+emailID+'F2'] && sentEmail['E'+emailID+'F3'];
+	}
+
 });

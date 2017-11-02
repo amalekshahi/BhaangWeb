@@ -5,13 +5,13 @@
 	<!--<input type="text" name="auCount"  id="auCount" value="" readonly></td></tr>-->
 	<tr>
 		<td>
-			<strong><a data-pk="2" data-title="Email Name" data-type="text" data-url="" href="#" id="filter##filterid##Name"></a></strong>
+			<strong><a data-pk="2" data-title="Email Name" data-type="text" data-emptytext="Your List Name Goes Here ..." data-url="" href="#" id="filter##filterid##Name"></a></strong>
 			<!-- <small>
 				<i class="fa fa-pencil" aria-hidden="true"></i>
 			</small> -->
 		</td>
 		<td>
-			<select chosen multiple placeholder-text-multiple="'Choose Your Lists...'" ng-model="filter##filterid##List" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" ng-change="ArrangeFilter('##filterid##')">
+			<select ng-disabled="sentEmail['E1F##filterid##']" chosen multiple placeholder-text-multiple="'Choose Your Lists...'" ng-model="filter##filterid##List" ng-options="s.contactID as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items" ng-change="ArrangeFilter('##filterid##')">
 				<option value=""></option>
 			</select>
 			<span class="help-block m-b-none">Who are you sending to? Pick your targets for this sequence. </span>
@@ -29,14 +29,14 @@
 					</label>
 					<br>
 					<div class="input-group form-group-sm">
-						<input ng-disabled="disabledEmail['1']" type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE##filterid##-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE##filterid##-DATE" name="EMAIL1-SCHEDULE##filterid##-DATE" ng-change="dateChange('##filterid##')" required="">
-						<span id="datespan1-##filterid##" class="input-group-addon" onclick="showcalendar('##filterid##');">
+						<input ng-disabled="sentEmail['E1F##filterid##']" type="datetime" class="form-control" date-time ng-model="campaign['EMAIL1-SCHEDULE##filterid##-DATE']" view="date" auto-close="true" min-view="date" format="MM/DD/YYYY" id="EMAIL1-SCHEDULE##filterid##-DATE" name="EMAIL1-SCHEDULE##filterid##-DATE" ng-change="dateChange('##filterid##')" required="">
+						<span ng-show="!sentEmail['E1F##filterid##']" class="input-group-addon" onclick="showcalendar('##filterid##');">
 							<i class="fa fa-calendar"></i>
 						</span>
 					</div>
 					<div class="input-group form-group-sm clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
-						<input ng-disabled="disabledEmail['1']" type="text" class="form-control" id="EMAIL1-SCHEDULE##filterid##-TIME" name="EMAIL1-SCHEDULE##filterid##-TIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE##filterid##-TIME']" ng-change="dateChange('##filterid##')" required="">
-						<span id="clockspan1-##filterid##" class="input-group-addon">
+						<input ng-disabled="sentEmail['E1F##filterid##']" type="text" class="form-control" id="EMAIL1-SCHEDULE##filterid##-TIME" name="EMAIL1-SCHEDULE##filterid##-TIME" placeholder="" type="text" ng-model="campaign['EMAIL1-SCHEDULE##filterid##-TIME']" ng-change="dateChange('##filterid##')" required="">
+						<span ng-show="!sentEmail['E1F##filterid##']" class="input-group-addon">
 							<span class="fa fa-clock-o"></span>
 						</span>
 					</div>
@@ -82,10 +82,10 @@
 			</form>
 		</td>
 		<td>
-			<div class="widget  p-lg text-center" style="padding-bottom: 0px;padd-top: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 0px;">
+			<div ng-show="campaign.filter##filterid##Count > 0" class="widget  p-lg text-center" style="padding-bottom: 0px;padd-top: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 0px;">
 				<div class="m-b-md" style="margin-bottom: 0px;">
-					<i class="fa fa-user-circle-o fa-4x"></i>
-					<h1 class="m-xs">{{campaign.filter##filterid##Count}}</h1>
+					<i class="fa fa-user-circle-o fa-4x" ng-style="{'color': campaign.filter##filterid##Count > 0 ? 'green': ''}"></i>
+					<h1 class="m-xs">{{campaign.filter##filterid##Count | number}}</h1>
 					<h3 class="font-bold no-margins">People</h3>
 					<small>In this Schedule</small>
 				</div>
