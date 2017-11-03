@@ -31,7 +31,7 @@ $fp = fopen($dbfile, "w");
 fputs($fp, serialize($dbary_new));
 fclose($fp);
  
-$out = count($dbary_new); 
+$out = count($dbary_new) + 2; 
 return $out;
 }
  
