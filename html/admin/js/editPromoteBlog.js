@@ -303,7 +303,20 @@ myApp.controller('myCtrl', function($scope, $http) {
 			$scope.campaign['TEXT-LINE-ACCTID-PROGRAMID-CALLTOACTIONFROM'] = emailList;
 		}
 		
-		$scope.setSendTestDateTime();
+		var startDate = new Date();
+		var numberOfMinsToAdd = 0;
+		if (hasValue($scope.campaign.sendTestStart,'0')) {
+			numberOfMinsToAdd = parseInt($scope.campaign.sendTestStart);
+			startDate = addMinutes(startDate, numberOfMinsToAdd);
+		}
+		numberOfMinsToAdd = parseInt($scope.campaign.sendTestInterval);
+		var sendTest2Date = addMinutes(startDate, numberOfMinsToAdd);
+		var sendTest3Date = addMinutes(sendTest2Date, numberOfMinsToAdd);
+
+		var mtz = $scope.getMomentTimezone($scope.campaign['EMAIL1-SENDTEST-TIMEZONE']);
+		$scope.campaign['EMAIL1-SENDTEST-DATETIME'] = moment.tz(startDate, mtz).format('MM/DD/YYYY hh:mm:ss A');
+		$scope.campaign['EMAIL2-SENDTEST-DATETIME'] = moment.tz(sendTest2Date, mtz).format('MM/DD/YYYY hh:mm:ss A');
+		$scope.campaign['EMAIL3-SENDTEST-DATETIME'] = moment.tz(sendTest3Date, mtz).format('MM/DD/YYYY hh:mm:ss A');
 
         $http.put(dbEndPoint + "/" + dbName + '/' + campaignID, $scope.campaign).then(function(response) {
             $scope.campaign._rev = response.data.rev;
@@ -1177,24 +1190,21 @@ myApp.controller('myCtrl', function($scope, $http) {
         }
     };
 
-	$scope.setSendTestDateTime = function() {
-		var d = new Date();
-		var startDate = new Date();
-		var numberOfMinsToAdd = 0;
-		if (hasValue($scope.campaign.sendTestStart,'0')) {
-			numberOfMinsToAdd = parseInt($scope.campaign.sendTestStart);
-			startDate = addMinutes(startDate, numberOfMinsToAdd);
+	$scope.getMomentTimezone = function(tz) {
+		if (tz == 'Pacific Standard Time')	{
+			return 'America/Los_Angeles';
 		}
-		numberOfMinsToAdd = parseInt($scope.campaign.sendTestInterval);
-		var sendTest2Date = addMinutes(startDate, numberOfMinsToAdd);
-		var sendTest3Date = addMinutes(sendTest2Date, numberOfMinsToAdd);
-
-		$scope.campaign['EMAIL1-SENDTEST-DATETIME'] = moment(startDate).utc().format('MM/DD/YYYY hh:mm:ss A');
-		$scope.campaign['EMAIL2-SENDTEST-DATETIME'] = moment(sendTest2Date).utc().format('MM/DD/YYYY hh:mm:ss A');
-		$scope.campaign['EMAIL3-SENDTEST-DATETIME'] = moment(sendTest3Date).utc().format('MM/DD/YYYY hh:mm:ss A');
-    };
-		
-    $scope.Load();
+		if (tz == 'Mountain Standard Time')	{
+			return 'America/Denver';
+		}
+		if (tz == 'Central America Standard Time')	{
+			return 'America/Chicago';
+		}
+		if (tz == 'Eastern Standard Time')	{
+			return 'America/New_York';
+		}
+	}
+	$scope.Load();
 });
 
 function convertTime(timeString) {

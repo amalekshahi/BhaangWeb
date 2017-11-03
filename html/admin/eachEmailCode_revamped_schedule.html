@@ -210,11 +210,11 @@
 						<form class="form-inline">
 							<div class="input-group form-group-sm">
 								<!--<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>-->
-			<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestDateChange()" ng-model="campaign.sendTestStart">
+			<select class="form-control input-sm" placeholder-text-single="'Pick a sender (replies go here too)'" ng-change="sendTestTimeChange()" ng-model="campaign.sendTestStart">
 									<option value="0">Now</option>
 									<option value="5">in 5 minutes</option>
 									<option value="10">in 10 minutes</option>
-									<option disabled>At HH:MM</option>
+									<option value="specific" disabled>At HH:MM</option>
 								</select>
 		</div><small> send to </small>
 		<div class="input-group form-group-sm">
@@ -227,7 +227,7 @@
 									<option>These email addresses: </option>
 								</select> -->
 			<select class="form-control input-sm" placeholder-text-single="'Pick a sender'" ng-model="campaign['EMAIL-SENDTEST-FILTER']" style="width: 100%;height: 30px;" ng-options="s['LIST-DEFINITION'] as s['LIST-NAME']+' ['+s['LIST-COUNT']+' people]' for s in audience.items | filter: lessThan('LIST-COUNT', 10)">
-									<option value="">These email addresses: </option>
+									<option value="" disabled>These email addresses: </option>
 								</select>
 		</div><small> and&nbsp;wait </small>
 		<div class="input-group form-group-sm">
