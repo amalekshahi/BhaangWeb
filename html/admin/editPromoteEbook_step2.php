@@ -47,7 +47,7 @@
 												 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 											</div>
 											
-												<div class="col-xs-2">
+												<div class="col-xs-3">
 													<div class="input-group form-group-sm">
 													<span class="input-group-addon">
 														<i class="fa fa-file" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
 													</select>
 												</div>
 												</div>
-												<div class="col-xs-2">
+												<div class="col-xs-3">
 													<div class="input-group form-group-sm">
 														<span class="input-group-addon">
 														<i class="fa fa-align-justify" aria-hidden="true"></i>
@@ -71,7 +71,7 @@
 													</select> -->
 												</div>
 											</div>
-												<div class="col-sx-2">
+												<div class="col-sx-4">
 													<a class="btn btn-white fullscreen-link btn-sm"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
 													<a href="#" class="btn btn-white btn-sm" role="button"><i class="fa fa-download" aria-hidden="true"></i> Download HTML</a>
 												</div>
@@ -102,7 +102,7 @@
 												<a
 												 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 											</div>
-											<div class="col-xs-2">
+											<div class="col-xs-3">
 												<div class="input-group form-group-sm">
 													<span class="input-group-addon">
 														<i class="fa fa-file" aria-hidden="true"></i>
@@ -113,7 +113,7 @@
 												</select>
 											</div>
 											</div>
-											<div class="col-xs-3">
+											<div class="col-xs-4">
 													<a class="btn btn-white fullscreen-link btn-sm"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
 													<a href="#" class="btn btn-white btn-sm" role="button"><i class="fa fa-download" aria-hidden="true"></i> Download HTML</a>
 											</div>
