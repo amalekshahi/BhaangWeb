@@ -114,6 +114,22 @@
 			<!-- End New -->
 			<!-- Old from here down -->
 		</div>
+
+		<div aria-hidden="true" class="modal fade" id="modal-form">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">
+							<input type="text" class="form-control" id="specificTime" name="specificTime" placeholder="" type="text">
+							<span id="specificClock" class="input-group-addon">
+								<span class="fa fa-clock-o"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Move to here for fix bug each step not have margin-top because css .panel-group .panel+.panel -->
 		<script src="js/editPromoteBlog_step2.js"></script>
 		<style>

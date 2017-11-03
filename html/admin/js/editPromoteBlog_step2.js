@@ -34,7 +34,7 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
     $scope.emlIndex = 0;
     $scope.maxEmail = 0;
     $scope.emailList = [];
-    $scope.sendTestContactSelected = "";
+    $scope.sendTestContactSelected = "";	
     $scope.newTab = function(tab) {
         //emlIndex = parseInt($scope.campaign.totalEmail)+1;
         $scope.emailList.push(emails[$scope.emlIndex]);
@@ -238,6 +238,28 @@ myApp.controller('step2', ['$scope', '$http', 'Upload', function($scope, $http, 
 		  return item[prop] <= val;
 		}
 	}
+
+	$scope.sendTestTimeChange = function(){
+		if (hasValue($scope.campaign.sendTestStart) && $scope.campaign.sendTestStart == 'specific') {
+			/*swal({
+				title: 'What is your send test time?',
+				html: '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.css" />'
+						+'<script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.js"></script>' 
+						+'<div class="input-group clockpicker" clock-picker data-autoclose="true" data-placement="left" data-align="top">'
+							+'<input type="text" class="form-control" id="specificTime" name="specificTime" placeholder="" type="text">'
+							+'<span id="specificClock" class="input-group-addon">'
+								+'<span class="fa fa-clock-o"></span>'
+							+'</span>'
+						+'</div>',
+				showCancelButton: true,
+			}).then($scope.specificSendTestTime);*/
+			$('#modal-form').modal();
+		}
+    };
+
+	$scope.specificSendTestTime = function(){
+        swal('OK');
+    };
 
     $scope.LoadSendTestContact();
 }]);
