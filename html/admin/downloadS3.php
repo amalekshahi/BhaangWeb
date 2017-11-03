@@ -7,16 +7,7 @@ $expandFolder = $_GET['initFolder'];     //"Images/ddd/...";
 
 //echo "start<br>"; 
 
-$folderArrs = s3_getchild_asset($dbName,"/"); 
-
-$orders  = ["Images","Videos","Audio","Documents","Emails","Web Pages"];
-$sections = array(); 
-/*
-$pieces = explode("/", $hostpath);
-if( count($pieces) > 1 ){
-	$expandFolder = $pieces[0]; 
-}
-*/ 
+$folderArrs = s3_download_asset($dbName,"/"); 
 
 foreach ($orders as $order) {		
 		$hasHeader = false; 
@@ -29,8 +20,7 @@ foreach ($orders as $order) {
 				$folderpath = $folderArr["fpath"]  ;  //  "/Images/"
 				$fullpath = $folderArr["fullpath"]  ; 
 				$pos = strpos( $folderpath ,  "/" . $order . "/");
-				
-				//echo "order[" ."/" . $order . "/" . "] = path[" .  $folderpath . "] = pos[" . $pos . "]<br>"; 
+				//echo "order[" . $order . "] = path[" .  $folderpath . "] = pos[" . $pos . "]<br>"; 
 				
 				if ($pos !== false) { //found
 
@@ -43,16 +33,13 @@ foreach ($orders as $order) {
 								//has header	
 								array_push($TuArr,array(
 									'name'=>$subfolder,										
-								)); 	
-								
+								)); 			
 								//var_dump($TuArr); 
 
 							}else{   //noheader			
 								$hasHeader = true ; 
 								$header = $order; 
-								
-								//echo "<br><br>add Header>>" .$header . "<br>" ; 
-
+								//echo "<br>add Header>>" .$header . "<br>" ; 
 							}			
 					
 				}else{
