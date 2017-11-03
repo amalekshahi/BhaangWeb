@@ -113,13 +113,40 @@ angular.module('davinci', [])
 .directive('usersActive', function () {
   
     var directive = {};
-    directive.restrict = 'E'; /* restrict this directive to elements */
-    directive.template = '{{people}} Users are logged in now'
+    directive.restrict = 'E'; 
+    directive.template = '<img src="https://cdn1.iconfinder.com/data/icons/unique-round-blue/93/group-128.png" width="20"> {{message}}'
     directive.scope = {
     };
   
-  directive.controller = ['$scope', '$http', function($scope, $http){
-    $scope.people = "30";
-  }];
-  return directive;
+    directive.controller = ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
+      $http({
+        method: 'GET',
+        url: 'https://api.chartbeat.com/live/toppages/v3/?apikey=377d6d7bd5f197ac3eab56c632fc1ab2&host=mindfireinc.com'
+      }).then(function successCallback(response) {
+        console.log(response.data);
+        var length = Object.keys(response.data.pages).length;
+        var people = 0; // Hey, no cheating! :)
+        for (var i=0; i < length; ++i) {
+          if (response.data.pages[i].path.includes("vinci")) {
+           people += response.data.pages[i].stats.people;
+          }
+        }
+        $scope.people = parseInt(people);
+        if (people ===0) {
+          $scope.message = "Da Vinci is all alone."
+        }
+        
+        if (people ===1) {
+          $scope.message = "Are you lonely?  You're the only User logged in right now."
+        }
+        
+        if (people > 1) {
+          $scope.message = people.toLocaleString() + " other Users are also logged in right now";
+        }
+
+      }, function errorCallback(response) {
+        console.log("We got an error.");
+      });
+    }];
+    return directive;
 });
