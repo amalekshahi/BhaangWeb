@@ -46,8 +46,8 @@
 												<a
 												 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 											</div>
-											<div class="col-xs-6" style="padding-left: 0px;padding-right: 0px;">
-												<div class="col-xs-4">
+											
+												<div class="col-xs-2">
 													<div class="input-group form-group-sm">
 													<span class="input-group-addon">
 														<i class="fa fa-file" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
 													</select>
 												</div>
 												</div>
-												<div class="col-xs-4">
+												<div class="col-xs-2">
 													<div class="input-group form-group-sm">
 														<span class="input-group-addon">
 														<i class="fa fa-align-justify" aria-hidden="true"></i>
@@ -71,12 +71,10 @@
 													</select> -->
 												</div>
 											</div>
-												<div class="col-sx-4">
+												<div class="col-sx-2">
 													<a class="btn btn-white fullscreen-link btn-sm"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
 													<a href="#" class="btn btn-white btn-sm" role="button"><i class="fa fa-download" aria-hidden="true"></i> Download HTML</a>
 												</div>
-											</div>
-											<br><br>
 										</div>
 										<div class="ibox-content">
 											<div class="window">
@@ -99,17 +97,25 @@
 									</div>
 									<div class="tab-pane" id="tab-2">
 										<div class="mail-box-header">
-											<!--<a href="" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="I'll send you a test of this email to daver@mindfireinc.com"><i class="fa fa-share-square-o"></i> Preview</a>-->
 											<div class="pull-right tooltip-demo">
-												<a class="btn btn-white fullscreen-link"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
 												<button class="btn btn-primary" ng-click="Save('ThankYou')"><i class="fa fa-floppy-o" ng-show="state['Save'] == 'Save'"></i><span ng-show="state['Save'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['Save']}} Page</button>
 												<a
 												 class="btn btn-white" data-placement="top" data-toggle="tooltip" title="Leave without saving" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</a>
 											</div>
-											<div class="col-xs-4">
-												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" style="width: 100%;height: 30px;">
+											<div class="col-xs-2">
+												<div class="input-group form-group-sm">
+													<span class="input-group-addon">
+														<i class="fa fa-file" aria-hidden="true"></i>
+													</span>
+												<select ng-model="campaign.templateThankYou" ng-change="SelectChanged('viewThankYou','templateThankYou')" class="form-control input-sm">
+												<option value="" selected>Select a page template ...</option>
 												<option ng-repeat="x in templatesThankYou" value="{{x.content}}">{{x.title}}</option>
 												</select>
+											</div>
+											</div>
+											<div class="col-xs-3">
+													<a class="btn btn-white fullscreen-link btn-sm"><i class="fa fa-arrows-alt"></i> Edit in Full Screen</a>
+													<a href="#" class="btn btn-white btn-sm" role="button"><i class="fa fa-download" aria-hidden="true"></i> Download HTML</a>
 											</div>
 											<br><br>
 										</div>
