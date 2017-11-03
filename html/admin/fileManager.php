@@ -51,7 +51,7 @@
  -->
 										<div class="css-treeview">
 											<ul ng-repeat="section in sections">		  
-												  <li><input type="checkbox" id="item-1" /><label for="item-1"></label><a href="fileManager.php?folder={{section.name}}">{{section.name}}</a>
+												  <li><input type="checkbox" id="item-{{section.name}}" ng-checked="section.checkOpt=='checked'" /><label for="item-{{section.name}}"></label><a href="fileManager.php?folder={{section.name}}">{{section.name}}</a>
 														<ul ng-if="section.tutorials.length!='0'">     
 																<li ng-repeat="tutorial in section.tutorials">
 																	<i class="fa fa-folder-o" style="color:gray;"></i>&nbsp;&nbsp;<a href="fileManager.php?folder={{section.name}}/{{tutorial.name}}">{{tutorial.name}}</a>
@@ -93,11 +93,12 @@
 											<div class="ibox-content">
 												<div class="ibox-tools pull-left">				
 												
-													<button class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
+												<!-- 
+													<button class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button> -->
 													<!-- ngf-max-size='5242880' -->			
 
 													<!-- host ["Images","Videos","Audio","Documents","Emails","Web Pages"]; -->
-<!-- 
+
 													<button ng-if="host=='Images'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
 
 													<button ng-if="host=='Videos'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="Video/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
@@ -109,7 +110,7 @@
 													<button ng-if="host=='Emails'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="application/hta,image/*" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
 
 													<button ng-if="host=='Web Pages'" class="btn btn-white btn-xs" ng-model="file" ngf-select="upload($file,'001')" href="" data-toggle="tooltip" data-placement="top" title="Upload and replace this email's hero image." accept="application/hta" ><i aria-hidden="true" class="fa fa-cloud-upload"></i> Upload</button>
- -->
+
 <!-- end host -->
 
 													<button class="btn btn-white btn-xs" ng-click="NewFolderClick('')"><i aria-hidden="true" class="fa fa-plus-circle"></i> New Folder</button>
@@ -121,7 +122,9 @@
 														<option value="Delete" class="underConstruction">Delete</option>
 														<option value="Move" class="underConstruction">Move</option>
 													</select>											
-													
+
+													<!-- <button class="btn btn-white btn-xs" onclick="test()">test</button> -->
+
 												</div>&nbsp;&nbsp;
 												<i ng-show="state['showfile'] != 'finish'"></i><span ng-show="state['showfile'] == 'loading'"><i class="glyphicon glyphicon-refresh spinning"></i></span>												
 												<i ng-show="state['UpdFiles'] != 'uploading'"></i><span ng-show="state['UpdFiles'] == 'uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span> 
@@ -169,14 +172,11 @@
 																			  <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as read"><i class="fa fa-cogs" aria-hidden="true"></i></button>  
 																			</a>
 																			<ul class="dropdown-menu dropdown-user">
-																				<li><a href="#"  ng-click="copyToClipboard(file.ID);">Grab URL</a>
-																				</li>
-																				<li><a href="#" ng-click="DeleteFileConfirm(file.ID);">Delete</a>
-																				</li>
-																				<li><a href="#" class="underConstruction">Replace</a>
-																				</li>
-																				<li><a href="#" class="underConstruction">Rename</a>
-																				</li>
+																				<li><a href="#"  ng-click="copyToClipboard(file.ID);">Grab URL</a></li>
+																				<li><a href="#" ng-click="DeleteFileConfirm(file.ID);">Delete</a></li>
+																				<!-- <li><a href="#" ng-click="DownloadS3(file.ID);">Download</a></li> -->
+																				<li><a href="#" class="underConstruction">Replace</a></li>
+																				<li><a href="#" class="underConstruction">Rename</a></li>
 
 																			</ul>
 																		<!-- </div> -->
@@ -235,6 +235,11 @@
 <!-- Page-Level Scripts -->
 <script type="text/JavaScript" src="global.js?n=1"></script> 
 <script>
+function test() {
+	$("#item-Audio").attr("checked", true);
+}
+
+
 	function uuidv4() {
 		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 			var r = Math.random() * 16 | 0,
