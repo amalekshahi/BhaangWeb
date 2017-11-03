@@ -123,11 +123,11 @@ angular.module('davinci', [])
         method: 'GET',
         url: 'https://api.chartbeat.com/live/toppages/v3/?apikey=377d6d7bd5f197ac3eab56c632fc1ab2&host=mindfireinc.com'
       }).then(function successCallback(response) {
-        console.log(response.data);
+        //console.log(response.data);
         var length = Object.keys(response.data.pages).length;
         var people = 0; // Hey, no cheating! :)
         for (var i=0; i < length; ++i) {
-          if (response.data.pages[i].path.includes("vinci")) {
+          if (response.data.pages[i].path.includes("vinci") || response.data.pages[i].path.includes("GetReport")) {
            people += response.data.pages[i].stats.people;
           }
         }
