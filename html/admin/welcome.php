@@ -13,7 +13,6 @@
 
 	<body class="fixed-sidebar">
 		<?php include "afterBody.php"; ?>
-		<?php include "getUserCount.php"; ?>
 		<script>
 			// welcome.js need this
 			var dbName = "<?php echo $dbName; ?>";

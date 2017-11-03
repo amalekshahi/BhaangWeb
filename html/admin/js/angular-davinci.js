@@ -1,4 +1,5 @@
 angular.module('davinci', [])
+
 .directive('accountSwitch', function() {
     var directive = {};
     directive.restrict = 'E'; /* restrict this directive to elements */
@@ -13,7 +14,7 @@ angular.module('davinci', [])
             passWord: $window.passWord,
         }
 
-         $scope.Login = function() {
+        $scope.Login = function() {
             $scope.alert = false;
             if (typeof $scope.state == 'undefined') {
                 $scope.CheckLogin();
@@ -23,7 +24,6 @@ angular.module('davinci', [])
                 $scope.RealLogin();
             }
         };
-     
       
         $scope.CheckLogin = function() {
          
@@ -107,4 +107,19 @@ angular.module('davinci', [])
 
     }];
     return directive;
+})
+
+// Dave created this to show # of logged in Users
+.directive('usersActive', function () {
+  
+    var directive = {};
+    directive.restrict = 'E'; /* restrict this directive to elements */
+    directive.template = '{{people}} Users are logged in now'
+    directive.scope = {
+    };
+  
+  directive.controller = ['$scope', '$http', function($scope, $http){
+    $scope.people = "30";
+  }];
+  return directive;
 });
