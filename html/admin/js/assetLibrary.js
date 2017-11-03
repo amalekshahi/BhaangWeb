@@ -6,8 +6,9 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 					$scope.showPreviewFile = file;
 		  }; 
 		  //$scope.folders = ["Images","HTML Emails","HTML Pages", "eBooks", "Videos", "Blueprint Defaults"];
-		  $scope.folders = ["Images","Videos","Audio","Documents","Emails","Web Pages"];
-		  $scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  		
+		  //$scope.folders = ["Images","Videos","Audio","Documents","Emails","Web Pages"];
+		  //$scope.tags = ["Prospect content", "Client content", "Internal stuff", "Mac-only"];  	
+		  $scope.state = {"showfile":"finish","UpdFiles":"finish","delFile":"finish"};
 
 		  $scope.upload = function (file,emlID) {
 					var fname = ""; 
@@ -93,29 +94,6 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 			};// end NewFolderClickOK
 
 			$scope.DeleteFileConfirm = function (fID) {
-					/*
-					swal({
-						  title: 'Are you sure?',
-						  text: "You won't be able to revert this!",
-						  type: 'warning',
-						  showCancelButton: true,
-						  confirmButtonColor: '#3085d6',
-						  cancelButtonColor: '#d33',
-						  confirmButtonText: 'Yes, delete it!',
-						  cancelButtonText: 'No, cancel!',
-						  confirmButtonClass: 'btn btn-success',
-						  cancelButtonClass: 'btn btn-danger',
-						  buttonsStyling: false
-					 },
-					function(isConfirm){
-						  if (isConfirm) {
-								$scope.DeleteFile(fID); 
-						  } else {
-								swal("Cancelled", "Your imaginary file is safe :)", "error");
-						  }
-					});
-					*/ 
-
 					swal({
 						  title: 'Are you sure?',
 						  text: "You won't be able to revert this!",
@@ -168,35 +146,7 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 				  copyClipboard(x); 
 			};// end copyToClipboard
 
-/*
-			$scope.GenFile = function(fileLists) {
-				var genFileArr = []; 
-				for(i=0;i<fileLists.length;i++){
-						var namefile = fileLists[i]; 
-						var nameFilePath = "https://bkktest.s3.amazonaws.com/tmp/17124/stage/Images/"; 
-						var fullnamefile = nameFilePath+namefile; 
-						//console.log(" i["+i+"]  ="+namefile); 
-						var fileDetail = { 
-							"fileName":fullnamefile,
-							"friendlyName":namefile
-						}
-//						$scope.files.push({
-						genFileArr.push({
-							"Name":fileDetail,
-							"Thumbnail":fullnamefile,
-							"Description":"This one is picture description.",
-							"Type":"Image",
-							"Size": "11k",
-							"URI": fullnamefile,
-							"Dimensions":"99 x 71"
-						});
-						
-				}//end for
-				return genFileArr; 
-			}; 
-*/ 
-
-			$scope.state = {"showfile":"finish","UpdFiles":"finish","delFile":"finish"};
+			
 
 			$scope.Load = function() {
 				//alert("Load"); 
@@ -204,12 +154,12 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 				if(pathfolder == "" || pathfolder == "undefined"){
 					pathfolder = "Images"; 
 				}
-
+				$scope.folderArr = pathfolder.split("/");
+				$scope.host = $scope.folderArr[0]; 
+				console.log( " host = "+ $scope.host  );  										
+	
 				$('#initFolder').val(pathfolder); 
-				$('#initAccID').val(accID); 
-				$scope.host = pathfolder; 
-				//console.log( " accID = "+ $('#initAccID').val() );  
-				//$('#initAccID').val("17124"); 
+				$('#initAccID').val(accID); 				
 				var form_data = $("#initForm").serialize();
 				$scope.state['showfile'] = "loading";
 				$.ajax({
@@ -237,21 +187,34 @@ assetLibrary.controller('assetList', ['$scope', '$http', 'Upload', function($sco
 				 }).then(function(resp) {									
 					$scope.state['showfile'] = "finish";
 				});
+
 			};// end Load
 
 			$scope.GetChildrenFolder = function(){				
-					$http.get("getChildS3.php?initAccID=" + accID).then(function(response){
+					$http.get("getChildS3.php?initAccID=" + accID+ "&initFolder=" + $scope.host).then(function(response){
 								if(response.data.success){							
-									$scope.sections = response.data.sections; 
+									$scope.sections = response.data.sections; 									
 								}else{
 									$scope.sections = []; 
 								}	
 					});			
 
 			}; //GetChildrenFolder
-			
-			$scope.GetChildrenFolder(); 
+
+			$scope.DownloadS3 = function(){				
+					$http.get("downloadS3.php?initAccID=" + accID+ "&initFolder=" + $scope.host).then(function(response){
+								if(response.data.success){							
+									$scope.sections = response.data.sections; 									
+								}else{
+									$scope.sections = []; 
+								}	
+					});			
+
+			}; //DownloadS3
+
 			$scope.Load(); 			 
+			$scope.GetChildrenFolder(); 
+			
 			  
 
 }]);// end assetList

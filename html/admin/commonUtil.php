@@ -867,6 +867,7 @@ function s3_get_asset($dbName,$folder)
 		$path = str_replace("/tmp", "tmp", $path);	
 		$path = $path . $folder; 
 		//echo "<br>path = $path<br>"; 
+
 		$client = S3Client::factory(array(
 			'credentials' => array(
 				'key'    => AWSKEY,
@@ -878,16 +879,26 @@ function s3_get_asset($dbName,$folder)
 			"Prefix" =>  $path,
 			//"Delimiter" => "/",
 		));
+		
+		//var_dump($objects);
 
+		
 		if (empty($objects)) {
+			//echo "<br>empty<br>"; 
 			 return ""; 
-		}else{
+		}else{			
+			//var_dump($objects); 
+			//echo "<br>HHHHH count = " . count($objects) . "<br>"; 
+
 			$fileArr = array() ; 
 			$cnt=0; 
 			$size=0; 
 			$firstDir=true; 
 			
 			foreach ($objects as $object) {
+				
+				//var_dump($object); 
+
 				$cnt ++; 
 				$filename = basename($object['Key']); 
 

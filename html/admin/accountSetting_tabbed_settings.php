@@ -83,7 +83,7 @@
 											</ul>
 											<div class="tab-content">
 												<form role="form">
-												<div class="tab-pane" id="tab-users">
+													<div class="tab-pane" id="tab-users">
 														<div class="panel-body">
 															<h2><i class="fa fa-user" aria-hidden="true"></i> Users at <?php echo $accountName;?></h2>
 															<fieldset class="form-horizontal">
@@ -154,39 +154,60 @@
 												</div>
 												<div class="tab-pane active" id="tab-your-company">
 													<div class="panel-body">
-														<fieldset class="form-horizontal">
-														<h2>Company Global Settings</h2>
-															<div class="form-group"><label class="col-sm-4 control-label">Official Name <br><small class="text-muted">This is how your company will be referenced in all communications, including email, landing pages, and Social.</small></label>
-																<div class="col-sm-8"><br><input type="text" class="form-control" placeholder="Company Name" name="defCompanyName" ng-model="userinfo.defCompanyName">
-																	<span class="help-block m-b-none"></span> </div>
-															</div>
-															<div class="form-group"><label class="col-sm-4 control-label">Address <br><small class="text-muted">This address is used when displaying your company's contact information.</small></label>
-																<div class="col-sm-8"><br>
-																	<input type="text" class="form-control" placeholder="Company Address" name="defCompanyAddress" ng-model="userinfo.defCompanyAddress">
-																	<span class="help-block m-b-none"></span> </div>
-															</div>
-															<div class="form-group"><label class="col-sm-4 control-label">Phone # <br><small class="text-muted">This address is used when displaying your company's phone number.  Make sure someone answers!</small></label>
-																<div class="col-sm-8"><br>
-																	<input type="text" class="form-control" placeholder="Company Phone" name="defCompanyPhone" ng-model="userinfo.defCompanyPhone">
-																	<span class="help-block m-b-none"></span> </div>
-															</div>
-															<div class="form-group"><label class="col-sm-4 control-label">Logo <br><small class="text-muted">This logo is used in all communications, including emails, landing pages, Social, and more.</small></label>
-																<div class="col-sm-8"><br>
-																	<a ng-model="file" ngf-select="upload($file,'defCompanyLogo')" href="" style="vertical-align: top;" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload-defCompanyLogo'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload-defCompanyLogo'] != 'Uploading'"></i> Change Logo ...</a>
-																	<img ng-src="{{srcCompanyLogo}}" width="180px" border="0" alt="logo">
-																	<span class="help-block m-b-none"></span> </div>
-															</div>
-															<div class="form-group"><label class="col-sm-4 control-label">Your Organization's Timezone <br><small class="text-muted">This timezone is used for your scheduled communications, like emails.  Changing this impacts all Users of your organization.</small></label>
-																<div class="col-sm-8"> <br><select ng-disabled="disabledEmail['1']" class="form-control" id="Timezone" name="Timezone" ng-model="userinfo.defTimezone" required="" style="width: 150px">
-																	<option value="Pacific Standard Time" >Pacific Time</option> 
-																	<option value="Mountain Standard Time">Mountain Time</option> 
-																	<option value="Central America Standard Time">Central Time</option> 
-																	<option value="Eastern Standard Time">Eastern Time</option>
-																</select>
-																	<span class="help-block m-b-none"></span>
+														<form name="myForm" method="post" class="form-horizontal">
+															<fieldset class="form-horizontal">
+															<h2>Company Global Settings</h2>
+																<div class="form-group"><label class="col-sm-4 control-label">Official Name <br><small class="text-muted">This is how your company will be referenced in all communications, including email, landing pages, and Social.</small></label>
+																	<div class="col-sm-8"><br><input type="text" class="form-control" placeholder="Company Name" name="defCompanyName" ng-model="userinfo.defCompanyName">
+																		<span class="help-block m-b-none"></span> </div>
+																</div>
+																<div class="form-group"><label class="col-sm-4 control-label">Address <br><small class="text-muted">This address is used when displaying your company's contact information.</small></label>
+																	<div class="col-sm-8"><br>
+																		<input type="text" class="form-control" placeholder="Company Address" name="defCompanyAddress" ng-model="userinfo.defCompanyAddress">
+																		<span class="help-block m-b-none"></span> </div>
+																</div>
+																<div class="form-group"><label class="col-sm-4 control-label">Phone # <br><small class="text-muted">This address is used when displaying your company's phone number.  Make sure someone answers!</small></label>
+																	<div class="col-sm-8"><br>
+																		<input type="text" class="form-control" placeholder="Company Phone" name="defCompanyPhone" ng-model="userinfo.defCompanyPhone">
+																		<span class="help-block m-b-none"></span> </div>
+																</div>
+																<div class="form-group"><label class="col-sm-4 control-label">Logo <br><small class="text-muted">This logo is used in all communications, including emails, landing pages, Social, and more.</small></label>
+																	<div class="col-sm-8"><br>
+																		<a ng-model="file" ngf-select="upload($file,'defCompanyLogo')" href="" style="vertical-align: top;" class="btn btn-default btn-file" data-toggle="tooltip" data-placement="top" title="I'll upload and replace image of this email "><span ng-show="state['Upload-defCompanyLogo'] == 'Uploading'"><i class="glyphicon glyphicon-refresh spinning"></i></span><i class="fa fa-cloud-upload" ng-show="state['Upload-defCompanyLogo'] != 'Uploading'"></i> Change Logo ...</a>
+																		<img ng-src="{{srcCompanyLogo}}" width="180px" border="0" alt="logo">
+																		<span class="help-block m-b-none"></span> </div>
+																</div>
+																<div class="form-group"><label class="col-sm-4 control-label">Button Color <br><small class="text-muted"></small></label>
+																	<div class="col-sm-8"><br>
+																		<color-picker options="colorPickerOptions" ng-model="userinfo.defButtonColor"></color-picker>
+																		<span class="help-block m-b-none">Default button color</span>  
+																	</div>
+																</div>
+																<div class="form-group"><label class="col-sm-4 control-label">Your Organization's Timezone <br><small class="text-muted">This timezone is used for your scheduled communications, like emails.  Changing this impacts all Users of your organization.</small></label>
+																	<div class="col-sm-8"> <br><select ng-disabled="disabledEmail['1']" class="form-control" id="Timezone" name="Timezone" ng-model="userinfo.defTimezone" required="" style="width: 150px">
+																		<option value="Pacific Standard Time" >Pacific Time</option> 
+																		<option value="Mountain Standard Time">Mountain Time</option> 
+																		<option value="Central America Standard Time">Central Time</option> 
+																		<option value="Eastern Standard Time">Eastern Time</option>
+																	</select>
+																		<span class="help-block m-b-none"></span>
+																	</div>
+																</div>
+															</fieldset>
+															<div class="hr-line-dashed"></div>         												
+															<div class="form-group">
+																<div class="col-sm-4 col-sm-offset-2">
+																	<input type="hidden" name="action" value="saveProfileSettings">
+																	<button ng-disabled="myForm.$pristine" class="btn btn-primary" ng-click="Save()" ><i class="fa fa-floppy-o" ng-show="state['SaveAccountSetting'] == 'Save'"></i><span ng-show="state['SaveAccountSetting'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['SaveAccountSetting']}}</button>
+																	<button ng-disabled="myForm.$pristine" class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
 																</div>
 															</div>
-														</fieldset>
+															<div ng-show="saveSuccess && myForm.$pristine"  ng-cloak>
+																<div class="alert alert-success">
+																<strong> Success! </strong> Save success.
+																</div>
+															</div>
+														</form>
 													</div>
 												</div>
 												<div class="tab-pane" id="tab-grading-and-scoring">
@@ -211,6 +232,7 @@
 												</div>	
 												<div class="tab-pane" id="tab-email-settings">
 													<div class="panel-body">
+														<form name="myForm" method="post" class="form-horizontal">
 														<fieldset disabled>
 															<h2>Global Email Settings</h2>
 															<div class="form-group"><label class="col-sm-4 control-label">Email Protection <span class="label">COMING SOON</span><br><small class="text-muted">This is a global setting that protects you from sending more emails that appropriate to your database.</small></label>
@@ -236,6 +258,21 @@
 																	<span class="help-block m-b-none"></span> </div>
 															</div>
 														</fieldset>
+														<div class="hr-line-dashed"></div>            
+												
+														<div class="form-group">
+															<div class="col-sm-4 col-sm-offset-2">
+																<input type="hidden" name="action" value="saveProfileSettings">
+																<button ng-disabled="myForm.$pristine" class="btn btn-primary" ng-click="Save()" ><i class="fa fa-floppy-o" ng-show="state['SaveAccountSetting'] == 'Save'"></i><span ng-show="state['SaveAccountSetting'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['SaveAccountSetting']}}</button>
+																<button ng-disabled="myForm.$pristine" class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
+															</div>
+														</div>
+														<div ng-show="saveSuccess && myForm.$pristine"  ng-cloak>
+															<div class="alert alert-success">
+															<strong> Success! </strong> Save success.
+															</div>
+														</div>
+													</form>
 													</div>
 												</div>									
 												<div class="tab-pane" id="tab-you">
@@ -245,6 +282,7 @@
 												</div>
 												<div class="tab-pane" id="tab-3rd-party-products">
 													<div class="panel-body">
+														<form name="myForm" method="post" class="form-horizontal">
 														<h2><i class="fa fa-google" aria-hidden="true" style="color:red"></i> Google</h2>
 														<fieldset class="form-horizontal">
 															<div class="form-group">
@@ -267,6 +305,21 @@
 																	<span class="help-block m-b-none"><a href="https://www.facebook.com/business/help/952192354843755" target="_blank">Where to find your Facebook Pixel ID</a>.</span>
 																</div>
 															</div>
+															<div class="hr-line-dashed"></div>            
+												
+															<div class="form-group">
+																<div class="col-sm-4 col-sm-offset-2">
+																	<input type="hidden" name="action" value="saveProfileSettings">
+																	<button ng-disabled="myForm.$pristine" class="btn btn-primary" ng-click="Save()" ><i class="fa fa-floppy-o" ng-show="state['SaveAccountSetting'] == 'Save'"></i><span ng-show="state['SaveAccountSetting'] == 'Saving'"><i class="glyphicon glyphicon-refresh spinning"></i></span> {{state['SaveAccountSetting']}}</button>
+																	<button ng-disabled="myForm.$pristine" class="btn btn-white" ng-click="Cancel()"><i class="fa fa-ban"></i> Cancel</button>
+																</div>
+															</div>
+															<div ng-show="saveSuccess && myForm.$pristine"  ng-cloak>
+																<div class="alert alert-success">
+																<strong> Success! </strong> Save success.
+																</div>
+															</div>
+														</form>
 													</div>
 												</div>
 												<div class="tab-pane" id="tab-tracking-code">

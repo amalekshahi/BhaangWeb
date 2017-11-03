@@ -85,7 +85,8 @@
 											</div>
 											<div class="col-xs-8 text-right">
 												<span> Delivered </span>
-												<h2 class="font-bold">{{campaign.reportSumaryDelivered | number}} ({{campaign.reportSumaryDeliveredRate | number:0}}%)</h2>
+												<h2 class="font-bold" ng-show="ShowDelivered!=0">{{campaign.reportSumaryDelivered | number}} ({{campaign.reportSumaryDeliveredRate | number:0}}%)</h2>
+												<h2 class="font-bold" ng-show="ShowDelivered==0">{{campaign.reportSumaryDelivered | number}}</h2>
 											</div>
 										</div>
 									</div>
@@ -96,7 +97,8 @@
 											</div>
 											<div class="col-xs-8 text-right">
 												<span> Opens </span>
-												<h2 class="font-bold">{{campaign.reportSumaryOpened | number}} ({{campaign.reportSumaryOpenedRate | number:0}}%)</h2>
+												<h2 class="font-bold" ng-show="ShowOpened!=0">{{campaign.reportSumaryOpened | number}} ({{campaign.reportSumaryOpenedRate | number:0}}%)</h2>
+												<h2 class="font-bold" ng-show="ShowOpened==0">{{campaign.reportSumaryOpened | number}}</h2>
 											</div>
 										</div>
 									</div>
@@ -107,7 +109,8 @@
 											</div>
 											<div class="col-xs-8 text-right">
 												<span> Clicks to Blog Post </span>
-												<h2 class="font-bold">{{campaign.reportSumaryClicked | number}} ({{campaign.reportSumaryClickedRate | number:0}}%)</h2>
+												<h2 class="font-bold" ng-show="ShowClicked!=0">{{campaign.reportSumaryClicked | number}} ({{campaign.reportSumaryClickedRate | number:0}}%)</h2>
+												<h2 class="font-bold" ng-show="ShowClicked==0">{{campaign.reportSumaryClicked | number}}</h2>
 											</div>
 										</div>
 									</div>
@@ -118,7 +121,7 @@
 											</div>
 											<div class="col-xs-8 text-right">
 												<span> Conversions </span>
-												<h2 class="font-bold">{{campaign.reportSumaryConversions | number}} ({{campaign.reportSumaryConversionsRate | number:0}}%)</h2>
+												<h2 class="font-bold">{{campaign.reportSumaryConversions | number}} ({{campaign.reportSumaryConversionsRate | number:0}}%)</h2>																			
 											</div>
 										</div>
 									</div>
@@ -199,10 +202,14 @@
 														<small>From {{item.emailFrom}}</small>
 													</td>
 													<td style="vertical-align: middle;">{{item.Sent | number}}</td>
-													<td style="vertical-align: middle;">{{item.Delivered | number}} ({{item.DeliveredRate | number:0}}%)</td>
-													<td style="vertical-align: middle;">{{item.Opened | number}} ({{item.OpenedRate | number:0}}%)</td>
-													<td style="vertical-align: middle;">{{item.Clicked | number}} ({{item.ClickedRate | number:0}}%)</td>
-													<td style="vertical-align: middle;">{{item.Unsubscribed | number}} ({{item.UnsubscribedRate | number:0}}%)</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowDelivered!=0">{{item.Delivered | number}} ({{item.DeliveredRate | number:0}}%)</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowDelivered==0">{{item.Delivered | number}} </td>
+													<td style="vertical-align: middle;" ng-show="item.ShowOpened!=0">{{item.Opened | number}} ({{item.OpenedRate | number:0}}%)</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowOpened==0">{{item.Opened | number}}</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowClicked!=0">{{item.Clicked | number}} ({{item.ClickedRate | number:0}}%)</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowClicked==0">{{item.Clicked | number}}</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowUnsubscribed!=0">{{item.Unsubscribed | number}} ({{item.UnsubscribedRate | number:0}}%)</td>
+													<td style="vertical-align: middle;" ng-show="item.ShowUnsubscribed==0">{{item.Unsubscribed | number}}</td>
 													<td style="vertical-align: middle;">{{item.Conversions | number}} ({{item.ConversionsRate | number:0}}%)</td>
 													<!-- Removed for now
 									<td style="vertical-align: middle;">
@@ -324,6 +331,8 @@
 										dt = 'Sent ' + ShowScheduleDateTime($scope.campaign['EMAIL' + j + '-SCHEDULE1-DATETIME']);
 									}
 								}
+
+
 								$scope.campaign.report.push({
 									"emailName": emailName,
 									"emailSent": dt,
@@ -339,6 +348,11 @@
 									"UnsubscribedRate": 100 * (report[i].Unsubscribed / report[i].Opened),
 									"Conversions": "0",
 									"ConversionsRate": "0",
+									"ShowDelivered": report[i].Sent,
+									"ShowOpened": report[i].Delivered,
+									"ShowClicked": report[i].Opened,
+									"ShowUnsubscribed": report[i].Opened,
+
 								});
 							}
 						}
@@ -363,17 +377,42 @@
 							//swal("fail");
 						} else {
 							$scope.campaign.reportSumary = [];
-							$scope.campaign.reportSumarySent = response.data.rows[0].Sent;
-							$scope.campaign.reportSumaryDelivered = response.data.rows[0].Delivered;
-							$scope.campaign.reportSumaryDeliveredRate = 100 * (response.data.rows[0].Delivered / response.data.rows[0].Sent);
-							$scope.campaign.reportSumaryOpened = response.data.rows[0].Opened;
-							$scope.campaign.reportSumaryOpenedRate = 100 * (response.data.rows[0].Opened / response.data.rows[0].Delivered);
-							$scope.campaign.reportSumaryClicked = response.data.rows[0].Clicked;
-							$scope.campaign.reportSumaryClickedRate = 100 * (response.data.rows[0].Clicked / response.data.rows[0].Opened);
-							$scope.campaign.reportSumaryUnsubscribed = response.data.rows[0].Unsubscribed;
-							$scope.campaign.reportSumaryUnsubscribedRate = 100 * (response.data.rows[0].Unsubscribed / response.data.rows[0].Opened);
-							$scope.campaign.reportSumaryConversions = '0';
-							$scope.campaign.reportSumaryConversionsRate = '0';
+							if (response.data.rows.length == 0) {
+								$scope.campaign.reportSumarySent = '0';
+								$scope.campaign.reportSumaryDelivered = '0';
+								$scope.campaign.reportSumaryDeliveredRate = '0';
+								$scope.campaign.reportSumaryOpened = '0';
+								$scope.campaign.reportSumaryOpenedRate = '0';
+								$scope.campaign.reportSumaryClicked = '0';
+								$scope.campaign.reportSumaryClickedRate = '0';
+								$scope.campaign.reportSumaryUnsubscribed = '0';
+								$scope.campaign.reportSumaryUnsubscribedRate = '0';
+								$scope.campaign.reportSumaryConversions = '0';
+								$scope.campaign.reportSumaryConversionsRate = '0';
+							
+								$scope.ShowDelivered = '0';
+								$scope.ShowOpened = '0';
+								$scope.ShowClicked = '0';
+								$scope.ShowUnsubscribed = '0';
+							} else {
+								$scope.campaign.reportSumarySent = response.data.rows[0].Sent;
+								$scope.campaign.reportSumaryDelivered = response.data.rows[0].Delivered;
+								$scope.campaign.reportSumaryDeliveredRate = 100 * (response.data.rows[0].Delivered / response.data.rows[0].Sent);
+								$scope.campaign.reportSumaryOpened = response.data.rows[0].Opened;
+								$scope.campaign.reportSumaryOpenedRate = 100 * (response.data.rows[0].Opened / response.data.rows[0].Delivered);
+								$scope.campaign.reportSumaryClicked = response.data.rows[0].Clicked;
+								$scope.campaign.reportSumaryClickedRate = 100 * (response.data.rows[0].Clicked / response.data.rows[0].Opened);
+								$scope.campaign.reportSumaryUnsubscribed = response.data.rows[0].Unsubscribed;
+								$scope.campaign.reportSumaryUnsubscribedRate = 100 * (response.data.rows[0].Unsubscribed / response.data.rows[0].Opened);
+								$scope.campaign.reportSumaryConversions = '0';
+								$scope.campaign.reportSumaryConversionsRate = '0';
+							
+								$scope.ShowDelivered = response.data.rows[0].Sent;
+								$scope.ShowOpened = response.data.rows[0].Delivered;
+								$scope.ShowClicked = response.data.rows[0].Opened;
+								$scope.ShowUnsubscribed = response.data.rows[0].Opened;
+							}
+							
 
 							var data = new google.visualization.arrayToDataTable([
 								['Step', 'People'],
